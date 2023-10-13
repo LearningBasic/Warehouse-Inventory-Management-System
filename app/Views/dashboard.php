@@ -10,19 +10,19 @@
 		<link
 			rel="apple-touch-icon"
 			sizes="180x180"
-			href="vendors/images/apple-touch-icon.png"
+			href="assets/img/fastcat.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="32x32"
-			href="vendors/images/favicon-32x32.png"
+			href="assets/img/fastcat.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="16x16"
-			href="vendors/images/favicon-16x16.png"
+			href="assets/img/fastcat.png"
 		/>
 
 		<!-- Mobile Specific Metas -->
@@ -59,7 +59,7 @@
 		<div class="pre-loader">
 			<div class="pre-loader-box">
 				<div class="loader-logo">
-					<img src="vendors/images/deskapp-logo.svg" alt="" />
+					<img src="assets/img/fastcat.png" alt="Fastcat" width="100"/>
 				</div>
 				<div class="loader-progress" id="progress_div">
 					<div class="bar" id="bar1"></div>
@@ -235,9 +235,9 @@
 							data-toggle="dropdown"
 						>
 							<span class="user-icon">
-								<img src="vendors/images/photo1.jpg" alt="" />
+								<img src="assets/vendors/images/photo1.jpg" alt="" />
 							</span>
-							<span class="user-name">Ross C. Lopez</span>
+							<span class="user-name"><?php echo session()->get('fullname'); ?></span>
 						</a>
 						<div
 							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
@@ -245,13 +245,7 @@
 							<a class="dropdown-item" href="profile.html"
 								><i class="dw dw-user1"></i> Profile</a
 							>
-							<a class="dropdown-item" href="profile.html"
-								><i class="dw dw-settings2"></i> Setting</a
-							>
-							<a class="dropdown-item" href="faq.html"
-								><i class="dw dw-help"></i> Help</a
-							>
-							<a class="dropdown-item" href="login.html"
+							<a class="dropdown-item" href="<?=base_url('/logout')?>"
 								><i class="dw dw-logout"></i> Log Out</a
 							>
 						</div>
@@ -437,11 +431,11 @@
 
 		<div class="left-side-bar">
 			<div class="brand-logo">
-				<a href="index.html">
-					<img src="vendors/images/deskapp-logo.svg" alt="" class="dark-logo" />
+				<a href="<?=site_url('/dashboard')?>">
+					<img src="assets/img/fastcat.png" alt="" class="dark-logo" width="100"/>
 					<img
-						src="vendors/images/deskapp-logo-white.svg"
-						alt=""
+						src="assets/img/fastcat.png"
+						alt="" width="100"
 						class="light-logo"
 					/>
 				</a>
@@ -453,15 +447,10 @@
 				<div class="sidebar-menu">
 					<ul id="accordion-menu">
 						<li class="dropdown">
-							<a href="javascript:;" class="dropdown-toggle">
+							<a href="<?=site_url('dashboard')?>" class="dropdown-toggle no-arrow active">
 								<span class="micon bi bi-house"></span
 								><span class="mtext">Home</span>
 							</a>
-							<ul class="submenu">
-								<li><a href="index.html">Dashboard style 1</a></li>
-								<li><a href="index2.html">Dashboard style 2</a></li>
-								<li><a href="index3.html">Dashboard style 3</a></li>
-							</ul>
 						</li>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
