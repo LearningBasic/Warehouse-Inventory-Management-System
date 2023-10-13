@@ -245,7 +245,7 @@
 							<a class="dropdown-item" href="profile.html"
 								><i class="dw dw-user1"></i> Profile</a
 							>
-							<a class="dropdown-item" onreturn="confirm('Do you want to sign-out?');" href="<?=site_url('/logout')?>"
+							<a class="dropdown-item" onclick="return confirm('Do you want to sign out?')" href="<?=site_url('/logout')?>"
 								><i class="dw dw-logout"></i> Log Out</a
 							>
 						</div>
