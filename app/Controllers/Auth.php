@@ -43,5 +43,9 @@ class Auth extends BaseController
         {
             return view('welcome_message',['validation'=>$this->validator]);
         }
+        else
+        {
+            
+        }
     }
 }
