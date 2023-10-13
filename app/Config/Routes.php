@@ -34,7 +34,7 @@ $routes->post('/auth','Auth::check');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
-
+    $routes->get('/dashboard','Home::dashboard');
 });
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
