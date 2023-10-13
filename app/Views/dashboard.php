@@ -461,6 +461,12 @@
 								><span class="mtext">System configuration</span>
 							</a>
 						</li>
+                        <li>
+							<a href="<?=site_url('profile')?>" class="dropdown-toggle no-arrow">
+								<span class="micon dw dw-user1"></span
+								><span class="mtext">Profile</span>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>
