@@ -74,7 +74,7 @@
 							<div class="login-title">
 								<h2 class="text-center text-primary">Login To FastCat WMS</h2>
 							</div>
-							<form>
+							<form method="post" action="<?=base_url('auth')?>">
 								<div class="input-group custom">
 									<input
 										type="text"
@@ -110,11 +110,6 @@
 											<label class="custom-control-label" for="customCheck1"
 												>Remember</label
 											>
-										</div>
-									</div>
-									<div class="col-6">
-										<div class="forgot-password">
-											<a href="forgot-password.html">Forgot Password</a>
 										</div>
 									</div>
 								</div>
