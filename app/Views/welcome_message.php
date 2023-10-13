@@ -74,7 +74,7 @@
 							<div class="login-title">
 								<h2 class="text-center text-primary">Login To FastCat WMS</h2>
 							</div>
-							<form method="post" action="<?=base_url('/auth')?>">
+							<form method="post" action="<?=base_url('auth')?>">
                                 <?= csrf_field(); ?>
                                 <?php if(session()->getFlashdata('fail')){ ?>
                                 <div class="alert alert-danger" role="alert">
