@@ -54,6 +54,28 @@
 			href="assets/src/plugins/datatables/css/responsive.bootstrap4.min.css"
 		/>
 		<link rel="stylesheet" type="text/css" href="assets/vendors/styles/style.css" />
+        <style>
+        /* Track */
+            ::-webkit-scrollbar-track {
+              background: #f1f1f1; 
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+              background: #888; 
+            }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+              background: #555; 
+            }
+            ::-webkit-scrollbar {
+                height: 4px;              /* height of horizontal scrollbar ← You're missing this */
+                width: 4px;               /* width of vertical scrollbar */
+                border: 1px solid #d5d5d5;
+              }
+            
+        </style>
 	</head>
 	<body>
 		<div class="pre-loader">
@@ -375,19 +397,16 @@
 						</li>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
-								<span class="micon bi bi-textarea-resize"></span
-								><span class="mtext">Forms</span>
+                            <i class="micon dw dw-server"></i><span class="mtext">Inventory</span>
 							</a>
 							<ul class="submenu">
-								<li><a href="form-basic.html">Form Basic</a></li>
-								<li>
-									<a href="advanced-components.html">Advanced Components</a>
-								</li>
-								<li><a href="form-wizard.html">Form Wizard</a></li>
-								<li><a href="html5-editor.html">HTML5 Editor</a></li>
-								<li><a href="form-pickers.html">Form Pickers</a></li>
-								<li><a href="image-cropper.html">Image Cropper</a></li>
-								<li><a href="image-dropzone.html">Image Dropzone</a></li>
+								<li><a href="<?=site_url('stocks')?>">All Stocks</a></li>
+								<li><a href="<?=site_url('monitor-stocks')?>">Monitor Stocks</a></li>
+								<li><a href="<?=site_url('orders')?>">Order Materials</a></li>
+								<li><a href="<?=site_url('add-stocks')?>">Add Stocks</a></li>
+								<li><a href="<?=site_url('Transfer')?>">Transfer Items</a></li>
+								<li><a href="i<?=site_url('dead-stocks')?>">Dead Stocks</a></li>
+								<li><a href="<?=site_url('overhaul-stocks')?>">Overhaul Items</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
