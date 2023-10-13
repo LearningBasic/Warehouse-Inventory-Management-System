@@ -565,30 +565,6 @@
 						<div class="card-box height-100-p pd-20 min-height-200px">
 							<div class="d-flex justify-content-between pb-10">
 								<div class="h5 mb-0">Top Suppliers</div>
-								<div class="dropdown">
-									<a
-										class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-										data-color="#1b3133"
-										href="#"
-										role="button"
-										data-toggle="dropdown"
-									>
-										<i class="dw dw-more"></i>
-									</a>
-									<div
-										class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
-									>
-										<a class="dropdown-item" href="#"
-											><i class="dw dw-eye"></i> View</a
-										>
-										<a class="dropdown-item" href="#"
-											><i class="dw dw-edit2"></i> Edit</a
-										>
-										<a class="dropdown-item" href="#"
-											><i class="dw dw-delete-3"></i> Delete</a
-										>
-									</div>
-								</div>
 							</div>
 							<div class="user-list">
 								<ul>
@@ -719,64 +695,16 @@
 					<div class="col-lg-4 col-md-6 mb-20">
 						<div class="card-box height-100-p pd-20 min-height-200px">
 							<div class="d-flex justify-content-between">
-								<div class="h5 mb-0">Stocks</div>
-								<div class="dropdown">
-									<a
-										class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-										data-color="#1b3133"
-										href="#"
-										role="button"
-										data-toggle="dropdown"
-									>
-										<i class="dw dw-more"></i>
-									</a>
-									<div
-										class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
-									>
-										<a class="dropdown-item" href="#"
-											><i class="dw dw-eye"></i> View</a
-										>
-										<a class="dropdown-item" href="#"
-											><i class="dw dw-edit2"></i> Edit</a
-										>
-										<a class="dropdown-item" href="#"
-											><i class="dw dw-delete-3"></i> Delete</a
-										>
-									</div>
-								</div>
+								<div class="h5 mb-0">Top Items</div>
 							</div>
 
-							<div id="diseases-chart"></div>
+							<div id="diseases-charts"></div>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-12 mb-20">
                     <div class="card-box height-100-p pd-20 min-height-200px">
 							<div class="d-flex justify-content-between">
 								<div class="h5 mb-0">Stocks</div>
-								<div class="dropdown">
-									<a
-										class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-										data-color="#1b3133"
-										href="#"
-										role="button"
-										data-toggle="dropdown"
-									>
-										<i class="dw dw-more"></i>
-									</a>
-									<div
-										class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
-									>
-										<a class="dropdown-item" href="#"
-											><i class="dw dw-eye"></i> View</a
-										>
-										<a class="dropdown-item" href="#"
-											><i class="dw dw-edit2"></i> Edit</a
-										>
-										<a class="dropdown-item" href="#"
-											><i class="dw dw-delete-3"></i> Delete</a
-										>
-									</div>
-								</div>
 							</div>
 
 							<div id="diseases-chart"></div>
@@ -1121,60 +1049,7 @@
 							</tr>
 						</tbody>
 					</table>
-				</div>
-
-				<div class="title pb-20 pt-20">
-					<h2 class="h3 mb-0">Quick Start</h2>
-				</div>
-
-				<div class="row">
-					<div class="col-md-4 mb-20">
-						<a href="#" class="card-box d-block mx-auto pd-20 text-secondary">
-							<div class="img pb-30">
-								<img src="vendors/images/medicine-bro.svg" alt="" />
-							</div>
-							<div class="content">
-								<h3 class="h4">Services</h3>
-								<p class="max-width-200">
-									We provide superior health care in a compassionate maner
-								</p>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-4 mb-20">
-						<a href="#" class="card-box d-block mx-auto pd-20 text-secondary">
-							<div class="img pb-30">
-								<img src="vendors/images/remedy-amico.svg" alt="" />
-							</div>
-							<div class="content">
-								<h3 class="h4">Medications</h3>
-								<p class="max-width-200">
-									Look for prescription and over-the-counter drug information.
-								</p>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-4 mb-20">
-						<a href="#" class="card-box d-block mx-auto pd-20 text-secondary">
-							<div class="img pb-30">
-								<img src="vendors/images/paper-map-cuate.svg" alt="" />
-							</div>
-							<div class="content">
-								<h3 class="h4">Locations</h3>
-								<p class="max-width-200">
-									Convenient locations when and where you need them.
-								</p>
-							</div>
-						</a>
-					</div>
-				</div>
-
-				<div class="footer-wrap pd-20 mb-20 card-box">
-					DeskApp - Bootstrap 4 Admin Template By
-					<a href="https://github.com/dropways" target="_blank"
-						>Ankit Hingarajiya</a
-					>
-				</div>
+                </div>
 			</div>
 		</div>
 		<!-- js -->

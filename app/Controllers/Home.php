@@ -20,4 +20,9 @@ class Home extends BaseController
     {
         return view('dashboard');
     }
+
+    public function stocks()
+    {
+        return view('all-stocks');
+    }
 }

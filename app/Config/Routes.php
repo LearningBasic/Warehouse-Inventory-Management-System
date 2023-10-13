@@ -36,6 +36,7 @@ $routes->get('/logout','Auth::logout');
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
     $routes->get('/dashboard','Home::dashboard');
+    $routes->get('/stocks','Home::stocks');
 });
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
