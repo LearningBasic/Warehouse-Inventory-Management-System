@@ -75,9 +75,15 @@
 								<h2 class="text-center text-primary">Login To FastCat WMS</h2>
 							</div>
 							<form method="post" action="<?=base_url('/auth')?>">
+                                <?= csrf_field(); ?>
+                                <?php if(session()->getFlashdata('fail')){ ?>
+                                <div class="alert alert-danger" role="alert">
+                                    <center><?= session()->getFlashdata('fail'); ?></center>
+                                </div>
+                                <?php } ?>
 								<div class="input-group custom">
 									<input
-										type="text"
+										type="text" name="username"
 										class="form-control form-control-lg"
 										placeholder="Username"
 									/>
@@ -89,7 +95,7 @@
 								</div>
 								<div class="input-group custom">
 									<input
-										type="password"
+										type="password" name="password"
 										class="form-control form-control-lg"
 										placeholder="**********"
 									/>
