@@ -5,6 +5,7 @@
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
 		<title>FastCat Warehouse Management System</title>
+        <meta name="keywords" description ="FastCat Warehouse, FastCat, WMS, FastCat WMS"/>
 
 		<!-- Site favicon -->
 		<link
@@ -51,14 +52,9 @@
 				class="container-fluid d-flex justify-content-between align-items-center"
 			>
 				<div class="brand-logo">
-					<a href="login.html">
-						<img src="vendors/images/deskapp-logo.svg" alt="" />
+					<a href="javascript:void(0);">
+						<img src="assets/vendors/images/deskapp-logo.svg" alt="" />
 					</a>
-				</div>
-				<div class="login-menu">
-					<ul>
-						<li><a href="register.html">Register</a></li>
-					</ul>
 				</div>
 			</div>
 		</div>
@@ -68,42 +64,14 @@
 			<div class="container">
 				<div class="row align-items-center">
 					<div class="col-md-6 col-lg-7">
-						<img src="vendors/images/login-page-img.png" alt="" />
+						<img src="assets/vendors/images/login-page-img.png" alt="" />
 					</div>
 					<div class="col-md-6 col-lg-5">
 						<div class="login-box bg-white box-shadow border-radius-10">
 							<div class="login-title">
-								<h2 class="text-center text-primary">Login To DeskApp</h2>
+								<h2 class="text-center text-primary">Login To FastCat WMS</h2>
 							</div>
 							<form>
-								<div class="select-role">
-									<div class="btn-group btn-group-toggle" data-toggle="buttons">
-										<label class="btn active">
-											<input type="radio" name="options" id="admin" />
-											<div class="icon">
-												<img
-													src="vendors/images/briefcase.svg"
-													class="svg"
-													alt=""
-												/>
-											</div>
-											<span>I'm</span>
-											Manager
-										</label>
-										<label class="btn">
-											<input type="radio" name="options" id="user" />
-											<div class="icon">
-												<img
-													src="vendors/images/person.svg"
-													class="svg"
-													alt=""
-												/>
-											</div>
-											<span>I'm</span>
-											Employee
-										</label>
-									</div>
-								</div>
 								<div class="input-group custom">
 									<input
 										type="text"
@@ -150,28 +118,7 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="input-group mb-0">
-											<!--
-											use code for form submit
 											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
-										-->
-											<a
-												class="btn btn-primary btn-lg btn-block"
-												href="index.html"
-												>Sign In</a
-											>
-										</div>
-										<div
-											class="font-16 weight-600 pt-10 pb-10 text-center"
-											data-color="#707373"
-										>
-											OR
-										</div>
-										<div class="input-group mb-0">
-											<a
-												class="btn btn-outline-primary btn-lg btn-block"
-												href="register.html"
-												>Register To Create Account</a
-											>
 										</div>
 									</div>
 								</div>
