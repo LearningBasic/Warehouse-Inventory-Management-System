@@ -46,7 +46,7 @@ class Auth extends BaseController
         else
         {
             $user_info = $accountModel->where('username', $username)->WHERE('Status',1)->first();
-            $check_password = Hash::check($password, $user_info['Password']);
+            $check_password = Hash::check($password, $user_info['password']);
             if(!$check_password || empty($check_password))
             {
                 session()->setFlashdata('fail','Invalid Username or Password!');
