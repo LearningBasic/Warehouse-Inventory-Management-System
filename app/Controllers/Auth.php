@@ -11,6 +11,7 @@ class Auth extends BaseController
         helper(['url','form']);
         $this->db = db_connect();
     }
+
 	public function index()
 	{
 		return view('welcome_message');
@@ -21,7 +22,7 @@ class Auth extends BaseController
         $accountModel = new \App\Models\accountModel();
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
-        
+
         $validation = $this->validate([
             'username'=>[
                 'rules'=>'is_not_unique[tblaccount.username]',
@@ -40,7 +41,7 @@ class Auth extends BaseController
         ]);
         if(!$validation)
         {
-            return view('/auth',['validation'=>$this->validator]);
+            return view('welcome_message',['validation'=>$this->validator]);
         }
     }
 }

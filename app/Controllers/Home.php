@@ -6,7 +6,14 @@ class Home extends BaseController
 {
     public function index()
     {
-        return view('welcome_message');
+        if (session()->has('loggedUser'))
+        {
+            return redirect()->back();
+        }
+        else
+        {
+		  return view('welcome_message');
+        }
     }
 
     public function dashboard()
