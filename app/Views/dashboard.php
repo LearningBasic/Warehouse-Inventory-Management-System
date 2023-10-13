@@ -156,14 +156,14 @@
 							data-toggle="dropdown"
 						>
 							<span class="user-icon">
-								<img src="assets/vendors/images/photo1.jpg" alt="" />
+                                <i class="dw dw-user1"></i>
 							</span>
 							<span class="user-name"><?php echo session()->get('fullname'); ?></span>
 						</a>
 						<div
 							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
 						>
-							<a class="dropdown-item" href="profile.html"
+							<a class="dropdown-item" href="<?=site_url('profile')?>"
 								><i class="dw dw-user1"></i> Profile</a
 							>
 							<a class="dropdown-item" onclick="return confirm('Do you want to sign out?')" href="<?=site_url('/logout')?>"
