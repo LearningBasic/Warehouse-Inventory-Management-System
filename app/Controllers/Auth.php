@@ -66,9 +66,8 @@ class Auth extends BaseController
     {
         if(session()->has('loggedUser'))
         {
-            $session = session();
-            $session->destroy();
-            return redirect()->to('/auth?access=out')->with('fail', 'You are logged out!');
+            session()->remove('loggedUser');
+            return redirect()->to('/?access=out')->with('fail', 'You are logged out!');
         }
     }
 }
