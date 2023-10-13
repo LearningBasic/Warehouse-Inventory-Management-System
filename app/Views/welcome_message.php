@@ -5,25 +5,28 @@
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
 		<title>FastCat Warehouse Management System</title>
-        <meta name="keywords" description ="FastCat Warehouse, FastCat, WMS, FastCat WMS"/>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="FastCat Warehouse Inventory Management System, fastcat, fastcat inventory, APFC Employees, APFC Head Office">
+        <meta name="keywords" content="fastcat, FastCat WMS, fastcat warehouse, fastcat Inventory, fastcat headoffice, Warehouse Inventory">
 
 		<!-- Site favicon -->
 		<link
 			rel="apple-touch-icon"
 			sizes="180x180"
-			href="assets/vendors/images/apple-touch-icon.png"
+			href="assets/img/fastcat.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="32x32"
-			href="assets/vendors/images/favicon-32x32.png"
+			href="assets/img/fastcat.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="16x16"
-			href="assets/vendors/images/favicon-16x16.png"
+			href="assets/img/fastcat.png"
 		/>
 
 		<!-- Mobile Specific Metas -->
@@ -53,7 +56,7 @@
 			>
 				<div class="brand-logo">
 					<a href="javascript:void(0);">
-						<img src="assets/vendors/images/deskapp-logo.svg" alt="" />
+						<img src="assets/img/fastcat.png" alt="FastCat" width="100"/>
 					</a>
 				</div>
 			</div>
