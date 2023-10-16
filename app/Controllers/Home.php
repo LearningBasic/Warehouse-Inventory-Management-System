@@ -50,10 +50,10 @@ class Home extends BaseController
     {
         $industryModel = new \App\Models\industryModel();
         $name = $this->request->getPost('industryName');
-        $validation = $this->validate(['industryName'=>'is_unique[tblindustry.Name]']);
+        $validation = $this->validate(['industryName'=>'is_unique[tblindustry.Name]|required']);
         if(!$validation)
         {
-            echo $name." already exists";
+            echo "Invalid! Please fill in the form";
         }
         else{
             $values = ['Name'=>$name];
@@ -65,14 +65,21 @@ class Home extends BaseController
     public function listIndustry()
     {
         $builder = $this->db->table('tblindustry');
-        $builder->select('Name');
+        $builder->select('Name,industryID');
         $data = $builder->get();
         foreach($data->getResult() as $row)
         {
             ?>
-            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                <h5 class="mb-1 h5"><?php echo $row->Name ?><button type="button" style="float:right;" class="btn"><i class="icon-copy dw dw-delete-3"></i></button></h5>
-            </a>
+            <li class="d-flex align-items-center justify-content-between">
+                <div class="name-avatar d-flex align-items-center pr-2">
+                    <div class="avatar mr-2 flex-shrink-0">
+                        <?php echo $row->Name ?>
+                    </div>
+                </div>
+                <div class="cta flex-shrink-0">
+                    <button type="button" class="btn btn-sm btn-outline-danger remove" value="<?php echo $row->industryID ?>"><i class="icon-copy dw dw-delete-3"></i></button>
+                </div>
+            </li>
             <?php
         }
     }

@@ -518,7 +518,8 @@
                                         <div class="card-box">
                                             <div class="card-header"><i class="icon-copy dw dw-building1"></i>&nbsp;Industry</div>
                                             <div class="card-body">
-                                                <div class="list-group" id="listindustry">
+                                                <div class="user-list">
+                                                    <ul id="listindustry"></ul>
                                                 </div>
                                                 <br/>
                                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#industryModal"><i class="icon-copy dw dw-add"></i> Add</button>
@@ -529,10 +530,11 @@
                                         <div class="card-box">
                                             <div class="card-header"><i class="icon-copy dw dw-list"></i>&nbsp;Product Category</div>
                                             <div class="card-body">
-                                                <div class="list-group" id="listcategory">
+                                                <div class="user-list">
+                                                    <ul id="listcategory"></ul>
                                                 </div>
                                                 <br/>
-                                                <button type="button" class="btn btn-primary btn-sm add_category"><i class="icon-copy dw dw-add"></i> Add</button>
+                                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#categoryModal"><i class="icon-copy dw dw-add"></i> Add</button>
                                             </div>
                                         </div>
                                     </div>
@@ -603,6 +605,33 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            New Category
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" class="row g-3" id="frmCategory">
+                            <div class="col-12 form-group">
+                                <label>Category Name</label>
+                                <input type="text" class="form-control" name="categoryName" required/>
+                            </div>
+                            <div class="col-12 form-group">
+                                <label>Description</label>
+                                <input type="text" class="form-control" name="description" required/>
+                            </div>
+                            <div class="col-12 form-group">
+                                <input type="submit" class="btn btn-primary" value="Add Entry" id="btnAddCategory"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
@@ -621,7 +650,7 @@
                 $.ajax({
                     url:"<?=site_url('list-industry')?>",method:"GET",success:function(response)
                     {
-                        $('#listindustry').append(response);
+                        $('#listindustry').html(response);
                     }
                 });
             }
