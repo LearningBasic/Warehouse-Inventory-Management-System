@@ -343,6 +343,7 @@
 								<li><a href="<?=site_url('add-stocks')?>" class="active">Add Stocks</a></li>
 								<li><a href="<?=site_url('Transfer')?>">Transfer Items</a></li>
 								<li><a href="<?=site_url('dead-stocks')?>">Dead Stocks</a></li>
+                                <li><a href="<?=site_url('return')?>">Return Items</a></li>
 								<li><a href="<?=site_url('overhaul-stocks')?>">Overhaul Items</a></li>
 							</ul>
 						</li>
@@ -421,16 +422,37 @@
                         <form method="post" class="row g-3" id="frmStock" action="">
                             <div class="col-12 form-group">
                                 <div class="row g-3">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <label>Warehouse</label>
-                                        <select class="form-control" id="warehouse" name="warehouse">
+                                        <select class="form-control" id="warehouse" name="warehouse" required>
                                             <option value="0">Choose</option>
+                                            <?php if($warehouse): ?>
+                                                <?php foreach($warehouse as $row): ?>
+                                                    <option value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
                                         </select>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <label>Supplier</label>
-                                        <select class="form-control" id="supplier" name="supplier">
+                                        <select class="form-control" id="supplier" name="supplier" required>
                                             <option value="0">Choose</option>
+                                            <?php if($supplier): ?>
+                                                <?php foreach($supplier as $row): ?>
+                                                    <option value="<?php echo $row->supplierID ?>"><?php echo $row->supplierName ?></option>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>Category</label>
+                                        <select class="form-control" id="category" name="category" required>
+                                            <option value="0">Choose</option>
+                                            <?php if($category): ?>
+                                                <?php foreach($category as $row): ?>
+                                                    <option value="<?php echo $row->categoryID ?>"><?php echo $row->categoryName ?></option>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -438,6 +460,10 @@
                             <div class="col-12 form-group">
                                 <label>Product Name</label>
                                 <input type="text" class="form-control" name="productName" required/>
+                            </div>
+                            <div class="col-12 form-group">
+                                <label>Product Description</label>
+                                <textarea class="form-control" name="description" required></textarea>
                             </div>
                         </form>
 					</div>

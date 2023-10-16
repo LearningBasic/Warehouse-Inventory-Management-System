@@ -343,6 +343,7 @@
 								<li><a href="<?=site_url('add-stocks')?>">Add Stocks</a></li>
 								<li><a href="<?=site_url('Transfer')?>">Transfer Items</a></li>
 								<li><a href="<?=site_url('dead-stocks')?>">Dead Stocks</a></li>
+								<li><a href="<?=site_url('return')?>">Return Items</a></li>
 								<li><a href="<?=site_url('overhaul-stocks')?>">Overhaul Items</a></li>
 							</ul>
 						</li>
