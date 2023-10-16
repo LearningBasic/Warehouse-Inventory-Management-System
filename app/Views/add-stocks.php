@@ -465,6 +465,28 @@
                                 <label>Product Description</label>
                                 <textarea class="form-control" name="description" required></textarea>
                             </div>
+                            <div class="col-12 form-group">
+                                <div class="row g-3">
+                                    <div class="col-lg-3">
+                                        <label>Unit Item</label>
+                                        <select class="form-control" name="itemUnit" required>
+                                            <option value="">Choose</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label>Unit Price</label>
+                                        <input type="text" class="form-control" name="unitPrice" required/>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label>Quantity</label>
+                                        <input type="number" class="form-control" name="qty" required/>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label>Expiration Date</label>
+                                        <input type="date" class="form-control" name="expirationDate" required/>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
 					</div>
 				</div>
