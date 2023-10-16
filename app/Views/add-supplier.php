@@ -424,7 +424,7 @@
                                     <div class="col-lg-4 form-group">
                                         <label>Industry</label>
                                         <select class="form-control" name="industry" id="industry">
-                                            <option value="">Choose</option>
+                                            <option value="0">Choose</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-8 form-group">
@@ -471,5 +471,9 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+        <script>
+            $(document).ready(function(){fetch();});
+            function fetch(){$.ajax({url:"<?=site_url('fetch-industry')?>",method:"GET",success:function(response){$('#industry').append(response);}});}
+        </script>
 	</body>
 </html>

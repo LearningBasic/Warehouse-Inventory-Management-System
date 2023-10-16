@@ -35,6 +35,7 @@ $routes->get('/logout','Auth::logout');
 //saving the data
 $routes->post('save-industry','Home::saveIndustry');
 $routes->get('list-industry','Home::listIndustry');
+$routes->get('fetch-industry','Home::fetchIndustry');
 $routes->post('save-category','Home::saveCategory');
 $routes->get('list-category','Home::listCategory');
 $routes->post('save-warehouse','Home::saveWarehouse');

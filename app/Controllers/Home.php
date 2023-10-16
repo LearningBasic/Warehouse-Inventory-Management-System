@@ -65,7 +65,20 @@ class Home extends BaseController
 
     public function saveSupplier()
     {
-        
+
+    }
+
+    public function fetchIndustry()
+    {
+        $builder = $this->db->table('tblindustry');
+        $builder->select('*');
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <option value="<?php echo $row->industryID ?>"><?php echo $row->Name ?></option>
+            <?php
+        }
     }
 
     public function saveIndustry()
