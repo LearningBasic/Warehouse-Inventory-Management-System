@@ -8,13 +8,12 @@ class inventoryModel extends Model
 {
     protected $table      = 'tblinventory';
     protected $primaryKey = 'inventID';
-
     protected $useAutoIncrement  = true;
     protected $insertID = 0;
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['Date', 'productID','productName','unitPrice','Qty','categoryID','ExpirationDate','Status','supplierID','warehouseID'];
+    protected $allowedFields = ['Date', 'productID','productName','unitPrice','Qty','categoryID','ExpirationDate','supplierID','warehouseID'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

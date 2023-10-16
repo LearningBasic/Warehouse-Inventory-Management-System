@@ -438,7 +438,7 @@
 											<td><?php echo $row->productName ?></td>
 											<td><?php echo $row->unitPrice ?></td>
 											<td><?php echo $row->Qty ?></td>
-											<td></td>
+											<td><?php if($row->Qty>0){echo "Available";}else{echo "Out of Stock";} ?>/</td>
 											<td><?php echo $row->ExpirationDate ?></td>
 											<td><?php echo $row->supplierName ?></td>
 										</tr>

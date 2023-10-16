@@ -40,6 +40,11 @@ class Home extends BaseController
         return view('all-stocks',$data);
     }
 
+    public function addStocks()
+    {
+        return view('add-stocks');
+    }
+
     public function suppliers()
     {
         $builder = $this->db->table('tblsupplier a');
@@ -80,11 +85,6 @@ class Home extends BaseController
         return redirect()->to('/list-supplier')->withInput();
     }
     
-    public function addStocks()
-    {
-        return view('add-stocks');
-    }
-
     public function addSupplier()
     {
         return view('add-supplier');
