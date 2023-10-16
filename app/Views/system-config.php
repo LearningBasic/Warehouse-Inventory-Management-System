@@ -722,7 +722,7 @@
                                 'Great',
                                 'Successfully added',
                                 'success'
-                            );$('#frmCategory')[0].reset();listWarehouse();
+                            );$('#frmWarehouse')[0].reset();listWarehouse();
                         }else{alert(response);}
                     }
                 });

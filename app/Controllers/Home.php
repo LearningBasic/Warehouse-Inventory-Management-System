@@ -91,7 +91,8 @@ class Home extends BaseController
         $location = $this->request->getPost('address');
         $status = 1;
         $validation = $this->validate([
-            'warehouseName'=>'required|is_unique[tblwarehouse.warehouseName]'
+            'warehouseName'=>'required|is_unique[tblwarehouse.warehouseName]',
+            'address'=>'required'
         ]);
         if(!$validation)
         {
