@@ -63,6 +63,11 @@ class Home extends BaseController
         return view('system-config');
     }
 
+    public function saveSupplier()
+    {
+        
+    }
+
     public function saveIndustry()
     {
         $industryModel = new \App\Models\industryModel();

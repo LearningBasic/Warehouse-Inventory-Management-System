@@ -418,7 +418,45 @@
 				<div class="card-box">
 					<div class="card-header"><span class="icon-copy dw dw-add"></span>&nbsp;Add Supplier</div>
 					<div class="card-body">
-						
+                        <form method="POST" class="row g-3" id="frmSupplier" action="<?=base_url('save-supplier')?>">
+                            <div class="col-12">
+                                <div class="row g-3">
+                                    <div class="col-lg-4 form-group">
+                                        <label>Industry</label>
+                                        <select class="form-control" name="industry" id="industry">
+                                            <option value="">Choose</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-8 form-group">
+                                        <label>Supplier's Name</label>
+                                        <input type="text" class="form-control" name="supplier_name" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label>Supplier's Address</label>
+                                <textarea class="form-control" name="supplier_name"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <div class="row g-3">
+                                    <div class="col-lg-4 form-group">
+                                        <label>Contact Person</label>
+                                        <input type="text" class="form-control" name="contact_person" required/>
+                                    </div>
+                                    <div class="col-lg-4 form-group">
+                                        <label>Email Address</label>
+                                        <input type="email" class="form-control" name="email" required/>
+                                    </div>
+                                    <div class="col-lg-4 form-group">
+                                        <label>Contact No</label>
+                                        <input type="phone" class="form-control" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="11" minlength="11" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Save Entry</button>
+                            </div>
+                        </form>
 					</div>
 				</div>
 			</div>
