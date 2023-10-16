@@ -42,7 +42,16 @@ class Home extends BaseController
 
     public function addStocks()
     {
-        return view('add-stocks');
+        //warehouse
+        $builder = $this->db->table('tblwarehouse');
+        $builder->select('*');
+        $warehouse = $builder->get()->getResult();
+        //supplier
+        $builder = $this->db->table('tblsupplier');
+        $builder->select('*');
+        $supplier = $builder->get()->getResult();
+        $data = ['warehouse'=>$warehouse,'supplier'=>$supplier];
+        return view('add-stocks',$data);
     }
 
     public function suppliers()

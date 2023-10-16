@@ -423,9 +423,15 @@
                                 <div class="row g-3">
                                     <div class="col-lg-6">
                                         <label>Warehouse</label>
+                                        <select class="form-control" id="warehouse" name="warehouse">
+                                            <option value="0">Choose</option>
+                                        </select>
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Supplier</label>
+                                        <select class="form-control" id="supplier" name="supplier">
+                                            <option value="0">Choose</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
