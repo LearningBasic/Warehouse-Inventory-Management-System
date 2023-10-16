@@ -71,7 +71,7 @@
             }
             ::-webkit-scrollbar {
                 height: 4px;              /* height of horizontal scrollbar ← You're missing this */
-                width: 4px;               /* width of vertical scrollbar */
+                width: 0px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
             
@@ -518,7 +518,7 @@
                                         <div class="card-box">
                                             <div class="card-header"><i class="icon-copy dw dw-building1"></i>&nbsp;Industry</div>
                                             <div class="card-body">
-                                                <div class="user-list">
+                                                <div class="user-list" style="height:400px;overflow-y:auto;">
                                                     <ul id="listindustry"></ul>
                                                 </div>
                                                 <br/>
@@ -530,7 +530,7 @@
                                         <div class="card-box">
                                             <div class="card-header"><i class="icon-copy dw dw-list"></i>&nbsp;Product Category</div>
                                             <div class="card-body">
-                                                <div class="user-list">
+                                                <div class="user-list" style="height:400px;overflow-y:auto;">
                                                     <ul id="listcategory"></ul>
                                                 </div>
                                                 <br/>
@@ -542,7 +542,7 @@
                                         <div class="card-box">
                                             <div class="card-header"><i class="icon-copy dw dw-house-11"></i>&nbsp;Warehouse</div>
                                             <div class="card-body">
-                                                <div class="user-list">
+                                                <div class="user-list" style="height:400px;overflow-y:auto;">
                                                     <ul id="listwarehouse"></ul>
                                                 </div>
                                                 <br/>

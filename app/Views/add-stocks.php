@@ -418,7 +418,22 @@
 				<div class="card-box">
 					<div class="card-header"><span class="icon-copy dw dw-add"></span>&nbsp;Add Stock</div>
 					<div class="card-body">
-						
+                        <form method="post" class="row g-3" id="frmStock" action="">
+                            <div class="col-12 form-group">
+                                <div class="row g-3">
+                                    <div class="col-lg-6">
+                                        <label>Warehouse</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Supplier</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 form-group">
+                                <label>Product Name</label>
+                                <input type="text" class="form-control" name="productName" required/>
+                            </div>
+                        </form>
 					</div>
 				</div>
 			</div>
