@@ -455,12 +455,14 @@
 						<li>
 							<div class="sidebar-small-cap">Extra</div>
 						</li>
+						<?php if(session()->get('role')=="Administrator"){ ?>
 						<li>
 							<a href="<?=site_url('configuration')?>" class="dropdown-toggle no-arrow">
 								<span class="micon dw dw-settings1"></span
 								><span class="mtext">System configuration</span>
 							</a>
 						</li>
+						<?php } ?>
                         <li>
 							<a href="<?=site_url('profile')?>" class="dropdown-toggle no-arrow">
 								<span class="micon dw dw-user1"></span
