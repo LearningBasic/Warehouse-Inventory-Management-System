@@ -644,16 +644,9 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- <script src="assets/ajax/system-config.js"></script> -->
         <script>
-            $(document).ready(function(){listIndustry();});
-            function listIndustry()
-            {
-                $.ajax({
-                    url:"<?=site_url('list-industry')?>",method:"GET",success:function(response)
-                    {
-                        $('#listindustry').html(response);
-                    }
-                });
-            }
+            $(document).ready(function(){listIndustry();listCategory();});
+            function listCategory(){$.ajax({url:"<?=site_url('list-category')?>",method:"GET",success:function(response){$('#listcategory').html(response);}});}
+            function listIndustry(){$.ajax({url:"<?=site_url('list-industry')?>",method:"GET",success:function(response){$('#listindustry').html(response);}});}
             $('#btnAdd').on('click',function(e)
             {
                 e.preventDefault();
@@ -667,6 +660,23 @@
                                 'Successfully added',
                                 'success'
                             );$('#frmIndustry')[0].reset();listIndustry();
+                        }else{alert(response);}
+                    }
+                });
+            });
+            $('#btnAddCategory').on('click',function(e)
+            {
+                e.preventDefault();
+                var data = $('#frmCategory').serialize();
+                $.ajax({
+                    url:"<?=site_url('save-category')?>",method:"POST",data:data,success:function(response)
+                    {
+                        if(response==="success"){
+                            Swal.fire(
+                                'Great',
+                                'Successfully added',
+                                'success'
+                            );$('#frmCategory')[0].reset();listCategory();
                         }else{alert(response);}
                     }
                 });

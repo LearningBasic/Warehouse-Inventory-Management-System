@@ -62,6 +62,28 @@ class Home extends BaseController
         }
     }
 
+    public function saveCategory()
+    {
+        $categoryModel = new \App\Models\categoryModel();
+        $category = $this->request->getPost('categoryName');
+        $desc = $this->request->getPost('description');
+        $validation = $this->validate([
+            'categoryName'=>'required|is_unique[tblcategory.categoryName]'
+        ]);
+        if(!$validation)
+        {
+            echo "Invalid! Please fill in the form";
+        }
+        else{
+            $values = [
+                'categoryName'=>$category,
+                'Description'=>$desc,
+            ];
+            $categoryModel->save($values);
+            echo "success";
+        }
+    }
+
     public function listIndustry()
     {
         $builder = $this->db->table('tblindustry');
@@ -78,6 +100,33 @@ class Home extends BaseController
                 </div>
                 <div class="cta flex-shrink-0">
                     <button type="button" class="btn btn-sm btn-outline-danger remove" value="<?php echo $row->industryID ?>"><i class="icon-copy dw dw-delete-3"></i></button>
+                </div>
+            </li>
+            <?php
+        }
+    }
+    
+    public function listCategory()
+    {
+        $builder = $this->db->table('tblcategory');
+        $builder->select('categoryName,categoryID,Description');
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <li class="d-flex align-items-center justify-content-between">
+                <div class="name-avatar d-flex align-items-center pr-2">
+                    <div class="avatar mr-2 flex-shrink-0">
+                        <?php echo $row->categoryName ?>
+                    </div>
+                    <div class="txt">
+                        <div class="font-12 weight-500" data-color="#b2b1b6">
+                            <?php echo $row->Description ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="cta flex-shrink-0">
+                    <button type="button" class="btn btn-sm btn-outline-danger remove" value="<?php echo $row->categoryID ?>"><i class="icon-copy dw dw-delete-3"></i></button>
                 </div>
             </li>
             <?php
