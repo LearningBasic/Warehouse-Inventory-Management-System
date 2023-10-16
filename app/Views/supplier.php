@@ -4,7 +4,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>FastCat WMS - Warehouse Inventory Management System</title>
+		<title>Suppliers</title>
 
 		<!-- Site favicon -->
 		<link
@@ -441,7 +441,7 @@
                                             <td><?php echo $row->contactNumber ?></td>
                                             <td><?php echo $row->Name ?></td>
                                             <td>
-                                                <button type="button" class="btn btn-default edit btn-sm" value="<?php echo $row->supplierID ?>"><i class="icon-copy dw dw-edit"></i></button>
+                                                <a class="btn btn-default" href="<?=site_url('edit-supplier/')?><?php echo $row->supplierID ?>"><i class="icon-copy dw dw-edit"></i>&nbsp;Edit</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

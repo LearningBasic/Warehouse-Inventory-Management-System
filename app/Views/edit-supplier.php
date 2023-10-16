@@ -4,25 +4,25 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>New Supplier</title>
+		<title>Edit Supplier</title>
 
 		<!-- Site favicon -->
 		<link
 			rel="apple-touch-icon"
 			sizes="180x180"
-			href="assets/img/fastcat.png"
+			href="/assets/img/fastcat.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="32x32"
-			href="assets/img/fastcat.png"
+			href="/assets/img/fastcat.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="16x16"
-			href="assets/img/fastcat.png"
+			href="/assets/img/fastcat.png"
 		/>
 
 		<!-- Mobile Specific Metas -->
@@ -37,23 +37,23 @@
 			rel="stylesheet"
 		/>
 		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="assets/vendors/styles/core.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/vendors/styles/core.css" />
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="assets/vendors/styles/icon-font.min.css"
+			href="/assets/vendors/styles/icon-font.min.css"
 		/>
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+			href="/assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
 		/>
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="assets/src/plugins/datatables/css/responsive.bootstrap4.min.css"
+			href="/assets/src/plugins/datatables/css/responsive.bootstrap4.min.css"
 		/>
-		<link rel="stylesheet" type="text/css" href="assets/vendors/styles/style.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/vendors/styles/style.css" />
         <style>
         /* Track */
             ::-webkit-scrollbar-track {
@@ -81,7 +81,7 @@
 		<div class="pre-loader">
 			<div class="pre-loader-box">
 				<div class="loader-logo">
-					<img src="assets/img/fastcat.png" alt="Fastcat" width="100"/>
+					<img src="/assets/img/fastcat.png" alt="Fastcat" width="100"/>
 				</div>
 				<div class="loader-progress" id="progress_div">
 					<div class="bar" id="bar1"></div>
@@ -313,9 +313,9 @@
 		<div class="left-side-bar">
 			<div class="brand-logo">
 				<a href="<?=site_url('/dashboard')?>">
-					<img src="assets/img/fastcat.png" alt="" class="dark-logo" width="100"/>
+					<img src="/assets/img/fastcat.png" alt="" class="dark-logo" width="100"/>
 					<img
-						src="assets/img/fastcat.png"
+						src="/assets/img/fastcat.png"
 						alt="" width="100"
 						class="light-logo"
 					/>
@@ -373,7 +373,7 @@
 							</a>
 							<ul class="submenu">
                                 <li><a href="<?=site_url('list-supplier')?>">List of Suppliers</a></li>
-								<li><a href="<?=site_url('add-supplier')?>" class="active">Add Supplier</a></li>
+								<li><a href="<?=site_url('edit-supplier')?>" class="active">Edit Supplier</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -416,74 +416,24 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header"><span class="icon-copy dw dw-add"></span>&nbsp;Add Supplier</div>
+					<div class="card-header"><span class="icon-copy dw dw-shop"></span>&nbsp;Edit Supplier
+                            <a href="<?=site_url('list-supplier')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
+                    </div>
 					<div class="card-body">
-                        <?php if(!empty(session()->getFlashdata('fail'))) : ?>
-                            <div class="alert alert-danger" role="alert">
-                                <?= session()->getFlashdata('fail'); ?>
-                            </div>
-                        <?php endif; ?>
-                        <?php if(!empty(session()->getFlashdata('success'))) : ?>
-                            <div class="alert alert-success" role="alert">
-                                <?= session()->getFlashdata('success'); ?>
-                            </div>
-                        <?php endif; ?>
-                        <form method="POST" class="row g-3" id="frmSupplier" action="<?=base_url('save-supplier')?>">
-                            <div class="col-12">
-                                <div class="row g-3">
-                                    <div class="col-lg-4 form-group">
-                                        <label>Industry</label>
-                                        <select class="form-control" name="industry" id="industry">
-                                            <option value="0">Choose</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-8 form-group">
-                                        <label>Supplier's Name</label>
-                                        <input type="text" class="form-control" name="supplier_name" required/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <label>Supplier's Address</label>
-                                <textarea class="form-control" name="supplier_address"></textarea>
-                            </div>
-                            <div class="col-12">
-                                <div class="row g-3">
-                                    <div class="col-lg-4 form-group">
-                                        <label>Contact Person</label>
-                                        <input type="text" class="form-control" name="contact_person" required/>
-                                    </div>
-                                    <div class="col-lg-4 form-group">
-                                        <label>Email Address</label>
-                                        <input type="email" class="form-control" name="email" required/>
-                                    </div>
-                                    <div class="col-lg-4 form-group">
-                                        <label>Contact No</label>
-                                        <input type="phone" class="form-control" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="11" minlength="11" required/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary">Save Entry</button>
-                            </div>
-                        </form>
+						
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- js -->
-		<script src="assets/vendors/scripts/core.js"></script>
-		<script src="assets/vendors/scripts/script.min.js"></script>
-		<script src="assets/vendors/scripts/process.js"></script>
-		<script src="assets/vendors/scripts/layout-settings.js"></script>
-		<script src="assets/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-		<script src="assets/vendors/scripts/datatable-setting.js"></script>
-        <script>
-            $(document).ready(function(){fetch();});
-            function fetch(){$.ajax({url:"<?=site_url('fetch-industry')?>",method:"GET",success:function(response){$('#industry').append(response);}});}
-        </script>
+		<script src="/assets/vendors/scripts/core.js"></script>
+		<script src="/assets/vendors/scripts/script.min.js"></script>
+		<script src="/assets/vendors/scripts/process.js"></script>
+		<script src="/assets/vendors/scripts/layout-settings.js"></script>
+		<script src="/assets/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script src="/assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script src="/assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script src="/assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script src="/assets/vendors/scripts/datatable-setting.js"></script>
 	</body>
 </html>

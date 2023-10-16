@@ -53,6 +53,19 @@ class Home extends BaseController
         return view('supplier',$data);
     }
 
+    public function editSupplier($id = null)
+    {
+        $builder = $this->db->table('tblsupplier a');
+        $builder->select('a.*,b.Name');
+        $builder->join('tblindustry b','b.industryID=a.industryID','LEFT');
+        $builder->WHERE('a.supplierID',$id);
+        $record = $builder->get()->getResult();
+        $data = [
+            'record'=>$record,
+        ];
+        return view('edit-supplier',$data);
+    }
+
     public function addSupplier()
     {
         return view('add-supplier');

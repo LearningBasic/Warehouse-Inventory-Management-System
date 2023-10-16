@@ -4,7 +4,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>FastCat WMS - Warehouse Inventory Management System</title>
+		<title>System Configuration</title>
 
 		<!-- Site favicon -->
 		<link
