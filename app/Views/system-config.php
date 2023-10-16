@@ -615,6 +615,16 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- <script src="assets/ajax/system-config.js"></script> -->
         <script>
+            $(document).ready(function(){listIndustry();});
+            function listIndustry()
+            {
+                $.ajax({
+                    url:"<?=site_url('list-industry')?>",method:"GET",success:function(response)
+                    {
+                        $('#listindustry').append(response);
+                    }
+                });
+            }
             $('#btnAdd').on('click',function(e)
             {
                 e.preventDefault();
@@ -627,7 +637,7 @@
                                 'Great',
                                 'Successfully added',
                                 'success'
-                            );$('#frmIndustry')[0].reset();
+                            );$('#frmIndustry')[0].reset();listIndustry();
                         }else{alert(response);}
                     }
                 });

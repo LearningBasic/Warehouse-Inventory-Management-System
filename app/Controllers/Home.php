@@ -50,8 +50,30 @@ class Home extends BaseController
     {
         $industryModel = new \App\Models\industryModel();
         $name = $this->request->getPost('industryName');
-        $values = ['Name'=>$name];
-        $industryModel->save($values);
-        echo "success";
+        $validation = $this->validate(['industryName'=>'is_unique[tblindustry.Name]']);
+        if(!$validation)
+        {
+            echo $name." already exists";
+        }
+        else{
+            $values = ['Name'=>$name];
+            $industryModel->save($values);
+            echo "success";
+        }
+    }
+
+    public function listIndustry()
+    {
+        $builder = $this->db->table('tblindustry');
+        $builder->select('Name');
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <h5 class="mb-1 h5"><?php echo $row->Name ?><button type="button" style="float:right;" class="btn"><i class="icon-copy dw dw-delete-3"></i></button></h5>
+            </a>
+            <?php
+        }
     }
 }
