@@ -415,7 +415,26 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
-				
+				<div class="card-box">
+					<div class="card-header"><span class="icon-copy dw dw-server"></span>&nbsp;Inventory</div>
+					<div class="card-body">
+						<table class="data-table table stripe hover nowrap">
+							<thead>
+								<th>Category</th>
+								<th>Product ID</th>
+								<th>Product Name</th>
+								<th>Unit Price</th>
+								<th>Status</th>
+								<th>Expiration Date</th>
+								<th>Supplier</th>
+								<th>Warehouse</th>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 		<!-- js -->
@@ -423,11 +442,10 @@
 		<script src="assets/vendors/scripts/script.min.js"></script>
 		<script src="assets/vendors/scripts/process.js"></script>
 		<script src="assets/vendors/scripts/layout-settings.js"></script>
-		<script src="assets/src/plugins/apexcharts/apexcharts.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-		<script src="assets/vendors/scripts/dashboard3.js"></script>
+		<script src="assets/vendors/scripts/datatable-setting.js"></script>
 	</body>
 </html>
