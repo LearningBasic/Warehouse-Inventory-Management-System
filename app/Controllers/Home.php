@@ -40,4 +40,9 @@ class Home extends BaseController
         $data = ['items'=>$items];
         return view('all-stocks',$data);
     }
+
+    public function systemConfiguration()
+    {
+        return view('system-config');
+    }
 }

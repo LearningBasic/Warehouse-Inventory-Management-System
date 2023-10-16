@@ -430,7 +430,20 @@
 								<th>Warehouse</th>
 							</thead>
 							<tbody>
-
+								<?php if($items): ?>
+									<?php foreach($items as $row): ?>
+										<tr>
+											<td><?php echo $row->categoryName ?></td>
+											<td><?php echo $row->productID ?></td>
+											<td><?php echo $row->productName ?></td>
+											<td><?php echo $row->unitPrice ?></td>
+											<td></td>
+											<td><?php echo $row->ExpirationDate ?></td>
+											<td><?php echo $row->supplierName ?></td>
+											<td><?php echo $row->warehouseName ?></td>
+										</tr>
+									<?php endforeach; ?>
+								<?php endif; ?>
 							</tbody>
 						</table>
 					</div>
