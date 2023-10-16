@@ -513,15 +513,35 @@
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="home6" role="tabpanel">
                             <div class="pd-20">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing
-                                elit, sed do eiusmod tempor incididunt ut labore et
-                                dolore magna aliqua. Ut enim ad minim veniam, quis
-                                nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                ea commodo consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate velit esse cillum dolore eu
-                                fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                non proident, sunt in culpa qui officia deserunt mollit
-                                anim id est laborum.
+                                <div class="row g-3">
+                                    <div class="col-lg-4 form-group">
+                                        <div class="card-box">
+                                            <div class="card-header"><i class="icon-copy dw dw-building1"></i>&nbsp;Industry</div>
+                                            <div class="card-body">
+                                                <div class="list-group" id="listindustry">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 form-group">
+                                        <div class="card-box">
+                                            <div class="card-header">Product Category</div>
+                                            <div class="card-body">
+                                                <div class="list-group" id="listcategory">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 form-group">
+                                        <div class="card-box">
+                                            <div class="card-header"><i class="icon-copy dw dw-house-11"></i>&nbsp;Warehouse</div>
+                                            <div class="card-body">
+                                                <div class="list-group" id="listwarehouse">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="profile6" role="tabpanel">
