@@ -41,6 +41,23 @@ class Home extends BaseController
         return view('all-stocks',$data);
     }
 
+    public function suppliers()
+    {
+        $builder = $this->db->table('tblsupplier a');
+        $builder->select('a.*,b.Name');
+        $builder->join('tblindustry b','b.industryID=a.industryID','LEFT');
+        $record = $builder->get()->getResult();
+        $data = [
+            'record'=>$record,
+        ];
+        return view('supplier',$data);
+    }
+
+    public function addSupplier()
+    {
+        return view('add-supplier');
+    }
+
     public function systemConfiguration()
     {
         return view('system-config');

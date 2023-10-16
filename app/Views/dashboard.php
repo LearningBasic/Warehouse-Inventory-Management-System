@@ -434,7 +434,7 @@
                                 <i class="micon dw dw-shop"></i><span class="mtext">Suppliers</span>
 							</a>
 							<ul class="submenu">
-                                <li><a href="<?=site_url('list')?>">List of Suppliers</a></li>
+                                <li><a href="<?=site_url('list-supplier')?>">List of Suppliers</a></li>
 								<li><a href="<?=site_url('add-supplier')?>">Add Supplier</a></li>
 							</ul>
 						</li>
