@@ -542,10 +542,11 @@
                                         <div class="card-box">
                                             <div class="card-header"><i class="icon-copy dw dw-house-11"></i>&nbsp;Warehouse</div>
                                             <div class="card-body">
-                                                <div class="list-group" id="listwarehouse">
+                                                <div class="user-list">
+                                                    <ul id="listwarehouse"></ul>
                                                 </div>
                                                 <br/>
-                                                <button type="button" class="btn btn-primary btn-sm add_warehouse"><i class="icon-copy dw dw-add"></i> Add</button>
+                                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#warehouseModal"><i class="icon-copy dw dw-add"></i> Add</button>
                                             </div>
                                         </div>
                                     </div>
@@ -632,6 +633,33 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="warehouseModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            New Warehouse
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" class="row g-3" id="frmWarehouse">
+                            <div class="col-12 form-group">
+                                <label>Name of Warehouse</label>
+                                <input type="text" class="form-control" name="warehouseName" required/>
+                            </div>
+                            <div class="col-12 form-group">
+                                <label>Location</label>
+                                <textarea class="form-control" name="address"></textarea>
+                            </div>
+                            <div class="col-12 form-group">
+                                <input type="submit" class="btn btn-primary" value="Add Entry" id="btnAddWarehouse"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
@@ -644,9 +672,10 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- <script src="assets/ajax/system-config.js"></script> -->
         <script>
-            $(document).ready(function(){listIndustry();listCategory();});
+            $(document).ready(function(){listIndustry();listCategory();listWarehouse();});
             function listCategory(){$.ajax({url:"<?=site_url('list-category')?>",method:"GET",success:function(response){$('#listcategory').html(response);}});}
             function listIndustry(){$.ajax({url:"<?=site_url('list-industry')?>",method:"GET",success:function(response){$('#listindustry').html(response);}});}
+            function listWarehouse(){$.ajax({url:"<?=site_url('list-warehouse')?>",method:"GET",success:function(response){$('#listwarehouse').html(response);}});}
             $('#btnAdd').on('click',function(e)
             {
                 e.preventDefault();
@@ -677,6 +706,23 @@
                                 'Successfully added',
                                 'success'
                             );$('#frmCategory')[0].reset();listCategory();
+                        }else{alert(response);}
+                    }
+                });
+            });
+            $('#btnAddWarehouse').on('click',function(e)
+            {
+                e.preventDefault();
+                var data = $('#frmWarehouse').serialize();
+                $.ajax({
+                    url:"<?=site_url('save-warehouse')?>",method:"POST",data:data,success:function(response)
+                    {
+                        if(response==="success"){
+                            Swal.fire(
+                                'Great',
+                                'Successfully added',
+                                'success'
+                            );$('#frmCategory')[0].reset();listWarehouse();
                         }else{alert(response);}
                     }
                 });

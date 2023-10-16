@@ -84,6 +84,30 @@ class Home extends BaseController
         }
     }
 
+    public function saveWarehouse()
+    {
+        $warehouseModel = new \App\Models\warehouseModel();
+        $name = $this->request->getPost('warehouseName');
+        $location = $this->request->getPost('address');
+        $status = 1;
+        $validation = $this->validate([
+            'warehouseName'=>'required|is_unique[tblwarehouse.warehouseName]'
+        ]);
+        if(!$validation)
+        {
+            echo "Invalid! Please fill in the form";
+        }
+        else{
+            $values = [
+                'warehouseName'=>$name,
+                'Address'=>$location,
+                'Status'=>$status,
+            ];
+            $warehouseModel->save($values);
+            echo "success";
+        }
+    }
+
     public function listIndustry()
     {
         $builder = $this->db->table('tblindustry');
@@ -116,10 +140,8 @@ class Home extends BaseController
             ?>
             <li class="d-flex align-items-center justify-content-between">
                 <div class="name-avatar d-flex align-items-center pr-2">
-                    <div class="avatar mr-2 flex-shrink-0">
-                        <?php echo $row->categoryName ?>
-                    </div>
                     <div class="txt">
+                        <div class="font-14 weight-600"><?php echo $row->categoryName ?></div>
                         <div class="font-12 weight-500" data-color="#b2b1b6">
                             <?php echo $row->Description ?>
                         </div>
@@ -127,6 +149,31 @@ class Home extends BaseController
                 </div>
                 <div class="cta flex-shrink-0">
                     <button type="button" class="btn btn-sm btn-outline-danger remove" value="<?php echo $row->categoryID ?>"><i class="icon-copy dw dw-delete-3"></i></button>
+                </div>
+            </li>
+            <?php
+        }
+    }
+
+    public function listWarehouse()
+    {
+        $builder = $this->db->table('tblwarehouse');
+        $builder->select('warehouseID,warehouseName,Address');
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <li class="d-flex align-items-center justify-content-between">
+                <div class="name-avatar d-flex align-items-center pr-2">
+                    <div class="txt">
+                        <div class="font-14 weight-600"><?php echo $row->warehouseName ?></div>
+                        <div class="font-12 weight-500" data-color="#b2b1b6">
+                            <?php echo $row->Address ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="cta flex-shrink-0">
+                    <button type="button" class="btn btn-sm btn-outline-danger remove" value="<?php echo $row->warehouseID ?>"><i class="icon-copy dw dw-delete-3"></i></button>
                 </div>
             </li>
             <?php

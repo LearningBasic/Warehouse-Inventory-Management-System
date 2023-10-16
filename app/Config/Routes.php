@@ -37,6 +37,8 @@ $routes->post('save-industry','Home::saveIndustry');
 $routes->get('list-industry','Home::listIndustry');
 $routes->post('save-category','Home::saveCategory');
 $routes->get('list-category','Home::listCategory');
+$routes->post('save-warehouse','Home::saveWarehouse');
+$routes->get('list-warehouse','Home::listWarehouse');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
