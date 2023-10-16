@@ -55,15 +55,30 @@ class Home extends BaseController
 
     public function editSupplier($id = null)
     {
-        $builder = $this->db->table('tblsupplier a');
-        $builder->select('a.*,b.Name');
-        $builder->join('tblindustry b','b.industryID=a.industryID','LEFT');
-        $builder->WHERE('a.supplierID',$id);
-        $record = $builder->get()->getResult();
+        $supplierModel = new \App\Models\supplierModel();
+        $record = $supplierModel->WHERE('supplierID',$id)->first();
         $data = [
             'record'=>$record,
         ];
         return view('edit-supplier',$data);
+    }
+
+    public function updateSupplier()
+    {
+        $supplierModel = new \App\Models\supplierModel();
+        $id = $this->request->getPost('supplierID');
+        $supplier_name = $this->request->getPost('supplier_name');
+        $supplier_address = $this->request->getPost('address');
+        $person = $this->request->getPost('contactPerson');
+        $email = $this->request->getPost('email');
+        $phone = $this->request->getPost('phone');
+        $values = [
+            'supplierName'=>$supplier_name,'Address'=>$supplier_address,
+            'contactPerson'=>$person,'EmailAddress'=>$email,'contactNumber'=>$phone,
+        ];
+        $supplierModel->update($id,$values);
+        session()->setFlashdata('success','Great! Successfully updated');
+        return redirect()->to('/list-supplier')->withInput();
     }
 
     public function addSupplier()

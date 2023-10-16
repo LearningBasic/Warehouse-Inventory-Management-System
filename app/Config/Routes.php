@@ -41,6 +41,7 @@ $routes->get('list-category','Home::listCategory');
 $routes->post('save-warehouse','Home::saveWarehouse');
 $routes->get('list-warehouse','Home::listWarehouse');
 $routes->post('save-supplier','Home::saveSupplier');
+$routes->post('update-supplier','Home::updateSupplier');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {

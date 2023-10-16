@@ -420,7 +420,36 @@
                             <a href="<?=site_url('list-supplier')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                     </div>
 					<div class="card-body">
-						
+                        <form method="post" class="row g-3" id="editSupplier" action="<?=base_url('update-supplier')?>">
+                            <input type="hidden" name="supplierID" value="<?=$record['supplierID']?>"/>
+                            <div class="col-12 form-group">
+                                <label>Supplier's Name</label>
+                                <input type="text" class="form-control" name="supplier_name" value="<?=$record['supplierName']?>" required/>
+                            </div>
+                            <div class="col-12 form-group">
+                                <label>Supplier's Address</label>
+                                <textarea class="form-control" name="address"><?=$record['Address']?></textarea>
+                            </div>
+                            <div class="col-12 form-group">
+                                <div class="row g-3">
+                                    <div class="col-lg-4">
+                                        <label>Contact Person</label>
+                                        <input type="text" class="form-control" name="contactPerson" value="<?=$record['contactPerson']?>" required/>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>Email Address</label>
+                                        <input type="email" class="form-control" name="email" value="<?=$record['EmailAddress']?>" required/>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>Contact No</label>
+                                        <input type="phone" class="form-control" name="phone" value="<?=$record['contactNumber']?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="11" minlength="11" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 form-group">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
 					</div>
 				</div>
 			</div>
