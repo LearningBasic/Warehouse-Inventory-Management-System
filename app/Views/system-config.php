@@ -520,15 +520,19 @@
                                             <div class="card-body">
                                                 <div class="list-group" id="listindustry">
                                                 </div>
+                                                <br/>
+                                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#industryModal"><i class="icon-copy dw dw-add"></i> Add</button>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 form-group">
                                         <div class="card-box">
-                                            <div class="card-header">Product Category</div>
+                                            <div class="card-header"><i class="icon-copy dw dw-list"></i>&nbsp;Product Category</div>
                                             <div class="card-body">
                                                 <div class="list-group" id="listcategory">
                                                 </div>
+                                                <br/>
+                                                <button type="button" class="btn btn-primary btn-sm add_category"><i class="icon-copy dw dw-add"></i> Add</button>
                                             </div>
                                         </div>
                                     </div>
@@ -538,6 +542,8 @@
                                             <div class="card-body">
                                                 <div class="list-group" id="listwarehouse">
                                                 </div>
+                                                <br/>
+                                                <button type="button" class="btn btn-primary btn-sm add_warehouse"><i class="icon-copy dw dw-add"></i> Add</button>
                                             </div>
                                         </div>
                                     </div>
@@ -574,16 +580,38 @@
                 </div>
 			</div>
 		</div>
+        <div class="modal fade" id="industryModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            New Industry
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" class="row g-3" id="frmIndustry">
+                            <div class="col-12 form-group">
+                                <label>Industy Name</label>
+                                <input type="text" class="form-control" name="industryName" required/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
 		<script src="assets/vendors/scripts/process.js"></script>
 		<script src="assets/vendors/scripts/layout-settings.js"></script>
-		<script src="assets/src/plugins/apexcharts/apexcharts.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-		<script src="assets/vendors/scripts/dashboard3.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+
+        </script>
 	</body>
 </html>
