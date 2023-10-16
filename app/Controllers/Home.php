@@ -65,7 +65,35 @@ class Home extends BaseController
 
     public function saveSupplier()
     {
-
+        $supplierModel = new \App\Models\supplierModel();
+        $industry = $this->request->getPost('industry');
+        $supplier_name = $this->request->getPost('supplier_name');
+        $supplier_address = $this->request->getPost('supplier_address');
+        $person = $this->request->getPost('contact_person');
+        $email = $this->request->getPost('email');
+        $phone = $this->request->getPost('phone');
+        $validation = $this->validate([
+            'supplier_name'=>'required|is_unique[tblsupplier.supplierName]',
+            'supplier_address'=>'required',
+            'contact_person'=>'required',
+            'email'=>'required|valid_email|is_unique[tblsupplier.EmailAddress]',
+            'phone'=>'required'
+        ]);
+        if(!$validation)
+        {
+            session()->setFlashdata('fail',"Invalid! Please check the supplier's information before the submission");
+            return redirect()->to('/add-supplier')->withInput();
+        }
+        else{
+            $values = [
+                'supplierName'=>$supplier_name,'Address'=>$supplier_address,
+                'contactPerson'=>$person,'EmailAddress'=>$email,'contactNumber'=>$phone,
+                'industryID'=>$industry,
+            ];
+            $supplierModel->save($values);
+            session()->setFlashdata('success','Great! Successfully added');
+            return redirect()->to('/add-supplier')->withInput();
+        }
     }
 
     public function fetchIndustry()

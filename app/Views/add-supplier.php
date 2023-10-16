@@ -418,6 +418,16 @@
 				<div class="card-box">
 					<div class="card-header"><span class="icon-copy dw dw-add"></span>&nbsp;Add Supplier</div>
 					<div class="card-body">
+                        <?php if(!empty(session()->getFlashdata('fail'))) : ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?= session()->getFlashdata('fail'); ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if(!empty(session()->getFlashdata('success'))) : ?>
+                            <div class="alert alert-success" role="alert">
+                                <?= session()->getFlashdata('success'); ?>
+                            </div>
+                        <?php endif; ?>
                         <form method="POST" class="row g-3" id="frmSupplier" action="<?=base_url('save-supplier')?>">
                             <div class="col-12">
                                 <div class="row g-3">
@@ -435,7 +445,7 @@
                             </div>
                             <div class="col-12">
                                 <label>Supplier's Address</label>
-                                <textarea class="form-control" name="supplier_name"></textarea>
+                                <textarea class="form-control" name="supplier_address"></textarea>
                             </div>
                             <div class="col-12">
                                 <div class="row g-3">

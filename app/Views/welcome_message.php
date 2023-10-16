@@ -80,7 +80,7 @@
                                     <div class="alert alert-danger" role="alert">
                                         <?= session()->getFlashdata('fail'); ?>
                                     </div>
-                                <?php endif ?>
+                                <?php endif; ?>
 								<div class="input-group custom">
 									<input
 										type="text" name="username"
