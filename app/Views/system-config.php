@@ -613,6 +613,25 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="assets/ajax/system-config.js"></script>
+        <!-- <script src="assets/ajax/system-config.js"></script> -->
+        <script>
+            $('#btnAdd').on('click',function(e)
+            {
+                e.preventDefault();
+                var data = $('#frmIndustry').serialize();
+                $.ajax({
+                    url:"<?=site_url('save-industry')?>",method:"POST",data:data,success:function(response)
+                    {
+                        if(response==="success"){
+                            Swal.fire(
+                                'Great',
+                                'Successfully added',
+                                'success'
+                            );$('#frmIndustry')[0].reset();
+                        }else{alert(response);}
+                    }
+                });
+            });
+        </script>
 	</body>
 </html>
