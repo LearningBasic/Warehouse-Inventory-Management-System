@@ -32,6 +32,8 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 $routes->post('/auth','Auth::check');
 $routes->get('/logout','Auth::logout');
+//saving the data
+$routes->post('save-industry','Home::saveIndustry');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {

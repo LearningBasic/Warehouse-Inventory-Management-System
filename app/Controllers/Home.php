@@ -45,4 +45,13 @@ class Home extends BaseController
     {
         return view('system-config');
     }
+
+    public function saveIndustry()
+    {
+        $industryModel = new \App\Models\industryModel();
+        $name = $this->request->getPost('industryName');
+        $values = ['Name'=>$name];
+        $industryModel->save($values);
+        echo "success";
+    }
 }

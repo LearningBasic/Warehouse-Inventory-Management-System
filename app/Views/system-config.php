@@ -595,6 +595,9 @@
                                 <label>Industy Name</label>
                                 <input type="text" class="form-control" name="industryName" required/>
                             </div>
+                            <div class="col-12 form-group">
+                                <input type="submit" class="btn btn-primary" value="Add Entry" id="btnAdd"/>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -609,9 +612,7 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
-
-        </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="assets/ajax/system-config.js"></script>
 	</body>
 </html>
