@@ -14,7 +14,7 @@ class inventoryModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['Date', 'productID','productName','unitPrice','categoryID','ExpirationDate','Status','supplierID','warehouseID'];
+    protected $allowedFields = ['Date', 'productID','productName','unitPrice','Qty','categoryID','ExpirationDate','Status','supplierID','warehouseID'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

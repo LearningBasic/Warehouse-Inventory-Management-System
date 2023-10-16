@@ -47,6 +47,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
     $routes->get('/dashboard','Home::dashboard');
     $routes->get('/stocks','Home::stocks');
+    $routes->get('/add-stocks','Home::addStocks');
     $routes->get('/list-supplier','Home::suppliers');
     $routes->get('/add-supplier','Home::addSupplier');
     $routes->get('/edit-supplier/(:any)','Home::editSupplier/$1');

@@ -31,11 +31,10 @@ class Home extends BaseController
     {
         //get all the stocks
         $builder = $this->db->table('tblinventory a');
-        $builder->select('a.*,b.categoryName,c.warehouseID');
+        $builder->select('a.*,b.categoryName');
         $builder->join('tblcategory b','b.categoryID=a.categoryID','LEFT');
-        $builder->join('tblwarehouse c','c.warehouseID=a.warehouseID','LEFT');
-        $builder->join('tblsupplier d','d.supplierID=a.supplierID','LEFT');
-        $builder->orderby('Date');
+        $builder->join('tblsupplier c','c.supplierID=a.supplierID','LEFT');
+        $builder->orderby('a.Date');
         $items = $builder->get()->getResult();
         $data = ['items'=>$items];
         return view('all-stocks',$data);
@@ -79,6 +78,11 @@ class Home extends BaseController
         $supplierModel->update($id,$values);
         session()->setFlashdata('success','Great! Successfully updated');
         return redirect()->to('/list-supplier')->withInput();
+    }
+    
+    public function addStocks()
+    {
+        return view('add-stocks');
     }
 
     public function addSupplier()

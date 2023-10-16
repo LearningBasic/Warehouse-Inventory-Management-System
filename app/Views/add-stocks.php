@@ -4,7 +4,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>Inventory</title>
+		<title>Add Stocks</title>
 
 		<!-- Site favicon -->
 		<link
@@ -338,9 +338,9 @@
                             <i class="micon dw dw-server"></i><span class="mtext">Inventory</span>
 							</a>
 							<ul class="submenu">
-								<li><a href="<?=site_url('stocks')?>" class="active">All Stocks</a></li>
+								<li><a href="<?=site_url('stocks')?>">All Stocks</a></li>
 								<li><a href="<?=site_url('monitor-stocks')?>">Monitor Stocks</a></li>
-								<li><a href="<?=site_url('add-stocks')?>">Add Stocks</a></li>
+								<li><a href="<?=site_url('add-stocks')?>" class="active">Add Stocks</a></li>
 								<li><a href="<?=site_url('Transfer')?>">Transfer Items</a></li>
 								<li><a href="<?=site_url('dead-stocks')?>">Dead Stocks</a></li>
 								<li><a href="<?=site_url('overhaul-stocks')?>">Overhaul Items</a></li>
@@ -416,36 +416,9 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header"><span class="icon-copy dw dw-server"></span>&nbsp;Inventory</div>
+					<div class="card-header"><span class="icon-copy dw dw-add"></span>&nbsp;Add Stock</div>
 					<div class="card-body">
-						<table class="data-table table stripe hover nowrap">
-							<thead>
-								<th>Category</th>
-								<th>Product ID</th>
-								<th>Product Name</th>
-								<th>Unit Price</th>
-								<th>Qty</th>
-								<th>Status</th>
-								<th>Expiration Date</th>
-								<th>Supplier</th>
-							</thead>
-							<tbody>
-								<?php if($items): ?>
-									<?php foreach($items as $row): ?>
-										<tr>
-											<td><?php echo $row->categoryName ?></td>
-											<td><?php echo $row->productID ?></td>
-											<td><?php echo $row->productName ?></td>
-											<td><?php echo $row->unitPrice ?></td>
-											<td><?php echo $row->Qty ?></td>
-											<td></td>
-											<td><?php echo $row->ExpirationDate ?></td>
-											<td><?php echo $row->supplierName ?></td>
-										</tr>
-									<?php endforeach; ?>
-								<?php endif; ?>
-							</tbody>
-						</table>
+						
 					</div>
 				</div>
 			</div>
