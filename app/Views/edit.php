@@ -420,7 +420,25 @@
                         <a href="<?=site_url('stocks')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                     </div>
 					<div class="card-body">
-						
+                        <form method="post" class="row g-3" id="editProduct" action="<?=base_url('update')?>">
+                            <input type="hidden" name="itemID" value="<?=$items['inventID']?>"/>
+                            <div class="col-12 form-group">
+                                <div class="row g-3">
+                                    <div class="col-lg-4">
+                                        <label>Item Number</label>
+                                        <input type="text" class="form-control" name="itemNumber" value="<?=$items['productID'] ?>" required/>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <label>Product Name</label>
+                                        <input type="text" class="form-control" name="itemNumber" value="<?=$items['productName'] ?>" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 form-group">
+                                <label>Description</label>
+                                <textarea class="form-control" name="description"><?=$items['Description'] ?></textarea>
+                            </div>
+                        </form>
 					</div>
 				</div>
 			</div>

@@ -43,9 +43,21 @@ class Home extends BaseController
 
     public function edit($id=null)
     {
+        //warehouse
+        $builder = $this->db->table('tblwarehouse');
+        $builder->select('*');
+        $warehouse = $builder->get()->getResult();
+        //supplier
+        $builder = $this->db->table('tblsupplier');
+        $builder->select('*');
+        $supplier = $builder->get()->getResult();
+        //category
+        $builder = $this->db->table('tblcategory');
+        $builder->select('*');
+        $category = $builder->get()->getResult();
         $inventoryModel = new \App\Models\inventoryModel();
         $items = $inventoryModel->WHERE('inventID',$id)->first();
-        $data = ['items'=>$items];
+        $data = ['items'=>$items,'warehouse'=>$warehouse,'supplier'=>$supplier,'category'=>$category,];
         return view('edit',$data);
     }
 
