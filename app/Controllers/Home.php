@@ -105,7 +105,22 @@ class Home extends BaseController
 
     public function systemConfiguration()
     {
-        return view('system-config');
+        //get the user accounts
+        $builder = $this->db->table('tblaccount');
+        $builder->select('*');
+        // $builder->WHERE('systemRole!=','Administrator');
+        $account = $builder->get()->getResult();
+        $data = ['account'=>$account,];
+        return view('system-config',$data);
+    }
+
+    public function editAccount($id=null)
+    {
+        //get the user accounts
+        $accountModel = new \App\Models\accountModel();
+        $account = $accountModel->WHERE('accountID',$id)->first();
+        $data = ['account'=>$account,];
+        return view('edit-account',$data);
     }
 
     public function saveSupplier()

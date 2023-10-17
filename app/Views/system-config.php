@@ -563,14 +563,26 @@
 											<thead>
 												<th>Date Created</th>
 												<th>Username</th>
-												<th>Password</th>
 												<th>Fullname</th>
 												<th>Status</th>
 												<th>User Role</th>
 												<th>Action</th>
 											</thead>
 											<tbody>
-												
+												<?php if($account): ?>
+													<?php foreach($account as $row): ?>
+														<tr>
+															<td><?php echo $row->DateCreated ?></td>
+															<td><?php echo $row->username ?></td>
+															<td><?php echo $row->Fullname ?></td>
+															<td><?php if($row->Status==1){echo "Active";}else{echo "Inactive";} ?></td>
+															<td><?php echo $row->systemRole ?></td>
+															<td>
+															<a class="btn btn-default" href="<?=site_url('edit-account/')?><?php echo $row->accountID ?>"><i class="icon-copy dw dw-edit"></i>&nbsp;Edit</a>
+															</td>
+														</tr>
+													<?php endforeach; ?>
+												<?php endif; ?>
 											</tbody>
 										</table>
 									</div>

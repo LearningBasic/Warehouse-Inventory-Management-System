@@ -52,6 +52,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/add-supplier','Home::addSupplier');
     $routes->get('/edit-supplier/(:any)','Home::editSupplier/$1');
     $routes->get('/configuration','Home::systemConfiguration');
+    $routes->get('/edit-account/(:any)','Home::editAccount/$1');
 });
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
