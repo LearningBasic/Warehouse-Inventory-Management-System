@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use App\Libraries\Hash;
 
 class Home extends BaseController
 {
@@ -108,7 +109,7 @@ class Home extends BaseController
         //get the user accounts
         $builder = $this->db->table('tblaccount');
         $builder->select('*');
-        // $builder->WHERE('systemRole!=','Administrator');
+        $builder->WHERE('systemRole!=','Administrator');
         $account = $builder->get()->getResult();
         $data = ['account'=>$account,];
         return view('system-config',$data);
@@ -121,6 +122,51 @@ class Home extends BaseController
         $account = $accountModel->WHERE('accountID',$id)->first();
         $data = ['account'=>$account,];
         return view('edit-account',$data);
+    }
+
+    public function saveAccount()
+    {
+        $accountModel = new \App\Models\accountModel();
+        $fullname = $this->request->getPost('fullname');
+        $username = $this->request->getPost('username');
+        $role = $this->request->getPost('systemRole');
+        $status = 1;
+        $dateCreated = date('Y-m-d');
+        $defaultPassword = Hash::make("Fastcat_01");
+        $validation = $this->validate([
+            'fullname'=>'required|is_unique[tblaccount.Fullname]',
+            'username'=>'required|is_unique[tblaccount.username]',
+            'systemRole'=>'required'
+        ]);
+        if(!$validation)
+        {
+            echo "Invalid! Please fill in the form/username already exist";
+        }
+        else{
+            $values = 
+            ['username'=>$username, 'password'=>$defaultPassword,'Fullname'=>$fullname,'Status'=>$status,'systemRole'=>$role,'DateCreated'=>$dateCreated];
+            $accountModel->save($values);
+            echo "success";
+        }
+        
+    }
+
+    public function updateAccount()
+    {
+        $accountModel = new \App\Models\accountModel();
+        $id = $this->request->getPost('supplierID');
+        $supplier_name = $this->request->getPost('supplier_name');
+        $supplier_address = $this->request->getPost('address');
+        $person = $this->request->getPost('contactPerson');
+        $email = $this->request->getPost('email');
+        $phone = $this->request->getPost('phone');
+        $values = [
+            'supplierName'=>$supplier_name,'Address'=>$supplier_address,
+            'contactPerson'=>$person,'EmailAddress'=>$email,'contactNumber'=>$phone,
+        ];
+        $accountModel->update($id,$values);
+        session()->setFlashdata('success','Great! Successfully updated');
+        return redirect()->to('/configuration')->withInput();
     }
 
     public function saveSupplier()

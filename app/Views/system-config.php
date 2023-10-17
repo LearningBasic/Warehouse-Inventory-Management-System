@@ -567,9 +567,11 @@
                         <div class="tab-pane fade" id="profile6" role="tabpanel">
                             <div class="pd-20">
 								<div class="card-box">
-									<div class="card-header"><i class="icon-copy dw dw-user-13"></i>&nbsp;User Accounts</div>
+									<div class="card-header"><i class="icon-copy dw dw-user-13"></i>&nbsp;User Accounts
+										<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#accountModal" style="float:right;"><i class="icon-copy dw dw-add-user"></i>&nbsp;Add</a>
+								</div>
 									<div class="card-body">
-										<table class="data-table table stripe hover nowrap">
+										<table class="data-table table stripe hover nowrap" id="table1">
 											<thead>
 												<th>Date Created</th>
 												<th>Username</th>
@@ -693,6 +695,42 @@
                 </div>
             </div>
         </div>
+		<div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            New Account
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" class="row g-3" id="frmAccount">
+							<div class="col-12 form-group">
+								<label>Complete Name</label>
+								<input type="text" class="form-control" name="fullname" required/>
+							</div>
+							<div class="col-12 form-group">
+								<label>Username</label>
+								<input type="text" class="form-control" name="username" required/>
+							</div>
+							<div class="col-12 form-group">
+								<label>System Role</label>
+								<select class="form-control" name="systemRole">
+									<option value="">Choose</option>
+									<option>Administrator</option>
+									<option>Editor</option>
+									<option>Standard User</option>
+								</select>
+							</div>
+							<div class="col-12 form-group">
+								<input type="submit" class="btn btn-primary" id="btnAddAccount" value="Register"/>
+							</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
@@ -757,6 +795,25 @@
                                 'Successfully added',
                                 'success'
                             );$('#frmWarehouse')[0].reset();listWarehouse();
+                        }else{alert(response);}
+                    }
+                });
+            });
+			$('#btnAddAccount').on('click',function(e)
+            {
+                e.preventDefault();
+				var table = $('#table1');
+                var data = $('#frmAccount').serialize();
+                $.ajax({
+                    url:"<?=site_url('save-account')?>",method:"POST",data:data,success:function(response)
+                    {
+                        if(response==="success"){
+                            Swal.fire(
+                                'Great',
+                                'Successfully added',
+                                'success'
+                            );$('#frmAccount')[0].reset();
+							table.ajax.reload();
                         }else{alert(response);}
                     }
                 });
