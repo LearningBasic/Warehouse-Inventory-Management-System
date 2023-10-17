@@ -715,6 +715,12 @@
 								<input type="text" class="form-control" name="username" required/>
 							</div>
 							<div class="col-12 form-group">
+								<label>Assignment</label>
+								<select class="form-control" name="assignment" id="assignment">
+									<option value="">Choose</option>
+								</select>
+							</div>
+							<div class="col-12 form-group">
 								<label>System Role</label>
 								<select class="form-control" name="systemRole">
 									<option value="">Choose</option>
@@ -744,10 +750,11 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- <script src="assets/ajax/system-config.js"></script> -->
         <script>
-            $(document).ready(function(){listIndustry();listCategory();listWarehouse();});
+            $(document).ready(function(){listIndustry();listCategory();listWarehouse();assignment();});
             function listCategory(){$.ajax({url:"<?=site_url('list-category')?>",method:"GET",success:function(response){$('#listcategory').html(response);}});}
             function listIndustry(){$.ajax({url:"<?=site_url('list-industry')?>",method:"GET",success:function(response){$('#listindustry').html(response);}});}
             function listWarehouse(){$.ajax({url:"<?=site_url('list-warehouse')?>",method:"GET",success:function(response){$('#listwarehouse').html(response);}});}
+			function assignment(){$.ajax({url:"<?=site_url('assignment')?>",method:"GET",success:function(response){$('#assignment').append(response);}});}
             $('#btnAdd').on('click',function(e)
             {
                 e.preventDefault();
@@ -794,7 +801,7 @@
                                 'Great',
                                 'Successfully added',
                                 'success'
-                            );$('#frmWarehouse')[0].reset();listWarehouse();
+                            );$('#frmWarehouse')[0].reset();listWarehouse();assignment();
                         }else{alert(response);}
                     }
                 });

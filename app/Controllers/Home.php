@@ -216,12 +216,14 @@ class Home extends BaseController
         $fullname = $this->request->getPost('fullname');
         $username = $this->request->getPost('username');
         $role = $this->request->getPost('systemRole');
+        $assign = $this->request->getPost('assignment');
         $status = 1;
         $dateCreated = date('Y-m-d');
         $defaultPassword = Hash::make("Fastcat_01");
         $validation = $this->validate([
             'fullname'=>'required|is_unique[tblaccount.Fullname]',
             'username'=>'required|is_unique[tblaccount.username]',
+            'assignment'=>'required',
             'systemRole'=>'required'
         ]);
         if(!$validation)
@@ -230,7 +232,7 @@ class Home extends BaseController
         }
         else{
             $values = 
-            ['username'=>$username, 'password'=>$defaultPassword,'Fullname'=>$fullname,'Status'=>$status,'systemRole'=>$role,'DateCreated'=>$dateCreated];
+            ['username'=>$username, 'password'=>$defaultPassword,'Fullname'=>$fullname,'Status'=>$status,'systemRole'=>$role,'warehouseID'=>$assign,'DateCreated'=>$dateCreated];
             $accountModel->save($values);
             echo "success";
         }
@@ -429,6 +431,19 @@ class Home extends BaseController
                     <button type="button" class="btn btn-sm btn-outline-danger remove" value="<?php echo $row->warehouseID ?>"><i class="icon-copy dw dw-delete-3"></i></button>
                 </div>
             </li>
+            <?php
+        }
+    }
+
+    public function assignment()
+    {
+        $builder = $this->db->table('tblwarehouse');
+        $builder->select('warehouseID,warehouseName,Address');
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <option value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>
             <?php
         }
     }
