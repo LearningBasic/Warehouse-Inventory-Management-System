@@ -61,6 +61,26 @@ class Home extends BaseController
         return view('edit',$data);
     }
 
+    public function update()
+    {
+        $inventoryModel = new \App\Models\inventoryModel();
+        $id = $this->request->getPost('itemID');
+        $warehouse = $this->request->getPost('warehouse');
+        $supplier = $this->request->getPost('supplier');
+        $category = $this->request->getPost('category');
+        $location = $this->request->getPost('location');
+        $item_number = $this->request->getPost('itemNumber');
+        $productName = $this->request->getPost('productName');
+        $desc = $this->request->getPost('description');
+        $values = [
+            'Location'=>$location,'productID'=>$item_number,'productName'=>$productName,
+            'Description'=>$desc,
+            'categoryID'=>$category,'supplierID'=>$supplier,'warehouseID'=>$warehouse,];
+        $inventoryModel->update($id,$values);
+        session()->setFlashdata('success','Great! Successfully updated');
+        return redirect()->to('/stocks')->withInput();
+    }
+
     public function deadStocks()
     {
         return view('dead-stocks');
