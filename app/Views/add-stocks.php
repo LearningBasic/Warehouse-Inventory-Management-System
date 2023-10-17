@@ -339,8 +339,7 @@
 							</a>
 							<ul class="submenu">
 								<li><a href="<?=site_url('stocks')?>">All Stocks</a></li>
-								<li><a href="<?=site_url('monitor-stocks')?>">Monitor Stocks</a></li>
-								<li><a href="<?=site_url('add-stocks')?>" class="active">Add Stocks</a></li>
+								<li><a href="<?=site_url('add')?>" class="active">Add Item</a></li>
 								<li><a href="<?=site_url('Transfer')?>">Transfer Items</a></li>
 								<li><a href="<?=site_url('dead-stocks')?>">Dead Stocks</a></li>
                                 <li><a href="<?=site_url('return')?>">Return Items</a></li>
@@ -417,7 +416,7 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header"><span class="icon-copy dw dw-add"></span>&nbsp;Add Stock</div>
+					<div class="card-header"><span class="icon-copy dw dw-add"></span>&nbsp;Add Item</div>
 					<div class="card-body">
 						<?php if(!empty(session()->getFlashdata('fail'))) : ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">

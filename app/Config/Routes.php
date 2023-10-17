@@ -50,8 +50,8 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
     $routes->get('/dashboard','Home::dashboard');
     $routes->get('/stocks','Home::stocks');
-    $routes->get('/add-stocks','Home::addStocks');
-    $routes->get('/monitor-stocks','Home::monitorStocks');
+    $routes->get('/add','Home::addItem');
+    $routes->get('/dead-stocks','Home::deadStocks');
     $routes->get('/list-supplier','Home::suppliers');
     $routes->get('/add-supplier','Home::addSupplier');
     $routes->get('/edit-supplier/(:any)','Home::editSupplier/$1');

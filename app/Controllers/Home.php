@@ -41,12 +41,12 @@ class Home extends BaseController
         return view('all-stocks',$data);
     }
 
-    public function monitorStocks()
+    public function deadStocks()
     {
-        return view('monitor-stocks');
+        return view('dead-stocks');
     }
 
-    public function addStocks()
+    public function addItem()
     {
         //warehouse
         $builder = $this->db->table('tblwarehouse');

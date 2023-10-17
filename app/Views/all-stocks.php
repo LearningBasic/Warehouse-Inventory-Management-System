@@ -339,8 +339,7 @@
 							</a>
 							<ul class="submenu">
 								<li><a href="<?=site_url('stocks')?>" class="active">All Stocks</a></li>
-								<li><a href="<?=site_url('monitor-stocks')?>">Monitor Stocks</a></li>
-								<li><a href="<?=site_url('add-stocks')?>">Add Stocks</a></li>
+								<li><a href="<?=site_url('add')?>">Add Item</a></li>
 								<li><a href="<?=site_url('Transfer')?>">Transfer Items</a></li>
 								<li><a href="<?=site_url('dead-stocks')?>">Dead Stocks</a></li>
 								<li><a href="<?=site_url('return')?>">Return Items</a></li>
@@ -429,6 +428,7 @@
 								<th>Status</th>
 								<th>Expiration Date</th>
 								<th>Supplier</th>
+								<th>Action</th>
 							</thead>
 							<tbody>
 								<?php if($items): ?>
@@ -442,6 +442,25 @@
 											<td><?php if($row->Qty>5){echo "Available";}else if($row->Qty<5 && $row->Qty>0){echo "Critical Level";}else{echo "Out of Stock";} ?></td>
 											<td><?php echo $row->ExpirationDate ?></td>
 											<td><?php echo $row->supplierName ?></td>
+											<td>
+												<div class="dropdown">
+													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+														href="#" role="button" data-toggle="dropdown">
+														<i class="dw dw-more"></i>
+													</a>
+													<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+														<a class="dropdown-item" href="#"
+															><i class="dw dw-eye"></i> View</a
+														>
+														<a class="dropdown-item" href="#"
+															><i class="dw dw-edit2"></i> Edit</a
+														>
+														<a class="dropdown-item" href="#"
+															><i class="dw dw-delete-3"></i> Delete</a
+														>
+													</div>
+												</div>
+											</td>
 										</tr>
 									<?php endforeach; ?>
 								<?php endif; ?>
