@@ -55,7 +55,7 @@ class Home extends BaseController
         $builder = $this->db->table('tblcategory');
         $builder->select('*');
         $category = $builder->get()->getResult();
-        $data = ['warehouse'=>$warehouse,'supplier'=>$supplier,'category'=>$category];
+        $data = ['warehouse'=>$warehouse,'supplier'=>$supplier,'category'=>$category,];
         return view('add-stocks',$data);
     }
 

@@ -571,7 +571,7 @@
 										<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#accountModal" style="float:right;"><i class="icon-copy dw dw-add-user"></i>&nbsp;Add</a>
 								</div>
 									<div class="card-body">
-										<table class="data-table table stripe hover nowrap" id="table1">
+										<table class="data-table table stripe hover nowrap">
 											<thead>
 												<th>Date Created</th>
 												<th>Username</th>
@@ -741,8 +741,8 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- <script src="assets/ajax/system-config.js"></script> -->
         <script>
             $(document).ready(function(){listIndustry();listCategory();listWarehouse();});

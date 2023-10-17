@@ -469,8 +469,30 @@
                                 <div class="row g-3">
                                     <div class="col-lg-3">
                                         <label>Unit Item</label>
-                                        <select class="form-control" name="itemUnit" required>
+                                        <select class="form-control custom-select2" name="itemUnit" style="width:100%;" required>
                                             <option value="">Choose</option>
+											<option>AVG</option>
+											<option>BAG</option>
+											<option>BLK</option>
+											<option>BOT</option>
+											<option>BOX</option>
+											<option>BK</option>
+											<option>BND</option>
+											<option>CAN</option>
+											<option>CRD</option>
+											<option>CTN</option>
+											<option>CG</option>
+											<option>CSE</option>
+											<option>CEN</option>
+											<option>COI</option>
+											<option>CON</option>
+											<option>CFT</option>
+											<option>CYD</option>
+											<option>CUR</option>
+											<option>CYL</option>
+											<option>DAY</option>
+											<option>DZ</option>
+											<option>DRM</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-3">
