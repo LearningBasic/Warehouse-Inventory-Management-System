@@ -32,13 +32,18 @@ class Home extends BaseController
     {
         //get all the stocks
         $builder = $this->db->table('tblinventory a');
-        $builder->select('a.*,b.categoryName');
+        $builder->select('a.*,b.categoryName,c.supplierName');
         $builder->join('tblcategory b','b.categoryID=a.categoryID','LEFT');
         $builder->join('tblsupplier c','c.supplierID=a.supplierID','LEFT');
         $builder->orderby('a.Date');
         $items = $builder->get()->getResult();
         $data = ['items'=>$items];
         return view('all-stocks',$data);
+    }
+
+    public function monitorStocks()
+    {
+        return view('monitor-stocks');
     }
 
     public function addStocks()
@@ -57,6 +62,47 @@ class Home extends BaseController
         $category = $builder->get()->getResult();
         $data = ['warehouse'=>$warehouse,'supplier'=>$supplier,'category'=>$category,];
         return view('add-stocks',$data);
+    }
+
+    public function addProduct()
+    {
+        $inventoryModel = new \App\Models\inventoryModel();
+        $date = date('Y-m-d');
+        $warehouse = $this->request->getPost('warehouse');
+        $supplier = $this->request->getPost('supplier');
+        $category = $this->request->getPost('category');
+        $location = $this->request->getPost('location');
+        $item_number = $this->request->getPost('item_number');
+        $productName = $this->request->getPost('productName');
+        $desc = $this->request->getPost('description');
+        $itemUnit = $this->request->getPost('itemUnit');
+        $unitPrice = $this->request->getPost('unitPrice');
+        $qty = $this->request->getPost('qty');
+        $expirationDate = $this->request->getPost('expirationDate');
+        $validation = $this->validate([
+            'warehouse'=>'required',
+            'category'=>'required',
+            'item_number'=>'required',
+            'productName'=>'required|is_unique[tblinventory.productName]',
+            'itemUnit'=>'required',
+            'unitPrice'=>'required',
+            'qty'=>'required'
+        ]);
+        if(!$validation)
+        {
+            session()->setFlashdata('fail',"Invalid! Please check the supplier's information before the submission");
+            return redirect()->to('/add-stocks')->withInput();
+        }
+        else
+        {
+            $values = [
+                'Date'=>$date,'Location'=>$location,'productID'=>$item_number,'productName'=>$productName,
+                'Description'=>$desc,'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'Qty'=>$qty,
+                'categoryID'=>$category,'ExpirationDate'=>$expirationDate,'supplierID'=>$supplier,'warehouseID'=>$warehouse,];
+            $inventoryModel->save($values);
+            session()->setFlashdata('success',"Great! Successfully added");
+            return redirect()->to('/add-stocks')->withInput();
+        }
     }
 
     public function suppliers()

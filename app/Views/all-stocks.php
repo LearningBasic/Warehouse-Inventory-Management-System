@@ -421,7 +421,7 @@
 					<div class="card-body">
 						<table class="data-table table stripe hover nowrap">
 							<thead>
-								<th>Category</th>
+								<th>Item Group</th>
 								<th>Product ID</th>
 								<th>Product Name</th>
 								<th>Unit Price</th>
@@ -437,9 +437,9 @@
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
 											<td><?php echo $row->productName ?></td>
-											<td><?php echo $row->unitPrice ?></td>
-											<td><?php echo $row->Qty ?></td>
-											<td><?php if($row->Qty>5){echo "Available";}else if($row->Qty<5 && $row->Qty>0){echo "Critical Level";}else{echo "Out of Stock";} ?>/</td>
+											<td><?php echo number_format($row->unitPrice,2) ?></td>
+											<td><?php echo number_format($row->Qty,0) ?></td>
+											<td><?php if($row->Qty>5){echo "Available";}else if($row->Qty<5 && $row->Qty>0){echo "Critical Level";}else{echo "Out of Stock";} ?></td>
 											<td><?php echo $row->ExpirationDate ?></td>
 											<td><?php echo $row->supplierName ?></td>
 										</tr>
