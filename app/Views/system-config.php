@@ -551,7 +551,7 @@
                                     </div>
                                     <div class="col-lg-4 form-group">
                                         <div class="card-box">
-                                            <div class="card-header"><i class="icon-copy dw dw-house-11"></i>&nbsp;Warehouse</div>
+                                            <div class="card-header"><i class="icon-copy dw dw-house-11"></i>&nbsp;Assignment</div>
                                             <div class="card-body">
                                                 <div class="user-list" style="height:400px;overflow-y:auto;">
                                                     <ul id="listwarehouse"></ul>
@@ -674,14 +674,14 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="myLargeModalLabel">
-                            New Warehouse
+                            New Assignment
                         </h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
                         <form method="post" class="row g-3" id="frmWarehouse">
                             <div class="col-12 form-group">
-                                <label>Name of Warehouse</label>
+                                <label>Assignment</label>
                                 <input type="text" class="form-control" name="warehouseName" required/>
                             </div>
                             <div class="col-12 form-group">
