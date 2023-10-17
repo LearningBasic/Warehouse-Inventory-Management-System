@@ -497,7 +497,7 @@
                                 href="#profile6"
                                 role="tab"
                                 aria-selected="false"
-                                >Back-up & Restore</a
+                                >User Management</a
                             >
                         </li>
                         <li class="nav-item">
@@ -556,15 +556,25 @@
                         </div>
                         <div class="tab-pane fade" id="profile6" role="tabpanel">
                             <div class="pd-20">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing
-                                elit, sed do eiusmod tempor incididunt ut labore et
-                                dolore magna aliqua. Ut enim ad minim veniam, quis
-                                nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                ea commodo consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate velit esse cillum dolore eu
-                                fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                non proident, sunt in culpa qui officia deserunt mollit
-                                anim id est laborum.
+								<div class="card-box">
+									<div class="card-header"><i class="icon-copy dw dw-user-13"></i>&nbsp;User Accounts</div>
+									<div class="card-body">
+										<table class="data-table table stripe hover nowrap">
+											<thead>
+												<th>Date Created</th>
+												<th>Username</th>
+												<th>Password</th>
+												<th>Fullname</th>
+												<th>Status</th>
+												<th>User Role</th>
+												<th>Action</th>
+											</thead>
+											<tbody>
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="contact6" role="tabpanel">
@@ -671,6 +681,7 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="assets/vendors/scripts/datatable-setting.js"></script>
         <!-- <script src="assets/ajax/system-config.js"></script> -->
         <script>
             $(document).ready(function(){listIndustry();listCategory();listWarehouse();});
