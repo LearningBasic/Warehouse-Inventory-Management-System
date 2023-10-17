@@ -41,6 +41,14 @@ class Home extends BaseController
         return view('all-stocks',$data);
     }
 
+    public function edit($id=null)
+    {
+        $inventoryModel = new \App\Models\inventoryModel();
+        $items = $inventoryModel->WHERE('inventID',$id)->first();
+        $data = ['items'=>$items];
+        return view('edit',$data);
+    }
+
     public function deadStocks()
     {
         return view('dead-stocks');

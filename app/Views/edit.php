@@ -4,25 +4,25 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>Inventory</title>
+		<title>Edit Item</title>
 
 		<!-- Site favicon -->
 		<link
 			rel="apple-touch-icon"
 			sizes="180x180"
-			href="assets/img/fastcat.png"
+			href="/assets/img/fastcat.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="32x32"
-			href="assets/img/fastcat.png"
+			href="/assets/img/fastcat.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="16x16"
-			href="assets/img/fastcat.png"
+			href="/assets/img/fastcat.png"
 		/>
 
 		<!-- Mobile Specific Metas -->
@@ -37,23 +37,23 @@
 			rel="stylesheet"
 		/>
 		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="assets/vendors/styles/core.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/vendors/styles/core.css" />
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="assets/vendors/styles/icon-font.min.css"
+			href="/assets/vendors/styles/icon-font.min.css"
 		/>
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+			href="/assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
 		/>
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="assets/src/plugins/datatables/css/responsive.bootstrap4.min.css"
+			href="/assets/src/plugins/datatables/css/responsive.bootstrap4.min.css"
 		/>
-		<link rel="stylesheet" type="text/css" href="assets/vendors/styles/style.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/vendors/styles/style.css" />
         <style>
         /* Track */
             ::-webkit-scrollbar-track {
@@ -81,7 +81,7 @@
 		<div class="pre-loader">
 			<div class="pre-loader-box">
 				<div class="loader-logo">
-					<img src="assets/img/fastcat.png" alt="Fastcat" width="100"/>
+					<img src="/assets/img/fastcat.png" alt="Fastcat" width="100"/>
 				</div>
 				<div class="loader-progress" id="progress_div">
 					<div class="bar" id="bar1"></div>
@@ -313,9 +313,9 @@
 		<div class="left-side-bar">
 			<div class="brand-logo">
 				<a href="<?=site_url('/dashboard')?>">
-					<img src="assets/img/fastcat.png" alt="" class="dark-logo" width="100"/>
+					<img src="/assets/img/fastcat.png" alt="" class="dark-logo" width="100"/>
 					<img
-						src="assets/img/fastcat.png"
+						src="/assets/img/fastcat.png"
 						alt="" width="100"
 						class="light-logo"
 					/>
@@ -338,7 +338,7 @@
                             <i class="micon dw dw-server"></i><span class="mtext">Inventory</span>
 							</a>
 							<ul class="submenu">
-								<li><a href="<?=site_url('stocks')?>" class="active">All Stocks</a></li>
+								<li><a href="<?=site_url('edit')?>" class="active">Edit Item</a></li>
 								<li><a href="<?=site_url('add')?>">Add Item</a></li>
 								<li><a href="<?=site_url('Transfer')?>">Transfer Items</a></li>
 								<li><a href="<?=site_url('dead-stocks')?>">Dead Stocks</a></li>
@@ -416,75 +416,24 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header"><span class="icon-copy dw dw-server"></span>&nbsp;Inventory</div>
+					<div class="card-header"><span class="icon-copy dw dw-edit"></span>&nbsp;Inventory
+                        <a href="<?=site_url('stocks')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
+                    </div>
 					<div class="card-body">
-						<?php if(!empty(session()->getFlashdata('fail'))) : ?>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <?= session()->getFlashdata('fail'); ?>
-                            </div>
-                        <?php endif; ?>
-                        <?php if(!empty(session()->getFlashdata('success'))) : ?>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <?= session()->getFlashdata('success'); ?>
-                            </div>
-                        <?php endif; ?>
-						<table class="data-table table stripe hover nowrap">
-							<thead>
-								<th>Item Group</th>
-								<th>Product ID</th>
-								<th>Product Name</th>
-								<th>Unit Price</th>
-								<th>Qty</th>
-								<th>Status</th>
-								<th>Expiration Date</th>
-								<th>Supplier</th>
-								<th>Action</th>
-							</thead>
-							<tbody>
-								<?php if($items): ?>
-									<?php foreach($items as $row): ?>
-										<tr>
-											<td><?php echo $row->categoryName ?></td>
-											<td><?php echo $row->productID ?></td>
-											<td><?php echo $row->productName ?></td>
-											<td><?php echo number_format($row->unitPrice,2) ?></td>
-											<td><?php echo number_format($row->Qty,0) ?></td>
-											<td><?php if($row->Qty>5){echo "Available";}else if($row->Qty<5 && $row->Qty>0){echo "Critical Level";}else{echo "Out of Stock";} ?></td>
-											<td><?php echo $row->ExpirationDate ?></td>
-											<td><?php echo $row->supplierName ?></td>
-											<td>
-												<div class="dropdown">
-													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-														href="#" role="button" data-toggle="dropdown">
-														<i class="dw dw-more"></i>
-													</a>
-													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
-														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
-														<button type="button" class="dropdown-item deadstock" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-briefcase"></i>Dead Stock</button>
-														<button type="button" class="dropdown-item repair" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-hammer"></i>For Repair</button>
-														<a class="dropdown-item" href="transfer/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-message-1"></i>Transfer</a>
-														<button type="button" class="dropdown-item return" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-refresh2"></i>Return</button>
-													</div>
-												</div>
-											</td>
-										</tr>
-									<?php endforeach; ?>
-								<?php endif; ?>
-							</tbody>
-						</table>
+						
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- js -->
-		<script src="assets/vendors/scripts/core.js"></script>
-		<script src="assets/vendors/scripts/script.min.js"></script>
-		<script src="assets/vendors/scripts/process.js"></script>
-		<script src="assets/vendors/scripts/layout-settings.js"></script>
-		<script src="assets/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script src="/assets/vendors/scripts/core.js"></script>
+		<script src="/assets/vendors/scripts/script.min.js"></script>
+		<script src="/assets/vendors/scripts/process.js"></script>
+		<script src="/assets/vendors/scripts/layout-settings.js"></script>
+		<script src="/assets/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script src="/assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script src="/assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script src="/assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script src="/assets/vendors/scripts/datatable-setting.js"></script>
 	</body>
 </html>
