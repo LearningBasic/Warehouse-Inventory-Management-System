@@ -154,16 +154,13 @@ class Home extends BaseController
     public function updateAccount()
     {
         $accountModel = new \App\Models\accountModel();
-        $id = $this->request->getPost('supplierID');
-        $supplier_name = $this->request->getPost('supplier_name');
-        $supplier_address = $this->request->getPost('address');
-        $person = $this->request->getPost('contactPerson');
-        $email = $this->request->getPost('email');
-        $phone = $this->request->getPost('phone');
-        $values = [
-            'supplierName'=>$supplier_name,'Address'=>$supplier_address,
-            'contactPerson'=>$person,'EmailAddress'=>$email,'contactNumber'=>$phone,
-        ];
+        $id = $this->request->getPost('accountID');
+        $fullname = $this->request->getPost('fullname');
+        $username = $this->request->getPost('username');
+        $role = $this->request->getPost('systemRole');
+        $status = $this->request->getPost('status');
+        $values = 
+            ['username'=>$username,'Fullname'=>$fullname,'Status'=>$status,'systemRole'=>$role];
         $accountModel->update($id,$values);
         session()->setFlashdata('success','Great! Successfully updated');
         return redirect()->to('/configuration')->withInput();

@@ -484,7 +484,39 @@
                     </div>
                     <div class="card-body">
                         <form method="post" class="row g-3" id="updateAccount" action="<?=base_url('update-account')?>">
-
+                            <input type="hidden" name="accountID" value="<?=$account['accountID']?>"/>
+                            <div class="col-12 form-group">
+                                <label>Complete Name</label>
+                                <input type="text" name="fullname" class="form-control" value="<?=$account['Fullname']?>" required/>
+                            </div>
+                            <div class="col-12 form-group">
+                                <div class="row g-3">
+                                    <div class="col-lg-4">
+                                        <label>Username</label>
+                                        <input type="text" name="username" class="form-control" value="<?=$account['username']?>" required/>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>Status</label>
+                                        <select class="form-control" name="status">
+                                            <option value="">Choose</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>System Role</label>
+                                        <select class="form-control" name="systemRole" required>
+                                            <option value="">Choose</option>
+                                            <option>Administrator</option>
+                                            <option>Editor</option>
+                                            <option>Standard User</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 form-group">
+                                <input type="submit" class="btn btn-primary" onclick="return confirm('Do you want to continue modifying the records?')" value="Save Changes"/>
+                            </div>
                         </form>
                     </div>
                 </div>
