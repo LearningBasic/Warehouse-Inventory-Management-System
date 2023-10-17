@@ -590,7 +590,8 @@
 															<td><?php if($row->Status==1){echo "Active";}else{echo "Inactive";} ?></td>
 															<td><?php echo $row->systemRole ?></td>
 															<td>
-															<a class="btn btn-default" href="<?=site_url('edit-account/')?><?php echo $row->accountID ?>"><i class="icon-copy dw dw-edit"></i>&nbsp;Edit</a>
+																<a class="btn btn-default" href="<?=site_url('edit-account/')?><?php echo $row->accountID ?>"><i class="icon-copy dw dw-edit"></i>&nbsp;Edit</a>
+																<button type="button" class="btn btn-default btn-sm reset" value="<?php echo $row->accountID ?>"><i class="icon-copy dw dw-reload"></i>&nbsp;Reset</button>
 															</td>
 														</tr>
 													<?php endforeach; ?>
