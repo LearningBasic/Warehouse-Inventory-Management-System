@@ -802,7 +802,6 @@
 			$('#btnAddAccount').on('click',function(e)
             {
                 e.preventDefault();
-				var table = $('#table1');
                 var data = $('#frmAccount').serialize();
                 $.ajax({
                     url:"<?=site_url('save-account')?>",method:"POST",data:data,success:function(response)
@@ -813,7 +812,6 @@
                                 'Successfully added',
                                 'success'
                             );$('#frmAccount')[0].reset();
-							table.ajax.reload();
                         }else{alert(response);}
                     }
                 });
