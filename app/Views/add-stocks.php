@@ -493,6 +493,22 @@
 											<option>DAY</option>
 											<option>DZ</option>
 											<option>DRM</option>
+											<option>EA</option>
+											<option>FT</option>
+											<option>GAL</option>
+											<option>GA</option>
+											<option>GRN</option>
+											<option>GRM</option>
+											<option>GMC</option>
+											<option>GRS</option>
+											<option>HR</option>
+											<option>CW</option>
+											<option>INC</option>
+											<option>INS</option>
+											<option>JAR</option>
+											<option>JOB</option>
+											<option>KG</option>
+											<option>KW</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-3">
