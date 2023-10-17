@@ -478,7 +478,16 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
-                
+                <div class="card-box">
+                    <div class="card-header"><span class="icon-copy dw dw-edit"></span>&nbsp;Edit Account
+                        <a href="<?=site_url('configuration')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" class="row g-3" id="updateAccount" action="<?=base_url('update-account')?>">
+
+                        </form>
+                    </div>
+                </div>
 			</div>
 		</div>
 		<!-- js -->

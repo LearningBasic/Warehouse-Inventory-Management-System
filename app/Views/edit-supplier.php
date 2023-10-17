@@ -418,7 +418,7 @@
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
 					<div class="card-header"><span class="icon-copy dw dw-shop"></span>&nbsp;Edit Supplier
-                            <a href="<?=site_url('list-supplier')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
+                        <a href="<?=site_url('list-supplier')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                     </div>
 					<div class="card-body">
                         <form method="post" class="row g-3" id="editSupplier" action="<?=base_url('update-supplier')?>">

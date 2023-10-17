@@ -478,6 +478,16 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
+				<?php if(!empty(session()->getFlashdata('fail'))) : ?>
+					<div class="alert alert-danger" role="alert">
+						<?= session()->getFlashdata('fail'); ?>
+					</div>
+				<?php endif; ?>
+				<?php if(!empty(session()->getFlashdata('success'))) : ?>
+					<div class="alert alert-success" role="alert">
+						<?= session()->getFlashdata('success'); ?>
+					</div>
+				<?php endif; ?>
                 <div class="tab">
                     <ul class="nav nav-pills justify-content-end" role="tablist">
                         <li class="nav-item">
