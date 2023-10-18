@@ -36,7 +36,13 @@ class Home extends BaseController
         $builder->join('tblinventory b','b.warehouseID=a.warehouseID','LEFT');
         $builder->groupBy('a.warehouseID');
         $assign = $builder->get()->getResult();
-        $data = ['query'=>$query,'assignment'=>$assign,];
+        //categorized
+        $builder = $this->db->table('tblcategory a');
+        $builder->select('a.categoryName,COUNT(b.inventID)total');
+        $builder->join('tblinventory b','b.categoryID=a.categoryID','LEFT');
+        $builder->groupBy('a.categoryID');
+        $category = $builder->get()->getResult();
+        $data = ['query'=>$query,'assignment'=>$assign,'category'=>$category,];
         return view('dashboard',$data);
     }
 

@@ -591,7 +591,7 @@
 								<div class="h5 mb-0">Top Suppliers</div>
 							</div>
 							<div class="user-list" style="overflow-y:auto;height:300px;">
-								<ul>
+								<ul id="listSupplier">
 									
 								</ul>
 							</div>
@@ -610,10 +610,11 @@
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-12 mb-20">
-                    <div class="card-box pd-20 min-height-200px">
+                    	<div class="card-box pd-20">
 							<div class="d-flex justify-content-between">
-								<div class="h5 mb-0">Stocks</div>
+								<div class="h5 mb-0">Stocks By Category</div>
 							</div>
+							<div id="chartCategory" style="height:300px;"></div>
 						</div>
 					</div>
 				</div>
@@ -629,13 +630,14 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script>
-			$(document).ready(function(){totalItem();totalStocks();totalReserved();totalSupplier();outStock();});
+			$(document).ready(function(){totalItem();totalStocks();totalReserved();totalSupplier();outStock();listSupplier();});
 			function totalItem(){$.ajax({url:"<?=site_url('total-item')?>",method:"GET",success:function(response){$('#allStocks').html(response);}});}
 			function totalStocks(){$.ajax({url:"<?=site_url('total-stocks')?>",method:"GET",success:function(response){$('#totalStocks').html(response);}});}
 			function totalReserved(){$.ajax({url:"<?=site_url('total-reserved')?>",method:"GET",success:function(response){$('#totalReserved').html(response);}});}
 			function totalSupplier(){$.ajax({url:"<?=site_url('total-void')?>",method:"GET",success:function(response){$('#totalVoid').html(response);}});}
+			function listSupplier(){$.ajax({url:"<?=site_url('list-supplier')?>",method:"GET",success:function(response){if(response===""){$('#listSupplier').html("<li>No Records</li>");}else{$('#listSupplier').append(response);}}});}
 			function outStock(){$.ajax({url:"<?=site_url('out-of-stock')?>",method:"GET",success:function(response){if(response===""){$('#outStock').html("<li>No Records</li>");}else{$('#outStock').append(response);}}});}
-			google.charts.setOnLoadCallback(productChart);google.charts.setOnLoadCallback(assignChart);
+			google.charts.setOnLoadCallback(productChart);google.charts.setOnLoadCallback(assignChart);google.charts.setOnLoadCallback(categoryChart);
 			function productChart() 
 			{
 	
@@ -679,6 +681,28 @@
 				};
 				/* Instantiate and draw the chart.*/
 				var chart = new google.visualization.PieChart(document.getElementById('chartAssignment'));
+				chart.draw(data, options);
+			}
+			function categoryChart() 
+			{
+	
+				/* Define the chart to be drawn.*/
+				var data = google.visualization.arrayToDataTable([
+					['Assignment', 'Total'],
+					<?php 
+					foreach ($category as $row){
+					echo "['".$row->categoryName."',".$row->total."],";
+					}
+					?>
+				]);
+
+				var options = {
+				title: '',
+				curveType: 'function',
+				legend: { position: 'bottom' },
+				};
+				/* Instantiate and draw the chart.*/
+				var chart = new google.visualization.PieChart(document.getElementById('chartCategory'));
 				chart.draw(data, options);
 			}
 		</script>

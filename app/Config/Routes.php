@@ -38,6 +38,7 @@ $routes->get('total-stocks','Dashboard::totalStocks');
 $routes->get('total-reserved','Dashboard::totalReserved');
 $routes->get('total-void','Dashboard::totalVoid');
 $routes->get('out-of-stock','Dashboard::outofStock');
+$routes->get('list-supplier','Dashboard::listSupplier');
 //saving the data
 $routes->post('save-industry','Home::saveIndustry');
 $routes->get('list-industry','Home::listIndustry');
