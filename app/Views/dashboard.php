@@ -490,11 +490,6 @@
 										Physical Available
 									</div>
 								</div>
-								<div class="widget-icon">
-									<div class="icon" data-color="#00eccf">
-                                        <i class="icon-copy fa fa-cubes" aria-hidden="true"></i>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -505,11 +500,6 @@
 									<div class="weight-700 font-24 text-dark" id="totalReserved">0</div>
 									<div class="font-14 text-secondary weight-500">
 										Soft Reserved
-									</div>
-								</div>
-								<div class="widget-icon">
-									<div class="icon" data-color="#00eccf">
-                                        <i class="icon-copy fa fa-cubes" aria-hidden="true"></i>
 									</div>
 								</div>
 							</div>
@@ -524,11 +514,6 @@
 										On-hand Inventory
 									</div>
 								</div>
-								<div class="widget-icon">
-									<div class="icon" data-color="#00eccf">
-                                        <i class="icon-copy fa fa-cubes" aria-hidden="true"></i>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -541,9 +526,16 @@
 										New Order Item
 									</div>
 								</div>
-								<div class="widget-icon">
-									<div class="icon" data-color="#ff5b5b">
-                                        <i class="icon-copy fa fa-shopping-cart" aria-hidden="true"></i>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
+						<div class="card-box height-100-p widget-style3">
+							<div class="d-flex flex-wrap">
+								<div class="widget-data">
+									<div class="weight-700 font-24 text-dark" id="totalReturn">0</div>
+									<div class="font-14 text-secondary weight-500">
+										Returned Item
 									</div>
 								</div>
 							</div>
@@ -558,23 +550,28 @@
 										Out of Stocks
 									</div>
 								</div>
-								<div class="widget-icon">
-									<div class="icon">
-                                        <i class="icon-copy fa fa-users" aria-hidden="true"></i>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<div class="row pb-10">
-					<div class="col-12 mb-20">
+					<div class="col-8 mb-20">
 						<div class="card-box height-100-p pd-20">
 							<div
 								class="d-flex flex-wrap justify-content-between align-items-center pb-0 pb-md-3"
 							>
 								<div class="h5 mb-md-0">Ordered Materials</div>
+							</div>
+							<div id="activities-chart"></div>
+						</div>
+					</div>
+					<div class="col-4 mb-20">
+						<div class="card-box height-100-p pd-20">
+							<div
+								class="d-flex flex-wrap justify-content-between align-items-center pb-0 pb-md-3"
+							>
+								<div class="h5 mb-md-0">Volume</div>
 							</div>
 							<div id="activities-chart"></div>
 						</div>
