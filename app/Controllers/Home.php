@@ -131,7 +131,7 @@ class Home extends BaseController
         if(!$validation)
         {
             session()->setFlashdata('fail',"Invalid! Please check the supplier's information before the submission");
-            return redirect()->to('/add-stocks')->withInput();
+            return redirect()->to('/add')->withInput();
         }
         else
         {
@@ -141,7 +141,7 @@ class Home extends BaseController
                 'categoryID'=>$category,'ExpirationDate'=>$expirationDate,'supplierID'=>$supplier,'warehouseID'=>$warehouse,];
             $inventoryModel->save($values);
             session()->setFlashdata('success',"Great! Successfully added");
-            return redirect()->to('/add-stocks')->withInput();
+            return redirect()->to('/add')->withInput();
         }
     }
 

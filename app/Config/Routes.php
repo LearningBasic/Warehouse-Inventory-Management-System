@@ -32,6 +32,10 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 $routes->post('/auth','Auth::check');
 $routes->get('/logout','Auth::logout');
+//dashboard
+$routes->get('total-stocks','Dashboard::totalStocks');
+$routes->get('total-void','Dashboard::totalVoid');
+$routes->get('out-of-stock','Dashboard::outofStock');
 //saving the data
 $routes->post('save-industry','Home::saveIndustry');
 $routes->get('list-industry','Home::listIndustry');

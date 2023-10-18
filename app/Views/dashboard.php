@@ -71,7 +71,7 @@
             }
             ::-webkit-scrollbar {
                 height: 4px;              /* height of horizontal scrollbar ← You're missing this */
-                width: 4px;               /* width of vertical scrollbar */
+                width: 0px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
             
@@ -481,13 +481,13 @@
 					<h2 class="h3 mb-0">Overview</h2>
 				</div>
 				<div class="row pb-10">
-					<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
 						<div class="card-box height-100-p widget-style3">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark"></div>
+									<div class="weight-700 font-24 text-dark" id="allStocks">0</div>
 									<div class="font-14 text-secondary weight-500">
-										All Stocks
+										Physical Available
 									</div>
 								</div>
 								<div class="widget-icon">
@@ -498,13 +498,47 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
 						<div class="card-box height-100-p widget-style3">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark">124,551</div>
+									<div class="weight-700 font-24 text-dark" id="totalReserved">0</div>
 									<div class="font-14 text-secondary weight-500">
-										Orders
+										Soft Reserved
+									</div>
+								</div>
+								<div class="widget-icon">
+									<div class="icon" data-color="#00eccf">
+                                        <i class="icon-copy fa fa-cubes" aria-hidden="true"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
+						<div class="card-box height-100-p widget-style3">
+							<div class="d-flex flex-wrap">
+								<div class="widget-data">
+									<div class="weight-700 font-24 text-dark" id="totalStocks">0</div>
+									<div class="font-14 text-secondary weight-500">
+										On-hand Inventory
+									</div>
+								</div>
+								<div class="widget-icon">
+									<div class="icon" data-color="#00eccf">
+                                        <i class="icon-copy fa fa-cubes" aria-hidden="true"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
+						<div class="card-box height-100-p widget-style3">
+							<div class="d-flex flex-wrap">
+								<div class="widget-data">
+									<div class="weight-700 font-24 text-dark" id="totalOrders">0</div>
+									<div class="font-14 text-secondary weight-500">
+										New Order Item
 									</div>
 								</div>
 								<div class="widget-icon">
@@ -515,33 +549,18 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
 						<div class="card-box height-100-p widget-style3">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark">400+</div>
+									<div class="weight-700 font-24 text-dark" id="totalVoid">0</div>
 									<div class="font-14 text-secondary weight-500">
-										Suppliers
+										Out of Stocks
 									</div>
 								</div>
 								<div class="widget-icon">
 									<div class="icon">
                                         <i class="icon-copy fa fa-users" aria-hidden="true"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
-						<div class="card-box height-100-p widget-style3">
-							<div class="d-flex flex-wrap">
-								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark">$50,000</div>
-									<div class="font-14 text-secondary weight-500">Payment</div>
-								</div>
-								<div class="widget-icon">
-									<div class="icon" data-color="#09cc06">
-										<i class="icon-copy fa fa-money" aria-hidden="true"></i>
 									</div>
 								</div>
 							</div>
@@ -564,152 +583,34 @@
 
 				<div class="row">
 					<div class="col-lg-4 col-md-6 mb-20">
-						<div class="card-box height-100-p pd-20 min-height-200px">
+						<div class="card-box pd-20 min-height-200px">
 							<div class="d-flex justify-content-between pb-10">
 								<div class="h5 mb-0">Top Suppliers</div>
 							</div>
-							<div class="user-list">
+							<div class="user-list" style="overflow-y:auto;height:300px;">
 								<ul>
-									<li class="d-flex align-items-center justify-content-between">
-										<div class="name-avatar d-flex align-items-center pr-2">
-											<div class="avatar mr-2 flex-shrink-0">
-												<img
-													src="vendors/images/photo1.jpg"
-													class="border-radius-100 box-shadow"
-													width="50"
-													height="50"
-													alt=""
-												/>
-											</div>
-											<div class="txt">
-												<span
-													class="badge badge-pill badge-sm"
-													data-bgcolor="#e7ebf5"
-													data-color="#265ed7"
-													>4.9</span
-												>
-												<div class="font-14 weight-600">Dr. Neil Wagner</div>
-												<div class="font-12 weight-500" data-color="#b2b1b6">
-													Pediatrician
-												</div>
-											</div>
-										</div>
-										<div class="cta flex-shrink-0">
-											<a href="#" class="btn btn-sm btn-outline-primary"
-												>Schedule</a
-											>
-										</div>
-									</li>
-									<li class="d-flex align-items-center justify-content-between">
-										<div class="name-avatar d-flex align-items-center pr-2">
-											<div class="avatar mr-2 flex-shrink-0">
-												<img
-													src="vendors/images/photo2.jpg"
-													class="border-radius-100 box-shadow"
-													width="50"
-													height="50"
-													alt=""
-												/>
-											</div>
-											<div class="txt">
-												<span
-													class="badge badge-pill badge-sm"
-													data-bgcolor="#e7ebf5"
-													data-color="#265ed7"
-													>4.9</span
-												>
-												<div class="font-14 weight-600">Dr. Ren Delan</div>
-												<div class="font-12 weight-500" data-color="#b2b1b6">
-													Pediatrician
-												</div>
-											</div>
-										</div>
-										<div class="cta flex-shrink-0">
-											<a href="#" class="btn btn-sm btn-outline-primary"
-												>Schedule</a
-											>
-										</div>
-									</li>
-									<li class="d-flex align-items-center justify-content-between">
-										<div class="name-avatar d-flex align-items-center pr-2">
-											<div class="avatar mr-2 flex-shrink-0">
-												<img
-													src="vendors/images/photo3.jpg"
-													class="border-radius-100 box-shadow"
-													width="50"
-													height="50"
-													alt=""
-												/>
-											</div>
-											<div class="txt">
-												<span
-													class="badge badge-pill badge-sm"
-													data-bgcolor="#e7ebf5"
-													data-color="#265ed7"
-													>4.9</span
-												>
-												<div class="font-14 weight-600">Dr. Garrett Kincy</div>
-												<div class="font-12 weight-500" data-color="#b2b1b6">
-													Pediatrician
-												</div>
-											</div>
-										</div>
-										<div class="cta flex-shrink-0">
-											<a href="#" class="btn btn-sm btn-outline-primary"
-												>Schedule</a
-											>
-										</div>
-									</li>
-									<li class="d-flex align-items-center justify-content-between">
-										<div class="name-avatar d-flex align-items-center pr-2">
-											<div class="avatar mr-2 flex-shrink-0">
-												<img
-													src="vendors/images/photo4.jpg"
-													class="border-radius-100 box-shadow"
-													width="50"
-													height="50"
-													alt=""
-												/>
-											</div>
-											<div class="txt">
-												<span
-													class="badge badge-pill badge-sm"
-													data-bgcolor="#e7ebf5"
-													data-color="#265ed7"
-													>4.9</span
-												>
-												<div class="font-14 weight-600">Dr. Callie Reed</div>
-												<div class="font-12 weight-500" data-color="#b2b1b6">
-													Pediatrician
-												</div>
-											</div>
-										</div>
-										<div class="cta flex-shrink-0">
-											<a href="#" class="btn btn-sm btn-outline-primary"
-												>Schedule</a
-											>
-										</div>
-									</li>
+									
 								</ul>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-6 mb-20">
-						<div class="card-box height-100-p pd-20 min-height-200px">
+						<div class="card-box pd-20 min-height-200px">
 							<div class="d-flex justify-content-between">
-								<div class="h5 mb-0">Top Items</div>
+								<div class="h5 mb-0">Out of Stocks</div>
 							</div>
-
-							<div id="diseases-charts"></div>
+							<div class="user-list" style="overflow-y:auto;height:300px;">
+								<ul id="outStock">
+									
+								</ul>
+							</div>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-12 mb-20">
-                    <div class="card-box height-100-p pd-20 min-height-200px">
+                    <div class="card-box pd-20 min-height-200px">
 							<div class="d-flex justify-content-between">
 								<div class="h5 mb-0">Stocks</div>
 							</div>
-
-							<div id="diseases-chart"></div>
 						</div>
 					</div>
 				</div>
@@ -726,5 +627,11 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/dashboard3.js"></script>
+		<script>
+			$(document).ready(function(){totalStocks();totalSupplier();outStock();});
+			function totalStocks(){$.ajax({url:"<?=site_url('total-stocks')?>",method:"GET",success:function(response){$('#totalStocks').html(response);}});}
+			function totalSupplier(){$.ajax({url:"<?=site_url('total-void')?>",method:"GET",success:function(response){$('#totalVoid').html(response);}});}
+			function outStock(){$.ajax({url:"<?=site_url('out-of-stock')?>",method:"GET",success:function(response){if(response===""){$('#outStock').html("<li>No Records</li>");}else{$('#outStock').append(response);}}});}
+		</script>
 	</body>
 </html>
