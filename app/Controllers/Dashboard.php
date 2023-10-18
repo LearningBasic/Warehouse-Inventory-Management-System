@@ -51,10 +51,48 @@ class Dashboard extends BaseController
     {
         $builder = $this->db->table('tblinventory');
         $builder->select('FORMAT(COUNT(*),0)total');
+        $builder->WHERE('Qty<>',0);
         $data = $builder->get();
         if($row = $data->getRow())
         {
             echo $row->total;
         }
+    }
+
+    public function totalReserved()
+    {
+        $builder = $this->db->table('tblreserved');
+        $builder->select('FORMAT(COUNT(*),0)total');
+        $builder->WHERE('Status','Hold');
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            echo $row->total;
+        }
+    }
+
+    public function totalItem()
+    {
+        $onhand=0;
+        $builder = $this->db->table('tblinventory');
+        $builder->select('COUNT(*)total');
+        $builder->WHERE('Qty<>',0);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $onhand =  $row->total;
+        }
+        //reserved
+        $reserve=0;
+        $builder = $this->db->table('tblreserved');
+        $builder->select('COUNT(*)total');
+        $builder->WHERE('Status','Hold');
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $reserve =  $row->total;
+        }
+        $total = $onhand + $reserve;
+        echo number_format($total,0);
     }
 }

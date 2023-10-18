@@ -577,7 +577,7 @@
 							<div
 								class="d-flex flex-wrap justify-content-between align-items-center pb-0 pb-md-3"
 							>
-								<div class="h5 mb-md-0">Volume</div>
+								<div class="h5 mb-md-0">Volume Per Assignment</div>
 							</div>
 							<div id="chartAssignment" style="height:400px;"></div>
 						</div>
@@ -629,8 +629,10 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script>
-			$(document).ready(function(){totalStocks();totalSupplier();outStock();});
+			$(document).ready(function(){totalItem();totalStocks();totalReserved();totalSupplier();outStock();});
+			function totalItem(){$.ajax({url:"<?=site_url('total-item')?>",method:"GET",success:function(response){$('#allStocks').html(response);}});}
 			function totalStocks(){$.ajax({url:"<?=site_url('total-stocks')?>",method:"GET",success:function(response){$('#totalStocks').html(response);}});}
+			function totalReserved(){$.ajax({url:"<?=site_url('total-reserved')?>",method:"GET",success:function(response){$('#totalReserved').html(response);}});}
 			function totalSupplier(){$.ajax({url:"<?=site_url('total-void')?>",method:"GET",success:function(response){$('#totalVoid').html(response);}});}
 			function outStock(){$.ajax({url:"<?=site_url('out-of-stock')?>",method:"GET",success:function(response){if(response===""){$('#outStock').html("<li>No Records</li>");}else{$('#outStock').append(response);}}});}
 			google.charts.setOnLoadCallback(productChart);google.charts.setOnLoadCallback(assignChart);
