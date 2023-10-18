@@ -54,6 +54,12 @@
 			href="assets/src/plugins/datatables/css/responsive.bootstrap4.min.css"
 		/>
 		<link rel="stylesheet" type="text/css" href="assets/vendors/styles/style.css" />
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
+		<script type="text/javascript">
+			google.charts.load('visualization', "1", {
+				packages: ['corechart']
+			});
+		</script>
         <style>
         /* Track */
             ::-webkit-scrollbar-track {
@@ -556,24 +562,24 @@
 				</div>
 
 				<div class="row pb-10">
-					<div class="col-8 mb-20">
-						<div class="card-box height-100-p pd-20">
+					<div class="col-7 mb-20">
+						<div class="card-box pd-20">
 							<div
 								class="d-flex flex-wrap justify-content-between align-items-center pb-0 pb-md-3"
 							>
-								<div class="h5 mb-md-0">Ordered Materials</div>
+								<div class="h5 mb-md-0">Inventory Value Per Product Name</div>
 							</div>
-							<div id="activities-chart"></div>
+							<div id="chartContainer" style="height:400px;"></div>
 						</div>
 					</div>
-					<div class="col-4 mb-20">
-						<div class="card-box height-100-p pd-20">
+					<div class="col-5 mb-20">
+						<div class="card-box pd-20">
 							<div
 								class="d-flex flex-wrap justify-content-between align-items-center pb-0 pb-md-3"
 							>
 								<div class="h5 mb-md-0">Volume</div>
 							</div>
-							<div id="activities-chart"></div>
+							<div id="chartAssignment" style="height:400px;"></div>
 						</div>
 					</div>
 				</div>
@@ -618,17 +624,61 @@
 		<script src="assets/vendors/scripts/script.min.js"></script>
 		<script src="assets/vendors/scripts/process.js"></script>
 		<script src="assets/vendors/scripts/layout-settings.js"></script>
-		<script src="assets/src/plugins/apexcharts/apexcharts.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-		<script src="assets/vendors/scripts/dashboard3.js"></script>
 		<script>
 			$(document).ready(function(){totalStocks();totalSupplier();outStock();});
 			function totalStocks(){$.ajax({url:"<?=site_url('total-stocks')?>",method:"GET",success:function(response){$('#totalStocks').html(response);}});}
 			function totalSupplier(){$.ajax({url:"<?=site_url('total-void')?>",method:"GET",success:function(response){$('#totalVoid').html(response);}});}
 			function outStock(){$.ajax({url:"<?=site_url('out-of-stock')?>",method:"GET",success:function(response){if(response===""){$('#outStock').html("<li>No Records</li>");}else{$('#outStock').append(response);}}});}
+			google.charts.setOnLoadCallback(productChart);google.charts.setOnLoadCallback(assignChart);
+			function productChart() 
+			{
+	
+				/* Define the chart to be drawn.*/
+				var data = google.visualization.arrayToDataTable([
+					['Product', 'Total'],
+					<?php 
+					foreach ($query as $row){
+					echo "['".$row->productName."',".$row->total."],";
+					}
+					?>
+				]);
+
+				var options = {
+				title: '',
+				curveType: 'function',
+				legend: { position: 'bottom' }
+				};
+				/* Instantiate and draw the chart.*/
+				var chart = new google.visualization.BarChart(document.getElementById('chartContainer'));
+				chart.draw(data, options);
+			}
+			function assignChart() 
+			{
+	
+				/* Define the chart to be drawn.*/
+				var data = google.visualization.arrayToDataTable([
+					['Assignment', 'Total'],
+					<?php 
+					foreach ($assignment as $row){
+					echo "['".$row->warehouseName."',".$row->total."],";
+					}
+					?>
+				]);
+
+				var options = {
+				title: '',
+				curveType: 'function',
+				legend: { position: 'bottom' },
+				pieHole: 0.4
+				};
+				/* Instantiate and draw the chart.*/
+				var chart = new google.visualization.PieChart(document.getElementById('chartAssignment'));
+				chart.draw(data, options);
+			}
 		</script>
 	</body>
 </html>

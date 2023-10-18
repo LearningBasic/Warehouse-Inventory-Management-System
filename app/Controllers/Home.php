@@ -25,7 +25,19 @@ class Home extends BaseController
 
     public function dashboard()
     {
-        return view('dashboard');
+        //get the total volume per product name
+        $builder = $this->db->table('tblinventory');
+        $builder->select('productName,SUM(Qty)total');
+        $builder->groupBy('inventID')->orderBy('total','DESC')->limit(25);
+        $query = $builder->get()->getResult();
+        //total of item per assignment
+        $builder = $this->db->table('tblwarehouse a');
+        $builder->select('a.warehouseName,IFNULL(SUM(b.Qty),0)total');
+        $builder->join('tblinventory b','b.warehouseID=a.warehouseID','LEFT');
+        $builder->groupBy('a.warehouseID');
+        $assign = $builder->get()->getResult();
+        $data = ['query'=>$query,'assignment'=>$assign,];
+        return view('dashboard',$data);
     }
 
     public function stocks()
