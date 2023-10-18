@@ -4,7 +4,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>Add Stocks</title>
+		<title>Add Product</title>
 
 		<!-- Site favicon -->
 		<link
