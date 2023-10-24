@@ -474,6 +474,59 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="modal fade" id="damageModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            Damage Report Form
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" class="row g-3" id="frmItem">
+							<input type="hidden" name="itemID" id="itemID"/>
+                            <div class="col-12 form-group">
+                                <label>Product Name</label>
+                                <input type="text" class="form-control" name="productName" id="productName" required/>
+                            </div>
+							<div class="col-12 form-group">
+								<div class="row g-3">
+									<div class="col-lg-6">
+										<label>Date</label>
+										<input type="date" class="form-control" name="dateReport" id="dateReport" required/>
+									</div>
+									<div class="col-lg-6">
+										<label>Qty</label>
+										<input type="number" class="form-control" name="qty" id="qty" required/>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 form-group">
+								<label>Details</label>
+								<textarea class="form-control" name="details" required></textarea>
+							</div>
+							<div class="col-12 form-group">
+								<label>Proof/Attachment</label>
+								<input type="file" class="form-control" name="file" required/>
+							</div>
+							<div class="col-12 form-group">
+								<label>Recommendation</label>
+								<select class="form-control" name="recommendation" required>
+									<option value="">Choose</option>
+									<option>For Repair</option>
+									<option>Replacement</option>
+								</select>
+							</div>
+                            <div class="col-12 form-group">
+                                <input type="submit" class="btn btn-primary" value="Submit Report" id="btnAdd"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
@@ -484,5 +537,15 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script>
+			$(document).on('click','.deadstock',function(e){
+				e.preventDefault();
+				var confirmation = confirm("Would you like to tag as damaged this selected item?");
+				if(confirmation)
+				{
+					$('#damageModal').modal('show');
+				}
+			});
+		</script>
 	</body>
 </html>
