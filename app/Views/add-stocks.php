@@ -472,16 +472,20 @@
                             </div>
                             <div class="col-12 form-group">
                                 <div class="row g-3">
-									<div class="col-lg-4">
+									<div class="col-lg-6">
 										<label>Item Number</label>
 										<input type="text" class="form-control" name="item_number" required/>
 									</div>
-									<div class="col-lg-8">
-										<label>Product Name</label>
-										<input type="text" class="form-control" name="productName" required/>
+									<div class="col-lg-6">
+										<label>Serial No</label>
+										<input type="text" class="form-control" name="productCode"/>
 									</div>
 								</div>
                             </div>
+							<div class="col-12 form-group">
+								<label>Product Name</label>
+								<input type="text" class="form-control" name="productName" required/>
+							</div>
                             <div class="col-12 form-group">
                                 <label>Product Description</label>
                                 <textarea class="form-control" name="description" required></textarea>

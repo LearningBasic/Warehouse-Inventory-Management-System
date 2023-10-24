@@ -131,6 +131,7 @@ class Home extends BaseController
         $category = $this->request->getPost('category');
         $location = $this->request->getPost('location');
         $item_number = $this->request->getPost('item_number');
+        $code = $this->request->getPost('productCode');
         $productName = $this->request->getPost('productName');
         $desc = $this->request->getPost('description');
         $itemUnit = $this->request->getPost('itemUnit');
@@ -155,7 +156,7 @@ class Home extends BaseController
         {
             $values = [
                 'Date'=>$date,'Location'=>$location,'productID'=>$item_number,'productName'=>$productName,
-                'Description'=>$desc,'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'Qty'=>$qty,
+                'Code'=>$code,'Description'=>$desc,'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'Qty'=>$qty,
                 'categoryID'=>$category,'ExpirationDate'=>$expirationDate,'supplierID'=>$supplier,'warehouseID'=>$warehouse,];
             $inventoryModel->save($values);
             session()->setFlashdata('success',"Great! Successfully added");

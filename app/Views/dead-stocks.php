@@ -415,7 +415,23 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
-				
+				<div class="card-box">
+					<div class="card-header"><i class="icon-copy dw dw-briefcase"></i>&nbsp;DeadStocks</div>
+					<div class="card-body">
+						<table class="data-table table stripe hover nowrap">
+							<thead>
+								<th>Date Created</th>
+								<th>Product Name</th>
+								<th>Qty</th>
+								<th>Details</th>
+								<th>Image</th>
+								<th>Remarks</th>
+								<th>Action</th>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 		<!-- js -->
