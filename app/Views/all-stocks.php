@@ -437,7 +437,6 @@
 								<th>Qty</th>
 								<th>Status</th>
 								<th>Expiration Date</th>
-								<th>Supplier</th>
 								<th>Action</th>
 							</thead>
 							<tbody>
@@ -449,9 +448,8 @@
 											<td><?php echo $row->productName ?></td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
-											<td><?php if($row->Qty>5){echo "Available";}else if($row->Qty<5 && $row->Qty>0){echo "Critical Level";}else{echo "Out of Stock";} ?></td>
+											<td><?php if($row->Qty>5){echo "<span class='badge bg-success text-white'>Available</span>";}else if($row->Qty<5 && $row->Qty>0){echo "<span class='badge bg-warning text-white'>Critical</span>";}else{echo "<span class='badge bg-danger text-white'>Out-of-Stock</span>";} ?></td>
 											<td><?php echo $row->ExpirationDate ?></td>
-											<td><?php echo $row->supplierName ?></td>
 											<td>
 												<div class="dropdown">
 													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"

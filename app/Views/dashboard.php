@@ -577,7 +577,7 @@
 							<div
 								class="d-flex flex-wrap justify-content-between align-items-center pb-0 pb-md-3"
 							>
-								<div class="h5 mb-md-0">Volume Per Assignment</div>
+								<div class="h5 mb-md-0">Volume Per Location</div>
 							</div>
 							<div id="chartAssignment" style="height:400px;"></div>
 						</div>
