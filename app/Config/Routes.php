@@ -62,7 +62,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/add','Home::addItem');
     $routes->get('/edit/(:any)','Home::edit/$1');
     $routes->get('/dead-stocks','Home::deadStocks');
-    $routes->get('/list-supplier','Home::suppliers');
+    $routes->get('/suppliers','Home::suppliers');
     $routes->get('/add-supplier','Home::addSupplier');
     $routes->get('/edit-supplier/(:any)','Home::editSupplier/$1');
     $routes->get('/configuration','Home::systemConfiguration');
