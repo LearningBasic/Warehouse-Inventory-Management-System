@@ -99,7 +99,7 @@ class Home extends BaseController
         return redirect()->to('/stocks')->withInput();
     }
 
-    public function deadStocks()
+    public function manageStocks()
     {
         $builder = $this->db->table('tbldamageitem a');
         $builder->select('a.*,b.productName,c.Fullname');
@@ -107,7 +107,7 @@ class Home extends BaseController
         $builder->join('tblaccount c','c.accountID=a.accountID','LEFT');
         $item = $builder->get()->getResult();
         $data = ['items'=>$item];
-        return view('dead-stocks',$data);
+        return view('manage-stocks',$data);
     }
 
     public function addItem()

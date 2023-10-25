@@ -402,10 +402,7 @@
 							<ul class="submenu">
 								<li><a href="<?=site_url('stocks')?>">All Stocks</a></li>
 								<li><a href="<?=site_url('add')?>">Add Item</a></li>
-								<li><a href="<?=site_url('Transfer')?>">Transfer Items</a></li>
-								<li><a href="<?=site_url('dead-stocks')?>">Dead Stocks</a></li>
-								<li><a href="<?=site_url('return')?>">Return Items</a></li>
-								<li><a href="<?=site_url('overhaul-stocks')?>">Overhaul Items</a></li>
+								<li><a href="<?=site_url('manage')?>">Manage Stocks</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">

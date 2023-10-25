@@ -340,10 +340,7 @@
 							<ul class="submenu">
 								<li><a href="<?=site_url('stocks')?>">All Stocks</a></li>
 								<li><a href="<?=site_url('add')?>">Add Item</a></li>
-								<li><a href="<?=site_url('Transfer')?>">Transfer Items</a></li>
-								<li><a href="<?=site_url('dead-stocks')?>" class="active">Dead Stocks</a></li>
-								<li><a href="<?=site_url('return')?>">Return Items</a></li>
-								<li><a href="<?=site_url('overhaul-stocks')?>">Overhaul Items</a></li>
+								<li><a href="<?=site_url('manage')?>" class="active">Manage Stocks</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -425,6 +422,7 @@
 								<th>Qty</th>
 								<th>Details</th>
 								<th>Image</th>
+								<th>Reported By</th>
 								<th>Remarks</th>
 								<th>Action</th>
 							</thead>
@@ -432,12 +430,13 @@
 								<?php if($items): ?>
 									<?php foreach($items as $row): ?>
 										<tr>
-											<td><?php echo $row->DateCreated ?></td>
+											<td><?php echo $row->DateReport ?></td>
 											<td><?php echo $row->productName ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><?php echo $row->Details ?></td>
 											<td></td>
-											<td><?php echo $row->Remarks ?></td>
+											<td><?php echo $row->Fullname ?></td>
+											<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
 											<td>
 												<button type="button" class="btn btn-default btn-sm"><span class="icon-copy dw dw-eye"></span></button>
 											</td> 

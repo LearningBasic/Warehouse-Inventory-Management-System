@@ -441,14 +441,14 @@
 							</thead>
 							<tbody>
 								<?php if($items): ?>
-									<?php foreach($items as $row): ?>
+									<?php foreach($items as $row): if($row->Qty>5){?>
 										<tr>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
 											<td><?php echo $row->productName ?></td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
-											<td><?php if($row->Qty>5){echo "<span class='badge bg-success text-white'>Available</span>";}else if($row->Qty>0){echo "<span class='badge bg-warning text-white'>Critical</span>";}else if($row->Qty<=0){echo "<span class='badge bg-danger text-white'>Out-of-Stock</span>";} ?></td>
+											<td><span class='badge bg-success text-white'>Available</span></td>
 											<td><?php echo $row->ExpirationDate ?></td>
 											<td>
 												<div class="dropdown">
@@ -466,6 +466,53 @@
 												</div>
 											</td>
 										</tr>
+										<?php }else if($row->Qty>0){?>
+										<tr>
+											<td><?php echo $row->categoryName ?></td>
+											<td><?php echo $row->productID ?></td>
+											<td><?php echo $row->productName ?></td>
+											<td><?php echo number_format($row->unitPrice,2) ?></td>
+											<td><?php echo number_format($row->Qty,0) ?></td>
+											<td><span class='badge bg-warning text-white'>Critical</span></td>
+											<td><?php echo $row->ExpirationDate ?></td>
+											<td>
+												<div class="dropdown">
+													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+														href="#" role="button" data-toggle="dropdown">
+														<i class="dw dw-more"></i>
+													</a>
+													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
+														<button type="button" class="dropdown-item deadstock" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-briefcase"></i>Dead Stock</button>
+														<button type="button" class="dropdown-item repair" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-hammer"></i>For Repair</button>
+														<a class="dropdown-item" href="transfer/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-message-1"></i>Transfer</a>
+														<button type="button" class="dropdown-item return" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-refresh2"></i>Return</button>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<?php }if($row->Qty==0){ ?>
+											<tr>
+											<td><?php echo $row->categoryName ?></td>
+											<td><?php echo $row->productID ?></td>
+											<td><?php echo $row->productName ?></td>
+											<td><?php echo number_format($row->unitPrice,2) ?></td>
+											<td><?php echo number_format($row->Qty,0) ?></td>
+											<td><span class='badge bg-danger text-white'>Out-of-Stock</span></td>
+											<td><?php echo $row->ExpirationDate ?></td>
+											<td>
+												<div class="dropdown">
+													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+														href="#" role="button" data-toggle="dropdown">
+														<i class="dw dw-more"></i>
+													</a>
+													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
+													</div>
+												</div>
+											</td>
+										</tr>	
+										<?php } ?>
 									<?php endforeach; ?>
 								<?php endif; ?>
 							</tbody>
@@ -521,7 +568,7 @@
 							</div>
 							<div class="col-12 form-group">
 								<label>Proof/Attachment</label>
-								<input type="file" class="form-control" name="file" required/>
+								<input type="file" class="form-control" name="file" accept="image/png, image/gif, image/jpeg" required/>
 							</div>
 							<div class="col-12 form-group">
 								<label>Recommendation</label>
