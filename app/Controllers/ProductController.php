@@ -78,4 +78,9 @@ class ProductController extends BaseController
             }
         }
     }
+
+    public function submitReport()
+    {
+        $repairModel = new \App\Models\repairModel();
+    }
 }

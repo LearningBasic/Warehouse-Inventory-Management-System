@@ -421,7 +421,7 @@
                         <div class="card-body">
                             <?php if($item): ?>
                                 <?php foreach($item as $row): ?>
-                            <form method="post" class="row g-3" id="frmRepair">
+                            <form method="post" class="row g-3" id="frmRepair" action="<?=base_url('submit-report')?>">
                                 <input type="hidden" name="productID" value="<?php echo $row->inventID ?>"/>
                                 <div class="col-12 form-group">
                                     <label for="product_name">Product Name</label>
@@ -454,6 +454,9 @@
                                             <input type="date" class="form-control" name="date_accomplish" required/>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <button type="submit" class="btn btn-primary" id="btnSubmit">Submit Report</button>
                                 </div>
                             </form>
                                 <?php endforeach; ?>
