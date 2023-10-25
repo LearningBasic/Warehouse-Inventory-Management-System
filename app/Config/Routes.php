@@ -54,6 +54,8 @@ $routes->post('update-account','Home::updateAccount');
 $routes->post('add-product','Home::addProduct');
 $routes->post('update','Home::update');
 $routes->get('assignment','Home::assignment');
+//fetch the product details
+$routes->get('product-information','ProductController::productInfo');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {

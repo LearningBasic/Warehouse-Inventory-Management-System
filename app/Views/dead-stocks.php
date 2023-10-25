@@ -428,7 +428,23 @@
 								<th>Remarks</th>
 								<th>Action</th>
 							</thead>
-							<tbody></tbody>
+							<tbody>
+								<?php if($items): ?>
+									<?php foreach($items as $row): ?>
+										<tr>
+											<td><?php echo $row->DateCreated ?></td>
+											<td><?php echo $row->productName ?></td>
+											<td><?php echo number_format($row->Qty,0) ?></td>
+											<td><?php echo $row->Details ?></td>
+											<td></td>
+											<td><?php echo $row->Remarks ?></td>
+											<td>
+												<button type="button" class="btn btn-default btn-sm"><span class="icon-copy dw dw-eye"></span></button>
+											</td> 
+										</tr>
+									<?php endforeach; ?>
+								<?php endif; ?>
+							</tbody>
 						</table>
 					</div>
 				</div>

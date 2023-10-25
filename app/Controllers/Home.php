@@ -101,7 +101,13 @@ class Home extends BaseController
 
     public function deadStocks()
     {
-        return view('dead-stocks');
+        $builder = $this->db->table('tbldamageitem a');
+        $builder->select('a.*,b.productName,c.Fullname');
+        $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
+        $builder->join('tblaccount c','c.accountID=a.accountID','LEFT');
+        $item = $builder->get()->getResult();
+        $data = ['items'=>$item];
+        return view('dead-stocks',$data);
     }
 
     public function addItem()

@@ -485,7 +485,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" class="row g-3" id="frmItem">
+                        <form method="post" class="row g-3" id="frmReport>
 							<input type="hidden" name="itemID" id="itemID"/>
                             <div class="col-12 form-group">
                                 <label>Product Name</label>
@@ -509,7 +509,7 @@
 							</div>
 							<div class="col-12 form-group">
 								<label>Proof/Attachment</label>
-								<input type="file" class="form-control" name="file" required/>
+								<input type="file" class="form-control" name="file"/>
 							</div>
 							<div class="col-12 form-group">
 								<label>Recommendation</label>
@@ -543,8 +543,22 @@
 				var confirmation = confirm("Would you like to tag as damaged this selected item?");
 				if(confirmation)
 				{
-					$('#damageModal').modal('show');
+					var val = $(this).val();
+					$.ajax({
+						url:"<?=site_url('product-information')?>",method:"GET",data:{value:val},success:function(response)
+						{
+							$('#damageModal').modal('show');
+							$('#itemID').attr("value",val);
+							$('#productName').attr("value",response);
+						}
+					});
 				}
+			});
+			$('#frmReport').on('submit',function(e)
+			{
+				e.preventDefault();
+				var data = $(this).serialize();
+				alert(data);
 			});
 		</script>
 	</body>
