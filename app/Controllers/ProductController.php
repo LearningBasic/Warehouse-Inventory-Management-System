@@ -82,5 +82,26 @@ class ProductController extends BaseController
     public function submitReport()
     {
         $repairModel = new \App\Models\repairModel();
+        $id = $this->request->getPost('ID');
+        $productID = $this->request->getPost('productID');
+        $qty = $this->request->getPost('qty');
+        $date_repair = $this->request->getPost('date_repair');
+        $details = $this->request->getPost('details');
+        $date_accomplish = "0000-00-00";
+        $user = session()->get('loggedUser');
+        $validation = $this->validate([
+            'qty'=>'required',
+            'date_repair'=>'required',
+            'details'=>'required'
+        ]);
+        if(!$validation)
+        {
+            session()->setFlashdata('fail','Invalid! Please fill in the form to continue');
+            return redirect()->to('/create-report/'.$id)->withInput();
+        }
+        else
+        {
+
+        }
     }
 }

@@ -419,9 +419,15 @@
                             <a href="<?=site_url('manage')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>Back</a>
                         </div>
                         <div class="card-body">
+                            <?php if(!empty(session()->getFlashdata('fail'))) : ?>
+                                <div class="alert alert-danger" role="alert">
+                                    <?= session()->getFlashdata('fail'); ?>
+                                </div>
+                            <?php endif; ?>
                             <?php if($item): ?>
                                 <?php foreach($item as $row): ?>
                             <form method="post" class="row g-3" id="frmRepair" action="<?=base_url('submit-report')?>">
+                                <input type="hidden" name="ID" value="<?php echo $row->damageID ?>"/>
                                 <input type="hidden" name="productID" value="<?php echo $row->inventID ?>"/>
                                 <div class="col-12 form-group">
                                     <label for="product_name">Product Name</label>
