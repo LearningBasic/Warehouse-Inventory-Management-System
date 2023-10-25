@@ -429,31 +429,23 @@
                                 </div>
                                 <div class="col-12 form-group">
                                     <div class="row g-3">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-4">
                                             <label for="defect_type">Type of Defect</label>
                                             <input type="text" class="form-control" style="background-color:#ffffff;" name="damageRate" value="<?php echo $row->DamageRate ?>" disabled/>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-4">
                                             <label for="qty">Total Qty</label>
                                             <input type="number" class="form-control" style="background-color:#ffffff;" name="qty" value="<?php echo $row->Qty ?>" disabled/>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label for="date_repair">Date of Repair</label>
+                                            <input type="date" class="form-control" name="date_repair" required/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 form-group">
                                     <label>Details</label>
                                     <textarea class="form-control" style="background-color:#ffffff;" name="details" disabled><?php echo $row->Details ?></textarea>
-                                </div>
-                                <div class="col-12 form-group">
-                                    <div class="row g-3">
-                                        <div class="col-lg-6">
-                                            <label for="date_repair">Date of Repair</label>
-                                            <input type="date" class="form-control" name="date_repair" required/>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label for="accomplish_date">Date Accomplished</label>
-                                            <input type="date" class="form-control" name="date_accomplish" required/>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-12 form-group">
                                     <button type="submit" class="btn btn-primary" id="btnSubmit">Submit Report</button>

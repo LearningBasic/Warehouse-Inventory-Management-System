@@ -455,8 +455,7 @@
 													</a>
 													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
-														<button type="button" class="dropdown-item deadstock" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-briefcase"></i>Dead Stock</button>
-														<button type="button" class="dropdown-item repair" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-hammer"></i>For Repair</button>
+														<button type="button" class="dropdown-item deadstock" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-briefcase"></i>Tag as Damage</button>
 														<a class="dropdown-item" href="transfer/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-message-1"></i>Transfer</a>
 														<button type="button" class="dropdown-item return" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-refresh2"></i>Return</button>
 													</div>
@@ -480,8 +479,7 @@
 													</a>
 													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
-														<button type="button" class="dropdown-item deadstock" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-briefcase"></i>Dead Stock</button>
-														<button type="button" class="dropdown-item repair" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-hammer"></i>For Repair</button>
+														<button type="button" class="dropdown-item deadstock" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-briefcase"></i>Tag as Damage</button>
 														<a class="dropdown-item" href="transfer/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-message-1"></i>Transfer</a>
 														<button type="button" class="dropdown-item return" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-refresh2"></i>Return</button>
 													</div>
