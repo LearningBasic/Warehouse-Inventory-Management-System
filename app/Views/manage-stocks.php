@@ -499,7 +499,7 @@
 														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
 														<td>
 															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm">View</a>
-															<a href="<?=site_url('create-report')?>" class="btn btn-outline-primary btn-sm">Create</a>
+															<a href="<?=site_url('create-report/')?><?php echo $row->damageID ?>" class="btn btn-outline-primary btn-sm">Create</a>
 														</td> 
 													</tr>
 													<?php }else{ ?>

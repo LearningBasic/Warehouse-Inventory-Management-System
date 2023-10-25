@@ -118,9 +118,16 @@ class Home extends BaseController
         return view('manage-stocks',$data);
     }
 
-    public function createReport()
+    public function createReport($id=null)
     {
-        return view ('create-report');
+        $builder = $this->db->table('tbldamageitem a');
+        $builder->select('a.*,b.productName,c.Fullname');
+        $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
+        $builder->join('tblaccount c','c.accountID=a.accountID','LEFT');
+        $builder->WHERE('a.damageID',$id);
+        $item = $builder->get()->getResult();
+        $data = ['item'=>$item];
+        return view ('create-report',$data);
     }
 
     public function addItem()
