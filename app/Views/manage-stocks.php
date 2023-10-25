@@ -463,11 +463,11 @@
 									<br/>
 									<table class="data-table table stripe hover nowrap">
 										<thead>
-											<th>Date Created</th>
+											<th>Date Reported</th>
+											<th>Defect Type</th>
 											<th>Product Name</th>
 											<th>Qty</th>
 											<th>Details</th>
-											<th>Date Report</th>
 											<th>Reported By</th>
 											<th>Remarks</th>
 											<th>Action</th>
@@ -478,11 +478,11 @@
 												if($row->Remarks=="Replacement"){
 													?>
 													<tr>
-														<td><?php echo $row->DateCreated ?></td>
+														<td><?php echo $row->DateReport ?></td>
+														<td><?php echo $row->DamageRate ?></td>
 														<td><?php echo $row->productName ?></td>
 														<td><?php echo number_format($row->Qty,0) ?></td>
 														<td><?php echo $row->Details ?></td>
-														<td><?php echo $row->DateReport ?></td>
 														<td><?php echo $row->Fullname ?></td>
 														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
 														<td>
@@ -491,11 +491,11 @@
 													</tr>
 												<?php }else{ ?>
 													<tr>
-														<td><?php echo $row->DateCreated ?></td>
+														<td><?php echo $row->DateReport ?></td>
+														<td><?php echo $row->DamageRate ?></td>
 														<td><?php echo $row->productName ?></td>
 														<td><?php echo number_format($row->Qty,0) ?></td>
 														<td><?php echo $row->Details ?></td>
-														<td><?php echo $row->DateReport ?></td>
 														<td><?php echo $row->Fullname ?></td>
 														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
 														<td>
