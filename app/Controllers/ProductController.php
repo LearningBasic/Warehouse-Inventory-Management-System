@@ -26,6 +26,7 @@ class ProductController extends BaseController
         $validation = $this->validate([
             'productName'=>'required',
             'dateReport'=>'required',
+            'defectType'=>'required',
             'qty'=>'required',
             'details'=>'required',
             'recommendation'=>'required',
@@ -35,6 +36,7 @@ class ProductController extends BaseController
         $dateCreated = date('Y-m-d');
         $itemID = $this->request->getPost('itemID');
         $productName = $this->request->getPost('productName');
+        $defectType = $this->request->getPost('defectType');
         $dateReport = $this->request->getPost('dateReport');
         $qty = $this->request->getPost('qty');
         $details = $this->request->getPost('details');
@@ -60,7 +62,7 @@ class ProductController extends BaseController
                     $file->move('Damage_Files/',$originalName);
                     $values = [
                         'DateCreated'=>$dateCreated,'inventID'=>$itemID,'Qty'=>$qty,
-                        'Details'=>$details,'DateReport'=>$dateReport,'Image'=>$originalName,'Remarks'=>$remarks,'accountID'=>$user
+                        'Details'=>$details,'DamageRate'=>$defectType,'DateReport'=>$dateReport,'Image'=>$originalName,'Remarks'=>$remarks,'accountID'=>$user
                         ];
                     $damageReport->save($values);
                     //deduct the number of stocks vs damage stock

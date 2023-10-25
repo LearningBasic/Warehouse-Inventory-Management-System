@@ -486,7 +486,7 @@
 														<td><?php echo $row->Fullname ?></td>
 														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
 														<td>
-															<button type="button" class="btn btn-outline-primary btn-sm">View</button>
+														<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm">View</a>
 														</td> 
 													</tr>
 												<?php }else{ ?>
@@ -499,7 +499,7 @@
 														<td><?php echo $row->Fullname ?></td>
 														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
 														<td>
-															<button type="button" class="btn btn-outline-primary btn-sm view">View</button>
+															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm">View</a>
 															<button type="button" class="btn btn-outline-primary btn-sm create">Create</button>
 														</td> 
 													</tr>
@@ -521,6 +521,43 @@
 											<th>Status</th>
 											<th>Action</th>
 										</thead>
+										<tbody>
+											<?php if($archive): ?>
+												<?php foreach($archive as $row): ?>
+													<?php if($row->Status==0){ ?>
+													<tr>
+														<td><?php echo $row->repairDate ?></td>
+														<td><?php echo $row->productName ?></td>
+														<td><?php echo number_format($row->Qty,0) ?></td>
+														<td><?php echo $row->Details ?></td>
+														<td><?php echo $row->dateAccomplished ?></td>
+														<td><span class="badge bg-warning text-white">PENDING</span></td>
+														<td></td>
+													</tr>
+													<?php }else if($row->Status==1){ ?>
+													<tr>
+														<td><?php echo $row->repairDate ?></td>
+														<td><?php echo $row->productName ?></td>
+														<td><?php echo number_format($row->Qty,0) ?></td>
+														<td><?php echo $row->Details ?></td>
+														<td><?php echo $row->dateAccomplished ?></td>
+														<td><span class="badge bg-success text-white">DONE</span></td>
+														<td>-</td>
+													</tr>
+													<?php }else if($row->Status==2){  ?>
+														<tr>
+														<td><?php echo $row->repairDate ?></td>
+														<td><?php echo $row->productName ?></td>
+														<td><?php echo number_format($row->Qty,0) ?></td>
+														<td><?php echo $row->Details ?></td>
+														<td><?php echo $row->dateAccomplished ?></td>
+														<td><span class="badge bg-danger text-white">UNDONE</span></td>
+														<td>-</td>
+													</tr>
+													<?php } ?>
+												<?php endforeach; ?>
+											<?php endif; ?>
+										</tbody>
 									</table>
 								</div>
 								<div class="tab-pane fade" id="contact6" role="tabpanel"></div>
