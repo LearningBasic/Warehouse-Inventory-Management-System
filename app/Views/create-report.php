@@ -413,12 +413,54 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
-				<div class="card-box">
-					<div class="card-header"><span class="icon-copy dw dw-edit2"></span>&nbsp;Create Report</div>
-					<div class="card-body">
-						
-					</div>
-				</div>
+				<div class="container">
+                    <div class="card-box">
+                        <div class="card-header"><span class="icon-copy dw dw-edit2"></span>&nbsp;Create Report
+                            <a href="<?=site_url('manage')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>Back</a>
+                        </div>
+                        <div class="card-body">
+                            <?php if($item): ?>
+                                <?php foreach($item as $row): ?>
+                            <form method="post" class="row g-3" id="frmRepair">
+                                <input type="hidden" name="productID" value="<?php echo $row->inventID ?>"/>
+                                <div class="col-12 form-group">
+                                    <label for="product_name">Product Name</label>
+                                    <input type="text" class="form-control" name="productName" value="<?php echo $row->productName ?>"/>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <div class="row g-3">
+                                        <div class="col-lg-6">
+                                            <label for="defect_type">Type of Defect</label>
+                                            <input type="text" class="form-control" style="background-color:#ffffff;" name="damageRate" value="<?php echo $row->DamageRate ?>" disabled/>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label for="qty">Total Qty</label>
+                                            <input type="number" class="form-control" style="background-color:#ffffff;" name="qty" value="<?php echo $row->Qty ?>" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label>Details</label>
+                                    <textarea class="form-control" style="background-color:#ffffff;" name="details" disabled><?php echo $row->Details ?></textarea>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <div class="row g-3">
+                                        <div class="col-lg-6">
+                                            <label for="date_repair">Date of Repair</label>
+                                            <input type="date" class="form-control" name="date_repair" required/>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label for="accomplish_date">Date Accomplished</label>
+                                            <input type="date" class="form-control" name="date_accomplish" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
 			</div>
 		</div>
 		<!-- js -->
