@@ -54,6 +54,7 @@ $routes->post('update-account','Home::updateAccount');
 $routes->post('add-product','Home::addProduct');
 $routes->post('update','Home::update');
 $routes->get('assignment','Home::assignment');
+$routes->post('save-report','ProductController::saveReport');
 //fetch the product details
 $routes->get('product-information','ProductController::productInfo');
 

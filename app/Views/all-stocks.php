@@ -485,7 +485,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" class="row g-3" id="frmReport>
+                        <form method="post" class="row g-3" id="frmReport" enctype="multipart/form-data">
 							<input type="hidden" name="itemID" id="itemID"/>
                             <div class="col-12 form-group">
                                 <label>Product Name</label>
@@ -509,7 +509,7 @@
 							</div>
 							<div class="col-12 form-group">
 								<label>Proof/Attachment</label>
-								<input type="file" class="form-control" name="file"/>
+								<input type="file" class="form-control" name="file" required/>
 							</div>
 							<div class="col-12 form-group">
 								<label>Recommendation</label>
@@ -557,8 +557,29 @@
 			$('#frmReport').on('submit',function(e)
 			{
 				e.preventDefault();
-				var data = $(this).serialize();
-				alert(data);
+				$.ajax({
+					type: 'POST',
+					url: '<?=site_url('save-report')?>',
+					data: new FormData(this),
+					dataType: 'json',
+					contentType: false,
+					cache: false,
+					processData:false,
+					beforeSend: function(){
+						$('#btnAdd').attr("disabled","disabled");
+						$('#frmReport').css("opacity",".5");
+					},
+					success: function(response){
+						if(response.status == 1){
+							$('#frmReport')[0].reset();
+							$('.statusMsg').html('<p class="alert alert-success">'+response.message+'</p>');
+						}else{
+							$('.statusMsg').html('<p class="alert alert-danger">'+response.message+'</p>');
+						}
+						$('#frmReport').css("opacity","");
+						$("#btnAdd").removeAttr("disabled");
+					}
+				});
 			});
 		</script>
 	</body>
