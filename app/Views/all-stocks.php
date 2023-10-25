@@ -543,11 +543,16 @@
 						</div>
                         <form method="post" class="row g-3" id="frmReport" enctype="multipart/form-data">
 							<input type="hidden" name="itemID" id="itemID"/>
-                            <div class="col-12 form-group">
+                            <div class="col-12">
                                 <label>Product Name</label>
                                 <input type="text" class="form-control" name="productName" id="productName" required/>
                             </div>
-							<div class="col-12 form-group">
+							<div class="col-12">
+								<label>Type of Defect/Problem</label><br/>
+								<input type="radio" name="defectType" style="width:20px;height:15px;" value="Minor" required/>&nbsp;<label>Minor</label>
+								<input type="radio" name="defectType" style="width:20px;height:15px;" value="Major"/>&nbsp;<label>Major</label>
+							</div>
+							<div class="col-12">
 								<div class="row g-3">
 									<div class="col-lg-6">
 										<label>Date</label>
@@ -559,15 +564,15 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-12 form-group">
+							<div class="col-12">
 								<label>Details</label>
 								<textarea class="form-control" name="details" required></textarea>
 							</div>
-							<div class="col-12 form-group">
+							<div class="col-12">
 								<label>Proof/Attachment</label>
 								<input type="file" class="form-control" name="file" accept="image/png, image/gif, image/jpeg" required/>
 							</div>
-							<div class="col-12 form-group">
+							<div class="col-12">
 								<label>Recommendation</label>
 								<select class="form-control" name="recommendation" required>
 									<option value="">Choose</option>
@@ -575,7 +580,7 @@
 									<option>Replacement</option>
 								</select>
 							</div>
-                            <div class="col-12 form-group">
+                            <div class="col-12"><br/>
                                 <input type="submit" class="btn btn-primary" value="Submit Report" id="btnAdd"/>
                             </div>
                         </form>

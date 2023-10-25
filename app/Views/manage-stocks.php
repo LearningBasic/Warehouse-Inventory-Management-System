@@ -467,26 +467,43 @@
 											<th>Product Name</th>
 											<th>Qty</th>
 											<th>Details</th>
-											<th>Image</th>
+											<th>Date Report</th>
 											<th>Reported By</th>
 											<th>Remarks</th>
 											<th>Action</th>
 										</thead>
 										<tbody>
 											<?php if($items): ?>
-												<?php foreach($items as $row): ?>
+												<?php foreach($items as $row): 
+												if($row->Remarks=="Replacement"){
+													?>
 													<tr>
-														<td><?php echo $row->DateReport ?></td>
+														<td><?php echo $row->DateCreated ?></td>
 														<td><?php echo $row->productName ?></td>
 														<td><?php echo number_format($row->Qty,0) ?></td>
 														<td><?php echo $row->Details ?></td>
-														<td></td>
+														<td><?php echo $row->DateReport ?></td>
 														<td><?php echo $row->Fullname ?></td>
 														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
 														<td>
-															<button type="button" class="btn btn-default btn-sm"><span class="icon-copy dw dw-eye"></span></button>
+															<button type="button" class="btn btn-outline-primary btn-sm">View</button>
 														</td> 
 													</tr>
+												<?php }else{ ?>
+													<tr>
+														<td><?php echo $row->DateCreated ?></td>
+														<td><?php echo $row->productName ?></td>
+														<td><?php echo number_format($row->Qty,0) ?></td>
+														<td><?php echo $row->Details ?></td>
+														<td><?php echo $row->DateReport ?></td>
+														<td><?php echo $row->Fullname ?></td>
+														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
+														<td>
+															<button type="button" class="btn btn-outline-primary btn-sm view">View</button>
+															<button type="button" class="btn btn-outline-primary btn-sm create">Create</button>
+														</td> 
+													</tr>
+												<?php } ?>
 												<?php endforeach; ?>
 											<?php endif; ?>
 										</tbody>
@@ -494,7 +511,17 @@
 								</div>
 								<div class="tab-pane fade" id="profile6" role="tabpanel">
 								<br/>
-									
+									<table class="data-table table stripe hover nowrap">
+										<thead>
+											<th>Date Repaired</th>
+											<th>Product Name</th>
+											<th>Qty</th>
+											<th>Details</th>
+											<th>Date Accomplished</th>
+											<th>Status</th>
+											<th>Action</th>
+										</thead>
+									</table>
 								</div>
 								<div class="tab-pane fade" id="contact6" role="tabpanel"></div>
 								<div class="tab-pane fade" id="others6" role="tabpanel"></div>
