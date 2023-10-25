@@ -468,7 +468,6 @@
 											<th>Product Name</th>
 											<th>Qty</th>
 											<th>Details</th>
-											<th>Reported By</th>
 											<th>Remarks</th>
 											<th>Action</th>
 										</thead>
@@ -483,26 +482,39 @@
 														<td><?php echo $row->productName ?></td>
 														<td><?php echo number_format($row->Qty,0) ?></td>
 														<td><?php echo $row->Details ?></td>
-														<td><?php echo $row->Fullname ?></td>
 														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
 														<td>
 														<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm">View</a>
 														</td> 
 													</tr>
-												<?php }else{ ?>
+												<?php }else{ 
+													if($row->Status==0){
+													?>
 													<tr>
 														<td><?php echo $row->DateReport ?></td>
 														<td><?php echo $row->DamageRate ?></td>
 														<td><?php echo $row->productName ?></td>
 														<td><?php echo number_format($row->Qty,0) ?></td>
 														<td><?php echo $row->Details ?></td>
-														<td><?php echo $row->Fullname ?></td>
 														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
 														<td>
 															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm">View</a>
-															<button type="button" class="btn btn-outline-primary btn-sm create">Create</button>
+															<a href="<?=site_url('create-report')?>" class="btn btn-outline-primary btn-sm">Create</a>
 														</td> 
 													</tr>
+													<?php }else{ ?>
+														<tr>
+														<td><?php echo $row->DateReport ?></td>
+														<td><?php echo $row->DamageRate ?></td>
+														<td><?php echo $row->productName ?></td>
+														<td><?php echo number_format($row->Qty,0) ?></td>
+														<td><?php echo $row->Details ?></td>
+														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
+														<td>
+															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm">View</a>
+														</td> 
+													</tr>
+													<?php } ?>
 												<?php } ?>
 												<?php endforeach; ?>
 											<?php endif; ?>

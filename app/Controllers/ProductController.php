@@ -62,7 +62,7 @@ class ProductController extends BaseController
                     $file->move('Damage_Files/',$originalName);
                     $values = [
                         'DateCreated'=>$dateCreated,'inventID'=>$itemID,'Qty'=>$qty,
-                        'Details'=>$details,'DamageRate'=>$defectType,'DateReport'=>$dateReport,'Image'=>$originalName,'Remarks'=>$remarks,'accountID'=>$user
+                        'Details'=>$details,'DamageRate'=>$defectType,'DateReport'=>$dateReport,'Image'=>$originalName,'Remarks'=>$remarks,'Status'=>0,'accountID'=>$user
                         ];
                     $damageReport->save($values);
                     //deduct the number of stocks vs damage stock

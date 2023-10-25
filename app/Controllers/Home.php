@@ -118,6 +118,11 @@ class Home extends BaseController
         return view('manage-stocks',$data);
     }
 
+    public function createReport()
+    {
+        return view ('create-report');
+    }
+
     public function addItem()
     {
         //warehouse

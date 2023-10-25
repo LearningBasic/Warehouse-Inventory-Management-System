@@ -14,7 +14,7 @@ class damageModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['DateCreated','inventID','Qty','Details','DamageRate','DateReport','Image','Remarks','accountID'];
+    protected $allowedFields = ['DateCreated','inventID','Qty','Details','DamageRate','DateReport','Image','Remarks','Status','accountID'];
 
     protected $validationRules = [];
     protected $validationMessages = [];
