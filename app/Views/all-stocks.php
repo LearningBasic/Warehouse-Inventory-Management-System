@@ -448,7 +448,7 @@
 											<td><?php echo $row->productName ?></td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
-											<td><?php if($row->Qty>5){echo "<span class='badge bg-success text-white'>Available</span>";}else if($row->Qty<5 && $row->Qty>0){echo "<span class='badge bg-warning text-white'>Critical</span>";}else{echo "<span class='badge bg-danger text-white'>Out-of-Stock</span>";} ?></td>
+											<td><?php if($row->Qty>5){echo "<span class='badge bg-success text-white'>Available</span>";}else if($row->Qty>0){echo "<span class='badge bg-warning text-white'>Critical</span>";}else if($row->Qty<=0){echo "<span class='badge bg-danger text-white'>Out-of-Stock</span>";} ?></td>
 											<td><?php echo $row->ExpirationDate ?></td>
 											<td>
 												<div class="dropdown">
@@ -485,6 +485,18 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
+						<div class="alert alert-success alert-dismissible fade show" id="success" style="display:none;" role="alert">
+							<b>Great!</b>&nbsp;Successfully reported.
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="alert alert-danger alert-dismissible fade show" id="error" style="display:none;" role="alert">
+							<label id="errorMessage"></label>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
                         <form method="post" class="row g-3" id="frmReport" enctype="multipart/form-data">
 							<input type="hidden" name="itemID" id="itemID"/>
                             <div class="col-12 form-group">
@@ -561,7 +573,6 @@
 					type: 'POST',
 					url: '<?=site_url('save-report')?>',
 					data: new FormData(this),
-					dataType: 'json',
 					contentType: false,
 					cache: false,
 					processData:false,
@@ -570,11 +581,12 @@
 						$('#frmReport').css("opacity",".5");
 					},
 					success: function(response){
-						if(response.status == 1){
+						if(response==="success"){
 							$('#frmReport')[0].reset();
-							$('.statusMsg').html('<p class="alert alert-success">'+response.message+'</p>');
+							document.getElementById('success').style="display:block";
 						}else{
-							$('.statusMsg').html('<p class="alert alert-danger">'+response.message+'</p>');
+							document.getElementById('error').style="display:block";
+							$('#errorMessage').html(response);
 						}
 						$('#frmReport').css("opacity","");
 						$("#btnAdd").removeAttr("disabled");

@@ -21,6 +21,8 @@ class ProductController extends BaseController
     public function saveReport()
     {
         $damageReport = new \App\Models\damageModel();
+        $inventoryModel = new \App\Models\inventoryModel();
+        //validate
         $validation = $this->validate([
             'productName'=>'required',
             'dateReport'=>'required',
@@ -46,19 +48,31 @@ class ProductController extends BaseController
         }
         else
         {
-            if($file->isValid() && ! $file->hasMoved())
+            $totalQty = $inventoryModel->WHERE('inventID',$itemID)->first();
+            if($qty>$totalQty['Qty'])
             {
-                $file->move('Damage_Files/',$originalName);
-                $values = [
-                    'DateCreated'=>$dateCreated,'inventID'=>$itemID,'Qty'=>$qty,
-                    'Details'=>$details,'DateReport'=>$dateReport,'Image'=>$originalName,'Remarks'=>$remarks,'accountID'=>$user
-                    ];
-                $damageReport->save($values);
-                echo "success";
+                echo "Invalid! Insufficient number of stocks";
             }
             else
             {
-                echo "File already uploaded";
+                if($file->isValid() && ! $file->hasMoved())
+                {
+                    $file->move('Damage_Files/',$originalName);
+                    $values = [
+                        'DateCreated'=>$dateCreated,'inventID'=>$itemID,'Qty'=>$qty,
+                        'Details'=>$details,'DateReport'=>$dateReport,'Image'=>$originalName,'Remarks'=>$remarks,'accountID'=>$user
+                        ];
+                    $damageReport->save($values);
+                    //deduct the number of stocks vs damage stock
+                    $newQty = $totalQty['Qty']-$qty;
+                    $values = ['Qty'=>$newQty,];
+                    $inventoryModel->update($itemID,$values);
+                    echo "success";
+                }
+                else
+                {
+                    echo "File already uploaded";
+                }
             }
         }
     }
