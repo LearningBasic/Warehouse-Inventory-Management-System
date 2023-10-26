@@ -549,7 +549,9 @@
 														<td><?php echo $row->Details ?></td>
 														<td><?php echo $row->dateAccomplished ?></td>
 														<td><span class="badge bg-warning text-white">PENDING</span></td>
-														<td></td>
+														<td>
+															<button type="button" class="btn btn-outline-primary btn-sm file" value="<?php echo $row->repairID ?>">Create</button>
+														</td>
 													</tr>
 													<?php }else if($row->Status==1){ ?>
 													<tr>
@@ -585,6 +587,46 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="accomplishModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            Accomplishment Report Form
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+						<div class="alert alert-success alert-dismissible fade show" id="success" style="display:none;" role="alert">
+							<label id="successMessage"></label>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="alert alert-danger alert-dismissible fade show" id="error" style="display:none;" role="alert">
+							<label id="errorMessage"></label>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+                        <form method="post" class="row g-3" id="frmReport" enctype="multipart/form-data">
+							<input type="hidden" id="itemID" name="itemID"/>
+							<div class="col-12 form-group">
+								<label>Repaired By:</label>
+								<textarea class="form-control" name="involveWorkers" placeholder="Enter their complete name" required></textarea>
+							</div>
+							<div class="col-12 form-group">
+								<label>Attachment/Proof</label>
+								<input type="file" class="form-control" name="file" accept="image/png, image/gif, image/jpeg" required/>
+							</div>
+							<div class="col-12 form-group">
+								<input type="submit" class="btn btn-primary" value="Send Report" id="btnSend"/>
+							</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
@@ -595,5 +637,12 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script>
+			$(document).on('click','.file',function(e){
+				e.preventDefault();
+				$('#itemID').attr("value",$(this).val());
+				$('#accomplishModal').modal('show');
+			});
+		</script>
 	</body>
 </html>

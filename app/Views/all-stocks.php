@@ -528,7 +528,7 @@
                     </div>
                     <div class="modal-body">
 						<div class="alert alert-success alert-dismissible fade show" id="success" style="display:none;" role="alert">
-							<b>Great!</b>&nbsp;Successfully reported.
+							<b>Great!</b>&nbsp;Successfully reported. Please refresh the page
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
