@@ -82,6 +82,7 @@ class ProductController extends BaseController
     public function submitReport()
     {
         $repairModel = new \App\Models\repairModel();
+        $damageModel = new \App\Models\damageModel();
         $id = $this->request->getPost('ID');
         $productID = $this->request->getPost('productID');
         $qty = $this->request->getPost('qty');
@@ -101,7 +102,15 @@ class ProductController extends BaseController
         }
         else
         {
-
+            $values = [
+                'repairDate'=>$date_repair,'inventID'=>$productID,'Qty'=>$qty,'Details'=>$details,'dateAccomplished'=>$date_accomplish,'Status'=>0,'accountID'=>$user
+            ];
+            $repairModel->save($values);
+            //update the status
+            $value = ['Status'=>1];
+            $damageModel->update($id,$value);
+            session()->setFlashdata('success',"Great! You've successfully submitted the data.");
+            return redirect()->to('/manage')->withInput();
         }
     }
 }

@@ -420,7 +420,7 @@
                         </div>
                         <div class="card-body">
                             <?php if(!empty(session()->getFlashdata('fail'))) : ?>
-                                <div class="alert alert-danger" role="alert">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <?= session()->getFlashdata('fail'); ?>
                                 </div>
                             <?php endif; ?>
@@ -441,7 +441,7 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <label for="qty">Total Qty</label>
-                                            <input type="number" class="form-control" style="background-color:#ffffff;" name="qty" value="<?php echo $row->Qty ?>" disabled/>
+                                            <input type="number" class="form-control" style="background-color:#ffffff;" name="qty" value="<?php echo $row->Qty ?>" readonly/>
                                         </div>
                                         <div class="col-lg-4">
                                             <label for="date_repair">Date of Repair</label>
@@ -451,7 +451,7 @@
                                 </div>
                                 <div class="col-12 form-group">
                                     <label>Details</label>
-                                    <textarea class="form-control" style="background-color:#ffffff;" name="details" disabled><?php echo $row->Details ?></textarea>
+                                    <textarea class="form-control" style="background-color:#ffffff;" name="details" readonly><?php echo $row->Details ?></textarea>
                                 </div>
                                 <div class="col-12 form-group">
                                     <button type="submit" class="btn btn-primary" id="btnSubmit">Submit Report</button>

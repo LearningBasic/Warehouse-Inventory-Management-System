@@ -415,6 +415,11 @@
 				<div class="card-box">
 					<div class="card-header"><i class="icon-copy dw dw-box"></i>&nbsp;Manage Stocks</div>
 					<div class="card-body">
+						<?php if(!empty(session()->getFlashdata('success'))) : ?>
+							<div class="alert alert-success alert-dismissible fade show" role="alert">
+								<?= session()->getFlashdata('success'); ?>
+							</div>
+						<?php endif; ?>
 						<div class="tabs">
 							<ul class="nav nav-pills justify-content-left" role="tablist">
 								<li class="nav-item">
