@@ -583,7 +583,7 @@
 
 				<div class="row">
 					<div class="col-lg-4 col-md-6 mb-20">
-						<div class="card-box pd-20 min-height-200px">
+						<div class="card-box pd-20">
 							<div class="d-flex justify-content-between pb-10">
 								<div class="h5 mb-0">Top Suppliers</div>
 							</div>
@@ -595,7 +595,7 @@
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-6 mb-20">
-						<div class="card-box pd-20 min-height-200px">
+						<div class="card-box pd-20">
 							<div class="d-flex justify-content-between">
 								<div class="h5 mb-0">Out of Stocks</div>
 							</div>

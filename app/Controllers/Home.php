@@ -28,7 +28,7 @@ class Home extends BaseController
         //get the total volume per product name
         $builder = $this->db->table('tblinventory');
         $builder->select('productName,SUM(Qty)total');
-        $builder->groupBy('inventID')->orderBy('total','DESC')->limit(25);
+        $builder->groupBy('productID')->orderBy('total','DESC')->limit(25);
         $query = $builder->get()->getResult();
         //total of item per assignment
         $builder = $this->db->table('tblwarehouse a');
