@@ -440,3 +440,75 @@ INFO - 2023-10-26 07:57:03 --> Session: Class initialized using 'CodeIgniter\Ses
 INFO - 2023-10-26 07:57:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2023-10-26 07:57:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2023-10-26 08:04:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-10-26 08:21:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-10-26 08:21:05 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\ProductController.php on line 172.
+ 1 APPPATH\Controllers\ProductController.php(172): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\ProductController.php', 172)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\ProductController->viewReport()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ProductController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+CRITICAL - 2023-10-26 08:21:07 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\ProductController.php on line 172.
+ 1 APPPATH\Controllers\ProductController.php(172): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\ProductController.php', 172)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\ProductController->viewReport()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ProductController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+CRITICAL - 2023-10-26 08:21:19 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\ProductController.php on line 172.
+ 1 APPPATH\Controllers\ProductController.php(172): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\ProductController.php', 172)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\ProductController->viewReport()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ProductController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+CRITICAL - 2023-10-26 08:21:44 --> Trying to access array offset on value of type null
+in APPPATH\Controllers\ProductController.php on line 172.
+ 1 APPPATH\Controllers\ProductController.php(172): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'APPPATH\\Controllers\\ProductController.php', 172)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\ProductController->viewReport()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ProductController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+INFO - 2023-10-26 08:22:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-10-26 08:23:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-10-26 08:41:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-10-26 08:44:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-10-26 08:46:34 --> File not found: "/Accomplishment/20230915044248_received_268830492634282.jpeg"
+in SYSTEMPATH\Files\File.php on line 47.
+ 1 SYSTEMPATH\Files\File.php(47): CodeIgniter\Files\Exceptions\FileNotFoundException::forFileNotFound('/Accomplishment/20230915044248_received_268830492634282.jpeg')
+ 2 SYSTEMPATH\HTTP\DownloadResponse.php(97): CodeIgniter\Files\File->__construct('/Accomplishment/20230915044248_received_268830492634282.jpeg', true)
+ 3 SYSTEMPATH\HTTP\ResponseTrait.php(794): CodeIgniter\HTTP\DownloadResponse->setFilePath('/Accomplishment/20230915044248_received_268830492634282.jpeg')
+ 4 APPPATH\Controllers\ProductController.php(193): CodeIgniter\HTTP\Response->download('20230915044248_received_268830492634282.jpeg', null)
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\ProductController->viewReport()
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ProductController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+CRITICAL - 2023-10-26 08:46:48 --> File not found: "/Accomplishment/20230915044248_received_268830492634282.jpeg"
+in SYSTEMPATH\Files\File.php on line 47.
+ 1 SYSTEMPATH\Files\File.php(47): CodeIgniter\Files\Exceptions\FileNotFoundException::forFileNotFound('/Accomplishment/20230915044248_received_268830492634282.jpeg')
+ 2 SYSTEMPATH\HTTP\DownloadResponse.php(97): CodeIgniter\Files\File->__construct('/Accomplishment/20230915044248_received_268830492634282.jpeg', true)
+ 3 SYSTEMPATH\HTTP\ResponseTrait.php(794): CodeIgniter\HTTP\DownloadResponse->setFilePath('/Accomplishment/20230915044248_received_268830492634282.jpeg')
+ 4 APPPATH\Controllers\ProductController.php(193): CodeIgniter\HTTP\Response->download('20230915044248_received_268830492634282.jpeg', null)
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\ProductController->viewReport()
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ProductController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+CRITICAL - 2023-10-26 08:47:18 --> Object of class CodeIgniter\HTTP\DownloadResponse could not be converted to string
+in APPPATH\Controllers\ProductController.php on line 193.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\ProductController->viewReport()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ProductController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+INFO - 2023-10-26 08:48:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-10-26 08:48:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-10-26 08:57:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-10-26 08:59:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-10-26 08:59:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-10-26 09:01:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

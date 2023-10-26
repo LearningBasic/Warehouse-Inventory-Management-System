@@ -562,7 +562,7 @@
 														<td><?php echo $row->dateAccomplished ?></td>
 														<td><span class="badge bg-success text-white">DONE</span></td>
 														<td>
-															<button type="button" class="btn btn-outline-primary btn-sm view"><i class="icon-copy dw dw-view"></i>&nbsp;Details</button>
+															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->repairID ?>"><i class="icon-copy dw dw-view"></i>&nbsp;Details</button>
 														</td>
 													</tr>
 													<?php }else if($row->Status==2){  ?>
