@@ -163,4 +163,11 @@ class ProductController extends BaseController
             }
         }
     }
+
+    public function viewReport()
+    {
+        $accomplishmentModel = new \App\Models\accomplishmentModel();
+        $val = $this->request->getGet('value');
+        $records = $accomplishmentModel->WHERE('accomplishmentID',$val)->first();
+    }
 }

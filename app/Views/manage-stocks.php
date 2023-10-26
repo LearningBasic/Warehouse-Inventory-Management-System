@@ -633,6 +633,21 @@
                 </div>
             </div>
         </div>
+		<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            Accomplishment Report
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
@@ -648,6 +663,14 @@
 				e.preventDefault();
 				$('#itemID').attr("value",$(this).val());
 				$('#accomplishModal').modal('show');
+			});
+			$(document).on('click','.view',function(e){
+				e.preventDefault();
+				$.ajax({url:"<?=site_url('view-report')?>",method:"GET",data:{value:$(this).val()},success:function(response)
+				{
+					$('#viewModal').modal('show');
+					$('#result').html(response);
+				}});
 			});
 			$('#frmReport').on('submit',function(e)
 			{
