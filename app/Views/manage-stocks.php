@@ -489,7 +489,7 @@
 														<td><?php echo $row->Details ?></td>
 														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
 														<td>
-														<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm">View</a>
+														<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-view"></i>&nbsp;View</a>
 														</td> 
 													</tr>
 												<?php }else{ 
@@ -503,8 +503,8 @@
 														<td><?php echo $row->Details ?></td>
 														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
 														<td>
-															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm">View</a>
-															<a href="<?=site_url('create-report/')?><?php echo $row->damageID ?>" class="btn btn-outline-primary btn-sm">Create</a>
+															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-view"></i>&nbsp;View</a>
+															<a href="<?=site_url('create-report/')?><?php echo $row->damageID ?>" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-add"></i>&nbsp;Create</a>
 														</td> 
 													</tr>
 													<?php }else{ ?>
@@ -516,7 +516,7 @@
 														<td><?php echo $row->Details ?></td>
 														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
 														<td>
-															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm">View</a>
+															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-view"></i>&nbsp;View</a>
 														</td> 
 													</tr>
 													<?php } ?>
@@ -550,7 +550,7 @@
 														<td><?php echo $row->dateAccomplished ?></td>
 														<td><span class="badge bg-warning text-white">PENDING</span></td>
 														<td>
-															<button type="button" class="btn btn-outline-primary btn-sm file" value="<?php echo $row->repairID ?>">Create</button>
+															<button type="button" class="btn btn-outline-primary btn-sm file" value="<?php echo $row->repairID ?>"><i class="icon-copy dw dw-add"></i>&nbsp;Create</button>
 														</td>
 													</tr>
 													<?php }else if($row->Status==1){ ?>
@@ -561,7 +561,9 @@
 														<td><?php echo $row->Details ?></td>
 														<td><?php echo $row->dateAccomplished ?></td>
 														<td><span class="badge bg-success text-white">DONE</span></td>
-														<td>-</td>
+														<td>
+															<button type="button" class="btn btn-outline-primary btn-sm view"><i class="icon-copy dw dw-view"></i>&nbsp;Details</button>
+														</td>
 													</tr>
 													<?php }else if($row->Status==2){  ?>
 														<tr>
@@ -611,6 +613,10 @@
 						</div>
                         <form method="post" class="row g-3" id="frmReport" enctype="multipart/form-data">
 							<input type="hidden" id="itemID" name="itemID"/>
+							<div class="col-12 form-group">
+								<label>Accomplished Date</label>
+								<input type="date" class="form-control" name="accomplish_date" required/>
+							</div>
 							<div class="col-12 form-group">
 								<label>Repaired By:</label>
 								<textarea class="form-control" name="involveWorkers" placeholder="Enter their complete name" required></textarea>
