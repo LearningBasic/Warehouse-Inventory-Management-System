@@ -489,7 +489,7 @@
 														<td><?php echo $row->Details ?></td>
 														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
 														<td>
-														<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-view"></i>&nbsp;View</a>
+														<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-image"></i>&nbsp;View</a>
 														</td> 
 													</tr>
 												<?php }else{ 
@@ -503,7 +503,7 @@
 														<td><?php echo $row->Details ?></td>
 														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
 														<td>
-															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-view"></i>&nbsp;View</a>
+															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-image"></i>&nbsp;View</a>
 															<a href="<?=site_url('create-report/')?><?php echo $row->damageID ?>" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-add"></i>&nbsp;Create</a>
 														</td> 
 													</tr>
@@ -516,7 +516,7 @@
 														<td><?php echo $row->Details ?></td>
 														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
 														<td>
-															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-view"></i>&nbsp;View</a>
+															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-image"></i>&nbsp;View</a>
 														</td> 
 													</tr>
 													<?php } ?>
@@ -648,6 +648,34 @@
 				e.preventDefault();
 				$('#itemID').attr("value",$(this).val());
 				$('#accomplishModal').modal('show');
+			});
+			$('#frmReport').on('submit',function(e)
+			{
+				e.preventDefault();
+				$.ajax({
+					type: 'POST',
+					url: '<?=site_url('send-report')?>',
+					data: new FormData(this),
+					contentType: false,
+					cache: false,
+					processData:false,
+					beforeSend: function(){
+						$('#btnSend').attr("disabled","disabled");
+						$('#frmReport').css("opacity",".5");
+					},
+					success: function(response){
+						if(response==="success"){
+							$('#frmReport')[0].reset();
+							document.getElementById('success').style="display:block";
+							$('#successMessage').html("Great! Successfully reported. Please refresh the page");
+						}else{
+							document.getElementById('error').style="display:block";
+							$('#errorMessage').html(response);
+						}
+						$('#frmReport').css("opacity","");
+						$("#btnSend").removeAttr("disabled");
+					}
+				});
 			});
 		</script>
 	</body>

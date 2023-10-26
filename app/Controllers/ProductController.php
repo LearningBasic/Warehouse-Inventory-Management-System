@@ -113,4 +113,54 @@ class ProductController extends BaseController
             return redirect()->to('/manage')->withInput();
         }
     }
+
+    public function sendReport()
+    {
+        $accomplishmentModel = new \App\Models\accomplishmentModel();
+        $repairModel = new \App\Models\repairModel();
+        $inventoryModel = new \App\Models\inventoryModel();
+        //data
+        $itemID = $this->request->getPost('itemID');
+        $date = $this->request->getPost('accomplish_date');
+        $involveWorkers = $this->request->getPost('involveWorkers');
+        $file = $this->request->getFile('file');
+        $originalName = $file->getClientName();
+        $validation = $this->validate([
+            'accomplish_date'=>'required',
+            'involveWorkers'=>'required',
+            'file'=>'uploaded[file]'
+        ]);
+        if(!$validation)
+        {
+            echo "Invalid! Please fill in the form to continue";
+        }
+        else
+        {
+            if($file->isValid() && ! $file->hasMoved())
+            {
+                $file->move('Accomplishment/',$originalName);
+                $values = [
+                    'repairID'=>$itemID, 'Workers'=>$involveWorkers,'File'=>$originalName,'DateCreated'=>date('Y-m-d')
+                ];
+                $accomplishmentModel->save($values);
+                //update the status
+                $value = [
+                    'dateAccomplished'=>$date,'Status'=>1,
+                ];
+                $repairModel->update($itemID,$value);
+                //update the inventory
+                $getInfo = $repairModel->WHERE('repairID',$itemID)->first();
+                $inventoryQty = $inventoryModel->WHERE('inventID',$getInfo['inventID'])->first();
+                //add the quantity from two models
+                $total = $getInfo['Qty']+$inventoryQty['Qty'];
+                $record = ['Qty'=>$total];
+                $inventoryModel->update($getInfo['inventID'],$record);
+                echo "success";
+            }
+            else
+            {
+                echo "File already uploaded";
+            }
+        }
+    }
 }

@@ -54,10 +54,11 @@ $routes->post('update-account','Home::updateAccount');
 $routes->post('add-product','Home::addProduct');
 $routes->post('update','Home::update');
 $routes->get('assignment','Home::assignment');
-$routes->post('save-report','ProductController::saveReport');
-$routes->post('submit-report','ProductController::submitReport');
 //fetch the product details
 $routes->get('product-information','ProductController::productInfo');
+$routes->post('save-report','ProductController::saveReport');
+$routes->post('submit-report','ProductController::submitReport');
+$routes->post('send-report','ProductController::sendReport');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
