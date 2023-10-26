@@ -193,6 +193,19 @@ class Home extends BaseController
         }
     }
 
+    public function transfer($id=null)
+    {
+        //warehouse
+        $builder = $this->db->table('tblwarehouse');
+        $builder->select('*');
+        $warehouse = $builder->get()->getResult();
+        //item
+        $inventoryModel = new \App\Models\inventoryModel();
+        $items = $inventoryModel->WHERE('inventID',$id)->first();
+        $data = ['items'=>$items,'location'=>$warehouse,];
+        return view('transfer-item',$data);
+    }
+
     public function suppliers()
     {
         $builder = $this->db->table('tblsupplier a');
