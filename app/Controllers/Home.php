@@ -50,9 +50,11 @@ class Home extends BaseController
     {
         //get all the stocks
         $builder = $this->db->table('tblinventory a');
-        $builder->select('a.*,b.categoryName,c.supplierName');
+        $builder->select('a.*,b.categoryName,c.supplierName,d.warehouseName');
         $builder->join('tblcategory b','b.categoryID=a.categoryID','LEFT');
         $builder->join('tblsupplier c','c.supplierID=a.supplierID','LEFT');
+        $builder->join('tblwarehouse d','d.warehouseID=a.warehouseID','LEFT');
+        $builder->groupby('a.warehouseID,a.inventID');
         $builder->orderby('a.Date');
         $items = $builder->get()->getResult();
         $data = ['items'=>$items];
@@ -87,12 +89,13 @@ class Home extends BaseController
         $supplier = $this->request->getPost('supplier');
         $category = $this->request->getPost('category');
         $location = $this->request->getPost('location');
+        $code = $this->request->getPost('code');
         $item_number = $this->request->getPost('itemNumber');
         $productName = $this->request->getPost('productName');
         $desc = $this->request->getPost('description');
         $values = [
             'Location'=>$location,'productID'=>$item_number,'productName'=>$productName,
-            'Description'=>$desc,
+            'Code'=>$code,'Description'=>$desc,
             'categoryID'=>$category,'supplierID'=>$supplier,'warehouseID'=>$warehouse,];
         $inventoryModel->update($id,$values);
         session()->setFlashdata('success','Great! Successfully updated');

@@ -433,7 +433,8 @@
 								<th>Unit Price</th>
 								<th>Qty</th>
 								<th>Status</th>
-								<th>Expiration Date</th>
+								<th>Expiration</th>
+								<th>Location</th>
 								<th>Action</th>
 							</thead>
 							<tbody>
@@ -447,6 +448,7 @@
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><span class='badge bg-success text-white'>Available</span></td>
 											<td><?php echo $row->ExpirationDate ?></td>
+											<td><?php echo $row->warehouseName ?></td>
 											<td>
 												<div class="dropdown">
 													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
@@ -455,7 +457,7 @@
 													</a>
 													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
-														<button type="button" class="dropdown-item deadstock" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-briefcase"></i>Damage</button>
+														<button type="button" class="dropdown-item deadstock" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-file-19"></i>Damage</button>
 														<a class="dropdown-item" href="transfer/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-message-1"></i>Transfer</a>
 														<button type="button" class="dropdown-item return" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-refresh2"></i>Return</button>
 													</div>
@@ -471,6 +473,7 @@
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><span class='badge bg-warning text-white'>Critical</span></td>
 											<td><?php echo $row->ExpirationDate ?></td>
+											<td><?php echo $row->warehouseName ?></td>
 											<td>
 												<div class="dropdown">
 													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
@@ -479,7 +482,7 @@
 													</a>
 													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
-														<button type="button" class="dropdown-item deadstock" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-briefcase"></i>Damage</button>
+														<button type="button" class="dropdown-item deadstock" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-file-19"></i>Damage</button>
 														<a class="dropdown-item" href="transfer/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-message-1"></i>Transfer</a>
 														<button type="button" class="dropdown-item return" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-refresh2"></i>Return</button>
 													</div>
@@ -495,6 +498,7 @@
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><span class='badge bg-danger text-white'>Out-of-Stock</span></td>
 											<td><?php echo $row->ExpirationDate ?></td>
+											<td><?php echo $row->warehouseName ?></td>
 											<td>
 												<div class="dropdown">
 													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"

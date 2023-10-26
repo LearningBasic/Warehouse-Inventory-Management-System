@@ -462,11 +462,15 @@
                             </div>
                             <div class="col-12 form-group">
                                 <div class="row g-3">
-                                    <div class="col-lg-4">
-                                        <label>Item Number</label>
+                                    <div class="col-lg-3">
+                                        <label>Item No</label>
                                         <input type="text" class="form-control" name="itemNumber" value="<?=$items['productID'] ?>" required/>
                                     </div>
-                                    <div class="col-lg-8">
+									<div class="col-lg-3">
+                                        <label>Serial/Barcode No</label>
+                                        <input type="text" class="form-control" name="Code" value="<?=$items['Code'] ?>" required/>
+                                    </div>
+                                    <div class="col-lg-6">
                                         <label>Product Name</label>
                                         <input type="text" class="form-control" name="productName" value="<?=$items['productName'] ?>" required/>
                                     </div>
