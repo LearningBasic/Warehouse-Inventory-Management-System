@@ -216,6 +216,7 @@ class ProductController extends BaseController
         $dateEffective = $this->request->getPost('dateEffective');
         $qty = $this->request->getPost('qty');
         $itemUnit = $this->request->getPost('itemUnit');
+        $unitPrice = $this->request->getPost('unitPrice');
         $warehouse = $this->request->getPost('warehouse');
         $description = $this->request->getPost('description');
 
@@ -230,9 +231,15 @@ class ProductController extends BaseController
         }
         else
         {
-            $values = ['inventID','productID','productName',
-            'Code','Description','Qty',
-            'ItemUnit','unitPrice','datePrepared','dateEffective','warehouseID','categoryID','supplierID','ExpirationDate','Status'];
+            $values = ['inventID'=>$inventID,'productID'=>$itemNumber,'productName'=>$productName,
+            'Code'=>$code,'Description'=>$description,'Qty'=>$qty,
+            'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'datePrepared'=>$datePrepared,
+            'dateEffective'=>$dateEffective,'warehouseID'=>$warehouse,'categoryID'=>$categoryID,
+            'supplierID'=>$supplierID,'ExpirationDate'=>$expirationDate,'Status'=>0];
+            $transferModel->save($values);
+
+            session()->setFlashdata('success','Great! Successfully submitted the request');
+            return redirect()->to('/stocks')->withInput();
         }
     }
 }

@@ -427,6 +427,7 @@
 							<input type="hidden" name="categoryID" value="<?=$items['categoryID']?>"/>
 							<input type="hidden" name="supplierID" value="<?=$items['supplierID']?>"/>
 							<input type="hidden" name="expirationdate" value="<?=$items['ExpirationDate']?>"/>
+							<input type="hidden" name="unitPrice" value="<?=$items['unitPrice']?>"/>
                             <div class="col-12 form-group">
                                 <div class="row g-3">
                                     <div class="col-lg-3">
