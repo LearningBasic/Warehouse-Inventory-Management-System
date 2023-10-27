@@ -6,8 +6,8 @@ use CodeIgniter\Model;
 
 class transferModel extends Model
 {
-    protected $table      = 'tblaccomplishment';
-    protected $primaryKey = 'accomplishmentID';
+    protected $table      = 'tbltransferitem';
+    protected $primaryKey = 'transferID';
 
     protected $useAutoIncrement  = true;
     protected $insertID = 0;
