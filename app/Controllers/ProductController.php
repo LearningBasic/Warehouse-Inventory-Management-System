@@ -203,5 +203,36 @@ class ProductController extends BaseController
     public function transferItem()
     {
         $transferModel = new \App\Models\transferModel();
+        $inventoryModel = new \App\Models\inventoryModel();
+        //datas
+        $inventID = $this->request->getPost('inventID');
+        $categoryID = $this->request->getPost('categoryID');
+        $supplierID = $this->request->getPost('supplierID');
+        $expirationDate = $this->request->getPost('expirationdate');
+        $itemNumber = $this->request->getPost('itemNumber');
+        $code = $this->request->getPost('Code');
+        $productName = $this->request->getPost('productName');
+        $datePrepared = $this->request->getPost('datePrepared');
+        $dateEffective = $this->request->getPost('dateEffective');
+        $qty = $this->request->getPost('qty');
+        $itemUnit = $this->request->getPost('itemUnit');
+        $warehouse = $this->request->getPost('warehouse');
+        $description = $this->request->getPost('description');
+
+        $validation = $this->validate([
+            'itemNumber'=>'required','Code'=>'required','productName'=>'required','datePrepared'=>'required',
+            'dateEffective'=>'required','qty'=>'required','itemUnit'=>'required','warehouse'=>'required','description'=>'required'
+        ]);
+        if(!$validation)
+        {
+            session()->setFlashdata('fail','Invalid! Please fill in the form to continue');
+            return redirect()->to('/transfer/'.$inventID)->withInput();
+        }
+        else
+        {
+            $values = ['inventID','productID','productName',
+            'Code','Description','Qty',
+            'ItemUnit','unitPrice','datePrepared','dateEffective','warehouseID','categoryID','supplierID','ExpirationDate','Status'];
+        }
     }
 }
