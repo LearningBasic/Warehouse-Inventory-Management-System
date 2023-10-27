@@ -170,6 +170,7 @@ class Home extends BaseController
         $itemUnit = $this->request->getPost('itemUnit');
         $unitPrice = $this->request->getPost('unitPrice');
         $qty = $this->request->getPost('qty');
+        $reOrder = $this->request->getPost('reOrder');
         $expirationDate = $this->request->getPost('expirationDate');
         $validation = $this->validate([
             'warehouse'=>'required',
@@ -189,7 +190,7 @@ class Home extends BaseController
         {
             $values = [
                 'Date'=>$date,'Location'=>$location,'productID'=>$item_number,'productName'=>$productName,
-                'Code'=>$code,'Description'=>$desc,'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'Qty'=>$qty,
+                'Code'=>$code,'Description'=>$desc,'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'Qty'=>$qty,'ReOrder'=>$reOrder,
                 'categoryID'=>$category,'ExpirationDate'=>$expirationDate,'supplierID'=>$supplier,'warehouseID'=>$warehouse,];
             $inventoryModel->save($values);
             session()->setFlashdata('success',"Great! Successfully added");

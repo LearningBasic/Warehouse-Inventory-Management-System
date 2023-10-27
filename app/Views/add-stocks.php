@@ -526,13 +526,17 @@
 											<option>WK</option><option>YD</option><option>YR</option>
                                         </select>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-2">
                                         <label>Unit Cost</label>
                                         <input type="text" class="form-control" name="unitPrice" required/>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-2">
                                         <label>Quantity</label>
                                         <input type="number" class="form-control" name="qty" required/>
+                                    </div>
+									<div class="col-lg-2">
+                                        <label>Re-Order</label>
+                                        <input type="number" class="form-control" name="reOrder" required/>
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Expiration Date</label>

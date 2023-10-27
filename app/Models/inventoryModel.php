@@ -13,7 +13,7 @@ class inventoryModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['Date','Location','productID','productName','Code','Description','ItemUnit','unitPrice','Qty','categoryID','ExpirationDate','supplierID','warehouseID'];
+    protected $allowedFields = ['Date','Location','productID','productName','Code','Description','ItemUnit','unitPrice','Qty','ReOrder','categoryID','ExpirationDate','supplierID','warehouseID'];
 
     protected $validationRules = [];
     protected $validationMessages = [];
