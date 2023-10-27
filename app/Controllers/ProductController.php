@@ -235,7 +235,7 @@ class ProductController extends BaseController
             'Code'=>$code,'Description'=>$description,'Qty'=>$qty,
             'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'datePrepared'=>$datePrepared,
             'dateEffective'=>$dateEffective,'warehouseID'=>$warehouse,'categoryID'=>$categoryID,
-            'supplierID'=>$supplierID,'ExpirationDate'=>$expirationDate,'Status'=>0];
+            'supplierID'=>$supplierID,'ExpirationDate'=>$expirationDate,'Status'=>0,'accountID'=>0];
             $transferModel->save($values);
 
             $invent = $inventoryModel->WHERE('inventID',$inventID)->first();

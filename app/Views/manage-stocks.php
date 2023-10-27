@@ -604,7 +604,7 @@
 														<td><?php echo $row->productName ?></td>
 														<td><?php echo number_format($row->Qty,0) ?></td>
 														<td><?php echo $row->dateEffective ?></td>
-														<td><span class="badge bg-pending text-white">Exporting</span></td>
+														<td><span class="badge bg-warning text-white">Exporting</span></td>
 														<td>
 															<button type="button" class="btn btn-outline-primary btn-sm create" value="<?php echo $row->transferID ?>"><i class="icon-copy dw dw-add"></i>&nbsp;Create</button>
 														</td>
