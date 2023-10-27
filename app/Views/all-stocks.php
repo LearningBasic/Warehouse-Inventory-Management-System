@@ -445,7 +445,7 @@
 							</thead>
 							<tbody>
 								<?php if($items): ?>
-									<?php foreach($items as $row): if($row->Qty>5){?>
+									<?php foreach($items as $row): if($row->Qty>$row->ReOrder){?>
 										<tr>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
@@ -470,7 +470,7 @@
 												</div>
 											</td>
 										</tr>
-										<?php }else if($row->Qty>0){?>
+										<?php }else if($row->Qty==$row->ReOrder){?>
 										<tr>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>

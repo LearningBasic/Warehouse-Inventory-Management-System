@@ -74,7 +74,25 @@
                 width: 4px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
-            
+			  .quote-imgs-thumbs {
+				background: #eee;
+				border: 1px solid #ccc;
+				border-radius: 0.25rem;
+				margin: 1.5rem 0;
+				padding: 0.75rem;
+				}
+				.quote-imgs-thumbs--hidden {
+				display: none;
+				}
+				.img-preview-thumb {
+				background: #fff;
+				border: 1px solid #777;
+				border-radius: 0.25rem;
+				box-shadow: 0.125rem 0.125rem 0.0625rem rgba(0, 0, 0, 0.12);
+				margin-right: 1rem;
+				max-width: 140px;
+				padding: 0.25rem;
+				}
         </style>
 	</head>
 	<body>
@@ -545,6 +563,13 @@
                                 </div>
                             </div>
 							<div class="col-12 form-group">
+								<p>
+									<label for="upload_imgs" class="button hollow">Select Your Images +</label>
+									<input class="show-for-sr" type="file" id="upload_imgs" name="upload_imgs[]" accept="image/jpeg, image/png, image/jpg" multiple/>
+								</p>
+								<div class="quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>
+							</div>
+							<div class="col-12 form-group">
 								<input type="submit" class="btn btn-primary" id="btnAdd" value="Add Entry"/>
 							</div>
                         </form>
@@ -562,5 +587,8 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script>
+			
+		</script>
 	</body>
 </html>
