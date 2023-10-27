@@ -238,6 +238,11 @@ class ProductController extends BaseController
             'supplierID'=>$supplierID,'ExpirationDate'=>$expirationDate,'Status'=>0];
             $transferModel->save($values);
 
+            $invent = $inventoryModel->WHERE('inventID',$inventID)->first();
+            $newQty = $invent['Qty']-$qty;
+            $record = ['Qty'=>$newQty,];
+            $inventoryModel->update($inventID,$record);
+
             session()->setFlashdata('success','Great! Successfully submitted the request');
             return redirect()->to('/stocks')->withInput();
         }
