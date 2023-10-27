@@ -60,6 +60,7 @@ $routes->post('save-report','ProductController::saveReport');
 $routes->post('submit-report','ProductController::submitReport');
 $routes->post('send-report','ProductController::sendReport');
 $routes->get('view-report','ProductController::viewReport');
+$routes->post('transfer-item','ProductController::transferItem');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {

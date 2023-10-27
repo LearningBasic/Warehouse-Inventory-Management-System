@@ -199,4 +199,9 @@ class ProductController extends BaseController
                 </div>";
         echo $output;
     }
+
+    public function transferItem()
+    {
+        $transferModel = new \App\Models\transferModel();
+    }
 }
