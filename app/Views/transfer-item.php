@@ -417,6 +417,11 @@
                         <a href="<?=site_url('stocks')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                     </div>
 					<div class="card-body">
+						<?php if(!empty(session()->getFlashdata('fail'))) : ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= session()->getFlashdata('fail'); ?>
+                            </div>
+                        <?php endif; ?>
                         <form method="post" class="row g-3" id="editProduct" action="<?=base_url('transfer-item')?>">
 							<input type="hidden" name="inventID" value="<?=$items['inventID']?>"/>
 							<input type="hidden" name="categoryID" value="<?=$items['categoryID']?>"/>

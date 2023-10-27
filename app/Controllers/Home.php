@@ -260,7 +260,6 @@ class Home extends BaseController
         //get the user accounts
         $builder = $this->db->table('tblaccount');
         $builder->select('*');
-        $builder->WHERE('systemRole!=','Administrator');
         $account = $builder->get()->getResult();
         $data = ['account'=>$account,];
         return view('system-config',$data);
