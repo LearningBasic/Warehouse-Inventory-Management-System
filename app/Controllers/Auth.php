@@ -60,7 +60,7 @@ class Auth extends BaseController
                 session()->set('assignment',$user_info['warehouseID']);
                 if(session()->get('role')=="Standard User")
                 {
-
+                    return redirect()->to('/user/dashboard');
                 }
                 else
                 {
