@@ -527,7 +527,7 @@
 									</table>
 								</div>
 								<div class="tab-pane fade" id="profile6" role="tabpanel">
-								<br/>
+									<br/>
 									<table class="data-table table stripe hover nowrap">
 										<thead>
 											<th>Date Repaired</th>
@@ -582,7 +582,49 @@
 									</table>
 								</div>
 								<div class="tab-pane fade" id="contact6" role="tabpanel"></div>
-								<div class="tab-pane fade" id="others6" role="tabpanel"></div>
+								<div class="tab-pane fade" id="others6" role="tabpanel">
+									<br/>
+									<table class="data-table table stripe hover nowrap">
+										<thead>
+											<th>Date Prepared</th>
+											<th>Item No</th>
+											<th>Product Name</th>
+											<th>Qty</th>
+											<th>Effective Date</th>
+											<th>Status</th>
+											<th>Action</th>
+										</thead>
+										<tbody>
+											<?php if($transfer): ?>
+												<?php foreach($transfer as $row): ?>
+													<?php if($row->Status==0){ ?>
+													<tr>
+														<td><?php echo $row->datePrepared ?></td>
+														<td><?php echo $row->productID ?></td>
+														<td><?php echo $row->productName ?></td>
+														<td><?php echo number_format($row->Qty,0) ?></td>
+														<td><?php echo $row->dateEffective ?></td>
+														<td><span class="badge bg-pending text-white">Exporting</span></td>
+														<td>
+															<button type="button" class="btn btn-outline-primary btn-sm create" value="<?php echo $row->transferID ?>"><i class="icon-copy dw dw-add"></i>&nbsp;Create</button>
+														</td>
+													</tr>
+													<?php }else{ ?>
+														<tr>
+														<td><?php echo $row->datePrepared ?></td>
+														<td><?php echo $row->productID ?></td>
+														<td><?php echo $row->productName ?></td>
+														<td><?php echo number_format($row->Qty,0) ?></td>
+														<td><?php echo $row->dateEffective ?></td>
+														<td><span class="badge bg-success text-white">Delivered</span></td>
+														<td>-</td>
+													</tr>
+													<?php } ?>
+												<?php endforeach; ?>
+											<?php endif; ?>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>

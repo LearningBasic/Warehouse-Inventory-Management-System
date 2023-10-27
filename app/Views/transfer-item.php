@@ -474,7 +474,7 @@
                                 <textarea class="form-control" name="description" required><?=$items['Description'] ?></textarea>
                             </div>
 							<div class="col-12 form-group">
-								<button type="submit" class="btn btn-primary" id="btnSend">Submit Request</button>
+								<button type="submit" class="btn btn-primary" onclick="return confirm('Do you want to continue?')" id="btnSend">Submit Request</button>
 							</div>
                         </form>
 					</div>

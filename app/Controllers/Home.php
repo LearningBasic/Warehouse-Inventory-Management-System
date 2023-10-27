@@ -116,8 +116,12 @@ class Home extends BaseController
         $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
         $builder->join('tblaccount c','c.accountID=a.accountID','LEFT');
         $archive = $builder->get()->getResult();
+        //transfer item
+        $builder = $this->db->table('tbltransferitem');
+        $builder->select('*');
+        $transfer = $builder->get()->getResult();
 
-        $data = ['items'=>$item,'archive'=>$archive,];
+        $data = ['items'=>$item,'archive'=>$archive,'transfer'=>$transfer,];
         return view('manage-stocks',$data);
     }
 
