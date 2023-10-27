@@ -417,7 +417,11 @@
                         <a href="<?=site_url('stocks')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                     </div>
 					<div class="card-body">
-                        <form method="post" class="row g-3" id="editProduct" action="<?=base_url('transferItem')?>">
+                        <form method="post" class="row g-3" id="editProduct" action="<?=base_url('transfer-item')?>">
+							<input type="hidden" name="inventID" value="<?=$items['inventID']?>"/>
+							<input type="hidden" name="categoryID" value="<?=$items['categoryID']?>"/>
+							<input type="hidden" name="supplierID" value="<?=$items['supplierID']?>"/>
+							<input type="hidden" name="expirationdate" value="<?=$items['ExpirationDate']?>"/>
                             <div class="col-12 form-group">
                                 <div class="row g-3">
                                     <div class="col-lg-3">
@@ -426,7 +430,7 @@
                                     </div>
 									<div class="col-lg-3">
                                         <label>Serial/Barcode No</label>
-                                        <input type="text" class="form-control" name="Code" value="<?=$items['Code'] ?>" required/>
+                                        <input type="text" class="form-control" name="Code" value="<?=$items['Code'] ?>"/>
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Product Name</label>
@@ -444,9 +448,13 @@
                                         <label>Effective Date</label>
                                         <input type="date" class="form-control" name="dateEffective" required/>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-1">
                                         <label>Qty</label>
                                         <input type="number" class="form-control" name="qty" required/>
+                                    </div>
+									<div class="col-lg-2">
+                                        <label>Item Unit</label>
+                                        <input type="text" class="form-control" name="itemUnit" value="<?=$items['ItemUnit']?>" required/>
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Assignment</label>
@@ -465,6 +473,9 @@
                                 <label>Description</label>
                                 <textarea class="form-control" name="description" required><?=$items['Description'] ?></textarea>
                             </div>
+							<div class="col-12 form-group">
+								<button type="submit" class="btn btn-primary" id="btnSend">Submit Request</button>
+							</div>
                         </form>
 					</div>
 				</div>
