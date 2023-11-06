@@ -446,7 +446,7 @@
 								<th>Action</th>
 							</thead>
 							<tbody>
-								<?php if($items): ?>
+								<?php if(session()->get('role')=="Administrator"){ ?>
 									<?php foreach($items as $row): if($row->Qty>$row->ReOrder){?>
 										<tr>
 											<td><?php echo $row->categoryName ?></td>
@@ -521,7 +521,46 @@
 										</tr>	
 										<?php } ?>
 									<?php endforeach; ?>
-								<?php endif; ?>
+								<?php }else{ ?>
+									<?php foreach($items as $row): if($row->Qty>$row->ReOrder){?>
+										<tr>
+											<td><?php echo $row->categoryName ?></td>
+											<td><?php echo $row->productID ?></td>
+											<td><?php echo $row->productName ?></td>
+											<td><?php echo number_format($row->unitPrice,2) ?></td>
+											<td><?php echo number_format($row->Qty,0) ?></td>
+											<td><span class='badge bg-success text-white'>Available</span></td>
+											<td><?php echo $row->ExpirationDate ?></td>
+											<td><?php echo $row->warehouseName ?></td>
+											<td>-</td>
+										</tr>
+										<?php }else if($row->Qty==$row->ReOrder){?>
+										<tr>
+											<td><?php echo $row->categoryName ?></td>
+											<td><?php echo $row->productID ?></td>
+											<td><?php echo $row->productName ?></td>
+											<td><?php echo number_format($row->unitPrice,2) ?></td>
+											<td><?php echo number_format($row->Qty,0) ?></td>
+											<td><span class='badge bg-warning text-white'>Critical</span></td>
+											<td><?php echo $row->ExpirationDate ?></td>
+											<td><?php echo $row->warehouseName ?></td>
+											<td>-</td>
+										</tr>
+										<?php }if($row->Qty==0){ ?>
+											<tr>
+											<td><?php echo $row->categoryName ?></td>
+											<td><?php echo $row->productID ?></td>
+											<td><?php echo $row->productName ?></td>
+											<td><?php echo number_format($row->unitPrice,2) ?></td>
+											<td><?php echo number_format($row->Qty,0) ?></td>
+											<td><span class='badge bg-danger text-white'>Out-of-Stock</span></td>
+											<td><?php echo $row->ExpirationDate ?></td>
+											<td><?php echo $row->warehouseName ?></td>
+											<td>-</td>
+										</tr>	
+										<?php } ?>
+									<?php endforeach; ?>
+								<?php } ?>
 							</tbody>
 						</table>
 					</div>
