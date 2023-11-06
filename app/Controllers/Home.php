@@ -256,6 +256,11 @@ class Home extends BaseController
         return view('add-supplier');
     }
 
+    public function receiveItem()
+    {
+        return view('receive-item');
+    }
+
     public function systemConfiguration()
     {
         //get the user accounts

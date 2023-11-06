@@ -4,7 +4,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>Manage Stocks</title>
+		<title>Receiving</title>
 
 		<!-- Site favicon -->
 		<link
@@ -340,7 +340,7 @@
 							<ul class="submenu">
 								<li><a href="<?=site_url('stocks')?>">All Stocks</a></li>
 								<li><a href="<?=site_url('add')?>">Add Item</a></li>
-								<li><a href="<?=site_url('manage')?>" class="active">Manage Stocks</a></li>
+								<li><a href="<?=site_url('manage')?>">Manage Stocks</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -358,7 +358,7 @@
                                 <i class="micon dw dw-clipboard1"></i><span class="mtext">Receiving</span>
 							</a>
 							<ul class="submenu">
-                                <li><a href="<?=site_url('receiving-item')?>">Receiving Item</a></li>
+                                <li><a href="<?=site_url('receiving-item')?>" class="active">Receiving Item</a></li>
                                 <li><a href="<?=site_url('storage')?>">Item Storage</a></li>
                                 <li><a href="<?=site_url('packaging')?>">Packaging</a></li>
                                 <li><a href="<?=site_url('shipping')?>">Shipping Items</a></li>
@@ -413,278 +413,29 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header"><i class="icon-copy dw dw-box"></i>&nbsp;Manage Stocks</div>
+					<div class="card-header"><span class="icon-copy dw dw-server"></span>&nbsp;Inventory</div>
 					<div class="card-body">
-						<?php if(!empty(session()->getFlashdata('success'))) : ?>
-							<div class="alert alert-success alert-dismissible fade show" role="alert">
-								<?= session()->getFlashdata('success'); ?>
-							</div>
-						<?php endif; ?>
-						<div class="tabs">
-							<ul class="nav nav-pills justify-content-left" role="tablist">
-								<li class="nav-item">
-									<a
-										class="nav-link active text-blue"
-										data-toggle="tab"
-										href="#home6"
-										role="tab"
-										aria-selected="true"
-										>Damaged Items</a
-									>
-								</li>
-								<li class="nav-item">
-									<a
-										class="nav-link text-blue"
-										data-toggle="tab"
-										href="#profile6"
-										role="tab"
-										aria-selected="false"
-										>Overhaul Items</a
-									>
-								</li>
-								<li class="nav-item">
-									<a
-										class="nav-link text-blue"
-										data-toggle="tab"
-										href="#contact6"
-										role="tab"
-										aria-selected="false"
-										>Return Items</a
-									>
-								</li>
-								<li class="nav-item">
-									<a
-										class="nav-link text-blue"
-										data-toggle="tab"
-										href="#others6"
-										role="tab"
-										aria-selected="false"
-										>Transfer Items</a
-									>
-								</li>
-							</ul>
-							<div class="tab-content">
-								<div class="tab-pane fade show active" id="home6" role="tabpanel">
-									<br/>
-									<table class="data-table table stripe hover nowrap">
-										<thead>
-											<th>Date Reported</th>
-											<th>Defect Type</th>
-											<th>Product Name</th>
-											<th>Qty</th>
-											<th>Details</th>
-											<th>Remarks</th>
-											<th>Action</th>
-										</thead>
-										<tbody>
-											<?php if($items): ?>
-												<?php foreach($items as $row): 
-												if($row->Remarks=="Replacement"){
-													?>
-													<tr>
-														<td><?php echo $row->DateReport ?></td>
-														<td><?php echo $row->DamageRate ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->Details ?></td>
-														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
-														<td>
-														<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-image"></i>&nbsp;View</a>
-														</td> 
-													</tr>
-												<?php }else{ 
-													if($row->Status==0){
-													?>
-													<tr>
-														<td><?php echo $row->DateReport ?></td>
-														<td><?php echo $row->DamageRate ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->Details ?></td>
-														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
-														<td>
-															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-image"></i>&nbsp;View</a>
-															<a href="<?=site_url('create-report/')?><?php echo $row->damageID ?>" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-add"></i>&nbsp;Create</a>
-														</td> 
-													</tr>
-													<?php }else{ ?>
-														<tr>
-														<td><?php echo $row->DateReport ?></td>
-														<td><?php echo $row->DamageRate ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->Details ?></td>
-														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
-														<td>
-															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-image"></i>&nbsp;View</a>
-														</td> 
-													</tr>
-													<?php } ?>
-												<?php } ?>
-												<?php endforeach; ?>
-											<?php endif; ?>
-										</tbody>
-									</table>
-								</div>
-								<div class="tab-pane fade" id="profile6" role="tabpanel">
-									<br/>
-									<table class="data-table table stripe hover nowrap">
-										<thead>
-											<th>Date Repaired</th>
-											<th>Product Name</th>
-											<th>Qty</th>
-											<th>Details</th>
-											<th>Date Accomplished</th>
-											<th>Status</th>
-											<th>Action</th>
-										</thead>
-										<tbody>
-											<?php if($archive): ?>
-												<?php foreach($archive as $row): ?>
-													<?php if($row->Status==0){ ?>
-													<tr>
-														<td><?php echo $row->repairDate ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->Details ?></td>
-														<td><?php echo $row->dateAccomplished ?></td>
-														<td><span class="badge bg-warning text-white">PENDING</span></td>
-														<td>
-															<button type="button" class="btn btn-outline-primary btn-sm file" value="<?php echo $row->repairID ?>"><i class="icon-copy dw dw-add"></i>&nbsp;Create</button>
-														</td>
-													</tr>
-													<?php }else if($row->Status==1){ ?>
-													<tr>
-														<td><?php echo $row->repairDate ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->Details ?></td>
-														<td><?php echo $row->dateAccomplished ?></td>
-														<td><span class="badge bg-success text-white">DONE</span></td>
-														<td>
-															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->repairID ?>"><i class="icon-copy dw dw-view"></i>&nbsp;Details</button>
-														</td>
-													</tr>
-													<?php }else if($row->Status==2){  ?>
-														<tr>
-														<td><?php echo $row->repairDate ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->Details ?></td>
-														<td><?php echo $row->dateAccomplished ?></td>
-														<td><span class="badge bg-danger text-white">UNDONE</span></td>
-														<td>-</td>
-													</tr>
-													<?php } ?>
-												<?php endforeach; ?>
-											<?php endif; ?>
-										</tbody>
-									</table>
-								</div>
-								<div class="tab-pane fade" id="contact6" role="tabpanel"></div>
-								<div class="tab-pane fade" id="others6" role="tabpanel">
-									<br/>
-									<table class="data-table table stripe hover nowrap">
-										<thead>
-											<th>Date Prepared</th>
-											<th>Item No</th>
-											<th>Product Name</th>
-											<th>Qty</th>
-											<th>Effective Date</th>
-											<th>Status</th>
-										</thead>
-										<tbody>
-											<?php if($transfer): ?>
-												<?php foreach($transfer as $row): ?>
-													<?php if($row->Status==0){ ?>
-													<tr>
-														<td><?php echo $row->datePrepared ?></td>
-														<td><?php echo $row->productID ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->dateEffective ?></td>
-														<td><span class="badge bg-warning text-white">Exporting</span></td>
-													</tr>
-													<?php }else{ ?>
-														<tr>
-														<td><?php echo $row->datePrepared ?></td>
-														<td><?php echo $row->productID ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->dateEffective ?></td>
-														<td><span class="badge bg-success text-white">Delivered</span></td>
-													</tr>
-													<?php } ?>
-												<?php endforeach; ?>
-											<?php endif; ?>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
+						<?php if(!empty(session()->getFlashdata('fail'))) : ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= session()->getFlashdata('fail'); ?>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+                            </div>
+                        <?php endif; ?>
+                        <?php if(!empty(session()->getFlashdata('success'))) : ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= session()->getFlashdata('success'); ?>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+                            </div>
+                        <?php endif; ?>
+						
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="accomplishModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myLargeModalLabel">
-                            Accomplishment Report Form
-                        </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    </div>
-                    <div class="modal-body">
-						<div class="alert alert-success alert-dismissible fade show" id="success" style="display:none;" role="alert">
-							<label id="successMessage"></label>
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="alert alert-danger alert-dismissible fade show" id="error" style="display:none;" role="alert">
-							<label id="errorMessage"></label>
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-                        <form method="post" class="row g-3" id="frmReport" enctype="multipart/form-data">
-							<input type="hidden" id="itemID" name="itemID"/>
-							<div class="col-12 form-group">
-								<label>Accomplished Date</label>
-								<input type="date" class="form-control" name="accomplish_date" required/>
-							</div>
-							<div class="col-12 form-group">
-								<label>Repaired By:</label>
-								<textarea class="form-control" name="involveWorkers" placeholder="Enter their complete name" required></textarea>
-							</div>
-							<div class="col-12 form-group">
-								<label>Attachment/Proof</label>
-								<input type="file" class="form-control" name="file" accept="image/png, image/gif, image/jpeg" required/>
-							</div>
-							<div class="col-12 form-group">
-								<input type="submit" class="btn btn-primary" value="Send Report" id="btnSend"/>
-							</div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-		<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myLargeModalLabel">
-                            Accomplishment Report
-                        </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    </div>
-                    <div class="modal-body">
-                        <div id="result"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
@@ -695,48 +446,5 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
-		<script>
-			$(document).on('click','.file',function(e){
-				e.preventDefault();
-				$('#itemID').attr("value",$(this).val());
-				$('#accomplishModal').modal('show');
-			});
-			$(document).on('click','.view',function(e){
-				e.preventDefault();
-				$.ajax({url:"<?=site_url('view-report')?>",method:"GET",data:{value:$(this).val()},success:function(response)
-				{
-					$('#viewModal').modal('show');
-					$('#result').html(response);
-				}});
-			});
-			$('#frmReport').on('submit',function(e)
-			{
-				e.preventDefault();
-				$.ajax({
-					type: 'POST',
-					url: '<?=site_url('send-report')?>',
-					data: new FormData(this),
-					contentType: false,
-					cache: false,
-					processData:false,
-					beforeSend: function(){
-						$('#btnSend').attr("disabled","disabled");
-						$('#frmReport').css("opacity",".5");
-					},
-					success: function(response){
-						if(response==="success"){
-							$('#frmReport')[0].reset();
-							document.getElementById('success').style="display:block";
-							$('#successMessage').html("Great! Successfully reported. Please refresh the page");
-						}else{
-							document.getElementById('error').style="display:block";
-							$('#errorMessage').html(response);
-						}
-						$('#frmReport').css("opacity","");
-						$("#btnSend").removeAttr("disabled");
-					}
-				});
-			});
-		</script>
 	</body>
 </html>
