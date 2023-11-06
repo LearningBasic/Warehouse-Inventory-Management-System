@@ -248,7 +248,7 @@ class Home extends BaseController
         ];
         $supplierModel->update($id,$values);
         session()->setFlashdata('success','Great! Successfully updated');
-        return redirect()->to('/list-supplier')->withInput();
+        return redirect()->to('/suppliers')->withInput();
     }
     
     public function addSupplier()
@@ -275,6 +275,11 @@ class Home extends BaseController
         $account = $builder->get()->getResult();
         $data = ['account'=>$account,];
         return view('system-config',$data);
+    }
+
+    public function profile()
+    {
+        return view('profile');
     }
 
     public function editAccount($id=null)

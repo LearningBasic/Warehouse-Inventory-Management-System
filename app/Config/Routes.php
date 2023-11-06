@@ -78,8 +78,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/edit-supplier/(:any)','Home::editSupplier/$1');
     $routes->get('/configuration','Home::systemConfiguration');
     $routes->get('/edit-account/(:any)','Home::editAccount/$1');
-    //standard user
-    $routes->get('/user/dashboard','UserController::dashboard');
+    $routes->get('/profile','Home::profile');
 });
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
