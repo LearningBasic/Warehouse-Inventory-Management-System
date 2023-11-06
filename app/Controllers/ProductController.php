@@ -249,4 +249,62 @@ class ProductController extends BaseController
             return redirect()->to('/stocks')->withInput();
         }
     }
+
+    public function receiveReport()
+    {
+        $receiveLogsModel = new \App\Models\receiveLogsModel();
+        $transferModel = new \App\Models\transferModel();
+        $inventoryModel = new \App\Models\inventoryModel();
+        //data
+        $dateReceived = date('Y-m-d');
+        $id = $this->request->getPost('transferID');
+        $receiver = $this->request->getPost('receiver');
+        $file = $this->request->getFile('file');
+        $originalName = $file->getClientName();
+
+        $validation = $this->validate([
+            'receiver'=>'required',
+            'file'=>'uploaded[file]'
+        ]);
+        if(!$validation)
+        {
+            session()->setFlashdata('fail','Invalid! Please fill in the form to continue');
+            return redirect()->to('/receiving-item')->withInput();
+        }
+        else
+        {
+            if($file->isValid() && ! $file->hasMoved())
+            {
+                $file->move('Report/',$originalName);
+                $values = [
+                    'dateReceived'=>$dateReceived,'receivedBy'=>$receiver,'proof'=>$originalName,'transferID'=>$id
+                ];
+                $receiveLogsModel->save($values);
+                //update the status
+                $record = ['Status'=>1];
+                $transferModel->update($id,$record);
+                //save the data to inventory
+                $builder = $this->db->table('tbltransferitem');
+                $builder->select('*');
+                $builder->WHERE('transferID',$id);
+                $data = $builder->get();
+                if($row = $data->getRow())
+                {
+                    $value = [
+                        'Date'=>$dateReceived,'Location'=>'N/A','productID'=>$row->productID,'productName'=>$row->productName,'Code'=>$row->Code,
+                        'Description'=>$row->Description,'ItemUnit'=>$row->ItemUnit,'unitPrice'=>$row->unitPrice,'Qty'=>$row->Qty,'ReOrder'=>0,
+                        'categoryID'=>$row->categoryID,'ExpirationDate'=>$row->ExpirationDate,'supplierID'=>$row->supplierID,'warehouseID'=>$row->warehouseID,
+                    ];
+                    $inventoryModel->save($value);
+                }
+                session()->setFlashdata('success','Great! Successfully reported');
+                return redirect()->to('/receiving-item')->withInput();
+            }
+            else
+            {
+                session()->setFlashdata('fail','Invalid! File already uploaded');
+                return redirect()->to('/receiving-item')->withInput();
+            }
+        }
+    }
 }

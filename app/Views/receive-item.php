@@ -436,6 +436,16 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
+                <?php if(!empty(session()->getFlashdata('fail'))) : ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <?= session()->getFlashdata('fail'); ?>
+                    </div>
+                <?php endif; ?>
+                <?php if(!empty(session()->getFlashdata('success'))) : ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?= session()->getFlashdata('success'); ?>
+                    </div>
+                <?php endif; ?>
 				<div class="card-box">
 					<div class="card-header"><span class="icon-copy dw dw-server"></span>&nbsp;Receiving Items</div>
 					<div class="card-body">
@@ -461,7 +471,11 @@
                                         <td><?php echo number_format($row->unitPrice,2) ?></td>
                                         <td><?php echo number_format($row->unitPrice*$row->Qty,2) ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-primary btn-sm create" value="<?php echo $row->transferID ?>"><span class="dw dw-checked"></span>&nbsp;Recieve</button>
+                                            <?php if($row->Status==0){ ?>
+												<button type="button" class="btn btn-outline-primary btn-sm create" value="<?php echo $row->transferID ?>"><span class="dw dw-checked"></span>&nbsp;Recieve</button>
+											<?php }else{ ?>
+												<button type="button" class="btn btn-success btn-sm"><span class="dw dw-checked"></span>&nbsp;Recieved</button>
+											<?php } ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -481,14 +495,8 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
-						<div class="alert alert-danger alert-dismissible fade show" id="error" style="display:none;" role="alert">
-							<label id="errorMessage"></label>
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-                        <form method="post" class="row g-3" id="frmReport" enctype="multipart/form-data">
-                            <input type="hidden" id="transferID"/>
+                        <form method="post" class="row g-3" id="frmReport" action="<?=base_url('receive-report')?>" enctype="multipart/form-data">
+                            <input type="hidden" id="transferID" name="transferID"/>
                             <div class="col-12 form-group">
                                 <label>Received By</label>
                                 <input type="text" class="form-control" name="receiver" required/>
@@ -496,7 +504,7 @@
                             <div class="col-12 form-group">
 								<p>
 									<label for="upload_imgs" class="btn btn-outline-primary form-control">Select Your Images +</label>
-									<input class="show-for-sr" type="file" id="upload_imgs" name="image" accept="image/jpeg, image/png, image/jpg"/>
+									<input class="show-for-sr" type="file" id="upload_imgs" name="file" accept="image/jpeg, image/png, image/jpg"/>
 								</p>
 								<div class="quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>
 							</div>
