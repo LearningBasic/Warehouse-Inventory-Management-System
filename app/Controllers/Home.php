@@ -279,7 +279,15 @@ class Home extends BaseController
 
     public function profile()
     {
-        return view('profile');
+        $user = session()->get('loggedUser');
+        $accountModel = new \App\Models\accountModel();
+        $account = $accountModel->WHERE('accountID',$user)->first();
+        //warehouse
+        $builder = $this->db->table('tblwarehouse');
+        $builder->select('*');
+        $warehouse = $builder->get()->getResult();
+        $data = ['account'=>$account,'warehouse'=>$warehouse,];
+        return view('profile',$data);
     }
 
     public function editAccount($id=null)

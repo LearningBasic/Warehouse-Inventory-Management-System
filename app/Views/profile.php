@@ -414,7 +414,74 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
-
+                <div class="row g-3">
+                    <div class="col-lg-8">
+                        <div class="card-box">
+                            <div class="card-header">
+                                Personal Information
+                            </div>
+                            <div class="card-body">
+                                <form method="GET" class="row g-2" action="<?=base_url('update-account')?>">
+                                    <input type="hidden" name="userID" value="<?php echo session()->get('loggedUser') ?>"/>
+                                    <div class="col-12 form-group">
+                                        <label>Complete Name</label>
+                                        <input type="text" class="form-control" name="fullname" value="<?=$account['Fullname']?>" required/>
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <div class="row g-3">
+                                            <div class="col-lg-6">
+                                                <label>System Role</label>
+                                                <select class="form-control" name="systemRole">
+                                                    <option value="">Choose</option>
+                                                    <option <?php if($account['systemRole']=="Administrator") echo 'selected="selected"'; ?>>Administrator</option>
+                                                    <option <?php if($account['systemRole']=="Editor") echo 'selected="selected"'; ?>>Editor</option>
+                                                    <option <?php if($account['systemRole']=="Standard User") echo 'selected="selected"'; ?>>Standard User</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Assignment</label>
+                                                <select class="form-control" id="warehouse" name="warehouse" required>
+                                                    <option value="">Choose</option>
+                                                    <?php if($warehouse): ?>
+                                                        <?php foreach($warehouse as $row): ?>
+                                                            <option value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <button type="submit" class="btn btn-primary" id="btnUpdate">Save Changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card-box">
+                            <div class="card-header">
+                                Account Security
+                            </div>
+                            <div class="card-body">
+                                <form method="GET" class="row g-2" action="<?=base_url('change-password')?>">
+                                    <input type="hidden" name="userID" value="<?php echo session()->get('loggedUser') ?>"/>
+                                    <div class="col-12 form-group">
+                                        <label>Current Password</label>
+                                        <input type="password" name="current_password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <label>ReType Password</label>
+                                        <input type="password" name="retype_password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <button type="submit" class="btn btn-primary" id="btnSave">Save Changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 			</div>
 		</div>
 		<!-- js -->
