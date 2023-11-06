@@ -447,7 +447,7 @@
                                 <?= session()->getFlashdata('success'); ?>
                             </div>
                         <?php endif; ?>
-                        <form method="post" class="row g-3" id="frmStock" action="<?=base_url('add-product')?>">
+                        <form method="post" class="row g-3" id="frmStock" action="<?=base_url('add-product')?>" autocomplete="OFF">
                             <div class="col-12 form-group">
                                 <div class="row g-3">
                                     <div class="col-lg-3">
