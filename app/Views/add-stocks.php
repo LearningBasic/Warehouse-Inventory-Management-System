@@ -362,7 +362,9 @@
 							<ul class="submenu">
 								<li><a href="<?=site_url('stocks')?>">All Stocks</a></li>
 								<li><a href="<?=site_url('add')?>" class="active">Add Item</a></li>
+								<?php if(session()->get('role')=="Administrator"){ ?>
 								<li><a href="<?=site_url('manage')?>">Manage Stocks</a></li>
+                                <?php } ?>
 							</ul>
 						</li>
 						<li class="dropdown">

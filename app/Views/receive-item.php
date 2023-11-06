@@ -340,7 +340,9 @@
 							<ul class="submenu">
 								<li><a href="<?=site_url('stocks')?>">All Stocks</a></li>
 								<li><a href="<?=site_url('add')?>">Add Item</a></li>
+                                <?php if(session()->get('role')=="Administrator"){ ?>
 								<li><a href="<?=site_url('manage')?>">Manage Stocks</a></li>
+                                <?php } ?>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -419,7 +421,7 @@
                             <thead>
                                 <th>Item No</th>
                                 <th>Product Name</th>
-                                <th>Bar/Serial Code</th>
+                                <th>Serial Code</th>
                                 <th>Description</th>
                                 <th>Qty</th>
                                 <th>Unit Price</th>
@@ -428,6 +430,18 @@
                             </thead>
                             <tbody>
                                 <?php foreach($items as $row): ?>
+                                    <tr>
+                                        <td><?php echo $row->productID ?></td>
+                                        <td><?php echo $row->productName ?></td>
+                                        <td><?php echo $row->Code ?></td>
+                                        <td><?php echo substr($row->Description,0,50) ?>...</td>
+                                        <td><?php echo $row->Qty ?></td>
+                                        <td><?php echo number_format($row->unitPrice,2) ?></td>
+                                        <td><?php echo number_format($row->unitPrice*$row->Qty,2) ?></td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-primary btn-sm create"><span class="dw dw-checked"></span>&nbsp;Recieve</button>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
