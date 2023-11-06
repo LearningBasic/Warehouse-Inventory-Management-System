@@ -448,11 +448,11 @@
                             </div>
                             <div class="col-12 form-group">
                                 <div class="row g-3">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-2">
                                         <label>Date Prepared</label>
                                         <input type="date" class="form-control" name="datePrepared" value="<?php echo date('Y-m-d') ?>" required/>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-2">
                                         <label>Effective Date</label>
                                         <input type="date" class="form-control" name="dateEffective" required/>
                                     </div>
@@ -460,8 +460,8 @@
                                         <label>Qty</label>
                                         <input type="number" class="form-control" name="qty" required/>
                                     </div>
-									<div class="col-lg-2">
-                                        <label>Item Unit</label>
+									<div class="col-lg-1">
+                                        <label>Unit</label>
                                         <input type="text" class="form-control" name="itemUnit" value="<?=$items['ItemUnit']?>" required/>
                                     </div>
                                     <div class="col-lg-3">
@@ -475,6 +475,10 @@
                                             <?php endif; ?>
                                         </select>
                                     </div>
+									<div class="col-lg-3">
+										<label>Department</label>
+										<input type="text" class="form-control" name="department"/>
+									</div>
                                 </div>
                             </div>
                             <div class="col-12 form-group">

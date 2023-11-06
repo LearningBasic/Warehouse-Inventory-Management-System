@@ -74,7 +74,29 @@
                 width: 4px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
-            
+              .quote-imgs-thumbs {
+				background: #eee;
+				border: 1px solid #ccc;
+				border-radius: 0.25rem;
+				margin: 1.5rem 0;
+				padding: 0.75rem;
+				}
+				.quote-imgs-thumbs--hidden {
+				display: none;
+				}
+				.img-preview-thumb {
+				background: #fff;
+				border: 1px solid #777;
+				border-radius: 0.25rem;
+				box-shadow: 0.125rem 0.125rem 0.0625rem rgba(0, 0, 0, 0.12);
+				margin-right: 1rem;
+				max-width: 140px;
+				padding: 0.25rem;
+				}
+			.show-for-sr
+			{
+				display:none;
+			}
         </style>
 	</head>
 	<body>
@@ -449,6 +471,43 @@
 				</div>
 			</div>
 		</div>
+        <div class="modal fade" id="receiveModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            Receive Form
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+						<div class="alert alert-danger alert-dismissible fade show" id="error" style="display:none;" role="alert">
+							<label id="errorMessage"></label>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+                        <form method="post" class="row g-3" id="frmReport" enctype="multipart/form-data">
+                            <input type="hidden" id="transferID"/>
+                            <div class="col-12 form-group">
+                                <label>Received By</label>
+                                <input type="text" class="form-control" name="receiver" required/>
+                            </div>
+                            <div class="col-12 form-group">
+								<p>
+									<label for="upload_imgs" class="btn btn-outline-primary form-control">Select Your Images +</label>
+									<input class="show-for-sr" type="file" id="upload_imgs" name="image" accept="image/jpeg, image/png, image/jpg"/>
+								</p>
+								<div class="quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>
+							</div>
+                            <div class="col-12 form-group">
+                                <button type="submit" class="btn btn-primary" id="btnSave">Save Report</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
@@ -464,8 +523,42 @@
             {
                 e.preventDefault();
                 var val = $(this).val();
-                alert(val);
+                $('#receiveModal').modal('show');
+                $('#transferID').attr("value",val);
             });
-        </script>
+			var imgUpload = document.getElementById('upload_imgs')
+				, imgPreview = document.getElementById('img_preview')
+				, imgUploadForm = document.getElementById('img-upload-form')
+				, totalFiles
+				, previewTitle
+				, previewTitleText
+				, img;
+
+				imgUpload.addEventListener('change', previewImgs, false);
+				imgUploadForm.addEventListener('submit', function (e) {
+				e.preventDefault();
+				alert('Images Uploaded! (not really, but it would if this was on your website)');
+				}, false);
+
+				function previewImgs(event) {
+				totalFiles = imgUpload.files.length;
+				
+				if(!!totalFiles) {
+					imgPreview.classList.remove('quote-imgs-thumbs--hidden');
+					previewTitle = document.createElement('p');
+					previewTitle.style.fontWeight = 'bold';
+					previewTitleText = document.createTextNode(totalFiles + ' Total Images Selected');
+					previewTitle.appendChild(previewTitleText);
+					imgPreview.appendChild(previewTitle);
+				}
+				
+				for(var i = 0; i < totalFiles; i++) {
+					img = document.createElement('img');
+					img.src = URL.createObjectURL(event.target.files[i]);
+					img.classList.add('img-preview-thumb');
+					imgPreview.appendChild(img);
+				}
+				}
+		</script>
 	</body>
 </html>
