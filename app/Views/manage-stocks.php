@@ -606,7 +606,7 @@
 														<td><?php echo $row->dateEffective ?></td>
 														<td><span class="badge bg-warning text-white">Exporting</span></td>
 														<td>
-															<button type="button" class="btn btn-outline-primary btn-sm create" value="<?php echo $row->transferID ?>"><i class="icon-copy dw dw-add"></i>&nbsp;Create</button>
+															<button type="button" class="btn btn-outline-primary btn-sm create" value="<?php echo $row->transferID ?>"><i class="icon-copy dw dw-add"></i>&nbsp;Add Report</button>
 														</td>
 													</tr>
 													<?php }else{ ?>
