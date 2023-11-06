@@ -58,14 +58,7 @@ class Auth extends BaseController
                 session()->set('fullname', $user_info['Fullname']);
                 session()->set('role',$user_info['systemRole']);
                 session()->set('assignment',$user_info['warehouseID']);
-                if(session()->get('role')=="Standard User")
-                {
-                    return redirect()->to('/user/dashboard');
-                }
-                else
-                {
-                    return redirect()->to('/dashboard');
-                }
+                return redirect()->to('/dashboard');
             }
         }
     }

@@ -413,25 +413,24 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header"><span class="icon-copy dw dw-server"></span>&nbsp;Inventory</div>
+					<div class="card-header"><span class="icon-copy dw dw-server"></span>&nbsp;Receiving Items</div>
 					<div class="card-body">
-						<?php if(!empty(session()->getFlashdata('fail'))) : ?>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <?= session()->getFlashdata('fail'); ?>
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-                            </div>
-                        <?php endif; ?>
-                        <?php if(!empty(session()->getFlashdata('success'))) : ?>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <?= session()->getFlashdata('success'); ?>
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-                            </div>
-                        <?php endif; ?>
-						
+                        <table class="data-table table stripe hover nowrap">
+                            <thead>
+                                <th>Item No</th>
+                                <th>Product Name</th>
+                                <th>Bar/Serial Code</th>
+                                <th>Description</th>
+                                <th>Qty</th>
+                                <th>Unit Price</th>
+                                <th>Total</th>
+                                <th>Action</th>
+                            </thead>
+                            <tbody>
+                                <?php foreach($items as $row): ?>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
 					</div>
 				</div>
 			</div>

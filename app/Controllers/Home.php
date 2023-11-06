@@ -258,7 +258,13 @@ class Home extends BaseController
 
     public function receiveItem()
     {
-        return view('receive-item');
+        $location = session()->get('assignment');
+        $builder = $this->db->table('tbltransferitem');
+        $builder->select('*');
+        $builder->WHERE('warehouseID',$location);
+        $items = $builder->get()->getResult();
+        $data = ['items'=>$items,];
+        return view('receive-item',$data);
     }
 
     public function systemConfiguration()
