@@ -290,6 +290,15 @@ class Home extends BaseController
         return view('profile',$data);
     }
 
+    public function changePassword()
+    {
+        $accountModel = new \App\Models\accountModel();
+        //data
+        $userID = $this->request->getPost('userID');
+        $password = $this->request->getPost('current_password');
+        $retypepassword = $this->request->getPost('retype_password');
+    }
+
     public function editAccount($id=null)
     {
         //get the user accounts
