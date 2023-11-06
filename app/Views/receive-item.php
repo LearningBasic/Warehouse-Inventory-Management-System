@@ -439,7 +439,7 @@
                                         <td><?php echo number_format($row->unitPrice,2) ?></td>
                                         <td><?php echo number_format($row->unitPrice*$row->Qty,2) ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-primary btn-sm create"><span class="dw dw-checked"></span>&nbsp;Recieve</button>
+                                            <button type="button" class="btn btn-outline-primary btn-sm create" value="<?php echo $row->transferID ?>"><span class="dw dw-checked"></span>&nbsp;Recieve</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -459,5 +459,13 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+        <script>
+            $(document).on('click','.create',function(e)
+            {
+                e.preventDefault();
+                var val = $(this).val();
+                alert(val);
+            });
+        </script>
 	</body>
 </html>

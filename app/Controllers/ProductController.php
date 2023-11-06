@@ -219,6 +219,7 @@ class ProductController extends BaseController
         $unitPrice = $this->request->getPost('unitPrice');
         $warehouse = $this->request->getPost('warehouse');
         $description = $this->request->getPost('description');
+        $dept = "";
 
         $validation = $this->validate([
             'itemNumber'=>'required','Code'=>'required','productName'=>'required','datePrepared'=>'required',
@@ -235,7 +236,7 @@ class ProductController extends BaseController
             'Code'=>$code,'Description'=>$description,'Qty'=>$qty,
             'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'datePrepared'=>$datePrepared,
             'dateEffective'=>$dateEffective,'warehouseID'=>$warehouse,'categoryID'=>$categoryID,
-            'supplierID'=>$supplierID,'ExpirationDate'=>$expirationDate,'Status'=>0,'accountID'=>0];
+            'supplierID'=>$supplierID,'ExpirationDate'=>$expirationDate,'Status'=>0,'Department'=>$dept,'accountID'=>session()->get('loggedUser')];
             $transferModel->save($values);
 
             $invent = $inventoryModel->WHERE('inventID',$inventID)->first();
