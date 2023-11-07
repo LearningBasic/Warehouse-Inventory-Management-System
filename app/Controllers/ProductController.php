@@ -220,6 +220,10 @@ class ProductController extends BaseController
         $warehouse = $this->request->getPost('warehouse');
         $description = $this->request->getPost('description');
         $dept = $this->request->getPost('department');
+        $delivery = $this->request->getPost('delivery');
+        $track_num = $this->request->getPost('track_number');
+        $driver = $this->request->getPost('driver');
+        $plate_num = $this->request->getPost('plate_number');
 
         $validation = $this->validate([
             'itemNumber'=>'required','Code'=>'required','productName'=>'required','datePrepared'=>'required',
@@ -232,21 +236,60 @@ class ProductController extends BaseController
         }
         else
         {
-            $values = ['inventID'=>$inventID,'productID'=>$itemNumber,'productName'=>$productName,
-            'Code'=>$code,'Description'=>$description,'Qty'=>$qty,
-            'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'datePrepared'=>$datePrepared,
-            'dateEffective'=>$dateEffective,'warehouseID'=>$warehouse,'categoryID'=>$categoryID,
-            'supplierID'=>$supplierID,'ExpirationDate'=>$expirationDate,'Status'=>0,'Department'=>$dept,
-            'accountID'=>session()->get('loggedUser')];
-            $transferModel->save($values);
+            if($delivery=="Logistics")
+            {
+                if(empty($track_num))
+                {
+                    session()->setFlashdata('fail','Invalid! Please enter the tracking number');
+                    return redirect()->to('/transfer/'.$inventID)->withInput();
+                }
+                else
+                {
+                    $values = ['inventID'=>$inventID,'productID'=>$itemNumber,'productName'=>$productName,
+                    'Code'=>$code,'Description'=>$description,'Qty'=>$qty,
+                    'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'datePrepared'=>$datePrepared,
+                    'dateEffective'=>$dateEffective,'warehouseID'=>$warehouse,'categoryID'=>$categoryID,
+                    'supplierID'=>$supplierID,'ExpirationDate'=>$expirationDate,'Status'=>0,'Department'=>$dept,
+                    'cargo_type','Driver','Plate_number','TrackingNumber',
+                    'accountID'=>session()->get('loggedUser')];
+                    $transferModel->save($values);
 
-            $invent = $inventoryModel->WHERE('inventID',$inventID)->first();
-            $newQty = $invent['Qty']-$qty;
-            $record = ['Qty'=>$newQty,];
-            $inventoryModel->update($inventID,$record);
+                    $invent = $inventoryModel->WHERE('inventID',$inventID)->first();
+                    $newQty = $invent['Qty']-$qty;
+                    $record = ['Qty'=>$newQty,];
+                    $inventoryModel->update($inventID,$record);
 
-            session()->setFlashdata('success','Great! Successfully submitted the request');
-            return redirect()->to('/stocks')->withInput();
+                    session()->setFlashdata('success','Great! Successfully submitted the request');
+                    return redirect()->to('/stocks')->withInput();
+                }
+            }
+            else if($delivery=="Company Service")
+            {
+                if(empty($driver)||empty($plate_num))
+                {
+                    session()->setFlashdata('fail','Invalid! Please select your driver and plate number');
+                    return redirect()->to('/transfer/'.$inventID)->withInput();
+                }
+                else
+                {
+                    $values = ['inventID'=>$inventID,'productID'=>$itemNumber,'productName'=>$productName,
+                    'Code'=>$code,'Description'=>$description,'Qty'=>$qty,
+                    'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'datePrepared'=>$datePrepared,
+                    'dateEffective'=>$dateEffective,'warehouseID'=>$warehouse,'categoryID'=>$categoryID,
+                    'supplierID'=>$supplierID,'ExpirationDate'=>$expirationDate,'Status'=>0,'Department'=>$dept,
+                    'cargo_type','Driver','Plate_number','TrackingNumber',
+                    'accountID'=>session()->get('loggedUser')];
+                    $transferModel->save($values);
+
+                    $invent = $inventoryModel->WHERE('inventID',$inventID)->first();
+                    $newQty = $invent['Qty']-$qty;
+                    $record = ['Qty'=>$newQty,];
+                    $inventoryModel->update($inventID,$record);
+
+                    session()->setFlashdata('success','Great! Successfully submitted the request');
+                    return redirect()->to('/stocks')->withInput();
+                }
+            }
         }
     }
 

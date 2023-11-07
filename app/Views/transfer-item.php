@@ -486,6 +486,32 @@
                                 <textarea class="form-control" name="description" required><?=$items['Description'] ?></textarea>
                             </div>
 							<div class="col-12 form-group">
+								<div class="row g-3">
+									<div class="col-lg-3">
+										<label>Delivery via</label>
+										<select class="form-control" name="delivery" id="delivery" required>
+											<option value="">Choose</option>
+											<option>Logistics</option>
+											<option>Company Service</option>
+										</select>
+									</div>
+									<div class="col-lg-3">
+										<label>Tracking Number</label>
+										<input type="text" class="form-control" onkeypress="return onlyNumberKey(event)" name="track_number" id="track_number"/>
+									</div>
+									<div class="col-lg-3">
+										<label>Driver</label>
+										<select class="form-control custom-select2" name="driver" id="driver" style="width:100%;">
+											<option value="">Choose</option>
+										</select>
+									</div>
+									<div class="col-lg-3">
+										<label>Plate Number</label>
+										<input type="text" class="form-control"  name="plate_number" id="plate_number"/>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 form-group">
 								<button type="submit" class="btn btn-primary" onclick="return confirm('Do you want to continue?')" id="btnSend">Submit Request</button>
 							</div>
                         </form>
@@ -503,5 +529,36 @@
 		<script src="/assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="/assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="/assets/vendors/scripts/datatable-setting.js"></script>
+		<script>
+			$('#delivery').change(function()
+			{
+				var val = $(this).val();
+				if(val==="Logistics")
+				{
+					$('#track_number').attr("disabled",false);
+					$('#plate_number').attr("disabled",true);
+					$('#driver').attr("disabled",true);
+				}
+				else if(val==="Company Service")
+				{
+					$('#track_number').attr("disabled",true);
+					$('#plate_number').attr("disabled",false);
+					$('#driver').attr("disabled",false);
+				}
+				else
+				{
+					$('#track_number').attr("disabled",true);
+					$('#plate_number').attr("disabled",true);
+					$('#driver').attr("disabled",true);
+				}
+			});
+			function onlyNumberKey(evt) {
+				// Only ASCII character in that range allowed
+				var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+				if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+					return false;
+				return true;
+			}
+		</script>
 	</body>
 </html>
