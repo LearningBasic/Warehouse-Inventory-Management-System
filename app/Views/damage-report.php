@@ -448,8 +448,11 @@
                                     <div class="row g-3">
                                         <div class="col-lg-4">
                                             <label>Type of Defect/Problem</label><br/>
-                                            <input type="radio" name="defectType" style="width:20px;height:15px;" value="Minor" required/>&nbsp;<label>Minor</label>
-                                            <input type="radio" name="defectType" style="width:20px;height:15px;" value="Major"/>&nbsp;<label>Major</label>
+                                            <select class="form-control" name="defectType" required>
+                                                <option value="">Choose</option>
+                                                <option>Minor</option>
+                                                <option>Major</option>
+                                            </select>
                                         </div>
                                         <div class="col-lg-4">
                                             <label>Date</label>

@@ -14,7 +14,10 @@ class transferModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['inventID','productID','productName','Code','Description','Qty','ItemUnit','unitPrice','datePrepared','dateEffective','warehouseID','categoryID','supplierID','ExpirationDate','Status','Department','accountID'];
+    protected $allowedFields = ['inventID','productID','productName','Code',
+    'Description','Qty','ItemUnit','unitPrice','datePrepared','dateEffective',
+    'warehouseID','categoryID','supplierID','ExpirationDate','Status','Department',
+    'cargo_type','Driver','Plate_number','TrackingNumber','accountID'];
 
     protected $validationRules = [];
     protected $validationMessages = [];
