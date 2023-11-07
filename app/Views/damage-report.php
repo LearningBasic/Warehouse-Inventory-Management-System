@@ -4,7 +4,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>Add Report</title>
+		<title>Damage Report</title>
 
 		<!-- Site favicon -->
 		<link
@@ -390,7 +390,7 @@
 							</ul>
 							<?php }else{ ?>
 							<ul class="submenu">
-								<li><a href="<?=site_url('add-report')?>" class="active">Create Report</a></li>
+								<li><a href="<?=site_url('damage-repprt')?>" class="active">Damage Report</a></li>
 							</ul>
 							<?php } ?>
 						</li>
@@ -432,75 +432,55 @@
 						<?= session()->getFlashdata('success'); ?>
 					</div>
 				<?php endif; ?>
-                <div class="card-box">
-                    <div class="card-header">
-                        Create Report
-						<div class="dropdown" style="float:right;">
-							<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" data-color="#1b3133" href="#" role="button" data-toggle="dropdown"><span class="icon-copy dw dw-add"></span> New</a>
-							<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-								<a class="dropdown-item" href="<?=site_url('damage-report')?>"><i class="dw dw-add"></i> Damage Item</a>
-								<a class="dropdown-item" href="<?=site_url('repair-report')?>"><i class="dw dw-add"></i> For Repair Item</a>
-								<a class="dropdown-item" href="<?=site_url('transfer-item')?>"><i class="dw dw-add"></i> Transfer Item</a>
-							</div>
-						</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="tab">
-                            <ul class="nav nav-tabs justify-content-left" role="tablist">
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link active text-blue"
-                                        data-toggle="tab"
-                                        href="#home6"
-                                        role="tab"
-                                        aria-selected="true"
-                                        >Damaged Item</a
-                                    >
-                                </li>
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link text-blue"
-                                        data-toggle="tab"
-                                        href="#profile6"
-                                        role="tab"
-                                        aria-selected="false"
-                                        >For Repair</a
-                                    >
-                                </li>
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link text-blue"
-                                        data-toggle="tab"
-                                        href="#contact6"
-                                        role="tab"
-                                        aria-selected="false"
-                                        >Return Item</a
-                                    >
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane fade show active" id="home6" role="tabpanel">
-                                    <div class="pd-20">
-                                        
+                <div class="container">
+                    <div class="card-box">
+                        <div class="card-header">
+                            Create Report
+                            <a href="<?=site_url('add-report')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" class="row g-3" id="frmReport" enctype="multipart/form-data">
+                                <div class="col-12 form-group">
+                                    <label>Product Name</label>
+                                    <input type="text" class="form-control" name="productName" id="productName" required/>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <div class="row g-3">
+                                        <div class="col-lg-4">
+                                            <label>Type of Defect/Problem</label><br/>
+                                            <input type="radio" name="defectType" style="width:20px;height:15px;" value="Minor" required/>&nbsp;<label>Minor</label>
+                                            <input type="radio" name="defectType" style="width:20px;height:15px;" value="Major"/>&nbsp;<label>Major</label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label>Date</label>
+                                            <input type="date" class="form-control" name="dateReport" id="dateReport" required/>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label>Qty</label>
+                                            <input type="number" class="form-control" name="qty" id="qty" required/>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="profile6" role="tabpanel">
-                                    <div class="pd-20"></div>
+                                <div class="col-12 form-group">
+                                    <label>Details</label>
+                                    <textarea class="form-control" name="details" required></textarea>
                                 </div>
-                                <div class="tab-pane fade" id="contact6" role="tabpanel">
-                                    <div class="pd-20">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                                        elit, sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                        ea commodo consequat. Duis aute irure dolor in
-                                        reprehenderit in voluptate velit esse cillum dolore eu
-                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                        non proident, sunt in culpa qui officia deserunt mollit
-                                        anim id est laborum.
-                                    </div>
+                                <div class="col-12 form-group">
+                                    <label>Proof/Attachment</label>
+                                    <input type="file" class="form-control" name="file" accept="image/png, image/gif, image/jpeg" required/>
                                 </div>
-                            </div>
+                                <div class="col-12 form-group">
+                                    <label>Recommendation</label>
+                                    <select class="form-control" name="recommendation" required>
+                                        <option value="">Choose</option>
+                                        <option>For Repair</option>
+                                        <option>Replacement</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <input type="submit" class="btn btn-primary" value="Submit Report" id="btnAdd"/>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

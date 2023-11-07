@@ -80,6 +80,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/configuration','Home::systemConfiguration');
     $routes->get('/edit-account/(:any)','Home::editAccount/$1');
     $routes->get('/add-report','Home::addReport');
+    $routes->get('/damage-report','Home::damageReport');
     $routes->get('/profile','Home::profile');
 });
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
