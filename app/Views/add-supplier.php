@@ -366,6 +366,7 @@
                                 <li><a href="<?=site_url('shipping')?>">Shipping Items</a></li>
 							</ul>
 						</li>
+						<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
                                 <i class="micon dw dw-shop"></i><span class="mtext">Suppliers</span>
@@ -375,16 +376,23 @@
 								<li><a href="<?=site_url('add-supplier')?>" class="active">Add Supplier</a></li>
 							</ul>
 						</li>
+						<?php } ?>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
                                 <i class="micon dw dw-bar-chart-1"></i><span class="mtext">Reports</span>
 							</a>
+							<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
 							<ul class="submenu">
                                 <li><a href="<?=site_url('report-stocks')?>">Stocks Report</a></li>
 								<li><a href="<?=site_url('report-purchase')?>">Purchasing Report</a></li>
 								<li><a href="<?=site_url('report-receive')?>">Receiving Report</a></li>
 								<li><a href="<?=site_url('report-suppliers')?>">Suppliers Report</a></li>
 							</ul>
+							<?php }else{ ?>
+							<ul class="submenu">
+								<li><a href="<?=site_url('create-report')?>">Create Report</a></li>
+							</ul>
+							<?php } ?>
 						</li>
 						<li>
 							<div class="dropdown-divider"></div>
