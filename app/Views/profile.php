@@ -414,6 +414,16 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
+				<?php if(!empty(session()->getFlashdata('fail'))) : ?>
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<?= session()->getFlashdata('fail'); ?>
+					</div>
+				<?php endif; ?>
+				<?php if(!empty(session()->getFlashdata('success'))) : ?>
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<?= session()->getFlashdata('success'); ?>
+					</div>
+				<?php endif; ?>
                 <div class="row g-3">
                     <div class="col-lg-8">
                         <div class="card-box">
@@ -421,40 +431,43 @@
                                 Personal Information
                             </div>
                             <div class="card-body">
-                                <form method="GET" class="row g-2" action="<?=base_url('update-account')?>">
+								<?php foreach($account as $row): ?>
+                                <form method="GET" class="row g-2">
                                     <input type="hidden" name="userID" value="<?php echo session()->get('loggedUser') ?>"/>
                                     <div class="col-12 form-group">
                                         <label>Complete Name</label>
-                                        <input type="text" class="form-control" name="fullname" value="<?=$account['Fullname']?>" required/>
+                                        <input type="text" class="form-control" name="fullname" value="<?php echo $row->Fullname ?>" required/>
+                                    </div>
+									<div class="col-12 form-group">
+                                        <label>Account Username</label>
+                                        <input type="text" class="form-control" name="fullname" value="<?php echo $row->username ?>" required/>
                                     </div>
                                     <div class="col-12 form-group">
                                         <div class="row g-3">
                                             <div class="col-lg-6">
                                                 <label>System Role</label>
                                                 <select class="form-control" name="systemRole">
-                                                    <option value="">Choose</option>
-                                                    <option <?php if($account['systemRole']=="Administrator") echo 'selected="selected"'; ?>>Administrator</option>
-                                                    <option <?php if($account['systemRole']=="Editor") echo 'selected="selected"'; ?>>Editor</option>
-                                                    <option <?php if($account['systemRole']=="Standard User") echo 'selected="selected"'; ?>>Standard User</option>
+                                                    <option <?php if($row->systemRole=="Administrator") echo 'selected="selected"'; ?>>Administrator</option>
+                                                    <option <?php if($row->systemRole=="Editor") echo 'selected="selected"'; ?>>Editor</option>
+                                                    <option <?php if($row->systemRole=="Standard User") echo 'selected="selected"'; ?>>Standard User</option>
                                                 </select>
                                             </div>
                                             <div class="col-lg-6">
-                                                <label>Assignment</label>
-                                                <select class="form-control" id="warehouse" name="warehouse" required>
-                                                    <option value="">Choose</option>
-                                                    <?php if($warehouse): ?>
-                                                        <?php foreach($warehouse as $row): ?>
-                                                            <option value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>
-                                                        <?php endforeach; ?>
-                                                    <?php endif; ?>
-                                                </select>
+                                                <label>Account Status</label>
+                                                <input type="text" class="form-control" value="<?php if($row->Status==1){echo "Active";}else{echo "Inactive";}?>"/>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 form-group">
-                                        <button type="submit" class="btn btn-primary" id="btnUpdate">Save Changes</button>
-                                    </div>
+									<div class="col-12 form-group">
+										<label>Assignment</label>
+                                    	<input type="text" class="form-control" value="<?php echo $row->warehouseName?>"/>
+									</div>
+									<div class="col-12 form-group">
+										<label>Address</label>
+                                    	<input type="text" class="form-control" value="<?php echo $row->Address?>"/>
+									</div>
                                 </form>
+								<?php endforeach; ?>
                             </div>
                         </div>
                     </div>
@@ -464,16 +477,19 @@
                                 Account Security
                             </div>
                             <div class="card-body">
-                                <form method="GET" class="row g-2" action="<?=base_url('change-password')?>">
+                                <form method="POST" class="row g-2" action="<?=base_url('change-password')?>">
                                     <input type="hidden" name="userID" value="<?php echo session()->get('loggedUser') ?>"/>
                                     <div class="col-12 form-group">
-                                        <label>Current Password</label>
-                                        <input type="password" name="current_password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
+                                        <label>New Password</label>
+                                        <input type="password" name="current_password" id="current_password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
                                     </div>
                                     <div class="col-12 form-group">
                                         <label>ReType Password</label>
-                                        <input type="password" name="retype_password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
+                                        <input type="password" name="retype_password" id="retype_password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
                                     </div>
+									<div class="col-12 form-group">
+									<input type="checkbox" onclick="myFunction()"> Show Password
+									</div>
                                     <div class="col-12 form-group">
                                         <button type="submit" class="btn btn-primary" id="btnSave">Save Changes</button>
                                     </div>
@@ -494,6 +510,21 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
-
+		<script>
+			function myFunction() {
+            var x = document.getElementById("current_password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+            var xx = document.getElementById("retype_password");
+            if (xx.type === "password") {
+                xx.type = "text";
+            } else {
+                xx.type = "password";
+            }
+        }
+		</script>
 	</body>
 </html>

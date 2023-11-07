@@ -280,13 +280,12 @@ class Home extends BaseController
     public function profile()
     {
         $user = session()->get('loggedUser');
-        $accountModel = new \App\Models\accountModel();
-        $account = $accountModel->WHERE('accountID',$user)->first();
-        //warehouse
-        $builder = $this->db->table('tblwarehouse');
-        $builder->select('*');
-        $warehouse = $builder->get()->getResult();
-        $data = ['account'=>$account,'warehouse'=>$warehouse,];
+        $builder = $this->db->table('tblaccount a');
+        $builder->select('a.username,a.Fullname,a.systemRole,a.Status,b.warehouseName,b.Address');
+        $builder->join('tblwarehouse b','b.warehouseID=a.warehouseID','LEFT');
+        $builder->WHERE('a.accountID',$user);
+        $account = $builder->get()->getResult();
+        $data = ['account'=>$account];
         return view('profile',$data);
     }
 
@@ -297,6 +296,32 @@ class Home extends BaseController
         $userID = $this->request->getPost('userID');
         $password = $this->request->getPost('current_password');
         $retypepassword = $this->request->getPost('retype_password');
+        
+        $validation = $this->validate([
+            'current_password'=>'required',
+            'retype_password'=>'required',
+        ]);
+
+        if(!$validation)
+        {
+            session()->setFlashdata('fail','Invalid! Please fill in the form');
+            return redirect()->to('/profile')->withInput();
+        }
+        else
+        {
+            if($password!=$retypepassword)
+            {
+                session()->setFlashdata('fail','Invalid! Password mismatched');
+                return redirect()->to('/profile')->withInput();
+            }
+            else
+            {
+                $values = ['password'=>Hash::make($password)];
+                $accountModel->update($userID,$values);
+                session()->setFlashdata('success','Great! Your password has successfully changed');
+                return redirect()->to('/profile')->withInput();
+            }
+        }
     }
 
     public function editAccount($id=null)
