@@ -391,7 +391,7 @@
 							</ul>
 							<?php }else{ ?>
 							<ul class="submenu">
-								<li><a href="<?=site_url('create-report')?>">Create Report</a></li>
+								<li><a href="<?=site_url('add-report')?>">Create Report</a></li>
 							</ul>
 							<?php } ?>
 						</li>
