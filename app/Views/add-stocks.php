@@ -457,7 +457,7 @@
                                 <?= session()->getFlashdata('success'); ?>
                             </div>
                         <?php endif; ?>
-                        <form method="post" class="row g-3" id="frmStock" action="<?=base_url('add-product')?>" autocomplete="OFF">
+                        <form method="post" class="row g-3" id="frmStock" action="<?=base_url('add-product')?>" enctype="multipart/form-data" autocomplete="OFF">
                             <div class="col-12 form-group">
                                 <div class="row g-3">
                                     <div class="col-lg-3">
@@ -579,7 +579,7 @@
 							<div class="col-12 form-group">
 								<p>
 									<label for="upload_imgs" class="btn btn-outline-primary">Select Your Images +</label>
-									<input class="show-for-sr" type="file" id="upload_imgs" name="upload_imgs[]" accept="image/jpeg, image/png, image/jpg" multiple/>
+									<input class="show-for-sr" type="file" id="upload_imgs" name="images[]" accept="image/jpeg, image/png, image/jpg" multiple/>
 								</p>
 								<div class="quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>
 							</div>

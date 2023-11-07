@@ -188,13 +188,26 @@ class Home extends BaseController
         }
         else
         {
-            $values = [
-                'Date'=>$date,'Location'=>$location,'productID'=>$item_number,'productName'=>$productName,
-                'Code'=>$code,'Description'=>$desc,'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'Qty'=>$qty,'ReOrder'=>$reOrder,
-                'categoryID'=>$category,'ExpirationDate'=>$expirationDate,'supplierID'=>$supplier,'warehouseID'=>$warehouse,];
-            $inventoryModel->save($values);
-            session()->setFlashdata('success',"Great! Successfully added");
-            return redirect()->to('/add')->withInput();
+            if ($this->request->getFileMultiple('images')) 
+            {
+                foreach($this->request->getFileMultiple('images') as $file)
+                { 
+                    $originalName = $file->getClientName();
+                    $file->move('Products/',$originalName);
+                }
+                $values = [
+                    'Date'=>$date,'Location'=>$location,'productID'=>$item_number,'productName'=>$productName,
+                    'Code'=>$code,'Description'=>$desc,'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'Qty'=>$qty,'ReOrder'=>$reOrder,
+                    'categoryID'=>$category,'ExpirationDate'=>$expirationDate,'supplierID'=>$supplier,'warehouseID'=>$warehouse,];
+                $inventoryModel->save($values);
+                session()->setFlashdata('success',"Great! Successfully added");
+                return redirect()->to('/add')->withInput();
+            }
+            else
+            {
+                session()->setFlashdata('fail',"Error! Something went wrong. Please contact IT Support");
+                return redirect()->to('/add')->withInput();
+            }
         }
     }
 
