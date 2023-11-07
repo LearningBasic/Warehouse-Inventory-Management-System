@@ -158,6 +158,8 @@ class Home extends BaseController
     public function addProduct()
     {
         $inventoryModel = new \App\Models\inventoryModel();
+        $productImage = new \App\Models\productImageModel();
+        //data
         $date = date('Y-m-d');
         $warehouse = $this->request->getPost('warehouse');
         $supplier = $this->request->getPost('supplier');
@@ -190,16 +192,33 @@ class Home extends BaseController
         {
             if ($this->request->getFileMultiple('images')) 
             {
-                foreach($this->request->getFileMultiple('images') as $file)
-                { 
-                    $originalName = $file->getClientName();
-                    $file->move('Products/',$originalName);
-                }
                 $values = [
                     'Date'=>$date,'Location'=>$location,'productID'=>$item_number,'productName'=>$productName,
                     'Code'=>$code,'Description'=>$desc,'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'Qty'=>$qty,'ReOrder'=>$reOrder,
                     'categoryID'=>$category,'ExpirationDate'=>$expirationDate,'supplierID'=>$supplier,'warehouseID'=>$warehouse,];
                 $inventoryModel->save($values);
+                //get the inventID
+                $inventID=0;
+                $builder = $this->db->table('tblinventory');
+                $builder->select('inventID');
+                $builder->WHERE('productID',$item_number)->WHERE('productName',$productName);
+                $data = $builder->get();
+                if($row = $data->getRow())
+                {
+                    $inventID = $row->inventID;
+                }
+                foreach($this->request->getFileMultiple('images') as $file)
+                { 
+                    $originalName = $file->getClientName();
+                    $file->move('Products/',$originalName);
+                    //save the images
+                    $values = [
+                        'inventID'=>$inventID,
+                        'Images'=>$originalName,
+                        'DateCreated'=>date('Y-m-d'),
+                    ];
+                    $productImage->save($values);
+                }
                 session()->setFlashdata('success',"Great! Successfully added");
                 return redirect()->to('/add')->withInput();
             }
