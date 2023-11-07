@@ -267,6 +267,11 @@ class Home extends BaseController
         return view('receive-item',$data);
     }
 
+    public function addReport()
+    {
+        return view('add-report');
+    }
+
     public function systemConfiguration()
     {
         //get the user accounts

@@ -4,7 +4,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>Profile</title>
+		<title>Add Report</title>
 
 		<!-- Site favicon -->
 		<link
@@ -71,7 +71,7 @@
             }
             ::-webkit-scrollbar {
                 height: 4px;              /* height of horizontal scrollbar ← You're missing this */
-                width: 4px;               /* width of vertical scrollbar */
+                width: 0px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
             
@@ -94,6 +94,68 @@
 		<div class="header">
 			<div class="header-left">
 				<div class="menu-icon bi bi-list"></div>
+				<div
+					class="search-toggle-icon bi bi-search"
+					data-toggle="header_search"
+				></div>
+				<div class="header-search">
+					<form>
+						<div class="form-group mb-0">
+							<i class="dw dw-search2 search-icon"></i>
+							<input
+								type="text"
+								class="form-control search-input"
+								placeholder="Search Here"
+							/>
+							<div class="dropdown">
+								<a
+									class="dropdown-toggle no-arrow"
+									href="#"
+									role="button"
+									data-toggle="dropdown"
+								>
+									<i class="ion-arrow-down-c"></i>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right">
+									<div class="form-group row">
+										<label class="col-sm-12 col-md-2 col-form-label"
+											>From</label
+										>
+										<div class="col-sm-12 col-md-10">
+											<input
+												class="form-control form-control-sm form-control-line"
+												type="text"
+											/>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-12 col-md-2 col-form-label">To</label>
+										<div class="col-sm-12 col-md-10">
+											<input
+												class="form-control form-control-sm form-control-line"
+												type="text"
+											/>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-12 col-md-2 col-form-label"
+											>Subject</label
+										>
+										<div class="col-sm-12 col-md-10">
+											<input
+												class="form-control form-control-sm form-control-line"
+												type="text"
+											/>
+										</div>
+									</div>
+									<div class="text-right">
+										<button class="btn btn-primary">Search</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
 			<div class="header-right">
 				<div class="dashboard-setting user-notification">
@@ -390,7 +452,7 @@
 							</ul>
 							<?php }else{ ?>
 							<ul class="submenu">
-								<li><a href="<?=site_url('create-report')?>">Create Report</a></li>
+								<li><a href="<?=site_url('add-report')?>" class="active">Create Report</a></li>
 							</ul>
 							<?php } ?>
 						</li>
@@ -409,7 +471,7 @@
 						</li>
 						<?php } ?>
                         <li>
-							<a href="<?=site_url('profile')?>" class="active dropdown-toggle no-arrow">
+							<a href="<?=site_url('profile')?>" class="dropdown-toggle no-arrow">
 								<span class="micon dw dw-user1"></span
 								><span class="mtext">Profile</span>
 							</a>
@@ -432,76 +494,59 @@
 						<?= session()->getFlashdata('success'); ?>
 					</div>
 				<?php endif; ?>
-                <div class="row g-3">
-                    <div class="col-lg-8">
-                        <div class="card-box">
-                            <div class="card-header">
-                                Personal Information
-                            </div>
-                            <div class="card-body">
-								<?php foreach($account as $row): ?>
-                                <form method="GET" class="row g-2">
-                                    <input type="hidden" name="userID" value="<?php echo session()->get('loggedUser') ?>"/>
-                                    <div class="col-12 form-group">
-                                        <label>Complete Name</label>
-                                        <input type="text" class="form-control" name="fullname" value="<?php echo $row->Fullname ?>" required/>
-                                    </div>
-									<div class="col-12 form-group">
-                                        <label>Account Username</label>
-                                        <input type="text" class="form-control" name="fullname" value="<?php echo $row->username ?>" required/>
-                                    </div>
-									<div class="col-12 form-group">
-										<label>Assignment</label>
-                                    	<input type="text" class="form-control" value="<?php echo $row->warehouseName?>"/>
-									</div>
-									<div class="col-12 form-group">
-										<label>Address</label>
-                                    	<input type="text" class="form-control" value="<?php echo $row->Address?>"/>
-									</div>
-                                    <div class="col-12 form-group">
-                                        <div class="row g-3">
-                                            <div class="col-lg-6">
-                                                <label>System Role</label>
-                                                <select class="form-control" name="systemRole">
-                                                    <option <?php if($row->systemRole=="Administrator") echo 'selected="selected"'; ?>>Administrator</option>
-                                                    <option <?php if($row->systemRole=="Editor") echo 'selected="selected"'; ?>>Editor</option>
-                                                    <option <?php if($row->systemRole=="Standard User") echo 'selected="selected"'; ?>>Standard User</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label>Account Status</label>
-                                                <input type="text" class="form-control" value="<?php if($row->Status==1){echo "Active";}else{echo "Inactive";}?>"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-								<?php endforeach; ?>
+                <div class="tab">
+                    <ul class="nav nav-pills justify-content-end" role="tablist">
+                        <li class="nav-item">
+                            <a
+                                class="nav-link active text-blue"
+                                data-toggle="tab"
+                                href="#home6"
+                                role="tab"
+                                aria-selected="true"
+                                >Damaged Item</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link text-blue"
+                                data-toggle="tab"
+                                href="#profile6"
+                                role="tab"
+                                aria-selected="false"
+                                >For Repair</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link text-blue"
+                                data-toggle="tab"
+                                href="#contact6"
+                                role="tab"
+                                aria-selected="false"
+                                >Return Item</a
+                            >
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="home6" role="tabpanel">
+                            <div class="pd-20">
+                                
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card-box">
-                            <div class="card-header">
-                                Account Security
-                            </div>
-                            <div class="card-body">
-                                <form method="POST" class="row g-2" action="<?=base_url('change-password')?>">
-                                    <input type="hidden" name="userID" value="<?php echo session()->get('loggedUser') ?>"/>
-                                    <div class="col-12 form-group">
-                                        <label>New Password</label>
-                                        <input type="password" name="current_password" id="current_password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
-                                    </div>
-                                    <div class="col-12 form-group">
-                                        <label>ReType Password</label>
-                                        <input type="password" name="retype_password" id="retype_password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
-                                    </div>
-									<div class="col-12 form-group">
-									<input type="checkbox" onclick="myFunction()"> Show Password
-									</div>
-                                    <div class="col-12 form-group">
-                                        <button type="submit" class="btn btn-primary" id="btnSave">Save Changes</button>
-                                    </div>
-                                </form>
+                        <div class="tab-pane fade" id="profile6" role="tabpanel">
+                            <div class="pd-20"></div>
+                        </div>
+                        <div class="tab-pane fade" id="contact6" role="tabpanel">
+                            <div class="pd-20">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing
+                                elit, sed do eiusmod tempor incididunt ut labore et
+                                dolore magna aliqua. Ut enim ad minim veniam, quis
+                                nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                ea commodo consequat. Duis aute irure dolor in
+                                reprehenderit in voluptate velit esse cillum dolore eu
+                                fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                                non proident, sunt in culpa qui officia deserunt mollit
+                                anim id est laborum.
                             </div>
                         </div>
                     </div>
@@ -518,21 +563,10 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
-		<script>
-			function myFunction() {
-            var x = document.getElementById("current_password");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-            var xx = document.getElementById("retype_password");
-            if (xx.type === "password") {
-                xx.type = "text";
-            } else {
-                xx.type = "password";
-            }
-        }
-		</script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- <script src="assets/ajax/system-config.js"></script> -->
+        <script>
+           
+        </script>
 	</body>
 </html>
