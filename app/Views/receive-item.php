@@ -507,7 +507,9 @@
                             <input type="hidden" id="transferID" name="transferID"/>
                             <div class="col-12 form-group">
                                 <label>Received By</label>
-                                <input type="text" class="form-control" name="receiver" required/>
+                                <select class="form-control custom-select2" name="receiver" id="receiver" style="width:100%;" required>
+									<option value="">Choose</option>
+								</select>
                             </div>
                             <div class="col-12 form-group">
 								<p>
@@ -535,6 +537,34 @@
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
         <script>
+			$(document).ready(function()
+			{
+				loadEmployee();
+			});
+			function loadEmployee()
+			{
+				var settings = {
+				"url": "https://fastcat-hris.com/EmployeeListController",
+				"method": "GET",
+				"timeout": 0,
+				};
+
+				$.ajax(settings).done(function (response) {
+					show(response);
+				});
+			}	
+			function show(response)
+			{
+				for (let r of response.employees) 
+				{
+					var fname = r.Firstname;
+					var mi = r.Middle_Initial;
+					var sname = r.Surname;
+					$('#receiver').append("<option>"+fname +" "+mi+" "+sname+"</option>");
+				}
+			}
+		</script>
+		<script>
             $(document).on('click','.create',function(e)
             {
                 e.preventDefault();
@@ -559,21 +589,21 @@
 				function previewImgs(event) {
 				totalFiles = imgUpload.files.length;
 				
-				if(!!totalFiles) {
-					imgPreview.classList.remove('quote-imgs-thumbs--hidden');
-					previewTitle = document.createElement('p');
-					previewTitle.style.fontWeight = 'bold';
-					previewTitleText = document.createTextNode(totalFiles + ' Total Images Selected');
-					previewTitle.appendChild(previewTitleText);
-					imgPreview.appendChild(previewTitle);
-				}
-				
-				for(var i = 0; i < totalFiles; i++) {
-					img = document.createElement('img');
-					img.src = URL.createObjectURL(event.target.files[i]);
-					img.classList.add('img-preview-thumb');
-					imgPreview.appendChild(img);
-				}
+					if(!!totalFiles) {
+						imgPreview.classList.remove('quote-imgs-thumbs--hidden');
+						previewTitle = document.createElement('p');
+						previewTitle.style.fontWeight = 'bold';
+						previewTitleText = document.createTextNode(totalFiles + ' Total Images Selected');
+						previewTitle.appendChild(previewTitleText);
+						imgPreview.appendChild(previewTitle);
+					}
+					
+					for(var i = 0; i < totalFiles; i++) {
+						img = document.createElement('img');
+						img.src = URL.createObjectURL(event.target.files[i]);
+						img.classList.add('img-preview-thumb');
+						imgPreview.appendChild(img);
+					}
 				}
 		</script>
 	</body>
