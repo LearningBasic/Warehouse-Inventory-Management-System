@@ -302,7 +302,14 @@ class Home extends BaseController
 
     public function addReport()
     {
-        return view('add-report');
+        $user = session()->get('loggedUser');
+        $builder = $this->db->table('tbldamagereport a');
+        $builder->select('a.*,b.productName');
+        $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
+        $builder->WHERE('a.accountID',$user);
+        $damage = $builder->get()->getResult();
+        $data = ['damage'=>$damage,];
+        return view('add-report',$data);
     }
 
     public function damageReport()

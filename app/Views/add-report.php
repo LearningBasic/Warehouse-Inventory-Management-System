@@ -481,7 +481,21 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="home6" role="tabpanel">
                                     <div class="pd-20">
-                                        
+										<table class="data-table table stripe hover nowrap">
+											<thead>
+												<th>Date Reported</th>
+												<th>Defect Type</th>
+												<th>Product Name</th>
+												<th>Qty</th>
+												<th>Details</th>
+												<th>Remarks</th>
+												<th>Status</th>
+											</thead>
+											<tbody>
+												<?php foreach($damage as $row): ?>
+												<?php endforeach; ?>
+											</tbody>
+										</table>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="profile6" role="tabpanel">
