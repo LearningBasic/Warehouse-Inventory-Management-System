@@ -477,6 +477,16 @@
                                         >Return Item</a
                                     >
                                 </li>
+								<li class="nav-item">
+                                    <a
+                                        class="nav-link text-blue"
+                                        data-toggle="tab"
+                                        href="#transfer6"
+                                        role="tab"
+                                        aria-selected="false"
+                                        >Transfer</a
+                                    >
+                                </li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="home6" role="tabpanel">
@@ -493,25 +503,50 @@
 											</thead>
 											<tbody>
 												<?php foreach($damage as $row): ?>
+													<tr>
+														<td><?php echo $row->DateReport ?></td>
+														<td><?php echo $row->DamageRate ?></td>
+														<td><?php echo $row->productName ?></td>
+														<td><?php echo number_format($row->Qty,0) ?></td>
+														<td><?php echo $row->Details ?></td>
+														<td><?php echo $row->Remarks ?></td>
+														<td>
+															<?php if($row->Status==0){ ?>
+																<span class="badge bg-warning text-white">PENDING</span>
+															<?php }else{ ?>
+																<span class="badge bg-primary text-white">ACCEPTED</span>
+															<?php } ?>
+														</td>
+													</tr>
 												<?php endforeach; ?>
 											</tbody>
 										</table>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="profile6" role="tabpanel">
-                                    <div class="pd-20"></div>
+                                    <div class="pd-20">
+										<table class="data-table table stripe hover nowrap">
+											<thead>
+												<th>Date Repaired</th>
+												<th>Product Name</th>
+												<th>Qty</th>
+												<th>Details</th>
+												<th>Date Accomplished</th>
+												<th>Status</th>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
+									</div>
                                 </div>
                                 <div class="tab-pane fade" id="contact6" role="tabpanel">
                                     <div class="pd-20">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                                        elit, sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                        ea commodo consequat. Duis aute irure dolor in
-                                        reprehenderit in voluptate velit esse cillum dolore eu
-                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                        non proident, sunt in culpa qui officia deserunt mollit
-                                        anim id est laborum.
+                                       
+                                    </div>
+                                </div>
+								<div class="tab-pane fade" id="transfer6" role="tabpanel">
+                                    <div class="pd-20">
+                                       
                                     </div>
                                 </div>
                             </div>
