@@ -307,8 +307,10 @@ class Home extends BaseController
 
     public function damageReport()
     {
+        $assign = session()->get('assignment');
         $builder = $this->db->table('tblinventory');
         $builder->select('*');
+        $builder->WHERE('warehouseID',$assign);
         $items = $builder->get()->getResult();
         $data = ['items'=>$items];
         return view('damage-report',$data);

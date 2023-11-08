@@ -422,17 +422,17 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
-				<?php if(!empty(session()->getFlashdata('fail'))) : ?>
-					<div class="alert alert-danger alert-dismissible fade show" role="alert">
-						<?= session()->getFlashdata('fail'); ?>
-					</div>
-				<?php endif; ?>
-				<?php if(!empty(session()->getFlashdata('success'))) : ?>
-					<div class="alert alert-success alert-dismissible fade show" role="alert">
-						<?= session()->getFlashdata('success'); ?>
-					</div>
-				<?php endif; ?>
                 <div class="container">
+					<?php if(!empty(session()->getFlashdata('fail'))) : ?>
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
+							<?= session()->getFlashdata('fail'); ?>
+						</div>
+					<?php endif; ?>
+					<?php if(!empty(session()->getFlashdata('success'))) : ?>
+						<div class="alert alert-success alert-dismissible fade show" role="alert">
+							<?= session()->getFlashdata('success'); ?>
+						</div>
+					<?php endif; ?>
                     <div class="card-box">
                         <div class="card-header">
                             Create Report
@@ -442,7 +442,7 @@
                             <form method="post" class="row g-3" id="frmReport" action="<?=base_url('send-damage-report')?>" enctype="multipart/form-data">
 								<div class="col-12 form-group">
 									<label>Choose Item/Equipment</label>
-									<select class="form-control custom-select2" id="itemID" name="itemID">
+									<select class="form-control custom-select2" id="itemID" name="itemID" required>
 										<option value="">Choose</option>
 										<?php foreach($items as $row): ?>
 										<option value="<?php echo $row->inventID ?>"><?php echo $row->productName ?> - <?php echo $row->Qty ?>Qty</option>
@@ -460,11 +460,11 @@
                                             </select>
                                         </div>
                                         <div class="col-lg-4">
-                                            <label>Date</label>
+                                            <label>Date Reported</label>
                                             <input type="date" class="form-control" name="dateReport" id="dateReport" required/>
                                         </div>
                                         <div class="col-lg-4">
-                                            <label>Qty</label>
+                                            <label>Quantity</label>
                                             <input type="number" class="form-control" name="qty" id="qty" required/>
                                         </div>
                                     </div>

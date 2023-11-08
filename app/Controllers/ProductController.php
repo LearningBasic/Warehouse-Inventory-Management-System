@@ -350,4 +350,65 @@ class ProductController extends BaseController
             }
         }
     }
+
+    public function damageReport()
+    {
+        $damageReportModel = new \App\Models\damageReportModel();
+        $inventoryModel = new \App\Models\inventoryModel();
+        //datas
+        $validation = $this->validate([
+            'itemID'=>'required',
+            'dateReport'=>'required',
+            'defectType'=>'required',
+            'qty'=>'required',
+            'details'=>'required',
+            'recommendation'=>'required',
+            'file'=>'uploaded[file]'
+        ]);
+        //datas
+        $dateCreated = date('Y-m-d');
+        $itemID = $this->request->getPost('itemID');
+        $defectType = $this->request->getPost('defectType');
+        $dateReport = $this->request->getPost('dateReport');
+        $qty = $this->request->getPost('qty');
+        $details = $this->request->getPost('details');
+        $remarks = $this->request->getPost('recommendation');
+        $file = $this->request->getFile('file');
+        $originalName = $file->getClientName();
+        $user = session()->get('loggedUser');
+        if(!$validation)
+        {
+            session()->setFlashdata('fail','Invalid! Please fill in the form');
+            return redirect()->to('/damage-report')->withInput();
+        }
+        else
+        {
+            $totalQty = $inventoryModel->WHERE('inventID',$itemID)->first();
+            if($qty>$totalQty['Qty'])
+            {
+                session()->setFlashdata('fail','Insufficient number of stocks');
+                return redirect()->to('/damage-report')->withInput();
+            }
+            else
+            {
+                if($file->isValid() && ! $file->hasMoved())
+                {
+                    $file->move('Damage_Files/',$originalName);
+                    $values = [
+                        'DateCreated'=>$dateCreated,'inventID'=>$itemID,'Qty'=>$qty,
+                        'Details'=>$details,'DamageRate'=>$defectType,'DateReport'=>$dateReport,
+                        'Image'=>$originalName,'Remarks'=>$remarks,'Status'=>0,'DateApproved'=>'0000-00-00','accountID'=>$user
+                        ];
+                    $damageReportModel->save($values);
+                    session()->setFlashdata('success','Great! Successfully submitted for review');
+                    return redirect()->to('/damage-report')->withInput();
+                }
+                else
+                {
+                    session()->setFlashdata('fail','Invalid! File already uploaded');
+                    return redirect()->to('/damage-report')->withInput();
+                }
+            }
+        }
+    }
 }
