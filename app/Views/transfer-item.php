@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -530,6 +529,10 @@
 		<script src="/assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="/assets/vendors/scripts/datatable-setting.js"></script>
 		<script>
+			$(document).ready(function()
+			{
+				loadEmployee();
+			});
 			$('#delivery').change(function()
 			{
 				var val = $(this).val();
@@ -559,6 +562,20 @@
 					return false;
 				return true;
 			}
+			function loadEmployee()
+			{
+				var settings = {
+				"url": "https://fastcat-hris.com/EmployeeListController",
+				"method": "GET",
+				"timeout": 0,
+				};
+
+				$.ajax(settings).done(function (response) {
+					console.log(response);
+					const myJSON = JSON.stringify(response);
+					console.log(myJSON.employees.Firstname);
+				});
+			}	
 		</script>
 	</body>
 </html>

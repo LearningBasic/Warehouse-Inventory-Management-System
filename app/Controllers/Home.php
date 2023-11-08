@@ -239,6 +239,7 @@ class Home extends BaseController
         //item
         $inventoryModel = new \App\Models\inventoryModel();
         $items = $inventoryModel->WHERE('inventID',$id)->first();
+        
         $data = ['items'=>$items,'location'=>$warehouse,];
         return view('transfer-item',$data);
     }
