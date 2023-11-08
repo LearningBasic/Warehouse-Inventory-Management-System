@@ -439,11 +439,16 @@
                             <a href="<?=site_url('add-report')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                         </div>
                         <div class="card-body">
-                            <form method="post" class="row g-3" id="frmReport" enctype="multipart/form-data">
-                                <div class="col-12 form-group">
-                                    <label>Product Name</label>
-                                    <input type="text" class="form-control" name="productName" id="productName" required/>
-                                </div>
+                            <form method="post" class="row g-3" id="frmReport" action="<?=base_url('send-damage-report')?>" enctype="multipart/form-data">
+								<div class="col-12 form-group">
+									<label>Choose Item/Equipment</label>
+									<select class="form-control custom-select2" id="itemID" name="itemID">
+										<option value="">Choose</option>
+										<?php foreach($items as $row): ?>
+										<option value="<?php echo $row->inventID ?>"><?php echo $row->productName ?> - <?php echo $row->Qty ?>Qty</option>
+										<?php endforeach; ?>
+									</select>
+								</div>
                                 <div class="col-12 form-group">
                                     <div class="row g-3">
                                         <div class="col-lg-4">

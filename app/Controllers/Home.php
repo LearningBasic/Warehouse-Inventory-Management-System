@@ -307,7 +307,11 @@ class Home extends BaseController
 
     public function damageReport()
     {
-        return view('damage-report');
+        $builder = $this->db->table('tblinventory');
+        $builder->select('*');
+        $items = $builder->get()->getResult();
+        $data = ['items'=>$items];
+        return view('damage-report',$data);
     }
 
     public function systemConfiguration()
