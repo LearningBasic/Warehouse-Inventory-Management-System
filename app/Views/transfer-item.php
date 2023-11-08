@@ -571,11 +571,19 @@
 				};
 
 				$.ajax(settings).done(function (response) {
-					console.log(response);
-					const myJSON = JSON.stringify(response);
-					console.log(myJSON.employees.Firstname);
+					show(response);
 				});
 			}	
+			function show(response)
+			{
+				for (let r of response.employees) 
+				{
+					var fname = r.Firstname;
+					var mi = r.Middle_Initial;
+					var sname = r.Surname;
+					$('#driver').append("<option>"+fname +" "+mi+" "+sname+"</option>");
+				}
+			}
 		</script>
 	</body>
 </html>
