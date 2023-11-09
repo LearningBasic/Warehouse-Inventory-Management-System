@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class accomplishmentReportModel extends Model
 {
-    protected $table      = 'tblaccomplishment';
+    protected $table      = 'tblaccomplishmentreport';
     protected $primaryKey = 'arID';
 
     protected $useAutoIncrement  = true;

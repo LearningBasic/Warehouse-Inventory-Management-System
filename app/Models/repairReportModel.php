@@ -14,7 +14,7 @@ class repairReportModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['repairDate','reportID','Details','dateAccomplished','Status','approveDate','accountID'];
+    protected $allowedFields = ['rrDate','reportID','Details','dateAccomplished','Status','approveDate','accountID'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

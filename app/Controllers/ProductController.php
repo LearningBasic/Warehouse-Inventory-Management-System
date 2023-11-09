@@ -191,7 +191,7 @@ class ProductController extends BaseController
             {
                 $file->move('Accomplishment/',$originalName);
                 $values = [
-                    'repairID'=>$itemID, 'Workers'=>$involveWorkers,'File'=>$originalName,'DateCreated'=>date('Y-m-d')
+                    'rrID'=>$itemID, 'Workers'=>$involveWorkers,'File'=>$originalName,'DateCreated'=>date('Y-m-d')
                 ];
                 $accomplishmentModel->save($values);
                 //update the inventory
@@ -211,39 +211,46 @@ class ProductController extends BaseController
         }
     }
 
-    public function vieAccomplishmentReport()
+    public function viewAccomplishmentReport()
     {
-        $accomplishmentModel = new \App\Models\accomplishmentModel();
+        $accomplishmentModel = new \App\Models\accomplishmentReportModel();
         $repairModel = new \App\Models\repairReportModel();
         $val = $this->request->getGet('value');
         $records = $accomplishmentModel->WHERE('rrID',$val)->first();
-        //get the date completed
-        $getinfo = $repairModel->WHERE('repairID',$val)->first();
-        $imgFile = "Accomplishment/".$records['File'];
-        $output="<div class='row g-3'>
-                    <div class='col-lg-6'>
-                        <div class='row g-3'>
-                            <div class='col-12 form-group'>
-                                <label>Date Reported</label>
-                                <input type='date' class='form-control' value='".$records['DateCreated']."'/>
-                            </div>
-                            <div class='col-12 form-group'>
-                                <label>Date Completed</label>
-                                <input type='date' class='form-control' value='".$getinfo['dateAccomplished']."'/>
-                            </div>
-                            <div class='col-12 form-group'>
-                                <label>Repaired By</label>
-                                <textarea class='form-control'>".$records['Workers']."</textarea>
+        if(empty($records['rrID']))
+        {
+            echo "No Record(s)";
+        }
+        else
+        {
+            //get the date completed
+            $getinfo = $repairModel->WHERE('rrID',$val)->first();
+            $imgFile = "Accomplishment/".$records['File'];
+            $output="<div class='row g-3'>
+                        <div class='col-lg-6'>
+                            <div class='row g-3'>
+                                <div class='col-12 form-group'>
+                                    <label>Date Reported</label>
+                                    <input type='date' class='form-control' value='".$records['DateCreated']."'/>
+                                </div>
+                                <div class='col-12 form-group'>
+                                    <label>Date Completed</label>
+                                    <input type='date' class='form-control' value='".$getinfo['dateAccomplished']."'/>
+                                </div>
+                                <div class='col-12 form-group'>
+                                    <label>Repaired By</label>
+                                    <textarea class='form-control'>".$records['Workers']."</textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class='col-lg-6'>
-                        <div class='img-container'>
-                            <img src='".$imgFile."' id='image'/>
+                        <div class='col-lg-6'>
+                            <div class='img-container'>
+                                <img src='".$imgFile."' id='image'/>
+                            </div>
                         </div>
-                    </div>
-                </div>";
-        echo $output;
+                    </div>";
+            echo $output;
+        }
     }
 
     public function viewReport()

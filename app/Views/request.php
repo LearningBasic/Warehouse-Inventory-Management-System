@@ -435,7 +435,7 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
                 <div class="row g-3">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 form-group">
                         <div class="card-box">
                             <div class="card-body">
                                 <label><b>Damage Item(s)</b></label>
@@ -444,7 +444,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 form-group">
                         <div class="card-box">
                             <div class="card-body">
                                 <label><b>Overhaul Item(s)</b></label>
@@ -453,7 +453,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 form-group">
                         <div class="card-box">
                             <div class="card-body">
                                 <label><b>Transfer Item(s)</b></label>
@@ -462,7 +462,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 form-group">
                         <div class="card-box">
                             <div class="card-body">
                                 <label><b>Return Item(s)</b></label>
@@ -550,7 +550,7 @@
 										<td><?php echo $row->dateAccomplished ?></td>
 										<td><span class="badge bg-primary text-white">ACCEPTED</span></td>
 										<td>
-										<button type="button" class="btn btn-outline-primary btn-sm view_repair" value="<?php echo $row->reportID ?>"><i class="icon-copy dw dw-image"></i>&nbsp;View</button>
+										<button type="button" class="btn btn-outline-primary btn-sm view_repair" value="<?php echo $row->rrID ?>"><i class="icon-copy dw dw-image"></i>&nbsp;View</button>
 										</td>
 									</tr>
 									<?php } ?>
@@ -610,9 +610,9 @@
                 totalPendingDamage();
 				totalPendingOverhaul();
             });
-			$(document).on('click','.view',function(e){
+			$(document).on('click','.view_repair',function(e){
 				e.preventDefault();
-				$.ajax({url:"<?=site_url('view-report')?>",method:"GET",data:{value:$(this).val()},success:function(response)
+				$.ajax({url:"<?=site_url('view-accomplishment')?>",method:"GET",data:{value:$(this).val()},success:function(response)
 				{
 					$('#viewModal').modal('show');
 					$('#result').html(response);
