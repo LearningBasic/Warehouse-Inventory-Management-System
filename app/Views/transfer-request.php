@@ -4,7 +4,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>Add Report</title>
+		<title>Transfer Request</title>
 
 		<!-- Site favicon -->
 		<link
@@ -377,14 +377,6 @@
 							</ul>
 						</li>
 						<?php } ?>
-						<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
-						<li class="dropdown">
-							<a href="<?=site_url('request')?>" class="dropdown-toggle no-arrow">
-								<span class="micon bi bi-clipboard-data"></span
-								><span class="mtext">Request</span>
-							</a>
-						</li>
-						<?php } ?>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
                                 <i class="micon dw dw-bar-chart-1"></i><span class="mtext">Reports</span>
@@ -398,7 +390,7 @@
 							</ul>
 							<?php }else{ ?>
 							<ul class="submenu">
-								<li><a href="<?=site_url('add-report')?>" class="active">Create Report</a></li>
+								<li><a href="<?=site_url('transfer-item')?>" class="active">Transfer Request</a></li>
 							</ul>
 							<?php } ?>
 						</li>
@@ -430,225 +422,29 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
-				<?php if(!empty(session()->getFlashdata('fail'))) : ?>
-					<div class="alert alert-danger alert-dismissible fade show" role="alert">
-						<?= session()->getFlashdata('fail'); ?>
-					</div>
-				<?php endif; ?>
-				<?php if(!empty(session()->getFlashdata('success'))) : ?>
-					<div class="alert alert-success alert-dismissible fade show" role="alert">
-						<?= session()->getFlashdata('success'); ?>
-					</div>
-				<?php endif; ?>
-                <div class="card-box">
-                    <div class="card-header">
-                        Create Report
-						<div class="dropdown" style="float:right;">
-							<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" data-color="#1b3133" href="#" role="button" data-toggle="dropdown"><span class="icon-copy dw dw-add"></span> New</a>
-							<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-								<a class="dropdown-item" href="<?=site_url('damage-report')?>"><i class="dw dw-right-arrow"></i> Damage Item</a>
-								<a class="dropdown-item" href="<?=site_url('repair-report')?>"><i class="dw dw-right-arrow"></i> For Repair Item</a>
-								<a class="dropdown-item" href="<?=site_url('transfer-item')?>"><i class="dw dw-right-arrow"></i> Transfer Item</a>
-								<a class="dropdown-item" href="<?=site_url('return-order')?>"><i class="dw dw-right-arrow"></i> Return Order</a>
-							</div>
+                <div class="container">
+					<?php if(!empty(session()->getFlashdata('fail'))) : ?>
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
+							<?= session()->getFlashdata('fail'); ?>
 						</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="tab">
-                            <ul class="nav nav-tabs justify-content-left" role="tablist">
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link active text-blue"
-                                        data-toggle="tab"
-                                        href="#home6"
-                                        role="tab"
-                                        aria-selected="true"
-                                        >Damaged Item</a
-                                    >
-                                </li>
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link text-blue"
-                                        data-toggle="tab"
-                                        href="#profile6"
-                                        role="tab"
-                                        aria-selected="false"
-                                        >For Repair</a
-                                    >
-                                </li>
-								<li class="nav-item">
-                                    <a
-                                        class="nav-link text-blue"
-                                        data-toggle="tab"
-                                        href="#transfer6"
-                                        role="tab"
-                                        aria-selected="false"
-                                        >Transfer</a
-                                    >
-                                </li>
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link text-blue"
-                                        data-toggle="tab"
-                                        href="#contact6"
-                                        role="tab"
-                                        aria-selected="false"
-                                        >Return Order(s)</a
-                                    >
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane fade show active" id="home6" role="tabpanel">
-                                    <div class="pd-20">
-										<table class="data-table table stripe hover nowrap">
-											<thead>
-												<th>Date Reported</th>
-												<th>Defect Type</th>
-												<th>Product Name</th>
-												<th>Qty</th>
-												<th>Details</th>
-												<th>Remarks</th>
-												<th>Status</th>
-											</thead>
-											<tbody>
-												<?php foreach($damage as $row): ?>
-													<tr>
-														<td><?php echo $row->DateReport ?></td>
-														<td><?php echo $row->DamageRate ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->Details ?></td>
-														<td><?php echo $row->Remarks ?></td>
-														<td>
-															<?php if($row->Status==0){ ?>
-																<span class="badge bg-warning text-white">PENDING</span>
-															<?php }else{ ?>
-																<span class="badge bg-primary text-white">ACCEPTED</span>
-															<?php } ?>
-														</td>
-													</tr>
-												<?php endforeach; ?>
-											</tbody>
-										</table>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="profile6" role="tabpanel">
-                                    <div class="pd-20">
-										<table class="data-table table stripe hover nowrap">
-											<thead>
-												<th>Date Repaired</th>
-												<th>Product Name</th>
-												<th>Details</th>
-												<th>Date Accomplished</th>
-												<th>Status</th>
-											</thead>
-											<tbody>
-											<?php foreach($repair as $row): ?>
-												<?php if($row->Status==0){ ?>
-												<tr>
-													<td><?php echo $row->repairDate ?></td>
-													<td><?php echo $row->productName ?></td>
-													<td><?php echo $row->Details ?></td>
-													<td><?php echo $row->dateAccomplished ?></td>
-													<td><span class="badge bg-warning text-white">PENDING</span></td>
-												</tr>
-												<?php }else{ ?>
-												<tr>
-													<td><?php echo $row->repairDate ?></td>
-													<td><?php echo $row->productName ?></td>
-													<td><?php echo $row->Details ?></td>
-													<td><?php echo $row->dateAccomplished ?></td>
-													<td> 
-														<button type="button" class="btn btn-outline-primary btn-sm upload_report" value="<?php echo $row->rrID ?>"><span class="dw dw-upload"></span> Upload</button>
-													</td>
-												</tr>
-												<?php } ?>
-											<?php endforeach; ?>
-											</tbody>
-										</table>
-									</div>
-                                </div>
-								<div class="tab-pane fade" id="transfer6" role="tabpanel">
-                                    <div class="pd-20">
-                                    <table class="data-table table stripe hover nowrap">
-									<thead>
-										<th>Item No</th>
-										<th>Product Name</th>
-										<th>Qty</th>
-										<th>Effective Date</th>
-										<th>Status</th>
-									</thead>
-									<tbody>
-										<?php foreach($request as $row): ?>
-											<tr>
-												<td><?php echo $row->itemID ?></td>
-												<td><?php echo $row->productName ?></td>
-												<td><?php echo number_format($row->Qty,0) ?></td>
-												<td><?php echo $row->EffectiveDate ?></td>
-												<td>
-													<?php if($row->Status==0){ ?>
-														<span class="badge bg-warning text-white">PENDING</span>
-													<?php }else {?>
-														<span class="badge bg-primary text-white">APPROVED</span>
-													<?php } ?>
-												</td>
-											</tr>
-										<?php endforeach; ?>
-									</tbody>
-								</table>  
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="contact6" role="tabpanel">
-                                    <div class="pd-20">
-                                       
-                                    </div>
-                                </div>
-                            </div>
+					<?php endif; ?>
+					<?php if(!empty(session()->getFlashdata('success'))) : ?>
+						<div class="alert alert-success alert-dismissible fade show" role="alert">
+							<?= session()->getFlashdata('success'); ?>
+						</div>
+					<?php endif; ?>
+                    <div class="card-box">
+                        <div class="card-header">
+                            Transfer Request
+                            <a href="<?=site_url('add-report')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
+                        </div>
+                        <div class="card-body">
+                            
                         </div>
                     </div>
                 </div>
 			</div>
 		</div>
-		<div class="modal fade" id="accomplishModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myLargeModalLabel">
-                            Accomplishment Report Form
-                        </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    </div>
-                    <div class="modal-body">
-						<div class="alert alert-success alert-dismissible fade show" id="success" style="display:none;" role="alert">
-							<label id="successMessage"></label>
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="alert alert-danger alert-dismissible fade show" id="error" style="display:none;" role="alert">
-							<label id="errorMessage"></label>
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-                        <form method="post" class="row g-3" id="frmReport" enctype="multipart/form-data">
-							<input type="hidden" id="itemID" name="itemID"/>
-							<div class="col-12 form-group">
-								<label>Repaired By:</label>
-								<textarea class="form-control" name="involveWorkers" placeholder="Enter their complete name" required></textarea>
-							</div>
-							<div class="col-12 form-group">
-								<label>Attachment/Proof</label>
-								<input type="file" class="form-control" name="file" accept="image/png, image/gif, image/jpeg" required/>
-							</div>
-							<div class="col-12 form-group">
-								<input type="submit" class="btn btn-primary" value="Send Report" id="btnSend"/>
-							</div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
@@ -661,41 +457,5 @@
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- <script src="assets/ajax/system-config.js"></script> -->
-        <script>
-			$(document).on('click','.upload_report',function()
-			{
-				var val = $(this).val();
-				$('#accomplishModal').modal('show');
-				$('#itemID').attr("value",val);
-			});
-		   	$('#frmReport').on('submit',function(e)
-			{
-				e.preventDefault();
-				$.ajax({
-					type: 'POST',
-					url: '<?=site_url('send-accomplishment')?>',
-					data: new FormData(this),
-					contentType: false,
-					cache: false,
-					processData:false,
-					beforeSend: function(){
-						$('#btnSend').attr("disabled","disabled");
-						$('#frmReport').css("opacity",".5");
-					},
-					success: function(response){
-						if(response==="success"){
-							$('#frmReport')[0].reset();
-							document.getElementById('success').style="display:block";
-							$('#successMessage').html("Great! Successfully reported. Please refresh the page");
-						}else{
-							document.getElementById('error').style="display:block";
-							$('#errorMessage').html(response);
-						}
-						$('#frmReport').css("opacity","");
-						$("#btnSend").removeAttr("disabled");
-					}
-				});
-			});
-        </script>
 	</body>
 </html>

@@ -92,6 +92,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/add-report','Home::addReport');
     $routes->get('/damage-report','Home::damageReport');
     $routes->get('/repair-report','Home::repairReport');
+    $routes->get('/transfer-item','Home::transferItem');
     $routes->get('/request','Home::userRequest');
     $routes->get('/profile','Home::profile');
 });

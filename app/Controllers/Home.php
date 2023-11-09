@@ -321,8 +321,13 @@ class Home extends BaseController
         $builder->WHERE('a.accountID',$user);
         $builder->groupby('a.rrID');
         $repair = $builder->get()->getResult();
+        //transfer request
+        $builder = $this->db->table('tbltransfer_request');
+        $builder->select('*');
+        $builder->WHERE('accountID',$user);
+        $request = $builder->get()->getResult();
 
-        $data = ['damage'=>$damage,'repair'=>$repair];
+        $data = ['damage'=>$damage,'repair'=>$repair,'request'=>$request,];
         return view('add-report',$data);
     }
 
@@ -347,6 +352,15 @@ class Home extends BaseController
         $forRepair = $builder->get()->getResult();
         $data = ['repair'=>$forRepair,];
         return view('repair-report',$data);
+    }
+
+    public function transferItem()
+    {
+        $builder = $this->db->table('tblinventory');
+        $builder->select('*');
+        $items = $builder->get()->getResult();
+        $data = ['items'=>$items];
+        return view('transfer-request',$data);
     }
 
     public function userRequest()
