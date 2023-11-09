@@ -40,6 +40,7 @@ $routes->get('total-void','Dashboard::totalVoid');
 $routes->get('out-of-stock','Dashboard::outofStock');
 $routes->get('list-supplier','Dashboard::listSupplier');
 $routes->get('pending-damage-report','Dashboard::damageItem');
+$routes->get('pending-repair-report','Dashboard::overhaulItem');
 //saving the data
 $routes->post('save-industry','Home::saveIndustry');
 $routes->get('list-industry','Home::listIndustry');
@@ -66,6 +67,7 @@ $routes->post('transfer-item','ProductController::transferItem');
 $routes->post('receive-report','ProductController::receiveReport');
 //standard user reports
 $routes->post('send-damage-report','ProductController::damageReport');
+$routes->post('accept-damage-report','ProductController::acceptDamageReport');
 $routes->post('send-repair-report','ProductController::repairReport');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)

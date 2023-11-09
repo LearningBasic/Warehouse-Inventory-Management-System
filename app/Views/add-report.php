@@ -538,12 +538,30 @@
 											<thead>
 												<th>Date Repaired</th>
 												<th>Product Name</th>
-												<th>Qty</th>
 												<th>Details</th>
 												<th>Date Accomplished</th>
 												<th>Status</th>
 											</thead>
 											<tbody>
+											<?php foreach($repair as $row): ?>
+												<?php if($row->Status==0){ ?>
+												<tr>
+													<td><?php echo $row->repairDate ?></td>
+													<td><?php echo $row->productName ?></td>
+													<td><?php echo $row->Details ?></td>
+													<td><?php echo $row->dateAccomplished ?></td>
+													<td><span class="badge bg-warning text-white">PENDING</span></td>
+												</tr>
+												<?php }else{ ?>
+												<tr>
+													<td><?php echo $row->repairDate ?></td>
+													<td><?php echo $row->productName ?></td>
+													<td><?php echo $row->Details ?></td>
+													<td><?php echo $row->dateAccomplished ?></td>
+													<td><span class="badge bg-primary text-white">ACCEPTED</span></td>
+												</tr>
+												<?php } ?>
+											<?php endforeach; ?>
 											</tbody>
 										</table>
 									</div>

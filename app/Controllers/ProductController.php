@@ -412,6 +412,30 @@ class ProductController extends BaseController
         }
     }
 
+    public function acceptDamageReport()
+    {
+        $damageReportModel = new \App\Models\damageReportModel();
+        $inventoryModel = new \App\Models\inventoryModel();
+        //datas
+        $itemID = $this->request->getPost('value');
+
+        $values = ['Status'=>1];
+        $damageReportModel->update($itemID,$values);
+        //update the inventory
+        $builder = $this->db->table('tbldamagereport');
+        $builder->select('Qty,inventID');
+        $builder->WHERE('reportID',$itemID);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $inventory = $inventoryModel->WHERE('inventID',$row->inventID)->first();
+            $remain_qty = $inventory['Qty']-$row->Qty;
+            $new_values = ['Qty'=>$remain_qty];
+            $inventoryModel->update($inventory['inventID'],$new_values);
+        }
+        echo "Success";
+    }
+
     public function repairReport()
     {
         $repairReport = new \App\Models\repairReportModel();

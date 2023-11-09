@@ -308,7 +308,16 @@ class Home extends BaseController
         $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
         $builder->WHERE('a.accountID',$user);
         $damage = $builder->get()->getResult();
-        $data = ['damage'=>$damage,];
+        //repair
+        $builder = $this->db->table('tblrepairreport a');
+        $builder->select('a.*,c.productName');
+        $builder->join('tbldamagereport b','b.reportID=a.reportID','LEFT');
+        $builder->join('tblinventory c','c.inventID=b.inventID','LEFT');
+        $builder->WHERE('a.accountID',$user);
+        $builder->groupby('a.rrID');
+        $repair = $builder->get()->getResult();
+
+        $data = ['damage'=>$damage,'repair'=>$repair];
         return view('add-report',$data);
     }
 
@@ -340,13 +349,23 @@ class Home extends BaseController
         if(session()->get('role')=="Administrator"||session()->get('role')=="Editor")
         {
             $location = session()->get('assignment');
+            //damage
             $builder = $this->db->table('tbldamagereport a');
             $builder->select('a.*,b.productName');
             $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
             $builder->WHERE('b.warehouseID',$location);
             $builder->groupby('a.reportID');
             $damage = $builder->get()->getResult();
-            $data = ['damage'=>$damage];
+            //for repair
+            $builder = $this->db->table('tblrepairreport a');
+            $builder->select('a.*,c.productName');
+            $builder->join('tbldamagereport b','b.reportID=a.reportID','LEFT');
+            $builder->join('tblinventory c','c.inventID=b.inventID','LEFT');
+            $builder->WHERE('c.warehouseID',$location);
+            $builder->groupby('a.rrID');
+            $repair = $builder->get()->getResult();
+
+            $data = ['damage'=>$damage,'repair'=>$repair];
             return view('request',$data);
         }
         else

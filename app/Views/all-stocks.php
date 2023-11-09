@@ -488,7 +488,7 @@
 												</div>
 											</td>
 										</tr>
-										<?php }else if($row->Qty==$row->ReOrder){?>
+										<?php }else if($row->Qty<=$row->ReOrder){?>
 										<tr>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
@@ -550,7 +550,7 @@
 											<td><?php echo $row->warehouseName ?></td>
 											<td>-</td>
 										</tr>
-										<?php }else if($row->Qty==$row->ReOrder){?>
+										<?php }else if($row->Qty<=$row->ReOrder){?>
 										<tr>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>

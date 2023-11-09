@@ -448,7 +448,7 @@
                         <div class="card-box">
                             <div class="card-body">
                                 <label><b>Overhaul Item(s)</b></label>
-                                <h1>0</h1>
+                                <h1 id="totalPendingOverhaulItem">0</h1>
                                 <a href="javascript:void(0);" id="viewOverhaulItems">View</a>
                             </div>
                         </div>
@@ -505,7 +505,7 @@
                                     </td>
                                     <td>
 									<?php if($row->Status==0){ ?>
-										<button type="button" class="btn btn-outline-primary btn-sm accept">Accept</button>
+										<button type="button" class="btn btn-outline-primary btn-sm accept" value="<?php echo $row->reportID ?>"><i class="icon-copy dw dw-checked"></i>&nbsp;Accept</button>
 										<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-image"></i>&nbsp;View</a>
 										<?php }else{ ?>
 											<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-image"></i>&nbsp;View</a>
@@ -524,13 +524,36 @@
                             <thead>
                                 <th>Date</th>
                                 <th>Product Name</th>
-                                <th>Qty</th>
                                 <th>Details</th>
                                 <th>Date Accomplish</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+								<?php foreach($repair as $row): ?>
+									<?php if($row->Status==0){ ?>
+									<tr>
+										<td><?php echo $row->repairDate ?></td>
+										<td><?php echo $row->productName ?></td>
+										<td><?php echo $row->Details ?></td>
+										<td><?php echo $row->dateAccomplished ?></td>
+										<td><span class="badge bg-warning text-white">PENDING</span></td>
+										<td>
+											<button type="button" class="btn btn-outline-primary btn-sm accept_repair" value="<?php echo $row->reportID ?>"><i class="icon-copy dw dw-checked"></i>&nbsp;Accept</button>
+										</td>
+									</tr>
+									<?php }else{ ?>
+									<tr>
+										<td><?php echo $row->repairDate ?></td>
+										<td><?php echo $row->productName ?></td>
+										<td><?php echo $row->Details ?></td>
+										<td><?php echo $row->dateAccomplished ?></td>
+										<td><span class="badge bg-primary text-white">ACCEPTED</span></td>
+										<td>-</td>
+									</tr>
+									<?php } ?>
+								<?php endforeach; ?>
+							</tbody>
                         </table>
                     </div>
                 </div>
@@ -563,11 +586,75 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
         <script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             $(document).ready(function()
             {
                 totalPendingDamage();
+				totalPendingOverhaul();
             });
+			$(document).on('click','.accept',function()
+			{
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to accept this report?",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+						if (result.isConfirmed) {
+							var val = $(this).val();
+							$.ajax({
+								url:"<?=site_url('accept-damage-report')?>",method:"POST",
+								data:{value:val},
+								success:function(response)
+								{
+									if(response==="Success")
+									{
+										location.reload();
+									}
+									else
+									{
+										Swal.fire({
+										title: "Error",
+										text: response,
+										icon: "error"
+										});
+									}
+								}
+							});
+						}
+					});
+			});
+			$(document).on('click','.accept_repair',function()
+			{
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to accept this report?",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+						if (result.isConfirmed) {
+							var val = $(this).val();
+							
+						}
+					});
+			});
+			function totalPendingOverhaul()
+			{
+				$.ajax({
+                    url:"<?=site_url('pending-repair-report')?>",method:"GET",
+                    success:function(response)
+                    {
+                        $('#totalPendingOverhaulItem').html(response);
+                    }
+                });
+			}
             function totalPendingDamage()
             {
                 $.ajax({

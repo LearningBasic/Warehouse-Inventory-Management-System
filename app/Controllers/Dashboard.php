@@ -133,4 +133,19 @@ class Dashboard extends BaseController
             echo $row->total;
         }
     }
+
+    public function overhaulItem()
+    {
+        $location = session()->get('assignment');
+        $builder = $this->db->table('tblrepairreport a');
+        $builder->select('FORMAT(COUNT(a.rrID),0)total');
+        $builder->join('tbldamagereport b','b.reportID=a.reportID','LEFT');
+        $builder->join('tblinventory c','c.inventID=b.inventID','LEFT');
+        $builder->WHERE('a.Status',0)->WHERE('c.warehouseID',$location);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            echo $row->total;
+        }
+    }
 }
