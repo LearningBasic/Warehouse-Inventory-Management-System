@@ -550,3 +550,19 @@ INFO - 2023-11-09 08:41:22 --> Session: Class initialized using 'CodeIgniter\Ses
 INFO - 2023-11-09 08:44:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2023-11-09 08:44:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2023-11-09 09:01:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-09 09:04:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-09 09:10:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-09 09:15:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2023-11-09 09:15:25 --> Undefined variable $warehouse
+in APPPATH\Views\transfer-request.php on line 473.
+ 1 APPPATH\Views\transfer-request.php(473): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $warehouse', 'APPPATH\\Views\\transfer-request.php', 473)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\transfer-request.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1177): CodeIgniter\View\View->render('transfer-request', [], true)
+ 5 APPPATH\Controllers\Home.php(364): view('transfer-request', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Home->transferItem()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+INFO - 2023-11-09 09:15:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

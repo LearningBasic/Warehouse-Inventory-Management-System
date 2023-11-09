@@ -456,6 +456,27 @@
                                         </div>
                                     </div>
                                 </div>
+								<div class="col-12 form-group">
+									<div class="row g-3">
+										<div class="col-lg-4">
+											<label>Date Created</label>
+											<input type="date" class="form-control" name="dateCreated" value="<?php echo date('Y-m-d') ?>" required/>
+										</div>
+										<div class="col-lg-4">
+											<label>Effective Date</label>
+											<input type="date" class="form-control" name="dateEffective" required/>
+										</div>
+										<div class="col-lg-4">
+											<label>Location</label>
+											<select class="form-control" name="location" required>
+												<option value="">Choose</option>
+												<?php foreach($location as $row): ?>
+													<option value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>
+												<?php endforeach; ?>
+											</select>
+										</div>
+									</div>
+								</div>
                             </form>
                         </div>
                     </div>
