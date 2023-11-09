@@ -564,15 +564,18 @@
                     <div class="card-body">
                         <table class="data-table table stripe hover nowrap">
                             <thead>
-                                <th>Date</th>
-                                <th>Product Name</th>
-                                <th>Qty</th>
-                                <th>Details</th>
-                                <th>Date Accomplish</th>
-                                <th>Status</th>
-                                <th>Action</th>
+								<th>Location</th>
+								<th>Requestor</th>
+								<th>Item No</th>
+								<th>Product Name</th>
+								<th>Qty</th>
+								<th>Effective Date</th>
+								<th>Status</th>
+								<th>Action</th>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+
+							</tbody>
                         </table>
                     </div>
                 </div>

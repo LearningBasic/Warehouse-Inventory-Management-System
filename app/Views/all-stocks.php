@@ -483,7 +483,6 @@
 														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
 														<button type="button" class="dropdown-item deadstock" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-file-19"></i>Damage</button>
 														<a class="dropdown-item" href="transfer/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-message-1"></i>Transfer</a>
-														<button type="button" class="dropdown-item return" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-refresh2"></i>Return</button>
 													</div>
 												</div>
 											</td>
@@ -508,7 +507,6 @@
 														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
 														<button type="button" class="dropdown-item deadstock" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-file-19"></i>Damage</button>
 														<a class="dropdown-item" href="transfer/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-message-1"></i>Transfer</a>
-														<button type="button" class="dropdown-item return" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-refresh2"></i>Return</button>
 													</div>
 												</div>
 											</td>
