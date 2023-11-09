@@ -503,7 +503,9 @@
                                             <span class="badge bg-primary text-white">ACCEPTED</span>
                                         <?php } ?>
                                     </td>
-                                    <td></td>
+                                    <td>
+										<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-image"></i>&nbsp;View</a>
+									</td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

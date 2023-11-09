@@ -417,5 +417,29 @@ class ProductController extends BaseController
         $repairReport = new \App\Models\repairReportModel();
         //data
         $itemID  = $this->request->getPost('itemID');
+        $details = $this->request->getPost('details');
+        $startDate = $this->request->getPost('startDate');
+        $dateAccomplish = $this->request->getPost('dateAccomplish');
+        $status=0;
+        $approveDate = "0000-00-00";
+
+        $validation = $this->validate([
+            'itemID'=>'required','details'=>'required','startDate'=>'required','dateAccomplish'=>'required',
+        ]);
+        if(!$validation)
+        {
+            session()->setFlashdata('fail','Invalid! Please fill in the form');
+            return redirect()->to('/repair-report')->withInput();
+        }
+        else
+        {
+            $values = [
+                'repairDate'=>$startDate,'reportID'=>$itemID,'Details'=>$details,'dateAccomplished'=>$dateAccomplish,
+                'Status'=>$status,'approveDate'=>$approveDate,'accountID'=>session()->get('loggedUser')
+            ];
+            $repairReport->save($values);
+            session()->setFlashdata('success','Great! Successfully submitted for review');
+            return redirect()->to('/repair-report')->withInput();
+        }
     }
 }
