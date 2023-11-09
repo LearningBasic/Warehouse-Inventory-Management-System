@@ -119,4 +119,18 @@ class Dashboard extends BaseController
         $total = $onhand + $reserve;
         echo number_format($total,0);
     }
+
+    public function damageItem()
+    {
+        $location = session()->get('assignment');
+        $builder = $this->db->table('tbldamagereport a');
+        $builder->select('FORMAT(COUNT(a.reportID),0)total');
+        $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
+        $builder->WHERE('a.Status',0)->WHERE('b.warehouseID',$location);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            echo $row->total;
+        }
+    }
 }

@@ -439,7 +439,7 @@
                         <div class="card-box">
                             <div class="card-body">
                                 <label><b>Damage Item(s)</b></label>
-                                <h1>0</h1>
+                                <h1 id="totalPendingDamageItem">0</h1>
                                 <a href="javascript:void(0);" id="viewDamageItems">View</a>
                             </div>
                         </div>
@@ -487,7 +487,26 @@
                                 <th>Status</th>
                                 <th>Action</th>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+                            <?php foreach($damage as $row): ?>
+                                <tr>
+                                    <td><?php echo $row->DateReport ?></td>
+                                    <td><?php echo $row->DamageRate ?></td>
+                                    <td><?php echo $row->productName ?></td>
+                                    <td><?php echo number_format($row->Qty,0) ?></td>
+                                    <td><?php echo $row->Details ?></td>
+                                    <td><?php echo $row->Remarks ?></td>
+                                    <td>
+                                        <?php if($row->Status==0){ ?>
+                                            <span class="badge bg-warning text-white">PENDING</span>
+                                        <?php }else{ ?>
+                                            <span class="badge bg-primary text-white">ACCEPTED</span>
+                                        <?php } ?>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -538,6 +557,20 @@
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
         <script src="assets/vendors/scripts/datatable-setting.js"></script>
         <script>
+            $(document).ready(function()
+            {
+                totalPendingDamage();
+            });
+            function totalPendingDamage()
+            {
+                $.ajax({
+                    url:"<?=site_url('pending-damage-report')?>",method:"GET",
+                    success:function(response)
+                    {
+                        $('#totalPendingDamageItem').html(response);
+                    }
+                });
+            }
             $('#viewDamageItems').on('click',function(e)
             {
                 e.preventDefault();

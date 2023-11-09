@@ -325,7 +325,15 @@ class Home extends BaseController
 
     public function userRequest()
     {
-        return view('request');
+        $location = session()->get('assignment');
+        $builder = $this->db->table('tbldamagereport a');
+        $builder->select('a.*,b.productName');
+        $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
+        $builder->WHERE('b.warehouseID',$location);
+        $builder->groupby('a.reportID');
+        $damage = $builder->get()->getResult();
+        $data = ['damage'=>$damage];
+        return view('request',$data);
     }
 
     public function systemConfiguration()
