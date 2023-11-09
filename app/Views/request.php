@@ -4,7 +4,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>FastCat WMS - Warehouse Inventory Management System</title>
+		<title>FastCat WMS - Request</title>
 
 		<!-- Site favicon -->
 		<link
@@ -100,68 +100,6 @@
 		<div class="header">
 			<div class="header-left">
 				<div class="menu-icon bi bi-list"></div>
-				<div
-					class="search-toggle-icon bi bi-search"
-					data-toggle="header_search"
-				></div>
-				<div class="header-search">
-					<form>
-						<div class="form-group mb-0">
-							<i class="dw dw-search2 search-icon"></i>
-							<input
-								type="text"
-								class="form-control search-input"
-								placeholder="Search Here"
-							/>
-							<div class="dropdown">
-								<a
-									class="dropdown-toggle no-arrow"
-									href="#"
-									role="button"
-									data-toggle="dropdown"
-								>
-									<i class="ion-arrow-down-c"></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-right">
-									<div class="form-group row">
-										<label class="col-sm-12 col-md-2 col-form-label"
-											>From</label
-										>
-										<div class="col-sm-12 col-md-10">
-											<input
-												class="form-control form-control-sm form-control-line"
-												type="text"
-											/>
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-sm-12 col-md-2 col-form-label">To</label>
-										<div class="col-sm-12 col-md-10">
-											<input
-												class="form-control form-control-sm form-control-line"
-												type="text"
-											/>
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-sm-12 col-md-2 col-form-label"
-											>Subject</label
-										>
-										<div class="col-sm-12 col-md-10">
-											<input
-												class="form-control form-control-sm form-control-line"
-												type="text"
-											/>
-										</div>
-									</div>
-									<div class="text-right">
-										<button class="btn btn-primary">Search</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
 			</div>
 			<div class="header-right">
 				<div class="dashboard-setting user-notification">
@@ -396,7 +334,7 @@
 				<div class="sidebar-menu">
 					<ul id="accordion-menu">
 						<li class="dropdown">
-							<a href="<?=site_url('dashboard')?>" class="dropdown-toggle no-arrow active">
+							<a href="<?=site_url('dashboard')?>" class="dropdown-toggle no-arrow">
 								<span class="micon bi bi-house"></span
 								><span class="mtext">Home</span>
 							</a>
@@ -446,7 +384,7 @@
 						</li>
 						<?php } ?>
 						<li class="dropdown">
-							<a href="<?=site_url('request')?>" class="dropdown-toggle no-arrow">
+							<a href="<?=site_url('request')?>" class="dropdown-toggle active no-arrow">
 								<span class="micon bi bi-clipboard-data"></span
 								><span class="mtext">Request</span>
 							</a>
@@ -496,141 +434,97 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
-				<div class="title pb-20">
-					<h2 class="h3 mb-0">Overview</h2>
-				</div>
-				<div class="row pb-10">
-					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
-						<div class="card-box height-100-p widget-style3">
-							<div class="d-flex flex-wrap">
-								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="allStocks">0</div>
-									<div class="font-14 text-secondary weight-500">
-										Physical Available
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
-						<div class="card-box height-100-p widget-style3">
-							<div class="d-flex flex-wrap">
-								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="totalReserved">0</div>
-									<div class="font-14 text-secondary weight-500">
-										Soft Reserved
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
-						<div class="card-box height-100-p widget-style3">
-							<div class="d-flex flex-wrap">
-								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="totalStocks">0</div>
-									<div class="font-14 text-secondary weight-500">
-										On-hand Inventory
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
-						<div class="card-box height-100-p widget-style3">
-							<div class="d-flex flex-wrap">
-								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="totalOrders">0</div>
-									<div class="font-14 text-secondary weight-500">
-										New Order Item
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
-						<div class="card-box height-100-p widget-style3">
-							<div class="d-flex flex-wrap">
-								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="totalReturn">0</div>
-									<div class="font-14 text-secondary weight-500">
-										Returned Item
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
-						<div class="card-box height-100-p widget-style3">
-							<div class="d-flex flex-wrap">
-								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="totalVoid">0</div>
-									<div class="font-14 text-secondary weight-500">
-										Out of Stocks
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row pb-10">
-					<div class="col-7 mb-20">
-						<div class="card-box pd-20">
-							<div
-								class="d-flex flex-wrap justify-content-between align-items-center pb-0 pb-md-3"
-							>
-								<div class="h5 mb-md-0">Inventory Value Per Product Name</div>
-							</div>
-							<div id="chartContainer" style="height:400px;"></div>
-						</div>
-					</div>
-					<div class="col-5 mb-20">
-						<div class="card-box pd-20">
-							<div
-								class="d-flex flex-wrap justify-content-between align-items-center pb-0 pb-md-3"
-							>
-								<div class="h5 mb-md-0">Volume Per Location</div>
-							</div>
-							<div id="chartAssignment" style="height:400px;"></div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-lg-4 col-md-6 mb-20">
-						<div class="card-box pd-20">
-							<div class="d-flex justify-content-between pb-10">
-								<div class="h5 mb-0">Top Suppliers</div>
-							</div>
-							<div class="user-list" style="overflow-y:auto;height:300px;">
-								<ul id="listSupplier">
-									
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 mb-20">
-						<div class="card-box pd-20">
-							<div class="d-flex justify-content-between">
-								<div class="h5 mb-0">Out of Stocks</div>
-							</div>
-							<div class="user-list" style="overflow-y:auto;height:300px;">
-								<ul id="outStock">
-									
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-12 mb-20">
-                    	<div class="card-box pd-20">
-							<div class="d-flex justify-content-between">
-								<div class="h5 mb-0">Stocks By Category</div>
-							</div>
-							<div id="chartCategory" style="height:300px;"></div>
-						</div>
-					</div>
-				</div>
+                <div class="row g-3">
+                    <div class="col-lg-3">
+                        <div class="card-box">
+                            <div class="card-body">
+                                <label><b>Damage Item(s)</b></label>
+                                <h1>0</h1>
+                                <a href="javascript:void(0);" id="viewDamageItems">View</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card-box">
+                            <div class="card-body">
+                                <label><b>Overhaul Item(s)</b></label>
+                                <h1>0</h1>
+                                <a href="javascript:void(0);" id="viewOverhaulItems">View</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card-box">
+                            <div class="card-body">
+                                <label><b>Transfer Item(s)</b></label>
+                                <h1>0</h1>
+                                <a href="javascript:void(0);" id="viewTransferItems">View</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card-box">
+                            <div class="card-body">
+                                <label><b>Return Item(s)</b></label>
+                                <h1>0</h1>
+                                <a href="javascript:void(0);" id="viewReturnItems">View</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="card-box" id="damageReport" style="display:none;">
+                    <div class="card-header">Damage Report</div>
+                    <div class="card-body">
+                        <table class="data-table table stripe hover nowrap">
+                            <thead>
+                                <th>Date Reported</th>
+                                <th>Defect Type</th>
+                                <th>Product Name</th>
+                                <th>Qty</th>
+                                <th>Details</th>
+                                <th>Remarks</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-box" id="overhaulReport" style="display:none;">
+                    <div class="card-header">Overhaul Report</div>
+                    <div class="card-body">
+                        <table class="data-table table stripe hover nowrap">
+                            <thead>
+                                <th>Date</th>
+                                <th>Product Name</th>
+                                <th>Qty</th>
+                                <th>Details</th>
+                                <th>Date Accomplish</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-box" id="transferReport" style="display:none;">
+                    <div class="card-header">For Transfer</div>
+                    <div class="card-body">
+                        <table class="data-table table stripe hover nowrap">
+                            <thead>
+                                <th>Date</th>
+                                <th>Product Name</th>
+                                <th>Qty</th>
+                                <th>Details</th>
+                                <th>Date Accomplish</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
 			</div>
 		</div>
 		<!-- js -->
@@ -642,82 +536,29 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-		<script>
-			$(document).ready(function(){totalItem();totalStocks();totalReserved();totalSupplier();outStock();listSupplier();});
-			function totalItem(){$.ajax({url:"<?=site_url('total-item')?>",method:"GET",success:function(response){$('#allStocks').html(response);}});}
-			function totalStocks(){$.ajax({url:"<?=site_url('total-stocks')?>",method:"GET",success:function(response){$('#totalStocks').html(response);}});}
-			function totalReserved(){$.ajax({url:"<?=site_url('total-reserved')?>",method:"GET",success:function(response){$('#totalReserved').html(response);}});}
-			function totalSupplier(){$.ajax({url:"<?=site_url('total-void')?>",method:"GET",success:function(response){$('#totalVoid').html(response);}});}
-			function listSupplier(){$.ajax({url:"<?=site_url('list-supplier')?>",method:"GET",success:function(response){if(response===""){$('#listSupplier').html("<li>No Records</li>");}else{$('#listSupplier').append(response);}}});}
-			function outStock(){$.ajax({url:"<?=site_url('out-of-stock')?>",method:"GET",success:function(response){if(response===""){$('#outStock').html("<li>No Records</li>");}else{$('#outStock').append(response);}}});}
-			google.charts.setOnLoadCallback(productChart);google.charts.setOnLoadCallback(assignChart);google.charts.setOnLoadCallback(categoryChart);
-			function productChart() 
-			{
-	
-				/* Define the chart to be drawn.*/
-				var data = google.visualization.arrayToDataTable([
-					['Product', 'Total'],
-					<?php 
-					foreach ($query as $row){
-					echo "['".$row->productName."',".$row->total."],";
-					}
-					?>
-				]);
-
-				var options = {
-				title: '',
-				curveType: 'function',
-				legend: { position: 'bottom' }
-				};
-				/* Instantiate and draw the chart.*/
-				var chart = new google.visualization.BarChart(document.getElementById('chartContainer'));
-				chart.draw(data, options);
-			}
-			function assignChart() 
-			{
-	
-				/* Define the chart to be drawn.*/
-				var data = google.visualization.arrayToDataTable([
-					['Assignment', 'Total'],
-					<?php 
-					foreach ($assignment as $row){
-					echo "['".$row->warehouseName."',".$row->total."],";
-					}
-					?>
-				]);
-
-				var options = {
-				title: '',
-				curveType: 'function',
-				legend: { position: 'bottom' },
-				pieHole: 0.4
-				};
-				/* Instantiate and draw the chart.*/
-				var chart = new google.visualization.PieChart(document.getElementById('chartAssignment'));
-				chart.draw(data, options);
-			}
-			function categoryChart() 
-			{
-	
-				/* Define the chart to be drawn.*/
-				var data = google.visualization.arrayToDataTable([
-					['Assignment', 'Total'],
-					<?php 
-					foreach ($category as $row){
-					echo "['".$row->categoryName."',".$row->total."],";
-					}
-					?>
-				]);
-
-				var options = {
-				title: '',
-				curveType: 'function',
-				legend: { position: 'bottom' },
-				};
-				/* Instantiate and draw the chart.*/
-				var chart = new google.visualization.PieChart(document.getElementById('chartCategory'));
-				chart.draw(data, options);
-			}
-		</script>
+        <script src="assets/vendors/scripts/datatable-setting.js"></script>
+        <script>
+            $('#viewDamageItems').on('click',function(e)
+            {
+                e.preventDefault();
+                $('#damageReport').slideDown();
+                $('#overhaulReport').slideUp();
+                $('#transferReport').slideUp();
+            });
+            $('#viewOverhaulItems').on('click',function(e)
+            {
+                e.preventDefault();
+                $('#overhaulReport').slideDown();
+                $('#damageReport').slideUp();
+                $('#transferReport').slideUp();
+            });
+            $('#viewTransferItems').on('click',function(e)
+            {
+                e.preventDefault();
+                $('#overhaulReport').slideUp();
+                $('#damageReport').slideUp();
+                $('#transferReport').slideDown();
+            });
+        </script>
 	</body>
 </html>

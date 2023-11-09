@@ -323,6 +323,11 @@ class Home extends BaseController
         return view('damage-report',$data);
     }
 
+    public function userRequest()
+    {
+        return view('request');
+    }
+
     public function systemConfiguration()
     {
         //get the user accounts
