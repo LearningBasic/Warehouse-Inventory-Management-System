@@ -375,6 +375,14 @@
 								<li><a href="<?=site_url('edit-supplier')?>" class="active">Edit Supplier</a></li>
 							</ul>
 						</li>
+						<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
+						<li class="dropdown">
+							<a href="<?=site_url('request')?>" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-clipboard-data"></span
+								><span class="mtext">Request</span>
+							</a>
+						</li>
+						<?php } ?>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
                                 <i class="micon dw dw-bar-chart-1"></i><span class="mtext">Reports</span>

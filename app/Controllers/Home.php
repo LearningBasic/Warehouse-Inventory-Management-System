@@ -323,17 +323,36 @@ class Home extends BaseController
         return view('damage-report',$data);
     }
 
+    public function repairReport()
+    {
+        $assign = session()->get('assignment');
+        $builder = $this->db->table('tbldamagereport a');
+        $builder->select('a.*');
+        $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
+        $builder->WHERE('b.warehouseID',$assign);
+        $forRepair = $builder->get()->getResult();
+        $data = ['repair'=>$forRepair,];
+        return view('repair-report',$data);
+    }
+
     public function userRequest()
     {
-        $location = session()->get('assignment');
-        $builder = $this->db->table('tbldamagereport a');
-        $builder->select('a.*,b.productName');
-        $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
-        $builder->WHERE('b.warehouseID',$location);
-        $builder->groupby('a.reportID');
-        $damage = $builder->get()->getResult();
-        $data = ['damage'=>$damage];
-        return view('request',$data);
+        if(session()->get('role')=="Administrator"||session()->get('role')=="Editor")
+        {
+            $location = session()->get('assignment');
+            $builder = $this->db->table('tbldamagereport a');
+            $builder->select('a.*,b.productName');
+            $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
+            $builder->WHERE('b.warehouseID',$location);
+            $builder->groupby('a.reportID');
+            $damage = $builder->get()->getResult();
+            $data = ['damage'=>$damage];
+            return view('request',$data);
+        }
+        else
+        {
+            return redirect()->back();
+        }
     }
 
     public function systemConfiguration()

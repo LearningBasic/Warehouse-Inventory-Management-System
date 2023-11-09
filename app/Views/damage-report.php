@@ -390,7 +390,7 @@
 							</ul>
 							<?php }else{ ?>
 							<ul class="submenu">
-								<li><a href="<?=site_url('damage-repprt')?>" class="active">Damage Report</a></li>
+								<li><a href="<?=site_url('damage-report')?>" class="active">Damage Report</a></li>
 							</ul>
 							<?php } ?>
 						</li>

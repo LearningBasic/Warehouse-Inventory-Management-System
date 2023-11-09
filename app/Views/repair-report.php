@@ -4,7 +4,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>Add Report</title>
+		<title>Overhaul Report</title>
 
 		<!-- Site favicon -->
 		<link
@@ -377,14 +377,6 @@
 							</ul>
 						</li>
 						<?php } ?>
-						<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
-						<li class="dropdown">
-							<a href="<?=site_url('request')?>" class="dropdown-toggle no-arrow">
-								<span class="micon bi bi-clipboard-data"></span
-								><span class="mtext">Request</span>
-							</a>
-						</li>
-						<?php } ?>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
                                 <i class="micon dw dw-bar-chart-1"></i><span class="mtext">Reports</span>
@@ -398,7 +390,7 @@
 							</ul>
 							<?php }else{ ?>
 							<ul class="submenu">
-								<li><a href="<?=site_url('add-report')?>" class="active">Create Report</a></li>
+								<li><a href="<?=site_url('repair-report')?>" class="active">Overhaul Report</a></li>
 							</ul>
 							<?php } ?>
 						</li>
@@ -430,134 +422,26 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
-				<?php if(!empty(session()->getFlashdata('fail'))) : ?>
-					<div class="alert alert-danger alert-dismissible fade show" role="alert">
-						<?= session()->getFlashdata('fail'); ?>
-					</div>
-				<?php endif; ?>
-				<?php if(!empty(session()->getFlashdata('success'))) : ?>
-					<div class="alert alert-success alert-dismissible fade show" role="alert">
-						<?= session()->getFlashdata('success'); ?>
-					</div>
-				<?php endif; ?>
-                <div class="card-box">
-                    <div class="card-header">
-                        Create Report
-						<div class="dropdown" style="float:right;">
-							<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" data-color="#1b3133" href="#" role="button" data-toggle="dropdown"><span class="icon-copy dw dw-add"></span> New</a>
-							<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-								<a class="dropdown-item" href="<?=site_url('damage-report')?>"><i class="dw dw-add"></i> Damage Item</a>
-								<a class="dropdown-item" href="<?=site_url('repair-report')?>"><i class="dw dw-add"></i> For Repair Item</a>
-								<a class="dropdown-item" href="<?=site_url('transfer-item')?>"><i class="dw dw-add"></i> Transfer Item</a>
-							</div>
+                <div class="container">
+					<?php if(!empty(session()->getFlashdata('fail'))) : ?>
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
+							<?= session()->getFlashdata('fail'); ?>
 						</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="tab">
-                            <ul class="nav nav-tabs justify-content-left" role="tablist">
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link active text-blue"
-                                        data-toggle="tab"
-                                        href="#home6"
-                                        role="tab"
-                                        aria-selected="true"
-                                        >Damaged Item</a
-                                    >
-                                </li>
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link text-blue"
-                                        data-toggle="tab"
-                                        href="#profile6"
-                                        role="tab"
-                                        aria-selected="false"
-                                        >For Repair</a
-                                    >
-                                </li>
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link text-blue"
-                                        data-toggle="tab"
-                                        href="#contact6"
-                                        role="tab"
-                                        aria-selected="false"
-                                        >Return Item</a
-                                    >
-                                </li>
-								<li class="nav-item">
-                                    <a
-                                        class="nav-link text-blue"
-                                        data-toggle="tab"
-                                        href="#transfer6"
-                                        role="tab"
-                                        aria-selected="false"
-                                        >Transfer</a
-                                    >
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane fade show active" id="home6" role="tabpanel">
-                                    <div class="pd-20">
-										<table class="data-table table stripe hover nowrap">
-											<thead>
-												<th>Date Reported</th>
-												<th>Defect Type</th>
-												<th>Product Name</th>
-												<th>Qty</th>
-												<th>Details</th>
-												<th>Remarks</th>
-												<th>Status</th>
-											</thead>
-											<tbody>
-												<?php foreach($damage as $row): ?>
-													<tr>
-														<td><?php echo $row->DateReport ?></td>
-														<td><?php echo $row->DamageRate ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->Details ?></td>
-														<td><?php echo $row->Remarks ?></td>
-														<td>
-															<?php if($row->Status==0){ ?>
-																<span class="badge bg-warning text-white">PENDING</span>
-															<?php }else{ ?>
-																<span class="badge bg-primary text-white">ACCEPTED</span>
-															<?php } ?>
-														</td>
-													</tr>
-												<?php endforeach; ?>
-											</tbody>
-										</table>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="profile6" role="tabpanel">
-                                    <div class="pd-20">
-										<table class="data-table table stripe hover nowrap">
-											<thead>
-												<th>Date Repaired</th>
-												<th>Product Name</th>
-												<th>Qty</th>
-												<th>Details</th>
-												<th>Date Accomplished</th>
-												<th>Status</th>
-											</thead>
-											<tbody>
-											</tbody>
-										</table>
-									</div>
-                                </div>
-                                <div class="tab-pane fade" id="contact6" role="tabpanel">
-                                    <div class="pd-20">
-                                       
-                                    </div>
-                                </div>
-								<div class="tab-pane fade" id="transfer6" role="tabpanel">
-                                    <div class="pd-20">
-                                       
-                                    </div>
-                                </div>
-                            </div>
+					<?php endif; ?>
+					<?php if(!empty(session()->getFlashdata('success'))) : ?>
+						<div class="alert alert-success alert-dismissible fade show" role="alert">
+							<?= session()->getFlashdata('success'); ?>
+						</div>
+					<?php endif; ?>
+                    <div class="card-box">
+                        <div class="card-header">
+                            Create Report
+                            <a href="<?=site_url('add-report')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" class="row g-3" id="frmReport" action="<?=base_url('send-repair-report')?>" enctype="multipart/form-data">
+								
+                            </form>
                         </div>
                     </div>
                 </div>
