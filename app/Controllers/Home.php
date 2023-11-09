@@ -125,6 +125,11 @@ class Home extends BaseController
         return view('manage-stocks',$data);
     }
 
+    public function storage()
+    {
+        return view('storage');
+    }
+
     public function createReport($id=null)
     {
         $builder = $this->db->table('tbldamageitem a');

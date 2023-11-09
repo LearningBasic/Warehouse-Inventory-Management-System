@@ -465,7 +465,7 @@
                     <div class="col-lg-3 form-group">
                         <div class="card-box">
                             <div class="card-body">
-                                <label><b>Return Item(s)</b></label>
+                                <label><b>Return Order(s)</b></label>
                                 <h1>0</h1>
                                 <a href="javascript:void(0);" id="viewReturnItems">View</a>
                             </div>

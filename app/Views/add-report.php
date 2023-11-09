@@ -449,7 +449,7 @@
 								<a class="dropdown-item" href="<?=site_url('damage-report')?>"><i class="dw dw-right-arrow"></i> Damage Item</a>
 								<a class="dropdown-item" href="<?=site_url('repair-report')?>"><i class="dw dw-right-arrow"></i> For Repair Item</a>
 								<a class="dropdown-item" href="<?=site_url('transfer-item')?>"><i class="dw dw-right-arrow"></i> Transfer Item</a>
-								<a class="dropdown-item" href="<?=site_url('return-item')?>"><i class="dw dw-right-arrow"></i> Return Item</a>
+								<a class="dropdown-item" href="<?=site_url('return-order')?>"><i class="dw dw-right-arrow"></i> Return Order</a>
 							</div>
 						</div>
                     </div>
@@ -476,16 +476,6 @@
                                         >For Repair</a
                                     >
                                 </li>
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link text-blue"
-                                        data-toggle="tab"
-                                        href="#contact6"
-                                        role="tab"
-                                        aria-selected="false"
-                                        >Return Item</a
-                                    >
-                                </li>
 								<li class="nav-item">
                                     <a
                                         class="nav-link text-blue"
@@ -494,6 +484,16 @@
                                         role="tab"
                                         aria-selected="false"
                                         >Transfer</a
+                                    >
+                                </li>
+                                <li class="nav-item">
+                                    <a
+                                        class="nav-link text-blue"
+                                        data-toggle="tab"
+                                        href="#contact6"
+                                        role="tab"
+                                        aria-selected="false"
+                                        >Return Order(s)</a
                                     >
                                 </li>
                             </ul>
@@ -568,12 +568,23 @@
 										</table>
 									</div>
                                 </div>
-                                <div class="tab-pane fade" id="contact6" role="tabpanel">
+								<div class="tab-pane fade" id="transfer6" role="tabpanel">
                                     <div class="pd-20">
-                                       
+                                    <table class="data-table table stripe hover nowrap">
+									<thead>
+										<th>Item No</th>
+										<th>Product Name</th>
+										<th>Qty</th>
+										<th>Effective Date</th>
+										<th>Status</th>
+									</thead>
+									<tbody>
+
+									</tbody>
+								</table>  
                                     </div>
                                 </div>
-								<div class="tab-pane fade" id="transfer6" role="tabpanel">
+                                <div class="tab-pane fade" id="contact6" role="tabpanel">
                                     <div class="pd-20">
                                        
                                     </div>
