@@ -411,4 +411,11 @@ class ProductController extends BaseController
             }
         }
     }
+
+    public function repairReport()
+    {
+        $repairReport = new \App\Models\repairReportModel();
+        //data
+        $itemID  = $this->request->getPost('itemID');
+    }
 }

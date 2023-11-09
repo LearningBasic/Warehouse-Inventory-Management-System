@@ -327,9 +327,9 @@ class Home extends BaseController
     {
         $assign = session()->get('assignment');
         $builder = $this->db->table('tbldamagereport a');
-        $builder->select('a.*');
+        $builder->select('a.reportID,b.productName');
         $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
-        $builder->WHERE('b.warehouseID',$assign);
+        $builder->WHERE('b.warehouseID',$assign)->WHERE('a.Status',1);
         $forRepair = $builder->get()->getResult();
         $data = ['repair'=>$forRepair,];
         return view('repair-report',$data);

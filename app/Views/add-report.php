@@ -449,6 +449,7 @@
 								<a class="dropdown-item" href="<?=site_url('damage-report')?>"><i class="dw dw-add"></i> Damage Item</a>
 								<a class="dropdown-item" href="<?=site_url('repair-report')?>"><i class="dw dw-add"></i> For Repair Item</a>
 								<a class="dropdown-item" href="<?=site_url('transfer-item')?>"><i class="dw dw-add"></i> Transfer Item</a>
+								<a class="dropdown-item" href="<?=site_url('return-item')?>"><i class="dw dw-add"></i> Return Item</a>
 							</div>
 						</div>
                     </div>

@@ -440,7 +440,34 @@
                         </div>
                         <div class="card-body">
                             <form method="post" class="row g-3" id="frmReport" action="<?=base_url('send-repair-report')?>" enctype="multipart/form-data">
-								
+                                <div class="col-12 form-group">
+                                    <label>Product Name</label>
+                                    <select class="form-control custom-select2" name="itemID" style="width:100%;" required>
+                                        <option value="">Choose</option>
+                                        <?php foreach($repair as $row): ?>
+                                            <option value="<?php echo $row->reportID ?>"><?php echo $row->productName ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label>Details</label>
+                                    <textarea class="form-control" name="details" required></textarea>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <div class="row g-3">
+                                        <div class="col-lg-6">
+                                            <label>Start of Repair</label>
+                                            <input type="date" class="form-control" name="startDate" required/>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Date Accomplish</label>
+                                            <input type="date" class="form-control" name="dateAccomplish" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <button type="submit" class="btn btn-primary" id="btnSave">Save Entry</button>
+                                </div>
                             </form>
                         </div>
                     </div>

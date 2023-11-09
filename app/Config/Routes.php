@@ -66,6 +66,7 @@ $routes->post('transfer-item','ProductController::transferItem');
 $routes->post('receive-report','ProductController::receiveReport');
 //standard user reports
 $routes->post('send-damage-report','ProductController::damageReport');
+$routes->post('send-repair-report','ProductController::repairReport');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
