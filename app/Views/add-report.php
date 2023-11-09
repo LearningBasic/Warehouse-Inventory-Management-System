@@ -446,10 +446,10 @@
 						<div class="dropdown" style="float:right;">
 							<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" data-color="#1b3133" href="#" role="button" data-toggle="dropdown"><span class="icon-copy dw dw-add"></span> New</a>
 							<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-								<a class="dropdown-item" href="<?=site_url('damage-report')?>"><i class="dw dw-add"></i> Damage Item</a>
-								<a class="dropdown-item" href="<?=site_url('repair-report')?>"><i class="dw dw-add"></i> For Repair Item</a>
-								<a class="dropdown-item" href="<?=site_url('transfer-item')?>"><i class="dw dw-add"></i> Transfer Item</a>
-								<a class="dropdown-item" href="<?=site_url('return-item')?>"><i class="dw dw-add"></i> Return Item</a>
+								<a class="dropdown-item" href="<?=site_url('damage-report')?>"><i class="dw dw-right-arrow"></i> Damage Item</a>
+								<a class="dropdown-item" href="<?=site_url('repair-report')?>"><i class="dw dw-right-arrow"></i> For Repair Item</a>
+								<a class="dropdown-item" href="<?=site_url('transfer-item')?>"><i class="dw dw-right-arrow"></i> Transfer Item</a>
+								<a class="dropdown-item" href="<?=site_url('return-item')?>"><i class="dw dw-right-arrow"></i> Return Item</a>
 							</div>
 						</div>
                     </div>
@@ -558,7 +558,9 @@
 													<td><?php echo $row->productName ?></td>
 													<td><?php echo $row->Details ?></td>
 													<td><?php echo $row->dateAccomplished ?></td>
-													<td><span class="badge bg-primary text-white">ACCEPTED</span></td>
+													<td> 
+														<button type="button" class="btn btn-outline-primary btn-sm upload_report"><span class="dw dw-upload"></span> Upload</button>
+													</td>
 												</tr>
 												<?php } ?>
 											<?php endforeach; ?>

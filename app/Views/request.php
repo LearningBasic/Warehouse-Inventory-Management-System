@@ -539,7 +539,7 @@
 										<td><?php echo $row->dateAccomplished ?></td>
 										<td><span class="badge bg-warning text-white">PENDING</span></td>
 										<td>
-											<button type="button" class="btn btn-outline-primary btn-sm accept_repair" value="<?php echo $row->reportID ?>"><i class="icon-copy dw dw-checked"></i>&nbsp;Accept</button>
+											<button type="button" class="btn btn-outline-primary btn-sm accept_repair" value="<?php echo $row->rrID ?>"><i class="icon-copy dw dw-checked"></i>&nbsp;Accept</button>
 										</td>
 									</tr>
 									<?php }else{ ?>
@@ -549,7 +549,9 @@
 										<td><?php echo $row->Details ?></td>
 										<td><?php echo $row->dateAccomplished ?></td>
 										<td><span class="badge bg-primary text-white">ACCEPTED</span></td>
-										<td>-</td>
+										<td>
+										<button type="button" class="btn btn-outline-primary btn-sm view_repair" value="<?php echo $row->reportID ?>"><i class="icon-copy dw dw-image"></i>&nbsp;View</button>
+										</td>
 									</tr>
 									<?php } ?>
 								<?php endforeach; ?>
@@ -641,7 +643,25 @@
 					}).then((result) => {
 						if (result.isConfirmed) {
 							var val = $(this).val();
-							
+							$.ajax({
+								url:"<?=site_url('accept-repair-report')?>",method:"POST",
+								data:{value:val},
+								success:function(response)
+								{
+									if(response==="Success")
+									{
+										location.reload();
+									}
+									else
+									{
+										Swal.fire({
+										title: "Error",
+										text: response,
+										icon: "error"
+										});
+									}
+								}
+							});
 						}
 					});
 			});

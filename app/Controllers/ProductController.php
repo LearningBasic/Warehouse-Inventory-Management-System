@@ -466,4 +466,15 @@ class ProductController extends BaseController
             return redirect()->to('/repair-report')->withInput();
         }
     }
+
+    public function acceptRepairReport()
+    {
+        $repairReport = new \App\Models\repairReportModel();
+        //datas
+        $itemID = $this->request->getPost('value');
+
+        $values = ['Status'=>1,'approveDate'=>date('Y-m-d')];
+        $repairReport->update($itemID,$values);
+        echo "Success";
+    }
 }
