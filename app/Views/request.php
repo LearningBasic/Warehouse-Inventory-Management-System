@@ -478,8 +478,8 @@
                     <div class="card-body">
                         <table class="data-table table stripe hover nowrap">
                             <thead>
-                                <th>Date Reported</th>
-                                <th>Defect Type</th>
+                                <th>Date</th>
+                                <th>Defect</th>
                                 <th>Product Name</th>
                                 <th>Qty</th>
                                 <th>Details</th>
@@ -504,7 +504,12 @@
                                         <?php } ?>
                                     </td>
                                     <td>
+									<?php if($row->Status==0){ ?>
+										<button type="button" class="btn btn-outline-primary btn-sm accept">Accept</button>
 										<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-image"></i>&nbsp;View</a>
+										<?php }else{ ?>
+											<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-image"></i>&nbsp;View</a>
+										<?php } ?>
 									</td>
                                 </tr>
                             <?php endforeach; ?>
