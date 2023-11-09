@@ -62,6 +62,7 @@ $routes->get('product-information','ProductController::productInfo');
 $routes->post('save-report','ProductController::saveReport');
 $routes->post('submit-report','ProductController::submitReport');
 $routes->post('send-report','ProductController::sendReport');
+$routes->post('send-accomplishment','ProductController::sendAccomplishment');
 $routes->get('view-report','ProductController::viewReport');
 $routes->post('transfer-item','ProductController::transferItem');
 $routes->post('receive-report','ProductController::receiveReport');

@@ -165,6 +165,87 @@ class ProductController extends BaseController
         }
     }
 
+    public function sendAccomplishment()
+    {
+        $accomplishmentModel = new \App\Models\accomplishmentReportModel();
+        $damageReportModel = new \App\Models\damageReportModel();
+        $repairReportModel = new \App\Models\repairReportModel();
+        $inventoryModel = new \App\Models\inventoryModel();
+        //data
+        $itemID = $this->request->getPost('itemID');
+        $involveWorkers = $this->request->getPost('involveWorkers');
+        $file = $this->request->getFile('file');
+        $originalName = $file->getClientName();
+        $validation = $this->validate([
+            'accomplish_date'=>'required',
+            'involveWorkers'=>'required',
+            'file'=>'uploaded[file]'
+        ]);
+        if(!$validation)
+        {
+            echo "Invalid! Please fill in the form to continue";
+        }
+        else
+        {
+            if($file->isValid() && ! $file->hasMoved())
+            {
+                $file->move('Accomplishment/',$originalName);
+                $values = [
+                    'repairID'=>$itemID, 'Workers'=>$involveWorkers,'File'=>$originalName,'DateCreated'=>date('Y-m-d')
+                ];
+                $accomplishmentModel->save($values);
+                //update the inventory
+                $getInfo = $repairReportModel->WHERE('rrID',$itemID)->first();
+                $damageInfo = $damageReportModel->WHERE('reportID',$getInfo['damageID'])->first();
+                $inventoryQty = $inventoryModel->WHERE('inventID',$damageInfo['inventID'])->first();
+                //add the quantity from two models
+                $total = $getInfo['Qty']+$inventoryQty['Qty'];
+                $record = ['Qty'=>$total];
+                $inventoryModel->update($getInfo['inventID'],$record);
+                echo "success";
+            }
+            else
+            {
+                echo "File already uploaded";
+            }
+        }
+    }
+
+    public function vieAccomplishmentReport()
+    {
+        $accomplishmentModel = new \App\Models\accomplishmentModel();
+        $repairModel = new \App\Models\repairReportModel();
+        $val = $this->request->getGet('value');
+        $records = $accomplishmentModel->WHERE('rrID',$val)->first();
+        //get the date completed
+        $getinfo = $repairModel->WHERE('repairID',$val)->first();
+        $imgFile = "Accomplishment/".$records['File'];
+        $output="<div class='row g-3'>
+                    <div class='col-lg-6'>
+                        <div class='row g-3'>
+                            <div class='col-12 form-group'>
+                                <label>Date Reported</label>
+                                <input type='date' class='form-control' value='".$records['DateCreated']."'/>
+                            </div>
+                            <div class='col-12 form-group'>
+                                <label>Date Completed</label>
+                                <input type='date' class='form-control' value='".$getinfo['dateAccomplished']."'/>
+                            </div>
+                            <div class='col-12 form-group'>
+                                <label>Repaired By</label>
+                                <textarea class='form-control'>".$records['Workers']."</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-lg-6'>
+                        <div class='img-container'>
+                            <img src='".$imgFile."' id='image'/>
+                        </div>
+                    </div>
+                </div>";
+        echo $output;
+    }
+
     public function viewReport()
     {
         $accomplishmentModel = new \App\Models\accomplishmentModel();
