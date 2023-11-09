@@ -14,7 +14,7 @@ class requestModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['itemID', 'productName','Qty','EffectiveDate','warehouseID','Status','accountID','DateCreated'];
+    protected $allowedFields = ['itemID', 'productName','Qty','EffectiveDate','warehouseID','Details','Status','accountID','DateCreated'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

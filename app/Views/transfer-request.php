@@ -477,6 +477,13 @@
 										</div>
 									</div>
 								</div>
+								<div class="col-12 form-group">
+									<label>Details</label>
+									<textarea class="form-control" name="details" required></textarea>
+								</div>
+								<div class="col-12 form-group">
+									<button type="submit" class="btn btn-primary" id="btnSend">Submit Entry</button>
+								</div>
                             </form>
                         </div>
                     </div>
