@@ -439,7 +439,24 @@
                             <a href="<?=site_url('add-report')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                         </div>
                         <div class="card-body">
-                            
+                            <form method="post" class="row g-3" action="">
+                                <div class="col-12 form-group">
+                                    <div class="row g-3">
+                                        <div class="col-lg-4">
+                                            <label>Item No</label>
+                                            <input type="text" class="form-control" name="itemID" required/>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Product Name</label>
+                                            <input type="text" class="form-control" name="productName" required/>
+                                        </div>
+										<div class="col-lg-2">
+                                            <label>Qty</label>
+                                            <input type="number" class="form-control" name="qty" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

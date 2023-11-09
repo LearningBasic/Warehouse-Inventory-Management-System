@@ -356,10 +356,11 @@ class Home extends BaseController
 
     public function transferItem()
     {
-        $builder = $this->db->table('tblinventory');
+        //warehouse
+        $builder = $this->db->table('tblwarehouse');
         $builder->select('*');
-        $items = $builder->get()->getResult();
-        $data = ['items'=>$items];
+        $warehouse = $builder->get()->getResult();
+        $data = ['location'=>$warehouse];
         return view('transfer-request',$data);
     }
 
