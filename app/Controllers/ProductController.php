@@ -603,4 +603,14 @@ class ProductController extends BaseController
             return redirect()->to('/transfer-item')->withInput();
         }
     }
+
+    public function acceptRequest()
+    {
+        $requestModel = new \App\Models\requestModel();
+        //data
+        $item = $this->request->getPost('value');
+        $values = ['Status'=>1];
+        $requestModel->update($item,$values);
+        echo "Success";
+    }
 }
