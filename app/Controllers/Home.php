@@ -384,8 +384,16 @@ class Home extends BaseController
             $builder->WHERE('c.warehouseID',$location);
             $builder->groupby('a.rrID');
             $repair = $builder->get()->getResult();
+            //transfer request
+            $builder = $this->db->table('tbltransfer_request a');
+            $builder->select('a.*,b.Fullname,c.warehouseName');
+            $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+            $builder->join('tblwarehouse c','c.warehouseID=b.warehouseID','LEFT');
+            $builder->WHERE('a.warehouseID',$location);
+            $builder->groupBy('a.requestID');
+            $transfer = $builder->get()->getResult();
 
-            $data = ['damage'=>$damage,'repair'=>$repair];
+            $data = ['damage'=>$damage,'repair'=>$repair,'transfer'=>$transfer,];
             return view('request',$data);
         }
         else

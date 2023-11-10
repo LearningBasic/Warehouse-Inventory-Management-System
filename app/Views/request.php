@@ -574,7 +574,33 @@
 								<th>Action</th>
                             </thead>
                             <tbody>
-
+								<?php foreach($transfer as $row): ?>
+									<?php if($row->Status==0){ ?>
+									<tr>
+										<td><?php echo $row->warehouseName ?></td>
+										<td><?php echo $row->Fullname ?></td>
+										<td><?php echo $row->itemID ?></td>
+										<td><?php echo $row->productName ?></td>
+										<td><?php echo number_format($row->Qty,0) ?></td>
+										<td><?php echo $row->EffectiveDate ?></td>
+										<td><span class="badge bg-warning text-white">PENDING</span></td>
+										<td>
+											<button type="button" class="btn btn-outline-primary btn-sm accept_request" value="<?php echo $row->requestID ?>"><i class="icon-copy dw dw-checked"></i>&nbsp;Accept</button>
+										</td>
+									</tr>
+									<?php }else{ ?>
+										<tr>
+										<td><?php echo $row->warehouseName ?></td>
+										<td><?php echo $row->Fullname ?></td>
+										<td><?php echo $row->itemID ?></td>
+										<td><?php echo $row->productName ?></td>
+										<td><?php echo number_format($row->Qty,0) ?></td>
+										<td><?php echo $row->EffectiveDate ?></td>
+										<td><span class="badge bg-primary text-white">APPROVED</span></td>
+										<td>-</td>
+									</tr>
+									<?php } ?>
+								<?php endforeach; ?>
 							</tbody>
                         </table>
                     </div>
