@@ -570,5 +570,37 @@ class ProductController extends BaseController
     {
         $requestModel = new \App\Models\requestModel();
         //save data 
+        $itemID = $this->request->getPost('itemID');
+        $productName = $this->request->getPost('productName');
+        $qty = $this->request->getPost('qty');
+        $dateCreated = $this->request->getPost('dateCreated');
+        $dateEffective = $this->request->getPost('dateEffective');
+        $location = $this->request->getPost('location');
+        $details = $this->request->getPost('details');
+
+        $validation = $this->validate([
+            'itemID'=>'required','productName'=>'required',
+            'qty'=>'required','dateCreated'=>'required',
+            'dateEffective'=>'required','location'=>'required',
+            'details'=>'required',
+        ]);
+
+        if(!$validation)
+        {
+            session()->setFlashdata('fail','Invalid! Please fill in the form');
+            return redirect()->to('/transfer-item')->withInput();
+        }
+        else
+        {
+            $values = [
+                'itemID'=>$itemID, 'productName'=>$productName,'Qty'=>$qty,
+                'EffectiveDate'=>$dateEffective,'warehouseID'=>$location,'Details'=>$details,
+                'Status'=>0,'accountID'=>session()->get('loggedUser'),'DateCreated'=>$dateCreated
+            ];
+            $requestModel->save($values);
+
+            session()->setFlashdata('success','Great! Successfully submitted for review');
+            return redirect()->to('/transfer-item')->withInput();
+        }
     }
 }
