@@ -610,15 +610,13 @@
                         </div>
                         <div class="tab-pane fade" id="contact6" role="tabpanel">
                             <div class="pd-20">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing
-                                elit, sed do eiusmod tempor incididunt ut labore et
-                                dolore magna aliqua. Ut enim ad minim veniam, quis
-                                nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                ea commodo consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate velit esse cillum dolore eu
-                                fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                non proident, sunt in culpa qui officia deserunt mollit
-                                anim id est laborum.
+								<div class="card-box">
+									<div class="card-header">Transfer Logs</div>
+									<div class="card-body">
+										<table class="data-table table stripe hover nowrap">
+										</table>
+									</div>
+								</div>
                             </div>
                         </div>
                     </div>

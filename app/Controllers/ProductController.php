@@ -421,14 +421,24 @@ class ProductController extends BaseController
                 $data = $builder->get();
                 if($row = $data->getRow())
                 {
-                    $value = [
-                        'Date'=>$dateReceived,'Location'=>'N/A','productID'=>$row->productID,'productName'=>$row->productName,'Code'=>$row->Code,
-                        'Description'=>$row->Description,'ItemUnit'=>$row->ItemUnit,'unitPrice'=>$row->unitPrice,'Qty'=>$row->Qty,'ReOrder'=>0,
-                        'categoryID'=>$row->categoryID,'ExpirationDate'=>$row->ExpirationDate,'supplierID'=>$row->supplierID,'warehouseID'=>$row->warehouseID,
-                    ];
-                    $inventoryModel->save($value);
+                    $check = $inventoryModel->WHERE('productID',$row->productID)->WHERE('warehouseID',$row->warehouseID)->first();
+                    if(empty($check['productID']))
+                    {
+                        $value = [
+                            'Date'=>$dateReceived,'Location'=>'N/A','productID'=>$row->productID,'productName'=>$row->productName,'Code'=>$row->Code,
+                            'Description'=>$row->Description,'ItemUnit'=>$row->ItemUnit,'unitPrice'=>$row->unitPrice,'Qty'=>$row->Qty,'ReOrder'=>0,
+                            'categoryID'=>$row->categoryID,'ExpirationDate'=>$row->ExpirationDate,'supplierID'=>$row->supplierID,'warehouseID'=>$row->warehouseID,
+                        ];
+                        $inventoryModel->save($value);
+                    }
+                    else
+                    {
+                        $newQty = $check['Qty']+$row->Qty;
+                        $values = ['Qty'=>$newQty,];
+                        $inventoryModel->update($check['inventID'],$values);
+                    }
                 }
-                session()->setFlashdata('success','Great! Successfully reported');
+                session()->setFlashdata('success','Great! Successfully received');
                 return redirect()->to('/receiving-item')->withInput();
             }
             else

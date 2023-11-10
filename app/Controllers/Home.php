@@ -50,7 +50,7 @@ class Home extends BaseController
     {
         //get all the stocks
         $builder = $this->db->table('tblinventory a');
-        $builder->select('a.*,b.categoryName,c.supplierName,d.warehouseName');
+        $builder->select('a.*,SUM(a.Qty)Qty,b.categoryName,c.supplierName,d.warehouseName');
         $builder->join('tblcategory b','b.categoryID=a.categoryID','LEFT');
         $builder->join('tblsupplier c','c.supplierID=a.supplierID','LEFT');
         $builder->join('tblwarehouse d','d.warehouseID=a.warehouseID','LEFT');
