@@ -305,6 +305,11 @@ class Home extends BaseController
         return view('receive-item',$data);
     }
 
+    public function purchaseRequest()
+    {
+        return view('orders');
+    }
+
     public function addReport()
     {
         $user = session()->get('loggedUser');

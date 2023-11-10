@@ -97,6 +97,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/repair-report','Home::repairReport');
     $routes->get('/transfer-item','Home::transferItem');
     $routes->get('/request','Home::userRequest');
+    $routes->get('/orders','Home::purchaseRequest');
     $routes->get('/profile','Home::profile');
 });
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
