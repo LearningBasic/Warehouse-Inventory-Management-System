@@ -72,6 +72,7 @@ $routes->post('send-damage-report','ProductController::damageReport');
 $routes->post('accept-damage-report','ProductController::acceptDamageReport');
 $routes->post('send-repair-report','ProductController::repairReport');
 $routes->post('accept-repair-report','ProductController::acceptRepairReport');
+$routes->post('save-request','ProductController::saveRequest');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {

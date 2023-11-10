@@ -565,4 +565,10 @@ class ProductController extends BaseController
         $repairReport->update($itemID,$values);
         echo "Success";
     }
+
+    public function saveRequest()
+    {
+        $requestModel = new \App\Models\requestModel();
+        //save data 
+    }
 }

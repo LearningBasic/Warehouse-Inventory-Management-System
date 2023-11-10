@@ -439,7 +439,7 @@
                             <a href="<?=site_url('add-report')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                         </div>
                         <div class="card-body">
-                            <form method="post" class="row g-3" action="">
+                            <form method="post" class="row g-3" action="<?=base_url('save-request')?>">
                                 <div class="col-12 form-group">
                                     <div class="row g-3">
                                         <div class="col-lg-4">
