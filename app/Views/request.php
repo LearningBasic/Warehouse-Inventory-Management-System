@@ -457,7 +457,7 @@
                         <div class="card-box">
                             <div class="card-body">
                                 <label><b>Transfer Item(s)</b></label>
-                                <h1>0</h1>
+                                <h1 id="totalPendingTransferItem">0</h1>
                                 <a href="javascript:void(0);" id="viewTransferItems" class="btn btn-outline-primary btn-sm">View</a>
                             </div>
                         </div>
@@ -638,6 +638,7 @@
             {
                 totalPendingDamage();
 				totalPendingOverhaul();
+				totalPendingTransfer();
             });
 			$(document).on('click','.view_repair',function(e){
 				e.preventDefault();
@@ -769,6 +770,16 @@
                     success:function(response)
                     {
                         $('#totalPendingDamageItem').html(response);
+                    }
+                });
+            }
+			function totalPendingTransfer()
+            {
+                $.ajax({
+                    url:"<?=site_url('pending-transfer-report')?>",method:"GET",
+                    success:function(response)
+                    {
+                        $('#totalPendingTransferItem').html(response);
                     }
                 });
             }

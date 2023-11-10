@@ -41,6 +41,7 @@ $routes->get('out-of-stock','Dashboard::outofStock');
 $routes->get('list-supplier','Dashboard::listSupplier');
 $routes->get('pending-damage-report','Dashboard::damageItem');
 $routes->get('pending-repair-report','Dashboard::overhaulItem');
+$routes->get('pending-transfer-report','Dashboard::transferItem');
 //saving the data
 $routes->post('save-industry','Home::saveIndustry');
 $routes->get('list-industry','Home::listIndustry');

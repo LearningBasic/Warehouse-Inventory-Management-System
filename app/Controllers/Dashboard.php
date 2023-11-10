@@ -148,4 +148,17 @@ class Dashboard extends BaseController
             echo $row->total;
         }
     }
+
+    public function transferItem()
+    {
+        $location = session()->get('assignment');
+        $builder = $this->db->table('tbltransfer_request');
+        $builder->select('FORMAT(COUNT(requestID),0)total');
+        $builder->WHERE('warehouseID',$location)->WHERE('Status',0);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            echo $row->total;
+        }
+    }
 }

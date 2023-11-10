@@ -607,10 +607,14 @@ class ProductController extends BaseController
     public function acceptRequest()
     {
         $requestModel = new \App\Models\requestModel();
+        $logModel = new \App\Models\logModel();
         //data
         $item = $this->request->getPost('value');
         $values = ['Status'=>1];
         $requestModel->update($item,$values);
+        //log records
+        $records = ['accountID'=>session()->get('loggedUser'),'DateApproved'=>date('Y-m-d')];
+        $logModel->save($records);
         echo "Success";
     }
 }
