@@ -74,29 +74,6 @@
                 width: 4px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
-			  .quote-imgs-thumbs {
-				background: #eee;
-				border: 1px solid #ccc;
-				border-radius: 0.25rem;
-				margin: 1.5rem 0;
-				padding: 0.75rem;
-				}
-				.quote-imgs-thumbs--hidden {
-				display: none;
-				}
-				.img-preview-thumb {
-				background: #fff;
-				border: 1px solid #777;
-				border-radius: 0.25rem;
-				box-shadow: 0.125rem 0.125rem 0.0625rem rgba(0, 0, 0, 0.12);
-				margin-right: 1rem;
-				max-width: 140px;
-				padding: 0.25rem;
-				}
-			.show-for-sr
-			{
-				display:none;
-			}
         </style>
 	</head>
 	<body>
@@ -465,7 +442,47 @@
                                 <?= session()->getFlashdata('success'); ?>
                             </div>
                         <?php endif; ?>
-                        
+                        <form method="POST" class="row g-3" id="frmPurchase">
+                            <div class="col-12 form-group">
+                                <div class="row g-3">
+                                    <div class="col-lg-4">
+                                        <label>Date Prepared</label>
+                                        <input type="date" class="form-control" value="<?php echo date('Y-m-d') ?>" name="datePrepared" required/>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>Vessel/Port/Department</label>
+                                        <input type="text" class="form-control"  name="department" required/>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>Date Needed</label>
+                                        <input type="date" class="form-control" name="dateNeeded" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 form-group">
+                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="myFunction()">Add</button>
+                            </div>
+                            <div class="col-12 form-group">
+                                <table class="table stripe table-bordered hover nowrap" id="myTable">
+                                    <thead>
+                                        <th>Qty</th>
+                                        <th>Item Unit</th>
+                                        <th>Product Name</th>
+                                        <th>Specification</th>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-12 form-group">
+                                <label>Reason</label>
+                                <textarea class="form-control" name="reason" required></textarea>
+                            </div>
+                            <div class="col-12 form-group">
+                                <button type="submit" class="btn btn-primary">Submit Entry</button>
+                            </div>
+                        </form>
 					</div>
 				</div>
 			</div>
@@ -480,5 +497,19 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+        <script>
+            function myFunction() {
+                var table = document.getElementById("myTable");
+                var row = table.insertRow(1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                cell1.innerHTML = "<input type='number' class='form-control' id='qty' name='qty'/>";
+                cell2.innerHTML = "<input type='text' class='form-control' id='unit' name='unit'/>";
+                cell3.innerHTML = "<input type='text' class='form-control' id='productName' name='productName'/>";
+                cell4.innerHTML = "<input type='text' class='form-control' id='specification' name='specification'/>";
+                }
+        </script>
 	</body>
 </html>
