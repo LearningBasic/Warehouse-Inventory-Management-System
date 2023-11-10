@@ -440,7 +440,7 @@
                             <div class="card-body">
                                 <label><b>Damage Item(s)</b></label>
                                 <h1 id="totalPendingDamageItem">0</h1>
-                                <a href="javascript:void(0);" id="viewDamageItems">View</a>
+                                <a href="javascript:void(0);" id="viewDamageItems" class="btn btn-outline-primary btn-sm">View</a>
                             </div>
                         </div>
                     </div>
@@ -449,7 +449,7 @@
                             <div class="card-body">
                                 <label><b>Overhaul Item(s)</b></label>
                                 <h1 id="totalPendingOverhaulItem">0</h1>
-                                <a href="javascript:void(0);" id="viewOverhaulItems">View</a>
+                                <a href="javascript:void(0);" id="viewOverhaulItems" class="btn btn-outline-primary btn-sm">View</a>
                             </div>
                         </div>
                     </div>
@@ -458,7 +458,7 @@
                             <div class="card-body">
                                 <label><b>Transfer Item(s)</b></label>
                                 <h1>0</h1>
-                                <a href="javascript:void(0);" id="viewTransferItems">View</a>
+                                <a href="javascript:void(0);" id="viewTransferItems" class="btn btn-outline-primary btn-sm">View</a>
                             </div>
                         </div>
                     </div>
@@ -467,7 +467,7 @@
                             <div class="card-body">
                                 <label><b>Return Order(s)</b></label>
                                 <h1>0</h1>
-                                <a href="javascript:void(0);" id="viewReturnItems">View</a>
+                                <a href="javascript:void(0);" id="viewReturnItems" class="btn btn-outline-primary btn-sm">View</a>
                             </div>
                         </div>
                     </div>
