@@ -86,7 +86,7 @@ class Dashboard extends BaseController
     public function totalReserved()
     {
         $builder = $this->db->table('tblreserved');
-        $builder->select('FORMAT(SUM(Qty),0)total');
+        $builder->select('FORMAT(IFNULL(SUM(Qty,0)),0)total');
         $builder->WHERE('Status','Hold');
         $data = $builder->get();
         if($row = $data->getRow())

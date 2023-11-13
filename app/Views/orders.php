@@ -460,10 +460,7 @@
                                 </div>
                             </div>
                             <div class="col-12 form-group">
-                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="myFunction()">Add</button>
-                            </div>
-                            <div class="col-12 form-group">
-                                <table class="table stripe table-bordered hover nowrap" id="myTable">
+                                <table class="table stripe table-bordered hover nowrap" id="Table">
                                     <thead>
                                         <th>Qty</th>
                                         <th>Item Unit</th>
@@ -480,7 +477,7 @@
                                 <textarea class="form-control" name="reason" required></textarea>
                             </div>
                             <div class="col-12 form-group">
-                                <button type="submit" class="btn btn-primary">Submit Entry</button>
+                                <button type="submit" class="btn btn-primary" id="btnSave">Submit Entry</button>
                             </div>
                         </form>
 					</div>
@@ -498,18 +495,13 @@
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
         <script>
-            function myFunction() {
-                var table = document.getElementById("myTable");
-                var row = table.insertRow(1);
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-                var cell4 = row.insertCell(3);
-                cell1.innerHTML = "<input type='number' class='form-control' id='qty' name='qty'/>";
-                cell2.innerHTML = "<input type='text' class='form-control' id='unit' name='unit'/>";
-                cell3.innerHTML = "<input type='text' class='form-control' id='productName' name='productName'/>";
-                cell4.innerHTML = "<input type='text' class='form-control' id='specification' name='specification'/>";
-                }
+            $(function()
+			{
+				var set_number = function()
+				{
+					var table_len  = $('#Table').length()+1;
+				}
+			});
         </script>
 	</body>
 </html>
