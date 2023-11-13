@@ -1,1 +1,1 @@
-__ci_last_regenerate|i:1699602295;_ci_previous_url|s:31:"http://localhost:8080/dashboard";fullname|s:20:"System Administrator";role|s:13:"Administrator";assignment|s:1:"1";loggedUser|s:1:"1";
+__ci_last_regenerate|i:1699602295;_ci_previous_url|s:33:"http://localhost:8080/?access=out";fullname|s:20:"System Administrator";role|s:13:"Administrator";assignment|s:1:"1";fail|s:19:"You are logged out!";__ci_vars|a:1:{s:4:"fail";s:3:"old";}
