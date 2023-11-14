@@ -449,7 +449,12 @@
                         </div>
                     </div>
                     <div class="col-lg-8 form-group">
-                        
+                        <div class="card-box">
+                            <div class="card-header">Scanned Item/Equipment</div>
+                            <div class="card-body">
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
 			</div>
