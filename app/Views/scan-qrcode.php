@@ -452,7 +452,16 @@
                         <div class="card-box">
                             <div class="card-header">Scanned Item/Equipment</div>
                             <div class="card-body">
-                                
+                                <table class="data-table table-bordered table stripe hover nowrap">
+                                    <thead>
+                                        <th>Item/Equipment</th>
+                                        <th>Total</th>
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -469,9 +478,29 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
         <script src="assets/src/scripts/html5-qrcode.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             function onScanSuccess(qrCodeMessage) {
             const text = qrCodeMessage;
+            $.ajax({
+                url:"<?=site_url('save-data')?>",method:"GET",
+                data:{text:text},
+                success:function(response)
+                {
+                    if(response==="success")
+                    {
+                        
+                    }
+                    else
+                    {
+                        Swal.fire(
+                                'Error',
+                                response,
+                                'error'
+                            );
+                    }
+                }
+            });
         }
         
         function onScanError(errorMessage) {
