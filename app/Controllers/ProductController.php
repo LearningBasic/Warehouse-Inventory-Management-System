@@ -666,6 +666,12 @@ class ProductController extends BaseController
         foreach($data->getResult() as $row)
         {
             ?>
+            <tr>
+                <td><?php echo $row->scanID ?></td>
+                <td><?php echo $row->productName ?></td>
+                <td><?php echo $row->Code ?></td>
+                <td></td>
+            </tr>
             <?php
         }
     }

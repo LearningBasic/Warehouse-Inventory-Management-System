@@ -457,12 +457,11 @@
                                         <th>ID</th>
                                         <th>Item/Equipment</th>
                                         <th>Product Code</th>
-                                        <th>Total</th>
                                         <th>Action</th>
                                     </thead>
                                     <tbody id="tblitems">
                                         <tr>
-                                            <td colspan="5"><center>No Item(s) Found</center></td>
+                                            <td colspan="4"><center>No Item(s) Found</center></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -496,7 +495,7 @@
                     {
                         if(response==="")
                         {
-                            $('#tblitems').html("<tr><td colspan='5'><center>No Item(s) Found</center></td></tr>");
+                            $('#tblitems').html("<tr><td colspan='4'><center>No Item(s) Found</center></td></tr>");
                         }
                         else
                         {
