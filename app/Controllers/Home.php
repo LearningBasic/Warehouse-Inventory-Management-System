@@ -61,6 +61,14 @@ class Home extends BaseController
         return view('all-stocks',$data);
     }
 
+    public function generateQR($id=null)
+    {
+        $inventoryModel = new \App\Models\inventoryModel();
+        $items = $inventoryModel->WHERE('inventID',$id)->first();
+        $data = ['items'=>$items,];
+        return view('generate-qrcode',$data);
+    }
+
     public function edit($id=null)
     {
         //warehouse

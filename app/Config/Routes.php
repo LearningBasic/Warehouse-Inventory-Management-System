@@ -80,6 +80,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
     $routes->get('/dashboard','Home::dashboard');
     $routes->get('/stocks','Home::stocks');
+    $routes->get('/generate-qrcode/(:any)','Home::generateQR/$1');
     $routes->get('/add','Home::addItem');
     $routes->get('/edit/(:any)','Home::edit/$1');
     $routes->get('/transfer/(:any)','Home::transfer/$1');
