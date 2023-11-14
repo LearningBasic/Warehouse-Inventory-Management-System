@@ -353,6 +353,9 @@
                                 <li><a href="<?=site_url('orders')?>">Order Materials</a></li>
                                 <li><a href="<?=site_url('payment')?>">For Payment</a></li>
 								<li><a href="<?=site_url('list-orders')?>">List Order</a></li>
+								<?php if(session()->get('role')=="Administrator"){ ?>
+								<li><a href="<?=site_url('approve-orders')?>">Orders</a></li>
+								<?php } ?>
 							</ul>
 						</li>
 						<li class="dropdown">
