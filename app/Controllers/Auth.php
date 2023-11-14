@@ -20,6 +20,8 @@ class Auth extends BaseController
     public function check()
     {
         $accountModel = new \App\Models\accountModel();
+        $systemLogsModel = new \App\Models\systemLogsModel();
+
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
@@ -58,6 +60,9 @@ class Auth extends BaseController
                 session()->set('fullname', $user_info['Fullname']);
                 session()->set('role',$user_info['systemRole']);
                 session()->set('assignment',$user_info['warehouseID']);
+                //save the logs
+                $values = ['accountID'=>$user_info['accountID'],'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Logged-In'];
+                $systemLogsModel->save($values);
                 return redirect()->to('/dashboard');
             }
         }

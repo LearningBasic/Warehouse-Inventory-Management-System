@@ -614,9 +614,23 @@
                         <div class="tab-pane fade" id="contact6" role="tabpanel">
                             <div class="pd-20">
 								<div class="card-box">
-									<div class="card-header">Transfer Logs</div>
+									<div class="card-header">System Logs</div>
 									<div class="card-body">
 										<table class="data-table table stripe hover nowrap">
+											<thead>
+												<th>Date</th>
+												<th>Fullname</th>
+												<th>Activities</th>
+											</thead>
+											<tbody>
+												<?php foreach($logs as $row): ?>
+													<tr>
+														<td><?php echo $row->Date ?></td>
+														<td><?php echo $row->Fullname ?></td>
+														<td><?php echo $row->Activity ?></td>
+													</tr>
+												<?php endforeach; ?>
+											</tbody>
 										</table>
 									</div>
 								</div>

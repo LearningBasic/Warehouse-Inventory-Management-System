@@ -413,7 +413,14 @@ class Home extends BaseController
         $builder = $this->db->table('tblaccount');
         $builder->select('*');
         $account = $builder->get()->getResult();
-        $data = ['account'=>$account,];
+        //get the logs
+        $builder = $this->db->table('tblsystem_logs a');
+        $builder->select('a.*,b.Fullname');
+        $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+        $builder->orderby('a.systemID','DESC');
+        $logs = $builder->get()->getResult();
+
+        $data = ['account'=>$account,'logs'=>$logs];
         return view('system-config',$data);
     }
 
