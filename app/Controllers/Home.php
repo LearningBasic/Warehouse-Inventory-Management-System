@@ -11,6 +11,11 @@ class Home extends BaseController
         $this->db = db_connect();
     }
 
+    public function Scanner()
+    {
+        return view('scan-qrcode');
+    }
+
     public function index()
     {
         if (session()->has('loggedUser'))

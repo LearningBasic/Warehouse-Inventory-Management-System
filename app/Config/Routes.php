@@ -78,6 +78,7 @@ $routes->post('accept-transfer-request','ProductController::acceptRequest');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
+    $routes->get('/scan','Home::Scanner');
     $routes->get('/dashboard','Home::dashboard');
     $routes->get('/stocks','Home::stocks');
     $routes->get('/generate-qrcode/(:any)','Home::generateQR/$1');
