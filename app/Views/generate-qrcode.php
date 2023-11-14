@@ -430,35 +430,33 @@
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
 					<div class="card-header"><span class="icon-copy bi bi-qr-code"></span>&nbsp;QR Code
-                    <a href="" style="float:right;" id="btnPrint"><span class="bi bi-printer"></span>&nbsp;Print</a>
+                    <a href="" style="float:right;" onclick="Print()" id="btnPrint"><span class="bi bi-printer"></span>&nbsp;Print</a>
                 </div>
-					<div class="card-body">
-                        <div class="row g-3" id="pdf">
-                            <?php for($i=0;$i<$items['Qty'];$i++){ ?>
-                                <div class="col-lg-3 form-group">
-                                <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=<?php echo $items['productID'].$i ?>&choe=UTF-8" title="<?php echo $items['productName'] ?>" style="border:1px solid #000;" />
-                                </div>
-                            <?php
-                                $text = $items['productID'].$i;
-                                $qrModel = new \App\Models\qrcodeModel();
-                                $db;
-                                $this->db = db_connect();
-                                $builder = $this->db->table('tblqrcode');
-                                $builder->select('*');
-                                $builder->WHERE('inventID',$items['inventID'])->WHERE('TextValue',$text);
-                                $data = $builder->get();
-                                if($row = $data->getRow())
-                                {
-                                    //do nothing, just generate the code
-                                }
-                                else
-                                {
-                                    $values = ['inventID'=>$items['inventID'],'TextValue'=>$text];
-                                    $qrModel->save($values);
-                                }
-                             ?>
-                             <?php } ?>
-                        </div>
+					<div class="card-body" id="pdf">
+                        <center>
+                        <?php for($i=0;$i<$items['Qty'];$i++){ ?>
+                        <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=<?php echo $items['productID'].$i ?>&choe=UTF-8" title="<?php echo $items['productName'] ?>" style="border:1px solid #000;" />
+                        <?php
+                            $text = $items['productID'].$i;
+                            $qrModel = new \App\Models\qrcodeModel();
+                            $db;
+                            $this->db = db_connect();
+                            $builder = $this->db->table('tblqrcode');
+                            $builder->select('*');
+                            $builder->WHERE('inventID',$items['inventID'])->WHERE('TextValue',$text);
+                            $data = $builder->get();
+                            if($row = $data->getRow())
+                            {
+                                //do nothing, just generate the code
+                            }
+                            else
+                            {
+                                $values = ['inventID'=>$items['inventID'],'TextValue'=>$text];
+                                $qrModel->save($values);
+                            }
+                            ?>
+                            <?php } ?>
+                        </center>
 					</div>
 				</div>
 			</div>
@@ -473,5 +471,14 @@
 		<script src="/assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="/assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="/assets/vendors/scripts/datatable-setting.js"></script>
+        <script>
+            function Print() {
+            var printContents = document.getElementById("pdf").innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+        </script>
 	</body>
 </html>
