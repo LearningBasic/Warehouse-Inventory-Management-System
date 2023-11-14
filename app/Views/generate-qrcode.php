@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -430,7 +429,7 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header"><span class="icon-copy dw dw-server"></span>&nbsp;Inventory</div>
+					<div class="card-header"><span class="icon-copy bi bi-qr-code"></span>&nbsp;QR Code</div>
 					<div class="card-body">
 						
 					</div>

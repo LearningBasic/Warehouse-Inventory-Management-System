@@ -66,10 +66,6 @@ class ComposerStaticInite34737ba95c92719544750e32dfcb156
         array (
             'Faker\\' => 6,
         ),
-        'E' => 
-        array (
-            'Endroid\\QrCode\\' => 15,
-        ),
         'D' => 
         array (
             'Doctrine\\Instantiator\\' => 22,
@@ -77,7 +73,6 @@ class ComposerStaticInite34737ba95c92719544750e32dfcb156
             'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Annotations\\' => 28,
             'DeepCopy\\' => 9,
-            'DASPRiD\\Enum\\' => 13,
         ),
         'C' => 
         array (
@@ -86,10 +81,6 @@ class ComposerStaticInite34737ba95c92719544750e32dfcb156
             'Composer\\Pcre\\' => 14,
             'CodeIgniter\\CodingStandard\\' => 27,
             'CodeIgniter\\' => 12,
-        ),
-        'B' => 
-        array (
-            'BaconQrCode\\' => 12,
         ),
     );
 
@@ -202,10 +193,6 @@ class ComposerStaticInite34737ba95c92719544750e32dfcb156
         array (
             0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
         ),
-        'Endroid\\QrCode\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/endroid/qrcode/src',
-        ),
         'Doctrine\\Instantiator\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
@@ -226,10 +213,6 @@ class ComposerStaticInite34737ba95c92719544750e32dfcb156
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
-        'DASPRiD\\Enum\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/dasprid/enum/src',
-        ),
         'Composer\\XdebugHandler\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/xdebug-handler/src',
@@ -249,10 +232,6 @@ class ComposerStaticInite34737ba95c92719544750e32dfcb156
         'CodeIgniter\\' => 
         array (
             0 => __DIR__ . '/../..' . '/system',
-        ),
-        'BaconQrCode\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/bacon/bacon-qr-code/src',
         ),
     );
 
