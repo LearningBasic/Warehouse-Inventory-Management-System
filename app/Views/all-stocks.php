@@ -353,7 +353,7 @@
                                 <li><a href="<?=site_url('orders')?>">Order Materials</a></li>
                                 <li><a href="<?=site_url('payment')?>">For Payment</a></li>
 								<li><a href="<?=site_url('list-orders')?>">List Order</a></li>
-								<?php if(session()->get('role')=="Administrator"){ ?>
+								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
 								<li><a href="<?=site_url('approve-orders')?>">Orders</a></li>
 								<?php } ?>
 							</ul>
@@ -465,7 +465,7 @@
 								<th>Action</th>
 							</thead>
 							<tbody>
-								<?php if(session()->get('role')=="Administrator"){ ?>
+								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
 									<?php foreach($items as $row): if($row->Qty>$row->ReOrder){?>
 										<tr>
 											<td><?php echo $row->categoryName ?></td>
