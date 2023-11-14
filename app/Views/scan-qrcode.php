@@ -440,7 +440,18 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
-				
+                <div class="row g-3">
+                    <div class="col-lg-4 form-group">
+                        <div class="card-box">
+                            <div class="card-body">
+                                <div id="reader"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 form-group">
+                        
+                    </div>
+                </div>
 			</div>
 		</div>
 		<!-- js -->
@@ -452,5 +463,17 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+        <script src="assets/src/scripts/html5-qrcode.min.js"></script>
+        <script>
+            function onScanSuccess(qrCodeMessage) {
+            const text = qrCodeMessage;
+        }
+        
+        function onScanError(errorMessage) {
+            //
+        }
+        var html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 200 });
+        html5QrcodeScanner.render(onScanSuccess, onScanError);
+        </script>
 	</body>
 </html>
