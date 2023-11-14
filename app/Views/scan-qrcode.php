@@ -454,20 +454,14 @@
                             <div class="card-body">
                                 <table class="data-table table-bordered table stripe hover nowrap">
                                     <thead>
+                                        <th>ID</th>
                                         <th>Item/Equipment</th>
+                                        <th>Product Code</th>
                                         <th>Total</th>
                                         <th>Action</th>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($items as $item): ?>
-                                            <tr>
-                                                <td><?=$item['name']?></td>
-                                                <td><?=$item['quantity']?></td>
-                                                <td>
-                                                <a href="<?=site_url('remove/'.$item['id'])?>"><span class="fa fa-trash"></span> Remove</a>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
+                                        
                                     </tbody>
                                 </table>
                             </div>

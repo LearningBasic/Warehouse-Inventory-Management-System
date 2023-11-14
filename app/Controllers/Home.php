@@ -13,8 +13,7 @@ class Home extends BaseController
 
     public function Scanner()
     {
-        $data['items'] = is_array(session('cart'))?array_values(session('cart')):array();
-        return view('scan-qrcode',$data);
+        return view('scan-qrcode');
     }
 
     public function index()
