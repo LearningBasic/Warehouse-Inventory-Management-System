@@ -634,16 +634,17 @@ class ProductController extends BaseController
         $scanModel = new \App\Models\scanItemModel();
         $inventory = new \App\Models\inventoryModel();
         $qrcodeModel = new \App\Models\qrcodeModel();
+        //datas
         $item = $qrcodeModel->WHERE('TextValue',$val)->first();
-        $product = $inventory->find($item['inventID']);
+        $product = $inventory->WHERE($item['inventID'])->first();
         //check if item is already scanned
         $builder = $this->db->table('tblscanned_items');
         $builder->select('*');
-        $builder->WHERE('Code',$item['TextValue'])->WHERE('accountID',session()->get('loggedUser'));
+        $builder->WHERE('Code',$val)->WHERE('accountID',session()->get('loggedUser'));
         $data = $builder->get();
         if($row=$data->getRow())
         {
-            echo "Item/Equipment already scanned";
+            echo $row->productName." already scanned";
         }
         else
         {
