@@ -460,8 +460,10 @@
                                         <th>Total</th>
                                         <th>Action</th>
                                     </thead>
-                                    <tbody>
-                                        
+                                    <tbody id="tblitems">
+                                        <tr>
+                                            <td colspan="5"><center>No Item(s) Found</center></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -482,16 +484,37 @@
         <script src="assets/src/scripts/html5-qrcode.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
+            $(document).ready(function()
+            {
+                viewItems();
+            });
+            function viewItems()
+            {
+                $.ajax({
+                    url:"<?=site_url('view-items')?>",method:"GET",
+                    success:function(response)
+                    {
+                        if(response==="")
+                        {
+                            $('#tblitems').html("<tr><td colspan='5'><center>No Item(s) Found</center></td></tr>");
+                        }
+                        else
+                        {
+                            $('#tblitems').html(response);
+                        }
+                    }
+                });
+            }
             function onScanSuccess(qrCodeMessage) {
             const text = qrCodeMessage;
             $.ajax({
-                url:"<?=site_url('save-data')?>",method:"GET",
+                url:"<?=site_url('save-data')?>",method:"POST",
                 data:{text:text},
                 success:function(response)
                 {
                     if(response==="success")
                     {
-                        console.log("success");
+                        console.log("success");viewItems();
                     }
                     else
                     {

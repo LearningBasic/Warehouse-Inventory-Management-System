@@ -655,4 +655,18 @@ class ProductController extends BaseController
         }
         echo "success";
     }
+
+    public function viewItems()
+    {
+        $user = session()->get('loggedUser');
+        $builder = $this->db->table('tblscanned_items');
+        $builder->select('*');
+        $builder->WHERE('accountID',$user);
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <?php
+        }
+    }
 }

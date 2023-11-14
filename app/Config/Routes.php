@@ -68,8 +68,8 @@ $routes->get('view-report','ProductController::viewReport');
 $routes->get('view-accomplishment','ProductController::viewAccomplishmentReport');
 $routes->post('transfer-item','ProductController::transferItem');
 $routes->post('receive-report','ProductController::receiveReport');
-$routes->get('save-data','ProductController::scanning');
-$routes->get('remove/(:any)','ProductController::remove/$1');
+$routes->post('save-data','ProductController::scanning');
+$routes->get('view-items','ProductController::viewItems');
 //standard user reports
 $routes->post('send-damage-report','ProductController::damageReport');
 $routes->post('accept-damage-report','ProductController::acceptDamageReport');
