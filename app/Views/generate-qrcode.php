@@ -307,7 +307,7 @@
 		<div class="left-side-bar">
 			<div class="brand-logo">
 				<a href="<?=site_url('/dashboard')?>">
-					<img src="assets/img/fastcat.png" alt="" class="dark-logo" width="100"/>
+					<img src="/assets/img/fastcat.png" alt="" class="dark-logo" width="100"/>
 					<img
 						src="assets/img/fastcat.png"
 						alt="" width="100"
@@ -431,7 +431,13 @@
 				<div class="card-box">
 					<div class="card-header"><span class="icon-copy bi bi-qr-code"></span>&nbsp;QR Code</div>
 					<div class="card-body">
-						
+                        <div class="row g-3">
+                            <?php for($i=0;$i<$items['Qty'];$i++){ ?>
+                                <div class="col-lg-3">
+                                <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=<?php echo $items['productID'].$i ?>&choe=UTF-8" title="<?php echo $items['productName'] ?>" style="border:1px solid #000;" />
+                                </div>
+                            <?php } ?>
+                        </div>
 					</div>
 				</div>
 			</div>
