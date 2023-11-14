@@ -429,7 +429,9 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header"><span class="icon-copy bi bi-qr-code"></span>&nbsp;QR Code</div>
+					<div class="card-header"><span class="icon-copy bi bi-qr-code"></span>&nbsp;QR Code
+                    <a href="" style="float:right;" id="btnPrint"><span class="bi bi-printer"></span>&nbsp;Print</a>
+                </div>
 					<div class="card-body">
                         <div class="row g-3">
                             <?php for($i=0;$i<$items['Qty'];$i++){ ?>
@@ -437,6 +439,11 @@
                                 <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=<?php echo $items['productID'].$i ?>&choe=UTF-8" title="<?php echo $items['productName'] ?>" style="border:1px solid #000;" />
                                 </div>
                             <?php } ?>
+                            <?php
+                                $db;
+                                $this->db = db_connect();
+                                $builder = $this->db->table('');
+                             ?>
                         </div>
 					</div>
 				</div>
