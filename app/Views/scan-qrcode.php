@@ -459,7 +459,15 @@
                                         <th>Action</th>
                                     </thead>
                                     <tbody>
-
+                                        <?php foreach($items as $item): ?>
+                                            <tr>
+                                                <td><?=$item['name']?></td>
+                                                <td><?=$item['quantity']?></td>
+                                                <td>
+                                                <a href="<?=site_url('remove/'.$item['id'])?>"><span class="fa fa-trash"></span> Remove</a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -489,7 +497,7 @@
                 {
                     if(response==="success")
                     {
-                        
+                        console.log("success");
                     }
                     else
                     {

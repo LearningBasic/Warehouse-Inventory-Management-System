@@ -627,4 +627,62 @@ class ProductController extends BaseController
         $logModel->save($records);
         echo "Success";
     }
+
+    public function scanning()
+    {
+        $val = $this->request->getGet('text');
+        $inventory = new \App\Models\inventoryModel();
+        $qrcodeModel = new \App\Models\qrcodeModel();
+        $item = $qrcodeModel->WHERE('TextValue',$val)->first();
+        $product = $inventory->find($item['inventID']);
+        $item = array(
+            'id'=>$product['inventID'],
+            'name'=>$product['productName'],
+            'quantity'=>1
+        );
+        $session = session();
+        if($session->has('cart'))
+        {
+            $index = $this->exists($val);
+            $cart = array_values(session('cart'));
+            if($index == -1)
+            {
+                array_push($cart, $item);
+            }
+            else
+            {
+                $cart[$index]['quantity']++; 
+            }
+            $session->set('cart',$cart);
+        }
+        else
+        {
+            $cart = array($item);
+            $session->set('cart',$cart);
+        }
+        echo "success";
+    }
+
+    private function exists($val)
+    {
+        $items = array_values(session('cart'));
+        for($i = 0; $i < count($items); $i++)
+        {
+            if($items[$i]['id']==$val)
+            {
+                return $i;
+            }
+        }
+        return -1;
+    }
+
+    public function remove($id)
+    {
+        $index = $this->exists($id);
+        $cart = array_values(session('cart'));
+        unset($cart[$index]);
+        $session = session();
+        $session->set('cart',$cart);
+        return $this->response->redirect(site_url('scan'));
+    }
 }
