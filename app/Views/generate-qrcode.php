@@ -433,17 +433,31 @@
                     <a href="" style="float:right;" id="btnPrint"><span class="bi bi-printer"></span>&nbsp;Print</a>
                 </div>
 					<div class="card-body">
-                        <div class="row g-3">
+                        <div class="row g-3" id="pdf">
                             <?php for($i=0;$i<$items['Qty'];$i++){ ?>
-                                <div class="col-lg-3">
+                                <div class="col-lg-3 form-group">
                                 <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=<?php echo $items['productID'].$i ?>&choe=UTF-8" title="<?php echo $items['productName'] ?>" style="border:1px solid #000;" />
                                 </div>
-                            <?php } ?>
                             <?php
+                                $text = $items['productID'].$i;
+                                $qrModel = new \App\Models\qrcodeModel();
                                 $db;
                                 $this->db = db_connect();
-                                $builder = $this->db->table('');
+                                $builder = $this->db->table('tblqrcode');
+                                $builder->select('*');
+                                $builder->WHERE('inventID',$items['inventID'])->WHERE('TextValue',$text);
+                                $data = $builder->get();
+                                if($row = $data->getRow())
+                                {
+                                    //do nothing, just generate the code
+                                }
+                                else
+                                {
+                                    $values = ['inventID'=>$items['inventID'],'TextValue'=>$text];
+                                    $qrModel->save($values);
+                                }
                              ?>
+                             <?php } ?>
                         </div>
 					</div>
 				</div>
