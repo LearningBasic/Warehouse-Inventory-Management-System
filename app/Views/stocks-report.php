@@ -497,7 +497,7 @@
                                             <th>Overhaul Items</th>
                                             <th>Total</th>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tblreport">
 
                                         </tbody>
                                     </table>
@@ -520,5 +520,27 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+        <script>
+            $('#btnSearch').on('click',function(e)
+            {
+                e.preventDefault();
+                $('#tblreport').html("<tr><td colspan='7'><center>Loading data...</center></td></tr>");
+                var data = $('#frmSearch').serialize();
+                $.ajax({
+                    url:"<?=site_url('search-stocks')?>",method:"GET",
+                    data:data,success:function(response)
+                    {
+                        if(response==="")
+                        {
+                            $('#tblreport').html("<tr><td colspan='7'><center>No Data</center></td></tr>");
+                        }
+                        else
+                        {
+                            $('#tblreport').html(response);
+                        }
+                    }
+                });
+            });
+        </script>
 	</body>
 </html>
