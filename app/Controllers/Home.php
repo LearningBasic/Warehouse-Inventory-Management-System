@@ -730,4 +730,9 @@ class Home extends BaseController
             <?php
         }
     }
+
+    public function stocksReport()
+    {
+        return view('stocks-report');
+    }
 }
