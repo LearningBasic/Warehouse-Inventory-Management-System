@@ -453,6 +453,16 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
+				<?php if(!empty(session()->getFlashdata('success'))) : ?>
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<?= session()->getFlashdata('success'); ?>
+					</div>
+				<?php endif; ?>
+				<?php if(!empty(session()->getFlashdata('fail'))) : ?>
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<?= session()->getFlashdata('fail'); ?>
+					</div>
+				<?php endif; ?>
                 <div class="row g-3">
                     <div class="col-lg-4 form-group">
                         <div class="card-box">
@@ -481,7 +491,7 @@
 										</table>
 									</div>
 									<div class="col-12 form-group">
-										<button type="submit" class="btn btn-primary" id="btnSend">Submit Report</button>
+										<button type="submit" class="btn btn-primary" onclick="return confirm('Do you want to submit your report?')" id="btnSend">Submit Report</button>
 									</div>
 								</form>
                             </div>

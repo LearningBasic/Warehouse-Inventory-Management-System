@@ -686,6 +686,25 @@ class ProductController extends BaseController
 
     public function saveInventory()
     {
-        
+        $scanModel = new \App\Models\scanItemModel();
+        //datas
+        $rowCounts = count($this->request->getPost('itemID'));
+        if($rowCounts==0)
+        {
+            session()->setFlashdata('fail','No Item(s) Found');
+            return redirect()->to('/scan')->withInput();
+        }
+        else
+        {
+            for($i=0;$i<$rowCounts;$i++)
+            {
+                $id = $this->request->getPost('itemID')[$i];
+                //values
+                $values = ['Status'=>1,'DateReported'=>date('Y-m-d')];
+                $scanModel->update($id,$values);
+            }
+            session()->setFlashdata('success','Great! Successfully submitted');
+            return redirect()->to('/scan')->withInput();
+        }
     }
 }
