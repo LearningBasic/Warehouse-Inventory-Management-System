@@ -4,7 +4,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>FastCat Warehouse Management System</title>
+		<title>FastCat Inventory Management System</title>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta name="description" content="FastCat Warehouse Inventory Management System, fastcat, fastcat inventory, APFC Employees, APFC Head Office">
@@ -49,7 +49,7 @@
 		/>
 		<link rel="stylesheet" type="text/css" href="assets/vendors/styles/style.css" />
 	</head>
-	<body class="login-page">
+	<body class="login-page bg-white">
 		<div class="login-header box-shadow">
 			<div
 				class="container-fluid d-flex justify-content-between align-items-center"
@@ -67,12 +67,12 @@
 			<div class="container">
 				<div class="row align-items-center">
 					<div class="col-md-6 col-lg-7">
-						<img src="assets/vendors/images/login-page-img.png" alt="" />
+						<img src="assets/vendors/images/inventory.gif" width="100%" alt="" />
 					</div>
 					<div class="col-md-6 col-lg-5">
 						<div class="login-box bg-white box-shadow border-radius-10">
 							<div class="login-title">
-								<h2 class="text-center text-primary">Login To FastCat WMS</h2>
+								<h2 class="text-center text-primary">Login To FastCat IMS</h2>
 							</div>
 							<form method="post" action="<?=base_url('/auth')?>">
                                 <?= csrf_field(); ?>
