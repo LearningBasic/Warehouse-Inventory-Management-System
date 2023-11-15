@@ -656,7 +656,8 @@ class ProductController extends BaseController
         {
             $values = [
                 'productName'=>$productName,'Code'=>$val,
-                'accountID'=>session()->get('loggedUser'),'Status'=>0,'Date'=>date('Y-m-d')
+                'accountID'=>session()->get('loggedUser'),'Status'=>0,
+                'Date'=>date('Y-m-d'),'DateReported'=>'0000-00-00'
             ];
             $scanModel->save($values);
             echo "success";
@@ -681,5 +682,10 @@ class ProductController extends BaseController
             </tr>
             <?php
         }
+    }
+
+    public function saveInventory()
+    {
+        
     }
 }

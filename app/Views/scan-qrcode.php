@@ -465,7 +465,7 @@
                         <div class="card-box">
                             <div class="card-header">Scanned Item/Equipment</div>
                             <div class="card-body">
-								<form method="POST" class="row g-3" action="<?=base_url('save-report')?>">
+								<form method="POST" class="row g-3" action="<?=base_url('save-inventory')?>">
 									<div class="col-12 form-group tableFixHead" style="height:400px;overflow-y:auto;">
 										<table class="table-bordered table stripe hover nowrap">
 											<thead>

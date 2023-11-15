@@ -14,7 +14,7 @@ class scanItemModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['productName','Code','accountID','Status','Date'];
+    protected $allowedFields = ['productName','Code','accountID','Status','Date','DateReported'];
 
     protected $validationRules = [];
     protected $validationMessages = [];
