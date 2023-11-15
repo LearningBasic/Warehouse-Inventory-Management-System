@@ -80,6 +80,19 @@
                 width: 0px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
+			.checkbox
+            {
+                width:25px;height:25px;
+            }
+			.tableFixHead thead th { position: sticky; top: 0; z-index: 1;color:#fff;background-color:#0275d8;}
+
+                /* Just common table stuff. Really. */
+                table  { border-collapse: collapse; width: 100%; }
+                th, td { padding: 8px 16px;color:#000; }
+                tbody{color:#000;}
+            tr:nth-child(even) {
+              background-color: #f2f2f2;
+            }
             
         </style>
 	</head>
@@ -452,19 +465,25 @@
                         <div class="card-box">
                             <div class="card-header">Scanned Item/Equipment</div>
                             <div class="card-body">
-                                <table class="data-table table-bordered table stripe hover nowrap">
-                                    <thead>
-                                        <th>ID</th>
-                                        <th>Item/Equipment</th>
-                                        <th>Product Code</th>
-                                        <th>Action</th>
-                                    </thead>
-                                    <tbody id="tblitems">
-                                        <tr>
-                                            <td colspan="4"><center>No Item(s) Found</center></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+								<form method="POST" class="row g-3" action="<?=base_url('save-report')?>">
+									<div class="col-12 form-group tableFixHead" style="height:400px;overflow-y:auto;">
+										<table class="table-bordered table stripe hover nowrap">
+											<thead>
+												<th>#</th>
+												<th>Item/Equipment</th>
+												<th>Product Code</th>
+											</thead>
+											<tbody id="tblitems">
+												<tr>
+													<td colspan="3"><center>No Item(s) Found</center></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="col-12 form-group">
+										<button type="submit" class="btn btn-primary" id="btnSend">Submit Report</button>
+									</div>
+								</form>
                             </div>
                         </div>
                     </div>
@@ -495,7 +514,7 @@
                     {
                         if(response==="")
                         {
-                            $('#tblitems').html("<tr><td colspan='4'><center>No Item(s) Found</center></td></tr>");
+                            $('#tblitems').html("<tr><td colspan='3'><center>No Item(s) Found</center></td></tr>");
                         }
                         else
                         {

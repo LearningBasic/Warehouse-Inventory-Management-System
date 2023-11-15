@@ -630,13 +630,19 @@ class ProductController extends BaseController
 
     public function scanning()
     {
-        $val = $this->request->getGet('text');
+        $val = $this->request->getPost('text');
         $scanModel = new \App\Models\scanItemModel();
-        $inventory = new \App\Models\inventoryModel();
-        $qrcodeModel = new \App\Models\qrcodeModel();
         //datas
-        $item = $qrcodeModel->WHERE('TextValue',$val)->first();
-        $product = $inventory->WHERE($item['inventID'])->first();
+        $productName = "";
+        $builder = $this->db->table('tblinventory a');
+        $builder->select('a.*');
+        $builder->join('tblqrcode b','b.inventID=a.inventID','LEFT');
+        $builder->WHERE('b.TextValue',$val);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $productName = $row->productName;
+        }
         //check if item is already scanned
         $builder = $this->db->table('tblscanned_items');
         $builder->select('*');
@@ -649,12 +655,12 @@ class ProductController extends BaseController
         else
         {
             $values = [
-                'productName'=>$product['productName'],'Code'=>$item['TextValue'],
+                'productName'=>$productName,'Code'=>$val,
                 'accountID'=>session()->get('loggedUser'),'Status'=>0,'Date'=>date('Y-m-d')
             ];
             $scanModel->save($values);
+            echo "success";
         }
-        echo "success";
     }
 
     public function viewItems()
@@ -662,16 +668,16 @@ class ProductController extends BaseController
         $user = session()->get('loggedUser');
         $builder = $this->db->table('tblscanned_items');
         $builder->select('*');
+        $builder->WHERE('Status',0);
         $builder->WHERE('accountID',$user);
         $data = $builder->get();
         foreach($data->getResult() as $row)
         {
             ?>
             <tr>
-                <td><?php echo $row->scanID ?></td>
+                <td><input type="checkbox" class="checkbox" value="<?php echo $row->scanID ?>" name="itemID[]" id="itemID" checked/></td>
                 <td><?php echo $row->productName ?></td>
                 <td><?php echo $row->Code ?></td>
-                <td></td>
             </tr>
             <?php
         }
