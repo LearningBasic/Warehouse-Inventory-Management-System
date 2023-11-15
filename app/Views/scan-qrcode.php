@@ -458,11 +458,6 @@
 						<?= session()->getFlashdata('success'); ?>
 					</div>
 				<?php endif; ?>
-				<?php if(!empty(session()->getFlashdata('fail'))) : ?>
-					<div class="alert alert-danger alert-dismissible fade show" role="alert">
-						<?= session()->getFlashdata('fail'); ?>
-					</div>
-				<?php endif; ?>
                 <div class="row g-3">
                     <div class="col-lg-4 form-group">
                         <div class="card-box">
@@ -525,10 +520,11 @@
                         if(response==="")
                         {
                             $('#tblitems').html("<tr><td colspan='3'><center>No Item(s) Found</center></td></tr>");
+							$('#btnSend').attr("disabled",true);
                         }
                         else
                         {
-                            $('#tblitems').html(response);
+                            $('#tblitems').html(response);$('#btnSend').attr("disabled",false);
                         }
                     }
                 });

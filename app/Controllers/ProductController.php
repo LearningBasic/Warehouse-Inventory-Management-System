@@ -689,22 +689,14 @@ class ProductController extends BaseController
         $scanModel = new \App\Models\scanItemModel();
         //datas
         $rowCounts = count($this->request->getPost('itemID'));
-        if($rowCounts==0)
+        for($i=0;$i<$rowCounts;$i++)
         {
-            session()->setFlashdata('fail','No Item(s) Found');
-            return redirect()->to('/scan')->withInput();
+            $id = $this->request->getPost('itemID')[$i];
+            //values
+            $values = ['Status'=>1,'DateReported'=>date('Y-m-d')];
+            $scanModel->update($id,$values);
         }
-        else
-        {
-            for($i=0;$i<$rowCounts;$i++)
-            {
-                $id = $this->request->getPost('itemID')[$i];
-                //values
-                $values = ['Status'=>1,'DateReported'=>date('Y-m-d')];
-                $scanModel->update($id,$values);
-            }
-            session()->setFlashdata('success','Great! Successfully submitted');
-            return redirect()->to('/scan')->withInput();
-        }
+        session()->setFlashdata('success','Great! Successfully submitted');
+        return redirect()->to('/scan')->withInput();
     }
 }
