@@ -433,7 +433,30 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
-				
+				<div class="tabs">
+                <ul class="nav nav-pills justify-content-left" role="tablist">
+                        <li class="nav-item">
+                            <a
+                                class="nav-link active text-blue"
+                                data-toggle="tab"
+                                href="#home6"
+                                role="tab"
+                                aria-selected="true"
+                                >Inventory Report</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link text-blue"
+                                data-toggle="tab"
+                                href="#profile6"
+                                role="tab"
+                                aria-selected="false"
+                                >Individual Report</a
+                            >
+                        </li>
+                    </ul>
+                </div>
 			</div>
 		</div>
 		<!-- js -->
