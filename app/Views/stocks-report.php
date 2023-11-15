@@ -487,6 +487,9 @@
                                                     <label>Category</label>
                                                     <select class="form-control" name="category">
                                                         <option value="ALL">ALL</option>
+                                                        <?php foreach($category as $row): ?>
+                                                            <option value="<?php echo $row->categoryID ?>"><?php echo $row->categoryName ?></option>
+                                                        <?php endforeach; ?>
                                                     </select>
                                                 </div>
                                                 <div class="col-lg-2 form-group">
