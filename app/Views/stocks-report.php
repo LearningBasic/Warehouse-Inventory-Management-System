@@ -74,6 +74,15 @@
                 width: 4px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
+            .tableFixHead thead th { position: sticky; top: 0; z-index: 1;color:#fff;background-color:#0275d8;}
+
+            /* Just common table stuff. Really. */
+            table  { border-collapse: collapse; width: 100%; }
+            th, td { padding: 8px 16px;color:#000; }
+            tbody{color:#000;}
+            tr:nth-child(even) {
+            background-color: #f2f2f2;
+            }
             
         </style>
 	</head>
@@ -486,8 +495,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 form-group">
-                                    <table  class="table table-bordered striped">
+                                <div class="col-12 form-group tableFixHead" style="height:400px;overflow-y:auto;">
+                                    <table  class="table stripe table-bordered hover nowrap">
                                         <thead>
                                             <th>Product ID</th>
                                             <th>Product Name</th>

@@ -15,7 +15,7 @@ class Report extends BaseController
         $location = $this->request->getGet('location');
         $sql = ('Select a.*,SUM(a.Qty)actual,
         SUM(CASE WHEN b.Remarks="Replacement" THEN b.Qty ELSE 0 END)damage,
-        SUM(CASE WHEN b.Remarks="For Repair" THEN b.Qty ELSE 0 END)repair,c.categoryName from tblinventory a 
+        SUM(CASE WHEN b.Remarks="For Repair" AND b.Status=1 THEN b.Qty ELSE 0 END)repair,c.categoryName from tblinventory a 
         LEFT JOIN tbldamagereport b ON b.inventID=a.inventID 
         LEFT JOIN tblcategory c ON c.categoryID=a.categoryID WHERE a.warehouseID=:location: GROUP BY a.inventID');
         $query =$this->db->query($sql,[

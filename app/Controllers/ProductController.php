@@ -202,6 +202,9 @@ class ProductController extends BaseController
                 $total = $getInfo['Qty']+$inventoryQty['Qty'];
                 $record = ['Qty'=>$total];
                 $inventoryModel->update($getInfo['inventID'],$record);
+                //update the qty of repair report into 0
+                $values = ['Qty'=>0];
+                $damageReportModel->update($getInfo['damageID'],$values);
                 echo "success";
             }
             else
