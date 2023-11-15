@@ -452,10 +452,61 @@
                                 href="#profile6"
                                 role="tab"
                                 aria-selected="false"
-                                >Individual Report</a
+                                >Actual Report</a
                             >
                         </li>
                     </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="home6" role="tabpanel">
+                            <br/>
+                            <div class="row g-3">
+                                <div class="col-12 form-group">
+                                    <div class="card-box">
+                                        <div class="card-header">Stocks Report</div>
+                                        <div class="card-body">
+                                            <form method="get" id="frmSearch" class="row g-3">
+                                                <div class="col-lg-4 form-group">
+                                                    <label>Warehouse/Vessel</label>
+                                                    <select class="form-control" name="location">
+                                                        <option value="">Choose</option>
+                                                        <?php foreach($location as $row): ?>
+                                                            <option value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-2 form-group">
+                                                    <label>&nbsp;</label>
+                                                    <input type="submit" class="btn btn-primary form-control text-white" id="btnSearch" value="Search"/>
+                                                </div>
+                                                <div class="col-lg-2 form-group">
+                                                    <label>&nbsp;</label>
+                                                    <a href="javascript:void(0);" class="btn btn-outline-primary form-control"><i class="icon-copy dw dw-download"></i>&nbsp;Export</a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <table  class="table table-bordered striped">
+                                        <thead>
+                                            <th>Product ID</th>
+                                            <th>Product Name</th>
+                                            <th>Category</th>
+                                            <th>Actual Stocks</th>
+                                            <th>Damage Items</th>
+                                            <th>Overhaul Items</th>
+                                            <th>Total</th>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile6" role="tabpanel">
+                        </div>
+                    </div>
                 </div>
 			</div>
 		</div>

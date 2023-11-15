@@ -733,6 +733,18 @@ class Home extends BaseController
 
     public function stocksReport()
     {
-        return view('stocks-report');
+        if(session()->get('role')=="Administrator"||session()->get('role')=="Editor")
+        {
+            $builder = $this->db->table('tblwarehouse');
+            $builder->select('*');
+            $warehouse = $builder->get()->getResult();
+
+            $data = ['location'=>$warehouse,];
+            return view('stocks-report',$data);
+        }
+        else
+        {
+            return redirect()->back();
+        }
     }
 }
