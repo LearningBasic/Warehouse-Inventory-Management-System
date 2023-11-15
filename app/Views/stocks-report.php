@@ -483,6 +483,12 @@
                                                         <?php endforeach; ?>
                                                     </select>
                                                 </div>
+                                                <div class="col-lg-4 form-group">
+                                                    <label>Category</label>
+                                                    <select class="form-control" name="category">
+                                                        <option value="ALL">ALL</option>
+                                                    </select>
+                                                </div>
                                                 <div class="col-lg-2 form-group">
                                                     <label>&nbsp;</label>
                                                     <input type="submit" class="btn btn-primary form-control text-white" id="btnSearch" value="Search"/>
