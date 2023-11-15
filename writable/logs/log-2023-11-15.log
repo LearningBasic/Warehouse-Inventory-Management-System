@@ -395,3 +395,51 @@ INFO - 2023-11-15 07:32:47 --> Session: Class initialized using 'CodeIgniter\Ses
 INFO - 2023-11-15 07:35:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2023-11-15 07:37:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2023-11-15 07:41:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2023-11-15 07:58:00 --> mysqli_sql_exception: Column 'Qty' in field list is ambiguous in C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php(295): mysqli->query('Select a.*,SUM(...', 0)
+#1 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('Select a.*,SUM(...')
+#2 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('Select a.*,SUM(...')
+#3 C:\xampp\htdocs\FastCat-WMS\app\Controllers\Report.php(21): CodeIgniter\Database\BaseConnection->query('Select a.*,SUM(...', Array)
+#4 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(934): App\Controllers\Report->searchStockReport()
+#5 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+#6 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\FastCat-WMS\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\FastCat-WMS\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2023-11-15 07:58:00 --> Column 'Qty' in field list is ambiguous
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Report.php(21): CodeIgniter\Database\BaseConnection->query('Select a.*,SUM(a.Qty)actual,
+        SUM(CASE WHEN b.Remarks="Replacement" THEN Qty ELSE 0 END)damage,
+        SUM(CASE WHEN b.Remarks="For Repair" THEN Qty ELSE 0 END)repair,c.categoryName from tblinventory a 
+        LEFT JOIN tbldamagereport b ON b.inventID=a.inventID 
+        LEFT JOIN tblcategory c ON c.categoryID=a.categoryID WHERE a.warehouseID=:location: GROUP BY a.inventID', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Report->searchStockReport()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+ERROR - 2023-11-15 07:58:08 --> mysqli_sql_exception: Column 'Qty' in field list is ambiguous in C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php(295): mysqli->query('Select a.*,SUM(...', 0)
+#1 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('Select a.*,SUM(...')
+#2 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('Select a.*,SUM(...')
+#3 C:\xampp\htdocs\FastCat-WMS\app\Controllers\Report.php(21): CodeIgniter\Database\BaseConnection->query('Select a.*,SUM(...', Array)
+#4 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(934): App\Controllers\Report->searchStockReport()
+#5 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+#6 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\FastCat-WMS\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\FastCat-WMS\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2023-11-15 07:58:08 --> Column 'Qty' in field list is ambiguous
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Report.php(21): CodeIgniter\Database\BaseConnection->query('Select a.*,SUM(a.Qty)actual,
+        SUM(CASE WHEN b.Remarks="Replacement" THEN Qty ELSE 0 END)damage,
+        SUM(CASE WHEN b.Remarks="For Repair" THEN Qty ELSE 0 END)repair,c.categoryName from tblinventory a 
+        LEFT JOIN tbldamagereport b ON b.inventID=a.inventID 
+        LEFT JOIN tblcategory c ON c.categoryID=a.categoryID WHERE a.warehouseID=:location: GROUP BY a.inventID', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Report->searchStockReport()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
