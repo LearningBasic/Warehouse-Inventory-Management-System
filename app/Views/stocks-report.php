@@ -523,6 +523,21 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="profile6" role="tabpanel">
+							<br/>
+							<div class="row g-3">
+								<div class="col-12 form-group">
+									<div class="card-box">
+										<div class="card-header">Search Inventory Report</div>
+										<div class="card-body">
+											<form method="GET" class="row g-3" id="frmReport">
+												
+											</form>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 form-group">
+								</div>
+							</div>
                         </div>
                     </div>
                 </div>
