@@ -515,6 +515,7 @@ class ProductController extends BaseController
 
     public function acceptDamageReport()
     {
+        $systemLogsModel = new \App\Models\systemLogsModel();
         $damageReportModel = new \App\Models\damageReportModel();
         $inventoryModel = new \App\Models\inventoryModel();
         //datas
@@ -534,6 +535,10 @@ class ProductController extends BaseController
             $new_values = ['Qty'=>$remain_qty];
             $inventoryModel->update($inventory['inventID'],$new_values);
         }
+        //save the logs
+        $values = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),
+        'Activity'=>'Accept Damage report of '.$inventory['productName']];
+        $systemLogsModel->save($values);
         echo "Success";
     }
 
@@ -571,11 +576,16 @@ class ProductController extends BaseController
     public function acceptRepairReport()
     {
         $repairReport = new \App\Models\repairReportModel();
+        $systemLogsModel = new \App\Models\systemLogsModel();
         //datas
         $itemID = $this->request->getPost('value');
 
         $values = ['Status'=>1,'approveDate'=>date('Y-m-d')];
         $repairReport->update($itemID,$values);
+        //add logs
+        $value = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),
+        'Activity'=>'Accept repair report'];
+        $systemLogsModel->save($value);
         echo "Success";
     }
 
@@ -619,6 +629,7 @@ class ProductController extends BaseController
 
     public function acceptRequest()
     {
+        $systemLogsModel = new \App\Models\systemLogsModel();
         $requestModel = new \App\Models\requestModel();
         $logModel = new \App\Models\logModel();
         //data
@@ -628,6 +639,11 @@ class ProductController extends BaseController
         //log records
         $records = ['accountID'=>session()->get('loggedUser'),'DateApproved'=>date('Y-m-d')];
         $logModel->save($records);
+        //save the logs
+        $item_request = $requestModel->WHERE('requestID',$item)->first();
+        $value = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),
+        'Activity'=>'Accept transfer request of '.$item_request['productName']];
+        $systemLogsModel->save($value);
         echo "Success";
     }
 
