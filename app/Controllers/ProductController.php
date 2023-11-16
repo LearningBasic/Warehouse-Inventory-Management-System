@@ -652,7 +652,7 @@ class ProductController extends BaseController
         $val = $this->request->getPost('text');
         $scanModel = new \App\Models\scanItemModel();
         //datas
-        $productName = "";
+        $productName = "";$inventID=0;
         $builder = $this->db->table('tblinventory a');
         $builder->select('a.*');
         $builder->join('tblqrcode b','b.inventID=a.inventID','LEFT');
@@ -660,6 +660,7 @@ class ProductController extends BaseController
         $data = $builder->get();
         if($row = $data->getRow())
         {
+            $inventID = $row->inventID;
             $productName = $row->productName;
         }
         //check if item is already scanned
@@ -675,6 +676,7 @@ class ProductController extends BaseController
         else
         {
             $values = [
+                'inventID'=>$inventID,
                 'productName'=>$productName,'Code'=>$val,
                 'accountID'=>session()->get('loggedUser'),'Status'=>0,
                 'Date'=>date('Y-m-d'),'DateReported'=>'0000-00-00'

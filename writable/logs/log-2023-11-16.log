@@ -172,3 +172,136 @@ INFO - 2023-11-16 07:02:55 --> Session: Class initialized using 'CodeIgniter\Ses
 INFO - 2023-11-16 07:03:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2023-11-16 07:03:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2023-11-16 07:03:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-16 07:06:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-16 07:06:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-16 07:06:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-16 07:06:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-16 07:07:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-16 07:07:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-16 07:07:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-16 07:07:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-16 07:07:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-16 07:07:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-16 07:07:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-16 07:07:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2023-11-16 07:08:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2023-11-16 07:08:38 --> mysqli_sql_exception: Unknown column 'd.categoryName' in 'field list' in C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php(295): mysqli->query('Select a.*,SUM(...', 0)
+#1 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('Select a.*,SUM(...')
+#2 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('Select a.*,SUM(...')
+#3 C:\xampp\htdocs\FastCat-WMS\app\Controllers\Report.php(97): CodeIgniter\Database\BaseConnection->query('Select a.*,SUM(...', Array)
+#4 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(934): App\Controllers\Report->searchInventory()
+#5 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+#6 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\FastCat-WMS\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\FastCat-WMS\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2023-11-16 07:08:38 --> Unknown column 'd.categoryName' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Report.php(97): CodeIgniter\Database\BaseConnection->query('Select a.*,SUM(a.Qty)actual,COUNT(b.scanID)total,d.categoryName
+            from tblinventory a  
+            INNER JOIN tblscanned_items b ON b.inventID=a.inventID
+            LEFT JOIN tblcategory c ON c.categoryID=a.categoryID
+            WHERE a.warehouseID=:location: AND b.accountID=:user: AND b.Date BETWEEN :from: AND :to: GROUP BY a.inventID', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Report->searchInventory()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+ERROR - 2023-11-16 07:08:48 --> mysqli_sql_exception: Unknown column 'd.categoryName' in 'field list' in C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php(295): mysqli->query('Select a.*,SUM(...', 0)
+#1 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('Select a.*,SUM(...')
+#2 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('Select a.*,SUM(...')
+#3 C:\xampp\htdocs\FastCat-WMS\app\Controllers\Report.php(97): CodeIgniter\Database\BaseConnection->query('Select a.*,SUM(...', Array)
+#4 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(934): App\Controllers\Report->searchInventory()
+#5 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+#6 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\FastCat-WMS\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\FastCat-WMS\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2023-11-16 07:08:48 --> Unknown column 'd.categoryName' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Report.php(97): CodeIgniter\Database\BaseConnection->query('Select a.*,SUM(a.Qty)actual,COUNT(b.scanID)total,d.categoryName
+            from tblinventory a  
+            INNER JOIN tblscanned_items b ON b.inventID=a.inventID
+            LEFT JOIN tblcategory c ON c.categoryID=a.categoryID
+            WHERE a.warehouseID=:location: AND b.accountID=:user: AND b.Date BETWEEN :from: AND :to: GROUP BY a.inventID', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Report->searchInventory()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+ERROR - 2023-11-16 07:14:24 --> mysqli_sql_exception: Unknown column 'b.accountID' in 'where clause' in C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php(295): mysqli->query('Select a.*,SUM(...', 0)
+#1 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('Select a.*,SUM(...')
+#2 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('Select a.*,SUM(...')
+#3 C:\xampp\htdocs\FastCat-WMS\app\Controllers\Report.php(97): CodeIgniter\Database\BaseConnection->query('Select a.*,SUM(...', Array)
+#4 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(934): App\Controllers\Report->searchInventory()
+#5 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+#6 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\FastCat-WMS\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\FastCat-WMS\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2023-11-16 07:14:24 --> Unknown column 'b.accountID' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Report.php(97): CodeIgniter\Database\BaseConnection->query('Select a.*,SUM(a.Qty)actual,b.total,c.categoryName
+            from tblinventory a  
+            LEFT JOIN (Select COUNT(scanID)total from tblscanned_items GROUP BY inventID) b ON b.inventID=a.inventID
+            LEFT JOIN tblcategory c ON c.categoryID=a.categoryID
+            WHERE a.warehouseID=:location: AND b.accountID=:user: AND b.Date BETWEEN :from: AND :to: GROUP BY a.inventID', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Report->searchInventory()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+ERROR - 2023-11-16 07:14:31 --> mysqli_sql_exception: Unknown column 'b.accountID' in 'where clause' in C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php(295): mysqli->query('Select a.*,SUM(...', 0)
+#1 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('Select a.*,SUM(...')
+#2 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('Select a.*,SUM(...')
+#3 C:\xampp\htdocs\FastCat-WMS\app\Controllers\Report.php(97): CodeIgniter\Database\BaseConnection->query('Select a.*,SUM(...', Array)
+#4 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(934): App\Controllers\Report->searchInventory()
+#5 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+#6 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\FastCat-WMS\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\FastCat-WMS\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2023-11-16 07:14:31 --> Unknown column 'b.accountID' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Report.php(97): CodeIgniter\Database\BaseConnection->query('Select a.*,SUM(a.Qty)actual,b.total,c.categoryName
+            from tblinventory a  
+            LEFT JOIN (Select COUNT(scanID)total from tblscanned_items GROUP BY inventID) b ON b.inventID=a.inventID
+            LEFT JOIN tblcategory c ON c.categoryID=a.categoryID
+            WHERE a.warehouseID=:location: AND b.accountID=:user: AND b.Date BETWEEN :from: AND :to: GROUP BY a.inventID', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Report->searchInventory()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+ERROR - 2023-11-16 07:14:56 --> mysqli_sql_exception: Unknown column 'b.inventID' in 'on clause' in C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php(295): mysqli->query('Select a.*,SUM(...', 0)
+#1 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('Select a.*,SUM(...')
+#2 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('Select a.*,SUM(...')
+#3 C:\xampp\htdocs\FastCat-WMS\app\Controllers\Report.php(97): CodeIgniter\Database\BaseConnection->query('Select a.*,SUM(...', Array)
+#4 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(934): App\Controllers\Report->searchInventory()
+#5 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+#6 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\FastCat-WMS\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\FastCat-WMS\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2023-11-16 07:14:56 --> Unknown column 'b.inventID' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Report.php(97): CodeIgniter\Database\BaseConnection->query('Select a.*,SUM(a.Qty)actual,b.total,c.categoryName
+            from tblinventory a  
+            LEFT JOIN (Select accountID,Date,COUNT(scanID)total from tblscanned_items GROUP BY inventID) b ON b.inventID=a.inventID
+            LEFT JOIN tblcategory c ON c.categoryID=a.categoryID
+            WHERE a.warehouseID=:location: AND b.accountID=:user: AND b.Date BETWEEN :from: AND :to: GROUP BY a.inventID', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Report->searchInventory()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
