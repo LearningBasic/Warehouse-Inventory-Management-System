@@ -465,7 +465,7 @@
 								<th>Action</th>
 							</thead>
 							<tbody>
-								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
+								<?php if(session()->get('role')=="Administrator"){ ?>
 									<?php foreach($items as $row): if($row->Qty>$row->ReOrder){?>
 										<tr>
 											<td><?php echo $row->categoryName ?></td>
