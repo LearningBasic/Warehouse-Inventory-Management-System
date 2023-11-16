@@ -742,8 +742,12 @@ class Home extends BaseController
             $builder = $this->db->table('tblcategory');
             $builder->select('*');
             $category = $builder->get()->getResult();
+            //account
+            $builder = $this->db->table('tblaccount');
+            $builder->select('*');
+            $account = $builder->get()->getResult();
 
-            $data = ['location'=>$warehouse,'category'=>$category];
+            $data = ['location'=>$warehouse,'category'=>$category,'account'=>$account,];
             return view('stocks-report',$data);
         }
         else

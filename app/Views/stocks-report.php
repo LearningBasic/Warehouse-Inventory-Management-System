@@ -530,13 +530,55 @@
 										<div class="card-header">Search Inventory Report</div>
 										<div class="card-body">
 											<form method="GET" class="row g-3" id="frmReport">
-												
+												<div class="col-lg-2 form-group">
+													<label>From</label>
+													<input type="date" class="form-control" name="from"/>
+												</div>
+												<div class="col-lg-2 form-group">
+													<label>To</label>
+													<input type="date" class="form-control" name="to"/>
+												</div>
+												<div class="col-lg-3 form-group">
+                                                    <label>Warehouse/Vessel</label>
+                                                    <select class="form-control" name="location">
+                                                        <option value="">Choose</option>
+                                                        <?php foreach($location as $row): ?>
+                                                            <option value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+												<div class="col-lg-3 form-group">
+                                                    <label>User Accounts</label>
+                                                    <select class="form-control" name="accounts">
+                                                        <option value="">Choose</option>
+                                                        <?php foreach($account as $row): ?>
+                                                            <option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+												<div class="col-lg-2 form-group">
+                                                    <label>&nbsp;</label>
+                                                    <input type="submit" class="btn btn-primary form-control text-white" id="btnGenerate" value="Search"/>
+                                                </div>
 											</form>
 										</div>
 									</div>
 								</div>
-								<div class="col-12 form-group">
-								</div>
+								<div class="col-12 form-group tableFixHead" style="height:400px;overflow-y:auto;">
+                                    <table  class="table stripe table-bordered hover nowrap">
+                                        <thead>
+                                            <th>Product ID</th>
+                                            <th>Product Name</th>
+                                            <th>Category</th>
+                                            <th>On-Hand</th>
+                                            <th>Actual</th>
+                                            <th>Variances</th>
+                                        </thead>
+                                        <tbody id="tblvariances">
+
+                                        </tbody>
+                                    </table>
+                                </div>
 							</div>
                         </div>
                     </div>
