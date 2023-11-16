@@ -616,6 +616,26 @@
                     }
                 });
             });
+			$('#btnGenerate').on('click',function(e)
+            {
+                e.preventDefault();
+                $('#tblvariances').html("<tr><td colspan='6'><center>Loading data...</center></td></tr>");
+                var data = $('#frmReport').serialize();
+                $.ajax({
+                    url:"<?=site_url('search-inventory')?>",method:"GET",
+                    data:data,success:function(response)
+                    {
+                        if(response==="")
+                        {
+                            $('#tblvariances').html("<tr><td colspan='6'><center>No Data</center></td></tr>");
+                        }
+                        else
+                        {
+                            $('#tblvariances').html(response);
+                        }
+                    }
+                });
+            });
         </script>
 	</body>
 </html>
