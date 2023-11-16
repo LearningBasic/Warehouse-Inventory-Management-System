@@ -80,6 +80,7 @@ $routes->post('save-request','ProductController::saveRequest');
 $routes->post('accept-transfer-request','ProductController::acceptRequest');
 //report
 $routes->get('search-stocks','Report::searchStockReport');
+$routes->get('search-inventory','Report::searchInventory');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {

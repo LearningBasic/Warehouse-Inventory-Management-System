@@ -68,4 +68,12 @@ class Report extends BaseController
             }
         }
     }
+
+    public function searchInventory()
+    {
+        $from = $this->request->getGet('from');
+        $to = $this->request->getGet('to');
+        $location = $this->request->getGet('location');
+        $account = $this->request->getGet('accounts');
+    }
 }
