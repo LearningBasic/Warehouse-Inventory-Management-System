@@ -89,12 +89,12 @@ class Report extends BaseController
         }
         else
         {
-            $sql = ('Select a.*,SUM(a.Qty)actual,COUNT(c.scanID)total,d.categoryName
+            $sql = ('Select a.*,SUM(a.Qty)actual,COUNT(b.qrID)total,d.categoryName
             from tblinventory a 
             LEFT JOIN tblqrcode b ON b.inventID=a.inventID 
-            LEFT JOIN tblscanned_items c ON b.TextValue=c.Code
+            INNER JOIN tblscanned_items c ON b.TextValue=c.Code
             LEFT JOIN tblcategory d ON d.categoryID=a.categoryID
-            WHERE a.warehouseID=:location: AND c.accountID=:user: AND c.Date BETWEEN :from: AND :to: GROUP BY a.inventID');
+            WHERE a.warehouseID=:location: AND c.accountID=:user: AND c.Date BETWEEN :from: AND :to: GROUP BY a.inventID,b.qrID');
             $query =$this->db->query($sql,[
                 "location"=>$location,
                 "user"=>$account,

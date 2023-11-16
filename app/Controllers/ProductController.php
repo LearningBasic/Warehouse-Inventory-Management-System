@@ -666,6 +666,7 @@ class ProductController extends BaseController
         $builder = $this->db->table('tblscanned_items');
         $builder->select('*');
         $builder->WHERE('Code',$val)->WHERE('accountID',session()->get('loggedUser'));
+        $builder->WHERE('Date',date('Y-m-d'));
         $data = $builder->get();
         if($row=$data->getRow())
         {
