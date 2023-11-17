@@ -43,6 +43,7 @@ class Purchase extends BaseController
                 'OrderNo','accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
                 'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d')
             ];
+            $purchaseModel->save($values);
             //save all the item requested
             $count = count($item_name);
             for($i=0;$i<$count;$i++)
