@@ -463,14 +463,15 @@
                                 </div>
                             </div>
                             <div class="col-12 form-group">
-                                <table class="table stripe table-bordered hover nowrap" id="Table">
+								<button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow()">Add</button><br/><br/>
+                                <table class="table stripe table-bordered hover nowrap">
                                     <thead>
                                         <th>Qty</th>
                                         <th>Item Unit</th>
                                         <th>Product Name</th>
                                         <th>Specification</th>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="Table">
 
                                     </tbody>
                                 </table>
@@ -498,13 +499,18 @@
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
         <script>
-            $(function()
-			{
-				var set_number = function()
-				{
-					var table_len  = $('#Table').length()+1;
-				}
-			});
+            function addRow() {
+				var table = document.getElementById("Table");
+				var row = table.insertRow(0);
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				var cell3 = row.insertCell(2);
+				var cell4 = row.insertCell(3);
+				cell1.innerHTML = "<input type='number' class='form-control' id='qty' name='qty'/>";
+				cell2.innerHTML = "<input type='text' class='form-control' id='item' name='item'/>";
+				cell3.innerHTML = "<input type='text' class='form-control' id='item_name' name='item_name'/>";
+				cell4.innerHTML = "<input type='text' class='form-control' id='specification' name='specification'/>";
+			}
         </script>
 	</body>
 </html>
