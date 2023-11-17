@@ -498,14 +498,14 @@
                                                 </div>
                                                 <div class="col-lg-2 form-group">
                                                     <label>&nbsp;</label>
-                                                    <a href="javascript:void(0);" class="btn btn-outline-primary form-control"><i class="icon-copy dw dw-download"></i>&nbsp;Export</a>
+                                                    <a href="javascript:void(0);" onclick="exportf(this)" class="btn btn-outline-primary form-control"><i class="icon-copy dw dw-download"></i>&nbsp;Export</a>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 form-group tableFixHead" style="height:400px;overflow-y:auto;">
-                                    <table  class="table stripe table-bordered hover nowrap">
+                                    <table  class="table stripe table-bordered hover nowrap" id="table">
                                         <thead>
                                             <th>Product ID</th>
                                             <th>Product Name</th>
@@ -636,6 +636,15 @@
                     }
                 });
             });
+
+			function exportf(elem) {
+			var table = document.getElementById("table");
+			var html = table.outerHTML;
+			var url = 'data:application/vnd.ms-excel,' + escape(html); // Set your html table into url 
+			elem.setAttribute("href", url);
+			elem.setAttribute("download","stocks-report.xls"); // Choose the file name
+			return false;
+			}
         </script>
 	</body>
 </html>
