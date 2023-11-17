@@ -585,6 +585,7 @@
 												<th>Date Created</th>
 												<th>Username</th>
 												<th>Fullname</th>
+												<th>Department</th>
 												<th>Status</th>
 												<th>User Role</th>
 												<th>Action</th>
@@ -596,7 +597,8 @@
 															<td><?php echo $row->DateCreated ?></td>
 															<td><?php echo $row->username ?></td>
 															<td><?php echo $row->Fullname ?></td>
-															<td><?php if($row->Status==1){echo "Active";}else{echo "Inactive";} ?></td>
+															<td><?php echo $row->Department ?></td>
+															<td><?php if($row->Status==1){echo "<span class='badge bg-success text-white'>Active</span>";}else{echo "<span class='badge bg-danger text-white'>Inactive</span>";} ?></td>
 															<td><?php echo $row->systemRole ?></td>
 															<td>
 																<a class="btn btn-default" href="<?=site_url('edit-account/')?><?php echo $row->accountID ?>"><i class="icon-copy dw dw-edit"></i>&nbsp;Edit</a>
@@ -741,6 +743,10 @@
 								<select class="form-control" name="assignment" id="assignment">
 									<option value="">Choose</option>
 								</select>
+							</div>
+							<div class="col-12 form-group">
+								<label>Department</label>
+								<input type="text" class="form-control" name="department" required/>
 							</div>
 							<div class="col-12 form-group">
 								<label>System Role</label>

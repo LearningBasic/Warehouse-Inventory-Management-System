@@ -500,6 +500,7 @@ class Home extends BaseController
         $username = $this->request->getPost('username');
         $role = $this->request->getPost('systemRole');
         $assign = $this->request->getPost('assignment');
+        $dept = $this->request->getPost('department');
         $status = 1;
         $dateCreated = date('Y-m-d');
         $defaultPassword = Hash::make("Fastcat_01");
@@ -515,7 +516,8 @@ class Home extends BaseController
         }
         else{
             $values = 
-            ['username'=>$username, 'password'=>$defaultPassword,'Fullname'=>$fullname,'Status'=>$status,'systemRole'=>$role,'warehouseID'=>$assign,'DateCreated'=>$dateCreated];
+            ['username'=>$username, 'password'=>$defaultPassword,'Fullname'=>$fullname,
+            'Status'=>$status,'systemRole'=>$role,'warehouseID'=>$assign,'Department'=>$dept,'DateCreated'=>$dateCreated];
             $accountModel->save($values);
             echo "success";
         }
