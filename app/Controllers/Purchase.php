@@ -14,6 +14,7 @@ class Purchase extends BaseController
     public function saveOrder()
     {
         $OrderItemModel = new \App\Models\OrderItemModel();
+        $purchaseModel = new \App\Models\purchaseModel();
         //datas
         $user = session()->get('loggedUser');
         $datePrepared = $this->request->getPost('datePrepared');
@@ -27,7 +28,7 @@ class Purchase extends BaseController
         $spec = $this->request->getPost('specification');
         
         $validation = $this->validate([
-            'datePrepared'=>'required','department'=>'required','dateNeeded'=>'required','reason'=>'required'
+            'datePrepared'=>'required','department'=>'required','dateNeeded'=>'required','reason'=>'required','item_name'=>'required'
         ]);
 
         if(!$validation)
@@ -37,6 +38,12 @@ class Purchase extends BaseController
         }
         else
         {
+            //save the prf data
+            $values = [
+                'OrderNo','accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
+                'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d')
+            ];
+            //save all the item requested
             $count = count($item_name);
             for($i=0;$i<$count;$i++)
             {
