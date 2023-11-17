@@ -464,6 +464,16 @@
                                 >Actual Report</a
                             >
                         </li>
+						<li class="nav-item">
+                            <a
+                                class="nav-link text-blue"
+                                data-toggle="tab"
+                                href="#expire6"
+                                role="tab"
+                                aria-selected="false"
+                                >Nearly Expired</a
+                            >
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="home6" role="tabpanel">
@@ -581,6 +591,36 @@
                                 </div>
 							</div>
                         </div>
+						<div class="tab-pane fade" id="expire6" role="tabpanel">
+							<br/>
+							<div class="card-box">
+								<div class="card-header">Items/Equipment - Nearly Expired</div>
+								<div class="card-body">
+									<table class="data-table table hover nowrap">
+										<thead>
+											<th>Item Group</th>
+											<th>Product ID</th>
+											<th>Product Name</th>
+											<th>Unit Price</th>
+											<th>Qty</th>
+											<th>Expiration</th>
+										</thead>
+										<tbody>
+											<?php foreach($items as $row): ?>
+												<tr>
+													<td><?php echo $row->categoryName ?></td>
+													<td><?php echo $row->productID ?></td>
+													<td><?php echo $row->productName ?></td>
+													<td><?php echo number_format($row->unitPrice,2) ?></td>
+													<td><?php echo number_format($row->Qty,0) ?></td>
+													<td><?php echo $row->ExpirationDate ?></td>
+												</tr>
+											<?php endforeach; ?>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
                     </div>
                 </div>
 			</div>

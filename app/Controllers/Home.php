@@ -748,8 +748,17 @@ class Home extends BaseController
             $builder = $this->db->table('tblaccount');
             $builder->select('*');
             $account = $builder->get()->getResult();
+            //nearly expired
+            $builder = $this->db->table('nearly_expired a');
+            $builder->select('a.*,SUM(a.Qty)Qty,b.categoryName,c.supplierName,d.warehouseName');
+            $builder->join('tblcategory b','b.categoryID=a.categoryID','LEFT');
+            $builder->join('tblsupplier c','c.supplierID=a.supplierID','LEFT');
+            $builder->join('tblwarehouse d','d.warehouseID=a.warehouseID','LEFT');
+            $builder->groupby('a.warehouseID,a.inventID');
+            $builder->orderby('a.Date');
+            $items = $builder->get()->getResult();
 
-            $data = ['location'=>$warehouse,'category'=>$category,'account'=>$account,];
+            $data = ['location'=>$warehouse,'category'=>$category,'account'=>$account,'items'=>$items];
             return view('stocks-report',$data);
         }
         else
