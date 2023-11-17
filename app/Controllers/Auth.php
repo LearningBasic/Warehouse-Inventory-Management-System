@@ -60,6 +60,7 @@ class Auth extends BaseController
                 session()->set('fullname', $user_info['Fullname']);
                 session()->set('role',$user_info['systemRole']);
                 session()->set('assignment',$user_info['warehouseID']);
+                session()->set('department',$user_info['Department']);
                 //save the logs
                 $values = ['accountID'=>$user_info['accountID'],'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Logged-In'];
                 $systemLogsModel->save($values);
