@@ -445,7 +445,7 @@
                                 <?= session()->getFlashdata('success'); ?>
                             </div>
                         <?php endif; ?>
-                        <form method="POST" class="row g-3" id="frmPurchase">
+                        <form method="POST" class="row g-3" id="frmPurchase" action="<?=base_url('save-order')?>">
                             <div class="col-12 form-group">
                                 <div class="row g-3">
                                     <div class="col-lg-4">
@@ -506,10 +506,10 @@
 				var cell2 = row.insertCell(1);
 				var cell3 = row.insertCell(2);
 				var cell4 = row.insertCell(3);
-				cell1.innerHTML = "<input type='number' class='form-control' id='qty' name='qty'/>";
-				cell2.innerHTML = "<input type='text' class='form-control' id='item' name='item'/>";
-				cell3.innerHTML = "<input type='text' class='form-control' id='item_name' name='item_name'/>";
-				cell4.innerHTML = "<input type='text' class='form-control' id='specification' name='specification'/>";
+				cell1.innerHTML = "<input type='number' class='form-control' id='qty' name='qty[]'/>";
+				cell2.innerHTML = "<input type='text' class='form-control' id='item' name='item[]'/>";
+				cell3.innerHTML = "<input type='text' class='form-control' id='item_name' name='item_name[]'/>";
+				cell4.innerHTML = "<input type='text' class='form-control' id='specification' name='specification[]'/>";
 			}
         </script>
 	</body>
