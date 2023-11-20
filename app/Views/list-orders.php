@@ -435,7 +435,19 @@
 				<div class="card-box">
 					<div class="card-header">PRF Inbox</div>
 					<div class="card-body">
-					
+                        <table class="data-table table stripe hover nowrap">
+                            <thead>
+                                <th>Date Prepared</th>
+                                <th>PRF No</th>
+                                <th>Reason</th>
+                                <th>Date Needed</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
 					</div>
 				</div>
 			</div>

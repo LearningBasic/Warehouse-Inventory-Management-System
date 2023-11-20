@@ -769,8 +769,14 @@ class Home extends BaseController
 
     public function listOrders()
     {
+        $user = session()->get('loggedUser');
         $builder = $this->db->table('tblprf');
-        return view('list-orders');
+        $builder->select('*');
+        $builder->WHERE('accountID',$user);
+        $orders = $builder->get()->getResult();
+
+        $data = ['orders'=>$orders];
+        return view('list-orders',$data);
     }
 
     public function approver()
