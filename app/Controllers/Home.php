@@ -766,4 +766,15 @@ class Home extends BaseController
             return redirect()->back();
         }
     }
+
+    public function listOrders()
+    {
+        $builder = $this->db->table('tblprf');
+        return view('list-orders');
+    }
+
+    public function approver()
+    {
+        return view('approver');
+    }
 }

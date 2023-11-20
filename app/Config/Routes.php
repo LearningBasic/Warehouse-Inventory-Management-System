@@ -108,6 +108,8 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/transfer-item','Home::transferItem');
     $routes->get('/request','Home::userRequest');
     $routes->get('/orders','Home::purchaseRequest');
+    $routes->get('/list-orders','Home::listOrders');
+    $routes->get('/approve-orders','Home::approver');
     $routes->get('/profile','Home::profile');
     //reports
     $routes->get('/report-stocks','Home::stocksReport');
