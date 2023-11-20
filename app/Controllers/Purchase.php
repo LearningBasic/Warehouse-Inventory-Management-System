@@ -38,9 +38,17 @@ class Purchase extends BaseController
         }
         else
         {
+            $code="";
+            $builder = $this->db->table('tblprf');
+            $builder->select('COUNT(prfID)+1 as total');
+            $code = $builder->get();
+            if($row  = $code->getRow())
+            {
+                $code = "PRF-".str_pad($row->total, 7, '0', STR_PAD_LEFT);
+            }
             //save the prf data
             $values = [
-                'OrderNo','accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
+                'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
                 'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d')
             ];
             $purchaseModel->save($values);
@@ -50,12 +58,26 @@ class Purchase extends BaseController
             {
                 $values = [
                     'accountID'=>$user, 'Qty'=>$qty[$i],'ItemUnit'=>$item[$i],'Item_Name'=>$item_name[$i],
-                    'Specification'=>$spec[$i],'OrderNo'=>'','DateCreated'=>date('Y-m-d')
+                    'Specification'=>$spec[$i],'OrderNo'=>$code,'DateCreated'=>date('Y-m-d')
                 ];
                 $OrderItemModel->save($values);
             }
             session()->setFlashdata('success','Great! Successfully submitted for review');
             return redirect()->to('/orders')->withInput();
+        }
+    }
+
+    public function getEditor()
+    {
+        $builder = $this->db->table('tblaccount');
+        $builder->select('*');
+        $builder->WHERE('Status',1);
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?></option>
+            <?php
         }
     }
 }
