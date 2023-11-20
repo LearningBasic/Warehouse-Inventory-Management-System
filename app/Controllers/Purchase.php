@@ -26,9 +26,12 @@ class Purchase extends BaseController
         $item = $this->request->getPost('item');
         $item_name = $this->request->getPost('item_name');
         $spec = $this->request->getPost('specification');
+        //approver
+        $approver_user = $this->request->getPost('approver');
         
         $validation = $this->validate([
-            'datePrepared'=>'required','department'=>'required','dateNeeded'=>'required','reason'=>'required','item_name'=>'required'
+            'datePrepared'=>'required','department'=>'required','dateNeeded'=>'required',
+            'reason'=>'required','item_name'=>'required','approver'=>'required'
         ]);
 
         if(!$validation)
@@ -71,7 +74,7 @@ class Purchase extends BaseController
     {
         $builder = $this->db->table('tblaccount');
         $builder->select('*');
-        $builder->WHERE('Status',1);
+        $builder->WHERE('Status',1)->WHERE('systemRole','Editor');
         $data = $builder->get();
         foreach($data->getResult() as $row)
         {

@@ -480,6 +480,12 @@
                                 <label>Reason</label>
                                 <textarea class="form-control" name="reason" required></textarea>
                             </div>
+							<div class="col-12 form-group">
+								<label>Approver</label>
+								<select class="form-control custom-select2" name="approver" id="approver">
+									<option value="">Choose</option>
+								</select>
+							</div>
                             <div class="col-12 form-group">
                                 <button type="submit" class="btn btn-primary" id="btnSave">Submit Entry</button>
                             </div>
@@ -499,6 +505,20 @@
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
         <script>
+			$(document).ready(function()
+			{
+				editors();
+			});
+			function editors()
+			{
+				$.ajax({
+					url:"<?=site_url('get-editor')?>",method:"GET",
+					success:function(response)
+					{
+						$('#approver').append(response);
+					}
+				});
+			}
             function addRow() {
 				var table = document.getElementById("Table");
 				var row = table.insertRow(0);
