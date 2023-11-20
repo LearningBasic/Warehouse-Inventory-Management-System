@@ -15,6 +15,7 @@ class Purchase extends BaseController
     {
         $OrderItemModel = new \App\Models\OrderItemModel();
         $purchaseModel = new \App\Models\purchaseModel();
+        $reviewModel = new \App\Models\reviewModel();
         //datas
         $user = session()->get('loggedUser');
         $datePrepared = $this->request->getPost('datePrepared');
@@ -65,6 +66,11 @@ class Purchase extends BaseController
                 ];
                 $OrderItemModel->save($values);
             }
+            //send to approver
+            $value = [
+                'accountID'=>$approver_user,'OrderNo'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>"0000-00-00"
+            ];
+            $reviewModel->save($value);
             session()->setFlashdata('success','Great! Successfully submitted for review');
             return redirect()->to('/orders')->withInput();
         }
