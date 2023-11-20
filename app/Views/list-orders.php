@@ -445,7 +445,28 @@
                                 <th>Action</th>
                             </thead>
                             <tbody>
-                                
+                                <?php foreach($orders as $row): ?>
+                                    <tr>
+                                        <td><?php echo $row->DatePrepared ?></td>
+                                        <td><?php echo $row->OrderNo ?></td>
+                                        <td><?php echo $row->Reason ?></td>
+                                        <td><?php echo $row->DateNeeded ?></td>
+                                        <td>
+                                            <?php if($row->Status==0){ ?>
+                                                <span class="badge bg-warning text-white">PENDING</span>
+                                            <?php }else if($row->Status==1){?>
+                                                <span class="badge bg-info text-white">REVIEWED</span>
+                                            <?php }else if($row->Status==2){ ?>
+                                                <span class="badge bg-danger text-white">REJECTED</span>
+                                            <?php }else if($row->Status==3){ ?>
+                                                <span class="badge bg-success text-white">APPROVED</span>
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span>&nbsp;View</button>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
 					</div>
