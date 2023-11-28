@@ -369,14 +369,14 @@
 						</li>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
-                            <i class="micon dw dw-shopping-cart"></i><span class="mtext">Purchasing</span>
+                            <i class="micon dw dw-shopping-cart"></i><span class="mtext">Purchasing</span>&nbsp;<span class="badge badge-pill bg-primary text-white" id="notification">0</span>
 							</a>
 							<ul class="submenu">
                                 <li><a href="<?=site_url('orders')?>">Order Materials</a></li>
                                 <li><a href="<?=site_url('payment')?>">For Payment</a></li>
 								<li><a href="<?=site_url('list-orders')?>">List Order</a></li>
 								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
-								<li><a href="<?=site_url('approve-orders')?>">For Approval</a></li>
+								<li><a href="<?=site_url('approve-orders')?>">For Approval&nbsp;<span class="badge badge-pill bg-primary text-white" id="notifications">0</span></a></li>
 								<?php } ?>
 							</ul>
 						</li>
@@ -646,6 +646,23 @@
 					imgPreview.appendChild(img);
 				}
 				}
+		</script>
+		<script>
+			$(document).ready(function()
+			{
+				notify();
+			});
+			function notify()
+			{
+				$.ajax({
+					url:"<?=site_url('notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notification').html(response);
+						$('#notifications').html(response);
+					}
+				});
+			}
 		</script>
 	</body>
 </html>
