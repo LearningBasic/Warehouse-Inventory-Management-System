@@ -183,4 +183,17 @@ class Purchase extends BaseController
             <?php
         }
     }
+
+    public function notification()
+    {
+        $user = session()->get('loggedUser');
+        $builder = $this->db->table('tblreview');
+        $builder->select('COUNT(reviewID)total');
+        $builder->WHERE('Status',0)->WHERE('accountID',$user);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            echo $row->total;
+        }
+    }
 }
