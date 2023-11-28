@@ -71,6 +71,7 @@ class Purchase extends BaseController
                 'accountID'=>$approver_user,'OrderNo'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>"0000-00-00"
             ];
             $reviewModel->save($value);
+            //send email notification
             session()->setFlashdata('success','Great! Successfully submitted for review');
             return redirect()->to('/orders')->withInput();
         }
