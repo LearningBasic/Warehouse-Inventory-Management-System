@@ -435,7 +435,17 @@
 				<div class="card-box">
 					<div class="card-header">PRF - Review</div>
 					<div class="card-body">
-					
+						<table class="data-table table stripe hover nowrap">
+							<thead>
+								<th>Date Received</th>
+								<th>PRF No</th>
+								<th>Requestor</th>
+								<th>Reason</th>
+								<th>Date Needed</th>
+								<th>Date Approved</th>
+								<th>Status</th>
+							</thead>
+						</table>
 					</div>
 				</div>
 			</div>
