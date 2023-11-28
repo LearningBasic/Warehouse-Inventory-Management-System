@@ -445,6 +445,27 @@
 								<th>Date Approved</th>
 								<th>Status</th>
 							</thead>
+							<tbody>
+								<?php foreach($review as $row): ?>
+									<tr>
+										<td><?php echo $row->DateReceived ?></td>
+										<td><?php echo $row->OrderNo ?></td>
+										<td><?php echo $row->Fullname ?></td>
+										<td><?php echo $row->Reason ?></td>
+										<td><?php echo $row->DateNeeded ?></td>
+										<td><?php echo $row->DateApproved ?></td>
+										<td>
+											<?php if($row->Status==0){ ?>
+												<span class="badge bg-warning text-white">PENDING</span>
+											<?php }else if($row->Status==1){?>
+												<span class="badge bg-success text-white">APPROVED</span>
+											<?php }else if($row->Status==2){?>
+												<span class="badge bg-danger text-white">CANCELLED</span>
+											<?php } ?>
+										</td>
+									</tr>
+								<?php endforeach; ?>
+							</tbody>
 						</table>
 					</div>
 				</div>

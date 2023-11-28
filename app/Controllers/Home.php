@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Libraries\Hash;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 
 class Home extends BaseController
 {
@@ -781,6 +782,15 @@ class Home extends BaseController
 
     public function approver()
     {
-        return view('approver');
+        $user = session()->get('loggedUser');
+        $builder = $this->db->table('tblreview a');
+        $builder->select('a.reviewID,a.OrderNo,a.DateReceived,a.DateApproved,a.Status,b.Reason,b.DateNeeded,c.Fullname');
+        $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
+        $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
+        $builder->WHERE('a.accountID',$user);
+        $builder->groupBy('a.reviewID');
+        $review = $builder->get()->getResult();
+        $data = ['review'=>$review];
+        return view('approver',$data);
     }
 }
