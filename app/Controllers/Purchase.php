@@ -179,7 +179,7 @@ class Purchase extends BaseController
         foreach($data->getResult() as $row)
         {
             ?>
-            <option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?></option>
+            <option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?> - <?php echo $row->Department ?></option>
             <?php
         }
     }
