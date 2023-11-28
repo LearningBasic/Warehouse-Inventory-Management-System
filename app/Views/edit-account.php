@@ -495,8 +495,16 @@
                         <form method="post" class="row g-3" id="updateAccount" action="<?=base_url('update-account')?>">
                             <input type="hidden" name="accountID" value="<?=$account['accountID']?>"/>
                             <div class="col-12 form-group">
-                                <label>Complete Name</label>
-                                <input type="text" name="fullname" class="form-control" value="<?=$account['Fullname']?>" required/>
+                                <div class="row g-3">
+									<div class="col-lg-6">
+										<label>Complete Name</label>
+                                		<input type="text" name="fullname" class="form-control" value="<?=$account['Fullname']?>" required/>
+									</div>
+									<div class="col-lg-6">
+										<label>Email Address</label>
+                                		<input type="email" name="email" class="form-control" value="<?=$account['Email']?>" required/>
+									</div>
+								</div>
                             </div>
                             <div class="col-12 form-group">
                                 <div class="row g-3">
@@ -516,9 +524,9 @@
                                         <label>System Role</label>
                                         <select class="form-control" name="systemRole" required>
                                             <option value="">Choose</option>
-                                            <option>Administrator</option>
-                                            <option>Editor</option>
-                                            <option>Standard User</option>
+                                            <option <?php if($account['systemRole']=="Administrator") echo 'selected="selected"'; ?>>Administrator</option>
+                                            <option <?php if($account['systemRole']=="Editor") echo 'selected="selected"'; ?>>Editor</option>
+                                            <option <?php if($account['systemRole']=="Standard User") echo 'selected="selected"'; ?>>Standard User</option>
                                         </select>
                                     </div>
                                 </div>

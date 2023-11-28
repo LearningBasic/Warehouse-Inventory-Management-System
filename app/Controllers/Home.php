@@ -498,6 +498,7 @@ class Home extends BaseController
     {
         $accountModel = new \App\Models\accountModel();
         $fullname = $this->request->getPost('fullname');
+        $email = $this->request->getPost('email');
         $username = $this->request->getPost('username');
         $role = $this->request->getPost('systemRole');
         $assign = $this->request->getPost('assignment');
@@ -508,6 +509,7 @@ class Home extends BaseController
         $validation = $this->validate([
             'fullname'=>'required|is_unique[tblaccount.Fullname]',
             'username'=>'required|is_unique[tblaccount.username]',
+            'email'=>'required|valid_email|is_unique[tblaccount.Email]',
             'assignment'=>'required',
             'systemRole'=>'required'
         ]);
@@ -517,7 +519,7 @@ class Home extends BaseController
         }
         else{
             $values = 
-            ['username'=>$username, 'password'=>$defaultPassword,'Fullname'=>$fullname,
+            ['username'=>$username, 'password'=>$defaultPassword,'Fullname'=>$fullname,'Email'=>$email,
             'Status'=>$status,'systemRole'=>$role,'warehouseID'=>$assign,'Department'=>$dept,'DateCreated'=>$dateCreated];
             $accountModel->save($values);
             echo "success";
@@ -530,11 +532,12 @@ class Home extends BaseController
         $accountModel = new \App\Models\accountModel();
         $id = $this->request->getPost('accountID');
         $fullname = $this->request->getPost('fullname');
+        $email = $this->request->getPost('email');
         $username = $this->request->getPost('username');
         $role = $this->request->getPost('systemRole');
         $status = $this->request->getPost('status');
         $values = 
-            ['username'=>$username,'Fullname'=>$fullname,'Status'=>$status,'systemRole'=>$role];
+            ['username'=>$username,'Fullname'=>$fullname,'Email'=>$email,'Status'=>$status,'systemRole'=>$role];
         $accountModel->update($id,$values);
         session()->setFlashdata('success','Great! Successfully updated');
         return redirect()->to('/configuration')->withInput();

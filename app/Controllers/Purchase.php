@@ -72,6 +72,32 @@ class Purchase extends BaseController
             ];
             $reviewModel->save($value);
             //send email notification
+            $builder = $this->db->table('tblaccount');
+            $builder->select('*');
+            $builder->WHERE('accountID',$approver_user);
+            $data = $builder->get();
+            if($row = $data->getRow())
+            {
+                $email = \Config\Services::email();
+                $email->setTo($row->Email,$row->Fullname);
+                $email->setFrom("fastcat.system@gmail.com","FastCat");
+                $imgURL = "assets/img/fastcat.png";
+                $email->attach($imgURL);
+                $cid = $email->setAttachmentCID($imgURL);
+                $template = "<center>
+                <img src='cid:". $cid ."' width='100'/>
+                <table style='padding:20px;background-color:#ffffff;' border='0'><tbody>
+                <tr><td><center><h1>Purchase Requistion Form</h1></center></td></tr>
+                <tr><td><center>Hi, ".$row->Fullname."</center></td></tr>
+                <tr><td><center>This is FastCat, sending you a reminder that</center></td></tr>
+                <tr><td><p><center>".$code." is requesting for your approval</center></p></td><tr>
+                <tr><td><center>Please login to your account. Thank you</center></td></tr>
+                <tr><td>FastCat IT Support</td></tr></tbody></table></center>";
+                $subject = "Purchase Requisition Form - For Approval";
+                $email->setSubject($subject);
+                $email->setMessage($template);
+                $email->send();
+            }
             session()->setFlashdata('success','Great! Successfully submitted for review');
             return redirect()->to('/orders')->withInput();
         }

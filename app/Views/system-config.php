@@ -585,6 +585,7 @@
 												<th>Date Created</th>
 												<th>Username</th>
 												<th>Fullname</th>
+												<th>Email</th>
 												<th>Department</th>
 												<th>Status</th>
 												<th>User Role</th>
@@ -597,6 +598,7 @@
 															<td><?php echo $row->DateCreated ?></td>
 															<td><?php echo $row->username ?></td>
 															<td><?php echo $row->Fullname ?></td>
+															<td><?php echo $row->Email ?></td>
 															<td><?php echo $row->Department ?></td>
 															<td><?php if($row->Status==1){echo "<span class='badge bg-success text-white'>Active</span>";}else{echo "<span class='badge bg-danger text-white'>Inactive</span>";} ?></td>
 															<td><?php echo $row->systemRole ?></td>
@@ -733,6 +735,10 @@
 							<div class="col-12 form-group">
 								<label>Complete Name</label>
 								<input type="text" class="form-control" name="fullname" required/>
+							</div>
+							<div class="col-12 form-group">
+								<label>Email Address</label>
+								<input type="email" class="form-control" name="email" required/>
 							</div>
 							<div class="col-12 form-group">
 								<label>Username</label>
