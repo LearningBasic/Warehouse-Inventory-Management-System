@@ -89,10 +89,11 @@ class Purchase extends BaseController
                 <table style='padding:20px;background-color:#ffffff;' border='0'><tbody>
                 <tr><td><center><h1>Purchase Requistion Form</h1></center></td></tr>
                 <tr><td><center>Hi, ".$row->Fullname."</center></td></tr>
-                <tr><td><center>This is FastCat, sending you a reminder that</center></td></tr>
-                <tr><td><p><center>".$code." is requesting for your approval</center></p></td><tr>
-                <tr><td><center>Please login to your account. Thank you</center></td></tr>
-                <tr><td>FastCat IT Support</td></tr></tbody></table></center>";
+                <tr><td><center>This is from FastCat System, sending you a reminder that</center></td></tr>
+                <tr><td><p><center><b>".$code."</b> is requesting for your approval</center></p></td><tr>
+                <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+                <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+                <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
                 $subject = "Purchase Requisition Form - For Approval";
                 $email->setSubject($subject);
                 $email->setMessage($template);
