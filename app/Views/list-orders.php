@@ -463,7 +463,12 @@
                                             <?php } ?>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span>&nbsp;View</button>
+											<?php if($row->Status==0){ ?>
+                                            	<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span>&nbsp;View</button>
+												<button type="button" class="btn btn-outline-danger btn-sm cancel" value="<?php echo $row->prfID ?>"><span class="dw dw-trash"></span>&nbsp;Cancel</button>
+											<?php }else{?>
+												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span>&nbsp;View</button>
+											<?php } ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -483,5 +488,12 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script>
+			$(document).on('click','.view',function()
+			{
+				var val = $(this).val();
+				alert(val);
+			});
+		</script>
 	</body>
 </html>
