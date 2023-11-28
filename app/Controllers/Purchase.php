@@ -82,11 +82,64 @@ class Purchase extends BaseController
         $reviewModel = new \App\Models\reviewModel();
         //data
         $val = $this->request->getPost('value');
-        $values = ['Status'=>2];
-        $purchaseModel->update($val,$values);
+        $code = "";
         //cancel the request
-        
+        $builder = $this->db->table('tblprf');
+        $builder->select('OrderNo');
+        $builder->WHERE('prfID',$val);
+        $data = $builder->get();
+        if($row  = $data->getRow())
+        {
+            $code = $row->OrderNo;
+            $values = ['Status'=>2];
+            $purchaseModel->update($val,$values);
+        }
+        //cancel the approval
+        $builder = $this->db->table('tblreview');
+        $builder->select('reviewID');
+        $builder->WHERE('OrderNo',$code);
+        $datas = $builder->get();
+        if($rows = $datas->getRow())
+        {
+            $values = ['Status'=>2];
+            $reviewModel->update($rows->reviewID,$values);
+        }
         echo "success";
+    }
+
+
+    public function viewOrder()
+    {
+        $val = $this->request->getGet('value');
+        $builder = $this->db->table('tbl_order_item');
+        $builder->select('*');
+        $builder->WHERE('OrderNo',$val);
+        $data = $builder->get();
+        ?>
+        <table class="table table-bordered stripe hover nowrap">
+            <thead>
+                <th>Product Name</th>
+                <th>Qty</th>
+                <th>Item Unit</th>
+                <th>Specification</th>
+            </thead>
+            <tbody>
+        <?php
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <tr>
+                <td><?php echo $row->Item_Name ?></td>
+                <td><?php echo $row->Qty ?></td>
+                <td><?php echo $row->ItemUnit ?></td>
+                <td><?php echo $row->Specification ?></td>
+            </tr>
+            <?php
+        }
+        ?>
+        </table>
+            </tbody>
+        <?php
     }
 
     public function getEditor()
