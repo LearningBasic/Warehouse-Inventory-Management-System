@@ -73,7 +73,7 @@ class Purchase extends BaseController
             $reviewModel->save($value);
             //send email notification
             $builder = $this->db->table('tblaccount');
-            $builder->select('*');
+            $builder->select('Fullname,Email');
             $builder->WHERE('accountID',$approver_user);
             $data = $builder->get();
             if($row = $data->getRow())
