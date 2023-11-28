@@ -488,11 +488,31 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script>
 			$(document).on('click','.view',function()
 			{
 				var val = $(this).val();
 				alert(val);
+			});
+			$(document).on('click','.cancel',function()
+			{
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to cancel this selected request?",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						$.ajax({
+							
+						});
+					}
+				});
 			});
 		</script>
 	</body>
