@@ -509,7 +509,23 @@
 					if (result.isConfirmed) {
 						var val = $(this).val();
 						$.ajax({
-							
+							url:"<?=site_url('cancel-order')?>?",method:"POST",
+							data:{value:val},
+							success:function(response)
+							{
+								if(response==="success")
+								{
+									location.reload();
+								}
+								else
+								{
+									Swal.fire({
+									title: "Error",
+									text: response,
+									icon: "error"
+									});
+								}
+							}
 						});
 					}
 				});

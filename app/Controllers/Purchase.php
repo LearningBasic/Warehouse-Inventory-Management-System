@@ -76,6 +76,19 @@ class Purchase extends BaseController
         }
     }
 
+    public function cancelOrder()
+    {
+        $purchaseModel = new \App\Models\purchaseModel();
+        $reviewModel = new \App\Models\reviewModel();
+        //data
+        $val = $this->request->getPost('value');
+        $values = ['Status'=>2];
+        $purchaseModel->update($val,$values);
+        //cancel the request
+        
+        echo "success";
+    }
+
     public function getEditor()
     {
         $builder = $this->db->table('tblaccount');
