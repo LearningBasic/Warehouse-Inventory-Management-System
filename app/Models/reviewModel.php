@@ -13,7 +13,7 @@ class reviewModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['accountID','OrderNo','DateReceived','Status','DateApproved'];
+    protected $allowedFields = ['accountID','OrderNo','DateReceived','Status','DateApproved','Comment'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

@@ -68,7 +68,8 @@ class Purchase extends BaseController
             }
             //send to approver
             $value = [
-                'accountID'=>$approver_user,'OrderNo'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>"0000-00-00"
+                'accountID'=>$approver_user,'OrderNo'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,
+                'DateApproved'=>"0000-00-00",'Comment'=>''
             ];
             $reviewModel->save($value);
             //send email notification
@@ -200,10 +201,11 @@ class Purchase extends BaseController
     public function viewPurchase()
     {
         $val = $this->request->getGet('value');
-        $builder = $this->db->table('tblprf a');
-        $builder->select('a.*,b.Fullname');
-        $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
-        $builder->WHERE('a.OrderNo',$val);
+        $builder = $this->db->table('tblreview a');
+        $builder->select('a.reviewID,b.*,c.Fullname');
+        $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
+        $builder->join('tblaccount c','b.accountID=c.accountID','LEFT');
+        $builder->WHERE('b.OrderNo',$val);
         $data = $builder->get();
         if($row = $data->getRow())
         {

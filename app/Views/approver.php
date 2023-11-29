@@ -512,6 +512,10 @@
 					}
 				});
 			}
+			$(document).on('click','.accept',function(e)
+			{
+				e.preventDefault();
+			});
 			$(document).on('click','.view',function(e)
 			{
 				e.preventDefault();
