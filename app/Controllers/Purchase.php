@@ -266,6 +266,10 @@ class Purchase extends BaseController
                         </tbody>
                     </table>
                 </div>
+                <div class="col-12 form-group">
+                    <button type="submit" class="btn btn-primary accept">Accept</button>
+                    <button type="button" class="btn btn-outline-danger cancel">Cancel</button>
+                </div>
             </form>
             <?php
         }
