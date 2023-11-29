@@ -202,7 +202,7 @@ class Purchase extends BaseController
     {
         $val = $this->request->getGet('value');
         $builder = $this->db->table('tblreview a');
-        $builder->select('a.reviewID,b.OrderNo,b.Department,b.Reason,b.DateNeeded,c.Fullname');
+        $builder->select('a.reviewID,a.Status,b.OrderNo,b.Department,b.Reason,b.DateNeeded,c.Fullname');
         $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
         $builder->join('tblaccount c','b.accountID=c.accountID','LEFT');
         $builder->WHERE('b.OrderNo',$val);
@@ -270,11 +270,44 @@ class Purchase extends BaseController
                     </table>
                 </div>
                 <div class="col-12 form-group">
+                    <?php if($row->Status==0){ ?>
                     <button type="button" class="btn btn-primary accept">Accept</button>
                     <button type="button" class="btn btn-outline-danger cancel">Cancel</button>
+                    <?php } ?>
                 </div>
             </form>
             <?php
         }
+    }
+
+    public function Accept()
+    {
+        $systemLogsModel = new \App\Models\systemLogsModel();
+        $reviewModel = new \App\Models\reviewModel();
+        $purchaseModel = new \App\Models\purchaseModel();
+        //data
+        $val = $this->request->getPost('reviewID');
+        $user = session()->get('loggedUser');
+        $values = [
+            'Status'=>1,'DateApproved'=>date('Y-m-d')
+        ];
+        $reviewModel->update($val,$values);
+        //update
+        $builder = $this->db->table('tblreview');
+        $builder->select('OrderNo');
+        $builder->WHERE('reviewID',$val);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $purchase = $purchaseModel->WHERE('OrderNo',$row->OrderNo)->first();
+            $value = ['Status'=>1];
+            $purchaseModel->update($purchase['prfID'],$value);
+            //save logs
+            $values = [
+                'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Accepted '.$row->OrderNo
+            ];
+            $systemLogsModel->save($values);
+        }
+        echo "success";
     }
 }

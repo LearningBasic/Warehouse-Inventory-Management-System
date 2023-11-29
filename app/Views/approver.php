@@ -496,6 +496,7 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script>
 			$(document).ready(function()
 			{
@@ -515,10 +516,35 @@
 			$(document).on('click','.accept',function(e)
 			{
 				e.preventDefault();
-				var data = $('#frmReview').serialize();
-				alert(data);
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to accept this selected request?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var data = $('#frmReview').serialize();
+						$.ajax({
+							url:"<?=site_url('accept')?>",method:"POST",
+							data:data,success:function(response)
+							{
+								if(response==="success")
+								{
+									location.reload();
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
+					}
+				});
 			});
-			
+
 			$(document).on('click','.view',function(e)
 			{
 				e.preventDefault();
