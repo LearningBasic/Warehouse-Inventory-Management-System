@@ -449,7 +449,7 @@
 								<?php foreach($review as $row): ?>
 									<tr>
 										<td><?php echo $row->DateReceived ?></td>
-										<td><?php echo $row->OrderNo ?></td>
+										<td><button type="button" class="btn btn-link view" value="<?php echo $row->OrderNo ?>"><?php echo $row->OrderNo ?></button></td>
 										<td><?php echo $row->Fullname ?></td>
 										<td><?php echo $row->Reason ?></td>
 										<td><?php echo $row->DateNeeded ?></td>
@@ -471,6 +471,21 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            Purchase Details
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
@@ -497,6 +512,20 @@
 					}
 				});
 			}
+			$(document).on('click','.view',function(e)
+			{
+				e.preventDefault();
+				var val = $(this).val();
+				$.ajax({
+					url:"<?=site_url('view-purchase')?>",method:"GET",
+					data:{value:val},
+					success:function(response)
+					{
+						$('#viewModal').modal('show');
+						$('#result').html(response);
+					}
+				});
+			});
 		</script>
 	</body>
 </html>

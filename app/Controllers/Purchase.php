@@ -196,4 +196,78 @@ class Purchase extends BaseController
             echo $row->total;
         }
     }
+
+    public function viewPurchase()
+    {
+        $val = $this->request->getGet('value');
+        $builder = $this->db->table('tblprf a');
+        $builder->select('a.*,b.Fullname');
+        $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+        $builder->WHERE('a.OrderNo',$val);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            ?>
+            <form method="post" class="row g-3">
+                <div class="col-12 form-group">
+                    <div class="row g-3">
+                        <div class="col-lg-8">
+                            <label>PRF Number</label>
+                            <input type="text" class="form-control" name="orderno" value="<?php echo $row->OrderNo ?>"/>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Date Needed</label>
+                            <input type="date" class="form-control" name="dateneeded" value="<?php echo $row->DateNeeded ?>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 form-group">
+                    <div class="row g-3">
+                        <div class="col-lg-8">
+                            <label>Requestor</label>
+                            <input type="text" class="form-control" name="fullname" value="<?php echo $row->Fullname ?>"/>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Department</label>
+                            <input type="text" class="form-control" name="department" value="<?php echo $row->Department ?>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 form-group">
+                    <label>Reason</label>
+                    <textarea name="reason" id="reason" class="form-control"><?php echo $row->Reason ?></textarea>
+                </div>
+                <div class="col-12 form-group">
+                    <table class="table table-striped table-bordered hover nowrap">
+                        <thead>
+                            <th>Item(s)</th>
+                            <th>Unit(s)</th>
+                            <th>Qty</th>
+                            <th>Specification(s)</th>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $builder = $this->db->table('tbl_order_item');
+                            $builder->select('*');
+                            $builder->WHERE('OrderNo',$row->OrderNo);
+                            $datas = $builder->get();
+                            foreach($datas->getResult() as $rows)
+                            {
+                                ?>
+                                <tr>
+                                    <td><?php echo $rows->Item_Name ?></td>
+                                    <td><?php echo $rows->ItemUnit ?></td>
+                                    <td><?php echo $rows->Qty ?></td>
+                                    <td><?php echo $rows->Specification ?></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+            <?php
+        }
+    }
 }
