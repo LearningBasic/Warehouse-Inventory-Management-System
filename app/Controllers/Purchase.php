@@ -202,7 +202,7 @@ class Purchase extends BaseController
     {
         $val = $this->request->getGet('value');
         $builder = $this->db->table('tblreview a');
-        $builder->select('a.reviewID,b.*,c.Fullname');
+        $builder->select('a.reviewID,b.OrderNo,b.Department,b.Reason,b.DateNeeded,c.Fullname');
         $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
         $builder->join('tblaccount c','b.accountID=c.accountID','LEFT');
         $builder->WHERE('b.OrderNo',$val);
@@ -210,7 +210,8 @@ class Purchase extends BaseController
         if($row = $data->getRow())
         {
             ?>
-            <form method="post" class="row g-3">
+            <form method="post" class="row g-3" id="frmReview">
+                <input type="hidden" name="reviewID" value="<?php echo $row->reviewID ?>"/>
                 <div class="col-12 form-group">
                     <div class="row g-3">
                         <div class="col-lg-8">
@@ -269,7 +270,7 @@ class Purchase extends BaseController
                     </table>
                 </div>
                 <div class="col-12 form-group">
-                    <button type="submit" class="btn btn-primary accept">Accept</button>
+                    <button type="button" class="btn btn-primary accept">Accept</button>
                     <button type="button" class="btn btn-outline-danger cancel">Cancel</button>
                 </div>
             </form>

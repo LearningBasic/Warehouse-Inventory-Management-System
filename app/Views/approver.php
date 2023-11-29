@@ -515,7 +515,10 @@
 			$(document).on('click','.accept',function(e)
 			{
 				e.preventDefault();
+				var data = $('#frmReview').serialize();
+				alert(data);
 			});
+			
 			$(document).on('click','.view',function(e)
 			{
 				e.preventDefault();
