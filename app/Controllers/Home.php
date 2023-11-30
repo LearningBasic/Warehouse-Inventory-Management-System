@@ -783,9 +783,14 @@ class Home extends BaseController
         return view('list-orders',$data);
     }
 
-    public function createCanvas()
+    public function createCanvas($id=null)
     {
-        
+        $builder = $this->db->table('tblprf');
+        $builder->select('*');
+        $builder->WHERE('OrderNo',$id);
+        $prf = $builder->get()->getResult();
+        $data = ['prf'=>$prf];
+        return view('create-canvass-sheet',$data);
     }
 
     public function approver()
