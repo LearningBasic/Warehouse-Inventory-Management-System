@@ -371,7 +371,7 @@ class Purchase extends BaseController
         $user = session()->get('loggedUser');
         //cancel
         $values = [
-            'Status'=>2
+            'Status'=>2,'Comment'=>$msg
         ];
         $reviewModel->update($val,$values);
         //update
