@@ -449,7 +449,7 @@
 								<?php foreach($review as $row): ?>
 									<tr>
 										<td><?php echo $row->DateReceived ?></td>
-										<td><button type="button" class="btn btn-link view" value="<?php echo $row->OrderNo ?>"><?php echo $row->OrderNo ?></button></td>
+										<td><button type="button" class="btn btn-link view" value="<?php echo $row->reviewID ?>"><?php echo $row->OrderNo ?></button></td>
 										<td><?php echo $row->Fullname ?></td>
 										<td><?php echo $row->Reason ?></td>
 										<td><?php echo $row->DateNeeded ?></td>
