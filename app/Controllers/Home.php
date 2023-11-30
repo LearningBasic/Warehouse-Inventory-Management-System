@@ -783,6 +783,11 @@ class Home extends BaseController
         return view('list-orders',$data);
     }
 
+    public function createCanvas()
+    {
+        
+    }
+
     public function approver()
     {
         $user = session()->get('loggedUser');

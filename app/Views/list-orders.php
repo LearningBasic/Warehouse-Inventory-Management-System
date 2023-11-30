@@ -436,49 +436,81 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header">PRF Inbox</div>
+					<div class="card-header">PRF/Canvas Sheets</div>
 					<div class="card-body">
-                        <table class="data-table table stripe hover nowrap">
-                            <thead>
-                                <th>Date Prepared</th>
-                                <th>PRF No</th>
-                                <th>Reason</th>
-                                <th>Date Needed</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </thead>
-                            <tbody>
-                                <?php foreach($orders as $row): ?>
-                                    <tr>
-                                        <td><?php echo $row->DatePrepared ?></td>
-                                        <td><?php echo $row->OrderNo ?></td>
-                                        <td><?php echo $row->Reason ?></td>
-                                        <td><?php echo $row->DateNeeded ?></td>
-                                        <td>
-                                            <?php if($row->Status==0){ ?>
-                                                <span class="badge bg-warning text-white">PENDING</span>
-                                            <?php }else if($row->Status==1){?>
-                                                <span class="badge bg-info text-white">REVIEWED</span>
-                                            <?php }else if($row->Status==2){ ?>
-                                                <span class="badge bg-danger text-white">CANCELLED</span>
-                                            <?php }else if($row->Status==3){ ?>
-                                                <span class="badge bg-success text-white">APPROVED</span>
-                                            <?php } ?>
-                                        </td>
-                                        <td>
-											<?php if($row->Status==0){ ?>
-                                            	<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span>&nbsp;View</button>
-												<button type="button" class="btn btn-outline-danger btn-sm cancel" value="<?php echo $row->prfID ?>"><span class="dw dw-trash"></span>&nbsp;Cancel</button>
-											<?php }else if($row->Status==3){ ?>
-												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span>&nbsp;View</button>
-											<?php }else{?>
-												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span>&nbsp;View</button>
-											<?php } ?>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+						<div class="tabs">
+							<ul class="nav nav-tabs justify-content-left" role="tablist">
+								<li class="nav-item">
+									<a
+										class="nav-link active text-blue"
+										data-toggle="tab"
+										href="#home6"
+										role="tab"
+										aria-selected="true"
+										>Purchase Requisition</a
+									>
+								</li>
+								<li class="nav-item">
+									<a
+										class="nav-link text-blue"
+										data-toggle="tab"
+										href="#profile6"
+										role="tab"
+										aria-selected="false"
+										>Canvas Sheet</a
+									>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane fade show active" id="home6" role="tabpanel">
+									<br/>
+									<table class="data-table table stripe hover nowrap">
+										<thead>
+											<th>Date Prepared</th>
+											<th>PRF No</th>
+											<th>Reason</th>
+											<th>Date Needed</th>
+											<th>Status</th>
+											<th>Action</th>
+										</thead>
+										<tbody>
+											<?php foreach($orders as $row): ?>
+												<tr>
+													<td><?php echo $row->DatePrepared ?></td>
+													<td><?php echo $row->OrderNo ?></td>
+													<td><?php echo $row->Reason ?></td>
+													<td><?php echo $row->DateNeeded ?></td>
+													<td>
+														<?php if($row->Status==0){ ?>
+															<span class="badge bg-warning text-white">PENDING</span>
+														<?php }else if($row->Status==1){?>
+															<span class="badge bg-info text-white">REVIEWED</span>
+														<?php }else if($row->Status==2){ ?>
+															<span class="badge bg-danger text-white">CANCELLED</span>
+														<?php }else if($row->Status==3){ ?>
+															<span class="badge bg-success text-white">APPROVED</span>
+														<?php } ?>
+													</td>
+													<td>
+														<?php if($row->Status==0){ ?>
+															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span>&nbsp;View</button>
+															<button type="button" class="btn btn-outline-danger btn-sm cancel" value="<?php echo $row->prfID ?>"><span class="dw dw-trash"></span>&nbsp;Cancel</button>
+														<?php }else if($row->Status==3){ ?>
+															<a class="btn btn-outline-primary btn-sm" href="create/<?php echo $row->OrderNo ?>"><span class="dw dw-add"></span>&nbsp;Create</a>
+														<?php }else{?>
+															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span>&nbsp;View</button>
+														<?php } ?>
+													</td>
+												</tr>
+											<?php endforeach; ?>
+										</tbody>
+									</table>
+								</div>
+								<div class="tab-pane fade" id="profile6" role="tabpanel">
+									<br/>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
