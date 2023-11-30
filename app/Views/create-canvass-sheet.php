@@ -450,7 +450,48 @@
                 <div class="card-box">
                     <div class="card-header">Create Canvass Sheet</div>
                     <div class="card-body">
+                        <?php foreach($prf as $row): ?>
+                        <div class="row g-3">
+                            <div class="col-12 form-group">
+                                <div class="row g-3">
+                                    <div class="col-lg-3">
+                                        <label>Date Prepared</label>
+                                        <input type="date" class="form-control" name="datePrepared" value="<?php echo $row->DatePrepared ?>"/>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label>Date Needed</label>
+                                        <input type="date" class="form-control" name="dateNeeded" value="<?php echo $row->DateNeeded ?>"/>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label>PRF #</label>
+                                        <input type="text" class="form-control" name="OrderNo" value="<?php echo $row->OrderNo ?>"/>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label>Department</label>
+                                        <input type="text" class="form-control" name="department" value="<?php echo $row->Department ?>"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 form-group">
+                                <table class="table table-bordered table-striped hover nowrap">
+                                    <thead>
+                                        <th>Qty</th>
+                                        <th>UOM</th>
+                                        <th>Item Description</th>
+                                        <th>Unit Price</th>
+                                        <th>Supplier</th>
+                                        <th>Contact Person</th>
+                                        <th>Contact #</th>
+                                        <th>Terms</th>
+                                        <th>Warranty</th>
+                                    </thead>
+                                    <tbody id="tbl_supplier">
 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
 			</div>
