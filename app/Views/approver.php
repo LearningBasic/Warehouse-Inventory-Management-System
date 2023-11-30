@@ -545,6 +545,45 @@
 				});
 			});
 
+			$(document).on('click','.cancel',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to cancel this selected request?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $('#reviewID').val();
+						var message = prompt("Enter your comment to cancel");
+						if(message==="")
+						{
+							alert("Invalid! Please try again");
+						}
+						else{
+							$.ajax({
+								url:"<?=site_url('cancel')?>",method:"POST",
+								data:{value:val,message:message},success:function(response)
+								{
+									if(response==="success")
+									{
+										location.reload();
+									}
+									else
+									{
+										alert(response);
+									}
+								}
+							});
+						}
+					}
+				});
+			});
+
 			$(document).on('click','.view',function(e)
 			{
 				e.preventDefault();

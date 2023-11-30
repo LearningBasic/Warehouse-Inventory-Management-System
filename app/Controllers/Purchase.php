@@ -211,7 +211,7 @@ class Purchase extends BaseController
         {
             ?>
             <form method="post" class="row g-3" id="frmReview">
-                <input type="hidden" name="reviewID" value="<?php echo $row->reviewID ?>"/>
+                <input type="hidden" name="reviewID" id="reviewID" value="<?php echo $row->reviewID ?>"/>
                 <div class="col-12 form-group">
                     <div class="row g-3">
                         <div class="col-lg-8">
@@ -356,6 +356,40 @@ class Purchase extends BaseController
                 ];
                 $systemLogsModel->save($values);
             }
+        }
+        echo "success";
+    }
+
+    public function Cancel()
+    {
+        $systemLogsModel = new \App\Models\systemLogsModel();
+        $reviewModel = new \App\Models\reviewModel();
+        $purchaseModel = new \App\Models\purchaseModel();
+        //data
+        $val = $this->request->getPost('value');
+        $msg = $this->request->getPost('message');
+        $user = session()->get('loggedUser');
+        //cancel
+        $values = [
+            'Status'=>2
+        ];
+        $reviewModel->update($val,$values);
+        //update
+        $builder = $this->db->table('tblreview a');
+        $builder->select('a.OrderNo');
+        $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
+        $builder->WHERE('a.reviewID',$val);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $purchase = $purchaseModel->WHERE('OrderNo',$row->OrderNo)->first();
+            $value = ['Status'=>2];
+            $purchaseModel->update($purchase['prfID'],$value);
+            //system logs
+            $values = [
+                'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Cancelled '.$row->OrderNo
+            ];
+            $systemLogsModel->save($values);
         }
         echo "success";
     }

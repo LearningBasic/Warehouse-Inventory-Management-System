@@ -88,6 +88,7 @@ $routes->get('view-order','Purchase::viewOrder');
 $routes->get('notification','Purchase::notification');
 $routes->get('view-purchase','Purchase::viewPurchase');
 $routes->post('accept','Purchase::Accept');
+$routes->post('cancel','Purchase::Cancel');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
