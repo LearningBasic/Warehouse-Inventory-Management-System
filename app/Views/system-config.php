@@ -498,7 +498,7 @@
 					</div>
 				<?php endif; ?>
                 <div class="tab">
-                    <ul class="nav nav-pills justify-content-end" role="tablist">
+                    <ul class="nav nav-pills justify-content-left" role="tablist">
                         <li class="nav-item">
                             <a
                                 class="nav-link active text-blue"
@@ -526,7 +526,7 @@
                                 href="#contact6"
                                 role="tab"
                                 aria-selected="false"
-                                >System Setup</a
+                                >System Logs/Activities</a
                             >
                         </li>
                     </ul>

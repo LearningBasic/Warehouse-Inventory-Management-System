@@ -308,6 +308,7 @@ class Purchase extends BaseController
             ];
             $systemLogsModel->save($values);
         }
+        //send email to procurement dept head
         echo "success";
     }
 }
