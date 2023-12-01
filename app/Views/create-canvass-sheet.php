@@ -486,6 +486,7 @@
                                         <th>Contact #</th>
                                         <th>Terms</th>
                                         <th>Warranty</th>
+										<th><span class="dw dw-more"></span></th>
                                     </thead>
                                     <tbody id="tbl_supplier">
 
@@ -580,7 +581,7 @@
 					{
 						if(response==="")
 						{
-							$('#tbl_supplier').html("<tr><td colspan='9'><center>No Data</center></td></tr>");
+							$('#tbl_supplier').html("<tr><td colspan='10'><center>No Data</center></td></tr>");
 						}
 						else
 						{

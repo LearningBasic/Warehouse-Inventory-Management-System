@@ -417,6 +417,9 @@ class Purchase extends BaseController
                 <td><?php echo $row->ContactNumber ?></td>
                 <td><?php echo $row->Terms ?></td>
                 <td><?php echo $row->Warranty ?></td>
+                <td>
+                    <button type="button" class="btn btn-danger btn-sm text-white delete" value="<?php echo $row->canvassID ?>"><span class="dw dw-trash"></span></button>
+                </td>
             </tr>
             <?php
         }
