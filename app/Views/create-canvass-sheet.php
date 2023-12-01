@@ -453,7 +453,7 @@
 					</div>
                     <div class="card-body">
                         <?php foreach($prf as $row): ?>
-                        <div class="row g-3">
+                        <form method="post" class="row g-3" action="" id="frmCanvass">
                             <div class="col-12 form-group">
                                 <div class="row g-3">
                                     <div class="col-lg-3">
@@ -493,7 +493,10 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+							<div class="col-12 form-group">
+								<button type="submit" class="btn btn-primary" id="btnSubmit">Submit Form</button>
+							</div>
+						</form>
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -583,10 +586,12 @@
 						if(response==="")
 						{
 							$('#tbl_supplier').html("<tr><td colspan='10'><center>No Data</center></td></tr>");
+							$('#btnSubmit').attr("disabled",true);
 						}
 						else
 						{
 							$('#tbl_supplier').html(response);
+							$('#btnSubmit').attr("disabled",false);
 						}
 					}
 				});
