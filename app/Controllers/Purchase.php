@@ -393,4 +393,9 @@ class Purchase extends BaseController
         }
         echo "success";
     }
+
+    public function fetchSupplier()
+    {
+        $val = $this->request->getGet('value');
+    }
 }

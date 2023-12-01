@@ -464,7 +464,7 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <label>PRF #</label>
-                                        <input type="text" class="form-control" name="OrderNo" value="<?php echo $row->OrderNo ?>"/>
+                                        <input type="text" class="form-control" name="OrderNo" id="OrderNo" value="<?php echo $row->OrderNo ?>"/>
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Department</label>
@@ -506,5 +506,30 @@
 		<script src="/assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="/assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="/assets/vendors/scripts/datatable-setting.js"></script>
+		<script>
+			$(document).ready(function()
+			{
+				loadSuppliers();
+			});
+			function loadSuppliers()
+			{
+				var val = $('#OrderNo').val();
+				$.ajax({
+					url:"<?=site_url('fetch-added-supplier')?>",method:"GET",
+					data:{value:val},
+					success:function(response)
+					{
+						if(response==="")
+						{
+							$('#tbl_supplier').html("<tr><td colspan='9'><center>No Data</center></td></tr>");
+						}
+						else
+						{
+							$('#tbl_supplier').html(response);
+						}
+					}
+				});
+			}
+		</script>
 	</body>
 </html>
