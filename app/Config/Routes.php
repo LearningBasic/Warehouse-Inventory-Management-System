@@ -92,6 +92,7 @@ $routes->post('cancel','Purchase::Cancel');
 $routes->get('fetch-added-supplier','Purchase::fetchSupplier');
 $routes->post('add-entry','Purchase::addEntry');
 $routes->post('remove-item','Purchase::removeItem');
+$routes->post('save-form','Purchase::saveForm');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {

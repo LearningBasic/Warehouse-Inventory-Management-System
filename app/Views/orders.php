@@ -451,15 +451,23 @@
                         <form method="POST" class="row g-3" id="frmPurchase" action="<?=base_url('save-order')?>">
                             <div class="col-12 form-group">
                                 <div class="row g-3">
-                                    <div class="col-lg-4">
+									<div class="col-lg-3">
+                                        <label>Type of Purchase</label>
+                                        <select class="form-control" name="purchase_type" required>
+											<option value="">Choose</option>
+											<option>Regular Purchase</option>
+											<option>Local Purchase</option>
+										</select>
+                                    </div>
+                                    <div class="col-lg-3">
                                         <label>Date Prepared</label>
                                         <input type="date" class="form-control" value="<?php echo date('Y-m-d') ?>" name="datePrepared" required/>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
                                         <label>Vessel/Port/Department</label>
                                         <input type="text" class="form-control"  name="department" required/>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
                                         <label>Date Needed</label>
                                         <input type="date" class="form-control" name="dateNeeded" required/>
                                     </div>

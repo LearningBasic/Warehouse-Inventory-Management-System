@@ -22,6 +22,7 @@ class Purchase extends BaseController
         $dept = $this->request->getPost('department');
         $dateNeeded = $this->request->getPost('dateNeeded');
         $reason = $this->request->getPost('reason');
+        $purchase_type = $this->request->getPost('purchase_type');
         //array
         $qty = $this->request->getPost('qty');
         $item = $this->request->getPost('item');
@@ -32,7 +33,8 @@ class Purchase extends BaseController
         
         $validation = $this->validate([
             'datePrepared'=>'required','department'=>'required','dateNeeded'=>'required',
-            'reason'=>'required','item_name'=>'required','approver'=>'required'
+            'reason'=>'required','item_name'=>'required','approver'=>'required',
+            'purchase_type'=>'required'
         ]);
 
         if(!$validation)
@@ -53,7 +55,7 @@ class Purchase extends BaseController
             //save the prf data
             $values = [
                 'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
-                'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d')
+                'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),'PurchaseType'=>$purchase_type
             ];
             $purchaseModel->save($values);
             //save all the item requested
@@ -456,7 +458,8 @@ class Purchase extends BaseController
             $values = [
                 'OrderNo'=>$orderNo, 'orderID'=>$item,'Supplier'=>$supplier,
                 'Price'=>$unitPrice,'ContactPerson'=>$contactPerson,
-                'ContactNumber'=>$phone,'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>''
+                'ContactNumber'=>$phone,'Terms'=>$terms,'Warranty'=>$warranty,
+                'Reference'=>'','Remarks'=>''
             ];
             $canvassModel->save($values);
             echo "success";
@@ -470,5 +473,10 @@ class Purchase extends BaseController
         $builder->WHERE('canvassID',$val);
         $builder->delete();
         echo "success";
+    }
+
+    public function saveForm()
+    {
+
     }
 }
