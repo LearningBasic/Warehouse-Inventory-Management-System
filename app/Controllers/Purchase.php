@@ -411,6 +411,12 @@ class Purchase extends BaseController
                 <td><?php echo $row->Qty ?></td>
                 <td><?php echo $row->ItemUnit ?></td>
                 <td><?php echo $row->Item_Name ?></td>
+                <td><?php echo number_format($row->Price,2) ?></td>
+                <td><?php echo $row->Supplier ?></td>
+                <td><?php echo $row->ContactPerson ?></td>
+                <td><?php echo $row->ContactNumber ?></td>
+                <td><?php echo $row->Terms ?></td>
+                <td><?php echo $row->Warranty ?></td>
             </tr>
             <?php
         }
