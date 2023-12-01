@@ -397,5 +397,22 @@ class Purchase extends BaseController
     public function fetchSupplier()
     {
         $val = $this->request->getGet('value');
+        $builder = $this->db->table('tbl_order_item a');
+        $builder->select('a.*,b.*');
+        $builder->join('tblcanvass_sheet b','b.orderID=a.orderID','LEFT');
+        $builder->WHERE('b.OrderNo',$val);
+        $builder->groupby('b.canvassID,a.orderID');
+        $builder->orderby('b.orderID','ASC');
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <tr>
+                <td><?php echo $row->Qty ?></td>
+                <td><?php echo $row->ItemUnit ?></td>
+                <td><?php echo $row->Item_Name ?></td>
+            </tr>
+            <?php
+        }
     }
 }
