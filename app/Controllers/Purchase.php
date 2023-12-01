@@ -462,4 +462,13 @@ class Purchase extends BaseController
             echo "success";
         }
     }
+
+    public function removeItem()
+    {
+        $val = $this->request->getPost('value');
+        $builder = $this->db->table('tblcanvass_sheet');
+        $builder->WHERE('canvassID',$val);
+        $builder->delete();
+        echo "success";
+    }
 }

@@ -458,7 +458,7 @@
                                 <div class="row g-3">
                                     <div class="col-lg-3">
                                         <label>Date Prepared</label>
-                                        <input type="date" class="form-control" name="datePrepared" value="<?php echo $row->DatePrepared ?>"/>
+                                        <input type="date" class="form-control" name="datePrepared" value="<?php echo date('Y-m-d') ?>"/>
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Date Needed</label>
@@ -566,6 +566,7 @@
 		<script src="/assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="/assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="/assets/vendors/scripts/datatable-setting.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script>
 			$(document).ready(function()
 			{
@@ -607,9 +608,48 @@
 						}
 						else
 						{
-							alert(response);
+							Swal.fire({
+								title: "Error",
+								text: response,
+								icon: "error"
+								});
 						}
 						$('#btnAdd').attr("value","Add Entry");
+					}
+				});
+			});
+			$(document).on('click','.delete',function()
+			{
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to remove this selected request?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						$.ajax({
+							url:"<?=site_url('remove-item')?>?",method:"POST",
+							data:{value:val},
+							success:function(response)
+							{
+								if(response==="success")
+								{
+									loadSuppliers();
+								}
+								else
+								{
+									Swal.fire({
+										title: "Error",
+										text: response,
+										icon: "error"
+									});
+								}
+							}
+						});
 					}
 				});
 			});
