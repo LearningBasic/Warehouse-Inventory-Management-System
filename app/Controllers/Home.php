@@ -795,7 +795,7 @@ class Home extends BaseController
         $builder->WHERE('OrderNo',$id);
         $item = $builder->get()->getResult();
 
-        $data = ['prf'=>$prf,'item'=>$item];
+        $data = ['prf'=>$prf,'item'=>$item,'id'=>$id];
         return view('create-canvass-sheet',$data);
     }
 

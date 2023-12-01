@@ -426,5 +426,37 @@ class Purchase extends BaseController
     {
         $canvassModel = new \App\Models\canvassModel();
         //datas
+        $orderNo = $this->request->getPost('orderNo');
+        $item = $this->request->getPost('item');
+        $unitPrice = $this->request->getPost('unitPrice');
+        $supplier = $this->request->getPost('supplier');
+        $contactPerson = $this->request->getPost('contactPerson');
+        $phone = $this->request->getPost('phone');
+        $terms = $this->request->getPost('terms');
+        $warranty = $this->request->getPost('warranty');
+        //validate
+        $validation = $this->validate([
+            'item'=>'required',
+            'unitPrice'=>'required',
+            'supplier'=>'required',
+            'contactPerson'=>'required',
+            'phone'=>'required',
+            'terms'=>'required',
+            'warranty'=>'required',
+        ]);
+        if(!$validation)
+        {
+            echo "Invalid! Please fill in the form to continue";
+        }
+        else
+        {
+            $values = [
+                'OrderNo'=>$orderNo, 'orderID'=>$item,'Supplier'=>$supplier,
+                'Price'=>$unitPrice,'ContactPerson'=>$contactPerson,
+                'ContactNumber'=>$phone,'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>''
+            ];
+            $canvassModel->save($values);
+            echo "success";
+        }
     }
 }

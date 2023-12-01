@@ -509,6 +509,7 @@
                     </div>
                     <div class="modal-body">
                         <form method="POST" class="row g-3" id="frmAdd">
+							<input type="hidden" name="orderNo" value="<?=$id ?>"/>
 							<div class="col-12 form-group">
 								<label>Item/Equipment</label>
 								<select class="form-control" name="item">
@@ -588,6 +589,29 @@
 					}
 				});
 			}
+			$('#btnAdd').on('click',function(e)
+			{
+				e.preventDefault();
+				$(this).attr("value","Adding! Please wait");
+				var data = $('#frmAdd').serialize();
+				$.ajax({
+					url:"<?=site_url('add-entry')?>",method:"POST",
+					data:data,
+					success:function(response)
+					{
+						if(response==="success")
+						{
+							loadSuppliers();$('#addModal').modal('hide');
+							$('#frmAdd')[0].reset();
+						}
+						else
+						{
+							alert(response);
+						}
+						$('#btnAdd').attr("value","Add Entry");
+					}
+				});
+			});
 		</script>
 	</body>
 </html>
