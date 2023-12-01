@@ -578,7 +578,7 @@
 								<div class="card-box">
 									<div class="card-header"><i class="icon-copy dw dw-user-13"></i>&nbsp;User Accounts
 										<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#accountModal" style="float:right;"><i class="icon-copy dw dw-add-user"></i>&nbsp;Add</a>
-								</div>
+									</div>
 									<div class="card-body">
 										<table class="data-table table stripe hover nowrap">
 											<thead>

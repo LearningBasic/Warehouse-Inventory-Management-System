@@ -421,4 +421,10 @@ class Purchase extends BaseController
             <?php
         }
     }
+
+    public function addEntry()
+    {
+        $canvassModel = new \App\Models\canvassModel();
+        //datas
+    }
 }
