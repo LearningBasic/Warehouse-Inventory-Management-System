@@ -273,7 +273,7 @@ class Purchase extends BaseController
                 </div>
                 <div class="col-12 form-group">
                     <?php if($row->Status==0){ ?>
-                    <button type="button" class="btn btn-primary accept">Accept</button>
+                    <input type="button" class="btn btn-primary accept" value="Accept"/>
                     <button type="button" class="btn btn-outline-danger cancel">Cancel</button>
                     <?php } ?>
                 </div>
