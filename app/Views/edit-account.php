@@ -527,6 +527,7 @@
                                             <option <?php if($account['systemRole']=="Administrator") echo 'selected="selected"'; ?>>Administrator</option>
                                             <option <?php if($account['systemRole']=="Editor") echo 'selected="selected"'; ?>>Editor</option>
                                             <option <?php if($account['systemRole']=="Standard User") echo 'selected="selected"'; ?>>Standard User</option>
+											<option <?php if($account['systemRole']=="Staff") echo 'selected="selected"'; ?>>Staff</option>
                                         </select>
                                     </div>
                                 </div>

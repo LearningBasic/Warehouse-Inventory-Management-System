@@ -767,6 +767,7 @@
 									<option>Administrator</option>
 									<option>Editor</option>
 									<option>Standard User</option>
+									<option>Staff</option>
 								</select>
 							</div>
 							<div class="col-12 form-group">
