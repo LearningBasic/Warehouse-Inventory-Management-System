@@ -501,6 +501,34 @@ class ProductController extends BaseController
                         'Image'=>$originalName,'Remarks'=>$remarks,'Status'=>0,'DateApproved'=>'0000-00-00','accountID'=>$user
                         ];
                     $damageReportModel->save($values);
+                    $builder = $this->db->table('tblaccount');
+                    $builder->select('*');
+                    $builder->WHERE('Department','Procurement')->WHERE('systemRole','Administrator');
+                    $datas = $builder->get();
+                    if($rows = $datas->getRow())
+                    {
+                        //email
+                        $email = \Config\Services::email();
+                        $email->setTo($rows->Email,$rows->Fullname);
+                        $email->setFrom("fastcat.system@gmail.com","FastCat");
+                        $imgURL = "assets/img/fastcat.png";
+                        $email->attach($imgURL);
+                        $cid = $email->setAttachmentCID($imgURL);
+                        $template = "<center>
+                        <img src='cid:". $cid ."' width='100'/>
+                        <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+                        <tr><td><center><h1>Purchase Requistion Form</h1></center></td></tr>
+                        <tr><td><center>Hi, ".$rows->Fullname."</center></td></tr>
+                        <tr><td><center>This is from FastCat System, sending you a reminder that requesting for your approval.</center></td></tr>
+                        <tr><td><p><center><b>Damage Item/Equipment due to ".$details."</b></center></p></td><tr>
+                        <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+                        <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+                        <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+                        $subject = "Damage Report";
+                        $email->setSubject($subject);
+                        $email->setMessage($template);
+                        $email->send();
+                    }
                     session()->setFlashdata('success','Great! Successfully submitted for review');
                     return redirect()->to('/damage-report')->withInput();
                 }
@@ -568,6 +596,34 @@ class ProductController extends BaseController
                 'Status'=>$status,'approveDate'=>$approveDate,'accountID'=>session()->get('loggedUser')
             ];
             $repairReport->save($values);
+            $builder = $this->db->table('tblaccount');
+            $builder->select('*');
+            $builder->WHERE('Department','Procurement')->WHERE('systemRole','Administrator');
+            $datas = $builder->get();
+            if($rows = $datas->getRow())
+            {
+                //email
+                $email = \Config\Services::email();
+                $email->setTo($rows->Email,$rows->Fullname);
+                $email->setFrom("fastcat.system@gmail.com","FastCat");
+                $imgURL = "assets/img/fastcat.png";
+                $email->attach($imgURL);
+                $cid = $email->setAttachmentCID($imgURL);
+                $template = "<center>
+                <img src='cid:". $cid ."' width='100'/>
+                <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+                <tr><td><center><h1>Purchase Requistion Form</h1></center></td></tr>
+                <tr><td><center>Hi, ".$rows->Fullname."</center></td></tr>
+                <tr><td><center>This is from FastCat System, sending you a reminder that requesting for your approval.</center></td></tr>
+                <tr><td><p><center><b>Requesting for Repair/Overhaul</b></center></p></td><tr>
+                <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+                <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+                <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+                $subject = "Requesting for Repair";
+                $email->setSubject($subject);
+                $email->setMessage($template);
+                $email->send();
+            }
             session()->setFlashdata('success','Great! Successfully submitted for review');
             return redirect()->to('/repair-report')->withInput();
         }
@@ -621,7 +677,34 @@ class ProductController extends BaseController
                 'Status'=>0,'accountID'=>session()->get('loggedUser'),'DateCreated'=>$dateCreated
             ];
             $requestModel->save($values);
-
+            $builder = $this->db->table('tblaccount');
+            $builder->select('*');
+            $builder->WHERE('Department','Procurement')->WHERE('systemRole','Administrator');
+            $datas = $builder->get();
+            if($rows = $datas->getRow())
+            {
+                //email
+                $email = \Config\Services::email();
+                $email->setTo($rows->Email,$rows->Fullname);
+                $email->setFrom("fastcat.system@gmail.com","FastCat");
+                $imgURL = "assets/img/fastcat.png";
+                $email->attach($imgURL);
+                $cid = $email->setAttachmentCID($imgURL);
+                $template = "<center>
+                <img src='cid:". $cid ."' width='100'/>
+                <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+                <tr><td><center><h1>Purchase Requistion Form</h1></center></td></tr>
+                <tr><td><center>Hi, ".$rows->Fullname."</center></td></tr>
+                <tr><td><center>This is from FastCat System, sending you a reminder that requesting for your approval.</center></td></tr>
+                <tr><td><p><center><b>Requesting for Transfer Item/Equipment due to ".$details."</b></center></p></td><tr>
+                <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+                <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+                <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+                $subject = "Requesting for Transfer";
+                $email->setSubject($subject);
+                $email->setMessage($template);
+                $email->send();
+            }
             session()->setFlashdata('success','Great! Successfully submitted for review');
             return redirect()->to('/transfer-item')->withInput();
         }
