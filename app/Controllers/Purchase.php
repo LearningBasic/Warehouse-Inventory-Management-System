@@ -436,6 +436,7 @@ class Purchase extends BaseController
         $unitPrice = $this->request->getPost('unitPrice');
         $supplier = $this->request->getPost('supplier');
         $contactPerson = $this->request->getPost('contactPerson');
+        $address = $this->request->getPost('address');
         $phone = $this->request->getPost('phone');
         $terms = $this->request->getPost('terms');
         $warranty = $this->request->getPost('warranty');
@@ -445,6 +446,7 @@ class Purchase extends BaseController
             'unitPrice'=>'required',
             'supplier'=>'required',
             'contactPerson'=>'required',
+            'address'=>'required',
             'phone'=>'required',
             'terms'=>'required',
             'warranty'=>'required',
@@ -457,7 +459,7 @@ class Purchase extends BaseController
         {
             $values = [
                 'OrderNo'=>$orderNo, 'orderID'=>$item,'Supplier'=>$supplier,
-                'Price'=>$unitPrice,'ContactPerson'=>$contactPerson,
+                'Price'=>$unitPrice,'ContactPerson'=>$contactPerson,'Address'=>$address,
                 'ContactNumber'=>$phone,'Terms'=>$terms,'Warranty'=>$warranty,
                 'Reference'=>'','Remarks'=>''
             ];

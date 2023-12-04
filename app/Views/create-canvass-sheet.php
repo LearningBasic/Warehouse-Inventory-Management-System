@@ -540,6 +540,10 @@
 								<input type="phone" class="form-control" maxlength="11" minlength="11" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required/>
 							</div>
 							<div class="col-12 form-group">
+								<label>Address</label>
+								<textarea class="form-control" name="address" required></textarea>
+							</div>
+							<div class="col-12 form-group">
 								<div class="row g-3">
 									<div class="col-lg-6">
 										<label>Terms</label>
