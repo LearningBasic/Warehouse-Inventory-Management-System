@@ -122,11 +122,10 @@ class Dashboard extends BaseController
 
     public function damageItem()
     {
-        $location = session()->get('assignment');
         $builder = $this->db->table('tbldamagereport a');
         $builder->select('FORMAT(COUNT(a.reportID),0)total');
         $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
-        $builder->WHERE('a.Status',0)->WHERE('b.warehouseID',$location);
+        $builder->WHERE('a.Status',0);
         $data = $builder->get();
         if($row = $data->getRow())
         {
@@ -136,12 +135,11 @@ class Dashboard extends BaseController
 
     public function overhaulItem()
     {
-        $location = session()->get('assignment');
         $builder = $this->db->table('tblrepairreport a');
         $builder->select('FORMAT(COUNT(a.rrID),0)total');
         $builder->join('tbldamagereport b','b.reportID=a.reportID','LEFT');
         $builder->join('tblinventory c','c.inventID=b.inventID','LEFT');
-        $builder->WHERE('a.Status',0)->WHERE('c.warehouseID',$location);
+        $builder->WHERE('a.Status',0);
         $data = $builder->get();
         if($row = $data->getRow())
         {
@@ -151,10 +149,9 @@ class Dashboard extends BaseController
 
     public function transferItem()
     {
-        $location = session()->get('assignment');
         $builder = $this->db->table('tbltransfer_request');
         $builder->select('FORMAT(COUNT(requestID),0)total');
-        $builder->WHERE('warehouseID',$location)->WHERE('Status',0);
+        $builder->WHERE('Status',0);
         $data = $builder->get();
         if($row = $data->getRow())
         {
