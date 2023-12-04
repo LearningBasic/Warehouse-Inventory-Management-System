@@ -385,14 +385,12 @@ class Home extends BaseController
 
     public function userRequest()
     {
-        if(session()->get('role')=="Administrator"||session()->get('role')=="Editor")
+        if(session()->get('role')=="Administrator")
         {
-            $location = session()->get('assignment');
             //damage
             $builder = $this->db->table('tbldamagereport a');
             $builder->select('a.*,b.productName');
             $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
-            $builder->WHERE('b.warehouseID',$location);
             $builder->groupby('a.reportID');
             $damage = $builder->get()->getResult();
             //for repair
@@ -400,7 +398,6 @@ class Home extends BaseController
             $builder->select('a.*,c.productName');
             $builder->join('tbldamagereport b','b.reportID=a.reportID','LEFT');
             $builder->join('tblinventory c','c.inventID=b.inventID','LEFT');
-            $builder->WHERE('c.warehouseID',$location);
             $builder->groupby('a.rrID');
             $repair = $builder->get()->getResult();
             //transfer request
@@ -408,7 +405,6 @@ class Home extends BaseController
             $builder->select('a.*,b.Fullname,c.warehouseName');
             $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
             $builder->join('tblwarehouse c','c.warehouseID=b.warehouseID','LEFT');
-            $builder->WHERE('a.warehouseID',$location);
             $builder->groupBy('a.requestID');
             $transfer = $builder->get()->getResult();
 

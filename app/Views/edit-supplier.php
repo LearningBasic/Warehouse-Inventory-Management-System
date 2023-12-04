@@ -378,7 +378,7 @@
 								<li><a href="<?=site_url('edit-supplier')?>" class="active">Edit Supplier</a></li>
 							</ul>
 						</li>
-						<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
+						<?php if(session()->get('role')=="Administrator"){ ?>
 						<li class="dropdown">
 							<a href="<?=site_url('request')?>" class="dropdown-toggle no-arrow">
 								<span class="micon bi bi-clipboard-data"></span
