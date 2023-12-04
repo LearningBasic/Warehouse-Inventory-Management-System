@@ -803,7 +803,7 @@ class Home extends BaseController
     {
         $user = session()->get('loggedUser');
         $builder = $this->db->table('tblreview a');
-        $builder->select('a.reviewID,a.OrderNo,a.DateReceived,a.DateApproved,a.Status,b.Reason,b.DateNeeded,c.Fullname');
+        $builder->select('a.reviewID,a.OrderNo,a.DateReceived,a.DateApproved,a.Status,b.Reason,b.DateNeeded,b.PurchaseType,c.Fullname');
         $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
         $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
         $builder->WHERE('a.accountID',$user);

@@ -466,7 +466,9 @@
 										</td>
 										<td>
 											<?php if($row->Status==1){?>
+												<?php if($row->PurchaseType=="Regular Purchase"){ ?>
 												<button type="button" class="btn btn-outline-primary btn-sm assign" value="<?php echo $row->OrderNo ?>">Assign</button>
+												<?php } ?>
 											<?php } ?>
 										</td>
 									</tr>
@@ -488,6 +490,21 @@
                     </div>
                     <div class="modal-body">
                         <div id="result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="modal fade" id="assignModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            Assign PRF
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        
                     </div>
                 </div>
             </div>
@@ -519,6 +536,12 @@
 					}
 				});
 			}
+			$(document).on('click','.assign',function(e)
+			{
+				e.preventDefault();
+				var val = $(this).val();
+				alert(val);
+			});
 			$(document).on('click','.accept',function(e)
 			{
 				e.preventDefault();
