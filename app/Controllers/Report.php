@@ -73,11 +73,10 @@ class Report extends BaseController
     {
         $from = $this->request->getGet('from');
         $to = $this->request->getGet('to');
-        $location = $this->request->getGet('location');
         $account = $this->request->getGet('accounts');
         $validation = $this->validate([
             'from'=>'required','to'=>'required',
-            'location'=>'required','accounts'=>'required'
+            'accounts'=>'required'
         ]);
         if(!$validation)
         {
@@ -89,20 +88,18 @@ class Report extends BaseController
         }
         else
         {
-            $sql = ('Select a.*,SUM(a.Qty)actual,b.total,c.categoryName
-            from tblinventory a  
-            LEFT JOIN (Select inventID,accountID,Date,COUNT(scanID)total from tblscanned_items GROUP BY inventID) b ON b.inventID=a.inventID
+            $sql = ('Select a.productID,a.productName,SUM(a.Qty)actual,b.total,c.categoryName from tblinventory a  
+            LEFT JOIN (Select inventID,accountID,COUNT(scanID)total from tblscanned_items WHERE Status=1 AND Date BETWEEN :from: AND :to: GROUP BY inventID) b ON b.inventID=a.inventID
             LEFT JOIN tblcategory c ON c.categoryID=a.categoryID
-            WHERE a.warehouseID=:location: AND b.accountID=:user: AND b.Date BETWEEN :from: AND :to: GROUP BY a.inventID');
+            WHERE b.accountID=:user: GROUP BY a.inventID');
             $query =$this->db->query($sql,[
-                "location"=>$location,
-                "user"=>$account,
                 "from"=>$from,
-                "to"=>$to
+                "to"=>$to,
+                "user"=>$account
                 ]);
             foreach ($query->getResult() as $row)
             {
-                $total = $row->actual-$row->total;
+                $total = $row->actual - $row->total;
                 ?>
                 <tr>
                     <td><?php echo $row->productID ?></td>

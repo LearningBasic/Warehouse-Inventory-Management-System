@@ -549,15 +549,6 @@
 													<input type="date" class="form-control" name="to"/>
 												</div>
 												<div class="col-lg-3 form-group">
-                                                    <label>Warehouse/Vessel</label>
-                                                    <select class="form-control" name="location">
-                                                        <option value="">Choose</option>
-                                                        <?php foreach($location as $row): ?>
-                                                            <option value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                </div>
-												<div class="col-lg-3 form-group">
                                                     <label>User Accounts</label>
                                                     <select class="form-control" name="accounts">
                                                         <option value="">Choose</option>
