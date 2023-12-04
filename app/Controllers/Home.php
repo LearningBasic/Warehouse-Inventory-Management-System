@@ -38,13 +38,13 @@ class Home extends BaseController
         $query = $builder->get()->getResult();
         //total of item per assignment
         $builder = $this->db->table('tblwarehouse a');
-        $builder->select('a.warehouseName,IFNULL(SUM(b.Qty),0)total');
+        $builder->select('a.warehouseName,IFNULL(COUNT(b.productID),0)total');
         $builder->join('tblinventory b','b.warehouseID=a.warehouseID','LEFT');
         $builder->groupBy('a.warehouseID');
         $assign = $builder->get()->getResult();
         //categorized
         $builder = $this->db->table('tblcategory a');
-        $builder->select('a.categoryName,COUNT(b.inventID)total');
+        $builder->select('a.categoryName,COUNT(DISTINCT b.productID)total');
         $builder->join('tblinventory b','b.categoryID=a.categoryID','LEFT');
         $builder->groupBy('a.categoryID');
         $category = $builder->get()->getResult();

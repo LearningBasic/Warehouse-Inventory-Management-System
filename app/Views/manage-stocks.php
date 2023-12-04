@@ -459,22 +459,23 @@
 									<a
 										class="nav-link text-blue"
 										data-toggle="tab"
-										href="#contact6"
-										role="tab"
-										aria-selected="false"
-										>Return Order(s)</a
-									>
-								</li>
-								<li class="nav-item">
-									<a
-										class="nav-link text-blue"
-										data-toggle="tab"
 										href="#others6"
 										role="tab"
 										aria-selected="false"
 										>Transfer Items</a
 									>
 								</li>
+								<li class="nav-item">
+									<a
+										class="nav-link text-blue"
+										data-toggle="tab"
+										href="#contact6"
+										role="tab"
+										aria-selected="false"
+										>Return Order(s)</a
+									>
+								</li>
+
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="home6" role="tabpanel">
@@ -594,7 +595,6 @@
 										</tbody>
 									</table>
 								</div>
-								<div class="tab-pane fade" id="contact6" role="tabpanel"></div>
 								<div class="tab-pane fade" id="others6" role="tabpanel">
 									<br/>
 									<table class="data-table table stripe hover nowrap">
@@ -605,6 +605,8 @@
 											<th>Qty</th>
 											<th>Effective Date</th>
 											<th>Status</th>
+											<th>Delivery via</th>
+											<th>Track #/Driver</th>
 										</thead>
 										<tbody>
 											<?php if($transfer): ?>
@@ -617,6 +619,8 @@
 														<td><?php echo number_format($row->Qty,0) ?></td>
 														<td><?php echo $row->dateEffective ?></td>
 														<td><span class="badge bg-warning text-white">Exporting</span></td>
+														<td><?php echo $row->cargo_type ?></td>
+														<td><?php echo $row->TrackingNumber ?><?php echo $row->Driver ?></td>
 													</tr>
 													<?php }else{ ?>
 														<tr>
@@ -626,12 +630,17 @@
 														<td><?php echo number_format($row->Qty,0) ?></td>
 														<td><?php echo $row->dateEffective ?></td>
 														<td><span class="badge bg-success text-white">Delivered</span></td>
+														<td><?php echo $row->cargo_type ?></td>
+														<td><?php echo $row->TrackingNumber ?><?php echo $row->Driver ?></td>
 													</tr>
 													<?php } ?>
 												<?php endforeach; ?>
 											<?php endif; ?>
 										</tbody>
 									</table>
+								</div>
+								<div class="tab-pane fade" id="contact6" role="tabpanel">
+
 								</div>
 							</div>
 						</div>
