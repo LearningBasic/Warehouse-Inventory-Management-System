@@ -618,7 +618,7 @@
 														<td><?php echo $row->productName ?></td>
 														<td><?php echo number_format($row->Qty,0) ?></td>
 														<td><?php echo $row->dateEffective ?></td>
-														<td><span class="badge bg-warning text-white">Exporting</span></td>
+														<td><span class="badge bg-warning text-white">For Delivery</span></td>
 														<td><?php echo $row->cargo_type ?></td>
 														<td><?php echo $row->TrackingNumber ?><?php echo $row->Driver ?></td>
 													</tr>
