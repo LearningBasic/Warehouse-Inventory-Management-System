@@ -435,7 +435,7 @@
 						<?php endif; ?>
 						<div class="tabs">
 							<ul class="nav nav-pills justify-content-left" role="tablist">
-								<li class="nav-item">
+								<!-- <li class="nav-item">
 									<a
 										class="nav-link active text-blue"
 										data-toggle="tab"
@@ -454,10 +454,10 @@
 										aria-selected="false"
 										>Overhaul Items</a
 									>
-								</li>
+								</li> -->
 								<li class="nav-item">
 									<a
-										class="nav-link text-blue"
+										class="nav-link active text-blue"
 										data-toggle="tab"
 										href="#others6"
 										role="tab"
@@ -478,7 +478,7 @@
 
 							</ul>
 							<div class="tab-content">
-								<div class="tab-pane fade show active" id="home6" role="tabpanel">
+								<!-- <div class="tab-pane fade show active" id="home6" role="tabpanel">
 									<br/>
 									<table class="data-table table stripe hover nowrap">
 										<thead>
@@ -594,8 +594,8 @@
 											<?php endif; ?>
 										</tbody>
 									</table>
-								</div>
-								<div class="tab-pane fade" id="others6" role="tabpanel">
+								</div> -->
+								<div class="tab-pane fade show active" id="others6" role="tabpanel">
 									<br/>
 									<table class="data-table table stripe hover nowrap">
 										<thead>
