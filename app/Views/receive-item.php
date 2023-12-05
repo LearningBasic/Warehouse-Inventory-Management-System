@@ -507,7 +507,7 @@
 				</div>
 			</div>
 		</div>
-        <div class="modal fade" id="receiveModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal fade" id="receiveModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
