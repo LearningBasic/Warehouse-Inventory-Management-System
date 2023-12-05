@@ -470,10 +470,18 @@
 							<tbody>
 								<?php if(session()->get('role')=="Administrator"){ ?>
 									<?php foreach($items as $row): if($row->Qty>$row->ReOrder){?>
+										<?php $imgURL = "Products/".$row->Image; ?>
 										<tr>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
-											<td><?php echo $row->productName ?></td>
+											<td>
+												<div class="name-avatar d-flex align-items-center">
+													<div class="avatar mr-2 flex-shrink-0">
+														<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
+													</div>
+													<div class="txt"><?php echo $row->productName ?></div>
+												</div>
+											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><span class='badge bg-success text-white'>Available</span></td>
@@ -495,10 +503,18 @@
 											</td>
 										</tr>
 										<?php }else if($row->Qty<=$row->ReOrder){?>
+										<?php $imgURL = "Products/".$row->Image; ?>
 										<tr>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
-											<td><?php echo $row->productName ?></td>
+											<td>
+												<div class="name-avatar d-flex align-items-center">
+													<div class="avatar mr-2 flex-shrink-0">
+														<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
+													</div>
+													<div class="txt"><?php echo $row->productName ?></div>
+												</div>
+											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><span class='badge bg-warning text-white'>Critical</span></td>
@@ -519,10 +535,18 @@
 											</td>
 										</tr>
 										<?php }if($row->Qty==0){ ?>
+											<?php $imgURL = "Products/".$row->Image; ?>
 											<tr>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
-											<td><?php echo $row->productName ?></td>
+											<td>
+												<div class="name-avatar d-flex align-items-center">
+													<div class="avatar mr-2 flex-shrink-0">
+														<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
+													</div>
+													<div class="txt"><?php echo $row->productName ?></div>
+												</div>
+											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><span class='badge bg-danger text-white'>Out-of-Stock</span></td>
@@ -544,10 +568,18 @@
 									<?php endforeach; ?>
 								<?php }else{ ?>
 									<?php foreach($items as $row): if($row->Qty>$row->ReOrder){?>
+										<?php $imgURL = "Products/".$row->Image; ?>
 										<tr>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
-											<td><?php echo $row->productName ?></td>
+											<td>
+												<div class="name-avatar d-flex align-items-center">
+													<div class="avatar mr-2 flex-shrink-0">
+														<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
+													</div>
+													<div class="txt"><?php echo $row->productName ?></div>
+												</div>
+											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><span class='badge bg-success text-white'>Available</span></td>
@@ -556,10 +588,18 @@
 											<td>-</td>
 										</tr>
 										<?php }else if($row->Qty<=$row->ReOrder){?>
+											<?php $imgURL = "Products/".$row->Image; ?>
 										<tr>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
-											<td><?php echo $row->productName ?></td>
+											<td>
+												<div class="name-avatar d-flex align-items-center">
+													<div class="avatar mr-2 flex-shrink-0">
+														<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
+													</div>
+													<div class="txt"><?php echo $row->productName ?></div>
+												</div>
+											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><span class='badge bg-warning text-white'>Critical</span></td>
@@ -568,10 +608,18 @@
 											<td>-</td>
 										</tr>
 										<?php }if($row->Qty==0){ ?>
+											<?php $imgURL = "Products/".$row->Image; ?>
 											<tr>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
-											<td><?php echo $row->productName ?></td>
+											<td>
+												<div class="name-avatar d-flex align-items-center">
+													<div class="avatar mr-2 flex-shrink-0">
+														<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
+													</div>
+													<div class="txt"><?php echo $row->productName ?></div>
+												</div>
+											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><span class='badge bg-danger text-white'>Out-of-Stock</span></td>

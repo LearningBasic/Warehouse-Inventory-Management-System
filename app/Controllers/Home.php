@@ -56,10 +56,11 @@ class Home extends BaseController
     {
         //get all the stocks
         $builder = $this->db->table('tblinventory a');
-        $builder->select('a.*,SUM(a.Qty)Qty,b.categoryName,c.supplierName,d.warehouseName');
+        $builder->select('a.*,SUM(a.Qty)Qty,b.categoryName,c.supplierName,d.warehouseName,e.Image');
         $builder->join('tblcategory b','b.categoryID=a.categoryID','LEFT');
         $builder->join('tblsupplier c','c.supplierID=a.supplierID','LEFT');
         $builder->join('tblwarehouse d','d.warehouseID=a.warehouseID','LEFT');
+        $builder->join('tblimage e','e.inventID=a.inventID','LEFT');
         $builder->groupby('a.warehouseID,a.inventID');
         $builder->orderby('a.Date');
         $items = $builder->get()->getResult();
