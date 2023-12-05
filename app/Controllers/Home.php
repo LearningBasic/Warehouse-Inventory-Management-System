@@ -233,7 +233,7 @@ class Home extends BaseController
                     //save the images
                     $values = [
                         'inventID'=>$inventID,
-                        'Images'=>$originalName,
+                        'Image'=>$file->getClientName(),
                         'DateCreated'=>date('Y-m-d'),
                     ];
                     $productImage->save($values);

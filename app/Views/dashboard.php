@@ -200,11 +200,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="github-link">
-					<a href="https://github.com/dropways/deskapp" target="_blank"
-						><img src="vendors/images/github.svg" alt=""
-					/></a>
-				</div>
 			</div>
 		</div>
 
@@ -666,7 +661,7 @@
 	
 				/* Define the chart to be drawn.*/
 				var data = google.visualization.arrayToDataTable([
-					['Product', 'Total'],
+					["Product", "Total"],
 					<?php 
 					foreach ($query as $row){
 					echo "['".$row->productName."',".$row->total."],";
