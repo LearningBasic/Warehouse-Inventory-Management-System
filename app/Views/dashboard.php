@@ -582,9 +582,7 @@
 				<div class="row pb-10">
 					<div class="col-lg-7 form-group">
 						<div class="card-box pd-20">
-							<div
-								class="d-flex flex-wrap justify-content-between align-items-center pb-0 pb-md-3"
-							>
+							<div class="card-title">
 								<div class="h5 mb-md-0">Inventory Value Per Product Name</div>
 							</div>
 							<div id="chartContainer" style="height:400px;"></div>
@@ -592,9 +590,7 @@
 					</div>
 					<div class="col-lg-5 form-group">
 						<div class="card-box pd-20">
-							<div
-								class="d-flex flex-wrap justify-content-between align-items-center pb-0 pb-md-3"
-							>
+							<div class="card-title">
 								<div class="h5 mb-md-0">Volume Per Location</div>
 							</div>
 							<div id="chartAssignment" style="height:400px;"></div>
