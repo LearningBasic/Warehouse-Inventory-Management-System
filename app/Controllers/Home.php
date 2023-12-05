@@ -209,7 +209,7 @@ class Home extends BaseController
         }
         else
         {
-            if ($this->request->getFileMultiple('images')) 
+            if($this->request->getFileMultiple('images')) 
             {
                 $values = [
                     'Date'=>$date,'Location'=>$location,'productID'=>$item_number,'productName'=>$productName,
@@ -367,7 +367,7 @@ class Home extends BaseController
         $builder = $this->db->table('tbldamagereport a');
         $builder->select('a.reportID,b.productName');
         $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
-        $builder->WHERE('b.warehouseID',$assign)->WHERE('a.Status',1);
+        $builder->WHERE('b.warehouseID',$assign)->WHERE('a.Status',1)->WHERE('a.Remarks','For Repair');
         $forRepair = $builder->get()->getResult();
         $data = ['repair'=>$forRepair,];
         return view('repair-report',$data);

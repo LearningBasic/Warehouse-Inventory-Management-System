@@ -14,7 +14,7 @@ class productImageModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['inventID', 'Images','DateCreated'];
+    protected $allowedFields = ['inventID', 'Image','DateCreated'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

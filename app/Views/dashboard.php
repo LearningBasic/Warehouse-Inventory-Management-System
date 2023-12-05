@@ -671,7 +671,7 @@
 				legend: { position: 'bottom' }
 				};
 				/* Instantiate and draw the chart.*/
-				var chart = new google.visualization.BarChart(document.getElementById('chartContainer'));
+				var chart = new google.visualization.ColumnChart(document.getElementById('chartContainer'));
 				chart.draw(data, options);
 			}
 			function assignChart() 
