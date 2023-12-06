@@ -445,32 +445,42 @@ class Purchase extends BaseController
     {
         ignore_user_abort(true);
         //send email to procurement dept head
-        $builder = $this->db->table('tblaccount');
-        $builder->select('Fullname,Email');
-        $builder->WHERE('Department','Procurement')->WHERE('systemRole','Administrator');
-        $datas = $builder->get();
-        if($row = $datas->getRow())
+        $builder = $this->db->table('tblinventory');
+        $builder->select('*');
+        $builder->WHERE('Qty',0);
+        $data = $builder->get();
+        if($row = $data->getRow())
         {
-            //email
-            $email = \Config\Services::email();
-            $email->setTo($row->Email,$row->Fullname);
-            $email->setFrom("fastcat.system@gmail.com","FastCat");
-            $imgURL = "assets/img/fastcat.png";
-            $email->attach($imgURL);
-            $cid = $email->setAttachmentCID($imgURL);
-            $template = "<center>
-            <img src='cid:". $cid ."' width='100'/>
-            <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
-            <tr><td><center><h1>FastCat Inventory System</h1></center></td></tr>
-            <tr><td><center>Hi, ".$row->Fullname."</center></td></tr>
-            <tr><td><center>This is from FastCat System, sending you a reminder that the system identifies all the out of stock(s) item.</center></td></tr>
-            <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
-            <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
-            <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
-            $subject = "Out-of-Stock - FastCat IMS";
-            $email->setSubject($subject);
-            $email->setMessage($template);
-            $email->send();
+            $builder = $this->db->table('tblaccount');
+            $builder->select('Fullname,Email');
+            $builder->WHERE('Department','Procurement')->WHERE('systemRole','Administrator');
+            $datas = $builder->get();
+            if($row = $datas->getRow())
+            {
+                //email
+                $email = \Config\Services::email();
+                $email->setTo($row->Email,$row->Fullname);
+                $email->setFrom("fastcat.system@gmail.com","FastCat");
+                $imgURL = "assets/img/fastcat.png";
+                $email->attach($imgURL);
+                $cid = $email->setAttachmentCID($imgURL);
+                $template = "<center>
+                <img src='cid:". $cid ."' width='100'/>
+                <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+                <tr><td><center><h1>FastCat Inventory System</h1></center></td></tr>
+                <tr><td><center>Hi, ".$row->Fullname."</center></td></tr>
+                <tr><td><center>This is from FastCat System, sending you a reminder that the system identifies all the out of stock(s) item.</center></td></tr>
+                <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+                <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+                <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+                $subject = "Out-of-Stock - FastCat IMS";
+                $email->setSubject($subject);
+                $email->setMessage($template);
+                $email->send();
+            }
+        }
+        else{
+            //do nothing
         }
     }
 
