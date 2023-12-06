@@ -184,7 +184,7 @@ class Home extends BaseController
         $supplier = $this->request->getPost('supplier');
         $category = $this->request->getPost('category');
         $location = $this->request->getPost('location');
-        $item_number = $this->request->getPost('item_number');
+        $item_number="";
         $code = $this->request->getPost('productCode');
         $productName = $this->request->getPost('productName');
         $desc = $this->request->getPost('description');
@@ -196,7 +196,6 @@ class Home extends BaseController
         $validation = $this->validate([
             'warehouse'=>'required',
             'category'=>'required',
-            'item_number'=>'required',
             'productName'=>'required|is_unique[tblinventory.productName]',
             'itemUnit'=>'required',
             'unitPrice'=>'required',
@@ -204,13 +203,32 @@ class Home extends BaseController
         ]);
         if(!$validation)
         {
-            session()->setFlashdata('fail',"Invalid! Please check the supplier's information before the submission");
+            session()->setFlashdata('fail',"Invalid! Please check the item/equipment information before submission");
             return redirect()->to('/add')->withInput();
         }
         else
         {
             if($this->request->getFileMultiple('images')) 
             {
+                //get the aliases
+                $alias = "";
+                $builder = $this->db->table('tblcategory');
+                $builder->select('Alias');
+                $builder->WHERE('categoryID',$category);
+                $datas = $builder->get();
+                if($row = $datas->getRow())
+                {
+                    $alias = $row->Alias;
+                }
+                //generate the code
+                $builder = $this->db->table('tblinventory');
+                $builder->select('COUNT(inventID)+1 as total');
+                $builder->WHERE('categoryID',$category);
+                $list = $builder->get();
+                if($li = $list->getRow())
+                {
+                    $item_number = $alias.str_pad($li->total, 4, '0', STR_PAD_LEFT);
+                }
                 $values = [
                     'Date'=>$date,'Location'=>$location,'productID'=>$item_number,'productName'=>$productName,
                     'Code'=>$code,'Description'=>$desc,'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'Qty'=>$qty,'ReOrder'=>$reOrder,
