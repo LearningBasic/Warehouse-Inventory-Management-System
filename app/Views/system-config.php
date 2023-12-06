@@ -688,6 +688,10 @@
                                 <label>Category Name</label>
                                 <input type="text" class="form-control" name="categoryName" required/>
                             </div>
+							<div class="col-12 form-group">
+                                <label>Alias</label>
+                                <input type="text" class="form-control" name="alias" required/>
+                            </div>
                             <div class="col-12 form-group">
                                 <label>Description</label>
                                 <input type="text" class="form-control" name="description" required/>

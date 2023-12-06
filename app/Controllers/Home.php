@@ -605,6 +605,7 @@ class Home extends BaseController
     {
         $categoryModel = new \App\Models\categoryModel();
         $category = $this->request->getPost('categoryName');
+        $alias = $this->request->getPost('alias');
         $desc = $this->request->getPost('description');
         $validation = $this->validate([
             'categoryName'=>'required|is_unique[tblcategory.categoryName]'
@@ -616,6 +617,7 @@ class Home extends BaseController
         else{
             $values = [
                 'categoryName'=>$category,
+                'Alias'=>$alias,
                 'Description'=>$desc,
             ];
             $categoryModel->save($values);

@@ -14,7 +14,7 @@ class categoryModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['categoryName','Description'];
+    protected $allowedFields = ['categoryName','Alias','Description'];
 
     protected $validationRules = [];
     protected $validationMessages = [];
