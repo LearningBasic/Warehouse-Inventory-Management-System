@@ -424,6 +424,23 @@ class Purchase extends BaseController
         echo "success";
     }
 
+    public function autoReset()
+    {
+        ignore_user_abort(true);
+        $inventoryModel = new \App\Models\inventoryModel();
+        $date = date('Y-m-d');
+        $builder = $this->db->table('tblinventory');
+        $builder->select('inventID');
+        $builder->WHERE('ExpirationDate',$date);
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            $values = ['Qty'=>0];
+            $inventoryModel->update($row->inventID,$values);
+        }
+        echo "success";
+    }
+
     public function fetchSupplier()
     {
         $val = $this->request->getGet('value');

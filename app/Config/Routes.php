@@ -94,6 +94,7 @@ $routes->get('fetch-added-supplier','Purchase::fetchSupplier');
 $routes->post('add-entry','Purchase::addEntry');
 $routes->post('remove-item','Purchase::removeItem');
 $routes->post('save-form','Purchase::saveForm');
+$routes->get('auto-reset','Purchase::autoReset');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
