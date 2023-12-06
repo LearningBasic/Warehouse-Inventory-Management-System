@@ -469,7 +469,8 @@
 							</thead>
 							<tbody>
 								<?php if(session()->get('role')=="Administrator"){ ?>
-									<?php foreach($items as $row): if($row->Qty>$row->ReOrder){?>
+									<?php foreach($items as $row): 
+										if($row->Qty>$row->ReOrder){?>
 										<?php $imgURL = "Products/".$row->Image; ?>
 										<tr>
 											<td><?php echo $row->categoryName ?></td>
@@ -517,7 +518,13 @@
 											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
-											<td><span class='badge bg-warning text-white'>Critical</span></td>
+											<td>
+												<?php if($row->Qty==0){ ?>
+													<span class='badge bg-danger text-white'>Out-of-Stock</span>
+												<?php }else {?>
+													<span class='badge bg-warning text-white'>Critical</span>
+												<?php } ?>
+											</td>
 											<td><?php echo $row->ExpirationDate ?></td>
 											<td><?php echo $row->warehouseName ?></td>
 											<td>
@@ -534,40 +541,11 @@
 												</div>
 											</td>
 										</tr>
-										<?php }if($row->Qty==0){ ?>
-											<?php $imgURL = "Products/".$row->Image; ?>
-											<tr>
-											<td><?php echo $row->categoryName ?></td>
-											<td><?php echo $row->productID ?></td>
-											<td>
-												<div class="name-avatar d-flex align-items-center">
-													<div class="avatar mr-2 flex-shrink-0">
-														<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
-													</div>
-													<div class="txt"><?php echo $row->productName ?></div>
-												</div>
-											</td>
-											<td><?php echo number_format($row->unitPrice,2) ?></td>
-											<td><?php echo number_format($row->Qty,0) ?></td>
-											<td><span class='badge bg-danger text-white'>Out-of-Stock</span></td>
-											<td><?php echo $row->ExpirationDate ?></td>
-											<td><?php echo $row->warehouseName ?></td>
-											<td>
-												<div class="dropdown">
-													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-														href="#" role="button" data-toggle="dropdown">
-														<i class="dw dw-more"></i>
-													</a>
-													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
-														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
-													</div>
-												</div>
-											</td>
-										</tr>	
 										<?php } ?>
 									<?php endforeach; ?>
 								<?php }else{ ?>
-									<?php foreach($items as $row): if($row->Qty>$row->ReOrder){?>
+									<?php foreach($items as $row): 
+										if($row->Qty>$row->ReOrder){?>
 										<?php $imgURL = "Products/".$row->Image; ?>
 										<tr>
 											<td><?php echo $row->categoryName ?></td>
@@ -602,31 +580,17 @@
 											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
-											<td><span class='badge bg-warning text-white'>Critical</span></td>
+											<td>
+												<?php if($row->Qty==0){ ?>
+													<span class='badge bg-danger text-white'>Out-of-Stock</span>
+												<?php }else {?>
+													<span class='badge bg-warning text-white'>Critical</span>
+												<?php } ?>
+											</td>
 											<td><?php echo $row->ExpirationDate ?></td>
 											<td><?php echo $row->warehouseName ?></td>
 											<td>-</td>
 										</tr>
-										<?php }if($row->Qty==0){ ?>
-											<?php $imgURL = "Products/".$row->Image; ?>
-											<tr>
-											<td><?php echo $row->categoryName ?></td>
-											<td><?php echo $row->productID ?></td>
-											<td>
-												<div class="name-avatar d-flex align-items-center">
-													<div class="avatar mr-2 flex-shrink-0">
-														<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
-													</div>
-													<div class="txt"><?php echo $row->productName ?></div>
-												</div>
-											</td>
-											<td><?php echo number_format($row->unitPrice,2) ?></td>
-											<td><?php echo number_format($row->Qty,0) ?></td>
-											<td><span class='badge bg-danger text-white'>Out-of-Stock</span></td>
-											<td><?php echo $row->ExpirationDate ?></td>
-											<td><?php echo $row->warehouseName ?></td>
-											<td>-</td>
-										</tr>	
 										<?php } ?>
 									<?php endforeach; ?>
 								<?php } ?>

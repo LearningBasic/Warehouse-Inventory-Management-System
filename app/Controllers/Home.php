@@ -61,8 +61,7 @@ class Home extends BaseController
         $builder->join('tblsupplier c','c.supplierID=a.supplierID','LEFT');
         $builder->join('tblwarehouse d','d.warehouseID=a.warehouseID','LEFT');
         $builder->join('(select Image,inventID from tblimage GROUP BY inventID) e','e.inventID=a.inventID','LEFT');
-        $builder->groupby('a.warehouseID,a.inventID');
-        $builder->orderby('a.Date');
+        $builder->groupby('a.inventID');
         $items = $builder->get()->getResult();
         $data = ['items'=>$items];
         return view('all-stocks',$data);
