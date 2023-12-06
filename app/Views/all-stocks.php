@@ -457,6 +457,7 @@
                         <?php endif; ?>
 						<table class="data-table table stripe hover nowrap">
 							<thead>
+								<th>Image</th>
 								<th>Item Group</th>
 								<th>Product ID</th>
 								<th>Product Name</th>
@@ -464,7 +465,6 @@
 								<th>Qty</th>
 								<th>Status</th>
 								<th>Expiration</th>
-								<th>Location</th>
 								<th>Action</th>
 							</thead>
 							<tbody>
@@ -473,21 +473,20 @@
 										if($row->Qty>$row->ReOrder){?>
 										<?php $imgURL = "Products/".$row->Image; ?>
 										<tr>
+											<td>
+												<button type="button" class="btn avatar mr-2 flex-shrink-0" value="<?php echo $row->inventID ?>">
+													<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
+												</button>
+											</td>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
 											<td>
-												<div class="name-avatar d-flex align-items-center">
-													<div class="avatar mr-2 flex-shrink-0">
-														<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
-													</div>
-													<div class="txt"><?php echo $row->productName ?></div>
-												</div>
+												<div class="txt"><?php echo $row->productName ?></div>
 											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><span class='badge bg-success text-white'>Available</span></td>
 											<td><?php echo $row->ExpirationDate ?></td>
-											<td><?php echo $row->warehouseName ?></td>
 											<td>
 												<div class="dropdown">
 													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
@@ -506,15 +505,15 @@
 										<?php }else if($row->Qty<=$row->ReOrder){?>
 										<?php $imgURL = "Products/".$row->Image; ?>
 										<tr>
+											<td>
+												<button type="button" class="btn avatar mr-2 flex-shrink-0" value="<?php echo $row->inventID ?>">
+													<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
+												</button>
+											</td>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
 											<td>
-												<div class="name-avatar d-flex align-items-center">
-													<div class="avatar mr-2 flex-shrink-0">
-														<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
-													</div>
-													<div class="txt"><?php echo $row->productName ?></div>
-												</div>
+												<div class="txt"><?php echo $row->productName ?></div>
 											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
@@ -526,7 +525,6 @@
 												<?php } ?>
 											</td>
 											<td><?php echo $row->ExpirationDate ?></td>
-											<td><?php echo $row->warehouseName ?></td>
 											<td>
 												<div class="dropdown">
 													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
@@ -548,35 +546,34 @@
 										if($row->Qty>$row->ReOrder){?>
 										<?php $imgURL = "Products/".$row->Image; ?>
 										<tr>
+											<td>
+												<button type="button" class="btn avatar mr-2 flex-shrink-0" value="<?php echo $row->inventID ?>">
+													<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
+												</button>
+											</td>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
 											<td>
-												<div class="name-avatar d-flex align-items-center">
-													<div class="avatar mr-2 flex-shrink-0">
-														<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
-													</div>
-													<div class="txt"><?php echo $row->productName ?></div>
-												</div>
+												<div class="txt"><?php echo $row->productName ?></div>
 											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><span class='badge bg-success text-white'>Available</span></td>
 											<td><?php echo $row->ExpirationDate ?></td>
-											<td><?php echo $row->warehouseName ?></td>
 											<td>-</td>
 										</tr>
 										<?php }else if($row->Qty<=$row->ReOrder){?>
 											<?php $imgURL = "Products/".$row->Image; ?>
 										<tr>
+											<td>
+												<button type="button" class="btn avatar mr-2 flex-shrink-0" value="<?php echo $row->inventID ?>">
+													<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
+												</button>
+											</td>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
 											<td>
-												<div class="name-avatar d-flex align-items-center">
-													<div class="avatar mr-2 flex-shrink-0">
-														<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
-													</div>
-													<div class="txt"><?php echo $row->productName ?></div>
-												</div>
+												<div class="txt"><?php echo $row->productName ?></div>
 											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
@@ -588,7 +585,6 @@
 												<?php } ?>
 											</td>
 											<td><?php echo $row->ExpirationDate ?></td>
-											<td><?php echo $row->warehouseName ?></td>
 											<td>-</td>
 										</tr>
 										<?php } ?>
@@ -670,6 +666,22 @@
                 </div>
             </div>
         </div>
+
+		<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            View Image
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+						<div id="result"></div> 
+                    </div>
+                </div>
+            </div>
+        </div>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
@@ -684,6 +696,19 @@
 			$(document).ready(function()
 			{
 				notify();
+			});
+			$(document).on('click','.avatar',function(e){
+				e.preventDefault();
+				var val = $(this).val();
+				$.ajax({
+					url:"<?=site_url('view-images')?>",method:"GET",
+					data:{value:val},
+					success:function(response)
+					{
+						$('#viewModal').modal('show');
+						$('#result').html(response);
+					}
+				});
 			});
 			$(document).on('click','.deadstock',function(e){
 				e.preventDefault();

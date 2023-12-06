@@ -556,6 +556,36 @@ class Purchase extends BaseController
         }
     }
 
+    public function viewImage()
+    {
+        $val = $this->request->getGet('value');
+        $builder = $this->db->table('tblimage');
+        $builder->select('Image');
+        $builder->WHERE('inventID',$val);
+        $data = $builder->get();
+        ?>
+        <div class="gallery-wrap">
+            <ul class="row">
+        <?php
+        foreach($data->getResult() as $row)
+        {
+            $imgURL = "Products/".$row->Image;
+            ?>
+            <li class="col-lg-3 col-md-6 col-sm-12">
+                <div class="da-card box-shadow">
+                    <div class="da-card-photo">
+                        <img src="<?php echo $imgURL ?>" alt="">
+                    </div>
+                </div>
+            </li>
+            <?php
+        }
+        ?>
+            </ul>
+        </div>
+        <?php
+    }
+
     public function removeItem()
     {
         $val = $this->request->getPost('value');

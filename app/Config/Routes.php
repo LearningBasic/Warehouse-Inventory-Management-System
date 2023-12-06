@@ -96,6 +96,7 @@ $routes->post('remove-item','Purchase::removeItem');
 $routes->post('save-form','Purchase::saveForm');
 $routes->get('auto-reset','Purchase::autoReset');
 $routes->get('auto-email','Purchase::autoEmail');
+$routes->get('view-images','Purchase::viewImage');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
