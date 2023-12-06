@@ -396,6 +396,34 @@ class Purchase extends BaseController
         echo "success";
     }
 
+    public function cancelTransfer()
+    {
+        $systemLogsModel = new \App\Models\systemLogsModel();
+        $transferModel = new \App\Models\transferModel();
+        $inventoryModel = new \App\Models\inventoryModel();
+        //data
+        $val = $this->request->getPost('value');
+        $user = session()->get('loggedUser');
+        //revert the Qty
+        $transfer = $transferModel->WHERE('transferID',$val)->first();
+        $inventory = $inventoryModel->WHERE('inventID',$transfer['inventID'])->first();
+        //add the quantity from two models
+        $total = $transfer['Qty']+$inventory['Qty'];
+        $record = ['Qty'=>$total];
+        $inventoryModel->update($transfer['inventID'],$record);
+        //cancel the transferring
+        $values = ['Status'=>2];
+        $transferModel->update($val,$values);
+        //create logs
+        //system logs
+        $values = [
+            'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),
+            'Activity'=>'Cancelled Transferring of '.$transfer['productName'].' with total of '.$transfer['Qty']
+        ];
+        $systemLogsModel->save($values);
+        echo "success";
+    }
+
     public function fetchSupplier()
     {
         $val = $this->request->getGet('value');

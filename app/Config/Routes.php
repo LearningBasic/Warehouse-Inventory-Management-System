@@ -89,6 +89,7 @@ $routes->get('notification','Purchase::notification');
 $routes->get('view-purchase','Purchase::viewPurchase');
 $routes->post('accept','Purchase::Accept');
 $routes->post('cancel','Purchase::Cancel');
+$routes->post('cancel-transfer','Purchase::cancelTransfer');
 $routes->get('fetch-added-supplier','Purchase::fetchSupplier');
 $routes->post('add-entry','Purchase::addEntry');
 $routes->post('remove-item','Purchase::removeItem');

@@ -607,6 +607,7 @@
 											<th>Status</th>
 											<th>Delivery via</th>
 											<th>Track #/Driver</th>
+											<th><span class="dw dw-more"></span></th>
 										</thead>
 										<tbody>
 											<?php if($transfer): ?>
@@ -621,9 +622,14 @@
 														<td><span class="badge bg-warning text-white">For Delivery</span></td>
 														<td><?php echo $row->cargo_type ?></td>
 														<td><?php echo $row->TrackingNumber ?><?php echo $row->Driver ?></td>
+														<td>
+															<button type="button" class="btn btn-danger btn-sm cancel" value="<?php echo $row->transferID ?>">
+															Cancel
+															</button>
+														</td>
 													</tr>
-													<?php }else{ ?>
-														<tr>
+													<?php }else if($row->Status==1){ ?>
+													<tr>
 														<td><?php echo $row->datePrepared ?></td>
 														<td><?php echo $row->productID ?></td>
 														<td><?php echo $row->productName ?></td>
@@ -632,6 +638,19 @@
 														<td><span class="badge bg-success text-white">Delivered</span></td>
 														<td><?php echo $row->cargo_type ?></td>
 														<td><?php echo $row->TrackingNumber ?><?php echo $row->Driver ?></td>
+														<td>-</td>
+													</tr>
+													<?php }else if($row->Status==2){ ?>
+													<tr>
+														<td><?php echo $row->datePrepared ?></td>
+														<td><?php echo $row->productID ?></td>
+														<td><?php echo $row->productName ?></td>
+														<td><?php echo number_format($row->Qty,0) ?></td>
+														<td><?php echo $row->dateEffective ?></td>
+														<td><span class="badge bg-danger text-white">Cancelled</span></td>
+														<td><?php echo $row->cargo_type ?></td>
+														<td><?php echo $row->TrackingNumber ?><?php echo $row->Driver ?></td>
+														<td></td>
 													</tr>
 													<?php } ?>
 												<?php endforeach; ?>
@@ -717,6 +736,7 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script>
 			$(document).ready(function()
 			{
@@ -771,6 +791,37 @@
 						}
 						$('#frmReport').css("opacity","");
 						$("#btnSend").removeAttr("disabled");
+					}
+				});
+			});
+			$(document).on('click','.cancel',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to cancel this selected request?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						$.ajax({
+							url:"<?=site_url('cancel-transfer')?>",method:"POST",
+							data:{value:val},success:function(response)
+							{
+								if(response==="success")
+								{
+									location.reload();
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
 					}
 				});
 			});
