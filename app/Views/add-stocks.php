@@ -508,7 +508,7 @@
                                         </select>
                                     </div>
 									<div class="col-lg-3">
-										<label>Location</label>
+										<label>Location (Optional)</label>
 										<input type="text" class="form-control" name="location"/>
 									</div>
                                 </div>
@@ -520,7 +520,7 @@
 										<input type="text" class="form-control" name="item_number" required/>
 									</div>
 									<div class="col-lg-6">
-										<label>Serial No</label>
+										<label>Serial No (Optional)</label>
 										<input type="text" class="form-control" name="productCode"/>
 									</div>
 								</div>
@@ -563,13 +563,14 @@
 											<option>M</option><option>PC</option><option>PT</option>
 											<option>PP</option><option>LB</option><option>QT</option>
 											<option>RCK</option><option>RM</option><option>RE</option>
-											<option>ROD</option><option>RL</option><option>SAC</option>
-											<option>SVC</option><option>ST</option><option>SHT</option>
-											<option>SLV</option><option>SFT</option><option>SYD</option>
-											<option>STK</option><option>TST</option><option>THR</option>
-											<option>TON</option><option>TRP</option><option>TUB</option>
-											<option>TB</option><option>UNT</option><option>VIL</option>
-											<option>WK</option><option>YD</option><option>YR</option>
+											<option>ROD</option><option>RIM<option>RL</option>
+											<option>SAC</option><option>SVC</option><option>SET</option>
+											<option>ST</option><option>SHT</option><option>SLV</option>
+											<option>SFT</option><option>SYD</option><option>STK</option>
+											<option>TST</option><option>THR</option><option>TON</option>
+											<option>TRP</option><option>TUB</option><option>TB</option>
+											<option>UNT</option><option>VIL</option><option>WK</option>
+											<option>YD</option><option>YR</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
@@ -585,7 +586,7 @@
                                         <input type="number" class="form-control" name="reOrder" required/>
                                     </div>
                                     <div class="col-lg-3">
-                                        <label>Expiration Date</label>
+                                        <label>Expiration Date (Optional)</label>
                                         <input type="date" class="form-control" name="expirationDate"/>
                                     </div>
                                 </div>
