@@ -314,7 +314,7 @@ class ProductController extends BaseController
         $delivery = $this->request->getPost('delivery');
         $track_num = $this->request->getPost('track_number');
         $driver = $this->request->getPost('driver');
-        $plate_num = $this->request->getPost('plate_number');
+        $plate_num = $this->request->getPost('plate_number'); 
 
         $validation = $this->validate([
             'itemNumber'=>'required','productName'=>'required','datePrepared'=>'required',
@@ -368,7 +368,7 @@ class ProductController extends BaseController
                     'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'datePrepared'=>$datePrepared,
                     'dateEffective'=>$dateEffective,'warehouseID'=>$warehouse,'categoryID'=>$categoryID,
                     'supplierID'=>$supplierID,'ExpirationDate'=>$expirationDate,'Status'=>0,'Department'=>$dept,
-                    'cargo_type','Driver','Plate_number','TrackingNumber',
+                    'cargo_type'=>$delivery,'Driver'=>$driver,'Plate_number'=>$plate_num,'TrackingNumber'=>$track_num,
                     'accountID'=>session()->get('loggedUser')];
                     $transferModel->save($values);
 

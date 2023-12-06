@@ -488,7 +488,7 @@
                                     <div class="col-lg-3">
                                         <label>Supplier's Name</label>
                                         <select class="form-control" id="supplier" name="supplier">
-                                            <option value="0">Choose</option>
+                                            <option value="0">No Supplier</option>
                                             <?php if($supplier): ?>
                                                 <?php foreach($supplier as $row): ?>
                                                     <option value="<?php echo $row->supplierID ?>"><?php echo $row->supplierName ?></option>
