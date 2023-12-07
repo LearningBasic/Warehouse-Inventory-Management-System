@@ -549,11 +549,11 @@
 													<input type="date" class="form-control" name="to"/>
 												</div>
 												<div class="col-lg-3 form-group">
-                                                    <label>User Accounts</label>
-                                                    <select class="form-control" name="accounts">
+                                                    <label>Warehouse/Vessel</label>
+                                                    <select class="form-control" name="location">
                                                         <option value="">Choose</option>
-                                                        <?php foreach($account as $row): ?>
-                                                            <option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?></option>
+                                                        <?php foreach($location as $row): ?>
+                                                            <option value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
                                                 </div>
@@ -574,6 +574,7 @@
                                             <th>On-Hand</th>
                                             <th>Actual</th>
                                             <th>Variances</th>
+											<th>Total</th>
                                         </thead>
                                         <tbody id="tblvariances">
 
@@ -654,7 +655,7 @@
 			$('#btnGenerate').on('click',function(e)
             {
                 e.preventDefault();
-                $('#tblvariances').html("<tr><td colspan='6'><center>Loading data...</center></td></tr>");
+                $('#tblvariances').html("<tr><td colspan='7'><center>Loading data...</center></td></tr>");
                 var data = $('#frmReport').serialize();
                 $.ajax({
                     url:"<?=site_url('search-inventory')?>",method:"GET",
@@ -662,7 +663,7 @@
                     {
                         if(response==="")
                         {
-                            $('#tblvariances').html("<tr><td colspan='6'><center>No Data</center></td></tr>");
+                            $('#tblvariances').html("<tr><td colspan='7'><center>No Data</center></td></tr>");
                         }
                         else
                         {
