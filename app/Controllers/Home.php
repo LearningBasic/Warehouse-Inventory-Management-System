@@ -836,6 +836,8 @@ class Home extends BaseController
     public function saveStocks()
     {
         $stockModel = new \App\Models\stocksModel();
+        $inventoryModel = new \App\Models\inventoryModel();
+        $systemLogsModel = new \App\Models\systemLogsModel();
         //data
         $product = $this->request->getPost('product');
         $date = date('Y-m-d');
@@ -864,6 +866,17 @@ class Home extends BaseController
                 'UnitPrice'=>$unitPrice,'TotalPrice'=>$totalPrice,'Details'=>$details,'accountID'=>$user
             ];
             $stockModel->save($values);
+            //update the stocks
+            $inventory = $inventoryModel->WHERE('inventID',$product)->first();
+            $newQty = $inventory['Qty']+$num_stocks;
+            $value = ['Qty'=>$newQty];
+            $inventoryModel->update($product,$value);
+            //save logs
+            $records = [
+                'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Added stocks to '.$inventory['productName']
+            ];
+            $systemLogsModel->save($records);
+
             session()->setFlashdata('success',"Great! Successfully submitted");
             return redirect()->to('/manage')->withInput();
         }
