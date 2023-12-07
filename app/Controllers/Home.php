@@ -134,8 +134,12 @@ class Home extends BaseController
         $builder = $this->db->table('tbltransferitem');
         $builder->select('*');
         $transfer = $builder->get()->getResult();
+        //products
+        $builder = $this->db->table('tblinventory');
+        $builder->select('*');
+        $product = $builder->get()->getResult();
 
-        $data = ['items'=>$item,'archive'=>$archive,'transfer'=>$transfer,];
+        $data = ['items'=>$item,'archive'=>$archive,'transfer'=>$transfer,'product'=>$product];
         return view('manage-stocks',$data);
     }
 

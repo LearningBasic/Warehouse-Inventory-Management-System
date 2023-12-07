@@ -672,9 +672,39 @@
 									<form method="post" class="row g-3" id="frmStock">
 										<div class="col-12 form-group">
 											<label>Product Name</label>
-											<select class="form-control" name="product">
+											<select class="form-control custom-select2" name="product" style="width:100%;" required>
 												<option value="">Choose</option>
+												<?php foreach($product as $row): ?>
+													<option value="<?php echo $row->inventID ?>"><?php echo $row->productName ?></option>
+												<?php endforeach; ?>
 											</select>
+										</div>
+										<div class="col-12 form-group">
+											<div class="row g-3">
+												<div class="col-lg-3">
+													<label>Date Added</label>
+													<input type="date" class="form-control" name="dateAdded" value="<?php echo date('Y-m-d') ?>" required/>
+												</div>
+												<div class="col-lg-3">
+													<label>Number of Stocks</label>
+													<input type="number" class="form-control" name="num_stocks" required/>
+												</div>
+												<div class="col-lg-3">
+													<label>Unit Price</label>
+													<input type="text" class="form-control" name="unitPrice" id="unitPrice" required/>
+												</div>
+												<div class="col-lg-3">
+													<label>Total Price</label>
+													<input type="text" class="form-control" name="totalPrice" id="totalPrice" required/>
+												</div>
+											</div>
+										</div>
+										<div class="col-12 form-group">
+											<label>Details/Reason</label>
+											<textarea class="form-control" name="details" required></textarea>
+										</div>
+										<div class="col-12 form-group">
+											<input type="submit" class="btn btn-primary" id="btnSave" value="Save Entry"/>
 										</div>
 									</form>
 								</div>
