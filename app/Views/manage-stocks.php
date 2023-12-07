@@ -669,7 +669,7 @@
 								</div>
 								<div class="tab-pane fade" id="addstock" role="tabpanel">
 									<br/>
-									<form method="post" class="row g-3" id="frmStock">
+									<form method="post" class="row g-3" id="frmStock" action="<?=base_url('save-stocks')?>">
 										<div class="col-12 form-group">
 											<label>Product Name</label>
 											<select class="form-control custom-select2" name="product" style="width:100%;" required>

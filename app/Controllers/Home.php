@@ -832,4 +832,9 @@ class Home extends BaseController
         $data = ['review'=>$review];
         return view('approver',$data);
     }
+
+    public function saveStocks()
+    {
+        
+    }
 }
