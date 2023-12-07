@@ -896,4 +896,31 @@ class Home extends BaseController
             return redirect()->to('/manage')->withInput();
         }
     }
+
+    public function removeCategory()
+    {
+        $val = $this->request->getPost('value');
+        $builder = $this->db->table('tblcategory');
+        $builder->WHERE('categoryID',$val);
+        $builder->delete();
+        echo "success";
+    }
+
+    public function removeLocation()
+    {
+        $val = $this->request->getPost('value');
+        $builder = $this->db->table('tblwarehouse');
+        $builder->WHERE('warehouseID',$val);
+        $builder->delete();
+        echo "success";
+    }
+
+    public function removeIndustry()
+    {
+        $val = $this->request->getPost('value');
+        $builder = $this->db->table('tblindustry');
+        $builder->WHERE('industryID',$val);
+        $builder->delete();
+        echo "success";
+    }
 }
