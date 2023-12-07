@@ -469,13 +469,22 @@
 									<a
 										class="nav-link text-blue"
 										data-toggle="tab"
+										href="#addstock"
+										role="tab"
+										aria-selected="false"
+										>Add Stocks</a
+									>
+								</li>
+								<li class="nav-item">
+									<a
+										class="nav-link text-blue"
+										data-toggle="tab"
 										href="#contact6"
 										role="tab"
 										aria-selected="false"
 										>Return Order(s)</a
 									>
 								</li>
-
 							</ul>
 							<div class="tab-content">
 								<!-- <div class="tab-pane fade show active" id="home6" role="tabpanel">
@@ -657,6 +666,17 @@
 											<?php endif; ?>
 										</tbody>
 									</table>
+								</div>
+								<div class="tab-pane fade" id="addstock" role="tabpanel">
+									<br/>
+									<form method="post" class="row g-3" id="frmStock">
+										<div class="col-12 form-group">
+											<label>Product Name</label>
+											<select class="form-control" name="product">
+												<option value="">Choose</option>
+											</select>
+										</div>
+									</form>
 								</div>
 								<div class="tab-pane fade" id="contact6" role="tabpanel">
 
