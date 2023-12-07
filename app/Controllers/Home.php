@@ -846,7 +846,26 @@ class Home extends BaseController
         $user = session()->get('loggedUser');
 
         $validation = $this->validate([
-            
+           'product'=>'required',
+           'num_stocks'=>'required',
+           'unitPrice'=>'required',
+           'totalPrice'=>'required',
+           'details'=>'required' 
         ]);
+        if(!$validation)
+        {
+            session()->setFlashdata('fail',"Invalid! Please fill in the form");
+            return redirect()->to('/manage')->withInput();
+        }
+        else
+        {
+            $values = [
+                'DateAdded'=>$date,'inventID'=>$product,'Qty'=>$num_stocks,
+                'UnitPrice'=>$unitPrice,'TotalPrice'=>$totalPrice,'Details'=>$details,'accountID'=>$user
+            ];
+            $stockModel->save($values);
+            session()->setFlashdata('success',"Great! Successfully submitted");
+            return redirect()->to('/manage')->withInput();
+        }
     }
 }
