@@ -793,7 +793,6 @@
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <!-- <script src="assets/ajax/system-config.js"></script> -->
         <script>
             $(document).ready(function(){listIndustry();listCategory();listWarehouse();assignment();notify();});
             function listCategory(){$.ajax({url:"<?=site_url('list-category')?>",method:"GET",success:function(response){$('#listcategory').html(response);}});}
@@ -869,6 +868,99 @@
                     }
                 });
             });
+			$(document).on('click','.removeIndustry',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to remove this selected industry?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						$.ajax({
+							url:"<?=site_url('remove-industry')?>",method:"POST",
+							data:{value:val},success:function(response)
+							{
+								if(response==="success")
+								{
+									listIndustry();
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
+					}
+				});
+			});
+			$(document).on('click','.removeLocation',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to remove this selected assignment?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						$.ajax({
+							url:"<?=site_url('remove-location')?>",method:"POST",
+							data:{value:val},success:function(response)
+							{
+								if(response==="success")
+								{
+									listWarehouse();
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
+					}
+				});
+			});
+			$(document).on('click','.removeCategory',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to remove this selected category?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						$.ajax({
+							url:"<?=site_url('remove-category')?>",method:"POST",
+							data:{value:val},success:function(response)
+							{
+								if(response==="success")
+								{
+									listCategory();
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
+					}
+				});
+			});
         </script>
 	</body>
 </html>
