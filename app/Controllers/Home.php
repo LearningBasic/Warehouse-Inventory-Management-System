@@ -835,6 +835,18 @@ class Home extends BaseController
 
     public function saveStocks()
     {
-        
+        $stockModel = new \App\Models\stocksModel();
+        //data
+        $product = $this->request->getPost('product');
+        $date = date('Y-m-d');
+        $num_stocks = $this->request->getPost('num_stocks');
+        $unitPrice = $this->request->getPost('unitPrice');
+        $totalPrice = $this->request->getPost('totalPrice');
+        $details = $this->request->getPost('details');
+        $user = session()->get('loggedUser');
+
+        $validation = $this->validate([
+            
+        ]);
     }
 }
