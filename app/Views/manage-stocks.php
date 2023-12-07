@@ -692,7 +692,7 @@
 												</div>
 												<div class="col-lg-3">
 													<label>Number of Stocks</label>
-													<input type="number" class="form-control" name="num_stocks" required/>
+													<input type="number" class="form-control" name="num_stocks" id="num_stocks" required/>
 												</div>
 												<div class="col-lg-3">
 													<label>Unit Price</label>
@@ -796,6 +796,13 @@
 			$(document).ready(function()
 			{
 				notify();
+			});
+			$('#unitPrice').keyup(function()
+			{
+				var val = $(this).val();
+				var qty = $('#num_stocks').val();
+				var total = qty*val;
+				$('#totalPrice').attr("value",total);
 			});
 			function notify()
 			{
