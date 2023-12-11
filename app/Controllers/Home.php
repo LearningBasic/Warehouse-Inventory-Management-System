@@ -965,4 +965,13 @@ class Home extends BaseController
             echo "success";
         }
     }
+
+    public function acceptAssignment()
+    {
+        $assignmentModel = new \App\Models\assignmentModel();
+        $val = $this->request->getPost('value');
+        $values = ['Status'=>1];
+        $assignmentModel->update($val,$values);
+        echo "success";
+    }
 }
