@@ -845,6 +845,7 @@ class Home extends BaseController
         $builder->select('a.*,c.Fullname');
         $builder->join('tblassignment b','b.prfID=a.prfID','LEFT');
         $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
+        $builder->WHERE('a.Status',3);
         $assign = $builder->get()->getResult();
         $data = ['review'=>$review,'assign'=>$assign];
         return view('approver',$data);

@@ -503,13 +503,21 @@
 										<thead>
 											<th>Date Created</th>
 											<th>PRF No</th>
-											<th>Requestor</th>
+											<th>Department</th>
 											<th>Reason</th>
 											<th>Date Needed</th>
 											<th>Assigned To</th>
 										</thead>
 										<tbody>
 											<?php foreach($assign as $row): ?>
+												<tr>
+													<td><?php echo $row->DatePrepared ?></td>
+													<td><button type="button" class="btn btn-link btn-sm assign" value="<?php echo $row->prfID ?>"><?php echo $row->OrderNo ?></button></td>
+													<td><?php echo $row->Department ?></td>
+													<td><?php echo $row->Reason ?></td>
+													<td><?php echo $row->DateNeeded ?></td>
+													<td><?php echo $row->Fullname ?></td>
+												</tr>
 											<?php endforeach; ?>
 										</tbody>
 									</table>
@@ -562,6 +570,12 @@
 					}
 				});
 			}
+			$(document).on('click','.assign',function(e)
+			{
+				e.preventDefault();
+				var val = $(this).val();
+				alert(val);
+			});
 			$(document).on('click','.accept',function(e)
 			{
 				e.preventDefault();
