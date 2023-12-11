@@ -470,7 +470,16 @@ class Home extends BaseController
 
     public function Assign()
     {
-        return view('assign');
+        $user = session()->get('loggedUser');
+        $builder = $this->db->table('tblassignment a');
+        $builder->select('a.Status,b.prfID,b.OrderNo,b.DatePrepared,b.DateNeeded,b.Reason,b.Department,c.Fullname');
+        $builder->join('tblprf b','b.prfID=a.prfID','LEFT');
+        $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
+        $builder->WHERE('a.accountID',$user);
+        $builder->groupby('a.assignID');
+        $list = $builder->get()->getResult();
+        $data = ['list'=>$list];
+        return view('assign',$data);
     }
 
     public function changePassword()
