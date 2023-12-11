@@ -132,6 +132,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/profile','Home::profile');
     //reports
     $routes->get('/report-stocks','Home::stocksReport');
+    $routes->get('/assign','Home::Assign');
 });
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {

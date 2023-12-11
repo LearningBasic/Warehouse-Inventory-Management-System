@@ -468,6 +468,11 @@ class Home extends BaseController
         return view('profile',$data);
     }
 
+    public function Assign()
+    {
+        return view('assign');
+    }
+
     public function changePassword()
     {
         $accountModel = new \App\Models\accountModel();
