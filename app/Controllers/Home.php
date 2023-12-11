@@ -687,9 +687,6 @@ class Home extends BaseController
                     </div>
                 </div>
                 <div class="cta flex-shrink-0">
-                    <button type="button" class="btn btn-sm btn-outline-primary editIndustry" value="<?php echo $row->industryID ?>">
-                        <i class="icon-copy dw dw-pencil"></i>
-                    </button>
                     <button type="button" class="btn btn-sm btn-outline-danger removeIndustry" value="<?php echo $row->industryID ?>">
                         <i class="icon-copy dw dw-delete-3"></i>
                     </button>
@@ -717,9 +714,6 @@ class Home extends BaseController
                     </div>
                 </div>
                 <div class="cta flex-shrink-0">
-                    <button type="button" class="btn btn-sm btn-outline-primary editCategory" value="<?php echo $row->categoryID ?>">
-                        <i class="icon-copy dw dw-pencil"></i>
-                    </button>
                     <button type="button" class="btn btn-sm btn-outline-danger removeCategory" value="<?php echo $row->categoryID ?>">
                         <i class="icon-copy dw dw-delete-3"></i>
                     </button>
@@ -747,9 +741,6 @@ class Home extends BaseController
                     </div>
                 </div>
                 <div class="cta flex-shrink-0">
-                    <button type="button" class="btn btn-sm btn-outline-primary editLocation" value="<?php echo $row->warehouseID ?>">
-                        <i class="icon-copy dw dw-pencil"></i>
-                    </button>
                     <button type="button" class="btn btn-sm btn-outline-danger removeLocation" value="<?php echo $row->warehouseID ?>">
                         <i class="icon-copy dw dw-delete-3"></i>
                     </button>
