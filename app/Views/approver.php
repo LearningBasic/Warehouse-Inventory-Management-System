@@ -507,6 +507,7 @@
 											<th>Reason</th>
 											<th>Date Needed</th>
 											<th>Assigned To</th>
+											<th>Status</th>
 										</thead>
 										<tbody>
 											<?php foreach($assign as $row): ?>
@@ -517,6 +518,13 @@
 													<td><?php echo $row->Reason ?></td>
 													<td><?php echo $row->DateNeeded ?></td>
 													<td><?php echo $row->Fullname ?></td>
+													<td>
+														<?php if($row->Status==0){ ?>
+															<span class="badge bg-warning text-white">PENDING</span>
+														<?php }else { ?>
+															<span class="badge bg-success text-white">DONE</span>
+														<?php } ?>													
+													</td>
 												</tr>
 											<?php endforeach; ?>
 										</tbody>
@@ -539,6 +547,35 @@
                     </div>
                     <div class="modal-body">
                         <div id="result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="modal fade" id="assignModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            Assigning PRF
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" class="row g-3" id="frmAssign">
+                            <input type="hidden" id="prfID" name="prfID"/>
+                            <div class="col-12 form-group">
+                                <label>Assign To</label>
+                                <select class="form-control custom-select2" name="receiver" id="receiver" style="width:100%;" required>
+									<option value="">Choose</option>
+									<?php foreach($account as $row): ?>
+										<option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?></option>
+									<?php endforeach; ?>
+								</select>
+                            </div>
+                            <div class="col-12 form-group">
+                                <button type="submit" class="btn btn-primary" id="btnSave">Submit</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -574,7 +611,8 @@
 			{
 				e.preventDefault();
 				var val = $(this).val();
-				alert(val);
+				$('#prfID').attr("value",val);
+				$('#assignModal').modal('show');
 			});
 			$(document).on('click','.accept',function(e)
 			{
@@ -664,6 +702,26 @@
 					{
 						$('#viewModal').modal('show');
 						$('#result').html(response);
+					}
+				});
+			});
+			$('#btnSave').on('click',function(e)
+			{
+				e.preventDefault();
+				var data = $('#frmAssign').serialize();
+				$.ajax({
+					url:"<?=site_url('add-assignment')?>",method:"POST",
+					data:data,
+					success:function(response)
+					{
+						if(response==="success")
+						{
+							location.reload();
+						}
+						else
+						{
+							alert(response);
+						}
 					}
 				});
 			});

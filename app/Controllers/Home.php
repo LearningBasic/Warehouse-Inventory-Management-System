@@ -842,12 +842,18 @@ class Home extends BaseController
         $review = $builder->get()->getResult();
         //assignment
         $builder = $this->db->table('tblprf a');
-        $builder->select('a.*,c.Fullname');
+        $builder->select('a.prfID,a.DatePrepared,a.Department,a.Reason,a.DateNeeded,a.OrderNo,c.Fullname,b.Status');
         $builder->join('tblassignment b','b.prfID=a.prfID','LEFT');
         $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
-        $builder->WHERE('a.Status',3);
+        $builder->WHERE('a.Status',3)->WHERE('PurchaseType','Regular Purchase');
         $assign = $builder->get()->getResult();
-        $data = ['review'=>$review,'assign'=>$assign];
+        //account
+        $builder = $this->db->table('tblaccount');
+        $builder->select('*');
+        $builder->WHERE('systemRole','Staff');
+        $account = $builder->get()->getResult();
+
+        $data = ['review'=>$review,'assign'=>$assign,'account'=>$account];
         return view('approver',$data);
     }
 
@@ -925,5 +931,29 @@ class Home extends BaseController
         $builder->WHERE('industryID',$val);
         $builder->delete();
         echo "success";
+    }
+
+    public function addAssignment()
+    {
+        $assignmentModel = new \App\Models\assignmentModel();
+        //data
+        $prf = $this->request->getPost('prfID');
+        $receiver = $this->request->getPost('receiver');
+
+        $validation = $this->validate([
+            'prfID'=>'is_unique[tblassignment.prfID]'
+        ]);
+        if(!$validation)
+        {
+            echo "Invalid! Already assigned";
+        }
+        else
+        {
+            $values = [
+                'prfID'=>$prf, 'accountID'=>$receiver,'Date'=>date('Y-m-d'),'Status'=>0
+            ];
+            $assignmentModel->save($values);
+            echo "success";
+        }
     }
 }
