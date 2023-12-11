@@ -439,16 +439,47 @@
                     <div class="card-body">
                         <table class="data-table table stripe hover nowrap">
                             <thead>
-                                <th>Date Reported</th>
-                                <th>Defect Type</th>
-                                <th>Product Name</th>
-                                <th>Qty</th>
-                                <th>Details</th>
-                                <th>Remarks</th>
+                                <th>Date Prepared</th>
+                                <th>PRF No</th>
+                                <th>Requestor</th>
+                                <th>Department</th>
+                                <th>Reason</th>
+                                <th>Date Needed</th>
                                 <th>Status</th>
+                                <th>Action</th>
                             </thead>
                             <tbody>
-                                
+                                <?php foreach($list as $row): ?>
+                                    <tr>
+                                        <td><?php echo $row->DatePrepared ?></td>
+                                        <td><?php echo $row->OrderNo ?></td>
+                                        <td><?php echo $row->Fullname ?></td>
+                                        <td><?php echo $row->Department ?></td>
+                                        <td><?php echo $row->Reason ?></td>
+                                        <td><?php echo $row->DateNeeded ?></td>
+                                        <td>
+                                            <?php if($row->Status==0){ ?>
+                                                <span class="badge bg-warning text-white">PENDING</span>
+                                            <?php }else{ ?>
+                                                <span class="badge bg-success text-white">DONE</span>
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <?php if($row->Status==0){ ?>
+                                                <button type="button" class="btn btn-outline-primary btn-sm accept" value="<?php echo $row->assignID ?>">
+                                                    <span class="dw dw-check"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-primary btn-sm view" value="<?php echo $row->OrderNo ?>">
+                                                    <span class="dw dw-eye"></span>
+                                                </button>
+                                            <?php }else{ ?>
+                                                <button type="button" class="btn btn-primary btn-sm view" value="<?php echo $row->OrderNo ?>">
+                                                    <span class="dw dw-eye"></span>
+                                                </button>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
