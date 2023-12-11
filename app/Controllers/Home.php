@@ -840,7 +840,13 @@ class Home extends BaseController
         $builder->WHERE('a.accountID',$user);
         $builder->groupBy('a.reviewID');
         $review = $builder->get()->getResult();
-        $data = ['review'=>$review];
+        //assignment
+        $builder = $this->db->table('tblprf a');
+        $builder->select('a.*,c.Fullname');
+        $builder->join('tblassignment b','b.prfID=a.prfID','LEFT');
+        $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
+        $assign = $builder->get()->getResult();
+        $data = ['review'=>$review,'assign'=>$assign];
         return view('approver',$data);
     }
 

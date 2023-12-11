@@ -509,7 +509,8 @@
 											<th>Assigned To</th>
 										</thead>
 										<tbody>
-
+											<?php foreach($assign as $row): ?>
+											<?php endforeach; ?>
 										</tbody>
 									</table>
 								</div>
