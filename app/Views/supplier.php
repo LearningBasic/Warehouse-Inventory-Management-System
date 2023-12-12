@@ -351,7 +351,6 @@
 							</a>
 							<ul class="submenu">
                                 <li><a href="<?=site_url('orders')?>">Order Materials</a></li>
-                                <li><a href="<?=site_url('payment')?>">For Payment</a></li>
 								<li><a href="<?=site_url('list-orders')?>">List Order</a></li>
 								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
 								<li><a href="<?=site_url('approve-orders')?>">For Approval&nbsp;<span class="badge badge-pill bg-primary text-white" id="notifications">0</span></a></li>
@@ -364,9 +363,6 @@
 							</a>
 							<ul class="submenu">
                                 <li><a href="<?=site_url('receiving-item')?>">Receiving Item</a></li>
-                                <li><a href="<?=site_url('storage')?>">Item Storage</a></li>
-                                <li><a href="<?=site_url('packaging')?>">Packaging</a></li>
-                                <li><a href="<?=site_url('shipping')?>">Shipping Items</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -392,9 +388,6 @@
 							</a>
 							<ul class="submenu">
                                 <li><a href="<?=site_url('report-stocks')?>">Stocks Report</a></li>
-								<li><a href="<?=site_url('report-purchase')?>">Purchasing Report</a></li>
-								<li><a href="<?=site_url('report-receive')?>">Receiving Report</a></li>
-								<li><a href="<?=site_url('report-suppliers')?>">Suppliers Report</a></li>
 							</ul>
 						</li>
 						<li>
