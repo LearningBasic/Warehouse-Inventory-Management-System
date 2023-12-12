@@ -455,12 +455,16 @@
                                         <input type="text" class="form-control" name="fullname" value="<?php echo $row->Fullname ?>" required/>
                                     </div>
 									<div class="col-12 form-group">
-                                        <label>Account Username</label>
-                                        <input type="text" class="form-control" name="fullname" value="<?php echo $row->username ?>" required/>
-                                    </div>
-									<div class="col-12 form-group">
-										<label>Assignment</label>
-                                    	<input type="text" class="form-control" value="<?php echo $row->warehouseName?>"/>
+										<div class="row g-3">
+											<div class="col-lg-6">
+												<label>Account Username</label>
+												<input type="text" class="form-control" name="fullname" value="<?php echo $row->username ?>" required/>
+											</div>
+											<div class="col-lg-6">
+												<label>Assignment</label>
+												<input type="text" class="form-control" value="<?php echo $row->warehouseName?>"/>
+											</div>
+										</div>
 									</div>
 									<div class="col-12 form-group">
 										<label>Address</label>
