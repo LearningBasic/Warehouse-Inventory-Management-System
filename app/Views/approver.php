@@ -428,7 +428,7 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header">PRF</div>
+					<div class="card-header">PRF (For Approval)</div>
 					<div class="card-body">
 						<div class="tabs">
 							<ul class="nav nav-pills justify-content-left" role="tablist">

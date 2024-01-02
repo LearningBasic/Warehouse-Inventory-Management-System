@@ -430,6 +430,17 @@
 				<div class="card-box">
 					<div class="card-header">Canvass Sheet</div>
 					<div class="card-body">
+                        <table class="data-table table stripe hover nowrap">
+                            <thead>
+                                <th>Date Received</th>
+                                <th>Reference No</th>
+                                <th>PRF No</th>
+                                <th>Department</th>
+                                <th>Date Needed</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </thead>
+                        </table>
 					</div>
 				</div>
 			</div>
