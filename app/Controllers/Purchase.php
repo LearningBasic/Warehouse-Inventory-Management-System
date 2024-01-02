@@ -490,7 +490,7 @@ class Purchase extends BaseController
         $builder = $this->db->table('tbl_order_item a');
         $builder->select('a.*,b.*');
         $builder->join('tblcanvass_sheet b','b.orderID=a.orderID','LEFT');
-        $builder->WHERE('b.OrderNo',$val);
+        $builder->WHERE('b.OrderNo',$val)->WHERE('b.Reference','');
         $builder->groupby('b.canvassID,a.orderID');
         $builder->orderby('b.orderID','ASC');
         $data = $builder->get();
@@ -610,12 +610,12 @@ class Purchase extends BaseController
 
         $validation = $this->validate([
             'datePrepared'=>'required','dateNeeded'=>'required',
-            'OrderNo'=>'required','department'=>'required',
+            'OrderNo'=>'required|is_unique[tblcanvass_form.OrderNo]','department'=>'required',
             'approver'=>'required',
         ]);
         if(!$validation)
         {
-            session()->setFlashdata('fail','Invalid! Please fill in the form to continue');
+            session()->setFlashdata('fail','Invalid! Please something went wrong. Please try again');
             return redirect()->to('/create/'.$OrderNo)->withInput();
         }
         else
@@ -629,7 +629,12 @@ class Purchase extends BaseController
                 $code = "CS".str_pad($row->total, 7, '0', STR_PAD_LEFT);
             }
             //save the records
-
+            $records = [
+                'Reference'=>$code, 'accountID'=>$requestor,'DatePrepared'=>$datePrepared,
+                'DateNeeded'=>$dateNeeded,'OrderNo'=>$OrderNo,'Department'=>$department,
+                'Status'=>0,'createdBy'=>$user
+            ];
+            $canvassForm->save($records);
             //update the list of vendors status and reference
             $builder = $this->db->table('tblcanvass_sheet');
             $builder->select('canvassID');
