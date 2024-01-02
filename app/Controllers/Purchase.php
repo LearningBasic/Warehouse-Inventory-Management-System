@@ -598,6 +598,7 @@ class Purchase extends BaseController
     public function saveForm()
     {
         $canvassForm = new \App\Models\canvasFormModel();
+        $canvassModel = new \App\Models\canvassModel();
         //data
         $user = session()->get('loggedUser');
         $datePrepared = $this->request->getPost('datePrepared');
@@ -614,7 +615,8 @@ class Purchase extends BaseController
         ]);
         if(!$validation)
         {
-            
+            session()->setFlashdata('fail','Invalid! Please fill in the form to continue');
+            return redirect()->to('/create/'.$OrderNo)->withInput();
         }
         else
         {
@@ -626,6 +628,22 @@ class Purchase extends BaseController
             {
                 $code = "CS".str_pad($row->total, 7, '0', STR_PAD_LEFT);
             }
+            //save the records
+
+            //update the list of vendors status and reference
+            $builder = $this->db->table('tblcanvass_sheet');
+            $builder->select('canvassID');
+            $builder->WHERE('OrderNo',$OrderNo);
+            $data = $builder->get();
+            foreach($data->getResult() as $row)
+            {
+                $values = [
+                    'Reference'=>$code
+                ];
+                $canvassModel->update($row->canvassID,$values);
+            }
+            session()->setFlashdata('success','Great! Successfully submitted to review');
+            return redirect()->to('/list-orders')->withInput();
         }
     }
 }
