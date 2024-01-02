@@ -513,6 +513,36 @@
 								</div>
 								<div class="tab-pane fade" id="profile6" role="tabpanel">
 									<br/>
+									<table class="data-table table stripe hover nowrap">
+										<thead>
+											<th>Date Prepared</th>
+											<th>Reference No</th>
+											<th>PRF No</th>
+											<th>Date Needed</th>
+											<th>Department</th>
+											<th>Status</th>
+										</thead>
+										<tbody>
+											<?php foreach($canvass as $row): ?>
+												<tr>
+													<td><?php echo $row->DatePrepared ?></td>
+													<td><?php echo $row->Reference ?></td>
+													<td><?php echo $row->OrderNo ?></td>
+													<td><?php echo $row->DateNeeded ?></td>
+													<td><?php echo $row->Department ?></td>
+													<td>
+														<?php if($row->Status==0){ ?>
+															<span class="badge bg-warning text-white">PENDING</span>
+														<?php }else if($row->Status==1){?>
+															<span class="badge bg-success text-white">APPROVED</span>
+														<?php }else { ?>
+															<span class="badge bg-danger text-white">CANCELLED</span>
+														<?php } ?>
+													</td>
+												</tr>
+											<?php endforeach; ?>
+										</tbody>	
+									</table>
 								</div>
 							</div>
 						</div>

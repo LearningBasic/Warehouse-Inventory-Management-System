@@ -599,6 +599,7 @@ class Purchase extends BaseController
     {
         $canvassForm = new \App\Models\canvasFormModel();
         $canvassModel = new \App\Models\canvassModel();
+        $reviewCanvassModel = new \App\Models\reviewCanvassModel();
         //data
         $user = session()->get('loggedUser');
         $datePrepared = $this->request->getPost('datePrepared');
@@ -607,6 +608,7 @@ class Purchase extends BaseController
         $department = $this->request->getPost('department');
         $deptHead = $this->request->getPost('approver');
         $requestor = $this->request->getPost('requestor');
+        $type_purchase = $this->request->getPost('type_purchase');
 
         $validation = $this->validate([
             'datePrepared'=>'required','dateNeeded'=>'required',
@@ -628,24 +630,34 @@ class Purchase extends BaseController
             {
                 $code = "CS".str_pad($row->total, 7, '0', STR_PAD_LEFT);
             }
-            //save the records
-            $records = [
-                'Reference'=>$code, 'accountID'=>$requestor,'DatePrepared'=>$datePrepared,
-                'DateNeeded'=>$dateNeeded,'OrderNo'=>$OrderNo,'Department'=>$department,
-                'Status'=>0,'createdBy'=>$user
-            ];
-            $canvassForm->save($records);
-            //update the list of vendors status and reference
-            $builder = $this->db->table('tblcanvass_sheet');
-            $builder->select('canvassID');
-            $builder->WHERE('OrderNo',$OrderNo);
-            $data = $builder->get();
-            foreach($data->getResult() as $row)
+            if($type_purchase=="Local Purchase")
             {
-                $values = [
-                    'Reference'=>$code
+                //save the records
+                $records = [
+                    'Reference'=>$code, 'accountID'=>$requestor,'DatePrepared'=>$datePrepared,
+                    'DateNeeded'=>$dateNeeded,'OrderNo'=>$OrderNo,'Department'=>$department,
+                    'Status'=>0,'createdBy'=>$user
                 ];
-                $canvassModel->update($row->canvassID,$values);
+                $canvassForm->save($records);
+                //update the list of vendors status and reference
+                $builder = $this->db->table('tblcanvass_sheet');
+                $builder->select('canvassID');
+                $builder->WHERE('OrderNo',$OrderNo);
+                $data = $builder->get();
+                foreach($data->getResult() as $row)
+                {
+                    $values = [
+                        'Reference'=>$code
+                    ];
+                    $canvassModel->update($row->canvassID,$values);
+                }
+                //send to approver
+                $value = ['accountID'=>$deptHead,'Reference'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>''];
+                $reviewCanvassModel->save($value);
+            }
+            else
+            {
+                
             }
             session()->setFlashdata('success','Great! Successfully submitted to review');
             return redirect()->to('/list-orders')->withInput();

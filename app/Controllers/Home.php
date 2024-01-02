@@ -818,8 +818,13 @@ class Home extends BaseController
         $builder->select('*');
         $builder->WHERE('accountID',$user);
         $orders = $builder->get()->getResult();
+        //canvass 
+        $builder = $this->db->table('tblcanvass_form');
+        $builder->select('*');
+        $builder->WHERE('accountID',$user);
+        $canvass = $builder->get()->getResult();
 
-        $data = ['orders'=>$orders];
+        $data = ['orders'=>$orders,'canvass'=>$canvass];
         return view('list-orders',$data);
     }
 
