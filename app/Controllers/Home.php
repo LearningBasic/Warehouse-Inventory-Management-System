@@ -821,7 +821,7 @@ class Home extends BaseController
         //canvass 
         $builder = $this->db->table('tblcanvass_form');
         $builder->select('*');
-        $builder->WHERE('accountID',$user);
+        $builder->WHERE('createdBy',$user);
         $canvass = $builder->get()->getResult();
 
         $data = ['orders'=>$orders,'canvass'=>$canvass];

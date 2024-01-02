@@ -175,9 +175,10 @@ class Purchase extends BaseController
 
     public function getEditor()
     {
+        $role = ['Editor','Administrator'];
         $builder = $this->db->table('tblaccount');
         $builder->select('*');
-        $builder->WHERE('Status',1)->WHERE('systemRole','Editor');
+        $builder->WHERE('Status',1)->WHEREIN('systemRole',$role)->WHERE('Department!=','');
         $data = $builder->get();
         foreach($data->getResult() as $row)
         {
@@ -657,7 +658,28 @@ class Purchase extends BaseController
             }
             else
             {
-                
+                //save the records
+                $records = [
+                    'Reference'=>$code, 'accountID'=>$requestor,'DatePrepared'=>$datePrepared,
+                    'DateNeeded'=>$dateNeeded,'OrderNo'=>$OrderNo,'Department'=>$department,
+                    'Status'=>0,'createdBy'=>$user
+                ];
+                $canvassForm->save($records);
+                //update the list of vendors status and reference
+                $builder = $this->db->table('tblcanvass_sheet');
+                $builder->select('canvassID');
+                $builder->WHERE('OrderNo',$OrderNo);
+                $data = $builder->get();
+                foreach($data->getResult() as $row)
+                {
+                    $values = [
+                        'Reference'=>$code,'Remarks'=>'Selected'
+                    ];
+                    $canvassModel->update($row->canvassID,$values);
+                }
+                //send to approver
+                $value = ['accountID'=>$deptHead,'Reference'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>''];
+                $reviewCanvassModel->save($value);
             }
             session()->setFlashdata('success','Great! Successfully submitted to review');
             return redirect()->to('/list-orders')->withInput();
