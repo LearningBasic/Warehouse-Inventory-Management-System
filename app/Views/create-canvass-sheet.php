@@ -436,11 +436,6 @@
 						<?= session()->getFlashdata('fail'); ?>
 					</div>
 				<?php endif; ?>
-				<?php if(!empty(session()->getFlashdata('success'))) : ?>
-					<div class="alert alert-success alert-dismissible fade show" role="alert">
-						<?= session()->getFlashdata('success'); ?>
-					</div>
-				<?php endif; ?>
                 <div class="card-box">
                     <div class="card-header">Create Canvass Sheet
 					<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addModal" style="float:right;"><i class="icon-copy dw dw-add"></i>&nbsp;Add</a>
@@ -448,6 +443,7 @@
                     <div class="card-body">
                         <?php foreach($prf as $row): ?>
                         <form method="post" class="row g-3" action="<?=base_url('save-form')?>" id="frmCanvass">
+							<input type="hidden" name="requestor" value="<?php echo $row->accountID ?>"/>
                             <div class="col-12 form-group">
                                 <div class="row g-3">
                                     <div class="col-lg-3">
@@ -489,7 +485,7 @@
                             </div>
 							<div class="col-12 form-group">
 								<label>Department/Division Head</label>
-								<select class="form-control custom-select2" name="approver" id="approver">
+								<select class="form-control custom-select2" name="approver" id="approver" required>
 									<option value="">Choose</option>
 								</select>
 							</div>

@@ -600,5 +600,32 @@ class Purchase extends BaseController
         $canvassForm = new \App\Models\canvasFormModel();
         //data
         $user = session()->get('loggedUser');
+        $datePrepared = $this->request->getPost('datePrepared');
+        $dateNeeded = $this->request->getPost('dateNeeded');
+        $OrderNo = $this->request->getPost('OrderNo');
+        $department = $this->request->getPost('department');
+        $deptHead = $this->request->getPost('approver');
+        $requestor = $this->request->getPost('requestor');
+
+        $validation = $this->validate([
+            'datePrepared'=>'required','dateNeeded'=>'required',
+            'OrderNo'=>'required','department'=>'required',
+            'approver'=>'required',
+        ]);
+        if(!$validation)
+        {
+            
+        }
+        else
+        {
+            $code="";
+            $builder = $this->db->table('tblcanvass_form');
+            $builder->select('COUNT(formID)+1 as total');
+            $code = $builder->get();
+            if($row  = $code->getRow())
+            {
+                $code = "CS".str_pad($row->total, 7, '0', STR_PAD_LEFT);
+            }
+        }
     }
 }
