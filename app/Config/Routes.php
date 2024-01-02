@@ -131,6 +131,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/list-orders','Home::listOrders');
     $routes->get('/create/(:any)','Home::createCanvas/$1');
     $routes->get('/approve-orders','Home::approver');
+    $routes->get('/canvass-sheet-request','Home::canvassRequest');
     $routes->get('/profile','Home::profile');
     //reports
     $routes->get('/report-stocks','Home::stocksReport');

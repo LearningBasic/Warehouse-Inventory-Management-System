@@ -871,6 +871,11 @@ class Home extends BaseController
         return view('approver',$data);
     }
 
+    public function canvassRequest()
+    {
+        return view ('canvass-sheet-request');
+    }
+
     public function saveStocks()
     {
         $stockModel = new \App\Models\stocksModel();
