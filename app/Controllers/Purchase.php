@@ -599,6 +599,6 @@ class Purchase extends BaseController
     {
         $canvassForm = new \App\Models\canvasFormModel();
         //data
-        
+        $user = session()->get('loggedUser');
     }
 }
