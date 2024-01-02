@@ -488,6 +488,12 @@
                                 </table>
                             </div>
 							<div class="col-12 form-group">
+								<label>Department/Division Head</label>
+								<select class="form-control custom-select2" name="approver" id="approver">
+									<option value="">Choose</option>
+								</select>
+							</div>
+							<div class="col-12 form-group">
 								<button type="submit" class="btn btn-primary" id="btnSubmit">Submit Form</button>
 							</div>
 						</form>
@@ -575,8 +581,18 @@
 		<script>
 			$(document).ready(function()
 			{
-				loadSuppliers();
+				loadSuppliers();editors();
 			});
+			function editors()
+			{
+				$.ajax({
+					url:"<?=site_url('get-editor')?>",method:"GET",
+					success:function(response)
+					{
+						$('#approver').append(response);
+					}
+				});
+			}
 			function loadSuppliers()
 			{
 				var val = $('#OrderNo').val();
