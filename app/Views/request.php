@@ -360,6 +360,7 @@
 								<li><a href="<?=site_url('list-orders')?>">List Order</a></li>
 								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
 								<li><a href="<?=site_url('approve-orders')?>">For Approval&nbsp;<span class="badge badge-pill bg-primary text-white" id="notifications">0</span></a></li>
+								<li><a href="<?=site_url('canvass-sheet-request')?>">Canvass Sheet&nbsp;<span class="badge badge-pill bg-primary text-white" id="notif">0</span></a></li>
 								<?php } ?>
 							</ul>
 						</li>
