@@ -444,6 +444,7 @@
                         <?php foreach($prf as $row): ?>
                         <form method="post" class="row g-3" action="<?=base_url('save-form')?>" id="frmCanvass">
 							<input type="hidden" name="requestor" value="<?php echo $row->accountID ?>"/>
+							<input type="hidden" name="type_purchase" value="<?php echo $row->PurchaseType ?>"/>
                             <div class="col-12 form-group">
                                 <div class="row g-3">
                                     <div class="col-lg-3">
