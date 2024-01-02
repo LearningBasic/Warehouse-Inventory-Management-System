@@ -497,11 +497,11 @@
 			</div>
 		</div>
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="myLargeModalLabel">
-							Add Supplier
+							Add Vendor/Supplier
                         </h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
@@ -518,16 +518,20 @@
 								</select>
 							</div>
 							<div class="col-12 form-group">
-								<label>Unit Price</label>
-								<input type="text" class="form-control" name="unitPrice" required/>
-							</div>
-							<div class="col-12 form-group">
-								<label>Supplier</label>
+								<label>Vendors/Supplier's Name</label>
 								<input type="text" class="form-control" name="supplier" required/>
 							</div>
 							<div class="col-12 form-group">
-								<label>Contact Person</label>
-								<input type="text" class="form-control" name="contactPerson" required/>
+								<div class="row g-3">
+									<div class="col-lg-6">
+										<label>Contact Person</label>
+										<input type="text" class="form-control" name="contactPerson" required/>
+									</div>
+									<div class="col-lg-6">
+										<label>Unit Price</label>
+										<input type="text" class="form-control" name="unitPrice" required/>
+									</div>
+								</div>
 							</div>
 							<div class="col-12 form-group">
 								<label>Contact Number</label>
