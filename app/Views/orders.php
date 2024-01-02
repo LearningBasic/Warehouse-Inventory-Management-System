@@ -430,7 +430,11 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header"><span class="icon-copy dw dw-add"></span>&nbsp;Purchase Request Form</div>
+					<div class="card-header">Purchase Request Form
+					<a href="javascript:void(0);" class="btn-link btn-sm" onclick="addRow()" style="float:right;margin-top:-5px;">
+						<span class="icon-copy dw dw-add"></span>&nbsp;Add
+					</a>
+				</div>
 					<div class="card-body">
 						<?php if(!empty(session()->getFlashdata('fail'))) : ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -468,7 +472,6 @@
                                 </div>
                             </div>
                             <div class="col-12 form-group">
-								<button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow()">Add</button><br/><br/>
                                 <table class="table stripe table-bordered hover nowrap">
                                     <thead>
                                         <th>Qty</th>
