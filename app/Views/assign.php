@@ -428,64 +428,88 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
                 <div class="card-box">
-                    <div class="card-header">Assigned PRF</div>
+                    <div class="card-header">Assigned PRF/Canvass Sheet</div>
                     <div class="card-body">
-                        <table class="data-table table stripe hover nowrap">
-                            <thead>
-                                <th>Date Prepared</th>
-                                <th>PRF No</th>
-                                <th>Requestor</th>
-                                <th>Department</th>
-                                <th>Reason</th>
-                                <th>Date Needed</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </thead>
-                            <tbody>
-                                <?php foreach($list as $row): ?>
-                                    <tr>
-                                        <td><?php echo $row->DatePrepared ?></td>
-                                        <td><?php echo $row->OrderNo ?></td>
-                                        <td><?php echo $row->Fullname ?></td>
-                                        <td><?php echo $row->Department ?></td>
-                                        <td><?php echo $row->Reason ?></td>
-                                        <td><?php echo $row->DateNeeded ?></td>
-                                        <td>
-                                            <?php if($row->Status==0){ ?>
-                                                <span class="badge bg-warning text-white">PENDING</span>
-                                            <?php }else{ ?>
-                                                <span class="badge bg-success text-white">DONE</span>
-                                            <?php } ?>
-                                        </td>
-                                        <td>
-                                            <?php if($row->Status==0){ ?>
-												<div class="dropdown">
-													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-														href="#" role="button" data-toggle="dropdown">
-														<i class="dw dw-more"></i>
-													</a>
-													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
-														<button type="button" class="dropdown-item accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span> Accept</button>
-														<button type="button" class="dropdown-item view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-eye"></span> View</button>
+						<div class="tabs">
+							<ul class="nav nav-tabs justify-content-left" role="tablist">
+								<li class="nav-item">
+									<a
+										class="nav-link active text-blue"
+										data-toggle="tab"
+										href="#home6"
+										role="tab"
+										aria-selected="true"
+										>Purchase Requisition</a
+									>
+								</li>
+								<li class="nav-item">
+									<a
+										class="nav-link text-blue"
+										data-toggle="tab"
+										href="#profile6"
+										role="tab"
+										aria-selected="false"
+										>Canvass Sheet</a
+									>
+								</li>
+							</ul>
+							<table class="data-table table stripe hover nowrap">
+								<thead>
+									<th>Date Prepared</th>
+									<th>PRF No</th>
+									<th>Requestor</th>
+									<th>Department</th>
+									<th>Reason</th>
+									<th>Date Needed</th>
+									<th>Status</th>
+									<th>Action</th>
+								</thead>
+								<tbody>
+									<?php foreach($list as $row): ?>
+										<tr>
+											<td><?php echo $row->DatePrepared ?></td>
+											<td><?php echo $row->OrderNo ?></td>
+											<td><?php echo $row->Fullname ?></td>
+											<td><?php echo $row->Department ?></td>
+											<td><?php echo $row->Reason ?></td>
+											<td><?php echo $row->DateNeeded ?></td>
+											<td>
+												<?php if($row->Status==0){ ?>
+													<span class="badge bg-warning text-white">PENDING</span>
+												<?php }else{ ?>
+													<span class="badge bg-success text-white">DONE</span>
+												<?php } ?>
+											</td>
+											<td>
+												<?php if($row->Status==0){ ?>
+													<div class="dropdown">
+														<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+															href="#" role="button" data-toggle="dropdown">
+															<i class="dw dw-more"></i>
+														</a>
+														<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+															<button type="button" class="dropdown-item accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span> Accept</button>
+															<button type="button" class="dropdown-item view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-eye"></span> View</button>
+														</div>
 													</div>
-												</div>
-                                            <?php }else{ ?>
-                                                <div class="dropdown">
-													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-														href="#" role="button" data-toggle="dropdown">
-														<i class="dw dw-more"></i>
-													</a>
-													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
-														<a href="create/<?php echo $row->OrderNo ?>" class="dropdown-item"><span class="dw dw-add"></span> Create</a>
-														<button type="button" class="dropdown-item view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-eye"></span> View</button>
+												<?php }else{ ?>
+													<div class="dropdown">
+														<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+															href="#" role="button" data-toggle="dropdown">
+															<i class="dw dw-more"></i>
+														</a>
+														<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+															<a href="create/<?php echo $row->OrderNo ?>" class="dropdown-item"><span class="dw dw-add"></span> Create</a>
+															<button type="button" class="dropdown-item view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-eye"></span> View</button>
+														</div>
 													</div>
-												</div>
-                                            <?php } ?>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+												<?php } ?>
+											</td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
+						</div>
                     </div>
                 </div>
 			</div>

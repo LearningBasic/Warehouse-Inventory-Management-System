@@ -456,7 +456,7 @@
 										href="#profile6"
 										role="tab"
 										aria-selected="false"
-										>Canvas Sheet</a
+										>Canvass Sheet</a
 									>
 								</li>
 							</ul>
@@ -540,7 +540,7 @@
 														<?php } ?>
 													</td>
 												</tr>
-											<?php endforeach; ?>
+											<?php endforeach; ?> 
 										</tbody>	
 									</table>
 								</div>
