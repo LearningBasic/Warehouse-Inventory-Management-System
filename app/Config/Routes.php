@@ -90,6 +90,7 @@ $routes->get('get-editor','Purchase::getEditor');
 $routes->post('cancel-order','Purchase::cancelOrder');
 $routes->get('view-order','Purchase::viewOrder');
 $routes->get('notification','Purchase::notification');
+$routes->get('canvas-notification','Purchase::canvasNotification');
 $routes->get('view-purchase','Purchase::viewPurchase');
 $routes->post('accept','Purchase::Accept');
 $routes->post('cancel','Purchase::Cancel');

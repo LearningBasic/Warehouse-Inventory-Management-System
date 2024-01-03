@@ -201,6 +201,19 @@ class Purchase extends BaseController
         }
     }
 
+    public function canvasNotification()
+    {
+        $user = session()->get('loggedUser');
+        $builder = $this->db->table('tblcanvass_review');
+        $builder->select('COUNT(crID)total');
+        $builder->WHERE('Status',0)->WHERE('accountID',$user);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            echo $row->total;
+        }
+    }
+
     public function viewPurchase()
     {
         $val = $this->request->getGet('value');
