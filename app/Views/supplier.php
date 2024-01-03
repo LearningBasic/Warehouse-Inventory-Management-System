@@ -487,8 +487,21 @@
 					url:"<?=site_url('notification')?>",method:"GET",
 					success:function(response)
 					{
-						$('#notification').html(response);
 						$('#notifications').html(response);
+					}
+				});
+				$.ajax({
+					url:"<?=site_url('canvas-notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notif').html(response);
+					}
+				});
+				$.ajax({
+					url:"<?=site_url('total-notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notification').html(response);
 					}
 				});
 			}

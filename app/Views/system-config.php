@@ -793,7 +793,6 @@
             function listIndustry(){$.ajax({url:"<?=site_url('list-industry')?>",method:"GET",success:function(response){$('#listindustry').html(response);}});}
             function listWarehouse(){$.ajax({url:"<?=site_url('list-warehouse')?>",method:"GET",success:function(response){$('#listwarehouse').html(response);}});}
 			function assignment(){$.ajax({url:"<?=site_url('assignment')?>",method:"GET",success:function(response){$('#assignment').append(response);}});}
-            function notify(){$.ajax({url:"<?=site_url('notification')?>",method:"GET",success:function(response){$('#notification').html(response);$('#notifications').html(response);}});}
 			$('#btnAdd').on('click',function(e)
             {
                 e.preventDefault();
@@ -955,6 +954,30 @@
 					}
 				});
 			});
+			function notify()
+			{
+				$.ajax({
+					url:"<?=site_url('notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notifications').html(response);
+					}
+				});
+				$.ajax({
+					url:"<?=site_url('canvas-notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notif').html(response);
+					}
+				});
+				$.ajax({
+					url:"<?=site_url('total-notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notification').html(response);
+					}
+				});
+			}
         </script>
 	</body>
 </html>

@@ -478,7 +478,31 @@
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script>
-			
+			$(document).ready(function(){notify();});
+			function notify()
+			{
+				$.ajax({
+					url:"<?=site_url('notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notifications').html(response);
+					}
+				});
+				$.ajax({
+					url:"<?=site_url('canvas-notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notif').html(response);
+					}
+				});
+				$.ajax({
+					url:"<?=site_url('total-notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notification').html(response);
+					}
+				});
+			}
 		</script>
 	</body>
 </html>
