@@ -444,7 +444,7 @@
 								<?php foreach($list as $row): ?>
 									<tr>
 										<td><?php echo $row->DateReceived ?></td>
-										<td><?php echo $row->Reference ?></td>
+										<td><button type="button" class="btn btn-link view" value="<?php echo $row->Reference ?>"><?php echo $row->Reference ?></button></td>
 										<td><?php echo $row->OrderNo ?></td>
 										<td><?php echo $row->Fullname ?></td>
 										<td><?php echo $row->Department ?></td>

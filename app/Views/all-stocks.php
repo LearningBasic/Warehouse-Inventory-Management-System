@@ -452,14 +452,14 @@
                         <?php endif; ?>
 						<table class="data-table table stripe hover nowrap">
 							<thead>
-								<th>Image</th>
+								<th>Product Name</th>
 								<th>Item Group</th>
 								<th>Product ID</th>
-								<th>Product Name</th>
 								<th>Unit Price</th>
 								<th>Qty</th>
 								<th>Status</th>
 								<th>Expiration</th>
+								<th>Location</th>
 								<th>Action</th>
 							</thead>
 							<tbody>
@@ -471,17 +471,15 @@
 											<td>
 												<button type="button" class="btn avatar mr-2 flex-shrink-0" value="<?php echo $row->inventID ?>">
 													<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
-												</button>
+												</button>&nbsp;<?php echo $row->productName ?>
 											</td>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
-											<td>
-												<div class="txt"><?php echo $row->productName ?></div>
-											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><span class='badge bg-success text-white'>Available</span></td>
 											<td><?php echo $row->ExpirationDate ?></td>
+											<td style="word-wrap: break-word;"><?php echo $row->warehouseName ?></td>
 											<td>
 												<div class="dropdown">
 													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
@@ -503,13 +501,10 @@
 											<td>
 												<button type="button" class="btn avatar mr-2 flex-shrink-0" value="<?php echo $row->inventID ?>">
 													<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
-												</button>
+												</button>&nbsp;<?php echo $row->productName ?>
 											</td>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
-											<td>
-												<div class="txt"><?php echo $row->productName ?></div>
-											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td>
@@ -520,6 +515,7 @@
 												<?php } ?>
 											</td>
 											<td><?php echo $row->ExpirationDate ?></td>
+											<td style="word-wrap: break-word;"><?php echo $row->warehouseName ?></td>
 											<td>
 												<div class="dropdown">
 													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
@@ -544,17 +540,15 @@
 											<td>
 												<button type="button" class="btn avatar mr-2 flex-shrink-0" value="<?php echo $row->inventID ?>">
 													<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
-												</button>
+												</button>&nbsp;<?php echo $row->productName ?>
 											</td>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
-											<td>
-												<div class="txt"><?php echo $row->productName ?></div>
-											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><span class='badge bg-success text-white'>Available</span></td>
 											<td><?php echo $row->ExpirationDate ?></td>
+											<td style="word-wrap: break-word;"><?php echo $row->warehouseName ?></td>
 											<td>-</td>
 										</tr>
 										<?php }else if($row->Qty<=$row->ReOrder){?>
@@ -563,13 +557,10 @@
 											<td>
 												<button type="button" class="btn avatar mr-2 flex-shrink-0" value="<?php echo $row->inventID ?>">
 													<img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/>
-												</button>
+												</button>&nbsp;<?php echo $row->productName ?>
 											</td>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
-											<td>
-												<div class="txt"><?php echo $row->productName ?></div>
-											</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td>
@@ -580,6 +571,7 @@
 												<?php } ?>
 											</td>
 											<td><?php echo $row->ExpirationDate ?></td>
+											<td style="word-wrap: break-word;"><?php echo $row->warehouseName ?></td>
 											<td>-</td>
 										</tr>
 										<?php } ?>
