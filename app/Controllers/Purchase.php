@@ -214,6 +214,30 @@ class Purchase extends BaseController
         }
     }
 
+    public function totalNotification()
+    {
+        $user = session()->get('loggedUser');
+        $canvass=0;$prf=0;
+        $builder = $this->db->table('tblcanvass_review');
+        $builder->select('COUNT(crID)total');
+        $builder->WHERE('Status',0)->WHERE('accountID',$user);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $canvass = $row->total;
+        }
+
+        $builder = $this->db->table('tblreview');
+        $builder->select('COUNT(reviewID)total');
+        $builder->WHERE('Status',0)->WHERE('accountID',$user);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $prf = $row->total;
+        }
+        echo $prf + $canvass;
+    }
+
     public function viewPurchase()
     {
         $val = $this->request->getGet('value');

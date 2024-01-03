@@ -717,25 +717,27 @@
 
 			function notify()
 			{
-				var prf = 0;var canvass=0;
 				$.ajax({
 					url:"<?=site_url('notification')?>",method:"GET",
 					success:function(response)
 					{
 						$('#notifications').html(response);
-						prf = parseInt($('#notifications').val(), 10);
 					}
 				});
 				$.ajax({
 					url:"<?=site_url('canvas-notification')?>",method:"GET",
 					success:function(response)
 					{
-						$('#notify').html(response);
-						canvass = parseInt($('#notify').val(), 10);
+						$('#notif').html(response);
 					}
 				});
-				alert(canvass);
-				$('#notification').html(total);
+				$.ajax({
+					url:"<?=site_url('total-notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notification').html(response);
+					}
+				});
 			}
 		</script>
 	</body>
