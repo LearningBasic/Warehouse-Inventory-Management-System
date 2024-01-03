@@ -873,7 +873,16 @@ class Home extends BaseController
 
     public function canvassRequest()
     {
-        return view ('canvass-sheet-request');
+        $user = session()->get('loggedUser');
+        $builder = $this->db->table('tblcanvass_review a');
+        $builder->select('a.DateReceived,a.Reference,b.DateNeeded,b.Department,b.Status,c.Fullname,b.OrderNo');
+        $builder->join('tblcanvass_form b','b.Reference=a.Reference','LEFT');
+        $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
+        $builder->WHERE('a.accountID',$user);
+        $builder->groupBy('a.crID')->orderby('a.crID','DESC');
+        $list = $builder->get()->getResult();
+        $data = ['list'=>$list];
+        return view ('canvass-sheet-request',$data);
     }
 
     public function saveStocks()

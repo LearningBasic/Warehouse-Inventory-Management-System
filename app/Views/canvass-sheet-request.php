@@ -435,11 +435,32 @@
                                 <th>Date Received</th>
                                 <th>Reference No</th>
                                 <th>PRF No</th>
+								<th>Requestor</th>
                                 <th>Department</th>
                                 <th>Date Needed</th>
                                 <th>Status</th>
-                                <th>Action</th>
                             </thead>
+							<tbody>
+								<?php foreach($list as $row): ?>
+									<tr>
+										<td><?php echo $row->DateReceived ?></td>
+										<td><?php echo $row->Reference ?></td>
+										<td><?php echo $row->OrderNo ?></td>
+										<td><?php echo $row->Fullname ?></td>
+										<td><?php echo $row->Department ?></td>
+										<td><?php echo $row->DateNeeded ?></td>
+										<td>
+											<?php if($row->Status==0){ ?>
+												<span class="badge bg-warning text-white">PENDING</span>
+											<?php }else if($row->Status==1){?>
+												<span class="badge bg-success text-white">APPROVED</span>
+											<?php }else if($row->Status==2){ ?>
+												<span class="badge bg-danger text-white">REJECTED</span>
+											<?php } ?>
+										</td>
+									</tr>
+								<?php endforeach; ?>
+							</tbody>
                         </table>
 					</div>
 				</div>
