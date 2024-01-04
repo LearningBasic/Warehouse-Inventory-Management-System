@@ -75,6 +75,7 @@ $routes->post('transfer-item','ProductController::transferItem');
 $routes->post('receive-report','ProductController::receiveReport');
 $routes->post('save-data','ProductController::scanning');
 $routes->get('view-items','ProductController::viewItems');
+$routes->get('view-vendors','ProductController::viewVendor');
 //standard user reports
 $routes->post('send-damage-report','ProductController::damageReport');
 $routes->post('accept-damage-report','ProductController::acceptDamageReport');

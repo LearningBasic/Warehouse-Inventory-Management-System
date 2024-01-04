@@ -479,6 +479,18 @@
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script>
 			$(document).ready(function(){notify();});
+			$(document).on('click','.view',function()
+			{
+				var val = $(this).val();
+				$.ajax({
+					url:"<?=site_url('view-vendors')?>",method:"GET",
+					data:{value:val},
+					success:function(response)
+					{
+						
+					}
+				});
+			});
 			function notify()
 			{
 				$.ajax({

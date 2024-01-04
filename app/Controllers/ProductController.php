@@ -789,6 +789,44 @@ class ProductController extends BaseController
         }
     }
 
+    public function viewVendor()
+    {
+        $val = $this->request->getGet('value');
+        $builder = $this->db->table('tblcanvass_sheet a');
+        $builder->select('a.*,b.Item_Name');
+        $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
+        $builder->WHERE('a.Reference',$val);
+        $builder->orderby('a.orderID');
+        $data = $builder->get();
+        ?>
+        <table class="table hover nowrap">
+            <thead>
+                <th>Product Name</th>
+                <th>Vendor</th>
+                <th>Price</th>
+                <th>Terms</th>
+                <th>Warranty</th>
+                <th>Remarks</th>
+            </thead>
+        <?php
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <tr>
+                <td><?php echo $row->Item_Name ?></td>
+                <td><?php echo $row->Supplier ?></td>
+                <td><?php echo number_format($row->Price,2) ?></td>
+                <td><?php echo $row->Terms ?></td>
+                <td><?php echo $row->Warranty ?></td>
+                <td><?php echo $row->Remarks ?></td>
+            </tr>
+            <?php
+        }
+        ?>
+        </table>
+        <?php
+    }
+
     public function saveInventory()
     {
         $scanModel = new \App\Models\scanItemModel();
