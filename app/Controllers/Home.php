@@ -996,11 +996,28 @@ class Home extends BaseController
 
     public function acceptRequest()
     {
-
+        $canvasFormModel = new \App\Models\canvasFormModel();
+        $reviewCanvassModel = new \App\Models\reviewCanvassModel();
+        //data
+        $user = session()->get('loggedUser');
+        $code = $this->request->getPost('code');
     }
 
     public function cancelRequest()
     {
-        
+        $canvasFormModel = new \App\Models\canvasFormModel();
+        $reviewCanvassModel = new \App\Models\reviewCanvassModel();
+        //data
+        $user = session()->get('loggedUser');
+        $code = $this->request->getPost('code');
+        $status = 2;
+        //approver
+        $review = $reviewCanvassModel->WHERE('accountID',$user)->WHERE('Reference',$code)->first();
+        $values = ['Status'=>$status];
+        $reviewCanvassModel->update($review['crID'],$values);
+        //canvass form
+        $canvass = $canvasFormModel->WHERE('Reference',$code)->first();
+        $canvasFormModel->update($canvass['formID'],$values);
+        echo "success";
     }
 }

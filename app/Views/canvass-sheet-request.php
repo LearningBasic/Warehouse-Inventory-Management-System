@@ -538,7 +538,7 @@
 						var code = $('#code').val();
 						$.ajax({
 							url:"<?=site_url('accept-request')?>",method:"POST",
-							data:data,success:function(response)
+							data:{code:code},success:function(response)
 							{
 								if(response==="success")
 								{
@@ -570,7 +570,7 @@
 						var code = $('#code').val();
 						$.ajax({
 							url:"<?=site_url('cancel-request')?>",method:"POST",
-							data:data,success:function(response)
+							data:{code:code},success:function(response)
 							{
 								if(response==="success")
 								{
