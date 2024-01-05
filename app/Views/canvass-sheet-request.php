@@ -482,7 +482,8 @@
 								<div id="result"></div>
 							</div>
 							<div class="col-12 form-group">
-								
+								<button type="submit" class="btn btn-primary btn-sm approve">Approve</button>
+								<button type="button" class="btn btn-danger btn-sm cancel">Cancel</button>
 							</div>
 						</form>
                     </div>
