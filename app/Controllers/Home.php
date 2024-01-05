@@ -998,9 +998,12 @@ class Home extends BaseController
     {
         $canvasFormModel = new \App\Models\canvasFormModel();
         $reviewCanvassModel = new \App\Models\reviewCanvassModel();
+        $purchaseModel = new \App\Models\purchaseModel();
         //data
         $user = session()->get('loggedUser');
         $code = $this->request->getPost('code');
+        $canvass = $canvasFormModel->WHERE('Reference',$code)->first();
+        $purchase = $purchaseModel->WHERE('OrderNo',$canvass['OrderNo'])->first();
     }
 
     public function cancelRequest()
