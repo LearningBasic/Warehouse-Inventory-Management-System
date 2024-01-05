@@ -799,7 +799,7 @@ class ProductController extends BaseController
         $builder->orderby('a.orderID');
         $data = $builder->get();
         ?>
-        <table class="table hover nowrap">
+        <table class="table table-bordered hover nowrap">
             <thead>
                 <th>Product Name</th>
                 <th>Vendor</th>

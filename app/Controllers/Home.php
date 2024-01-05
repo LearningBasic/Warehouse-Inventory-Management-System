@@ -881,7 +881,13 @@ class Home extends BaseController
         $builder->WHERE('a.accountID',$user);
         $builder->groupBy('a.crID')->orderby('a.crID','DESC');
         $list = $builder->get()->getResult();
-        $data = ['list'=>$list];
+        //account
+        $builder = $this->db->table('tblaccount');
+        $builder->select('*');
+        $builder->WHERE('systemRole','Staff');
+        $account = $builder->get()->getResult();
+
+        $data = ['list'=>$list,'account'=>$account];
         return view ('canvass-sheet-request',$data);
     }
 
@@ -1008,19 +1014,39 @@ class Home extends BaseController
         {
             if($canvass['Status']==0)
             {
-
+                //update the status of canvass sheet form
+                $value = ['Status'=>1];
+                $canvass = $canvasFormModel->WHERE('Reference',$code)->first();
+                $canvasFormModel->update($canvass['formID'],$value);
+                //send 
             }
             else if($canvass['Status']==1)
             {
-                //send to Procurement Admin
-                $review = $reviewCanvassModel->WHERE('accountID',$user)->WHERE('Reference',$code)->first();
-                $values = ['Status'=>1,'DateApproved'=>date('Y-m-d')];
-                $reviewCanvassModel->update($review['crID'],$values);
+                //update the status of canvass sheet form
+                $value = ['Status'=>3];
+                $canvass = $canvasFormModel->WHERE('Reference',$code)->first();
+                $canvasFormModel->update($canvass['formID'],$value);
+                //update the canvass sheet vendor to select
             }
+            else if($canvass['Status']==3)
+            {
+                //update the status of canvass sheet form
+                $value = ['Status'=>4];
+                $canvass = $canvasFormModel->WHERE('Reference',$code)->first();
+                $canvasFormModel->update($canvass['formID'],$value);
+            }
+            //approved
+            $review = $reviewCanvassModel->WHERE('accountID',$user)->WHERE('Reference',$code)->first();
+            $values = ['Status'=>1,'DateApproved'=>date('Y-m-d')];
+            $reviewCanvassModel->update($review['crID'],$values);
         }
         else
         {
-            //send to Procurement Admin
+            //update the status of canvass sheet form
+            $value = ['Status'=>4];
+            $canvass = $canvasFormModel->WHERE('Reference',$code)->first();
+            $canvasFormModel->update($canvass['formID'],$value);
+            //approved
             $review = $reviewCanvassModel->WHERE('accountID',$user)->WHERE('Reference',$code)->first();
             $values = ['Status'=>1,'DateApproved'=>date('Y-m-d')];
             $reviewCanvassModel->update($review['crID'],$values);

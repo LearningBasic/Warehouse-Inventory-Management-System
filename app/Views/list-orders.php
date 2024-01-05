@@ -537,6 +537,8 @@
 														<?php }else if($row->Status==1){?>
 															<span class="badge bg-info text-white">REVIEWED</span>
 														<?php }else if($row->Status==3){?>
+															<span class="badge bg-primary text-white">ON PROCESS</span>
+														<?php }else if($row->Status==4){?>
 															<span class="badge bg-success text-white">APPROVED</span>
 														<?php }else { ?>
 															<span class="badge bg-danger text-white">CANCELLED</span>

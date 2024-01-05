@@ -466,7 +466,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal fade" id="viewModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -484,7 +484,18 @@
 							<div class="col-12">
 								<div id="result"></div>
 							</div>
-							<div class="col-12">
+							<?php if(session()->get('role')!="Administrator"){ ?>
+							<div class="col-12 form-group">
+								<label>Negotiator</label>
+								<select class="form-control custom-select2" name="receiver" id="receiver" style="width:100%;" required>
+									<option value="">Choose</option>
+									<?php foreach($account as $row): ?>
+										<option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+							<?php } ?>
+							<div class="col-12 form-group">
 								<button type="submit" class="btn btn-primary btn-sm approve"><span class="dw dw-check"></span>&nbsp;Approve</button>
 								<button type="button" class="btn btn-danger btn-sm cancel"><span class="dw dw-trash"></span>&nbsp;Cancel</button>
 							</div>
