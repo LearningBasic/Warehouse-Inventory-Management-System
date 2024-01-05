@@ -444,7 +444,11 @@
 								<?php foreach($list as $row): ?>
 									<tr>
 										<td><?php echo $row->DateReceived ?></td>
+										<?php if($row->Status==0){ ?>
 										<td><button type="button" class="btn btn-link view" value="<?php echo $row->Reference ?>"><?php echo $row->Reference ?></button></td>
+										<?php }else { ?>
+										<td><button type="button" class="btn btn-link" value="<?php echo $row->Reference ?>"><?php echo $row->Reference ?></button></td>
+										<?php } ?>
 										<td><?php echo $row->OrderNo ?></td>
 										<td><?php echo $row->Fullname ?></td>
 										<td><?php echo $row->Department ?></td>
@@ -487,8 +491,8 @@
 							<?php if(session()->get('role')!="Administrator"){ ?>
 							<div class="col-12 form-group">
 								<label>Negotiator</label>
-								<select class="form-control custom-select2" name="receiver" id="receiver" style="width:100%;" required>
-									<option value="">Choose</option>
+								<select class="form-control custom-select2" name="receiver" id="receiver" style="width:100%;">
+									<option value="0">Choose</option>
 									<?php foreach($account as $row): ?>
 										<option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?></option>
 									<?php endforeach; ?>
@@ -547,9 +551,10 @@
 					}).then((result) => {
 					if (result.isConfirmed) {
 						var code = $('#code').val();
+						var user = $('#receiver').val();
 						$.ajax({
 							url:"<?=site_url('accept-request')?>",method:"POST",
-							data:{code:code},success:function(response)
+							data:{code:code,user:user},success:function(response)
 							{
 								if(response==="success")
 								{
