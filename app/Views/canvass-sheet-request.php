@@ -476,7 +476,15 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
-						<div id="result"></div>
+						<form method="post" class="row g-3">
+							<input type="hidden" name="code" id="code"/>
+							<div class="col-12 form-group">
+								<div id="result"></div>
+							</div>
+							<div class="col-12 form-group">
+								
+							</div>
+						</form>
                     </div>
                 </div>
             </div>
@@ -504,6 +512,7 @@
 					{
 						$('#viewModal').modal('show');
 						$('#result').html(response);
+						$('#code').attr("value",val);
 					}
 				});
 			});

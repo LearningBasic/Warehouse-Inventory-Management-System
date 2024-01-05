@@ -819,7 +819,9 @@ class ProductController extends BaseController
                 <td><?php echo $row->Terms ?></td>
                 <td><?php echo $row->Warranty ?></td>
                 <td>
+                    <?php if(!empty($row->Remarks)){ ?>
                     <span class="badge bg-success text-white"><?php echo $row->Remarks ?></span>
+                    <?php } ?>
                 </td>
             </tr>
             <?php
