@@ -993,4 +993,14 @@ class Home extends BaseController
         $assignmentModel->update($val,$values);
         echo "success";
     }
+
+    public function acceptRequest()
+    {
+
+    }
+
+    public function cancelRequest()
+    {
+        
+    }
 }
