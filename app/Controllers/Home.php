@@ -1004,6 +1004,28 @@ class Home extends BaseController
         $code = $this->request->getPost('code');
         $canvass = $canvasFormModel->WHERE('Reference',$code)->first();
         $purchase = $purchaseModel->WHERE('OrderNo',$canvass['OrderNo'])->first();
+        if($purchase['PurchaseType']=="Local Purchase")
+        {
+            if($canvass['Status']==0)
+            {
+
+            }
+            else if($canvass['Status']==1)
+            {
+                //send to Procurement Admin
+                $review = $reviewCanvassModel->WHERE('accountID',$user)->WHERE('Reference',$code)->first();
+                $values = ['Status'=>1,'DateApproved'=>date('Y-m-d')];
+                $reviewCanvassModel->update($review['crID'],$values);
+            }
+        }
+        else
+        {
+            //send to Procurement Admin
+            $review = $reviewCanvassModel->WHERE('accountID',$user)->WHERE('Reference',$code)->first();
+            $values = ['Status'=>1,'DateApproved'=>date('Y-m-d')];
+            $reviewCanvassModel->update($review['crID'],$values);
+        }
+        echo "success";
     }
 
     public function cancelRequest()
