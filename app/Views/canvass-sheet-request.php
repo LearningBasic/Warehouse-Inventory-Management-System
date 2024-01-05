@@ -478,12 +478,15 @@
                     <div class="modal-body">
 						<form method="post" class="row g-3">
 							<input type="hidden" name="code" id="code"/>
-							<div class="col-12 form-group">
+							<div class="col-12">
+								<p>Reference No : <label id="reference"></label></p>
+							</div>
+							<div class="col-12">
 								<div id="result"></div>
 							</div>
-							<div class="col-12 form-group">
-								<button type="submit" class="btn btn-primary btn-sm approve">Approve</button>
-								<button type="button" class="btn btn-danger btn-sm cancel">Cancel</button>
+							<div class="col-12">
+								<button type="submit" class="btn btn-primary btn-sm approve"><span class="dw dw-check"></span>&nbsp;Approve</button>
+								<button type="button" class="btn btn-danger btn-sm cancel"><span class="dw dw-trash"></span>&nbsp;Cancel</button>
 							</div>
 						</form>
                     </div>
@@ -514,9 +517,75 @@
 						$('#viewModal').modal('show');
 						$('#result').html(response);
 						$('#code').attr("value",val);
+						$('#reference').html(val);
 					}
 				});
 			});
+
+			$(document).on('click','.approve',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to accept this request?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var code = $('#code').val();
+						$.ajax({
+							url:"<?=site_url('accept-request')?>",method:"POST",
+							data:data,success:function(response)
+							{
+								if(response==="success")
+								{
+									location.reload();
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
+					}
+				});
+			});
+
+			$(document).on('click','.cancel',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to reject this request?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var code = $('#code').val();
+						$.ajax({
+							url:"<?=site_url('cancel-request')?>",method:"POST",
+							data:data,success:function(response)
+							{
+								if(response==="success")
+								{
+									location.reload();
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
+					}
+				});
+			});
+
 			function notify()
 			{
 				$.ajax({
