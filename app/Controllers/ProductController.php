@@ -818,7 +818,9 @@ class ProductController extends BaseController
                 <td><?php echo number_format($row->Price,2) ?></td>
                 <td><?php echo $row->Terms ?></td>
                 <td><?php echo $row->Warranty ?></td>
-                <td><?php echo $row->Remarks ?></td>
+                <td>
+                    <span class="badge bg-success text-white"><?php echo $row->Remarks ?></span>
+                </td>
             </tr>
             <?php
         }
