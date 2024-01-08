@@ -446,7 +446,7 @@
 									<tr>
 										<td><?php echo $row->DateReceived ?></td>
 										<td>
-                                            <a href="<?=site_url('view/')?><?php echo $row->Reference ?>"><?php echo $row->Reference ?></a>
+                                            <a class="btn btn-link" href="<?=site_url('view/')?><?php echo $row->Reference ?>"><?php echo $row->Reference ?></a>
                                         </td>
 										<td><?php echo $row->OrderNo ?></td>
 										<td><?php echo $row->Fullname ?></td>

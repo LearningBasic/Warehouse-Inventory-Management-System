@@ -429,9 +429,48 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
                 <div class="card-box">
-                    <div class="card-header">Reference No : <?=$code;?></div>
+                    <div class="card-header">Reference No : <?=$code;?>
+                        <a href="<?=site_url('local-purchase')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a></div>
                     <div class="card-body">
-                    
+                        <form method="POST" class="row g-3" id="frmVendor">
+                            <input type="hidden" name="code" id="code" value="<?=$code;?>"/>
+                            <div class="col-12 form-group">
+                                <table class="table table-bordered hover nowrap">
+                                    <thead>
+                                        <th>&nbsp;</th>
+                                        <th>Product Name</th>
+                                        <th>Qty</th>
+                                        <th>Specification</th>
+                                        <th>Vendors</th>
+                                        <th>Unit Price</th>
+                                        <th>Terms</th>
+                                        <th>Warranty</th>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($list as $row): ?>
+                                            <tr>
+                                                <td><input type="checkbox" style="height:15px;width:15px;" class="checkbox" value="<?php echo $row->canvassID ?>" name="itemID[]" id="itemID"/></td>
+                                                <td><?php echo $row->Item_Name ?></td>
+                                                <td><?php echo $row->Qty ?></td>
+                                                <td><?php echo $row->Specification ?></td>
+                                                <td><?php echo $row->Supplier ?></td>
+                                                <td><?php echo number_format($row->Price,2) ?></td>
+                                                <td><?php echo $row->Terms ?></td>
+                                                <td><?php echo $row->Warranty ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-12 form-group">
+                                <button type="submit" class="btn btn-primary btn-sm accept">
+                                    <span class="dw dw-check"></span>&nbsp;Proceed
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm cancel">
+                                    <span class="dw dw-trash"></span>&nbsp;cancel
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
 			</div>
@@ -445,8 +484,39 @@
 		<script src="/assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
 		<script src="/assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="/assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-		<script src="/assets/vendors/scripts/datatable-setting.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        
+        <script>
+            $(document).on('click','.cancel',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to reject this request?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var code = $('#code').val();
+						$.ajax({
+							url:"<?=site_url('cancel-request')?>",method:"POST",
+							data:{code:code},success:function(response)
+							{
+								if(response==="success")
+								{
+									window.location.href="<?=site_url('local-purchase')?>";
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
+					}
+				});
+			});
+        </script>
 	</body>
 </html>

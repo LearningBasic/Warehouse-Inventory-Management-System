@@ -908,7 +908,12 @@ class Home extends BaseController
 
     public function viewVendor($id=null)
     {
-        $data = ['code'=>$id];
+        $builder = $this->db->table('tblcanvass_sheet a');
+        $builder->select('a.*,b.Item_Name,b.Qty,b.Specification');
+        $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
+        $builder->WHERE('a.Reference',$id);
+        $list = $builder->get()->getResult();
+        $data = ['code'=>$id,'list'=>$list];
         return view ('view-vendor',$data);
     }
 
