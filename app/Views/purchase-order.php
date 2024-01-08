@@ -433,25 +433,29 @@
                     <div class="card-body">
                         <table class="data-table table stripe hover nowrap">
                             <thead>
-                                <th>Date Prepared</th>
                                 <th>Reference No</th>
                                 <th>PRF No</th>
 								<th>Requestor</th>
-                                <th>Department</th>
-                                <th>Date Needed</th>
+                                <th>Vendor(s)</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Terms</th>
+                                <th>Warranty</th>
                                 <th>Action</th>
                             </thead>
 							<tbody>
 							<?php foreach($canvass as $row): ?>
                                 <tr>
-                                    <td><?php echo $row->DatePrepared ?></td>
                                     <td><?php echo $row->Reference ?></td>
                                     <td><?php echo $row->OrderNo ?></td>
                                     <td><?php echo $row->Fullname ?></td>
-                                    <td><?php echo $row->Department ?></td>
-                                    <td><?php echo $row->DateNeeded ?></td>
+                                    <td><?php echo $row->Supplier ?></td>
+                                    <td><?php echo $row->Qty ?></td>
+                                    <td style="text-align: right;"><?php echo number_format($row->Price,2) ?></td>
+                                    <td><?php echo $row->Terms ?></td>
+                                    <td><?php echo $row->Warranty ?></td>
                                     <td>
-                                        <button type="button" class="btn btn-outline-primary btn-sm generate" value="<?php echo $row->Reference ?>">Generate</button>
+                                        <button type="button" class="btn btn-outline-primary btn-sm generate" value="<?php echo $row->canvassID ?>">Generate</button>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
