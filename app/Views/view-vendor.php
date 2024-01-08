@@ -4,25 +4,25 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>Local Purchase</title>
+		<title>Local Purchase - Canvass Sheet</title>
 
 		<!-- Site favicon -->
 		<link
 			rel="apple-touch-icon"
 			sizes="180x180"
-			href="assets/img/fastcat.png"
+			href="/assets/img/fastcat.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="32x32"
-			href="assets/img/fastcat.png"
+			href="/assets/img/fastcat.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="16x16"
-			href="assets/img/fastcat.png"
+			href="/assets/img/fastcat.png"
 		/>
 
 		<!-- Mobile Specific Metas -->
@@ -37,23 +37,23 @@
 			rel="stylesheet"
 		/>
 		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="assets/vendors/styles/core.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/vendors/styles/core.css" />
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="assets/vendors/styles/icon-font.min.css"
+			href="/assets/vendors/styles/icon-font.min.css"
 		/>
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+			href="/assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
 		/>
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="assets/src/plugins/datatables/css/responsive.bootstrap4.min.css"
+			href="/assets/src/plugins/datatables/css/responsive.bootstrap4.min.css"
 		/>
-		<link rel="stylesheet" type="text/css" href="assets/vendors/styles/style.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/vendors/styles/style.css" />
         <style>
         /* Track */
             ::-webkit-scrollbar-track {
@@ -81,7 +81,7 @@
 		<div class="pre-loader">
 			<div class="pre-loader-box">
 				<div class="loader-logo">
-					<img src="assets/img/fastcat.png" alt="Fastcat" width="100"/>
+					<img src="/assets/img/fastcat.png" alt="Fastcat" width="100"/>
 				</div>
 				<div class="loader-progress" id="progress_div">
 					<div class="bar" id="bar1"></div>
@@ -313,9 +313,9 @@
 		<div class="left-side-bar">
 			<div class="brand-logo">
 				<a href="<?=site_url('/dashboard')?>">
-					<img src="assets/img/fastcat.png" alt="" class="dark-logo" width="100"/>
+					<img src="/assets/img/fastcat.png" alt="" class="dark-logo" width="100"/>
 					<img
-						src="assets/img/fastcat.png"
+						src="/assets/img/fastcat.png"
 						alt="" width="100"
 						class="light-logo"
 					/>
@@ -396,7 +396,7 @@
 							<ul class="submenu">
 								<li><a href="<?=site_url('add-report')?>">Create Report</a></li>
                                 <li><a href="<?=site_url('assign')?>">Assigned PRF</a></li>
-								<li><a href="<?=site_url('local-purchase')?>" class="active">Local Purchase</a></li>
+								<li><a href="javascript:void(0);" class="active">Vendor/Supplier</a></li>
 							</ul>
 							<?php } ?>
 						</li>
@@ -429,56 +429,23 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
                 <div class="card-box">
-                    <div class="card-header">PRF - Local Purchase</div>
+                    <div class="card-header">Reference No : <?=$code;?></div>
                     <div class="card-body">
-                        <table class="data-table table stripe hover nowrap">
-                            <thead>
-                                <th>Date Received</th>
-                                <th>Reference No</th>
-                                <th>PRF No</th>
-								<th>Requestor</th>
-                                <th>Department</th>
-                                <th>Date Needed</th>
-                                <th>Status</th>
-                            </thead>
-							<tbody>
-								<?php foreach($review as $row): ?>
-									<tr>
-										<td><?php echo $row->DateReceived ?></td>
-										<td>
-                                            <a href="<?=site_url('view/')?><?php echo $row->Reference ?>"><?php echo $row->Reference ?></a>
-                                        </td>
-										<td><?php echo $row->OrderNo ?></td>
-										<td><?php echo $row->Fullname ?></td>
-										<td><?php echo $row->Department ?></td>
-										<td><?php echo $row->DateNeeded ?></td>
-										<td>
-											<?php if($row->Status==0){ ?>
-												<span class="badge bg-warning text-white">PENDING</span>
-											<?php }else if($row->Status==1){?>
-												<span class="badge bg-success text-white">APPROVED</span>
-											<?php }else if($row->Status==2){ ?>
-												<span class="badge bg-danger text-white">REJECTED</span>
-											<?php } ?>
-										</td>
-									</tr>
-								<?php endforeach; ?>
-							</tbody>
-                        </table>
+                    
                     </div>
                 </div>
 			</div>
 		</div>
 		<!-- js -->
-		<script src="assets/vendors/scripts/core.js"></script>
-		<script src="assets/vendors/scripts/script.min.js"></script>
-		<script src="assets/vendors/scripts/process.js"></script>
-		<script src="assets/vendors/scripts/layout-settings.js"></script>
-		<script src="assets/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script src="/assets/vendors/scripts/core.js"></script>
+		<script src="/assets/vendors/scripts/script.min.js"></script>
+		<script src="/assets/vendors/scripts/process.js"></script>
+		<script src="/assets/vendors/scripts/layout-settings.js"></script>
+		<script src="/assets/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script src="/assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script src="/assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script src="/assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script src="/assets/vendors/scripts/datatable-setting.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         
 	</body>

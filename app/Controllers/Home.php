@@ -875,7 +875,7 @@ class Home extends BaseController
     {
         $user = session()->get('loggedUser');
         $builder = $this->db->table('tblcanvass_review a');
-        $builder->select('a.DateReceived,a.Reference,b.DateNeeded,b.Department,b.Status,c.Fullname,b.OrderNo,a.accountID');
+        $builder->select('a.DateReceived,a.Reference,b.DateNeeded,b.Department,a.Status,c.Fullname,b.OrderNo,a.accountID');
         $builder->join('tblcanvass_form b','b.Reference=a.Reference','LEFT');
         $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
         $builder->WHERE('a.accountID',$user);
@@ -895,7 +895,7 @@ class Home extends BaseController
     {
         $user = session()->get('loggedUser');
         $builder = $this->db->table('tblcanvass_review a');
-        $builder->select('a.DateReceived,a.Reference,b.DateNeeded,b.Department,b.Status,c.Fullname,b.OrderNo,a.accountID');
+        $builder->select('a.DateReceived,a.Reference,b.DateNeeded,b.Department,a.Status,c.Fullname,b.OrderNo,a.accountID');
         $builder->join('tblcanvass_form b','b.Reference=a.Reference','LEFT');
         $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
         $builder->WHERE('a.accountID',$user);
@@ -904,6 +904,12 @@ class Home extends BaseController
 
         $data = ['review'=>$list];
         return view ('selection-vendor',$data);
+    }
+
+    public function viewVendor($id=null)
+    {
+        $data = ['code'=>$id];
+        return view ('view-vendor',$data);
     }
 
     public function saveStocks()
