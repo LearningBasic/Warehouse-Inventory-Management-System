@@ -435,6 +435,24 @@
                         <form method="POST" class="row g-3" id="frmVendor">
                             <input type="hidden" name="code" id="code" value="<?=$code;?>"/>
                             <div class="col-12 form-group">
+                                <div class="row g-3">
+                                    <?php foreach($canvass as $row): ?>
+                                        <div class="col-lg-4">
+                                            <label><b>PRF No : </b></label>
+                                            <input type="text" class="form-control" value="<?php echo $row->OrderNo ?>"/>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label><b>Department : </b></label>
+                                            <input type="text" class="form-control" value="<?php echo $row->Department ?>"/>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label><b>Date Needed : </b></label>
+                                            <input type="text" class="form-control" value="<?php echo $row->DateNeeded ?>"/>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="col-12 form-group">
                                 <table class="table table-bordered hover nowrap">
                                     <thead>
                                         <th>&nbsp;</th>
@@ -449,7 +467,7 @@
                                     <tbody>
                                         <?php foreach($list as $row): ?>
                                             <tr>
-                                                <td><input type="checkbox" style="height:15px;width:15px;" class="checkbox" value="<?php echo $row->canvassID ?>" name="itemID[]" id="itemID"/></td>
+                                                <td><input type="checkbox" style="height:15px;width:15px;" onclick="check()" class="checkbox" value="<?php echo $row->canvassID ?>" name="itemID[]" id="itemID"/></td>
                                                 <td><?php echo $row->Item_Name ?></td>
                                                 <td><?php echo $row->Qty ?></td>
                                                 <td><?php echo $row->Specification ?></td>
@@ -463,7 +481,7 @@
                                 </table>
                             </div>
                             <div class="col-12 form-group">
-                                <button type="submit" class="btn btn-primary btn-sm accept">
+                                <button type="submit" class="btn btn-primary btn-sm accept" disabled>
                                     <span class="dw dw-check"></span>&nbsp;Proceed
                                 </button>
                                 <button type="button" class="btn btn-danger btn-sm cancel">
@@ -486,6 +504,49 @@
 		<script src="/assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
+            function check()
+            {
+                var checkbox = $('input:checkbox').is(':checked')
+                if(checkbox){
+                $('.accept').attr("disabled",false);
+                }
+                else
+                {
+                $('.accept').attr("disabled",true);
+                }
+            }
+            $(document).on('click','.accept',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to accept this request?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var data = $('#frmVendor').serialize();
+						$.ajax({
+							url:"<?=site_url('proceed')?>",method:"POST",
+							data:data,success:function(response)
+							{
+								if(response==="success")
+								{
+									window.location.href="<?=site_url('local-purchase')?>";
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
+					}
+				});
+			});
+
             $(document).on('click','.cancel',function(e)
 			{
 				e.preventDefault();

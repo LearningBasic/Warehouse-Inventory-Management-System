@@ -108,6 +108,7 @@ $routes->post('add-assignment','Home::addAssignment');
 $routes->post('accept-assignment','Home::acceptAssignment');
 $routes->post('accept-request','Home::acceptRequest');
 $routes->post('cancel-request','Home::cancelRequest');
+$routes->post('proceed','Home::proceedRequest');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {

@@ -908,12 +908,19 @@ class Home extends BaseController
 
     public function viewVendor($id=null)
     {
+        //vendor
         $builder = $this->db->table('tblcanvass_sheet a');
         $builder->select('a.*,b.Item_Name,b.Qty,b.Specification');
         $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
         $builder->WHERE('a.Reference',$id);
         $list = $builder->get()->getResult();
-        $data = ['code'=>$id,'list'=>$list];
+        //canvass form
+        $builder = $this->db->table('tblcanvass_form');
+        $builder->select('DateNeeded,Department,OrderNo');
+        $builder->WHERE('Reference',$id);
+        $canvass = $builder->get()->getResult();
+
+        $data = ['code'=>$id,'list'=>$list,'canvass'=>$canvass];
         return view ('view-vendor',$data);
     }
 
@@ -1102,6 +1109,16 @@ class Home extends BaseController
             $reviewCanvassModel->update($review['crID'],$values);
         }
         echo "success";
+    }
+
+    public function proceedRequest()
+    {
+        $canvasFormModel = new \App\Models\canvasFormModel();
+        $reviewCanvassModel = new \App\Models\reviewCanvassModel();
+        $purchaseModel = new \App\Models\purchaseModel();
+        //data
+        $user = session()->get('loggedUser');
+        $code = $this->request->getPost('code');
     }
 
     public function cancelRequest()
