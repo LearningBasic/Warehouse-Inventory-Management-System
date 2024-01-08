@@ -474,7 +474,7 @@ class Home extends BaseController
         $builder = $this->db->table('tblassignment a');
         $builder->select('a.Status,b.prfID,b.OrderNo,b.DatePrepared,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID');
         $builder->join('tblprf b','b.prfID=a.prfID','LEFT');
-        $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
+        $builder->join('tblaccount c','c.accountID=b.accountID','INNER');
         $builder->WHERE('a.accountID',$user);
         $builder->groupby('a.assignID');
         $list = $builder->get()->getResult();
@@ -889,6 +889,21 @@ class Home extends BaseController
 
         $data = ['list'=>$list,'account'=>$account];
         return view ('canvass-sheet-request',$data);
+    }
+
+    public function localPurchase()
+    {
+        $user = session()->get('loggedUser');
+        $builder = $this->db->table('tblcanvass_review a');
+        $builder->select('a.DateReceived,a.Reference,b.DateNeeded,b.Department,b.Status,c.Fullname,b.OrderNo,a.accountID');
+        $builder->join('tblcanvass_form b','b.Reference=a.Reference','LEFT');
+        $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
+        $builder->WHERE('a.accountID',$user);
+        $builder->groupBy('a.crID')->orderby('a.crID','DESC');
+        $list = $builder->get()->getResult();
+
+        $data = ['review'=>$list];
+        return view ('selection-vendor',$data);
     }
 
     public function saveStocks()

@@ -429,27 +429,49 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
                 <div class="card-box">
-                    <div class="card-header">Assigned PRF</div>
+                    <div class="card-header">PRF - Local Purchase</div>
                     <div class="card-body">
-						<table class="data-table table stripe hover nowrap">
-							<thead>
-								<th>Date Prepared</th>
-								<th>PRF No</th>
+                    <table class="data-table table stripe hover nowrap">
+                            <thead>
+                                <th>Date Received</th>
+                                <th>Reference No</th>
+                                <th>PRF No</th>
 								<th>Requestor</th>
-								<th>Department</th>
-								<th>Reason</th>
-								<th>Date Needed</th>
-								<th>Status</th>
-								<th>Action</th>
-							</thead>
+                                <th>Department</th>
+                                <th>Date Needed</th>
+                                <th>Status</th>
+                            </thead>
 							<tbody>
-								
+								<?php foreach($review as $row): ?>
+									<tr>
+										<td><?php echo $row->DateReceived ?></td>
+										<?php if($row->Status==0){ ?>
+										<td><button type="button" class="btn btn-link view" value="<?php echo $row->Reference ?>"><?php echo $row->Reference ?></button></td>
+										<?php }else { ?>
+										<td><button type="button" class="btn btn-link" value="<?php echo $row->Reference ?>"><?php echo $row->Reference ?></button></td>
+										<?php } ?>
+										<td><?php echo $row->OrderNo ?></td>
+										<td><?php echo $row->Fullname ?></td>
+										<td><?php echo $row->Department ?></td>
+										<td><?php echo $row->DateNeeded ?></td>
+										<td>
+											<?php if($row->Status==0){ ?>
+												<span class="badge bg-warning text-white">PENDING</span>
+											<?php }else if($row->Status==1){?>
+												<span class="badge bg-success text-white">APPROVED</span>
+											<?php }else if($row->Status==2){ ?>
+												<span class="badge bg-danger text-white">REJECTED</span>
+											<?php } ?>
+										</td>
+									</tr>
+								<?php endforeach; ?>
 							</tbody>
-						</table>
+                        </table>
                     </div>
                 </div>
 			</div>
 		</div>
+        <?php echo session()->get('loggedUser'); ?>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
