@@ -926,9 +926,10 @@ class Home extends BaseController
 
     public function purchaseOrder()
     {
-        $builder = $this->db->table('tblcanvass_form');
-        $builder->select('*');
-        $builder->WHERE('Status',4);
+        $builder = $this->db->table('tblcanvass_form a');
+        $builder->select('a.*,b.Fullname');
+        $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+        $builder->WHERE('a.Status',4);
         $canvass = $builder->get()->getResult();
 
         $data = ['canvass'=>$canvass];

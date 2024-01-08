@@ -442,7 +442,19 @@
                                 <th>Action</th>
                             </thead>
 							<tbody>
-								
+							<?php foreach($canvass as $row): ?>
+                                <tr>
+                                    <td><?php echo $row->DatePrepared ?></td>
+                                    <td><?php echo $row->Reference ?></td>
+                                    <td><?php echo $row->OrderNo ?></td>
+                                    <td><?php echo $row->Fullname ?></td>
+                                    <td><?php echo $row->Department ?></td>
+                                    <td><?php echo $row->DateNeeded ?></td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-primary btn-sm generate" value="<?php echo $row->Reference ?>">Generate</button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
 							</tbody>
                         </table>
                     </div>
