@@ -144,6 +144,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/assign','Home::Assign');
     $routes->get('/local-purchase','Home::localPurchase');
     $routes->get('/view/(:any)','Home::viewVendor/$1');
+    $routes->get('/purchase-order','Home::purchaseOrder');
 });
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {

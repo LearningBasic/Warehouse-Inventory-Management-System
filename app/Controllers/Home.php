@@ -924,6 +924,17 @@ class Home extends BaseController
         return view ('view-vendor',$data);
     }
 
+    public function purchaseOrder()
+    {
+        $builder = $this->db->table('tblcanvass_form');
+        $builder->select('*');
+        $builder->WHERE('Status',4);
+        $canvass = $builder->get()->getResult();
+
+        $data = ['canvass'=>$canvass];
+        return view('purchase-order',$data);
+    }
+
     public function saveStocks()
     {
         $stockModel = new \App\Models\stocksModel();
