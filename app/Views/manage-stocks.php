@@ -356,6 +356,10 @@
 								<li><a href="<?=site_url('approve-orders')?>">For Approval&nbsp;<span class="badge badge-pill bg-primary text-white" id="notifications">0</span></a></li>
 								<li><a href="<?=site_url('canvass-sheet-request')?>">Canvass Sheet&nbsp;<span class="badge badge-pill bg-primary text-white" id="notif">0</span></a></li>
 								<?php } ?>
+								<?php if(session()->get('role')=="Staff"){?>
+								<li><a href="<?=site_url('assign')?>">Assigned PRF</a></li>
+								<li><a href="<?=site_url('local-purchase')?>">Local Purchase</a></li>
+								<?php } ?>
 							</ul>
 						</li>
 						<li class="dropdown">

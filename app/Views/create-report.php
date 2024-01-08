@@ -353,8 +353,9 @@
 							<ul class="submenu">
                                 <li><a href="<?=site_url('orders')?>">Order Materials</a></li>
 								<li><a href="<?=site_url('list-orders')?>">List Order</a></li>
-								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
-								<li><a href="<?=site_url('approve-orders')?>">For Approval</a></li>
+								<?php if(session()->get('role')=="Staff"){?>
+								<li><a href="<?=site_url('assign')?>">Assigned PRF</a></li>
+								<li><a href="<?=site_url('local-purchase')?>">Local Purchase</a></li>
 								<?php } ?>
 							</ul>
 						</li>
@@ -395,9 +396,7 @@
 							</ul>
 							<?php }else{ ?>
 							<ul class="submenu">
-								<li><a href="<?=site_url('add-report')?>">Create Report</a></li>
-								<li><a href="<?=site_url('assign')?>">Assigned PRF</a></li>
-								<li><a href="<?=site_url('local-purchase')?>">Local Purchase</a></li>
+								<li><a href="<?=site_url('add-report')?>">Create Report</a></li>>
 							</ul>
 							<?php } ?>
 						</li>

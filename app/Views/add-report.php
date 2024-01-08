@@ -355,6 +355,10 @@
 								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
 								<li><a href="<?=site_url('approve-orders')?>">For Approval</a></li>
 								<?php } ?>
+								<?php if(session()->get('role')=="Staff"){?>
+								<li><a href="<?=site_url('assign')?>">Assigned PRF</a></li>
+								<li><a href="<?=site_url('local-purchase')?>">Local Purchase</a></li>
+								<?php } ?>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -395,8 +399,6 @@
 							<?php }else{ ?>
 							<ul class="submenu">
 								<li><a href="<?=site_url('add-report')?>" class="active">Create Report</a></li>
-								<li><a href="<?=site_url('assign')?>">Assigned PRF</a></li>
-								<li><a href="<?=site_url('local-purchase')?>">Local Purchase</a></li>
 							</ul>
 							<?php } ?>
 						</li>
