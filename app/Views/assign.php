@@ -355,6 +355,7 @@
 								<?php if(session()->get('role')=="Staff"){?>
 								<li><a href="<?=site_url('assign')?>" class="active">Assigned PRF</a></li>
 								<li><a href="<?=site_url('local-purchase')?>">Local Purchase</a></li>
+								<li><a href="<?=site_url('purchase-order')?>">Purchase Order</a></li>
 								<?php } ?>
 							</ul>
 						</li>

@@ -359,6 +359,7 @@
 								<li><a href="<?=site_url('assign')?>">Assigned PRF</a></li>
 								<li><a href="<?=site_url('local-purchase')?>">Local Purchase</a></li>
 								<li><a href="javascript:void(0);" class="active">Vendor/Supplier</a></li>
+								<li><a href="<?=site_url('purchase-order')?>">Purchase Order</a></li>
 								<?php } ?>
 							</ul>
 						</li>
