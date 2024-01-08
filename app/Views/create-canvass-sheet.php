@@ -401,6 +401,7 @@
 							<ul class="submenu">
 								<li><a href="<?=site_url('add-report')?>">Create Report</a></li>
 								<li><a href="<?=site_url('assign')?>">Assigned PRF</a></li>
+								<li><a href="<?=site_url('local-purchase')?>">Local Purchase</a></li>
 							</ul>
 							<?php } ?>
 						</li>
