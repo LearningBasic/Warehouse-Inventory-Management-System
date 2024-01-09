@@ -48,7 +48,70 @@ class Home extends BaseController
         $builder->join('tblinventory b','b.categoryID=a.categoryID','LEFT');
         $builder->groupBy('a.categoryID');
         $category = $builder->get()->getResult();
-        $data = ['query'=>$query,'assignment'=>$assign,'category'=>$category,];
+        //total stocks
+        $stocks=0;
+        $builder = $this->db->table('tblinventory');
+        $builder->select('FORMAT(SUM(Qty),0)total');
+        $builder->WHERE('Qty<>',0);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $stocks= $row->total;
+        }
+        //void
+        $void=0;
+        $builder = $this->db->table('tblinventory');
+        $builder->select('FORMAT(COUNT(*),0)total');
+        $builder->WHERE('Qty',0);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $void= $row->total;
+        }
+        //reserved
+        $reserved=0;
+        $builder = $this->db->table('tblreserved');
+        $builder->select('FORMAT(IFNULL(SUM(Qty),0),0)total');
+        $builder->WHERE('Status','Hold');
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $reserved= $row->total;
+        }
+        //total item
+        $onhand=0;
+        $builder = $this->db->table('tblinventory');
+        $builder->select('SUM(Qty)total');
+        $builder->WHERE('Qty<>',0);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $onhand =  $row->total;
+        }
+        //reserved
+        $reserve=0;
+        $builder = $this->db->table('tblreserved');
+        $builder->select('SUM(Qty)total');
+        $builder->WHERE('Status','Hold');
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $reserve =  $row->total;
+        }
+        $total = $onhand + $reserve;
+        $totalItem = number_format($total,0);
+        //approved PO
+        $purchase_order=0;
+        $builder = $this->db->table('tblpurchase_logs');
+        $builder->select('COUNT(*)total');
+        $builder->WHERE('Status',1);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $purchase_order = number_format($row->total,0);
+        }
+        $data = ['query'=>$query,'assignment'=>$assign,'category'=>$category,'purchase'=>$purchase_order,
+        'stocks'=>$stocks,'void'=>$void,'reserve'=>$reserved,'total'=>$totalItem];
         return view('dashboard',$data);
     }
 

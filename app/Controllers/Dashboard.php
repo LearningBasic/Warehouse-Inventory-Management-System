@@ -59,67 +59,6 @@ class Dashboard extends BaseController
         }
     }
 
-    public function totalVoid()
-    {
-        $builder = $this->db->table('tblinventory');
-        $builder->select('FORMAT(COUNT(*),0)total');
-        $builder->WHERE('Qty',0);
-        $data = $builder->get();
-        if($row = $data->getRow())
-        {
-            echo $row->total;
-        }
-    }
-
-    public function totalStocks()
-    {
-        $builder = $this->db->table('tblinventory');
-        $builder->select('FORMAT(SUM(Qty),0)total');
-        $builder->WHERE('Qty<>',0);
-        $data = $builder->get();
-        if($row = $data->getRow())
-        {
-            echo $row->total;
-        }
-    }
-
-    public function totalReserved()
-    {
-        $builder = $this->db->table('tblreserved');
-        $builder->select('FORMAT(IFNULL(SUM(Qty),0),0)total');
-        $builder->WHERE('Status','Hold');
-        $data = $builder->get();
-        if($row = $data->getRow())
-        {
-            echo $row->total;
-        }
-    }
-
-    public function totalItem()
-    {
-        $onhand=0;
-        $builder = $this->db->table('tblinventory');
-        $builder->select('SUM(Qty)total');
-        $builder->WHERE('Qty<>',0);
-        $data = $builder->get();
-        if($row = $data->getRow())
-        {
-            $onhand =  $row->total;
-        }
-        //reserved
-        $reserve=0;
-        $builder = $this->db->table('tblreserved');
-        $builder->select('SUM(Qty)total');
-        $builder->WHERE('Status','Hold');
-        $data = $builder->get();
-        if($row = $data->getRow())
-        {
-            $reserve =  $row->total;
-        }
-        $total = $onhand + $reserve;
-        echo number_format($total,0);
-    }
-
     public function damageItem()
     {
         $builder = $this->db->table('tbldamagereport a');

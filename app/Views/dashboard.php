@@ -508,7 +508,7 @@
 						<div class="card-box height-100-p widget-style3">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="allStocks">0</div>
+									<div class="weight-700 font-24 text-dark" id="allStocks"><?=$total?></div>
 									<div class="font-14 text-secondary weight-500">
 										Physical Available
 									</div>
@@ -520,7 +520,7 @@
 						<div class="card-box height-100-p widget-style3">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="totalReserved">0</div>
+									<div class="weight-700 font-24 text-dark" id="totalReserved"><?=$reserve?></div>
 									<div class="font-14 text-secondary weight-500">
 										Soft Reserved
 									</div>
@@ -532,7 +532,7 @@
 						<div class="card-box height-100-p widget-style3">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="totalStocks">0</div>
+									<div class="weight-700 font-24 text-dark" id="totalStocks"><?=$stocks?></div>
 									<div class="font-14 text-secondary weight-500">
 										On-hand Inventory
 									</div>
@@ -544,9 +544,9 @@
 						<div class="card-box height-100-p widget-style3">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="totalOrders">0</div>
+									<div class="weight-700 font-24 text-dark" id="totalOrders"><?=$purchase?></div>
 									<div class="font-14 text-secondary weight-500">
-										New Order Item
+										Purchase Order
 									</div>
 								</div>
 							</div>
@@ -568,7 +568,7 @@
 						<div class="card-box height-100-p widget-style3">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="totalVoid">0</div>
+									<div class="weight-700 font-24 text-dark" id="totalVoid"><?=$void?></div>
 									<div class="font-14 text-secondary weight-500">
 										Out of Stocks
 									</div>
@@ -643,11 +643,7 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script>
-			$(document).ready(function(){totalItem();totalStocks();totalReserved();totalSupplier();outStock();listSupplier();notify();});
-			function totalItem(){$.ajax({url:"<?=site_url('total-item')?>",method:"GET",success:function(response){$('#allStocks').html(response);}});}
-			function totalStocks(){$.ajax({url:"<?=site_url('total-stocks')?>",method:"GET",success:function(response){$('#totalStocks').html(response);}});}
-			function totalReserved(){$.ajax({url:"<?=site_url('total-reserved')?>",method:"GET",success:function(response){$('#totalReserved').html(response);}});}
-			function totalSupplier(){$.ajax({url:"<?=site_url('total-void')?>",method:"GET",success:function(response){$('#totalVoid').html(response);}});}
+			$(document).ready(function(){outStock();listSupplier();notify();});
 			function listSupplier(){$.ajax({url:"<?=site_url('list-supplier')?>",method:"GET",success:function(response){if(response===""){$('#listSupplier').html("<li>No Records</li>");}else{$('#listSupplier').append(response);}}});}
 			function outStock(){$.ajax({url:"<?=site_url('out-of-stock')?>",method:"GET",success:function(response){if(response===""){$('#outStock').html("<li>No Records</li>");}else{$('#outStock').append(response);}}});}
 			google.charts.setOnLoadCallback(productChart);google.charts.setOnLoadCallback(assignChart);google.charts.setOnLoadCallback(categoryChart);
