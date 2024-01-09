@@ -461,6 +461,41 @@ class Home extends BaseController
         return view('system-config',$data);
     }
 
+    public function saveSettings()
+    {
+        $systemModel = new \App\Models\systemModel();
+        //data
+        $date = date('Y-m-d');
+        $user = $this->request->getPost('user');
+        //check if table has data
+        $builder = $this->db->table('tblsystem');
+        $builder->select('COUNT(systemID)total');
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            if($row->total==0)
+            {
+                //save
+                $values = ['accountID'=>$user,'Date'=>$date];
+                $systemModel->save($values);
+            }
+            else
+            {
+                //update
+                $builder = $this->db->table('tblsystem');
+                $builder->select('systemID');
+                $list = $builder->get();
+                if($rows = $list->getRow())
+                {
+                    $values = ['accountID'=>$user,'Date'=>$date];
+                    $systemModel->update($rows->systemID,$values);
+                }
+            }
+            session()->setFlashdata('success','Great! Successfully saved');
+            return redirect()->to('/configuration')->withInput();
+        }
+    }
+
     public function profile()
     {
         $user = session()->get('loggedUser');
@@ -978,6 +1013,34 @@ class Home extends BaseController
             //system logs
             $value = ['accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Created PO Number '.$code];
             $systemLogsModel->save($value);
+            //get the approver from purchase order setup
+            $builder = $this->db->table('tblsystem a');
+            $builder->select('a.accountID,b.Fullname,b.Email');
+            $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+            $data = $builder->get();
+            if($row = $data->getRow())
+            {
+                //email
+                $email = \Config\Services::email();
+                $email->setTo($row->Email,$row->Fullname);
+                $email->setFrom("fastcat.system@gmail.com","FastCat");
+                $imgURL = "assets/img/fastcat.png";
+                $email->attach($imgURL);
+                $cid = $email->setAttachmentCID($imgURL);
+                $template = "<center>
+                <img src='cid:". $cid ."' width='100'/>
+                <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+                <tr><td><center><h1>Purchase Order Form</h1></center></td></tr>
+                <tr><td><center>Hi, ".$row->Fullname."</center></td></tr>
+                <tr><td><center>This is from FastCat System, sending you a reminder that requesting for your approval of the generated Purchase Order.</center></td></tr>
+                <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+                <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+                <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+                $subject = "Purchase Order Form - For Approval";
+                $email->setSubject($subject);
+                $email->setMessage($template);
+                $email->send();
+            }
             echo "success";
         }
     }

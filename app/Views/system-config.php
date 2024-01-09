@@ -565,7 +565,7 @@
 								<div class="card-box">
 									<div class="card-header">User Account Control</div>
 									<div class="card-body">
-										<form method="post" class="row g-3">
+										<form method="post" class="row g-3" action="<?=base_url('save-settings')?>">
 											<div class="col-12 form-group">
 												<label>Employee Name</label>
 												<select class="form-control custom-select2" name="user" style="width:100%;" required>
