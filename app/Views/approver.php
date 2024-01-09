@@ -449,7 +449,7 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header">PRF (For Approval)</div>
+					<div class="card-header">PRF/Purchase Order (For Approval)</div>
 					<div class="card-body">
 						<div class="tabs">
 							<ul class="nav nav-pills justify-content-left" role="tablist">
@@ -472,6 +472,16 @@
 										role="tab"
 										aria-selected="false"
 										>Assigning</a
+									>
+								</li>
+								<li class="nav-item">
+									<a
+										class="nav-link text-blue"
+										data-toggle="tab"
+										href="#purchase"
+										role="tab"
+										aria-selected="false"
+										>New Purchase Order</a
 									>
 								</li>
 								<?php } ?>
@@ -544,6 +554,9 @@
 											<?php endforeach; ?>
 										</tbody>
 									</table>
+								</div>
+								<div class="tab-pane fade" id="purchase" role="tabpanel">
+									<br/>
 								</div>
 							</div>
 						</div>

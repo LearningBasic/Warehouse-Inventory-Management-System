@@ -191,14 +191,25 @@ class Purchase extends BaseController
     public function notification()
     {
         $user = session()->get('loggedUser');
+        $prf=0;$purchase_order=0;
         $builder = $this->db->table('tblreview');
         $builder->select('COUNT(reviewID)total');
         $builder->WHERE('Status',0)->WHERE('accountID',$user);
         $data = $builder->get();
         if($row = $data->getRow())
         {
-            echo $row->total;
+            $prf = $row->total;
         }
+
+        $builder = $this->db->table('tblpurchase_review');
+        $builder->select('COUNT(prID)total');
+        $builder->WHERE('Status',0)->WHERE('accountID',$user);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $purchase_order = $row->total;
+        }
+        echo $purchase_order+ $prf;
     }
 
     public function canvasNotification()
@@ -217,7 +228,7 @@ class Purchase extends BaseController
     public function totalNotification()
     {
         $user = session()->get('loggedUser');
-        $canvass=0;$prf=0;
+        $canvass=0;$prf=0;$purchase_order=0;
         $builder = $this->db->table('tblcanvass_review');
         $builder->select('COUNT(crID)total');
         $builder->WHERE('Status',0)->WHERE('accountID',$user);
@@ -235,7 +246,16 @@ class Purchase extends BaseController
         {
             $prf = $row->total;
         }
-        echo $prf + $canvass;
+
+        $builder = $this->db->table('tblpurchase_review');
+        $builder->select('COUNT(prID)total');
+        $builder->WHERE('Status',0)->WHERE('accountID',$user);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $purchase_order = $row->total;
+        }
+        echo $prf + $canvass + $purchase_order;
     }
 
     public function viewPurchase()
