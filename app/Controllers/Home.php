@@ -943,6 +943,7 @@ class Home extends BaseController
     public function createPO()
     {
         $purchaseOrderModel = new \App\Models\purchaseOrderModel();
+        $systemLogsModel = new \App\Models\systemLogsModel();
         //data
         $val = $this->request->getPost('value');
         $date = date('Y-m-d');
@@ -954,7 +955,7 @@ class Home extends BaseController
         ]);
         if(!$validation)
         {
-            echo "Invalid Request. The selected vendor already generated PO";
+            echo "Invalid Request. The selected vendor was already generated";
         }
         else
         {
@@ -964,11 +965,14 @@ class Home extends BaseController
             $list = $builder->get();
             if($li = $list->getRow())
             {
-                $code = "PO".str_pad($li->total, 9, '0', STR_PAD_LEFT);
+                $code = "PO-".str_pad($li->total, 9, '0', STR_PAD_LEFT);
             }
             //save
             $values = ['purchaseNumber'=>$code,'canvassID'=>$val, 'Status'=>$status,'Date'=>$date,'accountID'=>$user];
             $purchaseOrderModel->save($values);
+            //system logs
+            $value = ['accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Created PO Number '.$code];
+            $systemLogsModel->save($value);
             echo "success";
         }
     }
