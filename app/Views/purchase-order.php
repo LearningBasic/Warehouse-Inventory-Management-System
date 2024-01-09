@@ -455,7 +455,8 @@
                                     <td><?php echo $row->Terms ?></td>
                                     <td><?php echo $row->Warranty ?></td>
                                     <td>
-                                        <a class="btn btn-outline-primary btn-sm" href="<?=site_url('generate/')?><?php echo $row->canvassID ?>" target="_BLANK">Generate</a>
+										<button type="button" class="btn btn-outline-primary btn-sm generate" value="<?php echo $row->canvassID ?>">Create</button>
+                                        <!-- <a class="btn btn-outline-primary btn-sm" href="<?=site_url('generate/')?><?php echo $row->canvassID ?>" target="_BLANK">Generate</a> -->
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -476,6 +477,42 @@
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        
+        <script>
+			$(document).on('click','.generate',function(e)
+            {
+                e.preventDefault();
+                Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to create purchase order form with this selected Vendor?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						$.ajax({
+							url:"<?=site_url('create-purchase-order')?>",method:"POST",
+							data:{value:val},success:function(response)
+							{
+								if(response==="success")
+								{
+									location.reload();
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
+					}
+					else
+					{
+						$('.accept').attr("value","Accept");
+					}
+				});
+            });
+		</script>
 	</body>
 </html>

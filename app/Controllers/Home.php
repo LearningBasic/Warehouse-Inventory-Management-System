@@ -931,6 +931,7 @@ class Home extends BaseController
         $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
         $builder->join('tblcanvass_sheet c','c.Reference=a.Reference','LEFT');
         $builder->join('tbl_order_item d','d.orderID=c.orderID','LEFT');
+        $builder->join('tblpurchase_logs e','e.');
         $builder->WHERE('a.Status',4)->WHERE('c.Remarks','Selected');
         $builder->groupBy('c.canvassID');
         $canvass = $builder->get()->getResult();
@@ -941,13 +942,13 @@ class Home extends BaseController
 
     public function generatePO($id=null)
     {
-        $builder = $this->db->table('tblcanvass_sheet a');
-        $builder->select('a.OrderNo,a.Supplier,a.Price,a.Terms,a.Warranty,b.Qty,b.Item_Name');
-        $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
-        $builder->WHERE('a.canvassID',$id);
-        $purchase = $builder->get()->getResult();
-        $data = ['purchase'=>$purchase];
-        return view('generate-purchase-order',$data);
+        // $builder = $this->db->table('tblcanvass_sheet a');
+        // $builder->select('a.OrderNo,a.Supplier,a.Price,a.Terms,a.Warranty,b.Qty,b.Item_Name');
+        // $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
+        // $builder->WHERE('a.canvassID',$id);
+        // $purchase = $builder->get()->getResult();
+        // $data = ['purchase'=>$purchase];
+        // return view('generate-purchase-order',$data);
     }
 
     public function saveStocks()
