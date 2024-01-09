@@ -984,6 +984,7 @@ class Home extends BaseController
     {
         $purchaseOrderModel = new \App\Models\purchaseOrderModel();
         $systemLogsModel = new \App\Models\systemLogsModel();
+        $purchaseReviewModel = new \App\Models\purchaseReviewModel();
         //data
         $val = $this->request->getPost('value');
         $date = date('Y-m-d');
@@ -1020,6 +1021,9 @@ class Home extends BaseController
             $data = $builder->get();
             if($row = $data->getRow())
             {
+                //save the data
+                $values = ['accountID'=>$row->accountID,'purchaseNumber'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>''];
+                $purchaseReviewModel->save($values);
                 //email
                 $email = \Config\Services::email();
                 $email->setTo($row->Email,$row->Fullname);
@@ -1033,6 +1037,8 @@ class Home extends BaseController
                 <tr><td><center><h1>Purchase Order Form</h1></center></td></tr>
                 <tr><td><center>Hi, ".$row->Fullname."</center></td></tr>
                 <tr><td><center>This is from FastCat System, sending you a reminder that requesting for your approval of the generated Purchase Order.</center></td></tr>
+                <tr><td><center>Purchase Order No</center></td></tr>
+                <tr><td><center><h2>".$code."</h2></center></td></tr>
                 <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
                 <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
                 <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
