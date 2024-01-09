@@ -74,6 +74,23 @@
                 width: 4px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
+			  .loading-spinner{
+				width:30px;
+				height:30px;
+				border:2px solid indigo;
+				border-radius:50%;
+				border-top-color:#0001;
+				display:inline-block;
+				animation:loadingspinner .7s linear infinite;
+				}
+				@keyframes loadingspinner{
+				0%{
+					transform:rotate(0deg)
+				}
+				100%{
+					transform:rotate(360deg)
+				}
+				}
         </style>
 	</head>
 	<body>
@@ -512,6 +529,16 @@
                 </div>
             </div>
         </div>
+		<div class="modal" id="modal-loading" data-backdrop="static">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+				<div class="modal-body text-center">
+					<div class="loading-spinner mb-2"></div>
+					<div>Loading</div>
+				</div>
+				</div>
+			</div>
+		</div>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
@@ -556,6 +583,7 @@
 					if (result.isConfirmed) {
 						var code = $('#code').val();
 						var user = $('#receiver').val();
+						$('#modal-loading').modal('show');
 						$.ajax({
 							url:"<?=site_url('accept-request')?>",method:"POST",
 							data:{code:code,user:user},success:function(response)
@@ -568,6 +596,7 @@
 								{
 									alert(response);
 								}
+								$('#modal-loading').modal('hide');
 							}
 						});
 					}
