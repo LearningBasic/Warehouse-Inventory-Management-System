@@ -455,7 +455,7 @@
                                     <td><?php echo $row->Terms ?></td>
                                     <td><?php echo $row->Warranty ?></td>
                                     <td>
-                                        <button type="button" class="btn btn-outline-primary btn-sm generate" value="<?php echo $row->canvassID ?>">Generate</button>
+                                        <a class="btn btn-outline-primary btn-sm" href="<?=site_url('generate/')?><?php echo $row->canvassID ?>" target="_BLANK">Generate</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
