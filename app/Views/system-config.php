@@ -528,6 +528,16 @@
                                 >System Logs/Activities</a
                             >
                         </li>
+						<li class="nav-item">
+                            <a
+                                class="nav-link text-blue"
+                                data-toggle="tab"
+                                href="#purchase6"
+                                role="tab"
+                                aria-selected="false"
+                                >Purchase Order Setup</a
+                            >
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="home6" role="tabpanel">
@@ -645,6 +655,11 @@
 								</div>
                             </div>
                         </div>
+						<div class="tab-pane fade" id="purchase6" role="tabpanel">
+							<div class="pd-20">
+								
+							</div>
+						</div>
                     </div>
                 </div>
 			</div>
