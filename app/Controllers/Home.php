@@ -451,8 +451,13 @@ class Home extends BaseController
         $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
         $builder->orderby('a.systemID','DESC');
         $logs = $builder->get()->getResult();
+        //administrator
+        $builder = $this->db->table('tblaccount');
+        $builder->select('*');
+        $builder->WHERE('systemRole','Administrator');
+        $admin = $builder->get()->getResult();
 
-        $data = ['account'=>$account,'logs'=>$logs];
+        $data = ['account'=>$account,'logs'=>$logs,'admin'=>$admin];
         return view('system-config',$data);
     }
 

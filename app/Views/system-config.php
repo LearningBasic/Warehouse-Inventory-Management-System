@@ -94,68 +94,6 @@
 		<div class="header">
 			<div class="header-left">
 				<div class="menu-icon bi bi-list"></div>
-				<div
-					class="search-toggle-icon bi bi-search"
-					data-toggle="header_search"
-				></div>
-				<div class="header-search">
-					<form>
-						<div class="form-group mb-0">
-							<i class="dw dw-search2 search-icon"></i>
-							<input
-								type="text"
-								class="form-control search-input"
-								placeholder="Search Here"
-							/>
-							<div class="dropdown">
-								<a
-									class="dropdown-toggle no-arrow"
-									href="#"
-									role="button"
-									data-toggle="dropdown"
-								>
-									<i class="ion-arrow-down-c"></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-right">
-									<div class="form-group row">
-										<label class="col-sm-12 col-md-2 col-form-label"
-											>From</label
-										>
-										<div class="col-sm-12 col-md-10">
-											<input
-												class="form-control form-control-sm form-control-line"
-												type="text"
-											/>
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-sm-12 col-md-2 col-form-label">To</label>
-										<div class="col-sm-12 col-md-10">
-											<input
-												class="form-control form-control-sm form-control-line"
-												type="text"
-											/>
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-sm-12 col-md-2 col-form-label"
-											>Subject</label
-										>
-										<div class="col-sm-12 col-md-10">
-											<input
-												class="form-control form-control-sm form-control-line"
-												type="text"
-											/>
-										</div>
-									</div>
-									<div class="text-right">
-										<button class="btn btn-primary">Search</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
 			</div>
 			<div class="header-right">
 				<div class="dashboard-setting user-notification">
@@ -193,11 +131,6 @@
 							>
 						</div>
 					</div>
-				</div>
-				<div class="github-link">
-					<a href="https://github.com/dropways/deskapp" target="_blank"
-						><img src="vendors/images/github.svg" alt=""
-					/></a>
 				</div>
 			</div>
 		</div>
@@ -499,44 +432,16 @@
                 <div class="tab">
                     <ul class="nav nav-pills justify-content-left" role="tablist">
                         <li class="nav-item">
-                            <a
-                                class="nav-link active text-blue"
-                                data-toggle="tab"
-                                href="#home6"
-                                role="tab"
-                                aria-selected="true"
-                                >Inventory Setup</a
-                            >
+                            <a class="nav-link active text-blue" data-toggle="tab" href="#home6" role="tab" aria-selected="true">Inventory Setup</a>
                         </li>
                         <li class="nav-item">
-                            <a
-                                class="nav-link text-blue"
-                                data-toggle="tab"
-                                href="#profile6"
-                                role="tab"
-                                aria-selected="false"
-                                >User Management</a
-                            >
+                            <a class="nav-link text-blue" data-toggle="tab" href="#profile6" role="tab" aria-selected="false">User Management</a>
                         </li>
                         <li class="nav-item">
-                            <a
-                                class="nav-link text-blue"
-                                data-toggle="tab"
-                                href="#contact6"
-                                role="tab"
-                                aria-selected="false"
-                                >System Logs/Activities</a
-                            >
+                            <a class="nav-link text-blue" data-toggle="tab" href="#contact6" role="tab" aria-selected="false">System Logs/Activities</a>
                         </li>
 						<li class="nav-item">
-                            <a
-                                class="nav-link text-blue"
-                                data-toggle="tab"
-                                href="#purchase6"
-                                role="tab"
-                                aria-selected="false"
-                                >Purchase Order Setup</a
-                            >
+                            <a class="nav-link text-blue" data-toggle="tab" href="#purchase6" role="tab" aria-selected="false">System Setup</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -657,7 +562,25 @@
                         </div>
 						<div class="tab-pane fade" id="purchase6" role="tabpanel">
 							<div class="pd-20">
-								
+								<div class="card-box">
+									<div class="card-header">User Account Control</div>
+									<div class="card-body">
+										<form method="post" class="row g-3">
+											<div class="col-12 form-group">
+												<label>Employee Name</label>
+												<select class="form-control custom-select2" name="user" style="width:100%;" required>
+													<option value="">Choose</option>
+													<?php foreach($admin as $row): ?>
+														<option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?></option>
+													<?php endforeach; ?>
+												</select>
+											</div>
+											<div class="col-12 form-group">
+												<button type="submit" class="btn btn-primary" id="btnSave">Save Changes</button>
+											</div>
+										</form>
+									</div>
+								</div>
 							</div>
 						</div>
                     </div>
