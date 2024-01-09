@@ -109,6 +109,7 @@ $routes->post('accept-assignment','Home::acceptAssignment');
 $routes->post('accept-request','Home::acceptRequest');
 $routes->post('cancel-request','Home::cancelRequest');
 $routes->post('proceed','Home::proceedRequest');
+$routes->post('create-purchase-order','Home::createPO');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
@@ -145,7 +146,6 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/local-purchase','Home::localPurchase');
     $routes->get('/view/(:any)','Home::viewVendor/$1');
     $routes->get('/purchase-order','Home::purchaseOrder');
-    $routes->get('/generate/(:any)','Home::generatePO');
 });
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {

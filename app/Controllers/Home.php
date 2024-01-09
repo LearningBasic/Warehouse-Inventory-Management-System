@@ -927,11 +927,11 @@ class Home extends BaseController
     public function purchaseOrder()
     {
         $builder = $this->db->table('tblcanvass_form a');
-        $builder->select('c.*,b.Fullname,d.Qty');
+        $builder->select('c.*,b.Fullname,d.Qty,e.Status');
         $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
         $builder->join('tblcanvass_sheet c','c.Reference=a.Reference','LEFT');
         $builder->join('tbl_order_item d','d.orderID=c.orderID','LEFT');
-        $builder->join('tblpurchase_logs e','e.');
+        $builder->join('tblpurchase_logs e','e.canvassID=c.canvassID','LEFT');
         $builder->WHERE('a.Status',4)->WHERE('c.Remarks','Selected');
         $builder->groupBy('c.canvassID');
         $canvass = $builder->get()->getResult();
@@ -940,15 +940,37 @@ class Home extends BaseController
         return view('purchase-order',$data);
     }
 
-    public function generatePO($id=null)
+    public function createPO()
     {
-        // $builder = $this->db->table('tblcanvass_sheet a');
-        // $builder->select('a.OrderNo,a.Supplier,a.Price,a.Terms,a.Warranty,b.Qty,b.Item_Name');
-        // $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
-        // $builder->WHERE('a.canvassID',$id);
-        // $purchase = $builder->get()->getResult();
-        // $data = ['purchase'=>$purchase];
-        // return view('generate-purchase-order',$data);
+        $purchaseOrderModel = new \App\Models\purchaseOrderModel();
+        //data
+        $val = $this->request->getPost('value');
+        $date = date('Y-m-d');
+        $status = 0;
+        $user = session()->get('loggedUser');
+        //validate if already exist
+        $validation  = $this->validate([
+            'value'=>'is_unique[tblpurchase_logs.canvassID]'
+        ]);
+        if(!$validation)
+        {
+            echo "Invalid Request. The selected vendor already generated PO";
+        }
+        else
+        {
+            $code="";
+            $builder = $this->db->table('tblpurchase_logs');
+            $builder->select('COUNT(purchaseLogID)+1 as total');
+            $list = $builder->get();
+            if($li = $list->getRow())
+            {
+                $code = "PO".str_pad($li->total, 9, '0', STR_PAD_LEFT);
+            }
+            //save
+            $values = ['purchaseNumber'=>$code,'canvassID'=>$val, 'Status'=>$status,'Date'=>$date,'accountID'=>$user];
+            $purchaseOrderModel->save($values);
+            echo "success";
+        }
     }
 
     public function saveStocks()
