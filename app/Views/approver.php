@@ -557,6 +557,36 @@
 								</div>
 								<div class="tab-pane fade" id="purchase" role="tabpanel">
 									<br/>
+									<table class="data-table table stripe hover nowrap">
+										<thead>
+											<th>Date Received</th>
+											<th>P.O. Number</th>
+											<th>Vendor/Supplier</th>
+											<th>Unit Price</th>
+											<th>Date Approved</th>
+											<th>Status</th>
+										</thead>
+										<tbody>
+											<?php foreach($purchase as $row): ?>
+												<tr>
+													<td><?php echo $row->DateReceived ?></td>
+													<td><?php echo $row->purchaseNumber ?></td>
+													<td><?php echo $row->Supplier ?></td>
+													<td style="text-align:right;"><?php echo number_format($row->Price,2) ?></td>
+													<td><?php echo $row->DateApproved ?></td>
+													<td>
+														<?php if($row->Status==0){ ?>
+															<span class="badge bg-warning text-white">PENDING</span>
+														<?php }else if($row->Status==1){?>
+															<span class="badge bg-success text-white">APPROVED</span>
+														<?php }else{?>
+															<span class="badge bg-danger text-white">CANCELLED</span>
+														<?php } ?>
+													</td>
+												</tr>
+											<?php endforeach; ?>
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
