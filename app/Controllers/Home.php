@@ -1389,6 +1389,18 @@ class Home extends BaseController
 
     public function approve()
     {
-        
+        $purchaseOrderModel = new \App\Models\purchaseOrderModel();
+        $purchaseReviewModel = new \App\Models\purchaseReviewModel();
+        $val = $this->request->getPost('value');
+        $date = date('Y-m-d');
+        //update the approver status
+        $values = ['Status'=>1,'DateApproved'=>$date];
+        $purchaseReviewModel->update($val,$values);
+        //update the PO status
+        $purchase = $purchaseReviewModel->WHERE('prID',$val)->first();
+        $purchase_order = $purchaseOrderModel->WHERE('purchaseNumber',$purchase['purchaseNumber'])->first();
+        $values = ['Status'=>1];
+        $purchaseOrderModel->update($purchase_order['purchaseLogID'],$values);
+        echo "success";
     }
 }
