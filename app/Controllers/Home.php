@@ -970,8 +970,15 @@ class Home extends BaseController
         $builder->WHERE('systemRole','Staff');
         $account = $builder->get()->getResult();
         //purchase order
+        $builder = $this->db->table('tblpurchase_review a');
+        $builder->select('a.DateReceived,a.Status,a.purchaseNumber,a.DateApproved,c.Supplier,c.Price');
+        $builder->join('tblpurchase_logs b','b.purchaseNumber=a.purchaseNumber','LEFT');
+        $builder->join('tblcanvass_sheet c','c.canvassID=b.canvassID','LEFT');
+        $builder->WHERE('a.accountID',$user);
+        $builder->groupBy('a.prID');
+        $purchase = $builder->get()->getResult();
 
-        $data = ['review'=>$review,'assign'=>$assign,'account'=>$account];
+        $data = ['review'=>$review,'assign'=>$assign,'account'=>$account,'purchase'=>$purchase];
         return view('approver',$data);
     }
 
