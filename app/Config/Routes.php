@@ -107,6 +107,7 @@ $routes->post('cancel-request','Home::cancelRequest');
 $routes->post('proceed','Home::proceedRequest');
 $routes->post('create-purchase-order','Home::createPO');
 $routes->post('save-settings','Home::saveSettings');
+$routes->post('approve','Home::approve');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {

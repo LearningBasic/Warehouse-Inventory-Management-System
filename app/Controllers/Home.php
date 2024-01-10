@@ -971,7 +971,7 @@ class Home extends BaseController
         $account = $builder->get()->getResult();
         //purchase order
         $builder = $this->db->table('tblpurchase_review a');
-        $builder->select('a.DateReceived,a.Status,a.purchaseNumber,a.DateApproved,c.Supplier,c.Price');
+        $builder->select('a.prID,a.DateReceived,a.Status,a.purchaseNumber,a.DateApproved,c.Supplier,c.Price');
         $builder->join('tblpurchase_logs b','b.purchaseNumber=a.purchaseNumber','LEFT');
         $builder->join('tblcanvass_sheet c','c.canvassID=b.canvassID','LEFT');
         $builder->WHERE('a.accountID',$user);
@@ -1385,5 +1385,10 @@ class Home extends BaseController
         $canvass = $canvasFormModel->WHERE('Reference',$code)->first();
         $canvasFormModel->update($canvass['formID'],$values);
         echo "success";
+    }
+
+    public function approve()
+    {
+        
     }
 }

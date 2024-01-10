@@ -565,6 +565,7 @@
 											<th>Unit Price</th>
 											<th>Date Approved</th>
 											<th>Status</th>
+											<th>Action</th>
 										</thead>
 										<tbody>
 											<?php foreach($purchase as $row): ?>
@@ -581,6 +582,15 @@
 															<span class="badge bg-success text-white">APPROVED</span>
 														<?php }else{?>
 															<span class="badge bg-danger text-white">CANCELLED</span>
+														<?php } ?>
+													</td>
+													<td>
+														<?php if($row->Status==0){ ?>
+															<button type="button" class="btn btn-primary btn-sm approve" value="<?php echo $row->prID ?>">
+															<span class="dw dw-check"></span>&nbsp;Approve?
+															</button>														
+														<?php }else{?>
+															-
 														<?php } ?>
 													</td>
 												</tr>
@@ -799,6 +809,40 @@
 						{
 							alert(response);
 						}
+					}
+				});
+			});
+
+			$(document).on('click','.approve',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to approve this selected Purchase Number?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						$('#modal-loading').modal('show');
+						$.ajax({
+							url:"<?=site_url('approve')?>",method:"POST",
+							data:{value:val},success:function(response)
+							{
+								if(response==="success")
+								{
+									location.reload();
+								}
+								else
+								{
+									alert(response);
+								}
+								$('#modal-loading').modal('hide');
+							}
+						});
 					}
 				});
 			});
