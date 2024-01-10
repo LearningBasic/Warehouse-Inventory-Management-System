@@ -108,6 +108,8 @@ $routes->post('proceed','Home::proceedRequest');
 $routes->post('create-purchase-order','Home::createPO');
 $routes->post('save-settings','Home::saveSettings');
 $routes->post('approve','Home::approve');
+$routes->get('search-vendor','Home::searchVendor');
+$routes->get('vendor-information','Home::vendorInformation');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {

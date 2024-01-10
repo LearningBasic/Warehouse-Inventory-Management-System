@@ -474,9 +474,13 @@
                                     <td><?php echo $row->Warranty ?></td>
                                     <td>
 										<?php if(empty($row->Status)){ ?>
-											<button type="button" class="btn btn-outline-primary btn-sm generate" value="<?php echo $row->canvassID ?>">Create</button>
+											<button type="button" class="btn btn-outline-primary btn-sm generate" value="<?php echo $row->canvassID ?>">
+											<span class="dw dw-add"></span>&nbsp;Create
+											</button>
 										<?php }else{ ?>
-											<a class="btn btn-outline-success btn-sm" href="<?=site_url('generate/')?><?php echo $row->canvassID ?>" target="_BLANK">Generate</a>
+											<a class="btn btn-success btn-sm" href="<?=site_url('download')?><?php echo $row->canvassID ?>">
+											<span class="dw dw-download"></span>&nbsp;Download
+											</a>
 										<?php } ?>
                                     </td>
                                 </tr>

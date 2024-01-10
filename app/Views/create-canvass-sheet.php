@@ -527,13 +527,14 @@
 							</div>
 							<div class="col-12 form-group">
 								<label>Vendors/Supplier's Name</label>
-								<input type="text" class="form-control" name="supplier" required/>
+								<input type="search" class="form-control" id="supplier" name="supplier" required/>
+								<div id="listOfName"></div>
 							</div>
 							<div class="col-12 form-group">
 								<div class="row g-3">
 									<div class="col-lg-6">
 										<label>Contact Person</label>
-										<input type="text" class="form-control" name="contactPerson" required/>
+										<input type="text" class="form-control" name="contactPerson" id="person" required/>
 									</div>
 									<div class="col-lg-6">
 										<label>Unit Price</label>
@@ -543,11 +544,11 @@
 							</div>
 							<div class="col-12 form-group">
 								<label>Contact Number</label>
-								<input type="phone" class="form-control" maxlength="11" minlength="11" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required/>
+								<input type="phone" class="form-control" maxlength="11" minlength="11" name="phone" id="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required/>
 							</div>
 							<div class="col-12 form-group">
 								<label>Address</label>
-								<textarea class="form-control" name="address" required></textarea>
+								<textarea class="form-control" name="address" id="address" required></textarea>
 							</div>
 							<div class="col-12 form-group">
 								<div class="row g-3">
@@ -677,6 +678,38 @@
 						});
 					}
 				});
+			});
+			$('#supplier').keyup(function()
+			{
+				var val = $(this).val();
+				if(val !=='')
+				{
+					$.ajax({
+						url:"<?=site_url('search-vendor')?>",type:"GET",
+						data:{keyword:val},
+						success:function(data)
+						{
+							$('#listOfName').fadeIn();
+							$('#listOfName').html(data);
+						}
+					});
+				}
+			});
+			$(document).on('click','.li',function()
+			{
+				$('#supplier').val($(this).text());
+				$('#listOfName').fadeOut();
+				var val = $('#supplier').val();
+				$.ajax({
+						url:"<?=site_url('vendor-information')?>",type:"GET",
+						data:{value:val},dataType:"json",
+						success:function(data)
+						{
+							$('#address').val(data["Address"]);
+							$('#phone').val(data["contactNumber"]);
+							$('#person').val(data["contactPerson"]);
+						}
+					});
 			});
 		</script>
 	</body>

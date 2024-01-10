@@ -1403,4 +1403,33 @@ class Home extends BaseController
         $purchaseOrderModel->update($purchase_order['purchaseLogID'],$values);
         echo "success";
     }
+
+    public function searchVendor()
+    {
+        $val = "%".$this->request->getGet('keyword')."%";
+        $builder = $this->db->table('tblsupplier');
+        $builder->select('*');
+        $builder->LIKE('supplierName',$val);
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <option class="li" value="<?php echo $row->supplierID ?>"><?php echo $row->supplierName ?></option>
+            <?php
+        }
+    }
+
+    public function vendorInformation()
+    {
+        $val = "%".$this->request->getGet('value')."%";
+        $builder = $this->db->table('tblsupplier');
+        $builder->select('*');
+        $builder->LIKE('supplierName',$val);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $info = array("Address"=>$row->Address,"contactNumber"=>$row->contactNumber,"contactPerson"=>$row->contactPerson);
+            echo json_encode($info);
+        }
+    }
 }
