@@ -339,7 +339,7 @@ class Report extends BaseController
                             <tr>
                                 <td colspan='3'>&nbsp;</td>
                                 <td style='font-size:18px;font-weight:bold;'>VAT TOTAL</td>
-                                <td style='text-align:right;font-size:18px;font-weight:bold;'>".number_format($total_sales,2)."</td>
+                                <td style='text-align:right;font-size:18px;font-weight:bold;'>PHP ".number_format($total_sales,2)."</td>
                             </tr>
                         </tbody>
                     </table>
