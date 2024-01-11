@@ -346,7 +346,6 @@ class Report extends BaseController
                     </td>
                 </tr>
                 <tr><td colspan='3'>&nbsp;</td></tr>
-                <tr><td>Delivery/Shipping Instructions : </td><td colspan='2'></td></tr>
                 <tr>
                     <td>PTU No. Date Issued<br/>Valid until<br/>Range of serial nos from<br/>Valid for Five (5) Years Only</td>
                     <td></td>
