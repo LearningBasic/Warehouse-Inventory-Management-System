@@ -123,9 +123,11 @@ class Report extends BaseController
         $dompdf = new Dompdf();
         $purchase_number="";
         $builder = $this->db->table('tblpurchase_logs a');
-        $builder->select('a.purchaseNumber,a.Date,b.OrderNo,b.Supplier,b.Price,b.Terms,b.Address,c.Qty,c.Item_Name,c.ItemUnit');
+        $builder->select('a.purchaseNumber,a.Date,b.OrderNo,b.Supplier,b.Price,b.Terms,b.Address,c.Qty,c.Item_Name,c.ItemUnit,e.Fullname');
         $builder->join('tblcanvass_sheet b','b.canvassID=a.canvassID','LEFT');
         $builder->join('tbl_order_item c','c.orderID=b.orderID','LEFT');
+        $builder->join('tblpurchase_review d','d.purchaseNumber=a.purchaseNumber','LEFT');
+        $builder->join('tblaccount e','e.accountID=d.accountID','LEFT');
         $builder->WHERE('a.canvassID',$id);
         $data = $builder->get(); 
         $template = '';  
@@ -345,6 +347,21 @@ class Report extends BaseController
                 </tr>
                 <tr><td colspan='3'>&nbsp;</td></tr>
                 <tr><td>Delivery/Shipping Instructions : </td><td colspan='2'></td></tr>
+                <tr>
+                    <td>PTU No. Date Issued<br/>Valid until<br/>Range of serial nos from<br/>Valid for Five (5) Years Only</td>
+                    <td></td>
+                    <td><p style='text-align:left;'>Order Confirmed By:</p>
+                    <center><u>&nbsp;&nbsp;&nbsp;".$row->Fullname."&nbsp;&nbsp;&nbsp;</u></center><center>AUTHORIZED SIGNATURE</center>
+                    </td>
+                </tr>
+                <tr><td></td><td colspan='2' style='text-align:right;'><i>THIS PURCHASE ORDER SHALL BE VALID UNTIL ________________</i></td></tr>
+                <tr><td colspan='3'>&nbsp;</td></tr>
+                <tr>
+                  <td></td>
+                  <td><center><b><u style='font-size:10px;'>THIS DOCUMENT IS NOT VALID FOR CLAIM OF INPUT TAXES</u></b></center></td>
+                  <td>Ref. No: ".$row->purchaseNumber."</td>
+                </tr>
+                <tr><td colspan='3'><small><center>This is a computer system generated form</center></small></td></tr>
                 </table>
             </body>";
             
