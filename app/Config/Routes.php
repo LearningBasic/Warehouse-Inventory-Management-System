@@ -110,6 +110,7 @@ $routes->post('save-settings','Home::saveSettings');
 $routes->post('approve','Home::approve');
 $routes->get('search-vendor','Home::searchVendor');
 $routes->get('vendor-information','Home::vendorInformation');
+$routes->get('download/(:any)','Report::Download/$1');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {

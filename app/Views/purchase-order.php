@@ -478,7 +478,7 @@
 											<span class="dw dw-add"></span>&nbsp;Create
 											</button>
 										<?php }else{ ?>
-											<a class="btn btn-success btn-sm" href="<?=site_url('download')?><?php echo $row->canvassID ?>">
+											<a class="btn btn-success btn-sm" href="<?=site_url('download/')?><?php echo $row->canvassID ?>">
 											<span class="dw dw-download"></span>&nbsp;Download
 											</a>
 										<?php } ?>
