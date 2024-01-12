@@ -51,7 +51,7 @@ class Home extends BaseController
         //total stocks
         $stocks=0;
         $builder = $this->db->table('tblinventory');
-        $builder->select('FORMAT(SUM(Qty),0)total');
+        $builder->select('FORMAT(IFNULL(SUM(Qty),0),0)total');
         $builder->WHERE('Qty<>',0);
         $data = $builder->get();
         if($row = $data->getRow())
