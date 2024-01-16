@@ -366,7 +366,7 @@ class Report extends BaseController
             
         }
         $dompdf->loadHtml($template);
-        $dompdf->setPaper('letter', 'portrait');
+        $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
         $dompdf->stream($purchase_number.".pdf");
         exit();
