@@ -516,6 +516,7 @@
 														<td><?php if($row->Status==1){echo "<span class='badge bg-success text-white'>Active</span>";}else{echo "<span class='badge bg-danger text-white'>Inactive</span>";} ?></td>
 														<td><?php echo $row->systemRole ?></td>
 														<td>
+															<?php if($row->Status==1){ ?>
 															<div class="dropdown">
 																<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
 																	href="#" role="button" data-toggle="dropdown">
@@ -523,9 +524,20 @@
 																</a>
 																<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 																	<a class="dropdown-item" href="<?=site_url('edit-account/')?><?php echo $row->accountID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
-																	<button type="button" class="dropdown-item deadstock" value="<?php echo $row->accountID ?>"><i class="icon-copy dw dw-reload"></i>Reset</button>
+																	<button type="button" class="dropdown-item reset" value="<?php echo $row->accountID ?>"><i class="icon-copy dw dw-reload"></i>Reset</button>
 																</div>
 															</div>
+															<?php }else{ ?>
+																<div class="dropdown">
+																<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+																	href="#" role="button" data-toggle="dropdown">
+																	<i class="dw dw-more"></i>
+																</a>
+																<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+																	<a class="dropdown-item" href="<?=site_url('edit-account/')?><?php echo $row->accountID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
+																</div>
+															</div>
+															<?php } ?>
 														</td>
 													</tr>
 												<?php endforeach; ?>
@@ -921,6 +933,39 @@
 					}
 				});
 			}
+
+			$(document).on('click','.reset',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to reset the password?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						$.ajax({
+							url:"<?=site_url('reset-account')?>",method:"POST",
+							data:{value:val},success:function(response)
+							{
+								if(response==="success")
+								{
+									location.reload();
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
+					}
+				});
+			});
+			
         </script>
 	</body>
 </html>
