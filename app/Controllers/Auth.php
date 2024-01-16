@@ -48,23 +48,31 @@ class Auth extends BaseController
         else
         {
             $user_info = $accountModel->where('username', $username)->WHERE('Status',1)->first();
-            $check_password = Hash::check($password, $user_info['password']);
-            if(!$check_password || empty($check_password))
+            if(empty($user_info['accountID']))
             {
-                session()->setFlashdata('fail','Invalid Username or Password!');
+                session()->setFlashdata('fail','Invalid! Account is disabled');
                 return redirect()->to('/auth')->withInput();
             }
             else
             {
-                session()->set('loggedUser', $user_info['accountID']);
-                session()->set('fullname', $user_info['Fullname']);
-                session()->set('role',$user_info['systemRole']);
-                session()->set('assignment',$user_info['warehouseID']);
-                session()->set('department',$user_info['Department']);
-                //save the logs
-                $values = ['accountID'=>$user_info['accountID'],'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Logged-In'];
-                $systemLogsModel->save($values);
-                return redirect()->to('/dashboard');
+                $check_password = Hash::check($password, $user_info['password']);
+                if(!$check_password || empty($check_password))
+                {
+                    session()->setFlashdata('fail','Invalid Username or Password!');
+                    return redirect()->to('/auth')->withInput();
+                }
+                else
+                {
+                    session()->set('loggedUser', $user_info['accountID']);
+                    session()->set('fullname', $user_info['Fullname']);
+                    session()->set('role',$user_info['systemRole']);
+                    session()->set('assignment',$user_info['warehouseID']);
+                    session()->set('department',$user_info['Department']);
+                    //save the logs
+                    $values = ['accountID'=>$user_info['accountID'],'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Logged-In'];
+                    $systemLogsModel->save($values);
+                    return redirect()->to('/dashboard');
+                }
             }
         }
     }
