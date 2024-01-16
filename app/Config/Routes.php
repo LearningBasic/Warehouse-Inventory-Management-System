@@ -59,6 +59,7 @@ $routes->post('save-stocks','Home::saveStocks');
 $routes->post('remove-category','Home::removeCategory');
 $routes->post('remove-location','Home::removeLocation');
 $routes->post('remove-industry','Home::removeIndustry');
+$routes->post('reset-account','Home::resetAccount');
 //fetch the product details
 $routes->get('product-information','ProductController::productInfo');
 $routes->post('save-report','ProductController::saveReport');
