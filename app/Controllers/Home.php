@@ -1440,6 +1440,16 @@ class Home extends BaseController
 
     public function overAllReport()
     {
-        return view('overall-report');
+        $total=0;
+        $builder = $this->db->table('tblprf');
+        $builder->select('COUNT(prfID)total');
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $total = $row->total;
+        }
+        //tag as released
+        $data = ['total'=>$total];
+        return view('overall-report',$data);
     }
 }
