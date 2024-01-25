@@ -450,7 +450,7 @@
                                 <div class="card-box">
                                     <div class="card-body">
                                         <div class="card-title">Cost of Purchase Order</div>
-                                        <h3>0.00</h3>
+                                        <h3><?=number_format($cost,2)?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -466,7 +466,7 @@
                                 <div class="card-box">
                                     <div class="card-body">
                                         <div class="card-title">Released P.O.</div>
-                                        <h3>0</h3>
+                                        <h3><?=$release?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -474,7 +474,7 @@
                                 <div class="card-box">
                                     <div class="card-body">
                                         <div class="card-title">Unreleased P.O.</div>
-                                        <h3>0</h3>
+                                        <h3><?=$unrelease?></h3>
                                     </div>
                                 </div>
                             </div>

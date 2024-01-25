@@ -1440,6 +1440,17 @@ class Home extends BaseController
 
     public function overAllReport()
     {
+        $cost=0;
+        $builder = $this->db->table('tblcanvass_sheet a');
+        $builder->select('SUM(a.Price*b.Qty)total');
+        $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
+        $builder->join('tblpurchase_logs c','c.canvassID=a.canvassID','LEFT');
+        $builder->WHERE('c.Status',1);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $cost = $row->total;
+        }
         $total=0;
         $builder = $this->db->table('tblprf');
         $builder->select('COUNT(prfID)total');
@@ -1449,7 +1460,26 @@ class Home extends BaseController
             $total = $row->total;
         }
         //tag as released
-        $data = ['total'=>$total];
+        $release=0;
+        $builder = $this->db->table('tblpurchase_logs');
+        $builder->select('COUNT(purchaseNumber)total');
+        $builder->WHERE('Status',1);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $release = $row->total;
+        }
+        //tag as unreleased
+        $unrelease=0;
+        $builder = $this->db->table('tblpurchase_logs');
+        $builder->select('COUNT(purchaseNumber)total');
+        $builder->WHERE('Status',0);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $unrelease = $row->total;
+        }
+        $data = ['total'=>$total,'release'=>$release,'unrelease'=>$unrelease,'cost'=>$cost];
         return view('overall-report',$data);
     }
 }
