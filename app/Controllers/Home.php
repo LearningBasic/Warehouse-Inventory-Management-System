@@ -1432,4 +1432,14 @@ class Home extends BaseController
             echo json_encode($info);
         }
     }
+
+    public function ledger()
+    {
+        return view('ledger');
+    }
+
+    public function overAllReport()
+    {
+        return view('overall-report');
+    }
 }

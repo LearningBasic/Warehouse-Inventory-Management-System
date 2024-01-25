@@ -150,6 +150,8 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/local-purchase','Home::localPurchase');
     $routes->get('/view/(:any)','Home::viewVendor/$1');
     $routes->get('/purchase-order','Home::purchaseOrder');
+    $routes->get('/overall-report','Home::overAllReport');
+    $routes->get('/ledger','Home::ledger');
 });
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
