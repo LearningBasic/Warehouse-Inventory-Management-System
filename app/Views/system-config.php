@@ -494,55 +494,43 @@
 										<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#accountModal" style="float:right;"><i class="icon-copy dw dw-add-user"></i>&nbsp;Add</a>
 									</div>
 									<div class="card-body">
-										<div class="table-responsive">
-										    <table class="data-table table stripe hover nowrap">
-    											<thead>
-    												<th>Fullname</th>
-    												<th>User Account</th>
-    												<th>Email</th>
-    												<th>Department</th>
-    												<th>Status</th>
-    												<th>User Role</th>
-    												<th>&nbsp;</th>
-    											</thead>
-    											<tbody>
-    												<?php foreach($account as $row): ?>
-    													<tr>
-    													    <td><?php echo $row->Fullname ?></td>
-    														<td><?php echo $row->username ?></td>
-    														<td><?php echo $row->Email ?></td>
-    														<td><?php echo $row->Department ?></td>
-    														<td><?php if($row->Status==1){echo "<span class='badge bg-success text-white'>Active</span>";}else{echo "<span class='badge bg-danger text-white'>Inactive</span>";} ?></td>
-    														<td><?php echo $row->systemRole ?></td>
-    														<td>
-    															<?php if($row->Status==1){ ?>
-    															<div class="dropdown">
-    																<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-    																	href="#" role="button" data-toggle="dropdown">
-    																	<i class="dw dw-more"></i>
-    																</a>
-    																<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
-    																	<a class="dropdown-item" href="<?=site_url('edit-account/')?><?php echo $row->accountID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
-    																	<button type="button" class="dropdown-item reset" value="<?php echo $row->accountID ?>"><i class="icon-copy dw dw-reload"></i>Reset</button>
-    																</div>
-    															</div>
-    															<?php }else{ ?>
-    																<div class="dropdown">
-    																<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-    																	href="#" role="button" data-toggle="dropdown">
-    																	<i class="dw dw-more"></i>
-    																</a>
-    																<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
-    																	<a class="dropdown-item" href="<?=site_url('edit-account/')?><?php echo $row->accountID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
-    																</div>
-    															</div>
-    															<?php } ?>
-    														</td>
-    													</tr>
-    												<?php endforeach; ?>
-    											</tbody>
-    										</table>
-										</div>
+										<table class="data-table table stripe hover nowrap">
+											<thead>
+												<th>Date Created</th>
+												<th>Username</th>
+												<th>Fullname</th>
+												<th>Email</th>
+												<th>Department</th>
+												<th>Status</th>
+												<th>User Role</th>
+												<th>&nbsp;</th>
+											</thead>
+											<tbody>
+												<?php foreach($account as $row): ?>
+													<tr>
+														<td><?php echo $row->DateCreated ?></td>
+														<td><?php echo $row->username ?></td>
+														<td><?php echo $row->Fullname ?></td>
+														<td><?php echo $row->Email ?></td>
+														<td><?php echo $row->Department ?></td>
+														<td><?php if($row->Status==1){echo "<span class='badge bg-success text-white'>Active</span>";}else{echo "<span class='badge bg-danger text-white'>Inactive</span>";} ?></td>
+														<td><?php echo $row->systemRole ?></td>
+														<td>
+															<div class="dropdown">
+																<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+																	href="#" role="button" data-toggle="dropdown">
+																	<i class="dw dw-more"></i>
+																</a>
+																<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+																	<a class="dropdown-item" href="<?=site_url('edit-account/')?><?php echo $row->accountID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
+																	<button type="button" class="dropdown-item deadstock" value="<?php echo $row->accountID ?>"><i class="icon-copy dw dw-reload"></i>Reset</button>
+																</div>
+															</div>
+														</td>
+													</tr>
+												<?php endforeach; ?>
+											</tbody>
+										</table>
 									</div>
 								</div>
                             </div>

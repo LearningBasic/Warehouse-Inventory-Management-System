@@ -1432,14 +1432,4 @@ class Home extends BaseController
             echo json_encode($info);
         }
     }
-    
-    public function resetAccount()
-    {
-        $accountModel  = new \App\Models\accountModel();
-        $user = $this->request->getPost('value');
-        $defaultPassword = Hash::make("Fastcat_01");
-        $values = ['password'=>$defaultPassword];
-        $accountModel->update($user,$values);
-        echo "success";
-    }
 }
