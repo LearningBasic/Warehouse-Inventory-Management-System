@@ -373,7 +373,7 @@
                                 <li><a href="<?=site_url('receiving-item')?>">Receiving Item</a></li>
 							</ul>
 						</li>
-						<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
+						<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Staff"){ ?>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
                                 <i class="micon dw dw-shop"></i><span class="mtext">Suppliers</span>
@@ -483,6 +483,7 @@
                                         <th>Item Unit</th>
                                         <th>Product Name</th>
                                         <th>Specification</th>
+                                        <th><span class="dw dw-more"></span></th>
                                     </thead>
                                     <tbody id="Table">
 
@@ -521,6 +522,9 @@
 			$(document).ready(function()
 			{
 				editors();notify();
+				$("#Table").on('click','.btnDelete',function(){
+                    $(this).closest('tr').remove();
+                });
 			});
 			function notify()
 			{
@@ -563,10 +567,12 @@
 				var cell2 = row.insertCell(1);
 				var cell3 = row.insertCell(2);
 				var cell4 = row.insertCell(3);
+				var cell5 = row.insertCell(4);
 				cell1.innerHTML = "<input type='number' class='form-control' id='qty' name='qty[]'/>";
 				cell2.innerHTML = "<input type='text' class='form-control' id='item' name='item[]'/>";
 				cell3.innerHTML = "<input type='text' class='form-control' id='item_name' name='item_name[]'/>";
 				cell4.innerHTML = "<input type='text' class='form-control' id='specification' name='specification[]'/>";
+				cell5.innerHTML = "<button type='button' class='btn btn-danger btnDelete'><span class='dw dw-trash'></span></button>";
 			}
         </script>
 	</body>

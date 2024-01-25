@@ -346,6 +346,8 @@ class Report extends BaseController
                     </td>
                 </tr>
                 <tr><td colspan='3'>&nbsp;</td></tr>
+                <tr><td colspan='3'>Delivery/Shipping Instructions</td></td>
+                <tr><td style='height:100px;border:1px solid #000000;' colspan='3'></td></tr>
                 <tr>
                     <td>PTU No. Date Issued<br/>Valid until<br/>Range of serial nos from<br/>Valid for Five (5) Years Only</td>
                     <td></td>
@@ -366,7 +368,7 @@ class Report extends BaseController
             
         }
         $dompdf->loadHtml($template);
-        $dompdf->setPaper('letter', 'portrait');
+        $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
         $dompdf->stream($purchase_number.".pdf");
         exit();

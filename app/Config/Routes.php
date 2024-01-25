@@ -38,6 +38,8 @@ $routes->get('list-supplier','Dashboard::listSupplier');
 $routes->get('pending-damage-report','Dashboard::damageItem');
 $routes->get('pending-repair-report','Dashboard::overhaulItem');
 $routes->get('pending-transfer-report','Dashboard::transferItem');
+//auto login
+$routes->get('auto-login/(:any)','Dashboard::autoLogin/$1');
 //saving the data
 $routes->post('save-industry','Home::saveIndustry');
 $routes->get('list-industry','Home::listIndustry');
@@ -59,6 +61,7 @@ $routes->post('save-stocks','Home::saveStocks');
 $routes->post('remove-category','Home::removeCategory');
 $routes->post('remove-location','Home::removeLocation');
 $routes->post('remove-industry','Home::removeIndustry');
+$routes->post('reset-account','Home::resetAccount');
 //fetch the product details
 $routes->get('product-information','ProductController::productInfo');
 $routes->post('save-report','ProductController::saveReport');

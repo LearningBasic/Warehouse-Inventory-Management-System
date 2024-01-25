@@ -1,0 +1,55 @@
+CRITICAL - 2024-01-24 01:32:25 --> Trying to access array offset on value of type null
+in APPPATH/Views/edit-account.php on line 491.
+ 1 APPPATH/Views/edit-account.php(491): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'APPPATH/Views/edit-account.php', 491)
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/edit-account.php')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1177): CodeIgniter\View\View->render('edit-account', [], true)
+ 5 APPPATH/Controllers/Home.php(629): view('edit-account', [...])
+ 6 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Home->editAccount('vendors', 'images', 'github.svg')
+ 7 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-24 02:07:23 --> Trying to access array offset on value of type null
+in APPPATH/Views/edit-supplier.php on line 429.
+ 1 APPPATH/Views/edit-supplier.php(429): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'APPPATH/Views/edit-supplier.php', 429)
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/edit-supplier.php')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1177): CodeIgniter\View\View->render('edit-supplier', [], true)
+ 5 APPPATH/Controllers/Home.php(370): view('edit-supplier', [...])
+ 6 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Home->editSupplier('vendors', 'images', 'github.svg')
+ 7 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-24 05:59:09 --> Trying to access array offset on value of type null
+in APPPATH/Views/generate-qrcode.php on line 432.
+ 1 APPPATH/Views/generate-qrcode.php(432): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'APPPATH/Views/generate-qrcode.php', 432)
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/generate-qrcode.php')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1177): CodeIgniter\View\View->render('generate-qrcode', [], true)
+ 5 APPPATH/Controllers/Home.php(138): view('generate-qrcode', [...])
+ 6 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Home->generateQR('FCPATH/assets', 'img', 'fastcat.png')
+ 7 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-24 06:00:18 --> Trying to access array offset on value of type null
+in APPPATH/Views/generate-qrcode.php on line 432.
+ 1 APPPATH/Views/generate-qrcode.php(432): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'APPPATH/Views/generate-qrcode.php', 432)
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/generate-qrcode.php')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1177): CodeIgniter\View\View->render('generate-qrcode', [], true)
+ 5 APPPATH/Controllers/Home.php(138): view('generate-qrcode', [...])
+ 6 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Home->generateQR('FCPATH/assets', 'img', 'fastcat.png')
+ 7 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-24 06:00:18 --> Trying to access array offset on value of type null
+in APPPATH/Views/generate-qrcode.php on line 432.
+ 1 APPPATH/Views/generate-qrcode.php(432): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'APPPATH/Views/generate-qrcode.php', 432)
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/generate-qrcode.php')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1177): CodeIgniter\View\View->render('generate-qrcode', [], true)
+ 5 APPPATH/Controllers/Home.php(138): view('generate-qrcode', [...])
+ 6 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Home->generateQR('FCPATH/assets', 'img', 'fastcat.png')
+ 7 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(67): CodeIgniter\CodeIgniter->run()

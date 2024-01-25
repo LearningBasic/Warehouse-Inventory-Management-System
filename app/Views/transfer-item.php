@@ -465,7 +465,7 @@
                                         <input type="text" class="form-control" name="itemUnit" value="<?=$items['ItemUnit']?>" required/>
                                     </div>
                                     <div class="col-lg-3">
-                                        <label>Assignment</label>
+                                        <label>New Assignment</label>
                                         <select class="form-control" id="warehouse" name="warehouse" required>
                                             <option value="">Choose</option>
                                             <?php if($location): ?>

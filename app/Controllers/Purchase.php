@@ -629,7 +629,7 @@ class Purchase extends BaseController
         {
             $imgURL = "Products/".$row->Image;
             ?>
-            <li class="col-lg-3 col-md-6 col-sm-12">
+            <li class="col-lg-4 col-md-6 col-sm-12">
                 <div class="da-card box-shadow">
                     <div class="da-card-photo">
                         <img src="<?php echo $imgURL ?>" alt="">

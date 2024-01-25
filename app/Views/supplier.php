@@ -347,7 +347,10 @@
 						</li>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
-                            <i class="micon dw dw-shopping-cart"></i><span class="mtext">Purchasing</span>&nbsp;<span class="badge badge-pill bg-primary text-white" id="notification">0</span>
+                            <i class="micon dw dw-shopping-cart"></i><span class="mtext">Purchasing</span>&nbsp;
+                            <?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
+							&nbsp;<span class="badge badge-pill bg-primary text-white" id="notification">0</span>
+							<?php } ?>
 							</a>
 							<ul class="submenu">
                                 <li><a href="<?=site_url('orders')?>">Order Materials</a></li>
@@ -392,9 +395,15 @@
 							<a href="javascript:;" class="dropdown-toggle">
                                 <i class="micon dw dw-bar-chart-1"></i><span class="mtext">Reports</span>
 							</a>
+							<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
 							<ul class="submenu">
                                 <li><a href="<?=site_url('report-stocks')?>">Stocks Report</a></li>
 							</ul>
+							<?php }else{ ?>
+							<ul class="submenu">
+								<li><a href="<?=site_url('add-report')?>">Create Report</a></li>
+							</ul>
+							<?php } ?>
 						</li>
 						<li>
 							<div class="dropdown-divider"></div>

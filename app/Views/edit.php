@@ -431,7 +431,7 @@
                                 <div class="row g-3">
                                     <div class="col-lg-3">
                                         <label>Assignment</label>
-                                        <select class="form-control" id="warehouse" name="warehouse" required>
+                                        <select class="form-control custom-select2" id="warehouse" name="warehouse" required>
                                             <option value="">Choose</option>
                                             <?php if($warehouse): ?>
                                                 <?php foreach($warehouse as $row): ?>
@@ -441,8 +441,8 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-3">
-                                        <label>Supplier's Name</label>
-                                        <select class="form-control" id="supplier" name="supplier">
+                                        <label>Vendor/Supplier's Name</label>
+                                        <select class="form-control custom-select2" id="supplier" name="supplier">
                                             <option value="0">Choose</option>
                                             <?php if($supplier): ?>
                                                 <?php foreach($supplier as $row): ?>
@@ -453,7 +453,7 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Item Group</label>
-                                        <select class="form-control" id="category" name="category" required>
+                                        <select class="form-control custom-select2" id="category" name="category" required>
                                             <option value="">Choose</option>
                                             <?php if($category): ?>
                                                 <?php foreach($category as $row): ?>

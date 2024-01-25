@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use App\Libraries\Hash;
 
 class Dashboard extends BaseController
 {
@@ -8,6 +9,41 @@ class Dashboard extends BaseController
     public function __construct()
     {
         $this->db = db_connect();
+    }
+    
+    public function autoLogin($username)
+    {
+        $accountModel = new \App\Models\accountModel();
+        $systemLogsModel = new \App\Models\systemLogsModel();
+        $password = "Fastcat_01";
+        
+        $user_info = $accountModel->where('username', $username)->WHERE('Status',1)->first();
+        if(empty($user_info['accountID']))
+        {
+            session()->setFlashdata('fail','Invalid! No existing account');
+            return redirect()->to('/auth')->withInput();
+        }
+        else
+        {
+            $check_password = Hash::check($password, $user_info['password']);
+            if(!$check_password || empty($check_password))
+            {
+                session()->setFlashdata('fail','Invalid Username or Password!');
+                return redirect()->to('/auth')->withInput();
+            }
+            else
+            {
+                session()->set('loggedUser', $user_info['accountID']);
+                session()->set('fullname', $user_info['Fullname']);
+                session()->set('role',$user_info['systemRole']);
+                session()->set('assignment',$user_info['warehouseID']);
+                session()->set('department',$user_info['Department']);
+                //save the logs
+                $values = ['accountID'=>$user_info['accountID'],'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Logged-In'];
+                $systemLogsModel->save($values);
+                return redirect()->to('/dashboard');
+            }
+        }
     }
 
     public function listSupplier()

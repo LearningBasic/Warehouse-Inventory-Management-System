@@ -485,7 +485,7 @@
                                             <form method="get" id="frmSearch" class="row g-3">
                                                 <div class="col-lg-4 form-group">
                                                     <label>Warehouse/Vessel</label>
-                                                    <select class="form-control" name="location">
+                                                    <select class="form-control custom-select2" name="location">
                                                         <option value="">Choose</option>
                                                         <?php foreach($location as $row): ?>
                                                             <option value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>
@@ -494,7 +494,7 @@
                                                 </div>
                                                 <div class="col-lg-4 form-group">
                                                     <label>Category</label>
-                                                    <select class="form-control" name="category">
+                                                    <select class="form-control custom-select2" name="category">
                                                         <option value="ALL">ALL</option>
                                                         <?php foreach($category as $row): ?>
                                                             <option value="<?php echo $row->categoryID ?>"><?php echo $row->categoryName ?></option>
@@ -549,7 +549,7 @@
 												</div>
 												<div class="col-lg-3 form-group">
                                                     <label>Warehouse/Vessel</label>
-                                                    <select class="form-control" name="location">
+                                                    <select class="form-control custom-select2" name="location" style="width:100%;">
                                                         <option value="">Choose</option>
                                                         <?php foreach($location as $row): ?>
                                                             <option value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>

@@ -396,7 +396,7 @@
                                 <li><a href="<?=site_url('receiving-item')?>">Receiving Item</a></li>
 							</ul>
 						</li>
-						<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
+						<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Staff"){ ?>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
                                 <i class="micon dw dw-shop"></i><span class="mtext">Suppliers</span>
@@ -475,7 +475,7 @@
                                 <div class="row g-3">
                                     <div class="col-lg-3">
                                         <label>Assignment</label>
-                                        <select class="form-control" id="warehouse" name="warehouse" required>
+                                        <select class="form-control custom-select2" id="warehouse" name="warehouse" required>
                                             <option value="">Choose</option>
                                             <?php if($warehouse): ?>
                                                 <?php foreach($warehouse as $row): ?>
@@ -485,9 +485,9 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-3">
-                                        <label>Supplier's Name</label>
-                                        <select class="form-control" id="supplier" name="supplier">
-                                            <option value="0">No Supplier</option>
+                                        <label>Vendor/Supplier's Name</label>
+                                        <select class="form-control custom-select2" id="supplier" name="supplier">
+                                            <option value="0">No Vendor</option>
                                             <?php if($supplier): ?>
                                                 <?php foreach($supplier as $row): ?>
                                                     <option value="<?php echo $row->supplierID ?>"><?php echo $row->supplierName ?></option>
@@ -497,7 +497,7 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Item Group</label>
-                                        <select class="form-control" id="category" name="category" required>
+                                        <select class="form-control custom-select2" id="category" name="category" required>
                                             <option value="">Choose</option>
                                             <?php if($category): ?>
                                                 <?php foreach($category as $row): ?>

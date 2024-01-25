@@ -347,7 +347,10 @@
 						</li>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
-                            <i class="micon dw dw-shopping-cart"></i><span class="mtext">Purchasing</span>&nbsp;<span class="badge badge-pill bg-primary text-white" id="notification">0</span>
+                            <i class="micon dw dw-shopping-cart"></i><span class="mtext">Purchasing</span>
+                            <?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
+							&nbsp;<span class="badge badge-pill bg-primary text-white" id="notification">0</span>
+							<?php } ?>
 							</a>
 							<ul class="submenu">
                                 <li><a href="<?=site_url('orders')?>">Order Materials</a></li>
@@ -371,7 +374,7 @@
                                 <li><a href="<?=site_url('receiving-item')?>">Receiving Item</a></li>
 							</ul>
 						</li>
-						<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
+						<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Staff"){ ?>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
                                 <i class="micon dw dw-shop"></i><span class="mtext">Suppliers</span>
@@ -450,7 +453,7 @@
                                 <div class="row g-3">
                                     <div class="col-lg-4 form-group">
                                         <label>Industry</label>
-                                        <select class="form-control" name="industry" id="industry">
+                                        <select class="form-control custom-select2" name="industry" id="industry">
                                             <option value="0">Choose</option>
                                         </select>
                                     </div>

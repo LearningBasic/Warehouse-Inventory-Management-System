@@ -51,7 +51,7 @@ class Home extends BaseController
         //total stocks
         $stocks=0;
         $builder = $this->db->table('tblinventory');
-        $builder->select('FORMAT(SUM(Qty),0)total');
+        $builder->select('FORMAT(IFNULL(SUM(Qty),0),0)total');
         $builder->WHERE('Qty<>',0);
         $data = $builder->get();
         if($row = $data->getRow())
@@ -816,7 +816,7 @@ class Home extends BaseController
     public function listCategory()
     {
         $builder = $this->db->table('tblcategory');
-        $builder->select('categoryName,categoryID,Description');
+        $builder->select('categoryName,categoryID,Description,Alias');
         $data = $builder->get();
         foreach($data->getResult() as $row)
         {
@@ -826,7 +826,7 @@ class Home extends BaseController
                     <div class="txt">
                         <div class="font-14 weight-600"><?php echo $row->categoryName ?></div>
                         <div class="font-12 weight-500" data-color="#b2b1b6">
-                            <?php echo $row->Description ?>
+                            <?php echo $row->Alias ?>
                         </div>
                     </div>
                 </div>
@@ -1431,5 +1431,15 @@ class Home extends BaseController
             $info = array("Address"=>$row->Address,"contactNumber"=>$row->contactNumber,"contactPerson"=>$row->contactPerson);
             echo json_encode($info);
         }
+    }
+    
+    public function resetAccount()
+    {
+        $accountModel  = new \App\Models\accountModel();
+        $user = $this->request->getPost('value');
+        $defaultPassword = Hash::make("Fastcat_01");
+        $values = ['password'=>$defaultPassword];
+        $accountModel->update($user,$values);
+        echo "success";
     }
 }

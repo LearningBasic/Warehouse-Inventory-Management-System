@@ -370,7 +370,7 @@
                                 <li><a href="<?=site_url('receiving-item')?>">Receiving Item</a></li>
 							</ul>
 						</li>
-						<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
+						<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Staff"){ ?>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
                                 <i class="micon dw dw-shop"></i><span class="mtext">Suppliers</span>
@@ -445,12 +445,12 @@
                     <div class="card-header">
                         Create Report
 						<div class="dropdown" style="float:right;">
-							<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" data-color="#1b3133" href="#" role="button" data-toggle="dropdown"><span class="icon-copy dw dw-add"></span> New</a>
+							<a class="btn font-24 p-0 line-height-1 no-arrow dropdown-toggle" data-color="#1b3133" href="#" role="button" data-toggle="dropdown"><span class="icon-copy dw dw-add"></span> New</a>
 							<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-								<a class="dropdown-item" href="<?=site_url('damage-report')?>"><i class="dw dw-right-arrow"></i> Damage Item</a>
-								<a class="dropdown-item" href="<?=site_url('repair-report')?>"><i class="dw dw-right-arrow"></i> For Repair Item</a>
-								<a class="dropdown-item" href="<?=site_url('transfer-item')?>"><i class="dw dw-right-arrow"></i> Transfer Item</a>
-								<a class="dropdown-item" href="<?=site_url('return-order')?>"><i class="dw dw-right-arrow"></i> Return Order</a>
+								<a class="dropdown-item" href="<?=site_url('damage-report')?>"><i class="icon-copy dw dw-right-arrow-1"></i> Damage</a>
+								<a class="dropdown-item" href="<?=site_url('repair-report')?>"><i class="icon-copy dw dw-right-arrow-1"></i> For Repair</a>
+								<a class="dropdown-item" href="<?=site_url('transfer-item')?>"><i class="icon-copy dw dw-right-arrow-1"></i> Transfer</a>
+								<a class="dropdown-item" href="<?=site_url('return-order')?>"><i class="icon-copy dw dw-right-arrow-1"></i> Return Order</a>
 							</div>
 						</div>
                     </div>
@@ -464,7 +464,7 @@
                                         href="#home6"
                                         role="tab"
                                         aria-selected="true"
-                                        >Damaged Item</a
+                                        >Damaged Item(s)</a
                                     >
                                 </li>
                                 <li class="nav-item">
@@ -474,7 +474,7 @@
                                         href="#profile6"
                                         role="tab"
                                         aria-selected="false"
-                                        >For Repair</a
+                                        >Overhaul</a
                                     >
                                 </li>
 								<li class="nav-item">
