@@ -393,7 +393,9 @@
                                 <i class="micon dw dw-bar-chart-1"></i><span class="mtext">Reports</span>
 							</a>
 							<ul class="submenu">
+								<li><a href="<?=site_url('overall-report')?>">Main Report</a></li>
                                 <li><a href="<?=site_url('report-stocks')?>">Stocks Report</a></li>
+								<li><a href="<?=site_url('ledger')?>">Vendor's Ledger</a></li>
 							</ul>
 						</li>
 						<li>
