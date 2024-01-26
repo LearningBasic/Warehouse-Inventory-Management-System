@@ -534,5 +534,30 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script>
+			google.charts.setOnLoadCallback(Chart);
+			function Chart() 
+			{
+	
+				/* Define the chart to be drawn.*/
+				var data = google.visualization.arrayToDataTable([
+					['Date', 'Total'],
+					<?php 
+					foreach ($po as $row){
+					echo "['".$row->Date."',".$row->total."],";
+					}
+					?>
+				]);
+
+				var options = {
+				title: '',
+				curveType: 'function',
+				legend: { position: 'bottom' },
+				};
+				/* Instantiate and draw the chart.*/
+				var chart = new google.visualization.LineChart(document.getElementById('chartContainer'));
+				chart.draw(data, options);
+			}
+		</script>
 	</body>
 </html>
