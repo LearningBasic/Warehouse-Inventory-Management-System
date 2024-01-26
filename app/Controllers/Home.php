@@ -1479,7 +1479,16 @@ class Home extends BaseController
         {
             $unrelease = $row->total;
         }
-        $data = ['total'=>$total,'release'=>$release,'unrelease'=>$unrelease,'cost'=>$cost];
+        //vendor
+        $builder = $this->db->table('tblcanvass_sheet a');
+        $builder->select('a.Supplier,SUM(a.Price*b.Qty)total');
+        $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
+        $builder->WHERE('a.Remarks','Selected');
+        $builder->groupBy('a.Supplier');
+        $builder->orderBy('total','DESC')->limit(10);
+        $vendor = $builder->get()->getResult();
+
+        $data = ['total'=>$total,'release'=>$release,'unrelease'=>$unrelease,'cost'=>$cost,'vendor'=>$vendor];
         return view('overall-report',$data);
     }
 }

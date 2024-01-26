@@ -54,6 +54,12 @@
 			href="assets/src/plugins/datatables/css/responsive.bootstrap4.min.css"
 		/>
 		<link rel="stylesheet" type="text/css" href="assets/vendors/styles/style.css" />
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
+		<script type="text/javascript">
+			google.charts.load('visualization', "1", {
+				packages: ['corechart']
+			});
+		</script>
         <style>
         /* Track */
             ::-webkit-scrollbar-track {
@@ -486,6 +492,22 @@
                                 <div class="card-box">
                                     <div class="card-body">
                                         <div class="card-title">Top 10 Vendor</div>
+										<div class="user-list">
+											<ul id="listSupplier">
+												<?php foreach($vendor as $row): ?>
+												<li class="d-flex align-items-center justify-content-between" style="border:1px solid grey;padding:5px;">
+													<div class="name-avatar d-flex align-items-center pr-2">
+														<div class="txt">
+															<div class="font-14 weight-600"><?php echo $row->Supplier ?></div>
+														</div>
+													</div>
+													<div class="cta flex-shrink-0">
+														<a href="#">PhP <?php echo number_format($row->total,2) ?></a>
+													</div>
+												</li>	
+												<?php endforeach; ?>
+											</ul>
+										</div>
                                     </div>
                                 </div>
                             </div>
@@ -493,6 +515,7 @@
                                 <div class="card-box">
                                     <div class="card-body">
                                         <div class="card-title">Daily Cost for Purchase Order</div>
+										<div id="chartContainer" style="height:400px;"></div>
                                     </div>
                                 </div>
                             </div>
