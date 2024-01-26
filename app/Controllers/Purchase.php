@@ -576,6 +576,7 @@ class Purchase extends BaseController
     public function addEntry()
     {
         $canvassModel = new \App\Models\canvassModel();
+        $supplierModel = new \App\Models\supplierModel();
         //datas
         $orderNo = $this->request->getPost('orderNo');
         $item = $this->request->getPost('item');
@@ -610,6 +611,12 @@ class Purchase extends BaseController
                 'Reference'=>'','Remarks'=>''
             ];
             $canvassModel->save($values);
+            $values = [
+                'supplierName'=>$supplier,'Address'=>$address,
+                'contactPerson'=>$contactPerson,'EmailAddress'=>"N/A",'contactNumber'=>$phone,
+                'industryID'=>0,
+            ];
+            $supplierModel->save($values);
             echo "success";
         }
     }

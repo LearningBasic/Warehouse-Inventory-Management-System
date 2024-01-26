@@ -471,6 +471,8 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 form-group" id="result">
+                    <div>
                 </div>
 			</div>
 		</div>
