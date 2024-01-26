@@ -1487,8 +1487,14 @@ class Home extends BaseController
         $builder->groupBy('a.Supplier');
         $builder->orderBy('total','DESC')->limit(10);
         $vendor = $builder->get()->getResult();
+        //graph total po
+        $builder = $this->db->table('tblpurchase_logs');
+        $builder->select('Date,COUNT(purchaseNumber)total');
+        $builder->WHERE('Status',1);
+        $builder->groupBy('Date');
+        $po = $builder->get()->getResult();
 
-        $data = ['total'=>$total,'release'=>$release,'unrelease'=>$unrelease,'cost'=>$cost,'vendor'=>$vendor];
+        $data = ['total'=>$total,'release'=>$release,'unrelease'=>$unrelease,'cost'=>$cost,'vendor'=>$vendor,'po'=>$po];
         return view('overall-report',$data);
     }
 }
