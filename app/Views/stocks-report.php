@@ -505,7 +505,7 @@
                                                 </div>
                                                 <div class="col-lg-2 form-group">
                                                     <label>&nbsp;</label>
-                                                    <input type="submit" class="btn btn-primary form-control text-white" id="btnSearch" value="Search"/>
+                                                    <button type="submit" class="btn btn-primary form-control text-white" id="btnSearch"><i class="icon-copy dw dw-search"></i>&nbsp;Search</button>
                                                 </div>
                                                 <div class="col-lg-2 form-group">
                                                     <label>&nbsp;</label>
@@ -560,7 +560,7 @@
                                                 </div>
 												<div class="col-lg-2 form-group">
                                                     <label>&nbsp;</label>
-                                                    <input type="submit" class="btn btn-primary form-control text-white" id="btnGenerate" value="Search"/>
+                                                    <button type="submit" class="btn btn-primary form-control text-white" id="btnGenerate"><i class="icon-copy dw dw-search"></i>&nbsp;Search</button>
                                                 </div>
 											</form>
 										</div>

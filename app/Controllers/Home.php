@@ -1435,7 +1435,12 @@ class Home extends BaseController
 
     public function ledger()
     {
-        return view('ledger');
+        $builder = $this->db->table('tblsupplier');
+        $builder->select('*');
+        $record = $builder->get()->getResult();
+
+        $data = ['vendor'=>$record];
+        return view('ledger',$data);
     }
 
     public function overAllReport()
