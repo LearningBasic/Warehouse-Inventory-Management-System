@@ -450,7 +450,7 @@
                             <thead>
                                 <th>Reference No</th>
                                 <th>PRF No</th>
-								<th>Requestor</th>
+								<th>Item Name</th>
                                 <th>Vendor(s)</th>
                                 <th>Qty</th>
                                 <th>Price</th>
@@ -463,7 +463,7 @@
                                 <tr>
                                     <td><?php echo $row->Reference ?></td>
                                     <td><?php echo $row->OrderNo ?></td>
-                                    <td><?php echo $row->Fullname ?></td>
+                                    <td><?php echo $row->Item_Name ?></td>
                                     <td><?php echo $row->Supplier ?></td>
                                     <td><?php echo $row->Qty ?></td>
                                     <td style="text-align: right;"><?php echo number_format($row->Price,2) ?></td>

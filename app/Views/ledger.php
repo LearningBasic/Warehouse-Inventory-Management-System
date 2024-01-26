@@ -454,7 +454,7 @@
                         <div class="card-box">
                             <div class="card-body">
                                 <div class="card-title"><i class="icon-copy dw dw-analytics-3"></i>&nbsp;Vendor's Ledger</div>
-                                <form method="GET" class="row g-3">
+                                <form method="GET" class="row g-3" id="frmSearch">
                                     <div class="col-lg-4">
                                         <select class="form-control custom-select2" name="vendor">
                                             <option value="">Choose</option>
@@ -463,7 +463,13 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="col-lg-8">
+									<div class="col-lg-2">
+										<input type="date" class="form-control" name="fromdate"/>
+									</div>
+									<div class="col-lg-2">
+										<input type="date" class="form-control" name="todate"/>
+									</div>
+                                    <div class="col-lg-4">
                                         <button type="submit" class="btn btn-primary" id="btnSearch"><i class="icon-copy dw dw-search"></i>&nbsp;Search</button>
                                         <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="icon-copy dw dw-download"></i>&nbsp;Export</a>
                                     </div>
@@ -487,7 +493,12 @@
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
 		<script>
-
+			$('#btnSearch').on('click',function(e)
+			{
+				e.preventDefault();
+				var data = $('#frmSearch').serialize();
+				alert(data);
+			});
 		</script>
 	</body>
 </html>
