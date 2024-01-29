@@ -497,7 +497,22 @@
 			{
 				e.preventDefault();
 				var data = $('#frmSearch').serialize();
-				alert(data);
+				$('#result').html("<div style='margin-top:10px;'><center>Generating Reports...</center></div>");
+				$.ajax({
+					url:"<?=site_url('vendor-ledger')?>",method:"GET",
+					data:data,
+					success:function(response)
+					{
+						if(response==="")
+						{
+							$('#result').html("<div style='margin-top:10px;'><center>No Data</center></div>");
+						}
+						else
+						{
+							$('#result').html(response);
+						}
+					}
+				});
 			});
 		</script>
 	</body>

@@ -11,6 +11,15 @@ class Report extends BaseController
         $this->db = db_connect();
     }
 
+    public function vendorLedger()
+    {
+        $vendor = $this->request->getGet('vendor');
+        $fdate = $this->request->getGet('fromdate');
+        $tdate = $this->request->getGet('todate');
+
+        
+    }
+
     public function searchStockReport()
     {
         $location = $this->request->getGet('location');
