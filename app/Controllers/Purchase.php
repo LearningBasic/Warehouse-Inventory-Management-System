@@ -611,12 +611,24 @@ class Purchase extends BaseController
                 'Reference'=>'','Remarks'=>''
             ];
             $canvassModel->save($values);
-            $values = [
-                'supplierName'=>$supplier,'Address'=>$address,
-                'contactPerson'=>$contactPerson,'EmailAddress'=>"N/A",'contactNumber'=>$phone,
-                'industryID'=>0,
-            ];
-            $supplierModel->save($values);
+            //validate if supplier already exist
+            $builder = $this->db->table('tblsupplier');
+            $builder->select('*');
+            $builder->WHERE('supplierName',$supplier);
+            $data = $builder->get();
+            if($row = $data->getRow())
+            {
+                //do nothing
+            }
+            else
+            {
+                $values = [
+                    'supplierName'=>$supplier,'Address'=>$address,
+                    'contactPerson'=>$contactPerson,'EmailAddress'=>"N/A",'contactNumber'=>$phone,
+                    'industryID'=>0,
+                ];
+                $supplierModel->save($values);
+            }
             echo "success";
         }
     }
