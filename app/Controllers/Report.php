@@ -16,8 +16,62 @@ class Report extends BaseController
         $vendor = $this->request->getGet('vendor');
         $fdate = $this->request->getGet('fromdate');
         $tdate = $this->request->getGet('todate');
-
         
+        ?>
+        <table class='table table-bordered' id="table">
+            <thead>
+                <th>Vendor :</th><th colspan='4'><?php echo $vendor ?></th>
+            </thead>
+            <thead>
+                <th class="bg-primary text-white">Products</th>
+                <th class="bg-primary text-white">Qty</th>
+                <th class="bg-primary text-white">Unit Price</th>
+                <th class="bg-primary text-white">Total Price</th>
+                <th class="bg-primary text-white">Terms/Warranty</th>
+            </thead>
+            <tbody>
+        <?php
+        $builder = $this->db->table('tblcanvass_sheet a');
+        $builder->select('a.*,b.Qty,b.Item_Name');
+        $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
+        $builder->WHERE('a.Supplier',$vendor)->WHERE('b.DateCreated >=',$fdate)->WHERE('b.DateCreated <=',$tdate);
+        $builder->WHERE('a.Remarks','Selected');
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <tr>
+                <td><?php echo $row->Item_Name ?></td>
+                <td><?php echo $row->Qty ?></td>
+                <td style='text-align:right;'>PhP <?php echo number_format($row->Price,2) ?></td>
+                <td style='text-align:right;'>PhP <?php echo number_format($row->Price*$row->Qty,2) ?></td>
+                <td><?php echo $row->Terms ?>/<?php echo $row->Warranty ?></td>
+            </tr>
+            <?php
+        }
+        ?>
+        <tr><td colspan='5'>&nbsp;</td></tr>
+        <?php
+        $builder = $this->db->table('tblcanvass_sheet a');
+        $builder->select('SUM(b.Qty * a.Price)total');
+        $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
+        $builder->WHERE('a.Supplier',$vendor)->WHERE('b.DateCreated >=',$fdate)->WHERE('b.DateCreated <=',$tdate);
+        $builder->WHERE('a.Remarks','Selected')->groupBy('a.Supplier');
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            ?>
+            <tr>
+                <td colspan='3' style="font-weight:bold;">TOTAL</td>
+                <td style='text-align:right;font-weight:bold;'>PhP <?php echo number_format($row->total,2) ?></td>
+                <td></td>
+            </tr>
+            <?php
+        }
+        ?>
+            </tbody>
+        </table>
+        <?php
     }
 
     public function searchStockReport()

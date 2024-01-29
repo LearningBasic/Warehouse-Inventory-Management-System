@@ -455,23 +455,23 @@
                             <div class="card-body">
                                 <div class="card-title"><i class="icon-copy dw dw-analytics-3"></i>&nbsp;Vendor's Ledger</div>
                                 <form method="GET" class="row g-3" id="frmSearch">
-                                    <div class="col-lg-4">
-                                        <select class="form-control custom-select2" name="vendor">
+                                    <div class="col-lg-4 form-group">
+                                        <select class="form-control custom-select2" name="vendor" style="width:100%;">
                                             <option value="">Choose</option>
                                             <?php foreach($vendor as $row): ?>
-                                                <option value="<?php echo $row->supplierID ?>"><?php echo $row->supplierName ?></option>
+                                                <option value="<?php echo $row->supplierName?>"><?php echo $row->supplierName ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-									<div class="col-lg-2">
+									<div class="col-lg-2 form-group">
 										<input type="date" class="form-control" name="fromdate"/>
 									</div>
-									<div class="col-lg-2">
+									<div class="col-lg-2 form-group">
 										<input type="date" class="form-control" name="todate"/>
 									</div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 form-group">
                                         <button type="submit" class="btn btn-primary" id="btnSearch"><i class="icon-copy dw dw-search"></i>&nbsp;Search</button>
-                                        <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="icon-copy dw dw-download"></i>&nbsp;Export</a>
+                                        <a href="javascript:void(0);" onclick="exportf(this)" class="btn btn-outline-primary"><i class="icon-copy dw dw-download"></i>&nbsp;Export</a>
                                     </div>
                                 </form>
                             </div>
@@ -514,6 +514,14 @@
 					}
 				});
 			});
+			function exportf(elem) {
+			var table = document.getElementById("table");
+			var html = table.outerHTML;
+			var url = 'data:application/vnd.ms-excel,' + escape(html); // Set your html table into url 
+			elem.setAttribute("href", url);
+			elem.setAttribute("download","vendor-ledger.xls"); // Choose the file name
+			return false;
+			}
 		</script>
 	</body>
 </html>

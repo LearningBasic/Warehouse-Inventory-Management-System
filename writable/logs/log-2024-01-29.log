@@ -12,3 +12,137 @@ INFO - 2024-01-29 01:29:16 --> Session: Class initialized using 'CodeIgniter\Ses
 INFO - 2024-01-29 01:29:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-01-29 01:29:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-01-29 01:50:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-01-29 02:24:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-01-29 02:24:46 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '> '2024-01-01'
+AND `b`.`DateCreated` <= '2024-01-31'' at line 5 in C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT `a`.*, `...', 0)
+#1 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `...')
+#2 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `...')
+#3 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `...', Array, false)
+#4 C:\xampp\htdocs\FastCat-WMS\app\Controllers\Report.php(31): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(934): App\Controllers\Report->vendorLedger()
+#6 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+#7 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\FastCat-WMS\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\FastCat-WMS\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2024-01-29 02:24:46 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '> '2024-01-01'
+AND `b`.`DateCreated` <= '2024-01-31'' at line 5
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`Qty`, `b`.`Item_Name`
+FROM `tblcanvass_sheet` `a`
+LEFT JOIN `tbl_order_item` `b` ON `b`.`orderID`=`a`.`orderID`
+WHERE `a`.`Supplier` = :a.Supplier:
+AND `b`.`DateCreated` = > :b.DateCreated =:
+AND `b`.`DateCreated` <= :b.DateCreated:', [...], false)
+ 2 APPPATH\Controllers\Report.php(31): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Report->vendorLedger()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+ERROR - 2024-01-29 02:24:53 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '> '2024-01-01'
+AND `b`.`DateCreated` <= '2024-01-31'' at line 5 in C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT `a`.*, `...', 0)
+#1 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `...')
+#2 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `...')
+#3 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `...', Array, false)
+#4 C:\xampp\htdocs\FastCat-WMS\app\Controllers\Report.php(31): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(934): App\Controllers\Report->vendorLedger()
+#6 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+#7 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\FastCat-WMS\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\FastCat-WMS\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2024-01-29 02:24:53 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '> '2024-01-01'
+AND `b`.`DateCreated` <= '2024-01-31'' at line 5
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`Qty`, `b`.`Item_Name`
+FROM `tblcanvass_sheet` `a`
+LEFT JOIN `tbl_order_item` `b` ON `b`.`orderID`=`a`.`orderID`
+WHERE `a`.`Supplier` = :a.Supplier:
+AND `b`.`DateCreated` = > :b.DateCreated =:
+AND `b`.`DateCreated` <= :b.DateCreated:', [...], false)
+ 2 APPPATH\Controllers\Report.php(31): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Report->vendorLedger()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+INFO - 2024-01-29 02:26:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-01-29 02:41:57 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' a.Price)total
+FROM `tblcanvass_sheet` `a`
+LEFT JOIN `tbl_order_item` `b` ON `b`' at line 1 in C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT SUM(b.Qt...', 0)
+#1 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(b.Qt...')
+#2 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(b.Qt...')
+#3 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT SUM(b.Qt...', Array, false)
+#4 C:\xampp\htdocs\FastCat-WMS\app\Controllers\Report.php(57): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(934): App\Controllers\Report->vendorLedger()
+#6 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+#7 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\FastCat-WMS\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\FastCat-WMS\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2024-01-29 02:41:57 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' a.Price)total
+FROM `tblcanvass_sheet` `a`
+LEFT JOIN `tbl_order_item` `b` ON `b`' at line 1
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT SUM(b.Qty, a.Price)total
+FROM `tblcanvass_sheet` `a`
+LEFT JOIN `tbl_order_item` `b` ON `b`.`orderID`=`a`.`orderID`
+WHERE `a`.`Supplier` = :a.Supplier:
+AND `b`.`DateCreated` >= :b.DateCreated:
+AND `b`.`DateCreated` <= :b.DateCreated.1:
+AND `a`.`Remarks` = :a.Remarks:
+GROUP BY `a`.`Supplier`', [...], false)
+ 2 APPPATH\Controllers\Report.php(57): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Report->vendorLedger()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+ERROR - 2024-01-29 02:42:03 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' a.Price)total
+FROM `tblcanvass_sheet` `a`
+LEFT JOIN `tbl_order_item` `b` ON `b`' at line 1 in C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT SUM(b.Qt...', 0)
+#1 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(b.Qt...')
+#2 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(b.Qt...')
+#3 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT SUM(b.Qt...', Array, false)
+#4 C:\xampp\htdocs\FastCat-WMS\app\Controllers\Report.php(57): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(934): App\Controllers\Report->vendorLedger()
+#6 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+#7 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\FastCat-WMS\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\FastCat-WMS\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2024-01-29 02:42:03 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' a.Price)total
+FROM `tblcanvass_sheet` `a`
+LEFT JOIN `tbl_order_item` `b` ON `b`' at line 1
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT SUM(b.Qty, a.Price)total
+FROM `tblcanvass_sheet` `a`
+LEFT JOIN `tbl_order_item` `b` ON `b`.`orderID`=`a`.`orderID`
+WHERE `a`.`Supplier` = :a.Supplier:
+AND `b`.`DateCreated` >= :b.DateCreated:
+AND `b`.`DateCreated` <= :b.DateCreated.1:
+AND `a`.`Remarks` = :a.Remarks:
+GROUP BY `a`.`Supplier`', [...], false)
+ 2 APPPATH\Controllers\Report.php(57): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Report->vendorLedger()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Report))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+INFO - 2024-01-29 02:42:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-01-29 02:43:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-01-29 02:48:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-01-29 02:48:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-01-29 02:48:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-01-29 02:48:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-01-29 02:48:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-01-29 02:49:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
