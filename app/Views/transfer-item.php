@@ -359,6 +359,7 @@
 							</a>
 							<ul class="submenu">
                                 <li><a href="<?=site_url('receiving-item')?>">Receiving Item</a></li>
+								<li><a href="<?=site_url('receive-order')?>">Received Order</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
