@@ -20,10 +20,11 @@ class Report extends BaseController
         ?>
         <table class='table table-bordered' id="table">
             <thead>
-                <th>Vendor :</th><th colspan='4'><?php echo $vendor ?></th>
+                <th colspan="6">Vendor/Supplier : <?php echo $vendor ?></th>
             </thead>
             <thead>
                 <th class="bg-primary text-white">Products</th>
+                <th class="bg-primary text-white">PRF No</th>
                 <th class="bg-primary text-white">Qty</th>
                 <th class="bg-primary text-white">Unit Price</th>
                 <th class="bg-primary text-white">Total Price</th>
@@ -42,6 +43,7 @@ class Report extends BaseController
             ?>
             <tr>
                 <td><?php echo $row->Item_Name ?></td>
+                <td><?php echo $row->OrderNo ?></td>
                 <td><?php echo $row->Qty ?></td>
                 <td style='text-align:right;'>PhP <?php echo number_format($row->Price,2) ?></td>
                 <td style='text-align:right;'>PhP <?php echo number_format($row->Price*$row->Qty,2) ?></td>
@@ -50,7 +52,7 @@ class Report extends BaseController
             <?php
         }
         ?>
-        <tr><td colspan='5'>&nbsp;</td></tr>
+        <tr><td colspan='6'></td></tr>
         <?php
         $builder = $this->db->table('tblcanvass_sheet a');
         $builder->select('SUM(b.Qty * a.Price)total');
@@ -62,7 +64,7 @@ class Report extends BaseController
         {
             ?>
             <tr>
-                <td colspan='3' style="font-weight:bold;">TOTAL</td>
+                <td colspan='4' style="font-weight:bold;">TOTAL</td>
                 <td style='text-align:right;font-weight:bold;'>PhP <?php echo number_format($row->total,2) ?></td>
                 <td></td>
             </tr>
