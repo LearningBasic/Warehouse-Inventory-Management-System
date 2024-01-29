@@ -128,6 +128,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/manage','Home::manageStocks');
     $routes->get('/create-report/(:any)','Home::createReport/$1');
     $routes->get('receiving-item','Home::receiveItem');
+    $routes->get('receive-order','Home::receiveOrder');
     $routes->get('/storage','Home::storage');
     $routes->get('/suppliers','Home::suppliers');
     $routes->get('/add-supplier','Home::addSupplier');

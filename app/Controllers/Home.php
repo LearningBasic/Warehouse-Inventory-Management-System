@@ -404,6 +404,11 @@ class Home extends BaseController
         return view('receive-item',$data);
     }
 
+    public function receiveOrder()
+    {
+        return view('inventory-receive');
+    }
+
     public function purchaseRequest()
     {
         return view('orders');
