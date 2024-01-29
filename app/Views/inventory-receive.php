@@ -440,7 +440,7 @@
 				<div class="card-box">
 					<div class="card-header"><span class="icon-copy dw dw-server"></span>&nbsp;Received Orders</div>
 					<div class="card-body">
-                        <form method="POST" class="row g-3" id="frmReceive">
+                        <form method="POST" class="row g-3" id="frmReceive" action="<?=base_url('save-entry')?>">
                             <div class="col-12 form-group">
                                 <div class="row g-3">
                                     <div class="col-lg-4">
