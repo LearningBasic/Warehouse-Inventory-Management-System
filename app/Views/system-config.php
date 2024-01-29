@@ -499,7 +499,6 @@
 										<table class="data-table table stripe hover nowrap">
 											<thead>
 												<th>Date Created</th>
-												<th>Username</th>
 												<th>Fullname</th>
 												<th>Email</th>
 												<th>Department</th>
@@ -511,7 +510,6 @@
 												<?php foreach($account as $row): ?>
 													<tr>
 														<td><?php echo $row->DateCreated ?></td>
-														<td><?php echo $row->username ?></td>
 														<td><?php echo $row->Fullname ?></td>
 														<td><?php echo $row->Email ?></td>
 														<td><?php echo $row->Department ?></td>
