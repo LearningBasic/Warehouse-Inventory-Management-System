@@ -515,7 +515,17 @@
                                             <option value="">Choose</option>
                                         </select>
                                     </div>
+                                    <div class="col-lg-6">
+                                        <label>Warehouse/Vessel/Port</label>
+                                        <select class="form-control custom-select2" name="assignment" required>
+                                            <option value="">Choose</option>
+                                        </select>
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="col-12 form-group">
+                                <input type="submit" class="btn btn-primary text-white" id="btnSend" value="Save Entry"/>
+                                <input type="reset" class="btn btn-danger text-white" id="btnReset" value="Reset Form"/>
                             </div>
                         </form>
 					</div>
