@@ -406,7 +406,18 @@ class Home extends BaseController
 
     public function receiveOrder()
     {
-        return view('inventory-receive');
+        $builder = $this->db->table('tblsupplier');
+        $builder->select('*');
+        $vendor = $builder->get()->getResult();
+        //warehouse
+        $builder = $this->db->table('tblwarehouse');
+        $builder->select('*');
+        $warehouse = $builder->get()->getResult();
+        //purchase order
+        $builder = $this->db->table('tblpurchase_logs');
+
+        $data = ['vendor'=>$vendor,'warehouse'=>$warehouse];
+        return view('inventory-receive',$data);
     }
 
     public function purchaseRequest()

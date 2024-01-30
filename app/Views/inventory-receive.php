@@ -465,6 +465,9 @@
                                         <label>Shipped By</label>
                                         <select class="form-control custom-select2" name="shipper" required>
                                             <option value="">Choose</option>
+											<?php foreach($vendor as $row): ?>
+												<option value="<?php echo $row->supplierID ?>"><?php echo $row->supplierName ?></option>
+											<?php endforeach; ?>
                                         </select>
                                     </div>
                                     <div class="col-lg-3">
@@ -511,7 +514,7 @@
                                 <div class="row g-3">
                                     <div class="col-lg-6">
                                         <label>Received By</label>
-                                        <select class="form-control custom-select2" name="receiver" required>
+                                        <select class="form-control custom-select2" name="receiver" id="receiver" required>
                                             <option value="">Choose</option>
                                         </select>
                                     </div>
@@ -519,6 +522,9 @@
                                         <label>Warehouse/Vessel/Port</label>
                                         <select class="form-control custom-select2" name="assignment" required>
                                             <option value="">Choose</option>
+											<?php foreach($warehouse as $row): ?>
+												<option value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>
+											<?php endforeach; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -542,5 +548,33 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script>
+			$(document).ready(function()
+			{
+				loadEmployee()
+			});
+			function loadEmployee()
+			{
+				var settings = {
+				"url": "https://fastcat-hris.com/EmployeeListController",
+				"method": "GET",
+				"timeout": 0,
+				};
+
+				$.ajax(settings).done(function (response) {
+					show(response);
+				});
+			}	
+			function show(response)
+			{
+				for (let r of response.employees) 
+				{
+					var fname = r.Firstname;
+					var mi = r.Middle_Initial;
+					var sname = r.Surname;
+					$('#receiver').append("<option>"+fname +" "+mi+" "+sname+"</option>");
+				}
+			}
+		</script>
 	</body>
 </html>
