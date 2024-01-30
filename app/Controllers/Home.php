@@ -72,7 +72,6 @@ class Home extends BaseController
         $reserved=0;
         $builder = $this->db->table('tblreserved');
         $builder->select('FORMAT(IFNULL(SUM(Qty),0),0)total');
-        $builder->WHERE('Status','Hold');
         $data = $builder->get();
         if($row = $data->getRow())
         {
@@ -92,7 +91,6 @@ class Home extends BaseController
         $reserve=0;
         $builder = $this->db->table('tblreserved');
         $builder->select('SUM(Qty)total');
-        $builder->WHERE('Status','Hold');
         $data = $builder->get();
         if($row = $data->getRow())
         {
@@ -175,6 +173,11 @@ class Home extends BaseController
             'Code'=>$code,'Description'=>$desc,
             'categoryID'=>$category,'supplierID'=>$supplier,'warehouseID'=>$warehouse,];
         $inventoryModel->update($id,$values);
+        //create logs
+        $systemLogsModel = new \App\Models\systemLogsModel();
+        $values = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Update product '.$productName];
+        $systemLogsModel->save($values);
+
         session()->setFlashdata('success','Great! Successfully updated');
         return redirect()->to('/stocks')->withInput();
     }
@@ -323,6 +326,11 @@ class Home extends BaseController
                     ];
                     $productImage->save($values);
                 }
+
+                //create logs
+                $systemLogsModel = new \App\Models\systemLogsModel();
+                $values = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Added new product '.$productName];
+                $systemLogsModel->save($values);
                 session()->setFlashdata('success',"Great! Successfully added");
                 return redirect()->to('/add')->withInput();
             }
@@ -384,6 +392,12 @@ class Home extends BaseController
             'contactPerson'=>$person,'EmailAddress'=>$email,'contactNumber'=>$phone,
         ];
         $supplierModel->update($id,$values);
+
+        //create logs
+        $systemLogsModel = new \App\Models\systemLogsModel();
+        $values = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Update information of '.$supplier_name];
+        $systemLogsModel->save($values);
+
         session()->setFlashdata('success','Great! Successfully updated');
         return redirect()->to('/suppliers')->withInput();
     }
@@ -676,6 +690,10 @@ class Home extends BaseController
             ['username'=>$username, 'password'=>$defaultPassword,'Fullname'=>$fullname,'Email'=>$email,
             'Status'=>$status,'systemRole'=>$role,'warehouseID'=>$assign,'Department'=>$dept,'DateCreated'=>$dateCreated];
             $accountModel->save($values);
+            //create logs
+            $systemLogsModel = new \App\Models\systemLogsModel();
+            $value = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Registered new account of '.$fullname];
+            $systemLogsModel->save($value);
             echo "success";
         }
         
@@ -725,6 +743,11 @@ class Home extends BaseController
                 'industryID'=>$industry,
             ];
             $supplierModel->save($values);
+
+            //create logs
+            $systemLogsModel = new \App\Models\systemLogsModel();
+            $value = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Added new vendor '.$supplier_name];
+            $systemLogsModel->save($value);
             session()->setFlashdata('success','Great! Successfully added');
             return redirect()->to('/add-supplier')->withInput();
         }
