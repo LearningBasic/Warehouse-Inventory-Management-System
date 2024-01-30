@@ -11,6 +11,23 @@ class Report extends BaseController
         $this->db = db_connect();
     }
 
+    public function fetchPO()
+    {
+        $val = $this->request->getGet('value');
+        $builder = $this->db->table('tblcanvass_sheet a');
+        $builder->select('b.purchaseNumber');
+        $builder->join('tblpurchase_logs b','b.canvassID=a.canvassID','LEFT');
+        $builder->WHERE('a.OrderNo',$val);
+        $builder->groupBy('b.purchaseLogID');
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <option><?php echo $row->purchaseNumber ?></option>
+            <?php
+        }
+    }
+
     public function vendorLedger()
     {
         $vendor = $this->request->getGet('vendor');

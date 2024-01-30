@@ -445,7 +445,7 @@
                                 <div class="row g-3">
                                     <div class="col-lg-3">
                                         <label>Job Order No</label>
-                                        <select class="form-control custom-select2" name="job_number" required>
+                                        <select class="form-control custom-select2" name="job_number" id="job_number" style="width: 100%;" required>
                                             <option value="">Choose</option>
 											<?php foreach($order as $row): ?>
 												<option value="<?php echo $row->OrderNo ?>"><?php echo $row->OrderNo ?></option>
@@ -454,7 +454,7 @@
                                     </div>
 									<div class="col-lg-3">
                                         <label>Purchase Order No</label>
-                                        <select class="form-control custom-select2" name="purchase_number" id="purchase_number" required>
+                                        <select class="form-control custom-select2" name="purchase_number" id="purchase_number" style="width:100%;" required>
                                             <option value="">Choose</option>
                                         </select>
                                     </div>
@@ -562,6 +562,20 @@
 			{
 				loadEmployee()
 			});
+			$('#job_number').change(function()
+			{
+				var val = $(this).val();
+				$('#purchase_number').find('option:not(:first)').remove();
+				$.ajax({
+					url:"<?=site_url('fetch-purchase_number')?>",method:"GET",
+					data:{value:val},
+					success:function(response)
+					{
+						$('#purchase_number').append(response);
+					}
+				});
+			});
+
 			function loadEmployee()
 			{
 				var settings = {
