@@ -443,17 +443,29 @@
                         <form method="POST" class="row g-3" id="frmReceive" action="<?=base_url('save-entry')?>">
                             <div class="col-12 form-group">
                                 <div class="row g-3">
-                                    <div class="col-lg-4">
-                                        <label>Purchase Order No</label>
-                                        <select class="form-control custom-select2" name="purchase_order" required>
+                                    <div class="col-lg-3">
+                                        <label>Job Order No</label>
+                                        <select class="form-control custom-select2" name="job_number" required>
                                             <option value="">Choose</option>
+											<?php foreach($order as $row): ?>
+												<option value="<?php echo $row->OrderNo ?>"><?php echo $row->OrderNo ?></option>
+											<?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="col-lg-4">
+									<div class="col-lg-3">
+                                        <label>Purchase Order No</label>
+                                        <select class="form-control custom-select2" name="job_number" required>
+                                            <option value="">Choose</option>
+											<?php foreach($order as $row): ?>
+												<option value="<?php echo $row->OrderNo ?>"><?php echo $row->OrderNo ?></option>
+											<?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
                                         <label>Invoice No</label>
                                         <input type="text" class="form-control" name="invoice_number" required/>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
                                         <label>Invoice Amount</label>
                                         <input type="text" class="form-control" name="invoice_amount" required/>
                                     </div>

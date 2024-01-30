@@ -414,9 +414,12 @@ class Home extends BaseController
         $builder->select('*');
         $warehouse = $builder->get()->getResult();
         //purchase order
-        $builder = $this->db->table('tblpurchase_logs');
+        $builder = $this->db->table('tblcanvass_sheet');
+        $builder->select('OrderNo');
+        $builder->WHERE('Remarks','Selected')->groupBy('OrderNo');
+        $order = $builder->get()->getResult();
 
-        $data = ['vendor'=>$vendor,'warehouse'=>$warehouse];
+        $data = ['vendor'=>$vendor,'warehouse'=>$warehouse,'order'=>$order];
         return view('inventory-receive',$data);
     }
 
