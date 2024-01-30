@@ -372,6 +372,7 @@
 							<ul class="submenu">
                                 <li><a href="<?=site_url('receiving-item')?>">Receiving Item</a></li>
 								<li><a href="<?=site_url('receive-order')?>" class="active">Received Order</a></li>
+								<li><a href="<?=site_url('storage')?>">Storage</a></li>
 							</ul>
 						</li>
 						<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Staff"){ ?>
