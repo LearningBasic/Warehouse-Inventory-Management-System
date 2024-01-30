@@ -819,4 +819,63 @@ class Purchase extends BaseController
             return redirect()->to('/list-orders')->withInput();
         }
     }
+
+    public function saveEntry()
+    {
+        $reservedModel = new \App\Models\reservedModel();
+        $systemLogsModel = new \App\Models\systemLogsModel();
+        //data
+        $job_number = $this->request->getPost('job_number');
+        $purchase_number = $this->request->getPost('purchase_number');
+        $invoiceNo = $this->request->getPost('invoice_number');
+        $invoiceAmt = $this->request->getPost('invoice_amount');
+        $shipper = $this->request->getPost('shipper');
+        $dateReceive = $this->request->getPost('date_receive');
+        $remarks = $this->request->getPost('remarks');
+        $product_name = $this->request->getPost('product_name');
+        $qty = $this->request->getPost('quantity');
+        $item_unit = $this->request->getPost('item_unit');
+        $unit_price = $invoiceAmt/$qty;
+        $item_condition = $this->request->getPost('condition');
+        $description = $this->request->getPost('description');
+        $receiver = $this->request->getPost('receiver');
+        $assign = $this->request->getPost('assignment');
+
+        $validation = $this->validate([
+            'job_number'=>'required',
+            'purchase_number'=>'required',
+            'invoice_number'=>'required',
+            'invoice_amount'=>'required',
+            'shipper'=>'required',
+            'date_receive'=>'required',
+            'remarks'=>'required',
+            'product_name'=>'required',
+            'quantity'=>'required',
+            'item_unit'=>'required',
+            'condition'=>'required',
+            'description'=>'required',
+            'assignment'=>'required',
+            'receiver'=>'required'
+        ]);
+
+        if(!$validation)
+        {
+            session()->setFlashdata('fail','Invalid! Please fill in the form and try again');
+            return redirect()->to('/receive-order')->withInput();
+        }
+        else
+        {
+            $values = ['Date'=>$dateReceive,'OrderNo'=>$job_number,'purchaseNumber'=>$purchase_number,
+                        'InvoiceNo'=>$invoiceNo,'InvoiceAmount'=>$invoiceAmt,
+                        'supplierID'=>$shipper,'Remarks'=>$remarks,'productName'=>$product_name,
+                        'Qty'=>$qty,'ItemUnit'=>$item_unit,'UnitPrice'=>$unit_price,
+                        'Description'=>$description,'Condition'=>$item_condition,'Receiver'=>$receiver,'warehouseID'=>$assign];
+            $reservedModel->save($values);
+            //system logs
+            $value = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Received Order of '.$product_name];
+            $systemLogsModel->save($value);
+            session()->setFlashdata('success','Great! Successfully submitted');
+            return redirect()->to('/receive-order')->withInput();
+        }
+    }
 }

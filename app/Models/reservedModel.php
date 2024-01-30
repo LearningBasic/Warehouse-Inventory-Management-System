@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class inventoryModel extends Model
+class reservedModel extends Model
 {
     protected $table      = 'tblreserved';
     protected $primaryKey = 'reservedID';

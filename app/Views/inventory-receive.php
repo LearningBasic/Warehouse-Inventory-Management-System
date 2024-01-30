@@ -440,6 +440,16 @@
 				<div class="card-box">
 					<div class="card-header"><span class="icon-copy dw dw-server"></span>&nbsp;Received Orders</div>
 					<div class="card-body">
+						<?php if(!empty(session()->getFlashdata('fail'))) : ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= session()->getFlashdata('fail'); ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if(!empty(session()->getFlashdata('success'))) : ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= session()->getFlashdata('success'); ?>
+                            </div>
+                        <?php endif; ?>
                         <form method="POST" class="row g-3" id="frmReceive" action="<?=base_url('save-entry')?>">
                             <div class="col-12 form-group">
                                 <div class="row g-3">
