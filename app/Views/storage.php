@@ -494,6 +494,39 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="receiveModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            Add Stock
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" class="row g-3" id="frmReport">
+                            <input type="hidden" id="receiveID" name="receiveID"/>
+                            <div class="col-12 form-group">
+                                <label>Product Name</label>
+                                <select class="form-control custom-select2" name="product" style="width:100%;" required>
+									<option value="">Choose</option>
+									<?php foreach($product as $row):?>
+										<option value="<?php echo $row->inventID ?>"><?php echo $row->productName ?></option>
+									<?php endforeach; ?>
+								</select>
+                            </div>
+							<div class="col-12 form-group">
+								<label>Quantity</label>
+								<input type="number" class="form-control" name="qty" required/>
+							</div>
+                            <div class="col-12 form-group">
+                                <button type="submit" class="btn btn-primary form-control text-white" id="btnSave">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
@@ -504,5 +537,20 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script>
+			$(document).on('click','.add-stock',function()
+			{
+				var val = $(this).val();
+				$('#receiveID').attr("value",val);
+				$('#receiveModal').modal('show');
+			});
+
+			$('#btnSave').on('click',function(e)
+			{
+				e.preventDefault();
+				var data = $('#frmReport').serialize();
+				
+			});
+		</script>
 	</body>
 </html>

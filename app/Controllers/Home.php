@@ -214,7 +214,12 @@ class Home extends BaseController
         $builder = $this->db->table("tblreserved");
         $builder->select('*');
         $reserve = $builder->get()->getResult();
-        $data = ['reserve'=>$reserve];
+        //product
+        $builder = $this->db->table('tblinventory');
+        $builder->select('*');
+        $product = $builder->get()->getResult();
+
+        $data = ['reserve'=>$reserve,'product'=>$product];
         return view('storage',$data);
     }
 
