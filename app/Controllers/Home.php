@@ -252,6 +252,7 @@ class Home extends BaseController
     {
         $inventoryModel = new \App\Models\inventoryModel();
         $productImage = new \App\Models\productImageModel();
+        $qrModel = new \App\Models\qrcodeModel();
         //data
         $date = date('Y-m-d');
         $warehouse = $this->request->getPost('warehouse');
@@ -329,6 +330,12 @@ class Home extends BaseController
                         'DateCreated'=>date('Y-m-d'),
                     ];
                     $productImage->save($values);
+                }
+                //generate QR
+                for($i=0;$i<$qty;$i++)
+                {
+                    $values = ['inventID'=>$inventID ,'TextValue'=>$item_number.$i];
+					$qrModel->save($values);
                 }
 
                 //create logs
