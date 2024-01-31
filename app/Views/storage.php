@@ -473,7 +473,7 @@
 													</button>
 													<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 														<button type="button" class="dropdown-item add-stock" value="<?php echo $row->reservedID ?>"><i class="icon-copy dw dw-right-arrow-1"></i> As Stock</button>
-														<button type="button" class="dropdown-item add-new" value="<?php echo $row->reservedID ?>"><i class="icon-copy dw dw-right-arrow-1"></i> As New Product</button>
+														<a class="dropdown-item" href="/new-product/<?php echo $row->reservedID ?>"><i class="icon-copy dw dw-right-arrow-1"></i> As New Product</a>
 													</div>
 												</div>
 										</td>
