@@ -8,3 +8,59 @@ INFO - 2024-01-31 01:38:06 --> Session: Class initialized using 'CodeIgniter\Ses
 INFO - 2024-01-31 01:40:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-01-31 01:41:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-01-31 01:44:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-01-31 01:57:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-01-31 01:57:20 --> Undefined variable $reserve
+in APPPATH\Views\storage.php on line 458.
+ 1 APPPATH\Views\storage.php(458): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $reserve', 'APPPATH\\Views\\storage.php', 458)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\storage.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1177): CodeIgniter\View\View->render('storage', [], true)
+ 5 APPPATH\Controllers\Home.php(217): view('storage', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Home->storage()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+INFO - 2024-01-31 01:57:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-01-31 01:57:52 --> Undefined array key "Date"
+in APPPATH\Views\storage.php on line 458.
+ 1 APPPATH\Views\storage.php(458): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Date"', 'APPPATH\\Views\\storage.php', 458)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\storage.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1177): CodeIgniter\View\View->render('storage', [], true)
+ 5 APPPATH\Controllers\Home.php(217): view('storage', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Home->storage()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+INFO - 2024-01-31 02:00:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-01-31 02:00:16 --> Attempt to read property "Date" on array
+in APPPATH\Views\storage.php on line 459.
+ 1 APPPATH\Views\storage.php(459): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "Date" on array', 'APPPATH\\Views\\storage.php', 459)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\storage.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1177): CodeIgniter\View\View->render('storage', [], true)
+ 5 APPPATH\Controllers\Home.php(217): view('storage', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Home->storage()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+INFO - 2024-01-31 02:03:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-01-31 02:03:22 --> Undefined array key "Date"
+in APPPATH\Views\storage.php on line 458.
+ 1 APPPATH\Views\storage.php(458): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Date"', 'APPPATH\\Views\\storage.php', 458)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\storage.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1177): CodeIgniter\View\View->render('storage', [], true)
+ 5 APPPATH\Controllers\Home.php(217): view('storage', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Home->storage()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+INFO - 2024-01-31 02:11:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-01-31 02:11:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-01-31 02:14:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-01-31 02:15:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

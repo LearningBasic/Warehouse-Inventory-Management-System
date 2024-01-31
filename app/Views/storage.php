@@ -443,7 +443,7 @@
 					<div class="card-body">
 						<table class="table data-table table-striped">
 							<thead>
-								<th>Date</th>
+								<th>Date Received</th>
 								<th>P.O. No</th>
 								<th>Invoice No</th>
 								<th>Item Unit</th>
@@ -451,10 +451,22 @@
 								<th>Qty</th>
 								<th>Unit Price</th>
 								<th>Total Price</th>
-								<th>Shipper</th>
+								<th>Condition(s)</th>
 							</thead>
 							<tbody>
-								
+								<?php foreach($reserve as $row): ?>
+									<tr>
+										<td><?php echo $row->Date ?></td>
+										<td><?php echo $row->purchaseNumber ?></td>
+										<td><?php echo $row->InvoiceNo ?></td>
+										<td><?php echo $row->ItemUnit ?></td>
+										<td><?php echo $row->productName ?></td>
+										<td><?php echo $row->Qty ?></td>
+										<td style="text-align:right;"><?php echo number_format($row->UnitPrice,2) ?></td>
+										<td style="text-align:right;"><?php echo number_format($row->InvoiceAmount,2) ?></td>
+										<td><?php echo $row->Condition ?></td>
+									</tr>
+								<?php endforeach; ?>
 							</tbody>
 						</table>
 					</div>

@@ -211,7 +211,11 @@ class Home extends BaseController
 
     public function storage()
     {
-        return view('storage');
+        $builder = $this->db->table("tblreserved");
+        $builder->select('*');
+        $reserve = $builder->get()->getResult();
+        $data = ['reserve'=>$reserve];
+        return view('storage',$data);
     }
 
     public function createReport($id=null)
