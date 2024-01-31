@@ -452,6 +452,7 @@
 								<th>Unit Price</th>
 								<th>Total Price</th>
 								<th>Condition(s)</th>
+								<th><span class="dw dw-more"></span></th>
 							</thead>
 							<tbody>
 								<?php foreach($reserve as $row): ?>
@@ -465,6 +466,17 @@
 										<td style="text-align:right;"><?php echo number_format($row->UnitPrice,2) ?></td>
 										<td style="text-align:right;"><?php echo number_format($row->InvoiceAmount,2) ?></td>
 										<td><?php echo $row->Condition ?></td>
+										<td>
+											<div class="dropdown">
+													<button type="button" class="btn btn-primary btn-sm line-height-1 no-arrow dropdown-toggle" role="button" data-toggle="dropdown">
+														Add
+													</button>
+													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+														<button type="button" class="dropdown-item add-stock" value="<?php echo $row->reservedID ?>"><i class="icon-copy dw dw-right-arrow-1"></i> As Stock</button>
+														<button type="button" class="dropdown-item add-new" value="<?php echo $row->reservedID ?>"><i class="icon-copy dw dw-right-arrow-1"></i> As New Product</button>
+													</div>
+												</div>
+										</td>
 									</tr>
 								<?php endforeach; ?>
 							</tbody>
