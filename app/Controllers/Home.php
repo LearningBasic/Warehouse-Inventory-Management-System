@@ -218,6 +218,11 @@ class Home extends BaseController
         return view('storage',$data);
     }
 
+    public function newProduct($id)
+    {
+        return view('new-product');
+    }
+
     public function createReport($id=null)
     {
         $builder = $this->db->table('tbldamageitem a');
