@@ -380,6 +380,7 @@ class Home extends BaseController
         $inventoryModel = new \App\Models\inventoryModel();
         $productImage = new \App\Models\productImageModel();
         $qrModel = new \App\Models\qrcodeModel();
+        $reservedModel = new \App\Models\reservedModel();
         //data
         $date = date('Y-m-d');
         $id = $this->request->getPost('reserveID');
@@ -465,6 +466,10 @@ class Home extends BaseController
                     $values = ['inventID'=>$inventID ,'TextValue'=>$item_number.$i];
 					$qrModel->save($values);
                 }
+                //deduct the qty
+                $reserved = $reservedModel->WHERE('reservedID',$id)->first();
+                $newValues = ['Qty'=>$reserved['Qty']-$qty];
+                $reservedModel->update($id,$newValues);
 
                 //create logs
                 $systemLogsModel = new \App\Models\systemLogsModel();
