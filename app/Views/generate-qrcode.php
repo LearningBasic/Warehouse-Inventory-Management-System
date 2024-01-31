@@ -453,31 +453,24 @@
 						<a href="" style="float:right;" onclick="Print()" id="btnPrint"><span class="bi bi-printer"></span>&nbsp;Print</a>
 						</div>
 						<div class="card-body" id="pdf">
-							<?php for($i=0;$i<$items['Qty'];$i++){ ?>
-							<div class="image-container">
-							<img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=<?php echo $items['productID'].$i ?>&choe=UTF-8" title="<?php echo $items['productID'].$i; ?>" style="border:1px solid #000;" />
-							<div class="overlay-text"><?php echo $items['productID'].$i ?></div>
-							</div>
-							<?php
-								$text = $items['productID'].$i;
-								$qrModel = new \App\Models\qrcodeModel();
-								$db;
+							<?php $db;
 								$this->db = db_connect();
+								//do nothing, just generate the code
+								//display all
 								$builder = $this->db->table('tblqrcode');
-								$builder->select('*');
-								$builder->WHERE('inventID',$items['inventID'])->WHERE('TextValue',$text);
-								$data = $builder->get();
-								if($row = $data->getRow())
+								$builder->select('TextValue');
+								$builder->WHERE('inventID',$items['inventID']);
+								$datas = $builder->get();
+								foreach($datas->getResult() as $rows)
 								{
-									//do nothing, just generate the code
-								}
-								else
-								{
-									$values = ['inventID'=>$items['inventID'],'TextValue'=>$text];
-									$qrModel->save($values);
-								}
 								?>
-							<?php } ?>
+								<div class="image-container">
+								<img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=<?php echo $rows->TextValue ?>&choe=UTF-8" title="<?php echo $rows->TextValue ?>" style="border:1px solid #000;" />
+								<div class="overlay-text"><?php echo $rows->TextValue ?></div>
+								</div>
+								<?php
+								}
+							?>
 						</div>
 					</div>
 				</div>

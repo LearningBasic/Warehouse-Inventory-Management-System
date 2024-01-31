@@ -1173,6 +1173,7 @@ class Home extends BaseController
         $stockModel = new \App\Models\stocksModel();
         $inventoryModel = new \App\Models\inventoryModel();
         $systemLogsModel = new \App\Models\systemLogsModel();
+        $qrModel = new \App\Models\qrcodeModel();
         //data
         $product = $this->request->getPost('product');
         $date = date('Y-m-d');
@@ -1211,7 +1212,19 @@ class Home extends BaseController
                 'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Added stocks to '.$inventory['productName']
             ];
             $systemLogsModel->save($records);
-
+            for($i=0;$i<$num_stocks;$i++)
+            {
+                //count the items per inventory and add qrcode
+                $builder = $this->db->table('tblqrcode');
+                $builder->select('COUNT(*) as total');
+                $builder->WHERE('inventID',$product);
+                $data = $builder->get();
+                if($row = $data->getRow())
+                {
+                    $values = ['inventID'=>$product,'TextValue'=>$inventory['productID'].$row->total];
+					$qrModel->save($values);
+                }
+            }
             session()->setFlashdata('success',"Great! Successfully submitted");
             return redirect()->to('/manage')->withInput();
         }
