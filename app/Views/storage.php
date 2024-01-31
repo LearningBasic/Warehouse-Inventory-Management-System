@@ -4,7 +4,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>Storage</title>
+		<title>Reserved</title>
 
 		<!-- Site favicon -->
 		<link
@@ -439,9 +439,24 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header"><span class="icon-copy dw dw-server"></span>&nbsp;Received Orders</div>
+					<div class="card-header"><span class="icon-copy dw dw-server"></span>&nbsp;Reserved</div>
 					<div class="card-body">
-						
+						<table class="table data-table table-striped">
+							<thead>
+								<th>Date</th>
+								<th>P.O. No</th>
+								<th>Invoice No</th>
+								<th>Item Unit</th>
+								<th>Product Name</th>
+								<th>Qty</th>
+								<th>Unit Price</th>
+								<th>Total Price</th>
+								<th>Shipper</th>
+							</thead>
+							<tbody>
+								
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
