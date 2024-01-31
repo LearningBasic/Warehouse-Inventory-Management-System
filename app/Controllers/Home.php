@@ -220,7 +220,24 @@ class Home extends BaseController
 
     public function newProduct($id)
     {
-        return view('new-product');
+        $reservedModel = new \App\Models\reservedModel();
+        $reserve = $reservedModel->WHERE('reservedID',$id)->first();
+        //warehouse
+        $builder = $this->db->table('tblwarehouse');
+        $builder->select('*');
+        $builder->WHERE('warehouseID',$reserve['warehouseID']);
+        $warehouse = $builder->get()->getResult();
+        //supplier
+        $builder = $this->db->table('tblsupplier');
+        $builder->select('*');
+        $builder->WHERE('supplierID',$reserve['supplierID']);
+        $supplier = $builder->get()->getResult();
+        //category
+        $builder = $this->db->table('tblcategory');
+        $builder->select('*');
+        $category = $builder->get()->getResult();
+        $data = ['warehouse'=>$warehouse,'supplier'=>$supplier,'category'=>$category,'reserve'=>$reserve];
+        return view('new-product',$data);
     }
 
     public function createReport($id=null)
@@ -285,6 +302,111 @@ class Home extends BaseController
         {
             session()->setFlashdata('fail',"Invalid! Please check the item/equipment information before submission");
             return redirect()->to('/add')->withInput();
+        }
+        else
+        {
+            if($this->request->getFileMultiple('images')) 
+            {
+                //get the aliases
+                $alias = "";
+                $builder = $this->db->table('tblcategory');
+                $builder->select('Alias');
+                $builder->WHERE('categoryID',$category);
+                $datas = $builder->get();
+                if($row = $datas->getRow())
+                {
+                    $alias = $row->Alias;
+                }
+                //generate the code
+                $builder = $this->db->table('tblinventory');
+                $builder->select('COUNT(inventID)+1 as total');
+                $builder->WHERE('categoryID',$category);
+                $list = $builder->get();
+                if($li = $list->getRow())
+                {
+                    $item_number = $alias.str_pad($li->total, 4, '0', STR_PAD_LEFT);
+                }
+                $values = [
+                    'Date'=>$date,'Location'=>$location,'productID'=>$item_number,'productName'=>$productName,
+                    'Code'=>$code,'Description'=>$desc,'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'Qty'=>$qty,'ReOrder'=>$reOrder,
+                    'categoryID'=>$category,'ExpirationDate'=>$expirationDate,'supplierID'=>$supplier,'warehouseID'=>$warehouse,];
+                $inventoryModel->save($values);
+                //get the inventID
+                $inventID=0;
+                $builder = $this->db->table('tblinventory');
+                $builder->select('inventID');
+                $builder->WHERE('productID',$item_number)->WHERE('productName',$productName);
+                $data = $builder->get();
+                if($row = $data->getRow())
+                {
+                    $inventID = $row->inventID;
+                }
+                foreach($this->request->getFileMultiple('images') as $file)
+                { 
+                    $originalName = $file->getClientName();
+                    $file->move('Products/',$originalName);
+                    //save the images
+                    $values = [
+                        'inventID'=>$inventID,
+                        'Image'=>$file->getClientName(),
+                        'DateCreated'=>date('Y-m-d'),
+                    ];
+                    $productImage->save($values);
+                }
+                //generate QR
+                for($i=0;$i<$qty;$i++)
+                {
+                    $values = ['inventID'=>$inventID ,'TextValue'=>$item_number.$i];
+					$qrModel->save($values);
+                }
+
+                //create logs
+                $systemLogsModel = new \App\Models\systemLogsModel();
+                $values = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Added new product '.$productName];
+                $systemLogsModel->save($values);
+                session()->setFlashdata('success',"Great! Successfully added");
+                return redirect()->to('/add')->withInput();
+            }
+            else
+            {
+                session()->setFlashdata('fail',"Error! Something went wrong. Please contact IT Support");
+                return redirect()->to('/add')->withInput();
+            }
+        }
+    }
+
+    public function saveProduct()
+    {
+        $inventoryModel = new \App\Models\inventoryModel();
+        $productImage = new \App\Models\productImageModel();
+        $qrModel = new \App\Models\qrcodeModel();
+        //data
+        $date = date('Y-m-d');
+        $warehouse = $this->request->getPost('warehouse');
+        $supplier = $this->request->getPost('supplier');
+        $category = $this->request->getPost('category');
+        $location = $this->request->getPost('location');
+        $item_number="";
+        $code = $this->request->getPost('productCode');
+        $productName = $this->request->getPost('productName');
+        $desc = $this->request->getPost('description');
+        $itemUnit = $this->request->getPost('itemUnit');
+        $unitPrice = $this->request->getPost('unitPrice');
+        $qty = $this->request->getPost('qty');
+        $reOrder = $this->request->getPost('reOrder');
+        $expirationDate = $this->request->getPost('expirationDate');
+        $validation = $this->validate([
+            'warehouse'=>'required',
+            'category'=>'required',
+            'productName'=>'required|is_unique[tblinventory.productName]',
+            'itemUnit'=>'required',
+            'unitPrice'=>'required',
+            'qty'=>'required'
+        ]);
+        if(!$validation)
+        {
+            session()->setFlashdata('fail',"Invalid! Please check the item/equipment information before submission");
+            return redirect()->to('/new-product')->withInput();
         }
         else
         {

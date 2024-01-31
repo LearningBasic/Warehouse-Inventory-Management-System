@@ -53,6 +53,7 @@ $routes->post('update-supplier','Home::updateSupplier');
 $routes->post('save-account','Home::saveAccount');
 $routes->post('update-account','Home::updateAccount');
 $routes->post('add-product','Home::addProduct');
+$routes->post('save-product','Home::saveProduct');
 $routes->post('update','Home::update');
 $routes->get('assignment','Home::assignment');
 $routes->post('change-password','Home::changePassword');

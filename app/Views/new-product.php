@@ -74,6 +74,29 @@
                 width: 4px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
+              .quote-imgs-thumbs {
+				background: #eee;
+				border: 1px solid #ccc;
+				border-radius: 0.25rem;
+				margin: 1.5rem 0;
+				padding: 0.75rem;
+				}
+				.quote-imgs-thumbs--hidden {
+				display: none;
+				}
+				.img-preview-thumb {
+				background: #fff;
+				border: 1px solid #777;
+				border-radius: 0.25rem;
+				box-shadow: 0.125rem 0.125rem 0.0625rem rgba(0, 0, 0, 0.12);
+				margin-right: 1rem;
+				max-width: 140px;
+				padding: 0.25rem;
+				}
+			.show-for-sr
+			{
+				display:none;
+			}
         </style>
 	</head>
 	<body>
@@ -443,7 +466,144 @@
                         <a href="<?=site_url('storage')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                     </div>
 					<div class="card-body">
-						
+                        <?php if(!empty(session()->getFlashdata('fail'))) : ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= session()->getFlashdata('fail'); ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if(!empty(session()->getFlashdata('success'))) : ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= session()->getFlashdata('success'); ?>
+                            </div>
+                        <?php endif; ?>
+                        <form method="post" class="row g-3" id="frmStock" action="<?=base_url('save-product')?>" enctype="multipart/form-data" autocomplete="OFF">
+                            <input type="hidden" name="reserveID" value="<?=$reserve['reservedID']?>"/>
+                            <div class="col-12 form-group">
+                                <div class="row g-3">
+                                    <div class="col-lg-3">
+                                        <label>Assignment</label>
+                                        <select class="form-control custom-select2" id="warehouse" name="warehouse" required>
+                                            <option value="">Choose</option>
+                                            <?php if($warehouse): ?>
+                                                <?php foreach($warehouse as $row): ?>
+                                                    <option value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label>Vendor/Supplier's Name</label>
+                                        <select class="form-control custom-select2" id="supplier" name="supplier">
+                                            <option value="0">No Vendor</option>
+                                            <?php if($supplier): ?>
+                                                <?php foreach($supplier as $row): ?>
+                                                    <option value="<?php echo $row->supplierID ?>"><?php echo $row->supplierName ?></option>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label>Item Group</label>
+                                        <select class="form-control custom-select2" id="category" name="category" required>
+                                            <option value="">Choose</option>
+                                            <?php if($category): ?>
+                                                <?php foreach($category as $row): ?>
+                                                    <option value="<?php echo $row->categoryID ?>"><?php echo $row->categoryName ?></option>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </select>
+                                    </div>
+									<div class="col-lg-3">
+										<label>Location (Optional)</label>
+										<input type="text" class="form-control" name="location"/>
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-12 form-group">
+                                <div class="row g-3">
+									<div class="col-lg-8 form-group">
+										<label>Product Name</label>
+										<input type="text" class="form-control" name="productName" value="<?=$reserve['productName']?>" required/>
+									</div>
+									<div class="col-lg-4">
+										<label>Serial No (Optional)</label>
+										<input type="text" class="form-control" name="productCode"/>
+									</div>
+								</div>
+                            </div>
+                            <div class="col-12 form-group">
+                                <label>Product Description</label>
+                                <textarea class="form-control" name="description" required><?=$reserve['Description']?></textarea>
+                            </div>
+                            <div class="col-12 form-group">
+                                <div class="row g-3">
+                                    <div class="col-lg-3">
+                                        <label>Unit Item (<a href="https://web.wpi.edu/Images/CMS/Finops/STARS_Units_of_Measure.pdf">see details</a>)</label>
+                                        <select class="form-control custom-select2" name="itemUnit" style="width:100%;" required>
+                                            <option value="">Choose</option>
+											<option>AVG</option><option>BAG</option><option>BLK</option>
+											<option>BOT</option><option>BOX</option><option>BK</option>
+											<option>BND</option><option>CAN</option><option>CRD</option>
+											<option>CTN</option><option>CG</option><option>CSE</option>
+											<option>CEN</option<option>COI</option><option>CON</option>
+											<option>CFT</option><option>CYD</option><option>CUR</option>
+											<option>CYL</option><option>DAY</option><option>DZ</option>
+											<option>DRM</option><option>EA</option><option>FT</option>
+											<option>GAL</option><option>GA</option><option>GRN</option>
+											<option>GRM</option><option>GMC</option><option>GRS</option>
+											<option>HR</option><option>CW</option><option>INC</option>
+											<option>INS</option><option>JAR</option><option>JOB</option>
+											<option>KG</option><option>KW</option><option>KIT</option>
+											<option>LNG</option><option>LFT</option><option>LTR</option>
+											<option>LOT</option><option>MET</option><option>MTN</option>
+											<option>MC</option><option>UL</option><option>MU</option>
+											<option>MGR</option><option>MLT</option><option>MOL</option>
+											<option>MON</option><option>TN</option><option>N/A</option>
+											<option>ORD</option><option>OZ</option><option>PK</option>
+											<option>PKT</option><option>PAD</option><option>PAL</option>
+											<option>PR</option><option>PLT</option><option>C</option>
+											<option>M</option><option>PC</option><option>PT</option>
+											<option>PP</option><option>LB</option><option>QT</option>
+											<option>RCK</option><option>RM</option><option>RE</option>
+											<option>ROD</option><option>RIM<option>RL</option>
+											<option>SAC</option><option>SVC</option><option>SET</option>
+											<option>ST</option><option>SHT</option><option>SLV</option>
+											<option>SFT</option><option>SYD</option><option>STK</option>
+											<option>TST</option><option>THR</option><option>TON</option>
+											<option>TRP</option><option>TUB</option><option>TB</option>
+											<option>UNT</option><option>VIL</option><option>WK</option>
+											<option>YD</option><option>YR</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label>Unit Cost</label>
+                                        <input type="text" class="form-control" name="unitPrice" value="<?=$reserve['UnitPrice']?>" required/>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label>Quantity</label>
+                                        <input type="number" class="form-control" name="qty" value="<?=$reserve['Qty']?>" required/>
+                                    </div>
+									<div class="col-lg-2">
+                                        <label>Re-Order</label>
+                                        <input type="number" class="form-control" name="reOrder" required/>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label>Expiration Date (Optional)</label>
+                                        <input type="date" class="form-control" name="expirationDate"/>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="col-12 form-group">
+								<p>
+									<label for="upload_imgs" class="btn btn-outline-primary">Select Your Images +</label>
+									<input class="show-for-sr" type="file" id="upload_imgs" name="images[]" accept="image/jpeg, image/png, image/jpg" multiple/>
+								</p>
+								<div class="quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>
+							</div>
+							<div class="col-12 form-group">
+								<input type="submit" class="btn btn-primary" id="btnAdd" value="Add Entry"/>
+							</div>
+                        </form>
 					</div>
 				</div>
 			</div>
