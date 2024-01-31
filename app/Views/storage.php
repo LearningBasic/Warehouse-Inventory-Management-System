@@ -469,9 +469,9 @@
 										<td>
 											<div class="dropdown">
 													<button type="button" class="btn btn-primary btn-sm line-height-1 no-arrow dropdown-toggle" role="button" data-toggle="dropdown">
-														Add
+														Action
 													</button>
-													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+													<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 														<button type="button" class="dropdown-item add-stock" value="<?php echo $row->reservedID ?>"><i class="icon-copy dw dw-right-arrow-1"></i> As Stock</button>
 														<button type="button" class="dropdown-item add-new" value="<?php echo $row->reservedID ?>"><i class="icon-copy dw dw-right-arrow-1"></i> As New Product</button>
 													</div>
