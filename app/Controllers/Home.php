@@ -382,6 +382,7 @@ class Home extends BaseController
         $qrModel = new \App\Models\qrcodeModel();
         //data
         $date = date('Y-m-d');
+        $id = $this->request->getPost('reserveID');
         $warehouse = $this->request->getPost('warehouse');
         $supplier = $this->request->getPost('supplier');
         $category = $this->request->getPost('category');
@@ -398,7 +399,7 @@ class Home extends BaseController
         $validation = $this->validate([
             'warehouse'=>'required',
             'category'=>'required',
-            'productName'=>'required|is_unique[tblinventory.productName]',
+            'productName'=>'required',
             'itemUnit'=>'required',
             'unitPrice'=>'required',
             'qty'=>'required'
@@ -406,7 +407,7 @@ class Home extends BaseController
         if(!$validation)
         {
             session()->setFlashdata('fail',"Invalid! Please check the item/equipment information before submission");
-            return redirect()->to('/new-product')->withInput();
+            return redirect()->to('/new-product/'.$id)->withInput();
         }
         else
         {
@@ -470,7 +471,7 @@ class Home extends BaseController
                 $values = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Added new product '.$productName];
                 $systemLogsModel->save($values);
                 session()->setFlashdata('success',"Great! Successfully added");
-                return redirect()->to('/add')->withInput();
+                return redirect()->to('/storage')->withInput();
             }
             else
             {

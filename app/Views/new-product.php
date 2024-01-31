@@ -471,11 +471,6 @@
                                 <?= session()->getFlashdata('fail'); ?>
                             </div>
                         <?php endif; ?>
-                        <?php if(!empty(session()->getFlashdata('success'))) : ?>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <?= session()->getFlashdata('success'); ?>
-                            </div>
-                        <?php endif; ?>
                         <form method="post" class="row g-3" id="frmStock" action="<?=base_url('save-product')?>" enctype="multipart/form-data" autocomplete="OFF">
                             <input type="hidden" name="reserveID" value="<?=$reserve['reservedID']?>"/>
                             <div class="col-12 form-group">
@@ -486,7 +481,7 @@
                                             <option value="">Choose</option>
                                             <?php if($warehouse): ?>
                                                 <?php foreach($warehouse as $row): ?>
-                                                    <option value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>
+                                                    <option <?php echo 'selected="selected"'; ?> value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
                                         </select>
@@ -497,7 +492,7 @@
                                             <option value="0">No Vendor</option>
                                             <?php if($supplier): ?>
                                                 <?php foreach($supplier as $row): ?>
-                                                    <option value="<?php echo $row->supplierID ?>"><?php echo $row->supplierName ?></option>
+                                                    <option <?php echo 'selected="selected"'; ?> value="<?php echo $row->supplierID ?>"><?php echo $row->supplierName ?></option>
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
                                         </select>
@@ -581,7 +576,7 @@
                                     </div>
                                     <div class="col-lg-2">
                                         <label>Quantity</label>
-                                        <input type="number" class="form-control" name="qty" value="<?=$reserve['Qty']?>" required/>
+                                        <input type="number" class="form-control" min="1" name="qty" value="<?=$reserve['Qty']?>" required/>
                                     </div>
 									<div class="col-lg-2">
                                         <label>Re-Order</label>
@@ -618,5 +613,40 @@
 		<script src="/assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="/assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="/assets/vendors/scripts/datatable-setting.js"></script>
+        <script>
+			var imgUpload = document.getElementById('upload_imgs')
+				, imgPreview = document.getElementById('img_preview')
+				, imgUploadForm = document.getElementById('img-upload-form')
+				, totalFiles
+				, previewTitle
+				, previewTitleText
+				, img;
+
+				imgUpload.addEventListener('change', previewImgs, false);
+				imgUploadForm.addEventListener('submit', function (e) {
+				e.preventDefault();
+				alert('Images Uploaded! (not really, but it would if this was on your website)');
+				}, false);
+
+				function previewImgs(event) {
+				totalFiles = imgUpload.files.length;
+				
+				if(!!totalFiles) {
+					imgPreview.classList.remove('quote-imgs-thumbs--hidden');
+					previewTitle = document.createElement('p');
+					previewTitle.style.fontWeight = 'bold';
+					previewTitleText = document.createTextNode(totalFiles + ' Total Images Selected');
+					previewTitle.appendChild(previewTitleText);
+					imgPreview.appendChild(previewTitle);
+				}
+				
+				for(var i = 0; i < totalFiles; i++) {
+					img = document.createElement('img');
+					img.src = URL.createObjectURL(event.target.files[i]);
+					img.classList.add('img-preview-thumb');
+					imgPreview.appendChild(img);
+				}
+				}
+		</script>
 	</body>
 </html>

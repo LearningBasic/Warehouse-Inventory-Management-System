@@ -441,6 +441,11 @@
 				<div class="card-box">
 					<div class="card-header"><span class="icon-copy dw dw-server"></span>&nbsp;Reserved</div>
 					<div class="card-body">
+                        <?php if(!empty(session()->getFlashdata('success'))) : ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= session()->getFlashdata('success'); ?>
+                            </div>
+                        <?php endif; ?>
 						<table class="table data-table table-striped">
 							<thead>
 								<th>Date Received</th>
