@@ -73,7 +73,27 @@
                 width: 4px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
-            
+			.image-container {
+			position: relative;
+			display: inline-block;
+			}
+
+			.image-container img {
+			display: block;
+			width: 100%;
+			height: auto;
+			}
+			.overlay-text {
+			position: absolute;
+			top: 10%; 
+			left: 50%; 
+			transform: translate(-50%, -50%); 
+			background-color: #000000; 
+			color: #fff; 
+			padding: 5px 5px; 
+			font-size: 10px; 
+			text-align: center;
+			  }
         </style>
 	</head>
 	<body>
@@ -427,35 +447,38 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
-				<div class="card-box">
-					<div class="card-header"><span class="icon-copy bi bi-qr-code"></span>&nbsp;QR Code
-                    <a href="" style="float:right;" onclick="Print()" id="btnPrint"><span class="bi bi-printer"></span>&nbsp;Print</a>
-                </div>
-					<div class="card-body" id="pdf">
-                        <center>
-                        <?php for($i=0;$i<$items['Qty'];$i++){ ?>
-                        <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=<?php echo $items['productID'].$i ?>&choe=UTF-8" title="<?php echo $items['productName'] ?>" style="border:1px solid #000;" />
-                        <?php
-                            $text = $items['productID'].$i;
-                            $qrModel = new \App\Models\qrcodeModel();
-                            $db;
-                            $this->db = db_connect();
-                            $builder = $this->db->table('tblqrcode');
-                            $builder->select('*');
-                            $builder->WHERE('inventID',$items['inventID'])->WHERE('TextValue',$text);
-                            $data = $builder->get();
-                            if($row = $data->getRow())
-                            {
-                                //do nothing, just generate the code
-                            }
-                            else
-                            {
-                                $values = ['inventID'=>$items['inventID'],'TextValue'=>$text];
-                                $qrModel->save($values);
-                            }
-                            ?>
-                            <?php } ?>
-                        </center>
+				<div class="container">
+					<div class="card-box">
+						<div class="card-header"><span class="icon-copy bi bi-qr-code"></span>&nbsp;QR Code
+						<a href="" style="float:right;" onclick="Print()" id="btnPrint"><span class="bi bi-printer"></span>&nbsp;Print</a>
+						</div>
+						<div class="card-body" id="pdf">
+							<?php for($i=0;$i<$items['Qty'];$i++){ ?>
+							<div class="image-container">
+							<img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=<?php echo $items['productID'].$i ?>&choe=UTF-8" title="<?php echo $items['productID'].$i; ?>" style="border:1px solid #000;" />
+							<div class="overlay-text"><?php echo $items['productID'].$i ?></div>
+							</div>
+							<?php
+								$text = $items['productID'].$i;
+								$qrModel = new \App\Models\qrcodeModel();
+								$db;
+								$this->db = db_connect();
+								$builder = $this->db->table('tblqrcode');
+								$builder->select('*');
+								$builder->WHERE('inventID',$items['inventID'])->WHERE('TextValue',$text);
+								$data = $builder->get();
+								if($row = $data->getRow())
+								{
+									//do nothing, just generate the code
+								}
+								else
+								{
+									$values = ['inventID'=>$items['inventID'],'TextValue'=>$text];
+									$qrModel->save($values);
+								}
+								?>
+							<?php } ?>
+						</div>
 					</div>
 				</div>
 			</div>
