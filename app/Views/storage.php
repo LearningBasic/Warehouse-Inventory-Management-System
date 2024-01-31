@@ -472,6 +472,9 @@
 										<td style="text-align:right;"><?php echo number_format($row->InvoiceAmount,2) ?></td>
 										<td><?php echo $row->Condition ?></td>
 										<td>
+											<?php if($row->Qty==0){ ?>
+												-
+											<?php }else { ?>
 											<div class="dropdown">
 												<button type="button" class="btn btn-primary btn-sm line-height-1 no-arrow dropdown-toggle" role="button" data-toggle="dropdown">
 													Action
@@ -481,6 +484,7 @@
 													<a class="dropdown-item" href="/new-product/<?php echo $row->reservedID ?>"><i class="icon-copy dw dw-right-arrow-1"></i> Add as New Product</a>
 												</div>
 											</div>
+											<?php } ?>
 										</td>
 									</tr>
 								<?php endforeach; ?>
