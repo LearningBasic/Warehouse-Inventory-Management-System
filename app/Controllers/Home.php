@@ -294,6 +294,7 @@ class Home extends BaseController
         $builder = $this->db->table('tblcategory');
         $builder->select('*');
         $category = $builder->get()->getResult();
+
         $data = ['warehouse'=>$warehouse,'supplier'=>$supplier,'category'=>$category,'reserve'=>$reserve];
         return view('new-product',$data);
     }
@@ -705,7 +706,12 @@ class Home extends BaseController
 
     public function returnOrder()
     {
+        $builder = $this->db->table("tblreserved");
+        $builder->select('*');
+        $reserve = $builder->get()->getResult();
         
+        $data = ['reserve'=>$reserve];
+        return view('return-order',$data);
     }
 
     public function userRequest()
