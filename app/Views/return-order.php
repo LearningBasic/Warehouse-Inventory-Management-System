@@ -441,25 +441,42 @@
                         <div class="card-body">
                             <form method="POST" class="row g-3" id="frmOrder">
                                 <div class="col-12 form-group">
-                                    <label>Purchase Order No</label>
-                                    <select class="form-control custom-select2" name="purchase_number" required>
+                                    <label>Shipper/Vendor</label>
+                                    <select class="form-control custom-select2" name="vendor" style="width:100%;" required>
                                         <option value="">Choose</option>
-                                        <?php foreach($reserve as $row): ?>
-                                                <option value="<?php echo $row->purchaseNumber ?>"><?php echo $row->purchaseNumber ?></option>
+                                        <?php foreach($supplier as $row): ?>
+                                                <option value="<?php echo $row->supplierID ?>"><?php echo $row->supplierName ?></option>
                                             <?php endforeach; ?>
-                                    </select>
+                                    </select>   
                                 </div>
                                 <div class="col-12 form-group">
                                     <div class="row g-3">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <label>Date Received</label>
                                             <input type="date" class="form-control" name="dateReceive" required/>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
+                                            <label>Purchase Order No</label>
+                                            <select class="form-control custom-select2" name="purchase_number" required>
+                                                <option value="">Choose</option>
+                                                <?php foreach($reserve as $row): ?>
+                                                        <option value="<?php echo $row->purchaseNumber ?>"><?php echo $row->purchaseNumber ?></option>
+                                                    <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-3">
                                             <label>Invoice Number</label>
                                             <input type="text" class="form-control" name="invoice_number" required/>
                                         </div>
-                                        <div class="col-lg-4">
+                                    </div>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <div class="row g-3">
+                                        <div class="col-lg-10">
+                                            <label>Product Name</label>
+                                            <input type="text" class="form-control" name="product_name" required/>
+                                        </div>
+                                        <div class="col-lg-2">
                                             <label>Quantity</label>
                                             <input type="number" class="form-control" min="1" name="quantity" required/>
                                         </div>
@@ -472,6 +489,9 @@
                                 <div class="col-12 form-group">
                                     <label>Attachment</label>
                                     <input type="file" class="form-control" name="file" required/>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <button type="submit" class="btn btn-primary" id="btnSave">Submit</button>
                                 </div>
                             </form>   
                         </div>

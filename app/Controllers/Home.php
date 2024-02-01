@@ -709,8 +709,13 @@ class Home extends BaseController
         $builder = $this->db->table("tblreserved");
         $builder->select('*');
         $reserve = $builder->get()->getResult();
+        //vendor
+        //supplier
+        $builder = $this->db->table('tblsupplier');
+        $builder->select('*');
+        $supplier = $builder->get()->getResult();
         
-        $data = ['reserve'=>$reserve];
+        $data = ['reserve'=>$reserve,'supplier'=>$supplier];
         return view('return-order',$data);
     }
 
