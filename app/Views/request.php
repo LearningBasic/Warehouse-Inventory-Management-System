@@ -611,6 +611,26 @@
                         </table>
                     </div>
                 </div>
+				<div class="card-box" id="returnOrder" style="display:none;">
+					<div class="card-header">Return Orders</div>
+                    <div class="card-body">
+						<table class="data-table table stripe hover nowrap">
+                            <thead>
+								<th>Date</th>
+								<th>Vendor</th>
+								<th>P.O. No</th>
+								<th>Invoice No</th>
+								<th>Product Name</th>
+								<th>Qty</th>
+								<th>Proof</th>
+								<th>Status</th>
+								<th>Action</th>
+                            </thead>
+                            <tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -820,6 +840,7 @@
                 $('#damageReport').slideDown();
                 $('#overhaulReport').slideUp();
                 $('#transferReport').slideUp();
+				$('#returnOrder').slideUp();
             });
             $('#viewOverhaulItems').on('click',function(e)
             {
@@ -827,6 +848,7 @@
                 $('#overhaulReport').slideDown();
                 $('#damageReport').slideUp();
                 $('#transferReport').slideUp();
+				$('#returnOrder').slideUp();
             });
             $('#viewTransferItems').on('click',function(e)
             {
@@ -834,7 +856,16 @@
                 $('#overhaulReport').slideUp();
                 $('#damageReport').slideUp();
                 $('#transferReport').slideDown();
+				$('#returnOrder').slideUp();
             });
+			$('#viewReturnItems').on('click',function(e)
+			{
+				e.preventDefault();
+				$('#overhaulReport').slideUp();
+                $('#damageReport').slideUp();
+                $('#transferReport').slideUp();
+				$('#returnOrder').slideDown();
+			});
         </script>
 	</body>
 </html>
