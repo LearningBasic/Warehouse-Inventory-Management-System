@@ -623,6 +623,14 @@
 												<td><?php echo $row->purchaseNumber ?></td>
 												<td><?php echo $row->InvoiceNo ?></td>
 												<td><?php echo $row->productName ?></td>
+												<td><?php echo $row->Qty ?></td>
+												<td>
+													<?php if($row->Status==0){ ?>
+														<span class="badge bg-warning text-white">PENDING</span>
+													<?php }else { ?>
+														<span class="badge bg-primary text-white">APPROVED</span>
+													<?php } ?>
+												</td>
 											</tr>
 										<?php endforeach; ?>
 										</tbody>
