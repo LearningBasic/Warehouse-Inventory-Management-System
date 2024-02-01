@@ -627,6 +627,25 @@
 								<th>Action</th>
                             </thead>
                             <tbody>
+							<?php foreach($returnOrder as $row): ?>
+								<tr>
+									<td><?php echo $row->Date ?></td>
+									<td><?php echo $row->supplierName ?></td>
+									<td><?php echo $row->purchaseNumber ?></td>
+									<td><?php echo $row->InvoiceNo ?></td>
+									<td><?php echo $row->productName ?></td>
+									<td><?php echo $row->Qty ?></td>
+									<td><a href="<?php echo "/returnOrder/".$row->Attachment ?>" class="btn btn-secondary btn-sm" target="_BLANK"><i class="icon-copy dw dw-image"></i>&nbsp;Attachment</a></td>
+									<td>
+										<?php if($row->Status==0){ ?>
+											<span class="badge bg-warning text-white">PENDING</span>
+										<?php }else { ?>
+											<span class="badge bg-primary text-white">APPROVED</span>
+										<?php } ?>
+									</td>
+									<td></td>
+								</tr>
+							<?php endforeach; ?>
 							</tbody>
 						</table>
 					</div>

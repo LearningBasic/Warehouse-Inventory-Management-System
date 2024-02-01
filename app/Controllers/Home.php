@@ -749,8 +749,13 @@ class Home extends BaseController
             $builder->join('tblwarehouse c','c.warehouseID=b.warehouseID','LEFT');
             $builder->groupBy('a.requestID');
             $transfer = $builder->get()->getResult();
+            //return order
+            $builder = $this->db->table('tblreturn a');
+            $builder->select('a.*,b.supplierName');
+            $builder->join('tblsupplier b','b.supplierID=a.supplierID','LEFT');
+            $returnOrder = $builder->get()->getResult();
 
-            $data = ['damage'=>$damage,'repair'=>$repair,'transfer'=>$transfer,];
+            $data = ['damage'=>$damage,'repair'=>$repair,'transfer'=>$transfer,'returnOrder'=>$returnOrder];
             return view('request',$data);
         }
         else
