@@ -439,7 +439,7 @@
                             <a href="<?=site_url('add-report')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                         </div>
                         <div class="card-body">
-                            <form method="POST" class="row g-3" id="frmOrder">
+                            <form method="POST" class="row g-3" id="frmOrder" action="<?=base_url('')?>">
                                 <div class="col-12 form-group">
                                     <label>Shipper/Vendor</label>
                                     <select class="form-control custom-select2" name="vendor" style="width:100%;" required>
