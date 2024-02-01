@@ -38,6 +38,7 @@ $routes->get('list-supplier','Dashboard::listSupplier');
 $routes->get('pending-damage-report','Dashboard::damageItem');
 $routes->get('pending-repair-report','Dashboard::overhaulItem');
 $routes->get('pending-transfer-report','Dashboard::transferItem');
+$routes->get('return-order-report','Dashboard::returnOrder');
 //auto login
 $routes->get('auto-login/(:any)','Dashboard::autoLogin/$1');
 //saving the data

@@ -472,7 +472,7 @@
                         <div class="card-box">
                             <div class="card-body">
                                 <label><b>Return Order(s)</b></label>
-                                <h1>0</h1>
+                                <h1 id="totalPendingReturnOrder">0</h1>
                                 <a href="javascript:void(0);" id="viewReturnItems" class="btn btn-outline-primary btn-sm">View</a>
                             </div>
                         </div>
@@ -684,6 +684,7 @@
                 totalPendingDamage();
 				totalPendingOverhaul();
 				totalPendingTransfer();
+				totalReturnOrder();
 				notify();
             });
 			function notify()
@@ -823,6 +824,16 @@
 						}
 					});
 			});
+			function totalReturnOrder()
+			{
+				$.ajax({
+                    url:"<?=site_url('return-order-report')?>",method:"GET",
+                    success:function(response)
+                    {
+                        $('#totalPendingReturnOrder').html(response);
+                    }
+                });
+			}
 			function totalPendingOverhaul()
 			{
 				$.ajax({

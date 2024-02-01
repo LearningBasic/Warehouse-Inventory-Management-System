@@ -95,6 +95,18 @@ class Dashboard extends BaseController
         }
     }
 
+    public function returnOrder()
+    {
+        $builder = $this->db->table('tblreturn');
+        $builder->select('FORMAT(COUNT(returnID),0)total');
+        $builder->WHERE('Status',0);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            echo $row->total;
+        }
+    }
+
     public function damageItem()
     {
         $builder = $this->db->table('tbldamagereport a');
