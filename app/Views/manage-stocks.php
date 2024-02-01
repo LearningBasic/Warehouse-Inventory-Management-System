@@ -443,26 +443,6 @@
 						<?php endif; ?>
 						<div class="tabs">
 							<ul class="nav nav-pills justify-content-left" role="tablist">
-								<!-- <li class="nav-item">
-									<a
-										class="nav-link active text-blue"
-										data-toggle="tab"
-										href="#home6"
-										role="tab"
-										aria-selected="true"
-										>Damaged Items</a
-									>
-								</li>
-								<li class="nav-item">
-									<a
-										class="nav-link text-blue"
-										data-toggle="tab"
-										href="#profile6"
-										role="tab"
-										aria-selected="false"
-										>Overhaul Items</a
-									>
-								</li> -->
 								<li class="nav-item">
 									<a
 										class="nav-link active text-blue"
@@ -483,135 +463,8 @@
 										>Add Stocks</a
 									>
 								</li>
-								<li class="nav-item">
-									<a
-										class="nav-link text-blue"
-										data-toggle="tab"
-										href="#contact6"
-										role="tab"
-										aria-selected="false"
-										>Return Order(s)</a
-									>
-								</li>
 							</ul>
 							<div class="tab-content">
-								<!-- <div class="tab-pane fade show active" id="home6" role="tabpanel">
-									<br/>
-									<table class="data-table table stripe hover nowrap">
-										<thead>
-											<th>Date Reported</th>
-											<th>Defect Type</th>
-											<th>Product Name</th>
-											<th>Qty</th>
-											<th>Details</th>
-											<th>Remarks</th>
-											<th>Action</th>
-										</thead>
-										<tbody>
-											<?php if($items): ?>
-												<?php foreach($items as $row): 
-												if($row->Remarks=="Replacement"){
-													?>
-													<tr>
-														<td><?php echo $row->DateReport ?></td>
-														<td><?php echo $row->DamageRate ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->Details ?></td>
-														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
-														<td>
-														<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-image"></i>&nbsp;View</a>
-														</td> 
-													</tr>
-												<?php }else{ 
-													if($row->Status==0){
-													?>
-													<tr>
-														<td><?php echo $row->DateReport ?></td>
-														<td><?php echo $row->DamageRate ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->Details ?></td>
-														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
-														<td>
-															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-image"></i>&nbsp;View</a>
-															<a href="<?=site_url('create-report/')?><?php echo $row->damageID ?>" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-add"></i>&nbsp;Create</a>
-														</td> 
-													</tr>
-													<?php }else{ ?>
-														<tr>
-														<td><?php echo $row->DateReport ?></td>
-														<td><?php echo $row->DamageRate ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->Details ?></td>
-														<td><span class="badge bg-primary text-white"><?php echo $row->Remarks ?></span></td>
-														<td>
-															<a href="/Damage_Files/<?php echo $row->Image ?>" target="_BLANK" class="btn btn-outline-primary btn-sm"><i class="icon-copy dw dw-image"></i>&nbsp;View</a>
-														</td> 
-													</tr>
-													<?php } ?>
-												<?php } ?>
-												<?php endforeach; ?>
-											<?php endif; ?>
-										</tbody>
-									</table>
-								</div>
-								<div class="tab-pane fade" id="profile6" role="tabpanel">
-									<br/>
-									<table class="data-table table stripe hover nowrap">
-										<thead>
-											<th>Date Repaired</th>
-											<th>Product Name</th>
-											<th>Qty</th>
-											<th>Details</th>
-											<th>Date Accomplished</th>
-											<th>Status</th>
-											<th>Action</th>
-										</thead>
-										<tbody>
-											<?php if($archive): ?>
-												<?php foreach($archive as $row): ?>
-													<?php if($row->Status==0){ ?>
-													<tr>
-														<td><?php echo $row->repairDate ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->Details ?></td>
-														<td><?php echo $row->dateAccomplished ?></td>
-														<td><span class="badge bg-warning text-white">PENDING</span></td>
-														<td>
-															<button type="button" class="btn btn-outline-primary btn-sm file" value="<?php echo $row->repairID ?>"><i class="icon-copy dw dw-add"></i>&nbsp;Create</button>
-														</td>
-													</tr>
-													<?php }else if($row->Status==1){ ?>
-													<tr>
-														<td><?php echo $row->repairDate ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->Details ?></td>
-														<td><?php echo $row->dateAccomplished ?></td>
-														<td><span class="badge bg-success text-white">DONE</span></td>
-														<td>
-															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->repairID ?>"><i class="icon-copy dw dw-view"></i>&nbsp;Details</button>
-														</td>
-													</tr>
-													<?php }else if($row->Status==2){  ?>
-														<tr>
-														<td><?php echo $row->repairDate ?></td>
-														<td><?php echo $row->productName ?></td>
-														<td><?php echo number_format($row->Qty,0) ?></td>
-														<td><?php echo $row->Details ?></td>
-														<td><?php echo $row->dateAccomplished ?></td>
-														<td><span class="badge bg-danger text-white">UNDONE</span></td>
-														<td>-</td>
-													</tr>
-													<?php } ?>
-												<?php endforeach; ?>
-											<?php endif; ?>
-										</tbody>
-									</table>
-								</div> -->
 								<div class="tab-pane fade show active" id="others6" role="tabpanel">
 									<br/>
 									<table class="data-table table stripe hover nowrap">
@@ -715,9 +568,6 @@
 											<input type="submit" class="btn btn-primary" id="btnSave" value="Save Entry"/>
 										</div>
 									</form>
-								</div>
-								<div class="tab-pane fade" id="contact6" role="tabpanel">
-
 								</div>
 							</div>
 						</div>
