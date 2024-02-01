@@ -59,6 +59,7 @@ $routes->get('assignment','Home::assignment');
 $routes->post('change-password','Home::changePassword');
 $routes->post('save-inventory','ProductController::saveInventory');
 $routes->post('save-stocks','Home::saveStocks');
+$routes->post('add-stock','Home::addStock');
 $routes->post('remove-category','Home::removeCategory');
 $routes->post('remove-location','Home::removeLocation');
 $routes->post('remove-industry','Home::removeIndustry');

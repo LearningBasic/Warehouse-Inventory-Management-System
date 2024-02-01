@@ -527,6 +527,16 @@
                 </div>
             </div>
         </div>
+		<div class="modal" id="modal-loading" data-backdrop="static">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+				<div class="modal-body text-center">
+					<div class="loading-spinner mb-2"></div>
+					<div>Loading</div>
+				</div>
+				</div>
+			</div>
+		</div>
 		<!-- js -->
 		<script src="assets/vendors/scripts/core.js"></script>
 		<script src="assets/vendors/scripts/script.min.js"></script>
@@ -548,8 +558,24 @@
 			$('#btnSave').on('click',function(e)
 			{
 				e.preventDefault();
+				$('#modal-loading').modal('show');
 				var data = $('#frmReport').serialize();
-				
+				$.ajax({
+					url:"<?=site_url('add-stock')?>",method:"POST",
+					data:data,
+					success:function(response)
+					{
+						if(response==="success")
+						{
+							window.location.href="<?=site_url('storage')?>";
+						}
+						else
+						{
+							alert(response);
+						}
+						$('#modal-loading').modal('hide');
+					}
+				});
 			});
 		</script>
 	</body>

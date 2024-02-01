@@ -223,6 +223,59 @@ class Home extends BaseController
         return view('storage',$data);
     }
 
+    public function addStock()
+    {
+        $inventoryModel = new \App\Models\inventoryModel();
+        $systemLogsModel = new \App\Models\systemLogsModel();
+        $qrModel = new \App\Models\qrcodeModel();
+        $reservedModel = new \App\Models\reservedModel();
+        //data
+        $id = $this->request->getPost('receiveID');
+        $product = $this->request->getPost('product');
+        $num_stocks = $this->request->getPost('qty');
+        $user = session()->get('loggedUser');
+
+        $validation = $this->validate([
+           'product'=>'required',
+           'qty'=>'required',
+        ]);
+        if(!$validation)
+        {
+            echo "Invalid! Please fill in the form";
+        }
+        else
+        {
+            //update the stocks
+            $inventory = $inventoryModel->WHERE('inventID',$product)->first();
+            $newQty = $inventory['Qty']+$num_stocks;
+            $value = ['Qty'=>$newQty];
+            $inventoryModel->update($product,$value);
+            //save logs
+            $records = [
+                'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Added stocks to '.$inventory['productName']
+            ];
+            $systemLogsModel->save($records);
+            for($i=0;$i<$num_stocks;$i++)
+            {
+                //count the items per inventory and add qrcode
+                $builder = $this->db->table('tblqrcode');
+                $builder->select('COUNT(*) as total');
+                $builder->WHERE('inventID',$product);
+                $data = $builder->get();
+                if($row = $data->getRow())
+                {
+                    $values = ['inventID'=>$product,'TextValue'=>$inventory['productID'].$row->total];
+					$qrModel->save($values);
+                }
+            }
+            //deduct the qty
+            $reserved = $reservedModel->WHERE('reservedID',$id)->first();
+            $newValues = ['Qty'=>$reserved['Qty']-$num_stocks];
+            $reservedModel->update($id,$newValues);
+            echo "success";
+        }
+    }
+
     public function newProduct($id)
     {
         $reservedModel = new \App\Models\reservedModel();
