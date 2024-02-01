@@ -85,6 +85,7 @@ $routes->post('send-repair-report','ProductController::repairReport');
 $routes->post('accept-repair-report','ProductController::acceptRepairReport');
 $routes->post('save-request','ProductController::saveRequest');
 $routes->post('accept-transfer-request','ProductController::acceptRequest');
+$routes->post('submit-return-order','ProductController::submitReturnOrder');
 //report
 $routes->get('search-stocks','Report::searchStockReport');
 $routes->get('search-inventory','Report::searchInventory');

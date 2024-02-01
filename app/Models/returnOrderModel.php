@@ -14,7 +14,7 @@ class returnOrderModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['Date','accountID', 'supplierID','purchaseNumber','InvoiceNo','productName','Qty','Details','Attachment'];
+    protected $allowedFields = ['Date','accountID', 'supplierID','purchaseNumber','InvoiceNo','productName','Qty','Details','Attachment','Status'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

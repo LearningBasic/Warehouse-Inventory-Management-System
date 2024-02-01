@@ -439,7 +439,7 @@
                             <a href="<?=site_url('add-report')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                         </div>
                         <div class="card-body">
-                            <form method="POST" class="row g-3" id="frmOrder" action="<?=base_url('')?>">
+                            <form method="POST" class="row g-3" id="frmOrder" enctype="multipart/form-data" action="<?=base_url('submit-return-order')?>">
                                 <div class="col-12 form-group">
                                     <label>Shipper/Vendor</label>
                                     <select class="form-control custom-select2" name="vendor" style="width:100%;" required>
@@ -457,7 +457,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Purchase Order No</label>
-                                            <select class="form-control custom-select2" name="purchase_number" required>
+                                            <select class="form-control custom-select2" name="purchase_number" style="width:100%;" required>
                                                 <option value="">Choose</option>
                                                 <?php foreach($reserve as $row): ?>
                                                         <option value="<?php echo $row->purchaseNumber ?>"><?php echo $row->purchaseNumber ?></option>

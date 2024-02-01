@@ -846,4 +846,63 @@ class ProductController extends BaseController
         session()->setFlashdata('success','Great! Successfully submitted');
         return redirect()->to('/scan')->withInput();
     }
+
+    public function submitReturnOrder()
+    {
+        $returnOrderModel = new \App\Models\returnOrderModel();
+        //data
+        $user = session()->get('loggedUser');
+        $vendor = $this->request->getPost('vendor');
+        $dateReceive = $this->request->getPost('dateReceive');
+        $purchase_number = $this->request->getPost('purchase_number');
+        $invoice_number = $this->request->getPost('invoice_number');
+        $product_name = $this->request->getPost('product_name');
+        $quantity = $this->request->getPost('quantity');
+        $details = $this->request->getPost('details');
+        $file = $this->request->getFile('file');
+        $originalName = $file->getClientName();
+
+        $validation = $this->validate([
+            'vendor'=>'required',
+            'dateReceive'=>'required',
+            'purchase_number'=>'required',
+            'invoice_number'=>'required',
+            'product_name'=>'required',
+            'quantity'=>'required',
+            'details'=>'required',
+        ]);
+        if(!$validation)
+        {
+            session()->setFlashdata('fail','Invalid! Please fill in the form to continue');
+            return redirect()->to('/return-order')->withInput();
+        }
+        else
+        {
+            if(empty($originalName))
+            {
+                session()->setFlashdata('fail','Invalid! Please attach the required attachment as proof');
+                return redirect()->to('/return-order')->withInput();
+            }
+            else
+            {
+                if($file->isValid() && ! $file->hasMoved())
+                {
+                    $file->move('ReturnOrder/',$originalName);
+                    $values = [
+                        'Date'=>$dateReceive,'accountID'=>$user, 'supplierID'=>$vendor,
+                        'purchaseNumber'=>$purchase_number,'InvoiceNo'=>$invoice_number,'productName'=>$product_name,
+                        'Qty'=>$quantity,'Details'=>$details,'Attachment'=>$originalName,'Status'=>0
+                    ];
+                    $returnOrderModel->save($values);
+                    session()->setFlashdata('success','Great! Successfully submitted for review');
+                    return redirect()->to('/return-order')->withInput();
+                }
+                else
+                {
+                    session()->setFlashdata('fail','Error! Something went wrong');
+                    return redirect()->to('/return-order')->withInput();
+                }
+            }
+        }
+    }
 }

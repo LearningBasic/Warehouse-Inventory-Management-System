@@ -718,7 +718,7 @@ class Home extends BaseController
         $data = ['reserve'=>$reserve,'supplier'=>$supplier];
         return view('return-order',$data);
     }
-
+    
     public function userRequest()
     {
         if(session()->get('role')=="Administrator")
