@@ -559,6 +559,7 @@
 			{
 				e.preventDefault();
 				$('#modal-loading').modal('show');
+				$('#receiveModal').modal('hide');
 				var data = $('#frmReport').serialize();
 				$.ajax({
 					url:"<?=site_url('add-stock')?>",method:"POST",

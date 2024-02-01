@@ -144,6 +144,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/damage-report','Home::damageReport');
     $routes->get('/repair-report','Home::repairReport');
     $routes->get('/transfer-item','Home::transferItem');
+    $routes->get('/return-order','Home::returnOrder');
     $routes->get('/request','Home::userRequest');
     $routes->get('/orders','Home::purchaseRequest');
     $routes->get('/list-orders','Home::listOrders');

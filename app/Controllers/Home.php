@@ -703,6 +703,11 @@ class Home extends BaseController
         return view('transfer-request',$data);
     }
 
+    public function returnOrder()
+    {
+        
+    }
+
     public function userRequest()
     {
         if(session()->get('role')=="Administrator")
