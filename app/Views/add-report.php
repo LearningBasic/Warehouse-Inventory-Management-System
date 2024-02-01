@@ -605,7 +605,28 @@
                                 </div>
                                 <div class="tab-pane fade" id="contact6" role="tabpanel">
                                     <div class="pd-20">
-                                       
+                                    <table class="data-table table stripe hover nowrap">
+										<thead>
+											<th>Date</th>
+											<th>Vendor</th>
+											<th>P.O. No</th>
+											<th>Invoice No</th>
+											<th>Product Name</th>
+											<th>Qty</th>
+											<th>Status</th>
+										</thead>
+										<tbody>
+										<?php foreach($returnOrder as $row): ?>
+											<tr>
+												<td><?php echo $row->Date ?></td>
+												<td><?php echo $row->supplierName ?></td>
+												<td><?php echo $row->purchaseNumber ?></td>
+												<td><?php echo $row->InvoiceNo ?></td>
+												<td><?php echo $row->productName ?></td>
+											</tr>
+										<?php endforeach; ?>
+										</tbody>
+									</table>  
                                     </div>
                                 </div>
                             </div>

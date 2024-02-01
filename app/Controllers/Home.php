@@ -666,8 +666,14 @@ class Home extends BaseController
         $builder->select('*');
         $builder->WHERE('accountID',$user);
         $request = $builder->get()->getResult();
+        //return order
+        $builder = $this->db->table('tblreturn a');
+        $builder->select('a.*,b.supplierName');
+        $builder->join('tblsupplier b','b.supplierID=a.supplierID','LEFT');
+        $builder->WHERE('a.accountID',$user);
+        $returnOrder = $builder->get()->getResult();
 
-        $data = ['damage'=>$damage,'repair'=>$repair,'request'=>$request,];
+        $data = ['damage'=>$damage,'repair'=>$repair,'request'=>$request,'returnOrder'=>$returnOrder];
         return view('add-report',$data);
     }
 

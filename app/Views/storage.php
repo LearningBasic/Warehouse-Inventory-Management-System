@@ -74,6 +74,23 @@
                 width: 4px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
+			  .loading-spinner{
+				width:30px;
+				height:30px;
+				border:2px solid indigo;
+				border-radius:50%;
+				border-top-color:#0001;
+				display:inline-block;
+				animation:loadingspinner .7s linear infinite;
+				}
+				@keyframes loadingspinner{
+				0%{
+					transform:rotate(0deg)
+				}
+				100%{
+					transform:rotate(360deg)
+				}
+				}
         </style>
 	</head>
 	<body>
