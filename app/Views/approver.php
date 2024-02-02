@@ -608,7 +608,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal fade" id="viewModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -678,6 +678,16 @@
 			{
 				notify();
 			});
+			function approver()
+			{
+				$.ajax({
+					url:"<?=site_url('list-editor')?>",method:"GET",
+					success:function(response)
+					{
+						$('#departmentHead').append(response);
+					}
+				});
+			}
 			function notify()
 			{
 				$.ajax({
@@ -791,6 +801,7 @@
 					data:{value:val},
 					success:function(response)
 					{
+						approver();
 						$('#viewModal').modal('show');
 						$('#result').html(response);
 					}

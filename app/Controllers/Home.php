@@ -1248,7 +1248,6 @@ class Home extends BaseController
         $builder->WHERE('a.accountID',$user);
         $builder->groupBy('a.prID');
         $purchase = $builder->get()->getResult();
-
         $data = ['review'=>$review,'assign'=>$assign,'account'=>$account,'purchase'=>$purchase];
         return view('approver',$data);
     }

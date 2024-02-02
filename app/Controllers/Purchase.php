@@ -11,6 +11,22 @@ class Purchase extends BaseController
         $this->db = db_connect();
     }
 
+    public function listEditor()
+    {
+        $role = ['Editor','Administrator'];
+        $user = session()->get('loggedUser');
+        $builder = $this->db->table('tblaccount');
+        $builder->select('*');
+        $builder->WHERE('Status',1)->WHEREIN('systemRole',$role)->WHERE('accountID<>',$user)->WHERE('Department!=','');
+        $editor = $builder->get();
+        foreach($editor->getResult() as $row)
+        {
+            ?>
+            <option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?> - <?php echo $row->Department ?></option>
+            <?php
+        }
+    }
+
     public function saveOrder()
     {
         $OrderItemModel = new \App\Models\OrderItemModel();
@@ -193,7 +209,7 @@ class Purchase extends BaseController
             $role = ['Editor','Administrator'];
             $builder = $this->db->table('tblaccount');
             $builder->select('*');
-            $builder->WHERE('Status',1)->WHEREIN('systemRole',$role);
+            $builder->WHERE('Status',1)->WHEREIN('systemRole',$role)->WHERE('Department!=','');
             $data = $builder->get();
             foreach($data->getResult() as $row)
             {
@@ -278,9 +294,10 @@ class Purchase extends BaseController
     {
         $val = $this->request->getGet('value');
         $builder = $this->db->table('tblreview a');
-        $builder->select('a.reviewID,a.Status,b.OrderNo,b.Department,b.Reason,b.DateNeeded,c.Fullname,b.PurchaseType');
+        $builder->select('a.reviewID,a.Status,b.OrderNo,b.Department,b.Reason,b.DateNeeded,c.Fullname,b.PurchaseType,d.warehouseName');
         $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
         $builder->join('tblaccount c','b.accountID=c.accountID','LEFT');
+        $builder->join('tblwarehouse d','d.warehouseID=c.warehouseID','LEFT');
         $builder->WHERE('a.reviewID',$val);
         $data = $builder->get();
         if($row = $data->getRow())
@@ -288,6 +305,7 @@ class Purchase extends BaseController
             ?>
             <form method="post" class="row g-3" id="frmReview">
                 <input type="hidden" name="reviewID" id="reviewID" value="<?php echo $row->reviewID ?>"/>
+                <input type="hidden" name="location" id="location" value="<?php echo $row->warehouseName ?>"/>
                 <div class="col-12 form-group">
                     <div class="row g-3">
                         <div class="col-lg-4">
@@ -353,6 +371,14 @@ class Purchase extends BaseController
                         </tbody>
                     </table>
                 </div>
+                <?php if(str_contains(session()->get('location'), 'FCM')){ ?>
+                <div class="col-12 form-group">
+                    <label>Department Head</label>
+                    <select class="form-control" name="departmentHead" id="departmentHead">
+                        <option value="">Choose</option>
+                    </select>
+                </div>
+                <?php } ?>
                 <div class="col-12 form-group">
                     <?php if($row->Status==0){ ?>
                     <input type="button" class="btn btn-primary accept" value="Accept"/>
@@ -372,12 +398,14 @@ class Purchase extends BaseController
         //data
         $val = $this->request->getPost('reviewID');
         $typePurchase = $this->request->getPost('purchase_type');
+        $deptHead = $this->request->getPost('departmentHead');
+        $location = $this->request->getPost('location');
         $user = session()->get('loggedUser');
         $values = [
             'Status'=>1,'DateApproved'=>date('Y-m-d')
         ];
         $reviewModel->update($val,$values);
-        if(str_contains(session()->get('location'), 'FCM'))
+        if(str_contains($location, 'FCM'))
         {
             //update
             $builder = $this->db->table('tblreview a');
@@ -389,7 +417,48 @@ class Purchase extends BaseController
             {
                 if($row->Status==0)
                 {
-                    
+                    $purchase = $purchaseModel->WHERE('OrderNo',$row->OrderNo)->first();
+                    $value = ['Status'=>4];
+                    $purchaseModel->update($purchase['prfID'],$value);
+                    //save logs
+                    $values = [
+                        'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Accepted '.$row->OrderNo
+                    ];
+                    $systemLogsModel->save($values);
+                    //send email to procurement dept head
+                    $builder = $this->db->table('tblaccount');
+                    $builder->select('*');
+                    $builder->WHERE('accountID',$deptHead);
+                    $datas = $builder->get();
+                    if($rows = $datas->getRow())
+                    {
+                        $records = [
+                            'accountID'=>$rows->accountID,'OrderNo'=>$row->OrderNo,
+                            'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>'0000-00-00','Comment'=>''
+                        ];
+                        $reviewModel->save($records);
+                        //email
+                        $email = \Config\Services::email();
+                        $email->setTo($rows->Email,$rows->Fullname);
+                        $email->setFrom("fastcat.system@gmail.com","FastCat");
+                        $imgURL = "assets/img/fastcat.png";
+                        $email->attach($imgURL);
+                        $cid = $email->setAttachmentCID($imgURL);
+                        $template = "<center>
+                        <img src='cid:". $cid ."' width='100'/>
+                        <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+                        <tr><td><center><h1>Purchase Requistion Form</h1></center></td></tr>
+                        <tr><td><center>Hi, ".$rows->Fullname."</center></td></tr>
+                        <tr><td><center>This is from FastCat System, sending you a reminder that</center></td></tr>
+                        <tr><td><p><center><b>".$row->OrderNo."</b> is requesting for your approval</center></p></td><tr>
+                        <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+                        <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+                        <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+                        $subject = "Purchase Requisition Form - For Approval";
+                        $email->setSubject($subject);
+                        $email->setMessage($template);
+                        $email->send();
+                    }
                 }
                 else if($row->Status==4)
                 {
