@@ -643,7 +643,13 @@
 											<span class="badge bg-primary text-white">APPROVED</span>
 										<?php } ?>
 									</td>
-									<td></td>
+									<td>
+										<?php if($row->Status==0){ ?>
+										<button type="button" class="btn btn-outline-primary btn-sm accept_return" value="<?php echo $row->returnID ?>"><i class="icon-copy dw dw-checked"></i>&nbsp;Accept</button>
+										<?php }else { ?>
+											-
+										<?php } ?>
+									</td>
 								</tr>
 							<?php endforeach; ?>
 							</tbody>
