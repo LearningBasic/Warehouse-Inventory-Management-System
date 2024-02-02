@@ -905,4 +905,14 @@ class ProductController extends BaseController
             }
         }
     }
+
+    public function acceptReturnOrder()
+    {
+        $returnOrderModel = new \App\Models\returnOrderModel();
+        //data
+        $val = $this->request->getPost('value');
+        $values = ['Status'=>1];
+        $returnOrderModel->update($val,$values);
+        echo "Success";
+    }
 }

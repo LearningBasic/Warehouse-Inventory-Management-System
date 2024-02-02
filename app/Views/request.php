@@ -830,6 +830,42 @@
 						}
 					});
 			});
+
+			$(document).on('click','.accept_return',function()
+			{
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to accept this request?",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+						if (result.isConfirmed) {
+							var val = $(this).val();
+							$.ajax({
+								url:"<?=site_url('accept-return-order')?>",method:"POST",
+								data:{value:val},
+								success:function(response)
+								{
+									if(response==="Success")
+									{
+										location.reload();
+									}
+									else
+									{
+										Swal.fire({
+										title: "Error",
+										text: response,
+										icon: "error"
+										});
+									}
+								}
+							});
+						}
+					});
+			});
 			function totalReturnOrder()
 			{
 				$.ajax({
