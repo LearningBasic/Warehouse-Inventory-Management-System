@@ -499,6 +499,8 @@
 															<span class="badge bg-danger text-white">CANCELLED</span>
 														<?php }else if($row->Status==3){ ?>
 															<span class="badge bg-success text-white">APPROVED</span>
+														<?php }else if($row->Status==4){ ?>
+															<span class="badge bg-primary text-white">CHECKING</span>
 														<?php } ?>
 													</td>
 													<td>
