@@ -499,7 +499,7 @@
                                 <textarea class="form-control" name="reason" required></textarea>
                             </div>
 							<div class="col-12 form-group">
-								<label>Approver</label>
+								<label>Department Head/Masters</label>
 								<select class="form-control custom-select2" name="approver" id="approver">
 									<option value="">Choose</option>
 								</select>
