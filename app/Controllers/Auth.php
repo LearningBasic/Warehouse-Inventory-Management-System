@@ -21,6 +21,7 @@ class Auth extends BaseController
     {
         $accountModel = new \App\Models\accountModel();
         $systemLogsModel = new \App\Models\systemLogsModel();
+        $warehouseModel = new \App\Models\warehouseModel();
 
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
@@ -63,11 +64,13 @@ class Auth extends BaseController
                 }
                 else
                 {
+                    $warehouse = $warehouseModel->WHERE('warehouseID',$user_info['warehouseID'])->first();
                     session()->set('loggedUser', $user_info['accountID']);
                     session()->set('fullname', $user_info['Fullname']);
                     session()->set('role',$user_info['systemRole']);
                     session()->set('assignment',$user_info['warehouseID']);
                     session()->set('department',$user_info['Department']);
+                    session()->set('location',$warehouse['warehouseName']);
                     //save the logs
                     $values = ['accountID'=>$user_info['accountID'],'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Logged-In'];
                     $systemLogsModel->save($values);
