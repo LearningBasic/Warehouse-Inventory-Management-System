@@ -11,6 +11,29 @@ class Report extends BaseController
         $this->db = db_connect();
     }
 
+    public function autoDetect()
+    {
+        $OrderItemModel = new \App\Models\OrderItemModel();
+        $purchaseOrderModel = new \App\Models\purchaseOrderModel();
+
+        $builder = $this->db->table('tblreserved');
+        $builder->select('OrderNo,purchaseNumber,SUM(Qty)total');
+        $builder->WHERE('Remarks','Partial Delivery');
+        $builder->groupBy('purchaseNumber');
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            $order = $OrderItemModel->WHERE('OrderNo',$row->OrderNo)->first();
+            if($row->total==$order['Qty'])
+            {
+                //update the remarks
+                $values = ['Remarks','CLOSE'];
+                $purchase = $purchaseOrderModel->WHERE('purchaseNumber',$row->purchaseNumber)->first();
+                $purchaseOrderModel->update($purchase['purchaseLogID'],$values);
+            }
+        }
+    }
+
     public function fetchPO()
     {
         $val = $this->request->getGet('value');
