@@ -539,10 +539,10 @@
 
 			function today()
         	{
-            var date = new Date(); // Now
-            date.setDate(date.getDate() + 15);
-            $('#dateNeeded').val(convert(date));
-            $('#dateNeeded').attr('min',convert(date));
+            	var date = new Date(); // Now
+            	date.setDate(date.getDate() + 15);
+            	$('#dateNeeded').val(convert(date));
+            	$('#dateNeeded').attr('min',convert(date));
         	}
         
 			function notify()

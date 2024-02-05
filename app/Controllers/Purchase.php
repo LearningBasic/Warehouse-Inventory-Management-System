@@ -230,10 +230,11 @@ class Purchase extends BaseController
         }
         else
         {
+            $user = session()->get('loggedUser');
             $role = ['Editor','Administrator'];
             $builder = $this->db->table('tblaccount');
             $builder->select('*');
-            $builder->WHERE('Status',1)->WHEREIN('systemRole',$role)->WHERE('Department!=','');
+            $builder->WHERE('Status',1)->WHEREIN('systemRole',$role)->WHERE('Department!=','')->WHERE('accountID<>',$user);
             $data = $builder->get();
             foreach($data->getResult() as $row)
             {
