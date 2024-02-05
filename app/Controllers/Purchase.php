@@ -29,12 +29,14 @@ class Purchase extends BaseController
 
     public function saveOrder()
     {
+        date_default_timezone_set('Asia/Manila');
         $OrderItemModel = new \App\Models\OrderItemModel();
         $purchaseModel = new \App\Models\purchaseModel();
         $reviewModel = new \App\Models\reviewModel();
         //datas
         $user = session()->get('loggedUser');
         $datePrepared = $this->request->getPost('datePrepared');
+        $tomorrow = date("Y-m-d", time() + 86400);
         $dept = $this->request->getPost('department');
         $dateNeeded = $this->request->getPost('dateNeeded');
         $reason = $this->request->getPost('reason');
@@ -69,11 +71,23 @@ class Purchase extends BaseController
                 $code = "PRF-".str_pad($row->total, 7, '0', STR_PAD_LEFT);
             }
             //save the prf data
-            $values = [
-                'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
-                'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),'PurchaseType'=>$purchase_type
-            ];
-            $purchaseModel->save($values);
+            if(date("h:i:s a")<="02:00:00 pm")
+            {
+                $values = [
+                    'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
+                    'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),'PurchaseType'=>$purchase_type
+                ];
+                $purchaseModel->save($values);
+            }
+            else
+            {
+                $values = [
+                    'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$tomorrow,'Department'=>$dept,
+                    'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),'PurchaseType'=>$purchase_type
+                ];
+                $purchaseModel->save($values);
+            }   
+            
             //save all the item requested
             $count = count($item_name);
             for($i=0;$i<$count;$i++)
@@ -85,11 +99,21 @@ class Purchase extends BaseController
                 $OrderItemModel->save($values);
             }
             //send to approver
-            $value = [
-                'accountID'=>$approver_user,'OrderNo'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,
-                'DateApproved'=>"0000-00-00",'Comment'=>''
-            ];
-            $reviewModel->save($value);
+            if(date("h:i:s a")<="02:00:00 pm"){
+                $value = [
+                    'accountID'=>$approver_user,'OrderNo'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,
+                    'DateApproved'=>"0000-00-00",'Comment'=>''
+                ];
+                $reviewModel->save($value);
+            }
+            else
+            {
+                $value = [
+                    'accountID'=>$approver_user,'OrderNo'=>$code,'DateReceived'=>$tomorrow,'Status'=>0,
+                    'DateApproved'=>"0000-00-00",'Comment'=>''
+                ];
+                $reviewModel->save($value);
+            }
             //send email notification
             $builder = $this->db->table('tblaccount');
             $builder->select('Fullname,Email');
