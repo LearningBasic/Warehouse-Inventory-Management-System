@@ -1037,7 +1037,7 @@ class Purchase extends BaseController
             $values = ['Date'=>$dateReceive,'OrderNo'=>$job_number,'purchaseNumber'=>$purchase_number,
                         'InvoiceNo'=>$invoiceNo,'InvoiceAmount'=>$invoiceAmt,
                         'supplierID'=>$shipper,'Remarks'=>$remarks,'productName'=>$product_name,
-                        'Qty'=>$qty,'ItemUnit'=>$item_unit,'UnitPrice'=>$unit_price,
+                        'Qty'=>$qty,'Available'=>$qty,'ItemUnit'=>$item_unit,'UnitPrice'=>$unit_price,
                         'Description'=>$description,'Condition'=>$item_condition,'Receiver'=>$receiver,'warehouseID'=>$assign];
             $reservedModel->save($values);
             //system logs

@@ -270,7 +270,7 @@ class Home extends BaseController
             }
             //deduct the qty
             $reserved = $reservedModel->WHERE('reservedID',$id)->first();
-            $newValues = ['Qty'=>$reserved['Qty']-$num_stocks];
+            $newValues = ['Available'=>$reserved['Available']-$num_stocks];
             $reservedModel->update($id,$newValues);
             echo "success";
         }
@@ -527,7 +527,7 @@ class Home extends BaseController
                 }
                 //deduct the qty
                 $reserved = $reservedModel->WHERE('reservedID',$id)->first();
-                $newValues = ['Qty'=>$reserved['Qty']-$qty];
+                $newValues = ['Available'=>$reserved['Available']-$qty];
                 $reservedModel->update($id,$newValues);
 
                 //create logs
@@ -1350,7 +1350,7 @@ class Home extends BaseController
                 $code = "PO-".str_pad($li->total, 9, '0', STR_PAD_LEFT);
             }
             //save
-            $values = ['purchaseNumber'=>$code,'canvassID'=>$val, 'Status'=>$status,'Date'=>$date,'accountID'=>$user];
+            $values = ['purchaseNumber'=>$code,'canvassID'=>$val, 'Status'=>$status,'Date'=>$date,'accountID'=>$user,'Remarks'=>'OPEN'];
             $purchaseOrderModel->save($values);
             //system logs
             $value = ['accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Created PO Number '.$code];
