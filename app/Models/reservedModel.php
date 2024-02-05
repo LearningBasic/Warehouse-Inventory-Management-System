@@ -14,7 +14,7 @@ class reservedModel extends Model
     protected $userSoftDelete = false;
     protected $protectFields = true;
     protected $allowedFields = ['Date','OrderNo','purchaseNumber','InvoiceNo','InvoiceAmount','supplierID','Remarks',
-    'productName','Qty','ItemUnit','UnitPrice','Description','Condition','Receiver','warehouseID'];
+    'productName','Qty','Available','ItemUnit','UnitPrice','Description','Condition','Receiver','warehouseID'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

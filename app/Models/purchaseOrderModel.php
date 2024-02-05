@@ -14,7 +14,7 @@ class purchaseOrderModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['purchaseNumber','canvassID', 'Status','Date','accountID'];
+    protected $allowedFields = ['purchaseNumber','canvassID', 'Status','Date','accountID','Remarks'];
 
     protected $validationRules = [];
     protected $validationMessages = [];
