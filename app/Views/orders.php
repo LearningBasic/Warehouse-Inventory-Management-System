@@ -476,7 +476,7 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Date Needed</label>
-                                        <input type="date" class="form-control" name="dateNeeded" required/>
+                                        <input type="date" class="form-control" name="dateNeeded" id="dateNeeded" required/>
                                     </div>
                                 </div>
                             </div>
@@ -525,11 +525,26 @@
         <script>
 			$(document).ready(function()
 			{
-				editors();notify();
+				editors();notify();today();
 				$("#Table").on('click','.btnDelete',function(){
                     $(this).closest('tr').remove();
                 });
 			});
+			function convert(str) {
+				var date = new Date(str),
+				mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+				day = ("0" + date.getDate()).slice(-2);
+				return [date.getFullYear(), mnth, day].join("-");
+			}
+
+			function today()
+        	{
+            var date = new Date(); // Now
+            date.setDate(date.getDate() + 15);
+            $('#dateNeeded').val(convert(date));
+            $('#dateNeeded').attr('min',convert(date));
+        	}
+        
 			function notify()
 			{
 				$.ajax({

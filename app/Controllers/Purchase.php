@@ -340,7 +340,7 @@ class Purchase extends BaseController
                 </div>
                 <div class="col-12 form-group">
                     <label>Reason</label>
-                    <textarea name="reason" id="reason" class="form-control"><?php echo $row->Reason ?></textarea>
+                    <textarea name="reason" id="reason" class="form-control" style="height:120px;"><?php echo $row->Reason ?></textarea>
                 </div>
                 <div class="col-12 form-group">
                     <table class="table table-striped table-bordered hover nowrap">
@@ -360,10 +360,10 @@ class Purchase extends BaseController
                             {
                                 ?>
                                 <tr>
-                                    <td><?php echo $rows->Item_Name ?></td>
-                                    <td><?php echo $rows->ItemUnit ?></td>
-                                    <td><?php echo $rows->Qty ?></td>
-                                    <td><?php echo $rows->Specification ?></td>
+                                    <td class="item_name" data-id1="<?php echo $rows->orderID ?>" contenteditable><?php echo $rows->Item_Name ?></td>
+                                    <td class="item_unit" data-id2="<?php echo $rows->orderID ?>" contenteditable><?php echo $rows->ItemUnit ?></td>
+                                    <td class="item_qty" data-id3="<?php echo $rows->orderID ?>" contenteditable><?php echo $rows->Qty ?></td>
+                                    <td class="desc" data-id4="<?php echo $rows->orderID ?>" contenteditable><?php echo $rows->Specification ?></td>
                                 </tr>
                                 <?php
                             }
