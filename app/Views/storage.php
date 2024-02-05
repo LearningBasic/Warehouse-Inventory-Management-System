@@ -470,9 +470,11 @@
 								<th>Invoice No</th>
 								<th>Item Unit</th>
 								<th>Product Name</th>
-								<th>Qty</th>
+								<th>Stocks</th>
+								<th>Available</th>
 								<th>Unit Price</th>
 								<th>Total Price</th>
+								<th>Remarks</th>
 								<th>Condition(s)</th>
 								<th><span class="dw dw-more"></span></th>
 							</thead>
@@ -485,11 +487,13 @@
 										<td><?php echo $row->ItemUnit ?></td>
 										<td><?php echo $row->productName ?></td>
 										<td><?php echo $row->Qty ?></td>
+										<td><?php echo $row->Available ?></td>
 										<td style="text-align:right;"><?php echo number_format($row->UnitPrice,2) ?></td>
 										<td style="text-align:right;"><?php echo number_format($row->InvoiceAmount,2) ?></td>
+										<td><?php echo $row->Remarks ?></td>
 										<td><?php echo $row->Condition ?></td>
 										<td>
-											<?php if($row->Qty==0){ ?>
+											<?php if($row->Available==0){ ?>
 												-
 											<?php }else { ?>
 											<div class="dropdown">

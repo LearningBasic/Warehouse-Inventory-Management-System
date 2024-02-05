@@ -17,7 +17,7 @@ class Report extends BaseController
         $builder = $this->db->table('tblcanvass_sheet a');
         $builder->select('b.purchaseNumber');
         $builder->join('tblpurchase_logs b','b.canvassID=a.canvassID','LEFT');
-        $builder->WHERE('a.OrderNo',$val);
+        $builder->WHERE('a.OrderNo',$val)->WHERE('b.Remarks','OPEN');
         $builder->groupBy('b.purchaseLogID');
         $data = $builder->get();
         foreach($data->getResult() as $row)

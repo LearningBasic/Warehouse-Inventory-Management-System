@@ -993,6 +993,7 @@ class Purchase extends BaseController
     {
         $reservedModel = new \App\Models\reservedModel();
         $systemLogsModel = new \App\Models\systemLogsModel();
+        $purchaseOrderModel = new \App\Models\purchaseOrderModel();
         //data
         $job_number = $this->request->getPost('job_number');
         $purchase_number = $this->request->getPost('purchase_number');
@@ -1040,6 +1041,12 @@ class Purchase extends BaseController
                         'Qty'=>$qty,'Available'=>$qty,'ItemUnit'=>$item_unit,'UnitPrice'=>$unit_price,
                         'Description'=>$description,'Condition'=>$item_condition,'Receiver'=>$receiver,'warehouseID'=>$assign];
             $reservedModel->save($values);
+            if($remarks=="Full Delivery")
+            {
+                $purchase = $purchaseOrderModel->WHERE('purchaseNumber',$purchase_number)->first();
+                $values = ['Remarks'=>'CLOSE'];
+                $purchaseOrderModel->update($purchase['purchaseLogID'],$values);
+            }
             //system logs
             $value = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Received Order of '.$product_name];
             $systemLogsModel->save($value);
