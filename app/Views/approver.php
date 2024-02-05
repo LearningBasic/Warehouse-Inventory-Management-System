@@ -678,18 +678,6 @@
 			{
 				notify();
 			});
-			function edit_data(id, text, column_name)  
-			{  
-				$.ajax({  
-					url:"<?=site_url('edit-item-data')?>",  
-					method:"POST",  
-					data:{id:id, text:text, column_name:column_name},  
-					dataType:"text",  
-					success:function(data){  
-						alert(data);  
-					}  
-				});  
-			}
 			function approver()
 			{
 				$.ajax({

@@ -385,10 +385,10 @@ class Purchase extends BaseController
                             {
                                 ?>
                                 <tr>
-                                    <td class="item_name" data-id1="<?php echo $rows->orderID ?>" contenteditable><?php echo $rows->Item_Name ?></td>
-                                    <td class="item_unit" data-id2="<?php echo $rows->orderID ?>" contenteditable><?php echo $rows->ItemUnit ?></td>
-                                    <td class="item_qty" data-id3="<?php echo $rows->orderID ?>" contenteditable><?php echo $rows->Qty ?></td>
-                                    <td class="desc" data-id4="<?php echo $rows->orderID ?>" contenteditable><?php echo $rows->Specification ?></td>
+                                    <td><?php echo $rows->Item_Name ?></td>
+                                    <td><?php echo $rows->ItemUnit ?></td>
+                                    <td><?php echo $rows->Qty ?></td>
+                                    <td><?php echo $rows->Specification ?></td>
                                 </tr>
                                 <?php
                             }
