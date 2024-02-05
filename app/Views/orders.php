@@ -484,7 +484,7 @@
                                 <table class="table stripe table-bordered hover nowrap">
                                     <thead>
                                         <th>Qty</th>
-                                        <th>Item Unit</th>
+                                        <th>Unit of Measure</th>
                                         <th>Product Name</th>
                                         <th>Specification</th>
                                         <th><span class="dw dw-more"></span></th>
