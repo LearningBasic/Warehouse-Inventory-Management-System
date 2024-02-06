@@ -494,7 +494,7 @@
                             <div class="col-lg-4">
                                 <div class="card-box">
                                     <div class="card-body">
-                                        <div class="card-title">Top 10 Vendor</div>
+                                        <div class="card-title">Top 20 Vendor</div>
 										<div class="user-list">
 											<ul id="listSupplier">
 												<?php foreach($vendor as $row): ?>

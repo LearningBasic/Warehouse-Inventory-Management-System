@@ -1773,7 +1773,7 @@ class Home extends BaseController
         $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
         $builder->WHERE('a.Remarks','Selected');
         $builder->groupBy('a.Supplier');
-        $builder->orderBy('total','DESC')->limit(10);
+        $builder->orderBy('total','DESC')->limit(20);
         $vendor = $builder->get()->getResult();
         //graph total po
         $builder = $this->db->table('tblpurchase_logs');
