@@ -1785,4 +1785,9 @@ class Home extends BaseController
         $data = ['total'=>$total,'release'=>$release,'unrelease'=>$unrelease,'cost'=>$cost,'vendor'=>$vendor,'po'=>$po];
         return view('overall-report',$data);
     }
+
+    public function receiveOrderReport()
+    {
+        return view('receive-order-report');
+    }
 }
