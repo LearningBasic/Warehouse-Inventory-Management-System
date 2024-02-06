@@ -410,6 +410,7 @@
 								<li><a href="<?=site_url('overall-report')?>">Main Report</a></li>
                                 <li><a href="<?=site_url('report-stocks')?>" class="active">Stocks Report</a></li>
 								<li><a href="<?=site_url('ledger')?>">Vendor's Ledger</a></li>
+								<li><a href="<?=site_url('receive-report')?>">Receive Order Report</a></li>
 							</ul>
 							<?php }else{ ?>
 							<ul class="submenu">
