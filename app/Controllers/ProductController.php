@@ -801,12 +801,12 @@ class ProductController extends BaseController
         ?>
         <table class="table table-bordered hover nowrap">
             <thead>
-                <th>Product Name</th>
-                <th>Vendor</th>
-                <th>Price</th>
-                <th>Terms</th>
-                <th>Warranty</th>
-                <th>Remarks</th>
+                <th class="bg-primary text-white">Product Name</th>
+                <th class="bg-primary text-white">Vendor</th>
+                <th class="bg-primary text-white">Price</th>
+                <th class="bg-primary text-white">Terms</th>
+                <th class="bg-primary text-white">Warranty</th>
+                <th class="bg-primary text-white">Remarks</th>
             </thead>
         <?php
         foreach($data->getResult() as $row)

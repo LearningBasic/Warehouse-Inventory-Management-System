@@ -499,11 +499,11 @@
 		<div class="modal fade" id="viewModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myLargeModalLabel">
-                            Proposed Vendor(s)/Supplier(s)
+                    <div class="modal-header" style="background-color:#EC5800;">
+                        <h4 class="modal-title text-white" id="myLargeModalLabel">
+                            Proposed Vendor(s)
                         </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
 						<form method="post" class="row g-3">
@@ -526,8 +526,8 @@
 							</div>
 							<?php } ?>
 							<div class="col-12 form-group">
-								<button type="submit" class="btn btn-primary btn-sm approve"><span class="dw dw-check"></span>&nbsp;Approve</button>
-								<button type="button" class="btn btn-danger btn-sm cancel"><span class="dw dw-trash"></span>&nbsp;Cancel</button>
+								<button type="submit" class="btn btn-primary approve"><span class="dw dw-check"></span>&nbsp;Approve</button>
+								<button type="button" class="btn btn-danger cancel"><span class="dw dw-trash"></span>&nbsp;Cancel</button>
 							</div>
 						</form>
                     </div>
