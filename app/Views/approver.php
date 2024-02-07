@@ -545,7 +545,7 @@
 													<td><?php echo $row->DatePrepared ?></td>
 													<td><button type="button" class="btn btn-link btn-sm assign" value="<?php echo $row->prfID ?>"><?php echo $row->OrderNo ?></button></td>
 													<td><?php echo $row->Department ?></td>
-													<td><?php echo $row->Reason ?></td>
+													<td><?php echo substr($row->Reason,0,30) ?>...</td>
 													<td><?php echo $row->DateNeeded ?></td>
 													<td><?php echo $row->Fullname ?></td>
 													<td>
