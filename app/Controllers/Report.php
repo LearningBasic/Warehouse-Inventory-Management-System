@@ -236,6 +236,10 @@ class Report extends BaseController
         $builder->WHERE('a.canvassID',$id);
         $data = $builder->get(); 
         $template = '';  
+        $path = 'Signatures/mike_fox.png';
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $img = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($img);
         if($row = $data->getRow())
         {        
             $purchase_number = $row->purchaseNumber;
@@ -457,6 +461,7 @@ class Report extends BaseController
                     <td>PTU No. Date Issued<br/>Valid until<br/>Range of serial nos from<br/>Valid for Five (5) Years Only</td>
                     <td></td>
                     <td><p style='text-align:left;'>Order Confirmed By:</p>
+                    <center><img src=".$base64." width='120'/></center>
                     <center><u>&nbsp;&nbsp;&nbsp;".$row->Fullname."&nbsp;&nbsp;&nbsp;</u></center><center>AUTHORIZED SIGNATURE</center>
                     </td>
                 </tr>

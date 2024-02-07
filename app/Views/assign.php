@@ -528,7 +528,7 @@
                 e.preventDefault();
                 Swal.fire({
 					title: "Are you sure?",
-					text: "Do you want to tag this as done?",
+					text: "Do you want to tag this as accept?",
 					icon: "question",
 					showCancelButton: true,
 					confirmButtonColor: "#3085d6",
