@@ -441,11 +441,11 @@
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
 					<div class="card-header">Purchase Request Form
-					<a href="javascript:void(0);" class="btn-link btn-sm" onclick="addRow()" style="float:right;margin-top:-5px;">
+					<a href="javascript:void(0);" class="btn-link btn-sm" onclick="addRow()" style="float:right;">
 						<span class="icon-copy dw dw-add"></span>&nbsp;Add
 					</a>
 					<div class="dropdown" style="float:right;">
-						<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown"><i class="icon-copy dw dw-idea-1"></i>&nbsp;Catalogs</a>
+						<a class="btn btn-link btn-sm no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown"><i class="icon-copy dw dw-idea-1"></i>&nbsp;Catalogs</a>
 						<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 							<a class="dropdown-item" href="Manuals/CUMMINS PARTS CATALOG 6BT5.9-DM.pdf" target="_blank"><i class="icon-copy dw dw-right-arrow-1"></i> Cummins Part</a>
 							<a class="dropdown-item" href="Manuals/0CG10-M34301_en.pdf" target="_blank"><i class="icon-copy dw dw-right-arrow-1"></i> Yanmar Part</a>
