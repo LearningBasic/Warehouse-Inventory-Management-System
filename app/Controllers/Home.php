@@ -1501,6 +1501,33 @@ class Home extends BaseController
                 'prfID'=>$prf, 'accountID'=>$receiver,'Date'=>date('Y-m-d'),'Status'=>0
             ];
             $assignmentModel->save($values);
+            $builder = $this->db->table('tblaccount');
+            $builder->select('Fullname,Email');
+            $builder->WHERE('accountID',$receiver);
+            $data = $builder->get();
+            if($row = $data->getRow())
+            {
+                //email
+                $email = \Config\Services::email();
+                $email->setTo($row->Email,$row->Fullname);
+                $email->setFrom("fastcat.system@gmail.com","FastCat");
+                $imgURL = "assets/img/fastcat.png";
+                $email->attach($imgURL);
+                $cid = $email->setAttachmentCID($imgURL);
+                $template = "<center>
+                <img src='cid:". $cid ."' width='100'/>
+                <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+                <tr><td><center><h1>Canvass Sheet Form</h1></center></td></tr>
+                <tr><td><center>Hi, ".$row->Fullname."</center></td></tr>
+                <tr><td><center>This is from FastCat System, sending you a reminder for creating of Canvass Sheet Form with the approved PRF</center></td></tr>
+                <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+                <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+                <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+                $subject = "PRF - Canvass Sheet Form";
+                $email->setSubject($subject);
+                $email->setMessage($template);
+                $email->send();
+            }
             echo "success";
         }
     }
