@@ -333,47 +333,63 @@ class Purchase extends BaseController
                 <input type="hidden" name="location" id="location" value="<?php echo $row->warehouseName ?>"/>
                 <div class="col-12 form-group">
                     <div class="row g-3">
-                        <div class="col-lg-4">
-                            <label>Type of Purchase</label>
-                            <select class="form-control" name="purchase_type" id="purchase_type">
-                                <option value="">Choose</option>
-                                <option <?php if($row->PurchaseType=="Local Purchase") echo 'selected="selected"'; ?>>Local Purchase</option>
-                                <option <?php if($row->PurchaseType=="Regular Purchase") echo 'selected="selected"'; ?>>Regular Purchase</option>
-                            </select>
+                        <div class="col-lg-8 form-group">
+                            <div class="row g-3">
+                                <div class="col-lg-4">
+                                    <label>Type of Purchase</label>
+                                    <select class="form-control" name="purchase_type" id="purchase_type">
+                                        <option value="">Choose</option>
+                                        <option <?php if($row->PurchaseType=="Local Purchase") echo 'selected="selected"'; ?>>Local Purchase</option>
+                                        <option <?php if($row->PurchaseType=="Regular Purchase") echo 'selected="selected"'; ?>>Regular Purchase</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>PRF Number</label>
+                                    <input type="text" class="form-control" name="orderno" value="<?php echo $row->OrderNo ?>"/>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>Date Needed</label>
+                                    <input type="date" class="form-control" name="dateneeded" value="<?php echo $row->DateNeeded ?>"/>
+                                </div>
+                            </div>
+                            <label>Reason</label>
+                            <textarea name="reason" id="reason" class="form-control" style="height:120px;"><?php echo $row->Reason ?></textarea>
                         </div>
-                        <div class="col-lg-4">
-                            <label>PRF Number</label>
-                            <input type="text" class="form-control" name="orderno" value="<?php echo $row->OrderNo ?>"/>
-                        </div>
-                        <div class="col-lg-4">
-                            <label>Date Needed</label>
-                            <input type="date" class="form-control" name="dateneeded" value="<?php echo $row->DateNeeded ?>"/>
+                        <div class="col-lg-4 form-group table-responsive">
+                            <table class="table table-striped table-bordered hover nowrap">
+                                <thead>
+                                    <th class="bg-primary text-white">Department Head</th>
+                                    <th class="bg-primary text-white">Date</th>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $builder = $this->db->table('tblreview a');
+                                    $builder->select('a.DateApproved,b.Fullname');
+                                    $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+                                    $builder->WHERE('a.OrderNo',$row->OrderNo);
+                                    $datas = $builder->get();
+                                    foreach($datas->getResult() as $rows)
+                                    {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $rows->Fullname ?></td>
+                                            <td><?php echo $rows->DateApproved ?></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>  
                         </div>
                     </div>
-                </div>
-                <div class="col-12 form-group">
-                    <div class="row g-3">
-                        <div class="col-lg-8">
-                            <label>Requestor</label>
-                            <input type="text" class="form-control" name="fullname" value="<?php echo $row->Fullname ?>"/>
-                        </div>
-                        <div class="col-lg-4">
-                            <label>Department</label>
-                            <input type="text" class="form-control" name="department" value="<?php echo $row->Department ?>"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 form-group">
-                    <label>Reason</label>
-                    <textarea name="reason" id="reason" class="form-control" style="height:120px;"><?php echo $row->Reason ?></textarea>
                 </div>
                 <div class="col-12 form-group">
                     <table class="table table-striped table-bordered hover nowrap">
                         <thead>
-                            <th>Item(s)</th>
-                            <th>Unit(s)</th>
-                            <th>Qty</th>
-                            <th>Specification(s)</th>
+                            <th class="bg-primary text-white">Item(s)</th>
+                            <th class="bg-primary text-white">Unit(s)</th>
+                            <th class="bg-primary text-white">Qty</th>
+                            <th class="bg-primary text-white">Specification(s)</th>
                         </thead>
                         <tbody>
                             <?php
@@ -395,7 +411,7 @@ class Purchase extends BaseController
                             ?>
                         </tbody>
                     </table>
-                </div>
+                </div>`
                 <?php if(str_contains(session()->get('location'), 'FCM')){ ?>
                 <div class="col-12 form-group">
                     <label>Department Head</label>
