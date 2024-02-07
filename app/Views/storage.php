@@ -494,6 +494,7 @@
 										<td><?php echo $row->Remarks ?></td>
 										<td><?php echo $row->Condition ?></td>
 										<td>
+											<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Staff"){ ?>
 											<?php if($row->Available==0){ ?>
 												-
 											<?php }else { ?>
@@ -506,6 +507,7 @@
 													<a class="dropdown-item" href="/new-product/<?php echo $row->reservedID ?>"><i class="icon-copy dw dw-right-arrow-1"></i> Add as New Product</a>
 												</div>
 											</div>
+											<?php } ?>
 											<?php } ?>
 										</td>
 									</tr>
