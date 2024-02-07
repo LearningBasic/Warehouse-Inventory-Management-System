@@ -494,114 +494,120 @@
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="others6" role="tabpanel">
 									<br/>
-									<table class="data-table table stripe hover nowrap">
-										<thead>
-											<th>Date Received</th>
-											<th>PRF No</th>
-											<th>Requestor</th>
-											<th>Reason</th>
-											<th>Date Needed</th>
-											<th>Date Approved</th>
-											<th>Status</th>
-										</thead>
-										<tbody>
-											<?php foreach($review as $row): ?>
-												<tr>
-													<td><?php echo $row->DateReceived ?></td>
-													<td><button type="button" class="btn btn-link view" value="<?php echo $row->reviewID ?>"><?php echo $row->OrderNo ?></button></td>
-													<td><?php echo $row->Fullname ?></td>
-													<td><?php echo $row->Reason ?></td>
-													<td><?php echo $row->DateNeeded ?></td>
-													<td><?php echo $row->DateApproved ?></td>
-													<td>
-														<?php if($row->Status==0){ ?>
-															<span class="badge bg-warning text-white">PENDING</span>
-														<?php }else if($row->Status==1){?>
-															<span class="badge bg-success text-white">APPROVED</span>
-														<?php }else if($row->Status==2){?>
-															<span class="badge bg-danger text-white">CANCELLED</span>
-														<?php } ?>
-													</td>
-												</tr>
-											<?php endforeach; ?>
-										</tbody>
-									</table>
+									<div class="table-responsive">
+										<table class="data-table table stripe hover nowrap">
+											<thead>
+												<th>Date Received</th>
+												<th>PRF No</th>
+												<th>Requestor</th>
+												<th>Reason</th>
+												<th>Date Needed</th>
+												<th>Date Approved</th>
+												<th>Status</th>
+											</thead>
+											<tbody>
+												<?php foreach($review as $row): ?>
+													<tr>
+														<td><?php echo $row->DateReceived ?></td>
+														<td><button type="button" class="btn btn-link view" value="<?php echo $row->reviewID ?>"><?php echo $row->OrderNo ?></button></td>
+														<td><?php echo $row->Fullname ?></td>
+														<td><?php echo $row->Reason ?></td>
+														<td><?php echo $row->DateNeeded ?></td>
+														<td><?php echo $row->DateApproved ?></td>
+														<td>
+															<?php if($row->Status==0){ ?>
+																<span class="badge bg-warning text-white">PENDING</span>
+															<?php }else if($row->Status==1){?>
+																<span class="badge bg-success text-white">APPROVED</span>
+															<?php }else if($row->Status==2){?>
+																<span class="badge bg-danger text-white">CANCELLED</span>
+															<?php } ?>
+														</td>
+													</tr>
+												<?php endforeach; ?>
+											</tbody>
+										</table>
+									</div>
 								</div>
 								<div class="tab-pane fade" id="addstock" role="tabpanel">
 									<br/>
-									<table class="data-table table stripe hover nowrap">
-										<thead>
-											<th>Date Created</th>
-											<th>PRF No</th>
-											<th>Department</th>
-											<th>Reason</th>
-											<th>Date Needed</th>
-											<th>Assigned To</th>
-											<th>Status</th>
-										</thead>
-										<tbody>
-											<?php foreach($assign as $row): ?>
-												<tr>
-													<td><?php echo $row->DatePrepared ?></td>
-													<td><button type="button" class="btn btn-link btn-sm assign" value="<?php echo $row->prfID ?>"><?php echo $row->OrderNo ?></button></td>
-													<td><?php echo $row->Department ?></td>
-													<td><?php echo substr($row->Reason,0,30) ?>...</td>
-													<td><?php echo $row->DateNeeded ?></td>
-													<td><?php echo $row->Fullname ?></td>
-													<td>
-														<?php if($row->Status==0){ ?>
-															<span class="badge bg-warning text-white">PENDING</span>
-														<?php }else { ?>
-															<span class="badge bg-success text-white">DONE</span>
-														<?php } ?>													
-													</td>
-												</tr>
-											<?php endforeach; ?>
-										</tbody>
-									</table>
+									<div class="table-responsive">
+										<table class="data-table table stripe hover nowrap">
+											<thead>
+												<th>Date Created</th>
+												<th>PRF No</th>
+												<th>Department</th>
+												<th>Reason</th>
+												<th>Date Needed</th>
+												<th>Assigned To</th>
+												<th>Status</th>
+											</thead>
+											<tbody>
+												<?php foreach($assign as $row): ?>
+													<tr>
+														<td><?php echo $row->DatePrepared ?></td>
+														<td><button type="button" class="btn btn-link btn-sm assign" value="<?php echo $row->prfID ?>"><?php echo $row->OrderNo ?></button></td>
+														<td><?php echo $row->Department ?></td>
+														<td><?php echo substr($row->Reason,0,30) ?>...</td>
+														<td><?php echo $row->DateNeeded ?></td>
+														<td><?php echo $row->Fullname ?></td>
+														<td>
+															<?php if($row->Status==0){ ?>
+																<span class="badge bg-warning text-white">PENDING</span>
+															<?php }else { ?>
+																<span class="badge bg-success text-white">DONE</span>
+															<?php } ?>													
+														</td>
+													</tr>
+												<?php endforeach; ?>
+											</tbody>
+										</table>
+									</div>
 								</div>
 								<div class="tab-pane fade" id="purchase" role="tabpanel">
 									<br/>
-									<table class="data-table table stripe hover nowrap">
-										<thead>
-											<th>Date Received</th>
-											<th>P.O. Number</th>
-											<th>Vendor/Supplier</th>
-											<th>Unit Price</th>
-											<th>Date Approved</th>
-											<th>Status</th>
-											<th>Action</th>
-										</thead>
-										<tbody>
-											<?php foreach($purchase as $row): ?>
-												<tr>
-													<td><?php echo $row->DateReceived ?></td>
-													<td><?php echo $row->purchaseNumber ?></td>
-													<td><?php echo $row->Supplier ?></td>
-													<td style="text-align:right;"><?php echo number_format($row->Price,2) ?></td>
-													<td><?php echo $row->DateApproved ?></td>
-													<td>
-														<?php if($row->Status==0){ ?>
-															<span class="badge bg-warning text-white">PENDING</span>
-														<?php }else if($row->Status==1){?>
-															<span class="badge bg-success text-white">APPROVED</span>
-														<?php }else{?>
-															<span class="badge bg-danger text-white">CANCELLED</span>
-														<?php } ?>
-													</td>
-													<td>
-														<?php if($row->Status==0){ ?>
-															<button type="button" class="btn btn-primary btn-sm approve" value="<?php echo $row->prID ?>">
-															<span class="dw dw-check"></span>&nbsp;Approve?
-															</button>														
-														<?php }else{?>
-															-
-														<?php } ?>
-													</td>
-												</tr>
-											<?php endforeach; ?>
-										</tbody>
-									</table>
+									<div class="table-responsive">
+										<table class="data-table table stripe hover nowrap">
+											<thead>
+												<th>Date Received</th>
+												<th>P.O. Number</th>
+												<th>Vendor/Supplier</th>
+												<th>Unit Price</th>
+												<th>Date Approved</th>
+												<th>Status</th>
+												<th>Action</th>
+											</thead>
+											<tbody>
+												<?php foreach($purchase as $row): ?>
+													<tr>
+														<td><?php echo $row->DateReceived ?></td>
+														<td><?php echo $row->purchaseNumber ?></td>
+														<td><?php echo $row->Supplier ?></td>
+														<td style="text-align:right;"><?php echo number_format($row->Price,2) ?></td>
+														<td><?php echo $row->DateApproved ?></td>
+														<td>
+															<?php if($row->Status==0){ ?>
+																<span class="badge bg-warning text-white">PENDING</span>
+															<?php }else if($row->Status==1){?>
+																<span class="badge bg-success text-white">APPROVED</span>
+															<?php }else{?>
+																<span class="badge bg-danger text-white">CANCELLED</span>
+															<?php } ?>
+														</td>
+														<td>
+															<?php if($row->Status==0){ ?>
+																<button type="button" class="btn btn-primary btn-sm approve" value="<?php echo $row->prID ?>">
+																<span class="dw dw-check"></span>&nbsp;Approve?
+																</button>														
+															<?php }else{?>
+																-
+															<?php } ?>
+														</td>
+													</tr>
+												<?php endforeach; ?>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
