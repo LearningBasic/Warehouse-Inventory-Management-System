@@ -192,12 +192,12 @@ class Purchase extends BaseController
         $builder->WHERE('OrderNo',$val);
         $data = $builder->get();
         ?>
-        <table class="table table-bordered stripe hover nowrap">
+        <table class="table table-bordered stripe hover nowrap" id="table1">
             <thead>
-                <th>Product Name</th>
-                <th>Qty</th>
-                <th>Item Unit</th>
-                <th>Specification</th>
+                <th class="bg-primary text-white">Product Name</th>
+                <th class="bg-primary text-white">Qty</th>
+                <th class="bg-primary text-white">Item Unit</th>
+                <th class="bg-primary text-white">Specification</th>
             </thead>
             <tbody>
         <?php
@@ -902,6 +902,8 @@ class Purchase extends BaseController
         $deptHead = $this->request->getPost('approver');
         $requestor = $this->request->getPost('requestor');
         $type_purchase = $this->request->getPost('type_purchase');
+        $file = $this->request->getFile('file');
+        $originalName = $file->getClientName();
 
         $validation = $this->validate([
             'datePrepared'=>'required','dateNeeded'=>'required',
@@ -929,7 +931,7 @@ class Purchase extends BaseController
                 $records = [
                     'Reference'=>$code, 'accountID'=>$requestor,'DatePrepared'=>$datePrepared,
                     'DateNeeded'=>$dateNeeded,'OrderNo'=>$OrderNo,'Department'=>$department,
-                    'Status'=>0,'createdBy'=>$user
+                    'Status'=>0,'createdBy'=>$user,'Attachment'=>$originalName
                 ];
                 $canvassForm->save($records);
                 //update the list of vendors status and reference
@@ -976,63 +978,75 @@ class Purchase extends BaseController
                     $email->setMessage($template);
                     $email->send();
                 }
+                $file->move('Canvass/',$originalName);
+                session()->setFlashdata('success','Great! Successfully submitted to review');
+                return redirect()->to('/list-orders')->withInput();
             }
             else
             {
-                //save the records
-                $records = [
-                    'Reference'=>$code, 'accountID'=>$requestor,'DatePrepared'=>$datePrepared,
-                    'DateNeeded'=>$dateNeeded,'OrderNo'=>$OrderNo,'Department'=>$department,
-                    'Status'=>0,'createdBy'=>$user
-                ];
-                $canvassForm->save($records);
-                //update the list of vendors status and reference
-                $builder = $this->db->table('tblcanvass_sheet');
-                $builder->select('canvassID');
-                $builder->WHERE('OrderNo',$OrderNo);
-                $data = $builder->get();
-                foreach($data->getResult() as $row)
+                if(empty($originalName))
                 {
-                    $values = [
-                        'Reference'=>$code,'Remarks'=>'Selected'
-                    ];
-                    $canvassModel->update($row->canvassID,$values);
+                    session()->setFlashdata('fail','Invalid! Please attach required document(s)');
+                    return redirect()->to('/create/'.$OrderNo)->withInput();
                 }
-                //send to approver
-                $value = ['accountID'=>$deptHead,'Reference'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>''];
-                $reviewCanvassModel->save($value);
-                //send email
-                $builder = $this->db->table('tblaccount');
-                $builder->select('*');
-                $builder->WHERE('accountID',$deptHead);
-                $datas = $builder->get();
-                if($rows = $datas->getRow())
+                else
                 {
-                    //email
-                    $email = \Config\Services::email();
-                    $email->setTo($rows->Email,$rows->Fullname);
-                    $email->setFrom("fastcat.system@gmail.com","FastCat");
-                    $imgURL = "assets/img/fastcat.png";
-                    $email->attach($imgURL);
-                    $cid = $email->setAttachmentCID($imgURL);
-                    $template = "<center>
-                    <img src='cid:". $cid ."' width='100'/>
-                    <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
-                    <tr><td><center><h1>Canvass Sheet Form</h1></center></td></tr>
-                    <tr><td><center>Hi, ".$rows->Fullname."</center></td></tr>
-                    <tr><td><center>This is from FastCat System, sending you a reminder that requesting for your approval.</center></td></tr>
-                    <tr><td><p><center><b>Reference No : ".$code."</b></center></p></td><tr>
-                    <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
-                    <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
-                    <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
-                    $subject = "Canvass Sheet Form - For Approval";
-                    $email->setSubject($subject);
-                    $email->setMessage($template);
-                    $email->send();
+                    //save the records
+                    $records = [
+                        'Reference'=>$code, 'accountID'=>$requestor,'DatePrepared'=>$datePrepared,
+                        'DateNeeded'=>$dateNeeded,'OrderNo'=>$OrderNo,'Department'=>$department,
+                        'Status'=>0,'createdBy'=>$user,'Attachment'=>$originalName
+                    ];
+                    $canvassForm->save($records);
+                    //update the list of vendors status and reference
+                    $builder = $this->db->table('tblcanvass_sheet');
+                    $builder->select('canvassID');
+                    $builder->WHERE('OrderNo',$OrderNo);
+                    $data = $builder->get();
+                    foreach($data->getResult() as $row)
+                    {
+                        $values = [
+                            'Reference'=>$code,'Remarks'=>'Selected'
+                        ];
+                        $canvassModel->update($row->canvassID,$values);
+                    }
+                    //send to approver
+                    $value = ['accountID'=>$deptHead,'Reference'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>''];
+                    $reviewCanvassModel->save($value);
+                    //send email
+                    $builder = $this->db->table('tblaccount');
+                    $builder->select('*');
+                    $builder->WHERE('accountID',$deptHead);
+                    $datas = $builder->get();
+                    if($rows = $datas->getRow())
+                    {
+                        //email
+                        $email = \Config\Services::email();
+                        $email->setTo($rows->Email,$rows->Fullname);
+                        $email->setFrom("fastcat.system@gmail.com","FastCat");
+                        $imgURL = "assets/img/fastcat.png";
+                        $email->attach($imgURL);
+                        $cid = $email->setAttachmentCID($imgURL);
+                        $template = "<center>
+                        <img src='cid:". $cid ."' width='100'/>
+                        <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+                        <tr><td><center><h1>Canvass Sheet Form</h1></center></td></tr>
+                        <tr><td><center>Hi, ".$rows->Fullname."</center></td></tr>
+                        <tr><td><center>This is from FastCat System, sending you a reminder that requesting for your approval.</center></td></tr>
+                        <tr><td><p><center><b>Reference No : ".$code."</b></center></p></td><tr>
+                        <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+                        <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+                        <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+                        $subject = "Canvass Sheet Form - For Approval";
+                        $email->setSubject($subject);
+                        $email->setMessage($template);
+                        $email->send();
+                    }
+                    $file->move('Canvass/',$originalName);
+                    session()->setFlashdata('success','Great! Successfully submitted to review');
+                    return redirect()->to('/list-orders')->withInput();
                 }
             }
-            session()->setFlashdata('success','Great! Successfully submitted to review');
-            return redirect()->to('/list-orders')->withInput();
         }
     }
 

@@ -1222,7 +1222,7 @@ class Home extends BaseController
     {
         $user = session()->get('loggedUser');
         $builder = $this->db->table('tblreview a');
-        $builder->select('a.reviewID,a.OrderNo,a.DateReceived,a.DateApproved,a.Status,b.Reason,b.DateNeeded,b.PurchaseType,c.Fullname');
+        $builder->select('a.reviewID,a.OrderNo,a.DateReceived,a.DateApproved,a.Status,b.Department,b.DateNeeded,b.PurchaseType,c.Fullname');
         $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
         $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
         $builder->WHERE('a.accountID',$user);
@@ -1241,14 +1241,14 @@ class Home extends BaseController
         $builder->WHERE('systemRole','Staff');
         $account = $builder->get()->getResult();
         //purchase order
-        $builder = $this->db->table('tblpurchase_review a');
-        $builder->select('a.prID,a.DateReceived,a.Status,a.purchaseNumber,a.DateApproved,c.Supplier,c.Price');
-        $builder->join('tblpurchase_logs b','b.purchaseNumber=a.purchaseNumber','LEFT');
-        $builder->join('tblcanvass_sheet c','c.canvassID=b.canvassID','LEFT');
-        $builder->WHERE('a.accountID',$user);
-        $builder->groupBy('a.prID');
-        $purchase = $builder->get()->getResult();
-        $data = ['review'=>$review,'assign'=>$assign,'account'=>$account,'purchase'=>$purchase];
+        // $builder = $this->db->table('tblpurchase_review a');
+        // $builder->select('a.prID,a.DateReceived,a.Status,a.purchaseNumber,a.DateApproved,c.Supplier,c.Price');
+        // $builder->join('tblpurchase_logs b','b.purchaseNumber=a.purchaseNumber','LEFT');
+        // $builder->join('tblcanvass_sheet c','c.canvassID=b.canvassID','LEFT');
+        // $builder->WHERE('a.accountID',$user);
+        // $builder->groupBy('a.prID');
+        // $purchase = $builder->get()->getResult();
+        $data = ['review'=>$review,'assign'=>$assign,'account'=>$account];
         return view('approver',$data);
     }
 

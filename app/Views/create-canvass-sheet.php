@@ -4,7 +4,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>Canvass Sheet</title>
+		<title><?php if(session()->get('role')=="Staff"){ ?>Create Quotation<?php }else {?>Create Canvass Sheet<?php }?></title>
 
 		<!-- Site favicon -->
 		<link
@@ -355,7 +355,7 @@
 							<ul class="submenu">
                                 <li><a href="<?=site_url('orders')?>">Order Materials</a></li>
 								<li><a href="<?=site_url('list-orders')?>">List Order</a></li>
-                                <li><a href="javascript:void(0);" class="active">Create Canvass Sheet</a></li>
+                                <li><a href="javascript:void(0);" class="active"><?php if(session()->get('role')=="Staff"){ ?>Create Quotation<?php }else {?>Create Canvass Sheet<?php }?></a></li>
 								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
 								<li><a href="<?=site_url('approve-orders')?>">For Approval&nbsp;<span class="badge badge-pill bg-primary text-white" id="notifications">0</span></a></li>
 								<li><a href="<?=site_url('canvass-sheet-request')?>">Canvass Sheet&nbsp;<span class="badge badge-pill bg-primary text-white" id="notif">0</span></a></li>
@@ -447,12 +447,12 @@
 					</div>
 				<?php endif; ?>
                 <div class="card-box">
-                    <div class="card-header">Create Canvass Sheet
+                    <div class="card-header"><?php if(session()->get('role')=="Staff"){ ?>Create Quotation<?php }else {?>Create Canvass Sheet<?php }?>
 					<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addModal" style="float:right;"><i class="icon-copy dw dw-add"></i>&nbsp;Add</a>
 					</div>
                     <div class="card-body">
                         <?php foreach($prf as $row): ?>
-                        <form method="post" class="row g-3" action="<?=base_url('save-form')?>" id="frmCanvass">
+                        <form method="post" class="row g-3" enctype="multipart/form-data" action="<?=base_url('save-form')?>" id="frmCanvass">
 							<input type="hidden" name="requestor" value="<?php echo $row->accountID ?>"/>
 							<input type="hidden" name="type_purchase" value="<?php echo $row->PurchaseType ?>"/>
                             <div class="col-12 form-group">
@@ -478,22 +478,26 @@
                             <div class="col-12 form-group">
                                 <table class="table table-bordered table-striped hover nowrap">
                                     <thead>
-                                        <th>Qty</th>
-                                        <th>UOM</th>
-                                        <th>Item Description</th>
-                                        <th>Unit Price</th>
-                                        <th>Supplier</th>
-                                        <th>Contact Person</th>
-                                        <th>Contact #</th>
-                                        <th>Terms</th>
-                                        <th>Warranty</th>
-										<th><span class="dw dw-more"></span></th>
+                                        <th class="bg-primary text-white">Qty</th>
+                                        <th class="bg-primary text-white">UOM</th>
+                                        <th class="bg-primary text-white">Item Description</th>
+                                        <th class="bg-primary text-white">Unit Price</th>
+                                        <th class="bg-primary text-white">Supplier</th>
+                                        <th class="bg-primary text-white">Contact Person</th>
+                                        <th class="bg-primary text-white">Contact #</th>
+                                        <th class="bg-primary text-white">Terms</th>
+                                        <th class="bg-primary text-white">Warranty</th>
+										<th class="bg-primary text-white"><span class="dw dw-more"></span></th>
                                     </thead>
                                     <tbody id="tbl_supplier">
 
                                     </tbody>
                                 </table>
                             </div>
+							<div class="col-12 form-group">
+								<label>Attachment (Optional)</label>
+                                <input type="file" class="form-control" name="file"/>
+							</div>
 							<div class="col-12 form-group">
 								<label>Department/Division Head</label>
 								<select class="form-control custom-select2" name="approver" id="approver" required>
@@ -521,6 +525,11 @@
                     <div class="modal-body">
                         <form method="POST" class="row g-3" id="frmAdd">
 							<input type="hidden" name="orderNo" value="<?=$id ?>"/>
+							<div class="col-12">
+								<label>Vatable ?</label>
+								<input type="radio" name="vatable" style="width:15px;height:15px;" value="Yes"/>&nbsp;<label>Yes</label>
+								<input type="radio" name="vatable" style="width:15px;height:15px;" value="No" checked/>&nbsp;<label>No</label>
+							</div>
 							<div class="col-12 form-group">
 								<label>Item/Equipment</label>
 								<select class="form-control" name="item">
@@ -541,19 +550,19 @@
 										<label>Contact Person</label>
 										<input type="text" class="form-control" name="contactPerson" id="person" required/>
 									</div>
-									<div class="col-lg-6">
+									<div class="col-lg-3">
 										<label>Unit Price</label>
 										<input type="text" class="form-control" name="unitPrice" required/>
+									</div>
+									<div class="col-lg-3">
+										<label>Contact Number</label>
+										<input type="phone" class="form-control" maxlength="11" minlength="11" name="phone" id="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required/>
 									</div>
 								</div>
 							</div>
 							<div class="col-12 form-group">
-								<label>Contact Number</label>
-								<input type="phone" class="form-control" maxlength="11" minlength="11" name="phone" id="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required/>
-							</div>
-							<div class="col-12 form-group">
 								<label>Address</label>
-								<textarea class="form-control" name="address" id="address" required></textarea>
+								<textarea class="form-control" style="height:120px;" name="address" id="address" required></textarea>
 							</div>
 							<div class="col-12 form-group">
 								<div class="row g-3">

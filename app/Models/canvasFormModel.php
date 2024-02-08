@@ -14,7 +14,7 @@ class canvasFormModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['Reference', 'accountID','DatePrepared','DateNeeded','OrderNo','Department','Status','createdBy'];
+    protected $allowedFields = ['Reference', 'accountID','DatePrepared','DateNeeded','OrderNo','Department','Status','createdBy','Attachment'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

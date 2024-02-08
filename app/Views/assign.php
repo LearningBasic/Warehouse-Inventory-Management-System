@@ -460,32 +460,16 @@
 											<?php if($row->Status==0){ ?>
 												<span class="badge bg-warning text-white">PENDING</span>
 											<?php }else{ ?>
-												<span class="badge bg-success text-white">DONE</span>
+												<span class="badge bg-success text-white">ACCEPTED</span>
 											<?php } ?>
 										</td>
 										<td>
 											<?php if($row->Status==0){ ?>
-												<div class="dropdown">
-													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-														href="#" role="button" data-toggle="dropdown">
-														<i class="dw dw-more"></i>
-													</a>
-													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
-														<button type="button" class="dropdown-item accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span> Accept</button>
-														<button type="button" class="dropdown-item view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-eye"></span> View</button>
-													</div>
-												</div>
+												<button type="button" class="btn btn-outline-primary btn-sm accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span> Accept</button>
+												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-eye"></span> View</button>
 											<?php }else{ ?>
-												<div class="dropdown">
-													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-														href="#" role="button" data-toggle="dropdown">
-														<i class="dw dw-more"></i>
-													</a>
-													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
-														<a href="create/<?php echo $row->OrderNo ?>" class="dropdown-item"><span class="dw dw-add"></span> Create</a>
-														<button type="button" class="dropdown-item view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-eye"></span> View</button>
-													</div>
-												</div>
+												<a href="create/<?php echo $row->OrderNo ?>" class="btn btn-outline-primary btn-sm"><span class="dw dw-add"></span> Create</a>
+												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-eye"></span> View</button>
 											<?php } ?>
 										</td>
 									</tr>
@@ -506,6 +490,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
+						<a href="javascript:void(0);" onclick="exportf(this)" class="btn btn-primary btn-sm text-white"><span class="dw dw-download"></span>&nbsp;Download</a>
                         <div id="result"></div>
                     </div>
                 </div>
@@ -571,6 +556,15 @@
 					}
 				});
 			});
+
+			function exportf(elem) {
+			var table = document.getElementById("result");
+			var html = table.outerHTML;
+			var url = 'data:application/vnd.ms-excel,' + escape(html); // Set your html table into url 
+			elem.setAttribute("href", url);
+			elem.setAttribute("download","order-list.xls"); // Choose the file name
+			return false;
+			}
         </script>
 	</body>
 </html>
