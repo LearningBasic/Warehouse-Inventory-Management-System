@@ -464,7 +464,7 @@
                                 <?= session()->getFlashdata('success'); ?>
                             </div>
                         <?php endif; ?>
-                        <form method="POST" class="row g-3" id="frmPurchase" action="<?=base_url('save-order')?>">
+                        <form method="POST" class="row g-3" id="frmPurchase" enctype="multipart/form-data" action="<?=base_url('save-order')?>">
                             <div class="col-12 form-group">
                                 <div class="row g-3">
 									<div class="col-lg-3">
@@ -506,6 +506,10 @@
                             <div class="col-12 form-group">
                                 <label>Reason</label>
                                 <textarea class="form-control" name="reason" required></textarea>
+                            </div>
+							<div class="col-12 form-group">
+                                <label>Attachment</label>
+                                <input type="file" class="form-control" name="file" required/>
                             </div>
 							<div class="col-12 form-group">
 								<label>Department Head/Masters</label>

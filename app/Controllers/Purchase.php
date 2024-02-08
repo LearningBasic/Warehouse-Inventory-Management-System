@@ -41,6 +41,8 @@ class Purchase extends BaseController
         $dateNeeded = $this->request->getPost('dateNeeded');
         $reason = $this->request->getPost('reason');
         $purchase_type = $this->request->getPost('purchase_type');
+        $file = $this->request->getFile('file');
+        $originalName = $file->getClientName();
         //array
         $qty = $this->request->getPost('qty');
         $item = $this->request->getPost('item');
@@ -75,7 +77,8 @@ class Purchase extends BaseController
             {
                 $values = [
                     'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
-                    'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),'PurchaseType'=>$purchase_type
+                    'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
+                    'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,
                 ];
                 $purchaseModel->save($values);
             }
@@ -83,10 +86,12 @@ class Purchase extends BaseController
             {
                 $values = [
                     'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$tomorrow,'Department'=>$dept,
-                    'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),'PurchaseType'=>$purchase_type
+                    'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
+                    'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,
                 ];
                 $purchaseModel->save($values);
-            }   
+            }  
+            $file->move('Attachment/',$originalName);
             
             //save all the item requested
             $count = count($item_name);
@@ -797,6 +802,7 @@ class Purchase extends BaseController
         $phone = $this->request->getPost('phone');
         $terms = $this->request->getPost('terms');
         $warranty = $this->request->getPost('warranty');
+        $vatable = $this->request->getPost('vatable');
         //validate
         $validation = $this->validate([
             'item'=>'required',
@@ -818,7 +824,7 @@ class Purchase extends BaseController
                 'OrderNo'=>$orderNo, 'orderID'=>$item,'Supplier'=>$supplier,
                 'Price'=>$unitPrice,'ContactPerson'=>$contactPerson,'Address'=>$address,
                 'ContactNumber'=>$phone,'Terms'=>$terms,'Warranty'=>$warranty,
-                'Reference'=>'','Remarks'=>''
+                'Reference'=>'','Remarks'=>'','Vatable'=>$vatable
             ];
             $canvassModel->save($values);
             //validate if supplier already exist
