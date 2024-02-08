@@ -233,14 +233,14 @@ class Report extends BaseController
         $builder->join('tbl_order_item c','c.orderID=b.orderID','LEFT');
         $builder->join('tblpurchase_review d','d.purchaseNumber=a.purchaseNumber','LEFT');
         $builder->join('tblaccount e','e.accountID=d.accountID','LEFT');
-        $builder->WHERE('a.canvassID',$id);
+        $builder->WHERE('a.purchaseNumber',$id);
         $data = $builder->get(); 
         $template = '';  
         $path = 'Signatures/mike_fox.png';
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $img = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($img);
-        if($row = $data->getRow())
+        foreach($data->getResult() as $row)
         {        
             $purchase_number = $row->purchaseNumber;
             $vatable = ($row->Price*$row->Qty)/1.12;
