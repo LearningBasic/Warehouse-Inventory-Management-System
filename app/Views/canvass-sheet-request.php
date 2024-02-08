@@ -513,6 +513,7 @@
 							</div>
 							<div class="col-12">
 								<div id="result"></div>
+								<br/>
 							</div>
 							<?php if(session()->get('role')!="Administrator"){ ?>
 							<div class="col-12 form-group">

@@ -793,8 +793,9 @@ class ProductController extends BaseController
     {
         $val = $this->request->getGet('value');
         $builder = $this->db->table('tblcanvass_sheet a');
-        $builder->select('a.*,b.Item_Name');
+        $builder->select('a.*,b.Item_Name,c.Attachment');
         $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
+        $builder->join('tblcanvass_form c','c.Reference=a.Reference','LEFT');
         $builder->WHERE('a.Reference',$val);
         $builder->orderby('a.orderID');
         $data = $builder->get();
@@ -828,6 +829,8 @@ class ProductController extends BaseController
         }
         ?>
         </table>
+        <br/>
+        <a href="Canvass/<?php echo $row->Attachment ?>" class="btn btn-link form-control" target="_blank"><span class="dw dw-paperclip"></span> <?php echo $row->Attachment ?></a>
         <?php
     }
 
