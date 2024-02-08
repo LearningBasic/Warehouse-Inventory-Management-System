@@ -451,36 +451,36 @@
                     <div class="card-body">
                         <table class="data-table table stripe hover nowrap">
                             <thead>
+								<th>Date Needed</th>
                                 <th>Reference No</th>
                                 <th>PRF No</th>
-								<th>Item Name</th>
                                 <th>Vendor(s)</th>
-                                <th>Qty</th>
-                                <th>Price</th>
                                 <th>Terms</th>
                                 <th>Warranty</th>
+								<th>Department</th>
                                 <th>Action</th>
                             </thead>
 							<tbody>
 							<?php foreach($canvass as $row): ?>
                                 <tr>
+									<td><?php echo $row->DateNeeded ?></td>
                                     <td><?php echo $row->Reference ?></td>
                                     <td><?php echo $row->OrderNo ?></td>
-                                    <td><?php echo $row->Item_Name ?></td>
                                     <td><?php echo $row->Supplier ?></td>
-                                    <td><?php echo $row->Qty ?></td>
-                                    <td style="text-align: right;"><?php echo number_format($row->Price,2) ?></td>
                                     <td><?php echo $row->Terms ?></td>
                                     <td><?php echo $row->Warranty ?></td>
+									<td><?php echo $row->Department ?></td>
                                     <td>
 										<?php if(empty($row->Status)){ ?>
-											<button type="button" class="btn btn-outline-primary btn-sm generate" value="<?php echo $row->canvassID ?>">
+											<button type="button" class="btn btn-outline-primary btn-sm generate" value="<?php echo $row->Reference ?>">
 											<span class="dw dw-add"></span>&nbsp;Create
 											</button>
 										<?php }else{ ?>
-											<a class="btn btn-success btn-sm" href="<?=site_url('download/')?><?php echo $row->canvassID ?>">
+											<?php if($row->Status==0){}else{ ?>
+											<a class="btn btn-success btn-sm" href="<?=site_url('download/')?><?php echo $row->Reference ?>">
 											<span class="dw dw-download"></span>&nbsp;Download
 											</a>
+											<?php } ?>
 										<?php } ?>
                                     </td>
                                 </tr>

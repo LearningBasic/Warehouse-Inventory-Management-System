@@ -14,7 +14,7 @@ class canvassModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['OrderNo', 'orderID','Supplier','Price','ContactPerson','ContactNumber','Address','Terms','Warranty','Reference','Remarks','Vatable'];
+    protected $allowedFields = ['OrderNo', 'orderID','Supplier','Price','ContactPerson','ContactNumber','Address','Terms','Warranty','Reference','Remarks','Vatable','purchaseLogID'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

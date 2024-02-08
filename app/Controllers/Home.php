@@ -1241,14 +1241,13 @@ class Home extends BaseController
         $builder->WHERE('systemRole','Staff');
         $account = $builder->get()->getResult();
         //purchase order
-        // $builder = $this->db->table('tblpurchase_review a');
-        // $builder->select('a.prID,a.DateReceived,a.Status,a.purchaseNumber,a.DateApproved,c.Supplier,c.Price');
-        // $builder->join('tblpurchase_logs b','b.purchaseNumber=a.purchaseNumber','LEFT');
-        // $builder->join('tblcanvass_sheet c','c.canvassID=b.canvassID','LEFT');
-        // $builder->WHERE('a.accountID',$user);
-        // $builder->groupBy('a.prID');
-        // $purchase = $builder->get()->getResult();
-        $data = ['review'=>$review,'assign'=>$assign,'account'=>$account];
+        $builder = $this->db->table('tblpurchase_review a');
+        $builder->select('a.prID,a.DateReceived,b.Reference,a.Status,a.purchaseNumber,a.DateApproved');
+        $builder->join('tblpurchase_logs b','b.purchaseNumber=a.purchaseNumber','LEFT');
+        $builder->WHERE('a.accountID',$user);
+        $builder->groupBy('a.prID');
+        $purchase = $builder->get()->getResult();
+        $data = ['review'=>$review,'assign'=>$assign,'account'=>$account,'purchase'=>$purchase];
         return view('approver',$data);
     }
 
@@ -1307,14 +1306,12 @@ class Home extends BaseController
 
     public function purchaseOrder()
     {
-        $builder = $this->db->table('tblcanvass_form a');
-        $builder->select('c.*,b.Fullname,d.Qty,d.Item_Name,e.Status');
-        $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
-        $builder->join('tblcanvass_sheet c','c.Reference=a.Reference','LEFT');
-        $builder->join('tbl_order_item d','d.orderID=c.orderID','LEFT');
-        $builder->join('tblpurchase_logs e','e.canvassID=c.canvassID','LEFT');
-        $builder->WHERE('a.Status',4)->WHERE('c.Remarks','Selected');
-        $builder->groupBy('c.canvassID');
+        $builder = $this->db->table('tblcanvass_sheet a');
+        $builder->select('b.DateNeeded,a.Reference,a.OrderNo,a.Supplier,a.Terms,a.Warranty,b.Department,c.Status');
+        $builder->join('tblcanvass_form b','b.Reference=a.Reference','LEFT');
+        $builder->join('tblpurchase_logs c','c.Reference=a.Reference','LEFT');
+        $builder->WHERE('a.Remarks','Selected')->WHERE('b.Status',4);
+        $builder->groupBy('a.Reference');
         $canvass = $builder->get()->getResult();
 
         $data = ['canvass'=>$canvass];
@@ -1326,6 +1323,7 @@ class Home extends BaseController
         $purchaseOrderModel = new \App\Models\purchaseOrderModel();
         $systemLogsModel = new \App\Models\systemLogsModel();
         $purchaseReviewModel = new \App\Models\purchaseReviewModel();
+        $canvasModel = new \App\Models\canvassModel();
         //data
         $val = $this->request->getPost('value');
         $date = date('Y-m-d');
@@ -1333,7 +1331,7 @@ class Home extends BaseController
         $user = session()->get('loggedUser');
         //validate if already exist
         $validation  = $this->validate([
-            'value'=>'is_unique[tblpurchase_logs.canvassID]'
+            'value'=>'is_unique[tblpurchase_logs.Reference]'
         ]);
         if(!$validation)
         {
@@ -1341,52 +1339,72 @@ class Home extends BaseController
         }
         else
         {
-            $code="";
-            $builder = $this->db->table('tblpurchase_logs');
-            $builder->select('COUNT(purchaseLogID)+1 as total');
-            $list = $builder->get();
-            if($li = $list->getRow())
-            {
-                $code = "PO-".str_pad($li->total, 9, '0', STR_PAD_LEFT);
-            }
-            //save
-            $values = ['purchaseNumber'=>$code,'canvassID'=>$val, 'Status'=>$status,'Date'=>$date,'accountID'=>$user,'Remarks'=>'OPEN'];
-            $purchaseOrderModel->save($values);
-            //system logs
-            $value = ['accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Created PO Number '.$code];
-            $systemLogsModel->save($value);
-            //get the approver from purchase order setup
-            $builder = $this->db->table('tblsystem a');
-            $builder->select('a.accountID,b.Fullname,b.Email');
-            $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+            $builder = $this->db->table('tblcanvass_sheet');
+            $builder->select('COUNT(Reference)total,Vatable');
+            $builder->WHERE('Reference',$val);
+            $builder->groupBy('Reference,Vatable');
             $data = $builder->get();
-            if($row = $data->getRow())
+            foreach($data->getResult() as $row)
             {
-                //save the data
-                $values = ['accountID'=>$row->accountID,'purchaseNumber'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>''];
-                $purchaseReviewModel->save($values);
-                //email
-                $email = \Config\Services::email();
-                $email->setTo($row->Email,$row->Fullname);
-                $email->setFrom("fastcat.system@gmail.com","FastCat");
-                $imgURL = "assets/img/fastcat.png";
-                $email->attach($imgURL);
-                $cid = $email->setAttachmentCID($imgURL);
-                $template = "<center>
-                <img src='cid:". $cid ."' width='100'/>
-                <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
-                <tr><td><center><h1>Purchase Order Form</h1></center></td></tr>
-                <tr><td><center>Hi, ".$row->Fullname."</center></td></tr>
-                <tr><td><center>This is from FastCat System, sending you a reminder that requesting for your approval of the generated Purchase Order.</center></td></tr>
-                <tr><td><center>Purchase Order No</center></td></tr>
-                <tr><td><center><h2>".$code."</h2></center></td></tr>
-                <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
-                <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
-                <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
-                $subject = "Purchase Order Form - For Approval";
-                $email->setSubject($subject);
-                $email->setMessage($template);
-                $email->send();
+                $code="";
+                $builder = $this->db->table('tblpurchase_logs');
+                $builder->select('COUNT(purchaseLogID)+1 as total');
+                $list = $builder->get();
+                if($li = $list->getRow())
+                {
+                    $code = "PO-".str_pad($li->total, 9, '0', STR_PAD_LEFT);
+                }
+                //save
+                $values = ['purchaseNumber'=>$code,'Reference'=>$val, 'Status'=>$status,'Date'=>$date,'accountID'=>$user,'Remarks'=>'OPEN'];
+                $purchaseOrderModel->save($values);
+                //get the PO Number
+                $purchase = $purchaseOrderModel->WHERE('purchaseNumber',$code)->first();
+                //update the canvass Sheet
+                $builder = $this->db->table('tblcanvass_sheet');
+                $builder->select('canvassID');
+                $builder->WHERE('Vatable',$row->Vatable)->WHERE('Reference',$val);
+                $datas = $builder->get();
+                foreach($datas->getResult() as $rows)
+                {
+                    $record = ['purchaseLogID'=>$purchase['purchaseLogID']];
+                    $canvasModel->update($rows->canvassID,$record);
+                }
+                //system logs
+                $value = ['accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Created PO Number '.$code];
+                $systemLogsModel->save($value);
+                //get the approver from purchase order setup
+                $builder = $this->db->table('tblsystem a');
+                $builder->select('a.accountID,b.Fullname,b.Email');
+                $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+                $data = $builder->get();
+                if($row = $data->getRow())
+                {
+                    //save the data
+                    $values = ['accountID'=>$row->accountID,'purchaseNumber'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>''];
+                    $purchaseReviewModel->save($values);
+                    //email
+                    $email = \Config\Services::email();
+                    $email->setTo($row->Email,$row->Fullname);
+                    $email->setFrom("fastcat.system@gmail.com","FastCat");
+                    $imgURL = "assets/img/fastcat.png";
+                    $email->attach($imgURL);
+                    $cid = $email->setAttachmentCID($imgURL);
+                    $template = "<center>
+                    <img src='cid:". $cid ."' width='100'/>
+                    <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+                    <tr><td><center><h1>Purchase Order Form</h1></center></td></tr>
+                    <tr><td><center>Hi, ".$row->Fullname."</center></td></tr>
+                    <tr><td><center>This is from FastCat System, sending you a reminder that requesting for your approval of the generated Purchase Order.</center></td></tr>
+                    <tr><td><center>Purchase Order No</center></td></tr>
+                    <tr><td><center><h2>".$code."</h2></center></td></tr>
+                    <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+                    <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+                    <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+                    $subject = "Purchase Order Form - For Approval";
+                    $email->setSubject($subject);
+                    $email->setMessage($template);
+                    $email->send();
+                }
             }
             echo "success";
         }

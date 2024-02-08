@@ -571,14 +571,38 @@
 											<thead>
 												<th>Date Received</th>
 												<th>P.O. Number</th>
-												<th>Vendor/Supplier</th>
-												<th>Unit Price</th>
+												<th>Reference</th>
 												<th>Date Approved</th>
 												<th>Status</th>
 												<th>Action</th>
 											</thead>
 											<tbody>
-												
+												<?php foreach($purchase as $row): ?>
+													<tr>
+														<td><?php echo $row->DateReceived ?></td>
+														<td><?php echo $row->purchaseNumber ?></td>
+														<td><?php echo $row->Reference ?></td>
+														<td><?php echo $row->DateApproved ?></td>
+														<td>
+															<?php if($row->Status==0){ ?>
+																<span class="badge bg-warning text-white">PENDING</span>
+															<?php }else if($row->Status==1){?>
+																<span class="badge bg-success text-white">APPROVED</span>
+															<?php }else{?>
+																<span class="badge bg-danger text-white">CANCELLED</span>
+															<?php } ?>
+														</td>
+														<td>
+															<?php if($row->Status==0){ ?>
+																<button type="button" class="btn btn-primary btn-sm approve" value="<?php echo $row->prID ?>">
+																<span class="dw dw-check"></span>&nbsp;Approve?
+																</button>														
+															<?php }else{?>
+																-
+															<?php } ?>
+														</td>
+													</tr>
+												<?php endforeach; ?>
 											</tbody>
 										</table>
 									</div>

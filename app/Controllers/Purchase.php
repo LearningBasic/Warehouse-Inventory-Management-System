@@ -824,7 +824,7 @@ class Purchase extends BaseController
                 'OrderNo'=>$orderNo, 'orderID'=>$item,'Supplier'=>$supplier,
                 'Price'=>$unitPrice,'ContactPerson'=>$contactPerson,'Address'=>$address,
                 'ContactNumber'=>$phone,'Terms'=>$terms,'Warranty'=>$warranty,
-                'Reference'=>'','Remarks'=>'','Vatable'=>$vatable
+                'Reference'=>'','Remarks'=>'','Vatable'=>$vatable,'purchaseLogID'=>0
             ];
             $canvassModel->save($values);
             //validate if supplier already exist
