@@ -538,6 +538,10 @@
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
 		<script>
+			$(document).ready(function()
+			{
+				notify();
+			});
 			google.charts.setOnLoadCallback(Chart);
 			function Chart() 
 			{
@@ -560,6 +564,30 @@
 				/* Instantiate and draw the chart.*/
 				var chart = new google.visualization.LineChart(document.getElementById('chartContainer'));
 				chart.draw(data, options);
+			}
+			function notify()
+			{
+				$.ajax({
+					url:"<?=site_url('notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notifications').html(response);
+					}
+				});
+				$.ajax({
+					url:"<?=site_url('canvas-notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notif').html(response);
+					}
+				});
+				$.ajax({
+					url:"<?=site_url('total-notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notification').html(response);
+					}
+				});
 			}
 		</script>
 	</body>

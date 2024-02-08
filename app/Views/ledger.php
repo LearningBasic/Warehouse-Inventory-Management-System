@@ -496,6 +496,10 @@
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
 		<script>
+			$(document).ready(function()
+			{
+				notify();
+			});
 			$('#btnSearch').on('click',function(e)
 			{
 				e.preventDefault();
@@ -517,6 +521,30 @@
 					}
 				});
 			});
+			function notify()
+			{
+				$.ajax({
+					url:"<?=site_url('notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notifications').html(response);
+					}
+				});
+				$.ajax({
+					url:"<?=site_url('canvas-notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notif').html(response);
+					}
+				});
+				$.ajax({
+					url:"<?=site_url('total-notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notification').html(response);
+					}
+				});
+			}
 			function exportf(elem) {
 			var table = document.getElementById("table");
 			var html = table.outerHTML;
