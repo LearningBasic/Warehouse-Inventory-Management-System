@@ -439,7 +439,7 @@
 		<div class="mobile-menu-overlay"></div>
 
 		<div class="main-container">
-			<div class="xs-pd-20-10 pd-ltr-20">
+			<div class="xs-pd-20-10 pd-ltr-10">
 				<div class="card-box">
 					<div class="card-header"><span class="icon-copy dw dw-server"></span>&nbsp;Inventory</div>
 					<div class="card-body">
@@ -464,11 +464,12 @@
 								<th>Product Name</th>
 								<th>Item Group</th>
 								<th>Product ID</th>
+								<th>Details</th>
 								<th>Unit Price</th>
 								<th>Qty</th>
 								<th>Status</th>
 								<th>Expiration</th>
-								<th>Location</th>
+								<th>Assignment</th>
 								<th>Action</th>
 							</thead>
 							<tbody>
@@ -484,6 +485,7 @@
 											</td>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
+											<td><?php echo substr($row->Description,0,20) ?>...</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><span class='badge bg-success text-white'>Available</span></td>
@@ -514,6 +516,7 @@
 											</td>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
+											<td><?php echo substr($row->Description,0,20) ?>...</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td>
@@ -554,6 +557,7 @@
 											</td>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
+											<td><?php echo substr($row->Description,0,20) ?>...</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td><span class='badge bg-success text-white'>Available</span></td>
@@ -571,6 +575,7 @@
 											</td>
 											<td><?php echo $row->categoryName ?></td>
 											<td><?php echo $row->productID ?></td>
+											<td><?php echo substr($row->Description,0,20) ?>...</td>
 											<td><?php echo number_format($row->unitPrice,2) ?></td>
 											<td><?php echo number_format($row->Qty,0) ?></td>
 											<td>

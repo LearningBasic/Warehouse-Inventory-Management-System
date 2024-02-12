@@ -477,6 +477,9 @@
 											</button>
 										<?php }else{ ?>
 											<?php if($row->Status==0){}else{ ?>
+											<button type="button" class="btn btn-primary btn-sm comment" value="<?php echo $row->Reference ?>">
+											<span class="dw dw-add"></span>&nbsp;Add
+											</button>
 											<a class="btn btn-success btn-sm" href="<?=site_url('download/')?><?php echo $row->Reference ?>">
 											<span class="dw dw-download"></span>&nbsp;Download
 											</a>

@@ -228,12 +228,11 @@ class Report extends BaseController
         $dompdf = new Dompdf();
         $purchase_number="";
         $builder = $this->db->table('tblpurchase_logs a');
-        $builder->select('a.purchaseNumber,a.Date,b.OrderNo,b.Supplier,b.Price,b.Terms,b.Address,c.Qty,c.Item_Name,c.ItemUnit,e.Fullname');
-        $builder->join('tblcanvass_sheet b','b.canvassID=a.canvassID','LEFT');
-        $builder->join('tbl_order_item c','c.orderID=b.orderID','LEFT');
+        $builder->select('a.purchaseNumber,a.Date,b.OrderNo,b.Supplier,b.Price,b.Terms,b.Address,e.Fullname');
+        $builder->join('tblcanvass_sheet b','b.purchaseLogID=a.purchaseLogID','LEFT');
         $builder->join('tblpurchase_review d','d.purchaseNumber=a.purchaseNumber','LEFT');
         $builder->join('tblaccount e','e.accountID=d.accountID','LEFT');
-        $builder->WHERE('a.purchaseNumber',$id);
+        $builder->WHERE('a.Reference',$id)->groupBy('a.purchaseNumber');
         $data = $builder->get(); 
         $template = '';  
         $path = 'Signatures/mike_fox.png';
@@ -243,9 +242,9 @@ class Report extends BaseController
         foreach($data->getResult() as $row)
         {        
             $purchase_number = $row->purchaseNumber;
-            $vatable = ($row->Price*$row->Qty)/1.12;
-            $vat = $vatable*0.12;
-            $total_sales = $vatable+$vat;
+            // $vatable = ($row->Price*$row->Qty)/1.12;
+            // $vat = $vatable*0.12;
+            // $total_sales = $vatable+$vat;
             $template .= "
             <head>
                 <style>
@@ -398,63 +397,9 @@ class Report extends BaseController
                 <tr><td colspan='3'><b>Ship To : Archipelago Philippine Ferries Corporation</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unioil Center Building, Commence Ave. Cor. Acacia Ave., Muntinlupa, PHL</td></tr>
                 <tr><td colspan='3'>&nbsp;</td></tr>
-                <tr><td colspan='3'><b>Gentlemen:</b> We are ordering the following and charged to our account</td></tr>
-                <tr>
-                    <td colspan='3'>
-                    <table id='vendor' style='width:100%;'>
-                        <thead>
-                        <th>QUANTITY</th>
-                        <th>UNIT</th>
-                        <th>DESCRIPTION</th>
-                        <th>UNIT PRICE</th>
-                        <th>AMOUNT</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <td>".$row->Qty."</td>
-                            <td>".$row->ItemUnit."</td>
-                            <td>".$row->Item_Name."<br/>".$row->OrderNo."</td>
-                            <td style='text-align:right;'>".number_format($row->Price,2)."</td>
-                            <td style='text-align:right;'>".number_format($row->Price*$row->Qty,2)."</td>
-                            </tr>
-                            <tr>
-                                <td colspan='3'>&nbsp;</td>
-                                <td>Subtotal Amount:</td>
-                                <td style='text-align:right;font-weight:bold;'>PHP ".number_format($row->Price*$row->Qty,2)."</td>
-                            </tr>
-                            <tr><td colspan='5'>&nbsp;</td></tr>
-                            <tr><td colspan='5'>&nbsp;</td></tr>
-                            <tr><td colspan='5'>&nbsp;</td></tr>
-                            <tr>
-                                <td colspan='3'>&nbsp;</td>
-                                <td>VATable</td>
-                                <td style='text-align:right;'>".number_format($vatable,2)."</td>
-                            </tr>
-                            <tr>
-                                <td colspan='3'>&nbsp;</td>
-                                <td>VAT - 12%</td>
-                                <td style='text-align:right;'>".number_format($vat,2)."</td>
-                            </tr>
-                            <tr>
-                                <td colspan='3'>&nbsp;</td>
-                                <td>VAT Exempt</td>
-                                <td style='text-align:right;'>0.00</td>
-                            </tr>
-                            <tr>
-                                <td colspan='3'>&nbsp;</td>
-                                <td>VAT Zero Rated</td>
-                                <td style='text-align:right;'>0.00</td>
-                            </tr>
-                            <tr>
-                                <td colspan='3'>&nbsp;</td>
-                                <td style='font-size:18px;font-weight:bold;'>VAT TOTAL</td>
-                                <td style='text-align:right;font-size:18px;font-weight:bold;'>PHP ".number_format($total_sales,2)."</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    </td>
-                </tr>
-                <tr><td colspan='3'>&nbsp;</td></tr>
+                <tr><td colspan='3'><b>Gentlemen:</b> We are ordering the following and charged to our account</td></tr>";
+                
+            $template.="<tr><td colspan='3'>&nbsp;</td></tr>
                 <tr><td colspan='3'>Delivery/Shipping Instructions</td></td>
                 <tr><td style='height:100px;border:1px solid #000000;' colspan='3'></td></tr>
                 <tr>
