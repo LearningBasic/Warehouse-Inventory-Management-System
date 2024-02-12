@@ -242,7 +242,7 @@ class Report extends BaseController
         $img = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($img);
         //procurement
-        $paths = 'Signatures/mike_fox.png';
+        $paths = 'Signatures/kit_vesorio.png';
         $type_s = pathinfo($paths, PATHINFO_EXTENSION);
         $img_s = file_get_contents($paths);
         $base64_s = 'data:image/' . $type_s . ';base64,' . base64_encode($img_s);

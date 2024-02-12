@@ -535,7 +535,7 @@
 								<select class="form-control" name="item">
 									<option value="">Choose</option>
 									<?php foreach($item as $row): ?>
-										<option value="<?php echo $row->orderID ?>"><?php echo $row->Item_Name ?></option>
+										<option value="<?php echo $row->orderID ?>"><?php echo $row->Item_Name ?> - <?php echo $row->Specification ?></option>
 									<?php endforeach; ?>
 								</select>
 							</div>
