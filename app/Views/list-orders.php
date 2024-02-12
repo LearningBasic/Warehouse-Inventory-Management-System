@@ -479,6 +479,7 @@
 											<th>Purchase Type</th>
 											<th>PRF No</th>
 											<th>Reason</th>
+											<th>Department</th>
 											<th>Date Needed</th>
 											<th>Status</th>
 											<th>Action</th>
@@ -490,6 +491,7 @@
 													<td><?php echo $row->PurchaseType ?></td>
 													<td><?php echo $row->OrderNo ?></td>
 													<td><?php echo $row->Reason ?></td>
+													<td><?php echo $row->Department ?></td>
 													<td><?php echo $row->DateNeeded ?></td>
 													<td>
 														<?php if($row->Status==0){ ?>
