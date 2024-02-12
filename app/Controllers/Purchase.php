@@ -1044,7 +1044,7 @@ class Purchase extends BaseController
                     }
                     $file->move('Canvass/',$originalName);
                     session()->setFlashdata('success','Great! Successfully submitted to review');
-                    return redirect()->to('/list-orders')->withInput();
+                    return redirect()->to('/assign')->withInput();
                 }
             }
         }
