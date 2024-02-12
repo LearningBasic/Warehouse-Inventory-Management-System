@@ -14,7 +14,7 @@ class commentModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['purchaseLogID', 'Message'];
+    protected $allowedFields = ['Reference', 'Message'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

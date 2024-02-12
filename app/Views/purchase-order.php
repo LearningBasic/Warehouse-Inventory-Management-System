@@ -516,6 +516,26 @@
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
+			$(document).on('click','.comment',function()
+			{
+				var message = prompt("Please enter delivery instruction");
+				var val = $(this).val();
+				$.ajax({
+					url:"<?=site_url('add-comment')?>",method:"POST",
+					data:{value:val,message:message},
+					success:function(response)
+					{
+						if(response==="success")
+						{
+							alert("Great! Successfully added");
+						}
+						else
+						{
+							alert(response);
+						}
+					}
+				});
+			});
 			$(document).on('click','.generate',function(e)
             {
                 e.preventDefault();

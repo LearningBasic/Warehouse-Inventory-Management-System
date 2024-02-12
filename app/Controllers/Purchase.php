@@ -1115,4 +1115,34 @@ class Purchase extends BaseController
             return redirect()->to('/receive-order')->withInput();
         }
     }
+
+    public function addComment()
+    {
+        $commentModel = new \App\Models\commentModel();
+        //data
+        $message = $this->request->getPost('message');
+        $val = $this->request->getPost('value');
+
+        $validation = $this->validate([
+            'value'=>'required|is_unique[tblcomment.Reference]'
+        ]);
+
+        if(!$validation)
+        {
+            echo "Invalid! Delivery instruction Already Added";
+        }
+        else
+        {
+            if(empty($message))
+            {
+                echo "Invalid! Please enter your delivery instruction";
+            }
+            else
+            {
+                $values = ['Reference'=>$val,'Message'=>$message];
+                $commentModel->save($values);
+                echo "success";
+            }
+        }
+    }
 }

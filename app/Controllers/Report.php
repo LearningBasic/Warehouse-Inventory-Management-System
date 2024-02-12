@@ -226,9 +226,9 @@ class Report extends BaseController
     public function Download($id)
     {
         $dompdf = new Dompdf();
-        $purchase_number="";
+        $purchase_number="";$jobOrder="";
         $builder = $this->db->table('tblpurchase_logs a');
-        $builder->select('a.purchaseNumber,a.Date,b.OrderNo,b.Supplier,b.Price,b.Terms,b.Address,e.Fullname');
+        $builder->select('a.purchaseLogID,a.purchaseNumber,a.Date,b.OrderNo,b.Supplier,b.Price,b.Terms,b.Address,e.Fullname,b.Vatable');
         $builder->join('tblcanvass_sheet b','b.purchaseLogID=a.purchaseLogID','LEFT');
         $builder->join('tblpurchase_review d','d.purchaseNumber=a.purchaseNumber','LEFT');
         $builder->join('tblaccount e','e.accountID=d.accountID','LEFT');
@@ -242,6 +242,7 @@ class Report extends BaseController
         foreach($data->getResult() as $row)
         {        
             $purchase_number = $row->purchaseNumber;
+            $jobOrder = $row->OrderNo;
             $template .= "
             <head>
                 <style>
@@ -253,11 +254,11 @@ class Report extends BaseController
                   }
                   
                   #vendor td, #vendor th {
-                    border: 1px solid #ddd;
+                    border: 1px solid #000;
                     padding: 5px;font-size:12px;
                   }
                  
-                  #vendor tr:hover {background-color: #ddd;}
+                  #vendor tr:hover {background-color: #000;}
                   
                   #vendor th {
                     padding-top: 12px;
@@ -390,15 +391,83 @@ class Report extends BaseController
                     <td colspan='2'><b>Address</b> : ".$row->Address."</td>
                     <td><b>Terms</b> : ".$row->Terms."</td>
                 </tr>
-                <tr><td colspan='3'><b>TIN :</b></td></tr>
+                <tr><td colspan='2'><b>TIN :</b></td><td><b>Job Order No</b> : ".$row->OrderNo."</td></tr>
                 <tr><td colspan='3'><b>Ship To : Archipelago Philippine Ferries Corporation</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unioil Center Building, Commence Ave. Cor. Acacia Ave., Muntinlupa, PHL</td></tr>
                 <tr><td colspan='3'>&nbsp;</td></tr>
                 <tr><td colspan='3'><b>Gentlemen:</b> We are ordering the following and charged to our account</td></tr>";
-                
+            $template.="
+                <tr>
+                    <td colspan='3'>
+                    <table style='width:100%;' id='vendor'>
+                        <thead>
+                        <th>QUANTITY</th>
+                        <th>UNIT</th>
+                        <th>DESCRIPTION</th>
+                        <th>UNIT PRICE</th>
+                        <th>TOTAL AMOUNT</th>
+                        </thead><tbody>";
+            $builder = $this->db->table('tblcanvass_sheet a');
+            $builder->select('a.Price,b.Qty,b.Item_Name,b.ItemUnit');
+            $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
+            $builder->WHERE('a.purchaseLogID',$row->purchaseLogID);
+            $datas = $builder->get();
+            foreach($datas->getResult() as $rows)
+            {
+                $template.="<tr>
+                    <td>".$rows->Qty."</td>
+                    <td>".$rows->ItemUnit."</td>
+                    <td>".$rows->Item_Name."</td>
+                    <td style='text-align:right;'>PhP ".number_format($rows->Price,2)."</td>
+                    <td style='text-align:right;'>PhP ".number_format($rows->Qty*$rows->Price,2)."</td>
+                </tr>";
+            } 
+            $template.="<tr><td colspan='5'>&nbsp;</td></tr>";
+            //total
+            $totalAmount=0.00;
+            $builder = $this->db->table('tblcanvass_sheet a');
+            $builder->select('SUM(a.Price*b.Qty)total');
+            $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
+            $builder->WHERE('a.purchaseLogID',$row->purchaseLogID);
+            $datax = $builder->get();
+            if($rowx = $datax->getRow())
+            {
+                $totalAmount = $rowx->total;
+                $template.="<tr>
+                    <td colspan='3'></td>
+                    <td>Sub-Total Amount</td>
+                    <td style='text-align:right;'>PhP ".number_format($rowx->total,2)."</td>
+                </tr>";
+            }   
+            $template.="<tr><td colspan='5'>&nbsp;</td></tr>";
+            if($row->Vatable=="Yes")
+            {
+                $template.="<tr><td colspan='3'></td><td>VATable</td><td style='text-align:right;'>PhP ".number_format($totalAmount/1.12,2)."</td></tr>";
+                $template.="<tr><td colspan='3'></td><td>VAT - 12%</td><td style='text-align:right;'>PhP ".number_format(($totalAmount/1.12)*0.12,2)."</td></tr>";
+                $template.="<tr><td colspan='3'></td><td>VAT Exempt</td><td style='text-align:right;'>0.00</td></tr>";
+                $template.="<tr><td colspan='3'></td><td>VAT Zero Rated</td><td style='text-align:right;'>0.00</td></tr>";
+                $template.="<tr><td colspan='3'></td><td>VAT Total</td><td style='text-align:right;'>PhP ".number_format($totalAmount,2)."</td></tr>";
+            }
+            else
+            {
+                $template.="<tr><td colspan='3'></td><td>VATable</td><td style='text-align:right;'>0.00</td></tr>";
+                $template.="<tr><td colspan='3'></td><td>VAT - 12%</td><td style='text-align:right;'>0.00</td></tr>";
+                $template.="<tr><td colspan='3'></td><td>VAT Exempt</td><td style='text-align:right;'>0.00</td></tr>";
+                $template.="<tr><td colspan='3'></td><td>VAT Zero Rated</td><td style='text-align:right;'>0.00</td></tr>";
+                $template.="<tr><td colspan='3'></td><td>VAT Total</td><td style='text-align:right;'>0.00</td></tr>";
+            }
+            $template.="</tbody></table></td></tr>"; 
+            $builder = $this->db->table('tblcomment');
+            $builder->select('Message');
+            $builder->WHERE('Reference',$id);
+            $dataY = $builder->get();
+            if($rowY = $dataY->getRow())
+            {
             $template.="<tr><td colspan='3'>&nbsp;</td></tr>
                 <tr><td colspan='3'>Delivery/Shipping Instructions</td></td>
-                <tr><td style='height:100px;border:1px solid #000000;' colspan='3'></td></tr>
+                <tr><td style='height:50px;border:1px solid #000000;' colspan='3'>".$rowY->Message."</td></tr>";
+            }
+            $template.="
                 <tr>
                     <td>PTU No. Date Issued<br/>Valid until<br/>Range of serial nos from<br/>Valid for Five (5) Years Only</td>
                     <td></td>
@@ -422,7 +491,7 @@ class Report extends BaseController
         $dompdf->loadHtml($template);
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-        $dompdf->stream($purchase_number.".pdf");
+        $dompdf->stream($jobOrder.".pdf");
         exit();
     }
 }
