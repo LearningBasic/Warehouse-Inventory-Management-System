@@ -39,7 +39,7 @@ class Report extends BaseController
         $val = $this->request->getGet('value');
         $builder = $this->db->table('tblcanvass_sheet a');
         $builder->select('b.purchaseNumber');
-        $builder->join('tblpurchase_logs b','b.canvassID=a.canvassID','LEFT');
+        $builder->join('tblpurchase_logs b','b.Reference=a.Reference','LEFT');
         $builder->WHERE('a.OrderNo',$val)->WHERE('b.Remarks','OPEN');
         $builder->groupBy('b.purchaseLogID');
         $data = $builder->get();

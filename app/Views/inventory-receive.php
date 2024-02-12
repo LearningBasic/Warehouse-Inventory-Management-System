@@ -456,7 +456,7 @@
                             <div class="col-12 form-group">
                                 <div class="row g-3">
                                     <div class="col-lg-3">
-                                        <label>Job Order No</label>
+                                        <label>PRF No</label>
                                         <select class="form-control custom-select2" name="job_number" id="job_number" style="width: 100%;" required>
                                             <option value="">Choose</option>
 											<?php foreach($order as $row): ?>

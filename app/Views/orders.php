@@ -507,7 +507,7 @@
                                 <label>Reason</label>
                                 <textarea class="form-control" name="reason" required></textarea>
                             </div>
-							<div class="col-12 form-group" style="display:none;" id="ShowAttachment">
+							<div class="col-12 form-group">
                                 <label>Attachment</label>
                                 <input type="file" class="form-control" name="file"/>
                             </div>
@@ -536,19 +536,6 @@
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
         <script>
-			$('#purchase_type').change(function()
-			{
-				var val = $(this).val();
-				if(val==="Local Purchase")
-				{
-					$('#ShowAttachment').slideDown();
-				}
-				else
-				{
-					$('#ShowAttachment').slideUp();
-				}
-			});
-
 			$(document).ready(function()
 			{
 				editors();notify();today();

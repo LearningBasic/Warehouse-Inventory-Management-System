@@ -167,21 +167,47 @@ class Purchase extends BaseController
                 //save the prf data
                 if(date("h:i:s a")<="02:00:00 pm")
                 {
-                    $values = [
-                        'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
-                        'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
-                        'PurchaseType'=>$purchase_type,'Attachment'=>'N/A',
-                    ];
-                    $purchaseModel->save($values);
+                    if(empty($originalName))
+                    {
+                        $values = [
+                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
+                            'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
+                            'PurchaseType'=>$purchase_type,'Attachment'=>'N/A',
+                        ];
+                        $purchaseModel->save($values);
+                    }
+                    else
+                    {
+                        $values = [
+                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
+                            'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
+                            'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,
+                        ];
+                        $purchaseModel->save($values);
+                        $file->move('Attachment/',$originalName);
+                    }
                 }
                 else
                 {
-                    $values = [
-                        'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$tomorrow,'Department'=>$dept,
-                        'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
-                        'PurchaseType'=>$purchase_type,'Attachment'=>'N/A',
-                    ];
-                    $purchaseModel->save($values);
+                    if(empty($originalName))
+                    {
+                        $values = [
+                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$tomorrow,'Department'=>$dept,
+                            'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
+                            'PurchaseType'=>$purchase_type,'Attachment'=>'N/A',
+                        ];
+                        $purchaseModel->save($values);
+                    }
+                    else
+                    {
+                        $values = [
+                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$tomorrow,'Department'=>$dept,
+                            'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
+                            'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,
+                        ];
+                        $purchaseModel->save($values);
+                        $file->move('Attachment/',$originalName);
+                    }
                 }  
                 
                 //save all the item requested

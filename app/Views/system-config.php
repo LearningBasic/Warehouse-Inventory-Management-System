@@ -445,9 +445,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-blue" data-toggle="tab" href="#contact6" role="tab" aria-selected="false">System Logs/Activities</a>
                         </li>
-						<li class="nav-item">
-                            <a class="nav-link text-blue" data-toggle="tab" href="#purchase6" role="tab" aria-selected="false">System Setup</a>
-                        </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="home6" role="tabpanel">
@@ -563,29 +560,6 @@
 								</div>
                             </div>
                         </div>
-						<div class="tab-pane fade" id="purchase6" role="tabpanel">
-							<div class="pd-20">
-								<div class="card-box">
-									<div class="card-header">User Account Control</div>
-									<div class="card-body">
-										<form method="post" class="row g-3" action="<?=base_url('save-settings')?>">
-											<div class="col-12 form-group">
-												<label>Employee Name</label>
-												<select class="form-control custom-select2" name="user" style="width:100%;" required>
-													<option value="">Choose</option>
-													<?php foreach($admin as $row): ?>
-														<option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?></option>
-													<?php endforeach; ?>
-												</select>
-											</div>
-											<div class="col-12 form-group">
-												<button type="submit" class="btn btn-primary" id="btnSave">Save Changes</button>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
                     </div>
                 </div>
 			</div>
