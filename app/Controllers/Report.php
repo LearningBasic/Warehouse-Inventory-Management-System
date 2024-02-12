@@ -242,9 +242,6 @@ class Report extends BaseController
         foreach($data->getResult() as $row)
         {        
             $purchase_number = $row->purchaseNumber;
-            // $vatable = ($row->Price*$row->Qty)/1.12;
-            // $vat = $vatable*0.12;
-            // $total_sales = $vatable+$vat;
             $template .= "
             <head>
                 <style>
