@@ -469,7 +469,7 @@
                                 <div class="row g-3">
 									<div class="col-lg-3">
                                         <label>Type of Purchase</label>
-                                        <select class="form-control" name="purchase_type" required>
+                                        <select class="form-control" name="purchase_type" id="purchase_type" required>
 											<option value="">Choose</option>
 											<option>Regular Purchase</option>
 											<option>Local Purchase</option>
@@ -507,9 +507,9 @@
                                 <label>Reason</label>
                                 <textarea class="form-control" name="reason" required></textarea>
                             </div>
-							<div class="col-12 form-group">
+							<div class="col-12 form-group" style="display:none;" id="ShowAttachment">
                                 <label>Attachment</label>
-                                <input type="file" class="form-control" name="file" required/>
+                                <input type="file" class="form-control" name="file"/>
                             </div>
 							<div class="col-12 form-group">
 								<label>Department Head/Masters</label>
@@ -536,6 +536,19 @@
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
         <script>
+			$('#purchase_type').change(function()
+			{
+				var val = $(this).val();
+				if(val==="Local Purchase")
+				{
+					$('#ShowAttachment').slideDown();
+				}
+				else
+				{
+					$('#ShowAttachment').slideUp();
+				}
+			});
+
 			$(document).ready(function()
 			{
 				editors();notify();today();
