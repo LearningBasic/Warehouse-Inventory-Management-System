@@ -853,7 +853,7 @@ class Home extends BaseController
         $builder->select('*');
         $builder->WHERE('OrderNo',$id);
         $item = $builder->get()->getResult();
-        $data = ['item'=>$item];
+        $data = ['item'=>$item,'PRF'=>$id];
         return view('edit-order',$data);
     }
 

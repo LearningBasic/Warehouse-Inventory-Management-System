@@ -482,7 +482,7 @@
                             <div class="col-12 form-group">
                                 <table class="table table-bordered hover nowrap">
                                     <thead>
-                                        <th>&nbsp;</th>
+                                        <th>#</th>
                                         <th>Product Name</th>
                                         <th>Qty</th>
                                         <th>Specification</th>

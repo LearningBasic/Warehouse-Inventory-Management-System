@@ -433,7 +433,36 @@
                         <a href="<?=site_url('assign')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                     </div>
                     <div class="card-body">
-                        
+                        <form method="POST" class="row g-3">
+                            <div class="col-12 form-group">
+                                <h3><b>PRF #</b> : <?=$PRF?></h3>
+                            </div>
+                            <div class="col-12 form-group">
+                                <table class="table stripe table-bordered hover nowrap">
+                                    <thead>
+                                        <th class="bg-primary text-white">#</th>
+                                        <th class="bg-primary text-white">Qty</th>
+                                        <th class="bg-primary text-white">Unit of Measure</th>
+                                        <th class="bg-primary text-white">Product Name</th>
+                                        <th class="bg-primary text-white">Specification</th>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach($item as $row): ?>
+                                        <tr>
+                                            <td><input type="checkbox" style="height:18px;width:18px;" value="<?php echo $row->orderID ?>" name="itemID[]" id="itemID" checked/></td>
+                                            <td><input type='number' class='form-control' value="<?php echo $row->Qty ?>" name='qty[]'/></td>
+                                            <td><input type='text' class='form-control' value="<?php echo $row->ItemUnit ?>" name='item[]'/></td>
+                                            <td><input type='text' class='form-control' value="<?php echo $row->Item_Name ?>" name='item_name[]'/></td>
+                                            <td><input type='text' class='form-control' value="<?php echo $row->Specification ?>" name='specification[]'/></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-12 form-group">
+                                <button type="submit" class="btn btn-primary" id="btnSave">Save Changes</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
 			</div>
