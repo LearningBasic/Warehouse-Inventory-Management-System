@@ -161,6 +161,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     //reports
     $routes->get('/report-stocks','Home::stocksReport');
     $routes->get('/assign','Home::Assign');
+    $routes->get('/edit-order/(:any)','Home::editOrder/$1');
     $routes->get('/local-purchase','Home::localPurchase');
     $routes->get('/view/(:any)','Home::viewVendor/$1');
     $routes->get('/purchase-order','Home::purchaseOrder');

@@ -4,25 +4,25 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>Assignment</title>
+		<title>Edit Orders</title>
 
 		<!-- Site favicon -->
 		<link
 			rel="apple-touch-icon"
 			sizes="180x180"
-			href="assets/img/fastcat.png"
+			href="../assets/img/fastcat.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="32x32"
-			href="assets/img/fastcat.png"
+			href="../assets/img/fastcat.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="16x16"
-			href="assets/img/fastcat.png"
+			href="../assets/img/fastcat.png"
 		/>
 
 		<!-- Mobile Specific Metas -->
@@ -37,23 +37,23 @@
 			rel="stylesheet"
 		/>
 		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="assets/vendors/styles/core.css" />
+		<link rel="stylesheet" type="text/css" href="../assets/vendors/styles/core.css" />
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="assets/vendors/styles/icon-font.min.css"
+			href="../assets/vendors/styles/icon-font.min.css"
 		/>
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+			href="../assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
 		/>
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="assets/src/plugins/datatables/css/responsive.bootstrap4.min.css"
+			href="../assets/src/plugins/datatables/css/responsive.bootstrap4.min.css"
 		/>
-		<link rel="stylesheet" type="text/css" href="assets/vendors/styles/style.css" />
+		<link rel="stylesheet" type="text/css" href="../assets/vendors/styles/style.css" />
         <style>
         /* Track */
             ::-webkit-scrollbar-track {
@@ -81,7 +81,7 @@
 		<div class="pre-loader">
 			<div class="pre-loader-box">
 				<div class="loader-logo">
-					<img src="assets/img/fastcat.png" alt="Fastcat" width="100"/>
+					<img src="../assets/img/fastcat.png" alt="Fastcat" width="100"/>
 				</div>
 				<div class="loader-progress" id="progress_div">
 					<div class="bar" id="bar1"></div>
@@ -131,11 +131,6 @@
 							>
 						</div>
 					</div>
-				</div>
-				<div class="github-link">
-					<a href="https://github.com/dropways/deskapp" target="_blank"
-						><img src="vendors/images/github.svg" alt=""
-					/></a>
 				</div>
 			</div>
 		</div>
@@ -313,9 +308,9 @@
 		<div class="left-side-bar">
 			<div class="brand-logo">
 				<a href="<?=site_url('/dashboard')?>">
-					<img src="assets/img/fastcat.png" alt="" class="dark-logo" width="100"/>
+					<img src="../assets/img/fastcat.png" alt="" class="dark-logo" width="100"/>
 					<img
-						src="assets/img/fastcat.png"
+						src="../assets/img/fastcat.png"
 						alt="" width="100"
 						class="light-logo"
 					/>
@@ -353,7 +348,7 @@
                                 <li><a href="<?=site_url('orders')?>">Order Materials</a></li>
 								<li><a href="<?=site_url('list-orders')?>">List Order</a></li>
 								<?php if(session()->get('role')=="Staff"){?>
-								<li><a href="<?=site_url('assign')?>" class="active">Assigned PRF</a></li>
+								<li><a href="" class="active">Edit Orders</a></li>
 								<li><a href="<?=site_url('local-purchase')?>">Local Purchase</a></li>
 								<li><a href="<?=site_url('purchase-order')?>">Purchase Order</a></li>
 								<?php } ?>
@@ -434,138 +429,25 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
                 <div class="card-box">
-                    <div class="card-header">Assigned PRF</div>
+                    <div class="card-header">Edit Orders
+                        <a href="<?=site_url('assign')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
+                    </div>
                     <div class="card-body">
-						<table class="data-table table stripe hover nowrap">
-							<thead>
-								<th>Date Prepared</th>
-								<th>PRF No</th>
-								<th>Requestor</th>
-								<th>Department</th>
-								<th>Reason</th>
-								<th>Date Needed</th>
-								<th>Status</th>
-								<th>Action</th>
-							</thead>
-							<tbody>
-								<?php foreach($list as $row): ?>
-									<tr>
-										<td><?php echo $row->DatePrepared ?></td>
-										<td><?php echo $row->OrderNo ?></td>
-										<td><?php echo $row->Fullname ?></td>
-										<td><?php echo $row->Department ?></td>
-										<td><?php echo $row->Reason ?></td>
-										<td><?php echo $row->DateNeeded ?></td>
-										<td>
-											<?php if($row->Status==0){ ?>
-												<span class="badge bg-warning text-white">PENDING</span>
-											<?php }else{ ?>
-												<span class="badge bg-success text-white">ACCEPTED</span>
-											<?php } ?>
-										</td>
-										<td>
-											<?php if($row->Status==0){ ?>
-												<button type="button" class="btn btn-outline-primary btn-sm accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span></button>
-												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-eye"></span></button>
-												<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-outline-primary btn-sm"><span class="dw dw-edit-1"></span></a>
-											<?php }else{ ?>
-												<a href="create/<?php echo $row->OrderNo ?>" class="btn btn-outline-primary btn-sm"><span class="dw dw-add"></span></a>
-												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-eye"></span></button>
-											<?php } ?>
-										</td>
-									</tr>
-								<?php endforeach; ?>
-							</tbody>
-						</table>
+                        
                     </div>
                 </div>
 			</div>
 		</div>
-        <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myLargeModalLabel">
-                            View Order(s)
-                        </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    </div>
-                    <div class="modal-body">
-						<a href="javascript:void(0);" onclick="exportf(this)" class="btn btn-primary btn-sm text-white"><span class="dw dw-download"></span>&nbsp;Download</a>
-                        <div id="result"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
 		<!-- js -->
-		<script src="assets/vendors/scripts/core.js"></script>
-		<script src="assets/vendors/scripts/script.min.js"></script>
-		<script src="assets/vendors/scripts/process.js"></script>
-		<script src="assets/vendors/scripts/layout-settings.js"></script>
-		<script src="assets/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script src="../assets/vendors/scripts/core.js"></script>
+		<script src="../assets/vendors/scripts/script.min.js"></script>
+		<script src="../assets/vendors/scripts/process.js"></script>
+		<script src="../assets/vendors/scripts/layout-settings.js"></script>
+		<script src="../assets/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script src="../assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script src="../assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script src="../assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script src="../assets/vendors/scripts/datatable-setting.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-            $(document).on('click','.accept',function(e)
-            {
-                e.preventDefault();
-                Swal.fire({
-					title: "Are you sure?",
-					text: "Do you want to tag this as accept?",
-					icon: "question",
-					showCancelButton: true,
-					confirmButtonColor: "#3085d6",
-					cancelButtonColor: "#d33",
-					confirmButtonText: "Yes!"
-					}).then((result) => {
-					if (result.isConfirmed) {
-						var val = $(this).val();
-						$.ajax({
-							url:"<?=site_url('accept-assignment')?>",method:"POST",
-							data:{value:val},success:function(response)
-							{
-								if(response==="success")
-								{
-									location.reload();
-								}
-								else
-								{
-									alert(response);
-								}
-							}
-						});
-					}
-					else
-					{
-						$('.accept').attr("value","Accept");
-					}
-				});
-            });
-			$(document).on('click','.view',function()
-			{
-				var val = $(this).val();
-				$.ajax({
-					url:"<?=site_url('view-order')?>",method:"GET",
-					data:{value:val},
-					success:function(response)
-					{
-						$('#viewModal').modal('show');
-						$('#result').html(response);
-					}
-				});
-			});
-
-			function exportf(elem) {
-			var table = document.getElementById("result");
-			var html = table.outerHTML;
-			var url = 'data:application/vnd.ms-excel,' + escape(html); // Set your html table into url 
-			elem.setAttribute("href", url);
-			elem.setAttribute("download","order-list.xls"); // Choose the file name
-			return false;
-			}
-        </script>
 	</body>
 </html>

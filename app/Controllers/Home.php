@@ -847,6 +847,16 @@ class Home extends BaseController
         return view('assign',$data);
     }
 
+    public function editOrder($id)
+    {
+        $builder = $this->db->table('tbl_order_item');
+        $builder->select('*');
+        $builder->WHERE('OrderNo',$id);
+        $item = $builder->get()->getResult();
+        $data = ['item'=>$item];
+        return view('edit-order',$data);
+    }
+
     public function changePassword()
     {
         $accountModel = new \App\Models\accountModel();
