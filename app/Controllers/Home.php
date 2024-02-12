@@ -1324,6 +1324,7 @@ class Home extends BaseController
         $systemLogsModel = new \App\Models\systemLogsModel();
         $purchaseReviewModel = new \App\Models\purchaseReviewModel();
         $canvasModel = new \App\Models\canvassModel();
+        $purchaseModel = new \App\Models\purchaseModel();
         //data
         $val = $this->request->getPost('value');
         $date = date('Y-m-d');
@@ -1340,7 +1341,7 @@ class Home extends BaseController
         else
         {
             $builder = $this->db->table('tblcanvass_sheet');
-            $builder->select('COUNT(Reference)total,Vatable');
+            $builder->select('COUNT(Reference)total,Vatable,OrderNo');
             $builder->WHERE('Reference',$val);
             $builder->groupBy('Reference,Vatable');
             $data = $builder->get();
@@ -1373,37 +1374,76 @@ class Home extends BaseController
                 $value = ['accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Created PO Number '.$code];
                 $systemLogsModel->save($value);
                 //get the approver from purchase order setup
-                $builder = $this->db->table('tblsystem a');
-                $builder->select('a.accountID,b.Fullname,b.Email');
-                $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
-                $data = $builder->get();
-                if($row = $data->getRow())
+                $purchaseOrder = $purchaseModel->WHERE('OrderNo',$row->OrderNo)->first();
+                if($purchaseOrder['PurchaseType']=="Regular Purchase")
                 {
-                    //save the data
-                    $values = ['accountID'=>$row->accountID,'purchaseNumber'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>''];
-                    $purchaseReviewModel->save($values);
-                    //email
-                    $email = \Config\Services::email();
-                    $email->setTo($row->Email,$row->Fullname);
-                    $email->setFrom("fastcat.system@gmail.com","FastCat");
-                    $imgURL = "assets/img/fastcat.png";
-                    $email->attach($imgURL);
-                    $cid = $email->setAttachmentCID($imgURL);
-                    $template = "<center>
-                    <img src='cid:". $cid ."' width='100'/>
-                    <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
-                    <tr><td><center><h1>Purchase Order Form</h1></center></td></tr>
-                    <tr><td><center>Hi, ".$row->Fullname."</center></td></tr>
-                    <tr><td><center>This is from FastCat System, sending you a reminder that requesting for your approval of the generated Purchase Order.</center></td></tr>
-                    <tr><td><center>Purchase Order No</center></td></tr>
-                    <tr><td><center><h2>".$code."</h2></center></td></tr>
-                    <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
-                    <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
-                    <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
-                    $subject = "Purchase Order Form - For Approval";
-                    $email->setSubject($subject);
-                    $email->setMessage($template);
-                    $email->send();
+                    $builder = $this->db->table('tblaccount');
+                    $builder->select('accountID,Fullname,Email');
+                    $builder->WHERE('systemRole','Administrator')->WHERE('Department','General Services');
+                    $data = $builder->get();
+                    if($row = $data->getRow())
+                    {
+                        //save the data
+                        $values = ['accountID'=>$row->accountID,'purchaseNumber'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>''];
+                        $purchaseReviewModel->save($values);
+                        //email
+                        $email = \Config\Services::email();
+                        $email->setTo($row->Email,$row->Fullname);
+                        $email->setFrom("fastcat.system@gmail.com","FastCat");
+                        $imgURL = "assets/img/fastcat.png";
+                        $email->attach($imgURL);
+                        $cid = $email->setAttachmentCID($imgURL);
+                        $template = "<center>
+                        <img src='cid:". $cid ."' width='100'/>
+                        <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+                        <tr><td><center><h1>Purchase Order Form</h1></center></td></tr>
+                        <tr><td><center>Hi, ".$row->Fullname."</center></td></tr>
+                        <tr><td><center>This is from FastCat System, sending you a reminder that requesting for your approval of the generated Purchase Order.</center></td></tr>
+                        <tr><td><center>Purchase Order No</center></td></tr>
+                        <tr><td><center><h2>".$code."</h2></center></td></tr>
+                        <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+                        <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+                        <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+                        $subject = "Purchase Order Form - For Approval";
+                        $email->setSubject($subject);
+                        $email->setMessage($template);
+                        $email->send();
+                    }
+                }
+                else
+                {
+                    $builder = $this->db->table('tblaccount');
+                    $builder->select('accountID,Fullname,Email');
+                    $builder->WHERE('systemRole','Administrator')->WHERE('Department','Procurement');
+                    $data = $builder->get();
+                    if($row = $data->getRow())
+                    {
+                        //save the data
+                        $values = ['accountID'=>$row->accountID,'purchaseNumber'=>$code,'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>''];
+                        $purchaseReviewModel->save($values);
+                        //email
+                        $email = \Config\Services::email();
+                        $email->setTo($row->Email,$row->Fullname);
+                        $email->setFrom("fastcat.system@gmail.com","FastCat");
+                        $imgURL = "assets/img/fastcat.png";
+                        $email->attach($imgURL);
+                        $cid = $email->setAttachmentCID($imgURL);
+                        $template = "<center>
+                        <img src='cid:". $cid ."' width='100'/>
+                        <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+                        <tr><td><center><h1>Purchase Order Form</h1></center></td></tr>
+                        <tr><td><center>Hi, ".$row->Fullname."</center></td></tr>
+                        <tr><td><center>This is from FastCat System, sending you a reminder that requesting for your approval of the generated Purchase Order.</center></td></tr>
+                        <tr><td><center>Purchase Order No</center></td></tr>
+                        <tr><td><center><h2>".$code."</h2></center></td></tr>
+                        <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+                        <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+                        <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+                        $subject = "Purchase Order Form - For Approval";
+                        $email->setSubject($subject);
+                        $email->setMessage($template);
+                        $email->send();
+                    }
                 }
             }
             echo "success";

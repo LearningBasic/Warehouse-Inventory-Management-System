@@ -228,17 +228,24 @@ class Report extends BaseController
         $dompdf = new Dompdf();
         $purchase_number="";$jobOrder="";
         $builder = $this->db->table('tblpurchase_logs a');
-        $builder->select('a.purchaseLogID,a.purchaseNumber,a.Date,b.OrderNo,b.Supplier,b.Price,b.Terms,b.Address,e.Fullname,b.Vatable');
+        $builder->select('a.purchaseLogID,a.purchaseNumber,a.Date,b.OrderNo,b.Supplier,b.Price,b.Terms,b.Address,e.Fullname,b.Vatable,c.PurchaseType');
         $builder->join('tblcanvass_sheet b','b.purchaseLogID=a.purchaseLogID','LEFT');
+        $builder->join('tblprf c','c.OrderNo=b.OrderNo','LEFT');
         $builder->join('tblpurchase_review d','d.purchaseNumber=a.purchaseNumber','LEFT');
         $builder->join('tblaccount e','e.accountID=d.accountID','LEFT');
         $builder->WHERE('a.Reference',$id)->groupBy('a.purchaseNumber');
         $data = $builder->get(); 
         $template = '';  
+        //general services
         $path = 'Signatures/mike_fox.png';
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $img = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($img);
+        //procurement
+        $paths = 'Signatures/mike_fox.png';
+        $type_s = pathinfo($paths, PATHINFO_EXTENSION);
+        $img_s = file_get_contents($paths);
+        $base64_s = 'data:image/' . $type_s . ';base64,' . base64_encode($img_s);
         foreach($data->getResult() as $row)
         {        
             $purchase_number = $row->purchaseNumber;
@@ -391,7 +398,7 @@ class Report extends BaseController
                     <td colspan='2'><b>Address</b> : ".$row->Address."</td>
                     <td><b>Terms</b> : ".$row->Terms."</td>
                 </tr>
-                <tr><td colspan='2'><b>TIN :</b></td><td><b>Job Order No</b> : ".$row->OrderNo."</td></tr>
+                <tr><td colspan='2'><b>TIN :</b></td><td><b>PRF No</b> : ".$row->OrderNo."</td></tr>
                 <tr><td colspan='3'><b>Ship To : Archipelago Philippine Ferries Corporation</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unioil Center Building, Commence Ave. Cor. Acacia Ave., Muntinlupa, PHL</td></tr>
                 <tr><td colspan='3'>&nbsp;</td></tr>
@@ -467,25 +474,50 @@ class Report extends BaseController
                 <tr><td colspan='3'>Delivery/Shipping Instructions</td></td>
                 <tr><td style='height:50px;border:1px solid #000000;' colspan='3'>".$rowY->Message."</td></tr>";
             }
-            $template.="
-                <tr>
-                    <td>PTU No. Date Issued<br/>Valid until<br/>Range of serial nos from<br/>Valid for Five (5) Years Only</td>
+            if($row->PurchaseType=="Regular Purchase")
+            {
+                $template.="
+                    <tr>
+                        <td>PTU No. Date Issued<br/>Valid until<br/>Range of serial nos from<br/>Valid for Five (5) Years Only</td>
+                        <td></td>
+                        <td><p style='text-align:left;'>Order Confirmed By:</p>
+                        <center><img src=".$base64." width='120'/></center>
+                        <center><u>&nbsp;&nbsp;&nbsp;".$row->Fullname."&nbsp;&nbsp;&nbsp;</u></center><center>AUTHORIZED SIGNATURE</center>
+                        </td>
+                    </tr>
+                    <tr><td></td><td colspan='2' style='text-align:right;'><i>THIS PURCHASE ORDER SHALL BE VALID UNTIL ________________</i></td></tr>
+                    <tr><td colspan='3'>&nbsp;</td></tr>
+                    <tr>
                     <td></td>
-                    <td><p style='text-align:left;'>Order Confirmed By:</p>
-                    <center><img src=".$base64." width='120'/></center>
-                    <center><u>&nbsp;&nbsp;&nbsp;".$row->Fullname."&nbsp;&nbsp;&nbsp;</u></center><center>AUTHORIZED SIGNATURE</center>
-                    </td>
-                </tr>
-                <tr><td></td><td colspan='2' style='text-align:right;'><i>THIS PURCHASE ORDER SHALL BE VALID UNTIL ________________</i></td></tr>
-                <tr><td colspan='3'>&nbsp;</td></tr>
-                <tr>
-                  <td></td>
-                  <td><center><b><u style='font-size:10px;'>THIS DOCUMENT IS NOT VALID FOR CLAIM OF INPUT TAXES</u></b></center></td>
-                  <td>Ref. No: ".$row->purchaseNumber."</td>
-                </tr>
-                <tr><td colspan='3'><small><center>This is a computer system generated form</center></small></td></tr>
-                </table>
-            </body>";
+                    <td><center><b><u style='font-size:10px;'>THIS DOCUMENT IS NOT VALID FOR CLAIM OF INPUT TAXES</u></b></center></td>
+                    <td>Ref. No: ".$row->purchaseNumber."</td>
+                    </tr>
+                    <tr><td colspan='3'><small><center>This is a computer system generated form</center></small></td></tr>
+                    </table>
+                </body>";
+            }
+            else
+            {
+                $template.="
+                    <tr>
+                        <td>PTU No. Date Issued<br/>Valid until<br/>Range of serial nos from<br/>Valid for Five (5) Years Only</td>
+                        <td></td>
+                        <td><p style='text-align:left;'>Order Confirmed By:</p>
+                        <center><img src=".$base64_s." width='120'/></center>
+                        <center><u>&nbsp;&nbsp;&nbsp;".$row->Fullname."&nbsp;&nbsp;&nbsp;</u></center><center>AUTHORIZED SIGNATURE</center>
+                        </td>
+                    </tr>
+                    <tr><td></td><td colspan='2' style='text-align:right;'><i>THIS PURCHASE ORDER SHALL BE VALID UNTIL ________________</i></td></tr>
+                    <tr><td colspan='3'>&nbsp;</td></tr>
+                    <tr>
+                    <td></td>
+                    <td><center><b><u style='font-size:10px;'>THIS DOCUMENT IS NOT VALID FOR CLAIM OF INPUT TAXES</u></b></center></td>
+                    <td>Ref. No: ".$row->purchaseNumber."</td>
+                    </tr>
+                    <tr><td colspan='3'><small><center>This is a computer system generated form</center></small></td></tr>
+                    </table>
+                </body>"; 
+            }
             
         }
         $dompdf->loadHtml($template);
