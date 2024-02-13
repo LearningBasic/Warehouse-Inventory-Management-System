@@ -531,7 +531,7 @@
 														</td>
 														<td>
 															<?php if($row->Status==0){ ?>
-															<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-outline-primary btn-sm"><span class="dw dw-edit-1"></span></a>
+															<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-warning btn-sm"><span class="dw dw-edit-1"></span></a>
 															<?php } ?>
 														</td>
 													</tr>

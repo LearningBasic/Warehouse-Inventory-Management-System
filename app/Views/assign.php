@@ -459,7 +459,7 @@
 										<td><?php echo $row->OrderNo ?></td>
 										<td><?php echo $row->Fullname ?></td>
 										<td><?php echo $row->Department ?></td>
-										<td><?php echo $row->Reason ?></td>
+										<td><?php echo substr($row->Reason,0,20) ?>...</td>
 										<td><?php echo $row->DateNeeded ?></td>
 										<td>
 											<?php if($row->Status==0){ ?>
@@ -470,11 +470,12 @@
 										</td>
 										<td>
 											<?php if($row->Status==0){ ?>
-												<button type="button" class="btn btn-outline-primary btn-sm accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span></button>
-												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-eye"></span></button>
+												<button type="button" class="btn btn-primary btn-sm accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span></button>
+												<button type="button" class="btn btn-danger btn-sm revision"><span class="dw dw-repeat1"></span></button>
+												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span></button>
 											<?php }else{ ?>
-												<a href="create/<?php echo $row->OrderNo ?>" class="btn btn-outline-primary btn-sm"><span class="dw dw-add"></span></a>
-												<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-outline-primary btn-sm"><span class="dw dw-edit-1"></span></a>
+												<a href="create/<?php echo $row->OrderNo ?>" class="btn btn-primary btn-sm"><span class="dw dw-add"></span></a>
+												<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-warning btn-sm"><span class="dw dw-edit-1"></span></a>
 											<?php } ?>
 										</td>
 									</tr>
@@ -518,7 +519,7 @@
                 e.preventDefault();
                 Swal.fire({
 					title: "Are you sure?",
-					text: "Do you want to tag this as accept?",
+					text: "Do you want to accept this request?",
 					icon: "question",
 					showCancelButton: true,
 					confirmButtonColor: "#3085d6",
