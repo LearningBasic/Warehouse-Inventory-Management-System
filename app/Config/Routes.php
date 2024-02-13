@@ -168,7 +168,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/purchase-order','Home::purchaseOrder');
     $routes->get('/overall-report','Home::overAllReport');
     $routes->get('/ledger','Home::ledger');
-    $routes->get('/receive-report','Home::receiveOrderReport');
+    $routes->get('/return-order-summary','Home::returnOrderReport');
 });
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {

@@ -1827,7 +1827,7 @@ class Home extends BaseController
         $builder = $this->db->table('tblcanvass_sheet a');
         $builder->select('SUM(a.Price*b.Qty)total');
         $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
-        $builder->join('tblpurchase_logs c','c.canvassID=a.canvassID','LEFT');
+        $builder->join('tblpurchase_logs c','c.Reference=a.Reference','LEFT');
         $builder->WHERE('c.Status',1);
         $data = $builder->get();
         if($row = $data->getRow())
@@ -1881,8 +1881,8 @@ class Home extends BaseController
         return view('overall-report',$data);
     }
 
-    public function receiveOrderReport()
+    public function returnOrderReport()
     {
-        return view('receive-order-report');
+        return view('return-order-report');
     }
 }
