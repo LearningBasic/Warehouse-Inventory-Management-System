@@ -443,13 +443,13 @@
                         <?php endif; ?>
 						<table class="data-table table stripe hover nowrap">
 							<thead>
-								<th>Date Prepared</th>
+								<th>Date</th>
 								<th>PRF No</th>
 								<th>Requestor</th>
 								<th>Department</th>
-								<th>Reason</th>
 								<th>Date Needed</th>
 								<th>Status</th>
+								<th>Action Taken</th>
 								<th>Action</th>
 							</thead>
 							<tbody>
@@ -459,11 +459,17 @@
 										<td><?php echo $row->OrderNo ?></td>
 										<td><?php echo $row->Fullname ?></td>
 										<td><?php echo $row->Department ?></td>
-										<td><?php echo substr($row->Reason,0,20) ?>...</td>
 										<td><?php echo $row->DateNeeded ?></td>
 										<td>
+											<?php if($row->Remarks==4){ ?>
+												<span class="badge bg-success text-white">APPROVED</span>
+											<?php }else{ ?>
+												<span class="badge bg-warning text-white">PROCESSING</span>
+											<?php } ?>
+										</td>
+										<td>
 											<?php if($row->Status==0){ ?>
-												<span class="badge bg-warning text-white">PENDING</span>
+												<span class="badge bg-warning text-white">WAITING</span>
 											<?php }else{ ?>
 												<span class="badge bg-success text-white">ACCEPTED</span>
 											<?php } ?>

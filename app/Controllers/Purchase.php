@@ -506,7 +506,7 @@ class Purchase extends BaseController
                         </div>
                     </div>
                 </div>
-                <div class="col-12 form-group">
+                <div class="col-12 form-group table-responsive">
                     <table class="table table-striped table-bordered hover nowrap">
                         <thead>
                             <th class="bg-primary text-white">Item(s)</th>
