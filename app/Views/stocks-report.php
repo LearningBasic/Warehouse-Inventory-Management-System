@@ -349,7 +349,7 @@
 							<ul class="submenu">
 								<li><a href="<?=site_url('stocks')?>">All Stocks</a></li>
 								<li><a href="<?=site_url('add')?>">Add Item</a></li>
-								<?php if(session()->get('role')=="Administrator"){ ?>
+								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Planner"){ ?>
 								<li><a href="<?=site_url('manage')?>">Manage Stocks</a></li>
                                 <?php } ?>
 							</ul>
