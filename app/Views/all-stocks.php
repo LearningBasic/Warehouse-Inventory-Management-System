@@ -473,7 +473,7 @@
 								<th>Action</th>
 							</thead>
 							<tbody>
-								<?php if(session()->get('role')=="Administrator"){ ?>
+								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Staff"||session()->get('role')=="Planner"){ ?>
 									<?php foreach($items as $row): 
 										if($row->Qty>$row->ReOrder){?>
 										<?php $imgURL = "Products/".$row->Image; ?>
@@ -499,8 +499,9 @@
 													</a>
 													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
-														<!--<button type="button" class="dropdown-item deadstock" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-file-19"></i>Damage</button>-->
+														<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Staff"){ ?>
 														<a class="dropdown-item" href="transfer/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-message-1"></i>Transfer</a>
+														<?php } ?>
 														<a class="dropdown-item" href="generate-qrcode/<?php echo $row->inventID ?>"><i class="icon-copy bi bi-qr-code"></i>&nbsp;Generate</a>
 													</div>
 												</div>

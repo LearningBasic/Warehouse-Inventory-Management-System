@@ -492,11 +492,11 @@
                     <div class="modal-header">
                         <h4 class="modal-title" id="myLargeModalLabel">
                             View Order(s)
+							<a href="javascript:void(0);" onclick="exportf(this)" class="btn btn-outline-primary btn-sm"><span class="dw dw-download"></span>&nbsp;Export</a>
                         </h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
-						<a href="javascript:void(0);" onclick="exportf(this)" class="btn btn-primary btn-sm text-white"><span class="dw dw-download"></span>&nbsp;Download</a>
                         <div id="result"></div>
                     </div>
                 </div>
