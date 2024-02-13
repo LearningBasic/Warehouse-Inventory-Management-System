@@ -472,10 +472,9 @@
 											<?php if($row->Status==0){ ?>
 												<button type="button" class="btn btn-outline-primary btn-sm accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span></button>
 												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-eye"></span></button>
-												<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-outline-primary btn-sm"><span class="dw dw-edit-1"></span></a>
 											<?php }else{ ?>
 												<a href="create/<?php echo $row->OrderNo ?>" class="btn btn-outline-primary btn-sm"><span class="dw dw-add"></span></a>
-												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-eye"></span></button>
+												<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-outline-primary btn-sm"><span class="dw dw-edit-1"></span></a>
 											<?php } ?>
 										</td>
 									</tr>
