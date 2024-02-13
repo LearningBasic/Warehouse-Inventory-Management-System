@@ -456,6 +456,11 @@
 				<div class="card-box">
 					<div class="card-header">PRF/Purchase Order (For Approval)</div>
 					<div class="card-body">
+						<?php if(!empty(session()->getFlashdata('success'))) : ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= session()->getFlashdata('success'); ?>
+                            </div>
+                        <?php endif; ?>
 						<div class="tabs">
 							<ul class="nav nav-pills justify-content-left" role="tablist">
 								<li class="nav-item">

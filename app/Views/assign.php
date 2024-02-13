@@ -436,6 +436,11 @@
                 <div class="card-box">
                     <div class="card-header">Assigned PRF</div>
                     <div class="card-body">
+						<?php if(!empty(session()->getFlashdata('success'))) : ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= session()->getFlashdata('success'); ?>
+                            </div>
+                        <?php endif; ?>
 						<table class="data-table table stripe hover nowrap">
 							<thead>
 								<th>Date Prepared</th>

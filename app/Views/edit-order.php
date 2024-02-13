@@ -428,6 +428,11 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
+				<?php if(!empty(session()->getFlashdata('fail'))) : ?>
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<?= session()->getFlashdata('fail'); ?>
+					</div>
+				<?php endif; ?>
                 <div class="card-box">
                     <div class="card-header">Edit Orders
 					<?php if(session()->get('role')=="Staff"){?>

@@ -1267,6 +1267,35 @@ class Purchase extends BaseController
     public function updateOrder()
     {
         $OrderItemModel = new \App\Models\OrderItemModel();
-        //
+        $systemLogsModel = new \App\Models\systemLogsModel();
+        //data
+        $prf = $this->request->getPost('prf');
+        $itemID = $this->request->getPost('itemID');
+        $qty = $this->request->getPost('qty');
+        $item = $this->request->getPost('item');
+        $item_name = $this->request->getPost('item_name');
+        $spec = $this->request->getPost('specification');
+
+        $count = count($itemID);
+        for($i=0;$i<$count;$i++)
+        {
+            $values = [
+                'Qty'=>$qty[$i],'ItemUnit'=>$item[$i],'Item_Name'=>$item_name[$i],
+                'Specification'=>$spec[$i],
+            ];
+            $OrderItemModel->update($itemID[$i],$values);
+        }
+        $value = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Update the Ordered items of '.$prf];
+        $systemLogsModel->save($value);
+        if(session()->get('role')=="Staff")
+        {
+            session()->setFlashdata('success','Great! Successfully update the ordered item(s)');
+            return redirect()->to('/assign')->withInput();
+        }
+        else
+        {
+            session()->setFlashdata('success','Great! Successfully update the ordered item(s)');
+            return redirect()->to('/approve-orders')->withInput();
+        }
     }
 }
