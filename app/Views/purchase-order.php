@@ -458,6 +458,7 @@
                                 <th>Terms</th>
                                 <th>Warranty</th>
 								<th>Department</th>
+								<th>Status</th>
                                 <th>Action</th>
                             </thead>
 							<tbody>
@@ -470,6 +471,13 @@
                                     <td><?php echo $row->Terms ?></td>
                                     <td><?php echo $row->Warranty ?></td>
 									<td><?php echo $row->Department ?></td>
+									<td>
+										<?php if($row->Status==1){ ?>
+											<span class="badge bg-success text-white">APPROVED</span>
+										<?php }else{ ?>
+											-
+										<?php } ?>
+									</td>
                                     <td>
 										<?php if(empty($row->Status)){ ?>
 											<button type="button" class="btn btn-outline-primary btn-sm generate" value="<?php echo $row->Reference ?>">

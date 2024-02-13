@@ -470,7 +470,7 @@
 										href="#others6"
 										role="tab"
 										aria-selected="false"
-										>For Approval</a
+										>For Approval <span class="badge bg-primary text-white" id="notification_approval">0</span></a
 									>
 								</li>
 								<?php if(session()->get('role')=="Administrator"){ ?>
@@ -581,9 +581,11 @@
 										<table class="data-table table stripe hover nowrap">
 											<thead>
 												<th>Date Received</th>
-												<th>P.O. Number</th>
+												<th>P.O. No</th>
+												<th>PRF No</th>
 												<th>Reference</th>
 												<th>Date Approved</th>
+												<th>Order(s)</th>
 												<th>Status</th>
 												<th>Action</th>
 											</thead>
@@ -592,8 +594,10 @@
 													<tr>
 														<td><?php echo $row->DateReceived ?></td>
 														<td><?php echo $row->purchaseNumber ?></td>
+														<td><?php echo $row->OrderNo ?></td>
 														<td><?php echo $row->Reference ?></td>
 														<td><?php echo $row->DateApproved ?></td>
+														<td><button type="button" class="btn btn-primary btn-sm view" value="<?php echo $row->Reference ?>">Quotation</button></td>
 														<td>
 															<?php if($row->Status==0){ ?>
 																<span class="badge bg-warning text-white">PENDING</span>
@@ -711,6 +715,7 @@
 					success:function(response)
 					{
 						$('#notifications').html(response);
+						$('#notification_approval').html(response);
 					}
 				});
 				$.ajax({
