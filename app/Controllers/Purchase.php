@@ -1263,4 +1263,10 @@ class Purchase extends BaseController
             }
         }
     }
+
+    public function updateOrder()
+    {
+        $OrderItemModel = new \App\Models\OrderItemModel();
+        //
+    }
 }
