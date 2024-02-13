@@ -504,6 +504,7 @@
 												<th>Date Needed</th>
 												<th>Date Approved</th>
 												<th>Status</th>
+												<th>Action</th>
 											</thead>
 											<tbody>
 												<?php foreach($review as $row): ?>
@@ -521,6 +522,11 @@
 																<span class="badge bg-success text-white">APPROVED</span>
 															<?php }else if($row->Status==2){?>
 																<span class="badge bg-danger text-white">CANCELLED</span>
+															<?php } ?>
+														</td>
+														<td>
+															<?php if($row->Status==0){ ?>
+															<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-outline-primary btn-sm"><span class="dw dw-edit-1"></span></a>
 															<?php } ?>
 														</td>
 													</tr>

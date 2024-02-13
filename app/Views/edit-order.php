@@ -347,8 +347,8 @@
 							<ul class="submenu">
                                 <li><a href="<?=site_url('orders')?>">Order Materials</a></li>
 								<li><a href="<?=site_url('list-orders')?>">List Order</a></li>
+								<li><a href="javascript:void(0);" class="active">Edit Orders</a></li>
 								<?php if(session()->get('role')=="Staff"){?>
-								<li><a href="" class="active">Edit Orders</a></li>
 								<li><a href="<?=site_url('local-purchase')?>">Local Purchase</a></li>
 								<li><a href="<?=site_url('purchase-order')?>">Purchase Order</a></li>
 								<?php } ?>
@@ -430,13 +430,18 @@
 			<div class="xs-pd-20-10 pd-ltr-20">
                 <div class="card-box">
                     <div class="card-header">Edit Orders
+					<?php if(session()->get('role')=="Staff"){?>
                         <a href="<?=site_url('assign')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
+					<?php }else {?>
+						<a href="<?=site_url('approve-orders')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
+					<?php } ?>
                     </div>
                     <div class="card-body">
-                        <form method="POST" class="row g-3">
+                        <form method="POST" class="row g-3" action="">
                             <div class="col-12 form-group">
                                 <h3><b>PRF #</b> : <?=$PRF?></h3>
                             </div>
+							<input type="hidden" name="prf" value="<?=$PRF?>"/>
                             <div class="col-12 form-group">
                                 <table class="table stripe table-bordered hover nowrap">
                                     <thead>
@@ -460,7 +465,7 @@
                                 </table>
                             </div>
                             <div class="col-12 form-group">
-                                <button type="submit" class="btn btn-primary" id="btnSave">Save Changes</button>
+                                <button type="submit" class="btn btn-primary" onclick="return confirm('Do you want to save the changes applied?')" id="btnSave">Save Changes</button>
                             </div>
                         </form>
                     </div>
