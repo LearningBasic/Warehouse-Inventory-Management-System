@@ -99,6 +99,7 @@ $routes->get('get-editor','Purchase::getEditor');
 $routes->post('cancel-order','Purchase::cancelOrder');
 $routes->get('view-order','Purchase::viewOrder');
 $routes->get('notification','Purchase::notification');
+$routes->get('notification-purchase-order','Purchase::PONotification');
 $routes->get('canvas-notification','Purchase::canvasNotification');
 $routes->get('total-notification','Purchase::totalNotification');
 $routes->get('view-purchase','Purchase::viewPurchase');

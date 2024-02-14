@@ -405,6 +405,19 @@ class Purchase extends BaseController
         }
     }
 
+    public function PONotification()
+    {
+        $user = session()->get('loggedUser');
+        $builder = $this->db->table('tblpurchase_review');
+        $builder->select('COUNT(prID)total');
+        $builder->WHERE('Status',0)->WHERE('accountID',$user);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            echo $row->total;
+        }
+    }
+
     public function totalNotification()
     {
         $user = session()->get('loggedUser');
@@ -452,7 +465,8 @@ class Purchase extends BaseController
             <tr>
                 <td><?php echo $row->Item_Name ?></td>
                 <td><?php echo $row->Qty ?></td>
-                <td><?php echo number_format($row->Price,2) ?></td>
+                <td style="text-align:right;"><?php echo number_format($row->Price,2) ?></td>
+                <td style="text-align:right;"><?php echo number_format($row->Qty*$row->Price,2) ?></td>
                 <td><?php echo $row->Specification ?></td>
                 <td><?php echo $row->Supplier ?></td>
                 <td><?php echo $row->Terms ?></td>

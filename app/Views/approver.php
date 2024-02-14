@@ -491,7 +491,7 @@
 										href="#purchase"
 										role="tab"
 										aria-selected="false"
-										>New Purchase Order</a
+										>New Purchase Order <span class="badge bg-primary text-white" id="notification_po">0</span></a
 									>
 								</li>
 								<?php } ?>
@@ -659,6 +659,7 @@
 									<th class="bg-primary text-white">Item(s)</th>
 									<th class="bg-primary text-white">Qty</th>
 									<th class="bg-primary text-white">Unit Price</th>
+									<th class="bg-primary text-white">Total Price</th>
 									<th class="bg-primary text-white">Specification</th>
 									<th class="bg-primary text-white">Vendor(s)</th>
 									<th class="bg-primary text-white">Terms</th>
@@ -743,6 +744,13 @@
 					{
 						$('#notifications').html(response);
 						$('#notification_approval').html(response);
+					}
+				});
+				$.ajax({
+					url:"<?=site_url('notification-purchase-order')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notifications_po').html(response);
 					}
 				});
 				$.ajax({
