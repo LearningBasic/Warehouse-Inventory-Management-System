@@ -4,7 +4,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>Purchase Request Form</title>
+		<title>Purchase Requisition/Purchase Order</title>
 
 		<!-- Site favicon -->
 		<link
@@ -470,7 +470,7 @@
 										href="#others6"
 										role="tab"
 										aria-selected="false"
-										>For Approval <span class="badge bg-primary text-white" id="notification_approval">0</span></a
+										>Purchase Requisition <span class="badge bg-primary text-white" id="notification_approval">0</span></a
 									>
 								</li>
 								<?php if(session()->get('role')=="Administrator"){ ?>
@@ -491,7 +491,7 @@
 										href="#purchase"
 										role="tab"
 										aria-selected="false"
-										>New Purchase Order <span class="badge bg-primary text-white" id="notification_po">0</span></a
+										>Purchase Order <span class="badge bg-primary text-white" id="notification_po">0</span></a
 									>
 								</li>
 								<?php } ?>
