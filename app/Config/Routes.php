@@ -102,6 +102,7 @@ $routes->get('notification','Purchase::notification');
 $routes->get('canvas-notification','Purchase::canvasNotification');
 $routes->get('total-notification','Purchase::totalNotification');
 $routes->get('view-purchase','Purchase::viewPurchase');
+$routes->get('view-quotation','Purchase::viewQuotation');
 $routes->post('accept','Purchase::Accept');
 $routes->post('cancel','Purchase::Cancel');
 $routes->post('cancel-transfer','Purchase::cancelTransfer');

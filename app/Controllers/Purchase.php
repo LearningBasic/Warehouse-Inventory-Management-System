@@ -438,6 +438,29 @@ class Purchase extends BaseController
         echo $prf + $canvass + $purchase_order;
     }
 
+    public function viewQuotation()
+    {
+        $reference = $this->request->getGet('value');
+        $builder = $this->db->table('tblcanvass_sheet a');
+        $builder->select('a.*,b.Qty,b.ItemUnit,b.Item_Name,b.Specification');
+        $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
+        $builder->WHERE('a.Reference',$reference)->WHERE('a.Remarks','Selected');
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <tr>
+                <td><?php echo $row->Item_Name ?></td>
+                <td><?php echo $row->Qty ?></td>
+                <td><?php echo number_format($row->Price,2) ?></td>
+                <td><?php echo $row->Specification ?></td>
+                <td><?php echo $row->Supplier ?></td>
+                <td><?php echo $row->Terms ?></td>
+            </tr>
+            <?php
+        }
+    }
+
     public function viewPurchase()
     {
         $val = $this->request->getGet('value');
