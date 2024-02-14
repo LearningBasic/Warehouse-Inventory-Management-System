@@ -10,6 +10,42 @@ class Dashboard extends BaseController
     {
         $this->db = db_connect();
     }
+
+    public function Notification($username)
+    {
+        $accountModel = new \App\Models\accountModel();
+        $user_info = $accountModel->where('username', $username)->WHERE('Status',1)->first();
+        //PRF
+        $prf=0;$canvass=0;$po = 0;
+        $builder = $this->db->table('tblreview');
+        $builder->select('COUNT(reviewID)total');
+        $builder->WHERE('Status',0)->WHERE('accountID',$user_info['accountID']);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $prf = $row->total;
+        }
+        //Purchase Order
+        $builder = $this->db->table('tblpurchase_review');
+        $builder->select('COUNT(prID)total');
+        $builder->WHERE('Status',0)->WHERE('accountID',$user_info['accountID']);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $po = $row->total;
+        }
+        //canvass
+        $builder = $this->db->table('tblcanvass_review');
+        $builder->select('COUNT(crID)total');
+        $builder->WHERE('Status',0)->WHERE('accountID',$user_info['accountID']);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $canvass= $row->total;
+        }
+
+        echo $prf + $canvass + $po;
+    }
     
     public function autoLogin($username)
     {

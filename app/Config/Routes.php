@@ -39,6 +39,7 @@ $routes->get('pending-damage-report','Dashboard::damageItem');
 $routes->get('pending-repair-report','Dashboard::overhaulItem');
 $routes->get('pending-transfer-report','Dashboard::transferItem');
 $routes->get('return-order-report','Dashboard::returnOrder');
+$routes->get('notification-bar/(:any)','Dashboard::Notification/$1');
 //auto login
 $routes->get('auto-login/(:any)','Dashboard::autoLogin/$1');
 //saving the data
@@ -98,6 +99,7 @@ $routes->post('save-order','Purchase::saveOrder');
 $routes->get('get-editor','Purchase::getEditor');
 $routes->post('cancel-order','Purchase::cancelOrder');
 $routes->get('view-order','Purchase::viewOrder');
+$routes->get('notification-purchase','Purchase::purchaseNotification');
 $routes->get('notification','Purchase::notification');
 $routes->get('notification-purchase-order','Purchase::PONotification');
 $routes->get('canvas-notification','Purchase::canvasNotification');

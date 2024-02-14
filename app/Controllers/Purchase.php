@@ -368,6 +368,20 @@ class Purchase extends BaseController
         }
     }
 
+    public function purchaseNotification()
+    {
+        $user = session()->get('loggedUser');
+        $prf=0;$purchase_order=0;
+        $builder = $this->db->table('tblreview');
+        $builder->select('COUNT(reviewID)total');
+        $builder->WHERE('Status',0)->WHERE('accountID',$user);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            echo $row->total;
+        }
+    }
+
     public function notification()
     {
         $user = session()->get('loggedUser');

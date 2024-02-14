@@ -747,10 +747,17 @@
 					}
 				});
 				$.ajax({
+					url:"<?=site_url('notification-purchase')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notification_approval').html(response);
+					}
+				});
+				$.ajax({
 					url:"<?=site_url('notification-purchase-order')?>",method:"GET",
 					success:function(response)
 					{
-						$('#notifications_po').html(response);
+						$('#notification_po').html(response);
 					}
 				});
 				$.ajax({
