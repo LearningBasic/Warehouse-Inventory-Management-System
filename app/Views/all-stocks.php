@@ -499,9 +499,7 @@
 													</a>
 													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
-														<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Staff"){ ?>
 														<a class="dropdown-item" href="transfer/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-message-1"></i>Transfer</a>
-														<?php } ?>
 														<a class="dropdown-item" href="generate-qrcode/<?php echo $row->inventID ?>"><i class="icon-copy bi bi-qr-code"></i>&nbsp;Generate</a>
 													</div>
 												</div>
@@ -537,7 +535,6 @@
 													</a>
 													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
-														<!--<button type="button" class="dropdown-item deadstock" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-file-19"></i>Damage</button>-->
 														<a class="dropdown-item" href="transfer/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-message-1"></i>Transfer</a>
 														<a class="dropdown-item" href="generate-qrcode/<?php echo $row->inventID ?>"><i class="icon-copy bi bi-qr-code"></i>&nbsp;Generate</a>
 													</div>

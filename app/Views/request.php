@@ -571,7 +571,8 @@
                     <div class="card-body">
                         <table class="data-table table stripe hover nowrap">
                             <thead>
-								<th>Location</th>
+								<th>From</th>
+								<th>To</th>
 								<th>Requestor</th>
 								<th>Item No</th>
 								<th>Product Name</th>
@@ -585,6 +586,7 @@
 									<?php if($row->Status==0){ ?>
 									<tr>
 										<td><?php echo $row->warehouseName ?></td>
+										<td><?php echo $row->newLocation ?></td>
 										<td><?php echo $row->Fullname ?></td>
 										<td><?php echo $row->itemID ?></td>
 										<td><?php echo $row->productName ?></td>

@@ -156,9 +156,7 @@ class Home extends BaseController
     {
         $inventoryModel = new \App\Models\inventoryModel();
         $id = $this->request->getPost('itemID');
-        $warehouse = $this->request->getPost('warehouse');
         $supplier = $this->request->getPost('supplier');
-        $category = $this->request->getPost('category');
         $location = $this->request->getPost('location');
         $code = $this->request->getPost('code');
         $item_number = $this->request->getPost('itemNumber');
@@ -167,7 +165,7 @@ class Home extends BaseController
         $values = [
             'Location'=>$location,'productID'=>$item_number,'productName'=>$productName,
             'Code'=>$code,'Description'=>$desc,
-            'categoryID'=>$category,'supplierID'=>$supplier,'warehouseID'=>$warehouse,];
+            'supplierID'=>$supplier,];
         $inventoryModel->update($id,$values);
         //create logs
         $systemLogsModel = new \App\Models\systemLogsModel();
@@ -740,9 +738,10 @@ class Home extends BaseController
             $repair = $builder->get()->getResult();
             //transfer request
             $builder = $this->db->table('tbltransfer_request a');
-            $builder->select('a.*,b.Fullname,c.warehouseName');
+            $builder->select('a.*,b.Fullname,c.warehouseName,d.warehouseName as newLocation');
             $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
             $builder->join('tblwarehouse c','c.warehouseID=b.warehouseID','LEFT');
+            $builder->join('tblwarehouse d','d.warehouseID=a.warehouseID','LEFT');
             $builder->groupBy('a.requestID');
             $transfer = $builder->get()->getResult();
             //return order

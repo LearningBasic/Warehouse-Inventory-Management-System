@@ -74,6 +74,29 @@
                 width: 4px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
+			  .quote-imgs-thumbs {
+				background: #eee;
+				border: 1px solid #ccc;
+				border-radius: 0.25rem;
+				margin: 1.5rem 0;
+				padding: 0.75rem;
+				}
+				.quote-imgs-thumbs--hidden {
+				display: none;
+				}
+				.img-preview-thumb {
+				background: #fff;
+				border: 1px solid #777;
+				border-radius: 0.25rem;
+				box-shadow: 0.125rem 0.125rem 0.0625rem rgba(0, 0, 0, 0.12);
+				margin-right: 1rem;
+				max-width: 140px;
+				padding: 0.25rem;
+				}
+			.show-for-sr
+			{
+				display:none;
+			}
             
         </style>
 	</head>
@@ -437,7 +460,7 @@
                                 <div class="row g-3">
                                     <div class="col-lg-3">
                                         <label>Assignment</label>
-                                        <input type="text" class="form-control" id="warehouse" name="warehouse" value="<?php echo $row->warehouseName ?>" required/>
+                                        <input type="text" class="form-control" id="warehouse" name="warehouse" value="<?php echo $row->warehouseName ?>" readonly/>
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Vendor/Supplier's Name</label>
@@ -450,7 +473,7 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Item Group</label>
-                                        <input type="text" class="form-control" id="category" name="category" value="<?php echo $row->categoryName ?>" required/>
+                                        <input type="text" class="form-control" id="category" name="category" value="<?php echo $row->categoryName ?>" readonly/>
                                     </div>
 									<div class="col-lg-3">
 										<label>Location</label>
@@ -462,7 +485,7 @@
                                 <div class="row g-3">
                                     <div class="col-lg-3">
                                         <label>Item No</label>
-                                        <input type="text" class="form-control" name="itemNumber" value="<?php echo $row->productID ?>" required/>
+                                        <input type="text" class="form-control" name="itemNumber" value="<?php echo $row->productID ?>" readonly/>
                                     </div>
 									<div class="col-lg-3">
                                         <label>Serial/Barcode No</label>
@@ -478,6 +501,13 @@
                                 <label>Description</label>
                                 <textarea class="form-control" name="description" required><?php echo $row->Description ?></textarea>
                             </div>
+							<div class="col-12 form-group">
+								<p>
+									<label for="upload_imgs" class="btn btn-outline-primary">Select Your Images +</label>
+									<input class="show-for-sr" type="file" id="upload_imgs" name="images[]" accept="image/jpeg, image/png, image/jpg" multiple/>
+								</p>
+								<div class="quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>
+							</div>
                             <div class="col-12 form-group">
                                 <input type="submit" class="btn btn-primary" value="Save Changes"/>
                             </div>
@@ -497,5 +527,40 @@
 		<script src="/assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="/assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="/assets/vendors/scripts/datatable-setting.js"></script>
+		<script>
+			var imgUpload = document.getElementById('upload_imgs')
+				, imgPreview = document.getElementById('img_preview')
+				, imgUploadForm = document.getElementById('img-upload-form')
+				, totalFiles
+				, previewTitle
+				, previewTitleText
+				, img;
+
+				imgUpload.addEventListener('change', previewImgs, false);
+				imgUploadForm.addEventListener('submit', function (e) {
+				e.preventDefault();
+				alert('Images Uploaded! (not really, but it would if this was on your website)');
+				}, false);
+
+				function previewImgs(event) {
+				totalFiles = imgUpload.files.length;
+				
+				if(!!totalFiles) {
+					imgPreview.classList.remove('quote-imgs-thumbs--hidden');
+					previewTitle = document.createElement('p');
+					previewTitle.style.fontWeight = 'bold';
+					previewTitleText = document.createTextNode(totalFiles + ' Total Images Selected');
+					previewTitle.appendChild(previewTitleText);
+					imgPreview.appendChild(previewTitle);
+				}
+				
+				for(var i = 0; i < totalFiles; i++) {
+					img = document.createElement('img');
+					img.src = URL.createObjectURL(event.target.files[i]);
+					img.classList.add('img-preview-thumb');
+					imgPreview.appendChild(img);
+				}
+			}
+		</script>
 	</body>
 </html>
