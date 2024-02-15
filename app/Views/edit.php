@@ -431,45 +431,30 @@
                     </div>
 					<div class="card-body">
                         <form method="post" class="row g-3" id="editProduct" action="<?=base_url('update')?>">
-                            <input type="hidden" name="itemID" value="<?=$items['inventID']?>"/>
+						<?php foreach($items as $row): ?>
+                            <input type="hidden" name="itemID" value="<?php echo $row->inventID ?>"/>
                             <div class="col-12 form-group">
                                 <div class="row g-3">
                                     <div class="col-lg-3">
                                         <label>Assignment</label>
-                                        <select class="form-control custom-select2" id="warehouse" name="warehouse" required>
-                                            <option value="">Choose</option>
-                                            <?php if($warehouse): ?>
-                                                <?php foreach($warehouse as $row): ?>
-                                                    <option value="<?php echo $row->warehouseID ?>"><?php echo $row->warehouseName ?></option>
-                                                <?php endforeach; ?>
-                                            <?php endif; ?>
-                                        </select>
+                                        <input type="text" class="form-control" id="warehouse" name="warehouse" value="<?php echo $row->warehouseName ?>" required/>
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Vendor/Supplier's Name</label>
                                         <select class="form-control custom-select2" id="supplier" name="supplier">
                                             <option value="0">Choose</option>
-                                            <?php if($supplier): ?>
-                                                <?php foreach($supplier as $row): ?>
-                                                    <option value="<?php echo $row->supplierID ?>"><?php echo $row->supplierName ?></option>
-                                                <?php endforeach; ?>
-                                            <?php endif; ?>
+											<?php foreach($supplier as $rows): ?>
+												<option value="<?php echo $rows->supplierID ?>"><?php echo $rows->supplierName ?></option>
+											<?php endforeach; ?>
                                         </select>
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Item Group</label>
-                                        <select class="form-control custom-select2" id="category" name="category" required>
-                                            <option value="">Choose</option>
-                                            <?php if($category): ?>
-                                                <?php foreach($category as $row): ?>
-                                                    <option value="<?php echo $row->categoryID ?>"><?php echo $row->categoryName ?></option>
-                                                <?php endforeach; ?>
-                                            <?php endif; ?>
-                                        </select>
+                                        <input type="text" class="form-control" id="category" name="category" value="<?php echo $row->categoryName ?>" required/>
                                     </div>
 									<div class="col-lg-3">
 										<label>Location</label>
-										<input type="text" class="form-control" name="location" value="<?=$items['Location'] ?>"/>
+										<input type="text" class="form-control" name="location" value="<?php echo $row->Location ?>"/>
 									</div>
                                 </div>
                             </div>
@@ -477,25 +462,26 @@
                                 <div class="row g-3">
                                     <div class="col-lg-3">
                                         <label>Item No</label>
-                                        <input type="text" class="form-control" name="itemNumber" value="<?=$items['productID'] ?>" required/>
+                                        <input type="text" class="form-control" name="itemNumber" value="<?php echo $row->productID ?>" required/>
                                     </div>
 									<div class="col-lg-3">
                                         <label>Serial/Barcode No</label>
-                                        <input type="text" class="form-control" name="Code" value="<?=$items['Code'] ?>" required/>
+                                        <input type="text" class="form-control" name="Code" value="<?php echo $row->Code ?>" required/>
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Product Name</label>
-                                        <input type="text" class="form-control" name="productName" value="<?=$items['productName'] ?>" required/>
+                                        <input type="text" class="form-control" name="productName" value="<?php echo $row->productName ?>" required/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 form-group">
                                 <label>Description</label>
-                                <textarea class="form-control" name="description" required><?=$items['Description'] ?></textarea>
+                                <textarea class="form-control" name="description" required><?php echo $row->Description ?></textarea>
                             </div>
                             <div class="col-12 form-group">
                                 <input type="submit" class="btn btn-primary" value="Save Changes"/>
                             </div>
+							<?php endforeach; ?>
                         </form>
 					</div>
 				</div>
