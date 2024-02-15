@@ -1208,6 +1208,14 @@ class Home extends BaseController
         return view('list-orders',$data);
     }
 
+    public function export($id)
+    {
+        $canvasFormModel = new \App\Models\canvasFormModel();
+        $form = $canvasFormModel->WHERE('Reference',$id)->first();
+        $data = ['form'=>$form];
+        return view('export',$data);
+    }
+
     public function createCanvas($id=null)
     {
         $builder = $this->db->table('tblprf');
