@@ -1210,9 +1210,22 @@ class Home extends BaseController
 
     public function export($id)
     {
+        //canvass form
         $canvasFormModel = new \App\Models\canvasFormModel();
         $form = $canvasFormModel->WHERE('Reference',$id)->first();
-        $data = ['form'=>$form];
+        //quotation
+        $builder = $this->db->table('tblcanvass_sheet a');
+        $builder->select('a.*,b.Qty,b.ItemUnit,b.Item_Name,b.Specification');
+        $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
+        $builder->WHERE('a.Reference',$id);
+        $list = $builder->get()->getResult();
+        //approver
+        $builder = $this->db->table('tblcanvass_review a');
+        $builder->select('b.Fullname,b.Department');
+        $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+        $builder->WHERE('a.Reference',$id);
+        $account = $builder->get()->getResult();
+        $data = ['form'=>$form,'list'=>$list,'account'=>$account];
         return view('export',$data);
     }
 

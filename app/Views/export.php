@@ -439,6 +439,71 @@
                     <a href="<?=site_url('list-orders')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                     </div>
 					<div class="card-body">
+                        <button id="download" type="button" class="btn btn-primary text-white shadow btn-sm"><span class="dw dw-download"></span>&nbsp;Download</button>
+                        <br/><br/>
+                        <div class="row g-3" id="pdf">
+                            <div class="col-12 form-group"> 
+                                <div class="row g-3">
+                                    <div class="col-lg-3">
+                                        <b>Date Prepared</b>
+                                        <p><?=$form['DatePrepared'] ?></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <b>PRF No.</b>
+                                        <p><?=$form['OrderNo'] ?></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <b>Department</b>
+                                        <p><?=$form['Department'] ?></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <b>Date Needed</b>
+                                        <p><?=$form['DateNeeded'] ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 form-group">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <th>Products/Items</th>
+                                        <th>UOM</th>
+                                        <th>Qty</th>
+                                        <th>Unit Price</th>
+                                        <th>Total Price</th>
+                                        <th>Specification</th>
+                                        <th>Vendor</th>
+                                        <th>Terms</th>
+                                        <th>Warranty</th>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($list as $row): ?>
+                                            <tr>
+                                                <td><?php echo $row->Item_Name ?></td>
+                                                <td><?php echo $row->ItemUnit ?></td>
+                                                <td><?php echo $row->Qty ?></td>
+                                                <td style='text-align:right;'><?php echo number_format($row->Price,2) ?></td>
+                                                <td style='text-align:right;'><?php echo number_format($row->Qty*$row->Price,2) ?></td>
+                                                <td><?php echo $row->Specification ?></td>
+                                                <td><?php echo $row->Supplier ?></td>
+                                                <td><?php echo $row->Terms ?></td>
+                                                <td><?php echo $row->Warranty ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-12 form-group">
+                                <label>Approved By</label>
+                                <div class="row g-3">
+                                    <?php foreach($account as $row): ?>
+                                        <div class="col-lg-3">
+                                            <p><center><b><u><?php echo $row->Fullname ?></u></b></center></p>
+                                            <p><center><?php echo $row->Department ?></center></p>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				</div>
 			</div>
@@ -453,6 +518,32 @@
 		<script src="/assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="/assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="/assets/vendors/scripts/datatable-setting.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+        <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+        <script>
+            $('#download').on('click',function()
+            {
+                var HTML_Width = $("#pdf").width();
+                var HTML_Height = $("#pdf").height();
+                var top_left_margin = 15;
+                var PDF_Width = HTML_Width + (top_left_margin * 2);
+                var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);//* 1.5
+                var canvas_image_width = HTML_Width;
+                var canvas_image_height = HTML_Height;
+                    
+                var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+                    
+                html2canvas($("#pdf")[0]).then(function (canvas) {
+                    var imgData = canvas.toDataURL("image/jpeg", 1.0);
+                    var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+                    pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+                    for (var i = 1; i <= totalPDFPages; i++) { 
+                        pdf.addPage(PDF_Width, PDF_Height);
+                        pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+                    }
+                    pdf.save("canvass-sheet.pdf");
+                });
+            });
+        </script>
 	</body>
 </html>
