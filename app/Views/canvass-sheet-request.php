@@ -496,7 +496,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="viewModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal fade" id="viewModal" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color:#EC5800;">

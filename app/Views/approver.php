@@ -597,7 +597,7 @@
 														<td><?php echo $row->OrderNo ?></td>
 														<td><?php echo $row->Reference ?></td>
 														<td><?php echo $row->DateApproved ?></td>
-														<td><button type="button" class="btn btn-primary btn-sm viewQuotation" value="<?php echo $row->Reference ?>">Quotation</button></td>
+														<td><button type="button" class="btn btn-primary btn-sm viewQuotation" value="<?php echo $row->Reference ?>">Details</button></td>
 														<td>
 															<?php if($row->Status==0){ ?>
 																<span class="badge bg-warning text-white">PENDING</span>
@@ -628,7 +628,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="viewModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal fade" id="viewModal" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color:#EC5800;">
@@ -643,30 +643,17 @@
                 </div>
             </div>
         </div>
-		<div class="modal fade" id="viewQuotationModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal fade" id="viewQuotationModal" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color:#EC5800;">
                         <h4 class="modal-title text-white" id="myLargeModalLabel">
-                            Quotation
+                            Purchase Order Details
                         </h4>
                         <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
-                        <div class="table-responsive">
-							<table class="table table-bordered table-striped">
-								<thead>
-									<th class="bg-primary text-white">Item(s)</th>
-									<th class="bg-primary text-white">Qty</th>
-									<th class="bg-primary text-white">Unit Price</th>
-									<th class="bg-primary text-white">Total Price</th>
-									<th class="bg-primary text-white">Specification</th>
-									<th class="bg-primary text-white">Vendor(s)</th>
-									<th class="bg-primary text-white">Terms</th>
-								</thead>
-								<tbody id="output"></tbody>
-							</table>
-						</div>
+						<div id="output"></div>
                     </div>
                 </div>
             </div>

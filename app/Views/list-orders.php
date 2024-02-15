@@ -535,6 +535,7 @@
 											<th>Date Needed</th>
 											<th>Department</th>
 											<th>Status</th>
+											<th>Action</th>
 										</thead>
 										<tbody>
 											<?php foreach($canvass as $row): ?>
@@ -556,6 +557,11 @@
 														<?php }else { ?>
 															<span class="badge bg-danger text-white">CANCELLED</span>
 														<?php } ?>
+													</td>
+													<td>
+													<?php if($row->Status==4){?>
+														<a href="" class="btn btn-primary btn-sm"><span class="dw dw-download"></span></a>
+													<?php }?>
 													</td>
 												</tr>
 											<?php endforeach; ?> 

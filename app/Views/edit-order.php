@@ -447,7 +447,7 @@
                                 <h3><b>PRF #</b> : <?=$PRF?></h3>
                             </div>
 							<input type="hidden" name="prf" value="<?=$PRF?>"/>
-                            <div class="col-12 form-group">
+                            <div class="col-12 form-group table-responsive">
                                 <table class="table stripe table-bordered hover nowrap">
                                     <thead>
                                         <th class="bg-primary text-white">#</th>

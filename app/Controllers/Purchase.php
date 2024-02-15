@@ -468,11 +468,62 @@ class Purchase extends BaseController
     public function viewQuotation()
     {
         $reference = $this->request->getGet('value');
+        $file="";
+        //fetch
+        $builder = $this->db->table('tblcanvass_form a');
+        $builder->select('a.Reference,b.Department,b.OrderNo,b.DateNeeded,b.PurchaseType,b.Reason,b.Attachment');
+        $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
+        $builder->WHERE('a.Reference',$reference);
+        $datax = $builder->get();
+        if($rowx = $datax->getRow())
+        {
+            $file = $rowx->Attachment;
+            ?>
+        <div class="form-group">
+            <div class="row g-3">
+                <div class="col-lg-3">
+                    <b>PRF No.</b>
+                    <input type="text" class="form-control" value="<?php echo $rowx->OrderNo ?>"/>
+                </div>
+                <div class="col-lg-3">
+                    <b>Department</b>
+                    <input type="text" class="form-control" value="<?php echo $rowx->Department ?>"/>
+                </div>
+                <div class="col-lg-3">
+                    <b>Type of Purchase</b>
+                    <input type="text" class="form-control" value="<?php echo $rowx->PurchaseType ?>"/>
+                </div>
+                <div class="col-lg-3">
+                    <b>Date Needed</b>
+                    <input type="text" class="form-control" value="<?php echo $rowx->DateNeeded ?>"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <b>Reason</b>
+            <textarea class="form-control" style="height:120px;"><?php echo $rowx->Reason ?></textarea>
+        </div>
+            <?php
+        }
         $builder = $this->db->table('tblcanvass_sheet a');
         $builder->select('a.*,b.Qty,b.ItemUnit,b.Item_Name,b.Specification');
         $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
         $builder->WHERE('a.Reference',$reference)->WHERE('a.Remarks','Selected');
         $data = $builder->get();
+        ?>
+        <div class="form-group table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <th class="bg-primary text-white">Item(s)</th>
+                    <th class="bg-primary text-white">Qty</th>
+                    <th class="bg-primary text-white">Unit Price</th>
+                    <th class="bg-primary text-white">Total Price</th>
+                    <th class="bg-primary text-white">Specification</th>
+                    <th class="bg-primary text-white">Vendor(s)</th>
+                    <th class="bg-primary text-white">Terms</th>
+                </thead>
+                <tbody>
+        <?php
         foreach($data->getResult() as $row)
         {
             ?>
@@ -485,6 +536,24 @@ class Purchase extends BaseController
                 <td><?php echo $row->Supplier ?></td>
                 <td><?php echo $row->Terms ?></td>
             </tr>
+            <?php
+        }
+        ?>
+                </tbody>
+            </table>
+        </div>
+        <?php
+        $builder = $this->db->table('tblcanvass_form');
+        $builder->select('Attachment');
+        $builder->WHERE('Reference',$reference);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            ?>
+            <div class="form-group">
+                <a href="Attachment/<?php echo $file ?>" class="btn btn-outline-primary btn-sm" target="_blank"><span class="dw dw-paperclip"></span>PRF Attachment</a>
+                <a href="Canvass/<?php echo $row->Attachment ?>" class="btn btn-outline-primary btn-sm" target="_blank"><span class="dw dw-paperclip"></span>Quotation</a>
+            </div>
             <?php
         }
     }
