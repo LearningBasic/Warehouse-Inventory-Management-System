@@ -1228,7 +1228,7 @@ class Home extends BaseController
         $list = $builder->get()->getResult();
         //approver
         $builder = $this->db->table('tblcanvass_review a');
-        $builder->select('b.Fullname,b.Department');
+        $builder->select('b.Fullname,b.Department,b.Signatures');
         $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
         $builder->WHERE('a.Reference',$id);
         $account = $builder->get()->getResult();

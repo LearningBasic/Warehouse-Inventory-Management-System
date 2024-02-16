@@ -497,6 +497,7 @@
                                 <div class="row g-3">
                                     <?php foreach($account as $row): ?>
                                         <div class="col-lg-3">
+											<center><img src="/Signatures/<?php echo $row->Signatures ?>" width="150"/></center>
                                             <p><center><b><u><?php echo $row->Fullname ?></u></b></center></p>
                                             <p><center><?php echo $row->Department ?></center></p>
                                         </div>
