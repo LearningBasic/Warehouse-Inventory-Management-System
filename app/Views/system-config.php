@@ -655,7 +655,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" class="row g-3" id="frmAccount">
+                        <form method="post" class="row g-3" enctype="multipart/form-data" id="frmAccount">
 							<div class="col-12 form-group">
 								<label>Complete Name</label>
 								<input type="text" class="form-control" name="fullname" required/>
@@ -665,8 +665,23 @@
 								<input type="email" class="form-control" name="email" required/>
 							</div>
 							<div class="col-12 form-group">
-								<label>Username</label>
-								<input type="text" class="form-control" name="username" required/>
+								<div class="row g-3">
+									<div class="col-lg-8">
+										<label>Username</label>
+										<input type="text" class="form-control" name="username" required/>
+									</div>
+									<div class="col-lg-4">
+										<label>System Role</label>
+										<select class="form-control" name="systemRole">
+											<option value="">Choose</option>
+											<option>Administrator</option>
+											<option>Editor</option>
+											<option>Planner</option>
+											<option>Standard User</option>
+											<option>Staff</option>
+										</select>
+									</div>
+								</div>
 							</div>
 							<div class="col-12 form-group">
 								<label>Assignment</label>
@@ -679,15 +694,8 @@
 								<input type="text" class="form-control" name="department" required/>
 							</div>
 							<div class="col-12 form-group">
-								<label>System Role</label>
-								<select class="form-control" name="systemRole">
-									<option value="">Choose</option>
-									<option>Administrator</option>
-									<option>Editor</option>
-									<option>Planner</option>
-									<option>Standard User</option>
-									<option>Staff</option>
-								</select>
+								<label>Signature</label>
+								<input type="file" class="form-control" name="file" required/>
 							</div>
 							<div class="col-12 form-group">
 								<input type="submit" class="btn btn-primary" id="btnAddAccount" value="Register"/>
