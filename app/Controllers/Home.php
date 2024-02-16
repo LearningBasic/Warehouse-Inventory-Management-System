@@ -384,6 +384,7 @@ class Home extends BaseController
                     'Code'=>$code,'Description'=>$desc,'ItemUnit'=>$itemUnit,'unitPrice'=>$unitPrice,'Qty'=>$qty,'ReOrder'=>$reOrder,
                     'categoryID'=>$category,'ExpirationDate'=>$expirationDate,'supplierID'=>$supplier,'warehouseID'=>$warehouse,];
                 $inventoryModel->save($values);
+                
                 //get the inventID
                 $inventID=0;
                 $builder = $this->db->table('tblinventory');
@@ -394,6 +395,14 @@ class Home extends BaseController
                 {
                     $inventID = $row->inventID;
                 }
+
+                //generate QR
+                for($i=0;$i<$qty;$i++)
+                {
+                    $values = ['inventID'=>$inventID ,'TextValue'=>$item_number.$i];
+					$qrModel->save($values);
+                }
+                
                 foreach($this->request->getFileMultiple('images') as $file)
                 { 
                     $originalName = $file->getClientName();
@@ -405,12 +414,6 @@ class Home extends BaseController
                         'DateCreated'=>date('Y-m-d'),
                     ];
                     $productImage->save($values);
-                }
-                //generate QR
-                for($i=0;$i<$qty;$i++)
-                {
-                    $values = ['inventID'=>$inventID ,'TextValue'=>$item_number.$i];
-					$qrModel->save($values);
                 }
 
                 //create logs
