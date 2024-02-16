@@ -14,7 +14,7 @@ class accountModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['username', 'password','Fullname','Email','Status','systemRole','warehouseID','Department','DateCreated'];
+    protected $allowedFields = ['username', 'password','Fullname','Email','Status','systemRole','warehouseID','Department','DateCreated','Signature'];
 
     protected $validationRules = [];
     protected $validationMessages = [];
