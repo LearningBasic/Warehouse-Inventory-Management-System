@@ -442,6 +442,9 @@
                         <button id="download" type="button" class="btn btn-primary text-white shadow btn-sm"><span class="dw dw-download"></span>&nbsp;Download</button>
                         <br/><br/>
                         <div class="row g-3" id="pdf">
+							<div class="col-12">
+								<b>Requestor : </b><?php echo session()->get('fullname')?>
+							</div>
                             <div class="col-12 form-group"> 
                                 <div class="row g-3">
                                     <div class="col-lg-3">
@@ -493,7 +496,7 @@
                                 </table>
                             </div>
                             <div class="col-12 form-group">
-                                <label>Approved By</label>
+								<label>Approved By</label>
                                 <div class="row g-3">
                                     <?php foreach($account as $row): ?>
                                         <div class="col-lg-3">
