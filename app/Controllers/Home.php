@@ -402,15 +402,15 @@ class Home extends BaseController
                     $values = ['inventID'=>$inventID ,'TextValue'=>$item_number.$i];
 					$qrModel->save($values);
                 }
-                
+
                 foreach($this->request->getFileMultiple('images') as $file)
                 { 
-                    $originalName = $file->getClientName();
+                    $originalName = date("YmdHis").$file->getClientName();
                     $file->move('Products/',$originalName);
                     //save the images
                     $values = [
                         'inventID'=>$inventID,
-                        'Image'=>$file->getClientName(),
+                        'Image'=>$originalName,
                         'DateCreated'=>date('Y-m-d'),
                     ];
                     $productImage->save($values);
