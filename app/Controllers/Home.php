@@ -923,7 +923,8 @@ class Home extends BaseController
         else{
             $values = 
             ['username'=>$username, 'password'=>$defaultPassword,'Fullname'=>$fullname,'Email'=>$email,
-            'Status'=>$status,'systemRole'=>$role,'warehouseID'=>$assign,'Department'=>$dept,'DateCreated'=>$dateCreated];
+            'Status'=>$status,'systemRole'=>$role,'warehouseID'=>$assign,'Department'=>$dept,
+            'DateCreated'=>$dateCreated,'Signatures','N/A'];
             $accountModel->save($values);
             //create logs
             $systemLogsModel = new \App\Models\systemLogsModel();
