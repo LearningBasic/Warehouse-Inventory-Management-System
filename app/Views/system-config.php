@@ -773,23 +773,41 @@
                     }
                 });
             });
-			$('#btnAddAccount').on('click',function(e)
-            {
-                e.preventDefault();
-                var data = $('#frmAccount').serialize();
-                $.ajax({
-                    url:"<?=site_url('save-account')?>",method:"POST",data:data,success:function(response)
-                    {
-                        if(response==="success"){
-                            Swal.fire(
-                                'Great',
-                                'Successfully added',
-                                'success'
-                            );$('#frmAccount')[0].reset();location.reload();
-                        }else{alert(response);}
-                    }
-                });
-            });
+			$('#frmAccount').on('submit',function(evt)
+			{
+				evt.preventDefault();
+				var data = $('#frmAccount').serialize();
+				$.ajax({
+					url:"<?=site_url('save-account')?>",method:"POST",
+					data:new FormData(this),
+					contentType: false,
+					cache: false,
+					processData:false,
+					beforeSend: function(){
+						$('#btnAddAccount').attr("disabled","disabled");
+						$('#frmAccount').css("opacity",".5");
+					},
+					success:function(data)
+					{
+						if(data==="success")
+						{
+							Swal.fire(
+								'Great',
+								'Successfully added',
+								'success'
+							);
+							$('#frmAccount')[0].reset();
+							location.reload();
+						}
+						else
+						{
+							alert(data);
+						}
+						$('#frmAccount').css("opacity","");
+						$("#btnAddAccount").removeAttr("disabled");
+					}
+				});
+			});
 			$(document).on('click','.removeIndustry',function(e)
 			{
 				e.preventDefault();

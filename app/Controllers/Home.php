@@ -906,6 +906,8 @@ class Home extends BaseController
         $role = $this->request->getPost('systemRole');
         $assign = $this->request->getPost('assignment');
         $dept = $this->request->getPost('department');
+        $file = $this->request->getFile('file');
+        $originalName = $file->getClientName();
         $status = 1;
         $dateCreated = date('Y-m-d');
         $defaultPassword = Hash::make("Fastcat_01");
@@ -924,8 +926,9 @@ class Home extends BaseController
             $values = 
             ['username'=>$username, 'password'=>$defaultPassword,'Fullname'=>$fullname,'Email'=>$email,
             'Status'=>$status,'systemRole'=>$role,'warehouseID'=>$assign,'Department'=>$dept,
-            'DateCreated'=>$dateCreated,'Signatures','N/A'];
+            'DateCreated'=>$dateCreated,'Signatures'=>$originalName];
             $accountModel->save($values);
+            $file->move('Signatures/',$originalName);
             //create logs
             $systemLogsModel = new \App\Models\systemLogsModel();
             $value = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Registered new account of '.$fullname];
