@@ -516,9 +516,9 @@
 											<td style="word-wrap: break-word;"><?php echo $row->warehouseName ?></td>
 											<td>
 												<div class="dropdown">
-													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+													<a class="btn btn-primary btn-sm dropdown-toggle"
 														href="#" role="button" data-toggle="dropdown">
-														<i class="dw dw-more"></i>
+														SELECT
 													</a>
 													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
@@ -553,9 +553,9 @@
 											<td style="word-wrap: break-word;"><?php echo $row->warehouseName ?></td>
 											<td>
 												<div class="dropdown">
-													<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+													<a class="btn btn-primary btn-sm dropdown-toggle"
 														href="#" role="button" data-toggle="dropdown">
-														<i class="dw dw-more"></i>
+														SELECT
 													</a>
 													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
