@@ -431,6 +431,26 @@ class Home extends BaseController
         }
     }
 
+    public function uploadImage()
+    {
+        $productImage = new \App\Models\productImageModel();
+        //data
+        $inventID = $this->request->getPost('productID');
+        $imageFile = $this->request->getFileMultiple('images');
+        $validation = $this->validate([
+            'images' =>'required',
+        ]);
+
+        if(!$validation)
+        {
+            echo "Invalid! Please select image";
+        }
+        else
+        {
+            echo "Great!";
+        }
+    }
+
     public function saveProduct()
     {
         $inventoryModel = new \App\Models\inventoryModel();

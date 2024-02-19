@@ -465,7 +465,7 @@
                                     </div>
 									<div class="col-lg-3">
                                         <label>Serial/Barcode No</label>
-                                        <input type="text" class="form-control" name="Code" value="<?php echo $row->Code ?>" required/>
+                                        <input type="text" class="form-control" name="Code" value="<?php echo $row->Code ?>"/>
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Product Name</label>
