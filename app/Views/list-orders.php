@@ -517,7 +517,7 @@
 															-
 															<?php } ?>
 														<?php }else{?>
-															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span>&nbsp;View</button>
+															<?php echo $row->Comment ?>
 														<?php } ?>
 													</td>
 												</tr>

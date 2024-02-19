@@ -600,6 +600,7 @@
 									<?php }else{ ?>
 										<tr>
 										<td><?php echo $row->warehouseName ?></td>
+										<td><?php echo $row->newLocation ?></td>
 										<td><?php echo $row->Fullname ?></td>
 										<td><?php echo $row->itemID ?></td>
 										<td><?php echo $row->productName ?></td>
