@@ -499,6 +499,7 @@
 													</a>
 													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
+														<button type="button" class="dropdown-item upload" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-upload"></i>Upload</button>
 														<a class="dropdown-item" href="transfer/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-message-1"></i>Transfer</a>
 														<a class="dropdown-item" href="generate-qrcode/<?php echo $row->inventID ?>"><i class="icon-copy bi bi-qr-code"></i>&nbsp;Generate</a>
 													</div>
@@ -535,6 +536,7 @@
 													</a>
 													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 														<a class="dropdown-item" href="edit/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
+														<button type="button" class="dropdown-item upload" value="<?php echo $row->inventID ?>"><i class="icon-copy dw dw-upload"></i>Upload</button>
 														<a class="dropdown-item" href="transfer/<?php echo $row->inventID ?>"><i class="icon-copy dw dw-message-1"></i>Transfer</a>
 														<a class="dropdown-item" href="generate-qrcode/<?php echo $row->inventID ?>"><i class="icon-copy bi bi-qr-code"></i>&nbsp;Generate</a>
 													</div>
