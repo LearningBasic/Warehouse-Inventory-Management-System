@@ -1923,6 +1923,36 @@ class Home extends BaseController
         $purchase_order = $purchaseOrderModel->WHERE('purchaseNumber',$purchase['purchaseNumber'])->first();
         $values = ['Status'=>1];
         $purchaseOrderModel->update($purchase_order['purchaseLogID'],$values);
+        //send email
+        $builder = $this->db->table('tblcanvass_form a');
+        $builder->select('b.Fullname,b.Email');
+        $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+        $builder->WHERE('a.Reference',$purchase_order['Reference']);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $email = \Config\Services::email();
+            $email->setTo($row->Email,$row->Fullname);
+            $email->setFrom("fastcat.system@gmail.com","FastCat");
+            $imgURL = "assets/img/fastcat.png";
+            $email->attach($imgURL);
+            $cid = $email->setAttachmentCID($imgURL);
+            $template = "<center>
+            <img src='cid:". $cid ."' width='100'/>
+            <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+            <tr><td><center><h1>Purchase Order Form</h1></center></td></tr>
+            <tr><td><center>Hi, ".$row->Fullname."</center></td></tr>
+            <tr><td><center>This is from FastCat System, we would like to inform you that your purchase request has already approved.</center></td></tr>
+            <tr><td><center>Contact Materials/Procurement Department for more details.</center></td></tr>
+            <tr><td><p><center><b>P.O. No : ".$purchase['purchaseNumber']."</b></center></p></td><tr>
+            <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+            <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+            <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+            $subject = "Approved Purchase Order Form";
+            $email->setSubject($subject);
+            $email->setMessage($template);
+            $email->send();
+        }
         echo "success";
     }
 
@@ -1931,6 +1961,7 @@ class Home extends BaseController
         $purchaseOrderModel = new \App\Models\purchaseOrderModel();
         $purchaseReviewModel = new \App\Models\purchaseReviewModel();
         $val = $this->request->getPost('value');
+        $msg = $this->request->getPost('message');
         //update the approver status
         $values = ['Status'=>2];
         $purchaseReviewModel->update($val,$values);
@@ -1939,6 +1970,36 @@ class Home extends BaseController
         $purchase_order = $purchaseOrderModel->WHERE('purchaseNumber',$purchase['purchaseNumber'])->first();
         $values = ['Status'=>2];
         $purchaseOrderModel->update($purchase_order['purchaseLogID'],$values);
+        //send email
+        $builder = $this->db->table('tblcanvass_form a');
+        $builder->select('b.Fullname,b.Email');
+        $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+        $builder->WHERE('a.Reference',$purchase_order['Reference']);
+        $data = $builder->get();
+        if($row = $data->getRow())
+        {
+            $email = \Config\Services::email();
+            $email->setTo($row->Email,$row->Fullname);
+            $email->setFrom("fastcat.system@gmail.com","FastCat");
+            $imgURL = "assets/img/fastcat.png";
+            $email->attach($imgURL);
+            $cid = $email->setAttachmentCID($imgURL);
+            $template = "<center>
+            <img src='cid:". $cid ."' width='100'/>
+            <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+            <tr><td><center><h1>Purchase Order Form</h1></center></td></tr>
+            <tr><td><center>Hi, ".$row->Fullname."</center></td></tr>
+            <tr><td><center>This is from FastCat System, we would like to inform you that your request has been rejected.</center></td></tr>
+            <tr><td><center>Reason : ".$msg."</center></td></tr>
+            <tr><td><p><center><b>P.O. No : ".$purchase['purchaseNumber']."</b></center></p></td><tr>
+            <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+            <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+            <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+            $subject = "Declined Purchase Order Form";
+            $email->setSubject($subject);
+            $email->setMessage($template);
+            $email->send();
+        }
         echo "success";
     }
 

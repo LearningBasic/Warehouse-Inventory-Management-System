@@ -950,22 +950,30 @@
 					}).then((result) => {
 					if (result.isConfirmed) {
 						var val = $(this).val();
-						$('#modal-loading').modal('show');
-						$.ajax({
-							url:"<?=site_url('decline')?>",method:"POST",
-							data:{value:val},success:function(response)
-							{
-								if(response==="success")
+						var message = prompt("Please leave a comment");
+						if(message==="")
+						{
+							alert("Invalid! Please try again");
+						}
+						else
+						{
+							$('#modal-loading').modal('show');
+							$.ajax({
+								url:"<?=site_url('decline')?>",method:"POST",
+								data:{value:val,message:message},success:function(response)
 								{
-									location.reload();
+									if(response==="success")
+									{
+										location.reload();
+									}
+									else
+									{
+										alert(response);
+									}
+									$('#modal-loading').modal('hide');
 								}
-								else
-								{
-									alert(response);
-								}
-								$('#modal-loading').modal('hide');
-							}
-						});
+							});
+						}
 					}
 				});
 			});
