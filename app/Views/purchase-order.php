@@ -474,9 +474,11 @@
 									<td>
 										<?php if($row->Status==1){ ?>
 											<span class="badge bg-success text-white">APPROVED</span>
-										<?php }else{ ?>
+										<?php }else if($row->Status==2){ ?>
+											<span class="badge bg-danger text-white">DECLINED</span>
+										<?php }else { ?>
 											-
-										<?php } ?>
+										<?php }?>
 									</td>
                                     <td>
 										<?php if(empty($row->Status)){ ?>
@@ -484,14 +486,16 @@
 											<span class="dw dw-add"></span>&nbsp;Create
 											</button>
 										<?php }else{ ?>
-											<?php if($row->Status==0){}else{ ?>
+											<?php if($row->Status==0){}else if($row->Status==1){ ?>
 											<button type="button" class="btn btn-primary btn-sm comment" value="<?php echo $row->Reference ?>">
 											<span class="dw dw-add"></span>&nbsp;Add
 											</button>
 											<a class="btn btn-success btn-sm" href="<?=site_url('download/')?><?php echo $row->Reference ?>">
 											<span class="dw dw-download"></span>&nbsp;Download
 											</a>
-											<?php } ?>
+											<?php }else{ ?>
+												-
+											<?php }?>
 										<?php } ?>
                                     </td>
                                 </tr>

@@ -1415,9 +1415,9 @@ class Home extends BaseController
         else
         {
             $builder = $this->db->table('tblcanvass_sheet');
-            $builder->select('COUNT(Reference)total,Vatable,OrderNo');
+            $builder->select('COUNT(Reference)total,Supplier,Vatable,OrderNo');
             $builder->WHERE('Reference',$val);
-            $builder->groupBy('Reference,Vatable');
+            $builder->groupBy('Reference,Supplier,Vatable');
             $data = $builder->get();
             foreach($data->getResult() as $row)
             {
@@ -1437,7 +1437,7 @@ class Home extends BaseController
                 //update the canvass Sheet
                 $builder = $this->db->table('tblcanvass_sheet');
                 $builder->select('canvassID');
-                $builder->WHERE('Vatable',$row->Vatable)->WHERE('Reference',$val);
+                $builder->WHERE('Vatable',$row->Vatable)->WHERE('Supplier',$row->Supplier)->WHERE('Reference',$val);
                 $datas = $builder->get();
                 foreach($datas->getResult() as $rows)
                 {
@@ -1922,6 +1922,22 @@ class Home extends BaseController
         $purchase = $purchaseReviewModel->WHERE('prID',$val)->first();
         $purchase_order = $purchaseOrderModel->WHERE('purchaseNumber',$purchase['purchaseNumber'])->first();
         $values = ['Status'=>1];
+        $purchaseOrderModel->update($purchase_order['purchaseLogID'],$values);
+        echo "success";
+    }
+
+    public function decline()
+    {
+        $purchaseOrderModel = new \App\Models\purchaseOrderModel();
+        $purchaseReviewModel = new \App\Models\purchaseReviewModel();
+        $val = $this->request->getPost('value');
+        //update the approver status
+        $values = ['Status'=>2];
+        $purchaseReviewModel->update($val,$values);
+        //update the PO status
+        $purchase = $purchaseReviewModel->WHERE('prID',$val)->first();
+        $purchase_order = $purchaseOrderModel->WHERE('purchaseNumber',$purchase['purchaseNumber'])->first();
+        $values = ['Status'=>2];
         $purchaseOrderModel->update($purchase_order['purchaseLogID'],$values);
         echo "success";
     }
