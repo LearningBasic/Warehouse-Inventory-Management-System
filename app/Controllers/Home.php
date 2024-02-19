@@ -121,7 +121,7 @@ class Home extends BaseController
         $builder->join('tblcategory b','b.categoryID=a.categoryID','LEFT');
         $builder->join('tblsupplier c','c.supplierID=a.supplierID','LEFT');
         $builder->join('tblwarehouse d','d.warehouseID=a.warehouseID','LEFT');
-        $builder->join('(select Image,inventID from tblimage GROUP BY inventID) e','e.inventID=a.inventID','LEFT');
+        $builder->join('tblimage e','e.inventID=a.inventID','LEFT');
         $builder->groupby('a.inventID');
         $items = $builder->get()->getResult();
         $data = ['items'=>$items];
@@ -438,7 +438,7 @@ class Home extends BaseController
         $inventID = $this->request->getPost('productID');
         $imageFile = $this->request->getFileMultiple('images');
         $validation = $this->validate([
-            'images' =>'required',
+            'images' =>'uploaded[images]',
         ]);
 
         if(!$validation)
@@ -447,7 +447,24 @@ class Home extends BaseController
         }
         else
         {
-            echo "Great!";
+            //remove the previous images
+            $builder = $this->db->table('tblimage');
+            $builder->WHERE('inventID',$inventID);
+            $builder->delete();
+
+            foreach($imageFile as $file)
+            {
+                $originalName = date("YmdHis").$file->getClientName();
+                $file->move('Products/',$originalName);
+                //save the images
+                $values = [
+                    'inventID'=>$inventID,
+                    'Image'=>$originalName,
+                    'DateCreated'=>date('Y-m-d'),
+                ];
+                $productImage->save($values);
+            }
+            echo "success";
         }
     }
 
