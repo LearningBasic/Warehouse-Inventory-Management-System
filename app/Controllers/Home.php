@@ -343,13 +343,15 @@ class Home extends BaseController
         $qty = $this->request->getPost('qty');
         $reOrder = $this->request->getPost('reOrder');
         $expirationDate = $this->request->getPost('expirationDate');
+        $imageFile = $this->request->getFileMultiple('images');
         $validation = $this->validate([
             'warehouse'=>'required',
             'category'=>'required',
             'productName'=>'required|is_unique[tblinventory.productName]',
             'itemUnit'=>'required',
             'unitPrice'=>'required',
-            'qty'=>'required'
+            'qty'=>'required',
+            'images'=>'uploaded[images]'
         ]);
         if(!$validation)
         {
@@ -403,7 +405,7 @@ class Home extends BaseController
 					$qrModel->save($values);
                 }
 
-                foreach($this->request->getFileMultiple('images') as $file)
+                foreach($imageFile as $file)
                 { 
                     $originalName = date("YmdHis").$file->getClientName();
                     $file->move('Products/',$originalName);
