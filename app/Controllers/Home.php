@@ -2107,6 +2107,11 @@ class Home extends BaseController
 
     public function returnOrderReport()
     {
-        return view('return-order-report');
+        $builder = $this->db->table('tblsupplier');
+        $builder->select('*');
+        $record = $builder->get()->getResult();
+
+        $data = ['vendor'=>$record];
+        return view('return-order-report',$data);
     }
 }

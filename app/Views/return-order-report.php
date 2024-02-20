@@ -452,7 +452,35 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
-                
+				<div class="row g-3">
+					<div class="col-12 form-group">
+						<div class="card-box">
+							<div class="card-body">
+								<div class="card-title"><i class="icon-copy dw dw-analytics-5"></i>&nbsp;Generate Return Order</div>
+								<form method="GET" class="row g-3" id="frmSearch">
+									<div class="col-lg-4 form-group">
+                                        <select class="form-control custom-select2" name="vendor" style="width:100%;">
+                                            <option value="">Choose</option>
+                                            <?php foreach($vendor as $row): ?>
+                                                <option value="<?php echo $row->supplierName?>"><?php echo $row->supplierName ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+									<div class="col-lg-2 form-group">
+										<input type="date" class="form-control" name="fromdate"/>
+									</div>
+									<div class="col-lg-2 form-group">
+										<input type="date" class="form-control" name="todate"/>
+									</div>
+                                    <div class="col-lg-4 form-group">
+                                        <button type="submit" class="btn btn-primary" id="btnSearch"><i class="icon-copy dw dw-search"></i>&nbsp;Search</button>
+                                        <a href="javascript:void(0);" onclick="exportf(this)" class="btn btn-outline-primary"><i class="icon-copy dw dw-download"></i>&nbsp;Export</a>
+                                    </div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<!-- js -->
