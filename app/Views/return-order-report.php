@@ -462,7 +462,7 @@
                                         <select class="form-control custom-select2" name="vendor" style="width:100%;">
                                             <option value="">Choose</option>
                                             <?php foreach($vendor as $row): ?>
-                                                <option value="<?php echo $row->supplierName?>"><?php echo $row->supplierName ?></option>
+                                                <option value="<?php echo $row->supplierID?>"><?php echo $row->supplierName ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -480,6 +480,18 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-12 form-group tableFixHead" style="height:500px;overflow-y:auto;">
+						<table class="table-bordered table-striped" id="table">
+							<thead>
+								<th>Image</th>
+								<th>P.O. No</th>
+								<th>Products</th>
+								<th>Qty</th>
+								<th>Details</th>
+							</thead>
+							<tbody id="results"></tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -493,5 +505,22 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script>
+			$('#btnSearch').on('click',function(e)
+			{
+				e.preventDefault();
+				var data = $('#frmSearch').serialize();
+				
+			});
+
+			function exportf(elem) {
+			var table = document.getElementById("table");
+			var html = table.outerHTML;
+			var url = 'data:application/vnd.ms-excel,' + escape(html); // Set your html table into url 
+			elem.setAttribute("href", url);
+			elem.setAttribute("download","return-order.xls"); // Choose the file name
+			return false;
+			}
+		</script>
 	</body>
 </html>
