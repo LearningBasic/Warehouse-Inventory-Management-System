@@ -469,7 +469,7 @@
                                         <tr>
                                             <td><?php echo $row->supplierName ?></td>
                                             <td><?php echo $row->contactPerson ?></td>
-                                            <td><?php echo $row->Address ?></td>
+                                            <td><?php echo substr($row->Address,0,30) ?>...</td>
                                             <td><?php echo $row->EmailAddress ?></td>
                                             <td><?php echo $row->contactNumber ?></td>
                                             <td><?php echo $row->Name ?></td>
