@@ -2089,7 +2089,8 @@ class Home extends BaseController
         $builder = $this->db->table('tblcanvass_sheet a');
         $builder->select('a.Supplier,SUM(a.Price*b.Qty)total');
         $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
-        $builder->WHERE('a.Remarks','Selected');
+        $builder->join('tblpurchase_logs c','c.Reference=a.Reference','LEFT');
+        $builder->WHERE('a.Remarks','Selected')->WHERE('c.Status',1);
         $builder->groupBy('a.Supplier');
         $builder->orderBy('total','DESC')->limit(20);
         $vendor = $builder->get()->getResult();
