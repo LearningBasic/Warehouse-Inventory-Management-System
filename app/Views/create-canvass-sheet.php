@@ -599,7 +599,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" class="row g-3" id="frmAdd">
+                        <form method="POST" class="row g-3" id="frmEntries">
 							<input type="hidden" name="orderNo" value="<?=$id ?>"/>
 							<div class="col-12">
 								<label>Vatable ?</label>
@@ -617,11 +617,7 @@
 										<label>Contact Person</label>
 										<input type="text" class="form-control" name="contactPerson" id="persons" required/>
 									</div>
-									<div class="col-lg-3">
-										<label>Unit Price</label>
-										<input type="text" class="form-control" name="unitPrice" required/>
-									</div>
-									<div class="col-lg-3">
+									<div class="col-lg-6">
 										<label>Contact Number</label>
 										<input type="phone" class="form-control" maxlength="11" minlength="11" name="phone" id="phones" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required/>
 									</div>
@@ -650,6 +646,7 @@
 										<th class="bg-primary text-white">#</th>
 										<th class="bg-primary text-white">Item Name</th>
 										<th class="bg-primary text-white">Specification</th>
+										<th class="bg-primary text-white">Unit Price</th>
 									</thead>
 									<tbody id="tbl_entries">
 									
@@ -723,6 +720,36 @@
 					}
 				});
 			}
+
+			$('#btnSaveEntry').on('click',function(e)
+			{
+				e.preventDefault();
+				$(this).attr("value","Saving! Please wait");
+				var data = $('#frmEntries').serialize();
+				$.ajax({
+					url:"<?=site_url('save-entries')?>",method:"POST",
+					data:data,
+					success:function(response)
+					{
+						if(response==="success")
+						{
+							loadSuppliers();entries();
+							$('#addRegularModal').modal('hide');
+							$('#frmEntries')[0].reset();
+						}
+						else
+						{
+							Swal.fire({
+								title: "Error",
+								text: response,
+								icon: "error"
+								});
+						}
+						$('#btnSaveEntry').attr("value","Save Entry");
+					}
+				});
+			});
+
 			$('#btnAdd').on('click',function(e)
 			{
 				e.preventDefault();
@@ -770,7 +797,7 @@
 							{
 								if(response==="success")
 								{
-									loadSuppliers();
+									loadSuppliers();entries();
 								}
 								else
 								{

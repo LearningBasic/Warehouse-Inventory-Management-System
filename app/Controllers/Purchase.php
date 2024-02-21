@@ -1099,6 +1099,7 @@ class Purchase extends BaseController
                 <td><input type="checkbox" style="height:18px;width:18px;" value="<?php echo $row->orderID ?>" name="itemID[]" id="itemID" checked/></td>
                 <td><?php echo $row->Item_Name ?></td>
                 <td><?php echo $row->Specification ?></td>
+                <td><input type="text" class="form-control" name="unitPrice[]"/></td>
             </tr>
             <?php
         }
@@ -1106,7 +1107,65 @@ class Purchase extends BaseController
 
     public function saveEntries()
     {
-        
+        $canvassModel = new \App\Models\canvassModel();
+        $supplierModel = new \App\Models\supplierModel();
+        //datas
+        $orderNo = $this->request->getPost('orderNo');
+        $unitPrice = $this->request->getPost('unitPrice');
+        $supplier = $this->request->getPost('supplier');
+        $contactPerson = $this->request->getPost('contactPerson');
+        $address = $this->request->getPost('address');
+        $phone = $this->request->getPost('phone');
+        $terms = $this->request->getPost('terms');
+        $warranty = $this->request->getPost('warranty');
+        $vatable = $this->request->getPost('vatable');
+        $orderID = $this->request->getPost('itemID');
+        $count = count($orderID);
+
+        $validation = $this->validate([
+            'unitPrice'=>'required',
+            'supplier'=>'required',
+            'contactPerson'=>'required',
+            'address'=>'required',
+            'phone'=>'required',
+            'terms'=>'required',
+            'warranty'=>'required',
+        ]);
+        if(!$validation)
+        {
+            echo "Invalid! Please fill in the form to continue";
+        }
+        else
+        {
+            for($i=0;$i<$count;$i++)
+            {
+                $values = 
+                ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$unitPrice[$i],
+                'ContactPerson'=>$contactPerson,'ContactNumber'=>$phone,'Address'=>$address,
+                'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>'','Remarks'=>'',
+                'Vatable'=>$vatable,'purchaseLogID'=>0];
+                $canvassModel->save($values);
+            }
+            //validate if supplier already exist
+            $builder = $this->db->table('tblsupplier');
+            $builder->select('*');
+            $builder->WHERE('supplierName',$supplier);
+            $data = $builder->get();
+            if($row = $data->getRow())
+            {
+                //do nothing
+            }
+            else
+            {
+                $values = [
+                    'supplierName'=>$supplier,'Address'=>$address,
+                    'contactPerson'=>$contactPerson,'EmailAddress'=>"N/A",'contactNumber'=>$phone,
+                    'industryID'=>0,
+                ];
+                $supplierModel->save($values);
+            }
+            echo "success";
+        }
     }
 
     public function viewImage()
