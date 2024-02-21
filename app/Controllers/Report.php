@@ -13,7 +13,30 @@ class Report extends BaseController
 
     public function generateReturnSummary()
     {
-        
+        $vendor = $this->request->getGet('vendor');
+        $fdate = $this->request->getGet('fromdate');
+        $tdate = $this->request->getGet('todate');
+        //fetch
+        $builder = $this->db->table('tblreturn');
+        $builder->select('*');
+        $builder->WHERE('Date >=',$fdate)->WHERE('Date<=',$tdate)->WHERE('supplierID',$vendor);
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            $imgURL = "ReturnOrder/".$row->Attachment;
+            ?>
+            <tr>
+                <td>
+                    <a href="<?php echo $imgURL ?>" target="_BLANK"><img src="<?php echo $imgURL ?>" class="border-radius-100 shadow" width="40" height="40"/></a>
+                </td>
+                <td><?php echo $row->InvoiceNo ?></td>
+                <td><?php echo $row->purchaseNumber ?></td>
+                <td><?php echo $row->productName ?></td>
+                <td><?php echo $row->Qty ?></td>
+                <td><?php echo $row->Details ?></td>
+            </tr>
+            <?php
+        }
     }
 
     public function autoDetect()

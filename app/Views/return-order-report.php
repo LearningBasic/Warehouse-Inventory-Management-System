@@ -484,6 +484,7 @@
 						<table class="table-bordered table-striped" id="table">
 							<thead>
 								<th>Image</th>
+								<th>Invoice No</th>
 								<th>P.O. No</th>
 								<th>Products</th>
 								<th>Qty</th>
@@ -509,7 +510,7 @@
 			$('#btnSearch').on('click',function(e)
 			{
 				e.preventDefault();
-				$('#results').html("<tr><td colspan='5'><center>Loading....</center></td></tr>");
+				$('#results').html("<tr><td colspan='6'><center>Loading....</center></td></tr>");
 				var formData = $('#frmSearch').serialize();
 				$.ajax({
 					url:"<?=site_url('generate-return-summary')?>",method:"GET",
@@ -518,7 +519,7 @@
 					{
 						if(response==="")
 						{
-							$('#results').html("<tr><td colspan='5'><center>No Record(s)</center></td></tr>");
+							$('#results').html("<tr><td colspan='6'><center>No Record(s)</center></td></tr>");
 						}
 						else
 						{
