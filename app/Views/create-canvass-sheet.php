@@ -448,7 +448,11 @@
 				<?php endif; ?>
                 <div class="card-box">
                     <div class="card-header"><?php if(session()->get('role')=="Staff"){ ?>Create Quotation<?php }else {?>Create Canvass Sheet<?php }?>
-					<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addModal" style="float:right;"><i class="icon-copy dw dw-add"></i>&nbsp;Add</a>
+					<?php if(session()->get('role')=="Staff"){ ?>
+						<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addRegularModal" style="float:right;"><i class="icon-copy dw dw-add"></i>&nbsp;Add</a>
+					<?php }else {?>	
+						<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addModal" style="float:right;"><i class="icon-copy dw dw-add"></i>&nbsp;Add</a>
+					<?php }?>
 					</div>
                     <div class="card-body">
                         <?php foreach($prf as $row): ?>
@@ -578,6 +582,82 @@
 							</div>
 							<div class="col-12 form-group">
 								<input type="submit" class="btn btn-primary text-white" value="Add Entry" id="btnAdd"/>
+							</div>
+						</form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<div class="modal fade" id="addRegularModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+							Add Vendor/Supplier
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" class="row g-3" id="frmAdd">
+							<input type="hidden" name="orderNo" value="<?=$id ?>"/>
+							<div class="col-12">
+								<label>Vatable ?</label>
+								<input type="radio" name="vatable" style="width:15px;height:15px;" value="Yes"/>&nbsp;<label>Yes</label>
+								<input type="radio" name="vatable" style="width:15px;height:15px;" value="No" checked/>&nbsp;<label>No</label>
+							</div>
+							<div class="col-12 form-group">
+								<label>Vendors/Supplier's Name</label>
+								<input type="search" class="form-control" id="supplier" name="supplier" required/>
+								<div id="listOfName"></div>
+							</div>
+							<div class="col-12 form-group">
+								<div class="row g-3">
+									<div class="col-lg-6">
+										<label>Contact Person</label>
+										<input type="text" class="form-control" name="contactPerson" id="person" required/>
+									</div>
+									<div class="col-lg-3">
+										<label>Unit Price</label>
+										<input type="text" class="form-control" name="unitPrice" required/>
+									</div>
+									<div class="col-lg-3">
+										<label>Contact Number</label>
+										<input type="phone" class="form-control" maxlength="11" minlength="11" name="phone" id="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required/>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 form-group">
+								<label>Address</label>
+								<textarea class="form-control" style="height:120px;" name="address" id="address" required></textarea>
+							</div>
+							<div class="col-12 form-group">
+								<div class="row g-3">
+									<div class="col-lg-6">
+										<label>Terms</label>
+										<input type="text" class="form-control" name="terms" required/>
+									</div>
+									<div class="col-lg-6">
+										<label>Warranty</label>
+										<input type="text" class="form-control" name="warranty" required/>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 form-group">
+								<label>Ordered Items/Materials</label>
+								<table class="table table-bordered table-striped">
+									<thead>
+										<th class="bg-primary text-white">#</th>
+										<th class="bg-primary text-white">Item Name</th>
+										<th class="bg-primary text-white">Specification</th>
+									</thead>
+									<tbody>
+									
+									</tbody>
+								</table>
+							</div>
+							<div class="col-12 form-group">
+								<input type="submit" class="btn btn-primary text-white" value="Save Entry" id="btnSaveEntry"/>
 							</div>
 						</form>
                     </div>
