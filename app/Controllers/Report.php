@@ -11,6 +11,11 @@ class Report extends BaseController
         $this->db = db_connect();
     }
 
+    public function generateReturnSummary()
+    {
+        
+    }
+
     public function autoDetect()
     {
         $OrderItemModel = new \App\Models\OrderItemModel();

@@ -132,6 +132,7 @@ $routes->get('vendor-information','Home::vendorInformation');
 $routes->get('download/(:any)','Report::Download/$1');
 $routes->get('vendor-ledger','Report::vendorLedger');
 $routes->get('fetch-purchase_number','Report::fetchPO');
+$routes->get('generate-return-summary','Report::generateReturnSummary');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {

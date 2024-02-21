@@ -509,8 +509,23 @@
 			$('#btnSearch').on('click',function(e)
 			{
 				e.preventDefault();
-				var data = $('#frmSearch').serialize();
-				
+				$('#results').html("<tr><td colspan='5'><center>Loading....</center></td></tr>");
+				var formData = $('#frmSearch').serialize();
+				$.ajax({
+					url:"<?=site_url('generate-return-summary')?>",method:"GET",
+					data:formData,
+					success:function(response)
+					{
+						if(response==="")
+						{
+							$('#results').html("<tr><td colspan='5'><center>No Record(s)</center></td></tr>");
+						}
+						else
+						{
+							$('#results').html(response);
+						}
+					}
+				});
 			});
 
 			function exportf(elem) {

@@ -121,7 +121,7 @@ class Home extends BaseController
         $builder->join('tblcategory b','b.categoryID=a.categoryID','LEFT');
         $builder->join('tblsupplier c','c.supplierID=a.supplierID','LEFT');
         $builder->join('tblwarehouse d','d.warehouseID=a.warehouseID','LEFT');
-        $builder->join('tblimage e','e.inventID=a.inventID','LEFT');
+        $builder->join('(Select Image,inventID from tblimage GROUP BY inventID) e','e.inventID=a.inventID','LEFT');
         $builder->groupby('a.inventID');
         $items = $builder->get()->getResult();
         $data = ['items'=>$items];
