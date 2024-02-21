@@ -74,3 +74,61 @@ INFO - 2024-02-21 03:16:46 --> Session: Class initialized using 'CodeIgniter\Ses
 INFO - 2024-02-21 03:17:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-02-21 03:17:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-02-21 03:17:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 03:32:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 03:32:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 03:32:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 03:36:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 03:36:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 03:36:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-02-21 03:36:38 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Select b.orderID from tblcanvass_sheet b)' at line 1 in C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php(295): mysqli->query('Select a.* from...', 0)
+#1 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('Select a.* from...')
+#2 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('Select a.* from...')
+#3 C:\xampp\htdocs\FastCat-WMS\app\Controllers\Purchase.php(1094): CodeIgniter\Database\BaseConnection->query('Select a.* from...', Array)
+#4 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(934): App\Controllers\Purchase->loadEntries()
+#5 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Purchase))
+#6 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\FastCat-WMS\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\FastCat-WMS\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2024-02-21 03:36:38 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Select b.orderID from tblcanvass_sheet b)' at line 1
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Purchase.php(1094): CodeIgniter\Database\BaseConnection->query('Select a.* from tbl_order_item a WHERE a.OrderNo=:id: AND NOT EXIST (Select b.orderID from tblcanvass_sheet b)', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Purchase->loadEntries()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Purchase))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+INFO - 2024-02-21 04:17:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 04:17:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 04:17:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-02-21 04:17:17 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Select b.orderID from tblcanvass_sheet b)' at line 1 in C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php(295): mysqli->query('Select a.* from...', 0)
+#1 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('Select a.* from...')
+#2 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('Select a.* from...')
+#3 C:\xampp\htdocs\FastCat-WMS\app\Controllers\Purchase.php(1094): CodeIgniter\Database\BaseConnection->query('Select a.* from...', Array)
+#4 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(934): App\Controllers\Purchase->loadEntries()
+#5 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Purchase))
+#6 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\FastCat-WMS\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\FastCat-WMS\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2024-02-21 04:17:17 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Select b.orderID from tblcanvass_sheet b)' at line 1
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Purchase.php(1094): CodeIgniter\Database\BaseConnection->query('Select a.* from tbl_order_item a WHERE a.OrderNo=:id: AND NOT EXIST (Select b.orderID from tblcanvass_sheet b)', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Purchase->loadEntries()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Purchase))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+INFO - 2024-02-21 04:17:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 04:17:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 04:17:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 04:19:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 04:19:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 04:19:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 04:20:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 04:20:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-21 04:20:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

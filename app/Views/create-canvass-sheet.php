@@ -608,14 +608,14 @@
 							</div>
 							<div class="col-12 form-group">
 								<label>Vendors/Supplier's Name</label>
-								<input type="search" class="form-control" id="supplier" name="supplier" required/>
-								<div id="listOfName"></div>
+								<input type="search" class="form-control" id="suppliers" name="supplier" required/>
+								<div id="listOfNames"></div>
 							</div>
 							<div class="col-12 form-group">
 								<div class="row g-3">
 									<div class="col-lg-6">
 										<label>Contact Person</label>
-										<input type="text" class="form-control" name="contactPerson" id="person" required/>
+										<input type="text" class="form-control" name="contactPerson" id="persons" required/>
 									</div>
 									<div class="col-lg-3">
 										<label>Unit Price</label>
@@ -623,13 +623,13 @@
 									</div>
 									<div class="col-lg-3">
 										<label>Contact Number</label>
-										<input type="phone" class="form-control" maxlength="11" minlength="11" name="phone" id="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required/>
+										<input type="phone" class="form-control" maxlength="11" minlength="11" name="phone" id="phones" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required/>
 									</div>
 								</div>
 							</div>
 							<div class="col-12 form-group">
 								<label>Address</label>
-								<textarea class="form-control" style="height:120px;" name="address" id="address" required></textarea>
+								<textarea class="form-control" style="height:120px;" name="address" id="addresses" required></textarea>
 							</div>
 							<div class="col-12 form-group">
 								<div class="row g-3">
@@ -651,7 +651,7 @@
 										<th class="bg-primary text-white">Item Name</th>
 										<th class="bg-primary text-white">Specification</th>
 									</thead>
-									<tbody>
+									<tbody id="tbl_entries">
 									
 									</tbody>
 								</table>
@@ -678,8 +678,20 @@
 		<script>
 			$(document).ready(function()
 			{
-				loadSuppliers();editors();
+				loadSuppliers();editors();entries();
 			});
+			function entries()
+			{
+				var val = $('#OrderNo').val();
+				$.ajax({
+					url:"<?=site_url('load-entries')?>",method:"GET",
+					data:{value:val},
+					success:function(response)
+					{
+						$('#tbl_entries').html(response);
+					}
+				});
+			}
 			function editors()
 			{
 				$.ajax({
@@ -802,6 +814,39 @@
 							$('#address').val(data["Address"]);
 							$('#phone').val(data["contactNumber"]);
 							$('#person').val(data["contactPerson"]);
+						}
+					});
+			});
+
+			$('#suppliers').keyup(function()
+			{
+				var val = $(this).val();
+				if(val !=='')
+				{
+					$.ajax({
+						url:"<?=site_url('search-vendor')?>",type:"GET",
+						data:{keyword:val},
+						success:function(data)
+						{
+							$('#listOfNames').fadeIn();
+							$('#listOfNames').html(data);
+						}
+					});
+				}
+			});
+			$(document).on('click','.li',function()
+			{
+				$('#suppliers').val($(this).text());
+				$('#listOfNames').fadeOut();
+				var val = $('#suppliers').val();
+				$.ajax({
+						url:"<?=site_url('vendor-information')?>",type:"GET",
+						data:{value:val},dataType:"json",
+						success:function(data)
+						{
+							$('#addresses').val(data["Address"]);
+							$('#phones').val(data["contactNumber"]);
+							$('#persons').val(data["contactPerson"]);
 						}
 					});
 			});

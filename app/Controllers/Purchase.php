@@ -1087,6 +1087,28 @@ class Purchase extends BaseController
         }
     }
 
+    public function loadEntries()
+    {
+        $id = $this->request->getGet('value');
+        $sql = "Select a.* from tbl_order_item a WHERE a.OrderNo=:id: AND NOT EXISTS (Select b.orderID from tblcanvass_sheet b WHERE b.orderID=a.orderID)";
+        $query = $this->db->query($sql,['id'=>$id]);
+        foreach ($query->getResult() as $row) 
+        {
+            ?>
+            <tr>
+                <td><input type="checkbox" style="height:18px;width:18px;" value="<?php echo $row->orderID ?>" name="itemID[]" id="itemID" checked/></td>
+                <td><?php echo $row->Item_Name ?></td>
+                <td><?php echo $row->Specification ?></td>
+            </tr>
+            <?php
+        }
+    }
+
+    public function saveEntries()
+    {
+        
+    }
+
     public function viewImage()
     {
         $val = $this->request->getGet('value');
