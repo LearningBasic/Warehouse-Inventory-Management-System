@@ -1260,7 +1260,7 @@ class Home extends BaseController
     {
         $purchaseModel = new \App\Models\purchaseModel();
         $purchase = $purchaseModel->WHERE('OrderNo',$id)->first();
-        $data = ['purchase'=>$purchase];
+        $data = ['purchase'=>$purchase,'code'=>$id];
         return view('generate-prf',$data);
     }
 

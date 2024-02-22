@@ -428,7 +428,7 @@ class Report extends BaseController
                 </tr>
                 <tr><td colspan='2'><b>TIN :</b></td><td><b>PRF No</b> : ".$row->OrderNo."</td></tr>
                 <tr><td colspan='3'><b>Ship To : Archipelago Philippine Ferries Corporation</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unioil Center Building, Commence Ave. Cor. Acacia Ave., Muntinlupa, PHL</td></tr>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unioil Center Building, Commerce Ave. Cor. Acacia Ave., Muntinlupa, PHL</td></tr>
                 <tr><td colspan='3'>&nbsp;</td></tr>
                 <tr><td colspan='3'><b>Gentlemen:</b> We are ordering the following and charged to our account</td></tr>";
             $template.="
