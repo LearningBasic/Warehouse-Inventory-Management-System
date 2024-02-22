@@ -1256,6 +1256,14 @@ class Home extends BaseController
         return view('list-orders',$data);
     }
 
+    public function generatePRF($id)
+    {
+        $purchaseModel = new \App\Models\purchaseModel();
+        $purchase = $purchaseModel->WHERE('OrderNo',$id)->first();
+        $data = ['purchase'=>$purchase];
+        return view('generate-prf',$data);
+    }
+
     public function export($id)
     {
         //canvass form
