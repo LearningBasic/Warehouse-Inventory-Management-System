@@ -443,9 +443,9 @@
 			<div class="xs-pd-20-10 pd-ltr-20">
                 <div class="card-box">
                     <div class="card-header"><span class="dw dw-export"></span>&nbsp;Export
-                    <a href="javascript:void(0);" style="float:right;" id="btnDownload"><span class="bi bi-download"></span>&nbsp;Download</a>
+                    <button id="download" type="button" class="btn btn-primary text-white shadow btn-sm" style="float:right;"><span class="dw dw-download"></span>&nbsp;Download</button>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" id="pdf">
                         <div class="row g-1">
                             <div class="col-lg-1">
                                 <img src="/assets/img/apfc.png" width="150"/>
@@ -508,6 +508,14 @@
                                         <p><b><center><u><?php echo session()->get('fullname'); ?></u></center></b></p>
                                         <p><center>Name/Signature</center></p>
                                     </div>
+                                    <?php foreach($list as $row): ?>
+                                    <div class="col-lg-3">
+                                        <label>Approved/Noted By:</label>
+                                        <center><img src="/Signatures/<?php echo $row->Signatures ?>" width="150"/></center>
+                                        <p><b><center><u><?php echo $row->Fullname ?></u></center></b></p>
+                                        <p><center><?php echo $row->Department ?></center></p>
+                                    </div>    
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
@@ -527,5 +535,32 @@
 		<script src="/assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="/assets/vendors/scripts/datatable-setting.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+        <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+        <script>
+            $('#download').on('click',function()
+            {
+                var HTML_Width = $("#pdf").width();
+                var HTML_Height = $("#pdf").height();
+                var top_left_margin = 15;
+                var PDF_Width = HTML_Width + (top_left_margin * 2);
+                var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);//* 1.5
+                var canvas_image_width = HTML_Width;
+                var canvas_image_height = HTML_Height;
+                    
+                var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+                    
+                html2canvas($("#pdf")[0]).then(function (canvas) {
+                    var imgData = canvas.toDataURL("image/jpeg", 1.0);
+                    var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+                    pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+                    for (var i = 1; i <= totalPDFPages; i++) { 
+                        pdf.addPage(PDF_Width, PDF_Height);
+                        pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+                    }
+                    pdf.save("PRF.pdf");
+                });
+            });
+        </script>
 	</body>
 </html>

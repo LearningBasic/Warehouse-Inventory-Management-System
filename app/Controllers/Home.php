@@ -1263,7 +1263,14 @@ class Home extends BaseController
         //items
         $OrderItemModel = new \App\Models\OrderItemModel();
         $items = $OrderItemModel->WHERE('OrderNo',$id)->findAll();
-        $data = ['purchase'=>$purchase,'code'=>$id,'items'=>$items];
+        //approver
+        $builder = $this->db->table('tblreview a');
+        $builder->select('b.Fullname,b.Department,b.Signatures');
+        $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+        $builder->WHERE('a.OrderNo',$id);
+        $list = $builder->get()->getResult();
+
+        $data = ['purchase'=>$purchase,'code'=>$id,'items'=>$items,'list'=>$list];
         return view('generate-prf',$data);
     }
 
