@@ -463,19 +463,54 @@
                         </div>
                         <?php if($purchase): ?>
                         <div class="row g-1">
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <label><b>Vessel/Port/Department :</b><u><?=$purchase['Department']?></u></label> 
                             </div>
-                            <div class="col-lg-4 text-center">
+                            <div class="col-lg-3 text-center">
                                 <label><b>Date Prepared :</b><u><?=$purchase['DatePrepared']?></u></label> 
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <label style="float:right;"><b>Date Needed :</b><u><?=$purchase['DateNeeded']?></u></label> 
                             </div>
                         </div>
-                        <table class="table nowrap">
-                           
+                        <table class="table table-bordered nowrap">
+                           <thead>
+                            <th>Item #</th>
+                            <th>Qty</th>
+                            <th>Unit</th>
+                            <th>Product Name</th>
+                            <th>Specification</th>
+                           </thead>
+                           <tbody>
+                            <?php $i = 1; ?>
+                            <?php foreach($items as $row): ?>
+                                <tr>
+                                    <td>
+                                        <?php echo $i;$i++; ?>
+                                    </td>
+                                    <td><?php echo $row['Qty'] ?></td>
+                                    <td><?php echo $row['ItemUnit'] ?></td>
+                                    <td><?php echo $row['Item_Name'] ?></td>
+                                    <td><?php echo $row['Specification']?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                           </tbody>
                         </table>
+                        <div class="row g-1">
+                            <div class="col-12 form-group">
+                                <label><b>Reason/Remarks</b></label>
+                                <textarea class="form-control"><?=$purchase['Reason']?></textarea>
+                            </div>
+                            <div class="col-12 form-group">
+                                <div class="row g-1">
+                                    <div class="col-lg-3">
+                                        <label>Requested By:</label>
+                                        <p><b><center><u><?php echo session()->get('fullname'); ?></u></center></b></p>
+                                        <p><center>Name/Signature</center></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <?php endif; ?> 
                     </div>
                 </div>

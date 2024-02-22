@@ -443,10 +443,11 @@
                         <?php endif; ?>
 						<table class="data-table table stripe hover nowrap">
 							<thead>
-								<th>Date</th>
+								<th>Date Received</th>
 								<th>PRF No</th>
 								<th>Requestor</th>
 								<th>Department</th>
+								<th>Reason</th>
 								<th>Date Needed</th>
 								<th>Status</th>
 								<th>Action Taken</th>
@@ -455,10 +456,11 @@
 							<tbody>
 								<?php foreach($list as $row): ?>
 									<tr>
-										<td><?php echo $row->DatePrepared ?></td>
+										<td><?php echo $row->Date ?></td>
 										<td><?php echo $row->OrderNo ?></td>
 										<td><?php echo $row->Fullname ?></td>
 										<td><?php echo $row->Department ?></td>
+										<td><?php echo $row->Reason ?></td>
 										<td><?php echo $row->DateNeeded ?></td>
 										<td>
 											<?php if($row->Remarks==4){ ?>

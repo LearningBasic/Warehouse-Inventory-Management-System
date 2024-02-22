@@ -874,7 +874,7 @@ class Home extends BaseController
     {
         $user = session()->get('loggedUser');
         $builder = $this->db->table('tblassignment a');
-        $builder->select('a.Status,b.prfID,b.OrderNo,b.DatePrepared,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID,d.Status as Remarks');
+        $builder->select('a.Status,b.prfID,b.OrderNo,a.Date,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID,d.Status as Remarks');
         $builder->join('tblprf b','b.prfID=a.prfID','LEFT');
         $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
         $builder->join('tblcanvass_form d','d.OrderNo=b.OrderNo','LEFT');
@@ -1260,7 +1260,10 @@ class Home extends BaseController
     {
         $purchaseModel = new \App\Models\purchaseModel();
         $purchase = $purchaseModel->WHERE('OrderNo',$id)->first();
-        $data = ['purchase'=>$purchase,'code'=>$id];
+        //items
+        $OrderItemModel = new \App\Models\OrderItemModel();
+        $items = $OrderItemModel->WHERE('OrderNo',$id)->findAll();
+        $data = ['purchase'=>$purchase,'code'=>$id,'items'=>$items];
         return view('generate-prf',$data);
     }
 
