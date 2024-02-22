@@ -1226,7 +1226,7 @@ class Purchase extends BaseController
 
         $validation = $this->validate([
             'datePrepared'=>'required','dateNeeded'=>'required',
-            'OrderNo'=>'required|is_unique[tblcanvass_form.OrderNo]','department'=>'required',
+            'OrderNo'=>'required','department'=>'required',
             'approver'=>'required',
         ]);
         if(!$validation)

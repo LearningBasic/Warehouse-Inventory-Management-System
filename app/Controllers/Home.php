@@ -1322,9 +1322,10 @@ class Home extends BaseController
         $builder->WHERE('a.Status',3)->WHERE('PurchaseType','Regular Purchase');
         $assign = $builder->get()->getResult();
         //account
+        $role = ['Staff','Administrator'];
         $builder = $this->db->table('tblaccount');
         $builder->select('*');
-        $builder->WHERE('systemRole','Staff');
+        $builder->WHEREIN('systemRole',$role);
         $account = $builder->get()->getResult();
         //purchase order
         $builder = $this->db->table('tblpurchase_review a');
@@ -1362,7 +1363,7 @@ class Home extends BaseController
     {
         $user = session()->get('loggedUser');
         $builder = $this->db->table('tblcanvass_review a');
-        $builder->select('a.DateReceived,a.Reference,b.DateNeeded,b.Department,a.Status,c.Fullname,b.OrderNo,a.accountID');
+        $builder->select('a.DateReceived,a.Reference,b.DateNeeded,b.Department,a.Status,c.Fullname,b.OrderNo,a.accountID,c.Department as Dept');
         $builder->join('tblcanvass_form b','b.Reference=a.Reference','LEFT');
         $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
         $builder->WHERE('a.accountID',$user);

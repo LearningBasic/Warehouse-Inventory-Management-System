@@ -443,6 +443,7 @@
                                 <th>PRF No</th>
 								<th>Requestor</th>
                                 <th>Department</th>
+								<th>To</th>
                                 <th>Date Needed</th>
                                 <th>Status</th>
                             </thead>
@@ -459,6 +460,7 @@
                                         </td>
 										<td><?php echo $row->OrderNo ?></td>
 										<td><?php echo $row->Fullname ?></td>
+										<td><?php echo $row->Dept ?></td>
 										<td><?php echo $row->Department ?></td>
 										<td><?php echo $row->DateNeeded ?></td>
 										<td>
