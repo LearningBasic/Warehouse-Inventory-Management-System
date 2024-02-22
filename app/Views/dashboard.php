@@ -584,7 +584,7 @@
 				</div>
 
 				<div class="row pb-10">
-					<div class="col-lg-7 form-group">
+					<div class="col-lg-8 form-group">
 						<div class="card-box pd-20">
 							<div class="card-title">
 								<div class="h5 mb-md-0">Inventory Value Per Product Name</div>
@@ -592,7 +592,7 @@
 							<div id="chartContainer" style="height:400px;"></div>
 						</div>
 					</div>
-					<div class="col-lg-5 form-group">
+					<div class="col-lg-4 form-group">
 						<div class="card-box pd-20">
 							<div class="card-title">
 								<div class="h5 mb-md-0">Volume Per Location</div>
