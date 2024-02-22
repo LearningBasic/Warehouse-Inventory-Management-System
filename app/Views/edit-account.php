@@ -492,7 +492,7 @@
                         <a href="<?=site_url('configuration')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                     </div>
                     <div class="card-body">
-                        <form method="post" class="row g-3" id="updateAccount" action="<?=base_url('update-account')?>">
+                        <form method="post" class="row g-3" id="updateAccount" enctype="multipart/form-data" action="<?=base_url('update-account')?>">
                             <input type="hidden" name="accountID" value="<?=$account['accountID']?>"/>
                             <div class="col-12 form-group">
                                 <div class="row g-3">
@@ -516,8 +516,8 @@
                                         <label>Status</label>
                                         <select class="form-control" name="status">
                                             <option value="">Choose</option>
-                                            <option value="1">Active</option>
-                                            <option value="0">Inactive</option>
+                                            <option <?php if($account['Status']==1) echo 'selected="selected"'; ?> value="1">Active</option>
+                                            <option <?php if($account['Status']==0) echo 'selected="selected"'; ?> value="0">Inactive</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-4">
@@ -533,6 +533,10 @@
                                     </div>
                                 </div>
                             </div>
+							<div  class="col-12 form-group">
+								<label>Upload Signature</label>
+								<input type="file" name="file" class="form-control"/>
+							</div>
                             <div class="col-12 form-group">
                                 <input type="submit" class="btn btn-primary" onclick="return confirm('Do you want to continue modifying the records?')" value="Save Changes"/>
                             </div>

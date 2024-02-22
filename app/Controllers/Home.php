@@ -989,9 +989,21 @@ class Home extends BaseController
         $username = $this->request->getPost('username');
         $role = $this->request->getPost('systemRole');
         $status = $this->request->getPost('status');
-        $values = 
-            ['username'=>$username,'Fullname'=>$fullname,'Email'=>$email,'Status'=>$status,'systemRole'=>$role];
-        $accountModel->update($id,$values);
+        $file = $this->request->getFile('file');
+        $originalName = $file->getClientName();
+        if(empty($originalName))
+        {
+            $values = 
+                ['username'=>$username,'Fullname'=>$fullname,'Email'=>$email,'Status'=>$status,'systemRole'=>$role];
+            $accountModel->update($id,$values);
+        }
+        else
+        {
+            $values = 
+                ['username'=>$username,'Fullname'=>$fullname,'Email'=>$email,'Status'=>$status,'systemRole'=>$role,'Signatures'=>$originalName];
+            $accountModel->update($id,$values);
+            $file->move('Signatures/',$originalName);
+        }
         session()->setFlashdata('success','Great! Successfully updated');
         return redirect()->to('/configuration')->withInput();
     }
