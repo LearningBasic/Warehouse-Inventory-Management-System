@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 use App\Libraries\Hash;
-
+header('Access-Control-Allow-Origin: *');
 class Dashboard extends BaseController
 {
     private $db;
