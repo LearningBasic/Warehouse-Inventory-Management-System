@@ -372,7 +372,7 @@
 								<li><a href="<?=site_url('approve-orders')?>" class="active">For Approval&nbsp;<span class="badge badge-pill bg-primary text-white" id="notifications">0</span></a></li>
 								<li><a href="<?=site_url('canvass-sheet-request')?>">Canvass Sheet&nbsp;<span class="badge badge-pill bg-primary text-white" id="notif">0</span></a></li>
 								<?php } ?>
-								<?php if(session()->get('role')=="Staff"){?>
+								<?php if(session()->get('role')=="Staff"||session()->get('role')=="Administrator"){?>
 								<li><a href="<?=site_url('assign')?>">Assigned PRF</a></li>
 								<li><a href="<?=site_url('local-purchase')?>">Local Purchase</a></li>
 								<li><a href="<?=site_url('purchase-order')?>">Purchase Order</a></li>

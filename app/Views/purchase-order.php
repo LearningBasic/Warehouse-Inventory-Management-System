@@ -365,7 +365,7 @@
 							<ul class="submenu">
                                 <li><a href="<?=site_url('orders')?>">Order Materials</a></li>
 								<li><a href="<?=site_url('list-orders')?>">List Order</a></li>
-								<?php if(session()->get('role')=="Staff"){?>
+								<?php if(session()->get('role')=="Staff"||session()->get('role')=="Administrator"){?>
 								<li><a href="<?=site_url('assign')?>">Assigned PRF</a></li>
 								<li><a href="<?=site_url('local-purchase')?>">Local Purchase</a></li>
 								<li><a href="<?=site_url('purchase-order')?>" class="active">Purchase Order</a></li>

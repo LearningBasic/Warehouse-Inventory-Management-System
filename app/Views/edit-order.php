@@ -348,7 +348,7 @@
                                 <li><a href="<?=site_url('orders')?>">Order Materials</a></li>
 								<li><a href="<?=site_url('list-orders')?>">List Order</a></li>
 								<li><a href="javascript:void(0);" class="active">Edit Orders</a></li>
-								<?php if(session()->get('role')=="Staff"){?>
+								<?php if(session()->get('role')=="Staff"||session()->get('role')=="Administrator"){?>
 								<li><a href="<?=site_url('local-purchase')?>">Local Purchase</a></li>
 								<li><a href="<?=site_url('purchase-order')?>">Purchase Order</a></li>
 								<?php } ?>
