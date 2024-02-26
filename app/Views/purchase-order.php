@@ -476,8 +476,8 @@
 											<span class="badge bg-success text-white">APPROVED</span>
 										<?php }else if($row->Status==2){ ?>
 											<span class="badge bg-danger text-white">DECLINED</span>
-										<?php }else { ?>
-											-
+										<?php }else if($row->Status==0) { ?>
+											<span class="badge bg-info text-white">CREATED</span>
 										<?php }?>
 									</td>
                                     <td>
