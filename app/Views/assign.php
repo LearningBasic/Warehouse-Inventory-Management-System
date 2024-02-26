@@ -488,6 +488,7 @@
 											<?php }else{ ?>
 												<a href="create/<?php echo $row->OrderNo ?>" class="btn btn-primary btn-sm"><span class="dw dw-add"></span></a>
 												<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-warning btn-sm"><span class="dw dw-edit-1"></span></a>
+												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span></button>
 											<?php } ?>
 										</td>
 									</tr>
