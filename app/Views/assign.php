@@ -352,6 +352,10 @@
 							<ul class="submenu">
                                 <li><a href="<?=site_url('orders')?>">Order Materials</a></li>
 								<li><a href="<?=site_url('list-orders')?>">List Order</a></li>
+								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
+								<li><a href="<?=site_url('approve-orders')?>">For Approval&nbsp;<span class="badge badge-pill bg-primary text-white" id="notifications">0</span></a></li>
+								<li><a href="<?=site_url('canvass-sheet-request')?>">Canvass Sheet&nbsp;<span class="badge badge-pill bg-primary text-white" id="notif">0</span></a></li>
+								<?php } ?>
 								<?php if(session()->get('role')=="Staff"||session()->get('role')=="Administrator"){?>
 								<li><a href="<?=site_url('assign')?>" class="active">Assigned PRF</a></li>
 								<li><a href="<?=site_url('local-purchase')?>">Local Purchase</a></li>
@@ -522,6 +526,7 @@
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
+			$(document).ready(function(){notify();});
             $(document).on('click','.accept',function(e)
             {
                 e.preventDefault();
@@ -578,6 +583,31 @@
 			elem.setAttribute("href", url);
 			elem.setAttribute("download","order-list.xls"); // Choose the file name
 			return false;
+			}
+
+			function notify()
+			{
+				$.ajax({
+					url:"<?=site_url('notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notifications').html(response);
+					}
+				});
+				$.ajax({
+					url:"<?=site_url('canvas-notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notif').html(response);
+					}
+				});
+				$.ajax({
+					url:"<?=site_url('total-notification')?>",method:"GET",
+					success:function(response)
+					{
+						$('#notification').html(response);
+					}
+				});
 			}
         </script>
 	</body>
