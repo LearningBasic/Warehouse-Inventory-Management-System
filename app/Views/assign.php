@@ -449,6 +449,7 @@
 							<thead>
 								<th>Date Received</th>
 								<th>PRF No</th>
+								<th>Assigned To</th>
 								<th>Requestor</th>
 								<th>Department</th>
 								<th>Reason</th>
@@ -462,6 +463,7 @@
 									<tr>
 										<td><?php echo $row->Date ?></td>
 										<td><?php echo $row->OrderNo ?></td>
+										<td><?php echo $row->Staff ?></td>
 										<td><?php echo $row->Fullname ?></td>
 										<td><?php echo $row->Department ?></td>
 										<td><?php echo $row->Reason ?></td>

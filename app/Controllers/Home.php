@@ -873,10 +873,11 @@ class Home extends BaseController
     public function Assign()
     {
         $builder = $this->db->table('tblassignment a');
-        $builder->select('a.Status,b.prfID,b.OrderNo,a.Date,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID,d.Status as Remarks');
+        $builder->select('a.Status,b.prfID,b.OrderNo,a.Date,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID,d.Status as Remarks,e.Fullname as Staff');
         $builder->join('tblprf b','b.prfID=a.prfID','LEFT');
         $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
         $builder->join('tblcanvass_form d','d.OrderNo=b.OrderNo','LEFT');
+        $builder->join('tblaccount e','e.accountID=a.accountID','LEFT');
         $builder->groupby('a.assignID');
         $list = $builder->get()->getResult();
         $data = ['list'=>$list];
