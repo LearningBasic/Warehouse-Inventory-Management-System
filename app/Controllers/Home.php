@@ -890,7 +890,14 @@ class Home extends BaseController
         $builder->select('*');
         $builder->WHERE('OrderNo',$id);
         $item = $builder->get()->getResult();
-        $data = ['item'=>$item,'PRF'=>$id];
+        //planner
+        $role = ['Planner'];
+        $builder = $this->db->table('tblaccount');
+        $builder->select('*');
+        $builder->WHEREIN('systemRole',$role)->WHERE('Status',1);
+        $account = $builder->get()->getResult();
+
+        $data = ['item'=>$item,'PRF'=>$id,'account'=>$account];
         return view('edit-order',$data);
     }
 

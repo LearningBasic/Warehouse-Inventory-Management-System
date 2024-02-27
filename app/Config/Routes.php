@@ -71,6 +71,7 @@ $routes->post('save-entry','Purchase::saveEntry');
 $routes->post('add-comment','Purchase::addComment');
 $routes->post('update-orders','Purchase::updateOrder');
 $routes->post('delete-item','Purchase::deleteItem');
+$routes->post('send-item','Purchase::sendItem');
 //fetch the product details
 $routes->get('product-information','ProductController::productInfo');
 $routes->post('save-report','ProductController::saveReport');

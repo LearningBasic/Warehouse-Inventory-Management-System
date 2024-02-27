@@ -507,6 +507,9 @@
 								<label>Inventory Planner</label>
 								<select class="form-control custom-select2" style="width:100%;" name="planner">
 									<option value="">Choose</option>
+									<?php foreach($account as $row): ?>
+										<option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?></option>
+									<?php endforeach; ?>
 								</select>
 							</div>
 							<div class="col-12 form-group">
@@ -574,6 +577,22 @@
 				e.preventDefault();
 				var data = $('#frmPlanner').serialize();
 				$(this).attr("value","Sending...");
+				$.ajax({
+					url:"<?=site_url('send-item')?>",method:"POST",
+					data:data,
+					success:function(response)
+					{
+						if(response==="success")
+						{
+							location.reload();
+						}
+						else
+						{
+							alert(response);
+						}
+						$('#btnSend').attr("value","Send");
+					}
+				});
 			});
 		</script>
 	</body>

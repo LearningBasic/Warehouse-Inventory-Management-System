@@ -11,6 +11,21 @@ class Purchase extends BaseController
         $this->db = db_connect();
     }
 
+    public function sendItem()
+    {
+        $val = $this->request->getPost('item');
+        $planner = $this->request->getPost('planner');
+        //send to the planner
+        
+        //send email notification
+
+        //remove the item
+        $builder = $this->db->table('tbl_order_item');
+        $builder->WHERE('orderID',$val);
+        $builder->delete();
+        echo "success";
+    }
+
     public function deleteItem()
     {
         $val = $this->request->getPost('value');
