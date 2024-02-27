@@ -11,6 +11,16 @@ class Purchase extends BaseController
         $this->db = db_connect();
     }
 
+    public function acceptItem()
+    {
+        $issuanceModel = new \App\Models\issuanceModel();
+        //data
+        $val = $this->request->getPost('value');
+        $values = ['Status'=>1];
+        $issuanceModel->update($val,$values);
+        echo "success";
+    }
+
     public function sendItem()
     {
         $issuanceModel = new \App\Models\issuanceModel();

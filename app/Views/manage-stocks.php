@@ -577,11 +577,14 @@
 													<td>
 														<?php if($row->Status==0){ ?>
 															<span class="badge bg-warning text-white">WAITING</span>
-														<?php }else { ?>
+														<?php }else if($row->Status==1){ ?>
 															<span class="badge bg-success text-white">DONE</span>
+														<?php }else{ ?>
+															-
 														<?php } ?>
 													</td>
 													<td>
+														<?php if($row->Status==0){ ?>
 														<div class="dropdown">
 															<a class="btn btn-primary btn-sm dropdown-toggle"
 																href="#" role="button" data-toggle="dropdown">
@@ -592,6 +595,7 @@
 																<button type="button" class="dropdown-item return" value="<?php echo $row->issuanceID ?>"><span class="dw dw-undo"></span>&nbsp;Return</button>
 															</div>
 														</div>
+														<?php }else{ ?>-<?php } ?>
 													</td>
 												</tr>
 											<?php endforeach; ?>
@@ -808,6 +812,38 @@
 						var val = $(this).val();
 						$.ajax({
 							url:"<?=site_url('cancel-transfer')?>",method:"POST",
+							data:{value:val},success:function(response)
+							{
+								if(response==="success")
+								{
+									location.reload();
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
+					}
+				});
+			});
+
+			$(document).on('click','.accept',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to accept this selected request?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						$.ajax({
+							url:"<?=site_url('accept-item')?>",method:"POST",
 							data:{value:val},success:function(response)
 							{
 								if(response==="success")

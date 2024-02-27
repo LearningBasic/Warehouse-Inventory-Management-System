@@ -188,7 +188,7 @@ class Home extends BaseController
         $total=0;
         $builder = $this->db->table('tblissuance');
         $builder->select('COUNT(*)total');
-        $builder->WHERE('accountID',$user);
+        $builder->WHERE('accountID',$user)->WHERE('Status',0);
         $list = $builder->get();
         if($row = $list->getRow())
         {
