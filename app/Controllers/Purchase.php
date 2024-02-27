@@ -11,6 +11,15 @@ class Purchase extends BaseController
         $this->db = db_connect();
     }
 
+    public function deleteItem()
+    {
+        $val = $this->request->getPost('value');
+        $builder = $this->db->table('tbl_order_item');
+        $builder->WHERE('orderID',$val);
+        $builder->delete();
+        echo "success";
+    }
+
     public function listEditor()
     {
         $role = ['Editor','Administrator'];

@@ -455,6 +455,7 @@
                                         <th class="bg-primary text-white">Unit of Measure</th>
                                         <th class="bg-primary text-white">Product Name</th>
                                         <th class="bg-primary text-white">Specification</th>
+										<th class="bg-primary text-white">Action</th>
                                     </thead>
                                     <tbody>
                                     <?php foreach($item as $row): ?>
@@ -464,6 +465,7 @@
                                             <td><input type='text' class='form-control' value="<?php echo $row->ItemUnit ?>" name='item[]'/></td>
                                             <td><input type='text' class='form-control' value="<?php echo $row->Item_Name ?>" name='item_name[]'/></td>
                                             <td><input type='text' class='form-control' value="<?php echo $row->Specification ?>" name='specification[]'/></td>
+											<td><button type="button" class="btn btn-danger btn-sm delete" value="<?php echo $row->orderID ?>"><span class="dw dw-trash"></span></button></td>
                                         </tr>
                                     <?php endforeach; ?>
                                     </tbody>
@@ -488,5 +490,38 @@
 		<script src="../assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="../assets/vendors/scripts/datatable-setting.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script>
+			$(document).on('click','.delete',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to delete this selected item?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						$.ajax({
+							url:"<?=site_url('delete-item')?>",method:"POST",
+							data:{value:val},success:function(response)
+							{
+								if(response==="success")
+								{
+									location.reload();
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
