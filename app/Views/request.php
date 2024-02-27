@@ -463,7 +463,7 @@
                     <div class="col-lg-3 form-group">
                         <div class="card-box">
                             <div class="card-body">
-                                <label><b>Transfer Item(s)</b></label>
+                                <label><b>Issued Item(s)</b></label>
                                 <h1 id="totalPendingTransferItem">0</h1>
                                 <a href="javascript:void(0);" id="viewTransferItems" class="btn btn-outline-primary btn-sm">View</a>
                             </div>
@@ -567,7 +567,7 @@
                     </div>
                 </div>
                 <div class="card-box" id="transferReport" style="display:none;">
-                    <div class="card-header">For Transfer</div>
+                    <div class="card-header">For Issuance</div>
                     <div class="card-body">
                         <table class="data-table table stripe hover nowrap">
                             <thead>

@@ -465,7 +465,18 @@
                                             <td><input type='text' class='form-control' value="<?php echo $row->ItemUnit ?>" name='item[]'/></td>
                                             <td><input type='text' class='form-control' value="<?php echo $row->Item_Name ?>" name='item_name[]'/></td>
                                             <td><input type='text' class='form-control' value="<?php echo $row->Specification ?>" name='specification[]'/></td>
-											<td><button type="button" class="btn btn-danger btn-sm delete" value="<?php echo $row->orderID ?>"><span class="dw dw-trash"></span></button></td>
+											<td>
+												<div class="dropdown">
+													<a class="btn btn-primary btn-sm dropdown-toggle"
+														href="#" role="button" data-toggle="dropdown">
+														SELECT
+													</a>
+													<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+														<button type="button" class="dropdown-item delete" value="<?php echo $row->orderID ?>"><span class="dw dw-trash"></span>&nbsp;Delete</button>
+														<button type="button" class="dropdown-item send" value="<?php echo $row->orderID ?>"><span class="dw dw-message-1"></span>&nbsp;Send</button>
+													</div>
+												</div>
+											</td>
                                         </tr>
                                     <?php endforeach; ?>
                                     </tbody>
@@ -519,6 +530,25 @@
 								}
 							}
 						});
+					}
+				});
+			});
+
+			$(document).on('click','.send',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Would you like to send this selected item?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						
 					}
 				});
 			});
