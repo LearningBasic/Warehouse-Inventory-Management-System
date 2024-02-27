@@ -490,6 +490,33 @@
                 </div>
 			</div>
 		</div>
+
+		<div class="modal fade" id="plannerModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myLargeModalLabel">
+							Send to Planner
+						</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					</div>
+					<div class="modal-body">
+						<form method="POST" class="row g-3" id="frmPlanner">
+							<input type="hidden" name="item" id="item"/>
+							<div class="col-12 form-group">
+								<label>Inventory Planner</label>
+								<select class="form-control custom-select2" style="width:100%;" name="planner">
+									<option value="">Choose</option>
+								</select>
+							</div>
+							<div class="col-12 form-group">
+								<input type="submit" class="form-control btn btn-primary text-white" id="btnSend" value="Send"/>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- js -->
 		<script src="../assets/vendors/scripts/core.js"></script>
 		<script src="../assets/vendors/scripts/script.min.js"></script>
@@ -537,20 +564,16 @@
 			$(document).on('click','.send',function(e)
 			{
 				e.preventDefault();
-				Swal.fire({
-					title: "Are you sure?",
-					text: "Would you like to send this selected item?",
-					icon: "question",
-					showCancelButton: true,
-					confirmButtonColor: "#3085d6",
-					cancelButtonColor: "#d33",
-					confirmButtonText: "Yes!"
-					}).then((result) => {
-					if (result.isConfirmed) {
-						var val = $(this).val();
-						
-					}
-				});
+				var val = $(this).val();
+				$('#plannerModal').modal('show');
+				$('#item').attr("value",val);
+			});
+
+			$('#btnSend').on('click',function(e)
+			{
+				e.preventDefault();
+				var data = $('#frmPlanner').serialize();
+				$(this).attr("value","Sending...");
 			});
 		</script>
 	</body>
