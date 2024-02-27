@@ -551,7 +551,11 @@ class Purchase extends BaseController
         {
             ?>
             <div class="form-group">
-                <a href="Attachment/<?php echo $file ?>" class="btn btn-outline-primary btn-sm" target="_blank"><span class="dw dw-paperclip"></span>PRF Attachment</a>
+                <?php if(empty($file)){ ?>
+                    <a href="javascript:void(0);" class="btn btn-outline-primary btn-sm"><span class="dw dw-paperclip"></span>No Attachment</a>
+                <?php } else {?>
+                    <a href="Attachment/<?php echo $file ?>" class="btn btn-outline-primary btn-sm" target="_blank"><span class="dw dw-paperclip"></span>PRF Attachment</a>
+                <?php } ?>
                 <a href="Canvass/<?php echo $row->Attachment ?>" class="btn btn-outline-primary btn-sm" target="_blank"><span class="dw dw-paperclip"></span>Quotation</a>
             </div>
             <?php
