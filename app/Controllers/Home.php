@@ -1343,7 +1343,7 @@ class Home extends BaseController
         $role = ['Staff','Administrator'];
         $builder = $this->db->table('tblaccount');
         $builder->select('*');
-        $builder->WHEREIN('systemRole',$role);
+        $builder->WHEREIN('systemRole',$role)->WHERE('Status',1);
         $account = $builder->get()->getResult();
         //purchase order
         $builder = $this->db->table('tblpurchase_review a');

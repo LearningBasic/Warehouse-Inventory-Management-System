@@ -3,7 +3,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>Transfer Item</title>
+		<title>Issuance</title>
 
 		<!-- Site favicon -->
 		<link
@@ -332,7 +332,7 @@
                             <i class="micon dw dw-server"></i><span class="mtext">Inventory</span>
 							</a>
 							<ul class="submenu">
-								<li><a href="<?=site_url('transfer')?>" class="active">Transfer Item</a></li>
+								<li><a href="javascript:void(0);" class="active">Issuance</a></li>
 								<li><a href="<?=site_url('add')?>">Add Item</a></li>
 								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Planner"){ ?>
 								<li><a href="<?=site_url('manage')?>">Manage Stocks</a></li>
@@ -420,7 +420,7 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header"><span class="icon-copy dw dw-message-1"></span>&nbsp;Transfer Product/Item
+					<div class="card-header"><span class="icon-copy dw dw-message-1"></span>&nbsp;Issuance
                         <a href="<?=site_url('stocks')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                     </div>
 					<div class="card-body">

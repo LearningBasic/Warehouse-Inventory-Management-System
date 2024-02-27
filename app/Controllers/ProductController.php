@@ -830,6 +830,27 @@ class ProductController extends BaseController
         ?>
         </table>
         <br/>
+        <?php
+        $builder = $this->db->table('tblprf');
+        $builder->select('Attachment');
+        $builder->WHERE('OrderNo',$row->OrderNo);
+        $data = $builder->get();
+        if($rows = $data->getRow())
+        {
+            if(empty($rows->Attachment)||$rows->Attachment=="N/A")
+            {
+                ?>
+                <p><center>No PRF Attachment</center></p>
+                <?php
+            }
+            else
+            {
+            ?>
+            <a href="Attachment/<?php echo $rows->Attachment ?>" class="btn btn-link" target="_blank"><span class="dw dw-paperclip"></span> <?php echo $rows->Attachment ?></a>
+            <?php
+            }
+        }
+         ?>
         <a href="Canvass/<?php echo $row->Attachment ?>" class="btn btn-link form-control" target="_blank"><span class="dw dw-paperclip"></span> <?php echo $row->Attachment ?></a>
         <?php
     }
