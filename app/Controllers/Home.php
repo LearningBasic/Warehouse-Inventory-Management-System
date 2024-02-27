@@ -178,18 +178,22 @@ class Home extends BaseController
 
     public function manageStocks()
     {
-        //damaged item
-        $builder = $this->db->table('tbldamageitem a');
-        $builder->select('a.*,b.productName,c.Fullname');
-        $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
-        $builder->join('tblaccount c','c.accountID=a.accountID','LEFT');
-        $item = $builder->get()->getResult();
-        //repair item
-        $builder = $this->db->table('tblrepairitem a');
-        $builder->select('a.*,b.productName,c.Fullname');
-        $builder->join('tblinventory b','b.inventID=a.inventID','LEFT');
-        $builder->join('tblaccount c','c.accountID=a.accountID','LEFT');
-        $archive = $builder->get()->getResult();
+        $user = session()->get('loggedUser');
+        //for release
+        $builder = $this->db->table('tblissuance');
+        $builder->select('*');
+        $builder->WHERE('accountID',$user);
+        $release = $builder->get()->getResult();
+        //count item
+        $total=0;
+        $builder = $this->db->table('tblissuance');
+        $builder->select('COUNT(*)total');
+        $builder->WHERE('accountID',$user);
+        $list = $builder->get();
+        if($row = $list->getRow())
+        {
+            $total = $row->total;
+        }
         //transfer item
         $builder = $this->db->table('tbltransferitem');
         $builder->select('*');
@@ -199,7 +203,7 @@ class Home extends BaseController
         $builder->select('*');
         $product = $builder->get()->getResult();
 
-        $data = ['items'=>$item,'archive'=>$archive,'transfer'=>$transfer,'product'=>$product];
+        $data = ['transfer'=>$transfer,'product'=>$product,'release'=>$release,'total'=>$total];
         return view('manage-stocks',$data);
     }
 

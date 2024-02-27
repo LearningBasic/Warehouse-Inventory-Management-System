@@ -470,7 +470,7 @@
 										href="#others6"
 										role="tab"
 										aria-selected="false"
-										>Purchase Requisition <span class="badge bg-primary text-white" id="notification_approval">0</span></a
+										>Purchase Requisition <span class="badge bg-primary btn-sm text-white" id="notification_approval">0</span></a
 									>
 								</li>
 								<?php if(session()->get('role')=="Administrator"){ ?>
@@ -491,7 +491,7 @@
 										href="#purchase"
 										role="tab"
 										aria-selected="false"
-										>Purchase Order <span class="badge bg-primary text-white" id="notification_po">0</span></a
+										>Purchase Order <span class="badge bg-primary btn-sm text-white" id="notification_po">0</span></a
 									>
 								</li>
 								<?php } ?>

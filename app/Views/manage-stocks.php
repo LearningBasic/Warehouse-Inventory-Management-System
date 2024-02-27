@@ -471,7 +471,12 @@
 										href="#forRelease"
 										role="tab"
 										aria-selected="false"
-										>For Release <span class="badge bg-primary text-white" id="item_notification">0</span></a>
+										>For Release 
+										<span class="badge bg-primary text-white" id="item_notification">
+										<?php if($total): ?>
+											<?php echo $total ?>
+										<?php endif; ?>
+										</span></a>
 								</li>
 								<li class="nav-item">
 									<a
@@ -496,7 +501,7 @@
 											<th>Status</th>
 											<th>Delivery via</th>
 											<th>Track #/Driver</th>
-											<th><span class="dw dw-more"></span></th>
+											<th>Action</th>
 										</thead>
 										<tbody>
 											<?php if($transfer): ?>
@@ -548,6 +553,50 @@
 									</table>
 								</div>
 								<div class="tab-pane fade" id="forRelease" role="tabpanel">
+								<br/>
+									<table class="data-table table stripe hover nowrap">
+										<thead>
+											<th>Date Received</th>
+											<th>Order No</th>
+											<th>Product Name</th>
+											<th>Item Unit</th>
+											<th>Qty</th>
+											<th>Specification</th>
+											<th>Status</th>
+											<th>Action</th>
+										</thead>
+										<tbody>
+											<?php foreach($release as $row): ?>
+												<tr>
+													<td><?php echo $row->DateReceived ?></td>
+													<td><?php echo $row->OrderNo ?></td>
+													<td><?php echo $row->Item_Name ?></td>
+													<td><?php echo $row->ItemUnit ?></td>
+													<td><?php echo $row->Qty ?></td>
+													<td><?php echo $row->Specification ?></td>
+													<td>
+														<?php if($row->Status==0){ ?>
+															<span class="badge bg-warning text-white">WAITING</span>
+														<?php }else { ?>
+															<span class="badge bg-success text-white">DONE</span>
+														<?php } ?>
+													</td>
+													<td>
+														<div class="dropdown">
+															<a class="btn btn-primary btn-sm dropdown-toggle"
+																href="#" role="button" data-toggle="dropdown">
+																SELECT
+															</a>
+															<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+																<button type="button" class="dropdown-item accept" value="<?php echo $row->issuanceID ?>"><span class="dw dw-check"></span>&nbsp;Accept</button>
+																<button type="button" class="dropdown-item return" value="<?php echo $row->issuanceID ?>"><span class="dw dw-undo"></span>&nbsp;Return</button>
+															</div>
+														</div>
+													</td>
+												</tr>
+											<?php endforeach; ?>
+										</tbody>
+									</table>
 								</div>
 								<div class="tab-pane fade" id="addstock" role="tabpanel">
 									<br/>
