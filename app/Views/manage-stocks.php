@@ -462,8 +462,16 @@
 										href="#others6"
 										role="tab"
 										aria-selected="false"
-										>Transfer Items</a
-									>
+										>Issued/Released Items</a>
+								</li>
+								<li class="nav-item">
+									<a
+										class="nav-link text-blue"
+										data-toggle="tab"
+										href="#forRelease"
+										role="tab"
+										aria-selected="false"
+										>For Release <span class="badge bg-primary text-white" id="item_notification">0</span></a>
 								</li>
 								<li class="nav-item">
 									<a
@@ -472,8 +480,7 @@
 										href="#addstock"
 										role="tab"
 										aria-selected="false"
-										>Add Stocks</a
-									>
+										>Add Stocks</a>
 								</li>
 							</ul>
 							<div class="tab-content">
@@ -539,6 +546,8 @@
 											<?php endif; ?>
 										</tbody>
 									</table>
+								</div>
+								<div class="tab-pane fade" id="forRelease" role="tabpanel">
 								</div>
 								<div class="tab-pane fade" id="addstock" role="tabpanel">
 									<br/>
