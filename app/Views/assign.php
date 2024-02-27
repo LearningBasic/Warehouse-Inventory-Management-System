@@ -469,28 +469,36 @@
 										<td><?php echo $row->Reason ?></td>
 										<td><?php echo $row->DateNeeded ?></td>
 										<td>
-											<?php if($row->Remarks==4){ ?>
-												<span class="badge bg-success text-white">APPROVED</span>
-											<?php }else{ ?>
-												<span class="badge bg-warning text-white">PROCESSING</span>
+											<?php if($row->Status==0||$row->Status==1){ ?>
+												<?php if($row->Remarks==4){ ?>
+													<span class="badge bg-success text-white">APPROVED</span>
+												<?php }else{ ?>
+													<span class="badge bg-warning text-white">PROCESSING</span>
+												<?php } ?>
+											<?php }else { ?>
+												-
 											<?php } ?>
 										</td>
 										<td>
 											<?php if($row->Status==0){ ?>
 												<span class="badge bg-warning text-white">WAITING</span>
-											<?php }else{ ?>
+											<?php }else if($row->Status==1){ ?>
 												<span class="badge bg-success text-white">ACCEPTED</span>
+											<?php }else{ ?>
+												<span class="badge bg-danger text-white">DECLINED</span>
 											<?php } ?>
 										</td>
 										<td>
 											<?php if($row->Status==0){ ?>
 												<button type="button" class="btn btn-primary btn-sm accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span></button>
-												<button type="button" class="btn btn-danger btn-sm revision"><span class="dw dw-repeat1"></span></button>
+												<button type="button" class="btn btn-danger btn-sm revision" value="<?php echo $row->OrderNo ?>"><span class="dw dw-repeat1"></span></button>
 												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span></button>
-											<?php }else{ ?>
+											<?php }else if($row->Status==1){ ?>
 												<a href="create/<?php echo $row->OrderNo ?>" class="btn btn-primary btn-sm"><span class="dw dw-add"></span></a>
 												<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-warning btn-sm"><span class="dw dw-edit-1"></span></a>
 												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span></button>
+											<?php }else { ?>
+												-
 											<?php } ?>
 										</td>
 									</tr>
@@ -575,6 +583,45 @@
 					{
 						$('#viewModal').modal('show');
 						$('#result').html(response);
+					}
+				});
+			});
+
+			$(document).on('click','.revision',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to cancel this selected request?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						var message = prompt("Enter your comment to cancel");
+						if(message==="")
+						{
+							alert("Invalid! Please try again");
+						}
+						else{
+							$.ajax({
+								url:"<?=site_url('cancel-purchase')?>",method:"POST",
+								data:{value:val,message:message},success:function(response)
+								{
+									if(response==="success")
+									{
+										location.reload();
+									}
+									else
+									{
+										alert(response);
+									}
+								}
+							});
+						}
 					}
 				});
 			});

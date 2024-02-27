@@ -13,12 +13,42 @@ class Purchase extends BaseController
 
     public function sendItem()
     {
+        $issuanceModel = new \App\Models\issuanceModel();
+        $accountModel = new \App\Models\accountModel();
+        $OrderItemModel = new \App\Models\OrderItemModel();
+        //data
         $val = $this->request->getPost('item');
         $planner = $this->request->getPost('planner');
+        //get the details of the item
+        $items = $OrderItemModel->WHERE('orderID',$val)->first();
         //send to the planner
-        
+        $values = [
+            'accountID'=>$planner,'DateReceived'=>date('Y-m-d'),
+            'Qty'=>$items['Qty'],'ItemUnit'=>$items['ItemUnit'],'Item_Name'=>$items['Item_Name'],
+            'Specification'=>$items['Specification'],'OrderNo'=>$items['OrderNo'],'Status'=>0];
+        $issuanceModel->save($values);
         //send email notification
-
+        $account = $accountModel->WHERE('accountID',$planner)->first();
+        $email = \Config\Services::email();
+        $email->setTo($account['Email'],$account['Fullname']);
+        $email->setFrom("fastcat.system@gmail.com","FastCat");
+        $imgURL = "assets/img/fastcat.png";
+        $email->attach($imgURL);
+        $cid = $email->setAttachmentCID($imgURL);
+        $template = "<center>
+        <img src='cid:". $cid ."' width='100'/>
+        <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+        <tr><td><center><h1>For Issuance</h1></center></td></tr>
+        <tr><td><center>Hi, ".$account['Fullname']."</center></td></tr>
+        <tr><td><center>This is from FastCat System, sending you a reminder that the item : ".$items['Item_Name']." is subject for issuance.</center></td></tr>
+        <tr><td><p><center>Kindly create a issuance form to deliver the item to the respective area.</center></p></td><tr>
+        <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+        <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+        <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+        $subject = "Issuance of Item";
+        $email->setSubject($subject);
+        $email->setMessage($template);
+        $email->send();
         //remove the item
         $builder = $this->db->table('tbl_order_item');
         $builder->WHERE('orderID',$val);
@@ -932,6 +962,55 @@ class Purchase extends BaseController
             ];
             $systemLogsModel->save($values);
         }
+        echo "success";
+    }
+
+    public function CancelPurchase()
+    {
+        $systemLogsModel = new \App\Models\systemLogsModel();
+        $purchaseModel = new \App\Models\purchaseModel();
+        $accountModel = new \App\Models\accountModel();
+        $assignmentModel = new \App\Models\assignmentModel();
+        //data
+        $val = $this->request->getPost('value');
+        $msg = $this->request->getPost('message');
+        $user = session()->get('loggedUser');
+        //update
+        $purchase = $purchaseModel->WHERE('OrderNo',$val)->first();
+        $value = ['Status'=>2];
+        $purchaseModel->update($purchase['prfID'],$value);
+        //update the assigned PRF
+        $assign = $assignmentModel->WHERE('prfID',$purchase['prfID'])->first();
+        $values = ['Status'=>2];
+        $assignmentModel->update($assign['assignID'],$values);
+        //send an email to the requestor
+        $account = $accountModel->WHERE('accountID',$purchase['accountID'])->first();
+        $email = \Config\Services::email();
+        $email->setTo($account['Email'],$account['Fullname']);
+        $email->setFrom("fastcat.system@gmail.com","FastCat");
+        $imgURL = "assets/img/fastcat.png";
+        $email->attach($imgURL);
+        $cid = $email->setAttachmentCID($imgURL);
+        $template = "<center>
+        <img src='cid:". $cid ."' width='100'/>
+        <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+        <tr><td><center><h1>For Issuance</h1></center></td></tr>
+        <tr><td><center>Hi, ".$account['Fullname']."</center></td></tr>
+        <tr><td><center>This is from FastCat System, sending you a message that your request PRF No : ".$val." has been rejected.</center></td></tr>
+        <tr><td><p><center>Please see the comment below :</center></p></td><tr>
+        <tr><td><p><center>Reason : ".$msg."</center></p></td><tr>
+        <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+        <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+        <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+        $subject = "Declined PRF";
+        $email->setSubject($subject);
+        $email->setMessage($template);
+        $email->send();
+        //system logs
+        $values = [
+            'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Cancelled '.$val
+        ];
+        $systemLogsModel->save($values);
         echo "success";
     }
 

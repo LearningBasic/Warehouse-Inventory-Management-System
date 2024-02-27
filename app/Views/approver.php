@@ -687,7 +687,7 @@
 								</select>
                             </div>
                             <div class="col-12 form-group">
-                                <button type="submit" class="btn btn-primary" id="btnSave">Submit</button>
+                                <input type="submit" class="btn btn-primary" id="btnSave" value="Submit"/>
                             </div>
                         </form>
                     </div>
@@ -884,6 +884,7 @@
 			$('#btnSave').on('click',function(e)
 			{
 				e.preventDefault();
+				$(this).attr("value","Please wait");
 				var data = $('#frmAssign').serialize();
 				$.ajax({
 					url:"<?=site_url('add-assignment')?>",method:"POST",
@@ -898,6 +899,7 @@
 						{
 							alert(response);
 						}
+						$('#btnSave').attr("value","Submit");
 					}
 				});
 			});
