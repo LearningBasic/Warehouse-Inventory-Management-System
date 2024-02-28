@@ -440,7 +440,7 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header">PRF/Canvas Sheets</div>
+					<div class="card-header">PRF/Canvas Sheets/P.O.</div>
 					<div class="card-body">
 						<?php if(!empty(session()->getFlashdata('success'))) : ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -448,7 +448,7 @@
                             </div>
                         <?php endif; ?>
 						<div class="tabs">
-							<ul class="nav nav-tabs justify-content-left" role="tablist">
+							<ul class="nav nav-pills justify-content-left" role="tablist">
 								<li class="nav-item">
 									<a
 										class="nav-link active text-blue"
@@ -467,6 +467,16 @@
 										role="tab"
 										aria-selected="false"
 										>Canvass Sheet</a
+									>
+								</li>
+								<li class="nav-item">
+									<a
+										class="nav-link text-blue"
+										data-toggle="tab"
+										href="#purchase6"
+										role="tab"
+										aria-selected="false"
+										>Purchase Order</a
 									>
 								</li>
 							</ul>
@@ -567,6 +577,37 @@
 												</tr>
 											<?php endforeach; ?> 
 										</tbody>	
+									</table>
+								</div>
+								<div class="tab-pane fade" id="purchase6" role="tabpanel">
+									<br/>
+									<table class="data-table table stripe hover nowrap">
+										<thead>
+											<th>Date Created</th>
+											<th>PRF No</th>
+											<th>Reference</th>
+											<th>Purchase No</th>
+											<th>Status</th>
+										</thead>
+										<tbody>
+											<?php foreach($po as $row): ?>
+											<tr>
+												<td><?php echo $row->Date ?></td>
+												<td><?php echo $row->OrderNo ?></td>
+												<td><?php echo $row->Reference ?></td>
+												<td><?php echo $row->purchaseNumber ?></td>
+												<td>
+													<?php if($row->Status==0){ ?>
+														<span class="badge bg-warning text-white">PENDING</span>
+													<?php }else if($row->Status==1){?>
+														<span class="badge bg-success text-white">APPROVED</span>
+													<?php }else if($row->Status==2){?>
+														<span class="badge bg-danger text-white">CANCELLED</span>
+													<?php }?>
+												</td>
+											</tr>	
+											<?php endforeach; ?>
+										</tbody>
 									</table>
 								</div>
 							</div>

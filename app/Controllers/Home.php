@@ -1263,8 +1263,14 @@ class Home extends BaseController
         $builder->select('*');
         $builder->WHERE('accountID',$user);
         $canvass = $builder->get()->getResult();
+        //po
+        $builder = $this->db->table('tblcanvass_form a');
+        $builder->select('a.Reference,b.purchaseNumber,b.Date,b.Status,a.OrderNo');
+        $builder->join('tblpurchase_logs b','b.Reference=a.Reference','LEFT');
+        $builder->WHERE('a.accountID',$user);
+        $po = $builder->get()->getResult();
 
-        $data = ['orders'=>$orders,'canvass'=>$canvass];
+        $data = ['orders'=>$orders,'canvass'=>$canvass,'po'=>$po];
         return view('list-orders',$data);
     }
 

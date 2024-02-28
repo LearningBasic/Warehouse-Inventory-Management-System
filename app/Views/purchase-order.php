@@ -453,6 +453,7 @@
                             <thead>
 								<th>Date Needed</th>
                                 <th>Reference No</th>
+								<th>Department</th>
                                 <th>PRF No</th>
                                 <th>Vendor(s)</th>
                                 <th>Terms</th>
@@ -466,6 +467,7 @@
                                 <tr>
 									<td><?php echo $row->DateNeeded ?></td>
                                     <td><?php echo $row->Reference ?></td>
+									<td><?php echo $row->Department ?></td>
                                     <td><?php echo $row->OrderNo ?></td>
                                     <td><?php echo $row->Supplier ?></td>
                                     <td><?php echo $row->Terms ?></td>
