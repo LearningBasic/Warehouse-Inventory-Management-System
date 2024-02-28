@@ -503,11 +503,14 @@
                             </div>
                             <div class="col-12 form-group">
                                 <div class="row g-1">
+									<?php foreach($requestor as $row): ?>
                                     <div class="col-lg-3">
                                         <label>Requested By:</label>
-                                        <p><b><center><u><?php echo session()->get('fullname'); ?></u></center></b></p>
+										<center><img src="/Signatures/<?php echo $row->Signatures ?>" width="150"/></center>
+                                        <p><b><center><u><?php echo $row->Fullname ?></u></center></b></p>
                                         <p><center>Name/Signature</center></p>
                                     </div>
+									<?php endforeach; ?>
                                     <?php foreach($list as $row): ?>
                                     <div class="col-lg-3">
                                         <label>Approved/Noted By:</label>

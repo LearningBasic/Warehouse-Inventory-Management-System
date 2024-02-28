@@ -1270,6 +1270,13 @@ class Home extends BaseController
 
     public function generatePRF($id)
     {
+        //requestor
+        $builder = $this->db->table('tblprf a');
+        $builder->select('b.Fullname,b.Signatures');
+        $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+        $builder->WHERE('a.OrderNo',$id);
+        $requestor = $builder->get()->getResult();
+
         $purchaseModel = new \App\Models\purchaseModel();
         $purchase = $purchaseModel->WHERE('OrderNo',$id)->first();
         //items
@@ -1282,7 +1289,7 @@ class Home extends BaseController
         $builder->WHERE('a.OrderNo',$id);
         $list = $builder->get()->getResult();
 
-        $data = ['purchase'=>$purchase,'code'=>$id,'items'=>$items,'list'=>$list];
+        $data = ['purchase'=>$purchase,'code'=>$id,'items'=>$items,'list'=>$list,'requestor'=>$requestor];
         return view('generate-prf',$data);
     }
 

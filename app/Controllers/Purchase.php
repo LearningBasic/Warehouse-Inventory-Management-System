@@ -562,7 +562,7 @@ class Purchase extends BaseController
     public function viewQuotation()
     {
         $reference = $this->request->getGet('value');
-        $file="";
+        $file="";$orderNo="";
         //fetch
         $builder = $this->db->table('tblcanvass_form a');
         $builder->select('a.Reference,b.Department,b.OrderNo,b.DateNeeded,b.PurchaseType,b.Reason,b.Attachment');
@@ -571,6 +571,7 @@ class Purchase extends BaseController
         $datax = $builder->get();
         if($rowx = $datax->getRow())
         {
+            $orderNo = $rowx->OrderNo;
             $file = $rowx->Attachment;
             ?>
         <div class="form-group">
@@ -645,15 +646,18 @@ class Purchase extends BaseController
         {
             ?>
             <div class="form-group">
+                <p>PRF and Quotations</p>
+                <a href="<?=site_url('generate/')?><?php echo $orderNo ?>" class="btn btn-outline-primary btn-sm" target="_blank">View PRF</a>
                 <a href="<?=site_url('export/')?><?php echo $reference ?>" class="btn btn-outline-primary btn-sm" target="_blank">View Quotation</a>
             </div>
             <div class="form-group">
+                <p>Attachments</p>
                 <?php if(empty($file)){ ?>
                     <a href="javascript:void(0);" class="btn btn-outline-primary btn-sm"><span class="dw dw-paperclip"></span>No Attachment</a>
                 <?php } else {?>
-                    <a href="Attachment/<?php echo $file ?>" class="btn btn-outline-primary btn-sm" target="_blank"><span class="dw dw-paperclip"></span>PRF Attachment</a>
+                    <a href="Attachment/<?php echo $file ?>" class="btn btn-outline-primary btn-sm" target="_blank"><span class="dw dw-paperclip"></span>PRF Files</a>
                 <?php } ?>
-                <a href="Canvass/<?php echo $row->Attachment ?>" class="btn btn-outline-primary btn-sm" target="_blank"><span class="dw dw-paperclip"></span>Quotation</a>
+                <a href="Canvass/<?php echo $row->Attachment ?>" class="btn btn-outline-primary btn-sm" target="_blank"><span class="dw dw-paperclip"></span>Quotation Files</a>
             </div>
             <?php
         }
