@@ -52,41 +52,48 @@ class Purchase extends BaseController
         //data
         $val = $this->request->getPost('item');
         $planner = $this->request->getPost('planner');
-        //get the details of the item
-        $items = $OrderItemModel->WHERE('orderID',$val)->first();
-        //send to the planner
-        $values = [
-            'accountID'=>$planner,'DateReceived'=>date('Y-m-d'),
-            'Qty'=>$items['Qty'],'ItemUnit'=>$items['ItemUnit'],'Item_Name'=>$items['Item_Name'],
-            'Specification'=>$items['Specification'],'OrderNo'=>$items['OrderNo'],'Status'=>0];
-        $issuanceModel->save($values);
-        //send email notification
-        $account = $accountModel->WHERE('accountID',$planner)->first();
-        $email = \Config\Services::email();
-        $email->setTo($account['Email'],$account['Fullname']);
-        $email->setFrom("fastcat.system@gmail.com","FastCat");
-        $imgURL = "assets/img/fastcat.png";
-        $email->attach($imgURL);
-        $cid = $email->setAttachmentCID($imgURL);
-        $template = "<center>
-        <img src='cid:". $cid ."' width='100'/>
-        <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
-        <tr><td><center><h1>For Issuance</h1></center></td></tr>
-        <tr><td><center>Hi, ".$account['Fullname']."</center></td></tr>
-        <tr><td><center>This is from FastCat System, sending you a reminder that the item : ".$items['Item_Name']." is subject for issuance.</center></td></tr>
-        <tr><td><p><center>Kindly create a issuance form to deliver the item to the respective area.</center></p></td><tr>
-        <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
-        <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
-        <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
-        $subject = "Issuance of Item";
-        $email->setSubject($subject);
-        $email->setMessage($template);
-        $email->send();
-        //remove the item
-        $builder = $this->db->table('tbl_order_item');
-        $builder->WHERE('orderID',$val);
-        $builder->delete();
-        echo "success";
+        if(empty($planner))
+        {
+            echo "Invalid! Please select assigned Personnel for issuance";
+        }
+        else
+        {
+            //get the details of the item
+            $items = $OrderItemModel->WHERE('orderID',$val)->first();
+            //send to the planner
+            $values = [
+                'accountID'=>$planner,'DateReceived'=>date('Y-m-d'),
+                'Qty'=>$items['Qty'],'ItemUnit'=>$items['ItemUnit'],'Item_Name'=>$items['Item_Name'],
+                'Specification'=>$items['Specification'],'OrderNo'=>$items['OrderNo'],'Status'=>0];
+            $issuanceModel->save($values);
+            //send email notification
+            $account = $accountModel->WHERE('accountID',$planner)->first();
+            $email = \Config\Services::email();
+            $email->setTo($account['Email'],$account['Fullname']);
+            $email->setFrom("fastcat.system@gmail.com","FastCat");
+            $imgURL = "assets/img/fastcat.png";
+            $email->attach($imgURL);
+            $cid = $email->setAttachmentCID($imgURL);
+            $template = "<center>
+            <img src='cid:". $cid ."' width='100'/>
+            <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+            <tr><td><center><h1>For Issuance</h1></center></td></tr>
+            <tr><td><center>Hi, ".$account['Fullname']."</center></td></tr>
+            <tr><td><center>This is from FastCat System, sending you a reminder that the item : ".$items['Item_Name']." is subject for issuance.</center></td></tr>
+            <tr><td><p><center>Kindly create a issuance form to deliver the item to the respective area.</center></p></td><tr>
+            <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+            <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+            <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+            $subject = "Issuance of Item";
+            $email->setSubject($subject);
+            $email->setMessage($template);
+            $email->send();
+            //remove the item
+            $builder = $this->db->table('tbl_order_item');
+            $builder->WHERE('orderID',$val);
+            $builder->delete();
+            echo "success";
+        }
     }
 
     public function deleteItem()
@@ -637,6 +644,9 @@ class Purchase extends BaseController
         if($row = $data->getRow())
         {
             ?>
+            <div class="form-group">
+                <a href="<?=site_url('export/')?><?php echo $reference ?>" class="btn btn-outline-primary btn-sm" target="_blank">View Quotation</a>
+            </div>
             <div class="form-group">
                 <?php if(empty($file)){ ?>
                     <a href="javascript:void(0);" class="btn btn-outline-primary btn-sm"><span class="dw dw-paperclip"></span>No Attachment</a>

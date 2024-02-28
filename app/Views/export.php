@@ -443,7 +443,7 @@
                         <br/><br/>
                         <div class="row g-3" id="pdf">
 							<div class="col-12">
-								<b>Requestor : </b><?php echo session()->get('fullname')?>
+								<b>Requestor : </b><?php foreach($requestor as $row): ?><?php echo $row->Fullname ?><?php endforeach; ?>
 							</div>
                             <div class="col-12 form-group"> 
                                 <div class="row g-3">

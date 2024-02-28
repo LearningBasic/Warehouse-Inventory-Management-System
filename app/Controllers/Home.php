@@ -1288,6 +1288,12 @@ class Home extends BaseController
 
     public function export($id)
     {
+        //get the requestor name
+        $builder = $this->db->table('tblcanvass_form a');
+        $builder->select('b.Fullname');
+        $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+        $builder->WHERE('a.Reference',$id);
+        $requestor = $builder->get()->getResult();
         //canvass form
         $canvasFormModel = new \App\Models\canvasFormModel();
         $form = $canvasFormModel->WHERE('Reference',$id)->first();
@@ -1303,7 +1309,7 @@ class Home extends BaseController
         $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
         $builder->WHERE('a.Reference',$id);
         $account = $builder->get()->getResult();
-        $data = ['form'=>$form,'list'=>$list,'account'=>$account];
+        $data = ['form'=>$form,'list'=>$list,'account'=>$account,'requestor'=>$requestor];
         return view('export',$data);
     }
 
