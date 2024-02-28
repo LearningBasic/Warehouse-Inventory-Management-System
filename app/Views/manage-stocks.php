@@ -472,11 +472,7 @@
 										role="tab"
 										aria-selected="false"
 										>For Release 
-										<span class="badge bg-primary text-white" id="item_notification">
-										<?php if($total): ?>
-											<?php echo $total ?>
-										<?php endif; ?>
-										</span></a>
+										<span class="badge bg-primary text-white" id="item_notification">0</span></a>
 								</li>
 								<li class="nav-item">
 									<a
@@ -733,6 +729,14 @@
 			});
 			function notify()
 			{
+				$.ajax({
+					url:"<?=site_url('count-item')?>",method:"GET",
+					success:function(response)
+					{
+						$('#item_notification').html(response);
+					}
+				});
+
 				$.ajax({
 					url:"<?=site_url('notification')?>",method:"GET",
 					success:function(response)

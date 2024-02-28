@@ -184,16 +184,6 @@ class Home extends BaseController
         $builder->select('*');
         $builder->WHERE('accountID',$user);
         $release = $builder->get()->getResult();
-        //count item
-        $total=0;
-        $builder = $this->db->table('tblissuance');
-        $builder->select('COUNT(*)total');
-        $builder->WHERE('accountID',$user)->WHERE('Status',0);
-        $list = $builder->get();
-        if($row = $list->getRow())
-        {
-            $total = $row->total;
-        }
         //transfer item
         $builder = $this->db->table('tbltransferitem');
         $builder->select('*');
@@ -203,7 +193,7 @@ class Home extends BaseController
         $builder->select('*');
         $product = $builder->get()->getResult();
 
-        $data = ['transfer'=>$transfer,'product'=>$product,'release'=>$release,'total'=>$total];
+        $data = ['transfer'=>$transfer,'product'=>$product,'release'=>$release];
         return view('manage-stocks',$data);
     }
 

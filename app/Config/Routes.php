@@ -74,6 +74,7 @@ $routes->post('delete-item','Purchase::deleteItem');
 $routes->post('send-item','Purchase::sendItem');
 $routes->post('accept-item','Purchase::acceptItem');
 $routes->post('cancel-item','Purchase::cancelItem');
+$routes->get('count-item','Purchase::countItem');
 //fetch the product details
 $routes->get('product-information','ProductController::productInfo');
 $routes->post('save-report','ProductController::saveReport');

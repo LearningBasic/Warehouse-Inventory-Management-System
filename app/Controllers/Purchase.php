@@ -11,6 +11,19 @@ class Purchase extends BaseController
         $this->db = db_connect();
     }
 
+    public function countItem()
+    {
+        $user = session()->get('loggedUser');
+        $builder = $this->db->table('tblissuance');
+        $builder->select('COUNT(*)total');
+        $builder->WHERE('accountID',$user)->WHERE('Status',0);
+        $list = $builder->get();
+        if($row = $list->getRow())
+        {
+            echo $row->total;
+        }
+    }
+
     public function cancelItem()
     {
         $issuanceModel = new \App\Models\issuanceModel();
