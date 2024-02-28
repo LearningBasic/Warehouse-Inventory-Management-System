@@ -956,7 +956,7 @@ class Home extends BaseController
         $validation = $this->validate([
             'fullname'=>'required|is_unique[tblaccount.Fullname]',
             'username'=>'required|is_unique[tblaccount.username]',
-            'email'=>'required|valid_email|is_unique[tblaccount.Email]',
+            'email'=>'required|valid_email',
             'assignment'=>'required',
             'systemRole'=>'required'
         ]);

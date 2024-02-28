@@ -496,12 +496,20 @@
 											</button>
 										<?php }else{ ?>
 											<?php if($row->Status==0){}else if($row->Status==1){ ?>
-											<button type="button" class="btn btn-primary btn-sm comment" value="<?php echo $row->Reference ?>">
-											<span class="dw dw-add"></span>&nbsp;Add
-											</button>
-											<a class="btn btn-success btn-sm" href="<?=site_url('download/')?><?php echo $row->Reference ?>">
-											<span class="dw dw-download"></span>&nbsp;Download
-											</a>
+											<div class="dropdown">
+												<a class="btn btn-primary btn-sm dropdown-toggle"
+													href="#" role="button" data-toggle="dropdown">
+													SELECT
+												</a>
+												<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+													<button type="button" class="dropdown-item comment" value="<?php echo $row->Reference ?>">
+														<span class="dw dw-add"></span>&nbsp;Add
+													</button>
+													<a class="dropdown-item" href="<?=site_url('download/')?><?php echo $row->Reference ?>">
+														<span class="dw dw-download"></span>&nbsp;Download
+													</a>
+												</div>
+											</div>
 											<?php }else{ ?>
 												-
 											<?php }?>
