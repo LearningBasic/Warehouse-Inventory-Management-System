@@ -592,7 +592,7 @@
 															</a>
 															<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 																<button type="button" class="dropdown-item accept" value="<?php echo $row->issuanceID ?>"><span class="dw dw-check"></span>&nbsp;Accept</button>
-																<button type="button" class="dropdown-item return" value="<?php echo $row->issuanceID ?>"><span class="dw dw-undo"></span>&nbsp;Return</button>
+																<button type="button" class="dropdown-item delete" value="<?php echo $row->issuanceID ?>"><span class="dw dw-trash"></span>&nbsp;Cancel</button>
 															</div>
 														</div>
 														<?php }else{ ?>-<?php } ?>
@@ -796,6 +796,7 @@
 					}
 				});
 			});
+
 			$(document).on('click','.cancel',function(e)
 			{
 				e.preventDefault();
@@ -812,6 +813,38 @@
 						var val = $(this).val();
 						$.ajax({
 							url:"<?=site_url('cancel-transfer')?>",method:"POST",
+							data:{value:val},success:function(response)
+							{
+								if(response==="success")
+								{
+									location.reload();
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
+					}
+				});
+			});
+
+			$(document).on('click','.delete',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to cancel this selected item?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						$.ajax({
+							url:"<?=site_url('cancel-item')?>",method:"POST",
 							data:{value:val},success:function(response)
 							{
 								if(response==="success")
