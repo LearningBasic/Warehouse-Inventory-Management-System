@@ -443,7 +443,8 @@
 			<div class="xs-pd-20-10 pd-ltr-20">
                 <div class="card-box">
                     <div class="card-header"><span class="dw dw-export"></span>&nbsp;Export
-                    <button id="download" type="button" class="btn btn-primary text-white shadow btn-sm" style="float:right;"><span class="dw dw-download"></span>&nbsp;Download</button>
+                    <button id="download" type="button" class="btn btn-primary text-white shadow btn-sm" style="float:right;margin-left:10px;"><span class="dw dw-download"></span>&nbsp;Download</button>
+					<a href="/Attachment/<?=$purchase['Attachment']?>" target="_blank" class="btn btn-primary text-white shadow btn-sm" style="float:right;"><span class="dw dw-paperclip"></span>&nbsp;Attachment</a>
                     </div>
                     <div class="card-body" id="pdf">
                         <div class="row g-1">
