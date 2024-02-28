@@ -1295,6 +1295,14 @@ class Home extends BaseController
 
     public function export($id)
     {
+        //assignment
+        $builder = $this->db->table('tblcanvass_form a');
+        $builder->select('d.Fullname,d.Signatures');
+        $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
+        $builder->join('tblassignment c','c.prfID=b.prfID','LEFT');
+        $builder->join('tblaccount d','d.accountID=c.accountID','LEFT');
+        $builder->WHERE('a.Reference',$id);
+        $assign = $builder->get()->getResult();
         //get the requestor name
         $builder = $this->db->table('tblcanvass_form a');
         $builder->select('b.Fullname');
@@ -1316,7 +1324,7 @@ class Home extends BaseController
         $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
         $builder->WHERE('a.Reference',$id);
         $account = $builder->get()->getResult();
-        $data = ['form'=>$form,'list'=>$list,'account'=>$account,'requestor'=>$requestor];
+        $data = ['form'=>$form,'list'=>$list,'account'=>$account,'requestor'=>$requestor,'assign'=>$assign];
         return view('export',$data);
     }
 
