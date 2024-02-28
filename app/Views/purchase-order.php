@@ -466,9 +466,9 @@
 							<?php foreach($canvass as $row): ?>
                                 <tr>
 									<td><?php echo $row->DateNeeded ?></td>
-                                    <td><?php echo $row->Reference ?></td>
+                                    <td><a class="btn btn-link" href="export/<?php echo $row->Reference ?>" target="_blank"><?php echo $row->Reference ?></a></td>
 									<td><?php echo $row->Department ?></td>
-                                    <td><?php echo $row->OrderNo ?></td>
+                                    <td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
                                     <td><?php echo $row->Supplier ?></td>
                                     <td><?php echo $row->Terms ?></td>
                                     <td><?php echo $row->Warranty ?></td>
