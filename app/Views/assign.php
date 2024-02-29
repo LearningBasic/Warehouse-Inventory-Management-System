@@ -465,7 +465,7 @@
 								<?php foreach($list as $row): ?>
 									<tr>
 										<td><?php echo $row->Date ?></td>
-										<td><?php echo $row->OrderNo ?></td>
+										<td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
 										<td><?php echo $row->Staff ?></td>
 										<td><?php echo $row->Fullname ?></td>
 										<td><?php echo $row->Department ?></td>
