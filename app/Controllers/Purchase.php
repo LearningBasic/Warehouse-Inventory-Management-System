@@ -667,7 +667,7 @@ class Purchase extends BaseController
     {
         $val = $this->request->getGet('value');
         $builder = $this->db->table('tblreview a');
-        $builder->select('a.reviewID,a.Status,b.OrderNo,b.Department,b.Reason,b.DateNeeded,c.Fullname,b.PurchaseType,d.warehouseName');
+        $builder->select('a.reviewID,a.Status,b.OrderNo,b.Department,b.Reason,b.DateNeeded,c.Fullname,b.PurchaseType,d.warehouseName,b.Attachment');
         $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
         $builder->join('tblaccount c','b.accountID=c.accountID','LEFT');
         $builder->join('tblwarehouse d','d.warehouseID=c.warehouseID','LEFT');
@@ -702,6 +702,9 @@ class Purchase extends BaseController
                             </div>
                             <label>Reason</label>
                             <textarea name="reason" id="reason" class="form-control" style="height:120px;"><?php echo $row->Reason ?></textarea>
+                            <br/>
+                            <label>Attachment</label>
+                            <div><a href="Attachment/<?php echo $row->Attachment ?>" target="_BLANK"><span class="dw dw-paperclip"></span>&nbsp;Attachment</a></div>
                         </div>
                         <div class="col-lg-4 form-group table-responsive">
                             <table class="table table-striped table-bordered hover nowrap">

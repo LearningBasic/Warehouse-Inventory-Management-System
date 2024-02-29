@@ -476,7 +476,7 @@
 										<?php }else { ?>
 										<td><button type="button" class="btn btn-link" value="<?php echo $row->Reference ?>"><?php echo $row->Reference ?></button></td>
 										<?php } ?>
-										<td><?php echo $row->OrderNo ?></td>
+										<td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
 										<td><?php echo $row->Fullname ?></td>
 										<td><?php echo $row->Department ?></td>
 										<td><?php echo $row->DateNeeded ?></td>
