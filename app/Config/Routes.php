@@ -186,6 +186,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/ledger','Home::ledger');
     $routes->get('/return-order-summary','Home::returnOrderReport');
     $routes->get('/generate/(:any)','Home::generatePRF/$1');
+    $routes->get('/issuance','Home::Issuance');
 });
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {

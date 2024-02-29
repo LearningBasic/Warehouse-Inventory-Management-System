@@ -2172,4 +2172,9 @@ class Home extends BaseController
         $data = ['vendor'=>$record];
         return view('return-order-report',$data);
     }
+
+    public function Issuance()
+    {
+        return view('issuance-report');
+    }
 }

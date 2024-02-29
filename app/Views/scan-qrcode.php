@@ -421,6 +421,7 @@
                                 <li><a href="<?=site_url('report-stocks')?>">Stocks Report</a></li>
 								<li><a href="<?=site_url('ledger')?>">Vendor's Ledger</a></li>
 								<li><a href="<?=site_url('return-order-summary')?>">Return Order Report</a></li>
+								<li><a href="<?=site_url('issuance')?>">Issuance Report</a></li>
 							</ul>
 							<?php }else{ ?>
 							<ul class="submenu">

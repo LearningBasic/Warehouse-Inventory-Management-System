@@ -417,6 +417,7 @@
                                 <li><a href="<?=site_url('report-stocks')?>">Stocks Report</a></li>
 								<li><a href="<?=site_url('ledger')?>">Vendor's Ledger</a></li>
 								<li><a href="<?=site_url('return-order-summary')?>">Return Order Report</a></li>
+								<li><a href="<?=site_url('issuance')?>">Issuance Report</a></li>
 							</ul>
 							<?php }else{ ?>
 							<ul class="submenu">
@@ -455,7 +456,7 @@
                 <div class="row g-3">
                     <div class="col-12 form-group">
                         <div class="row g-3">
-                            <div class="col-lg-3">
+                            <div class="col-lg-3 form-group">
                                 <div class="card-box">
                                     <div class="card-body">
                                         <div class="card-title">Cost of Purchase Order</div>
@@ -463,7 +464,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3 form-group">
                                 <div class="card-box">
                                     <div class="card-body">
                                         <div class="card-title">Total PRF</div>
@@ -471,7 +472,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3 form-group">
                                 <div class="card-box">
                                     <div class="card-body">
                                         <div class="card-title">Released P.O.</div>
@@ -479,7 +480,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3 form-group">
                                 <div class="card-box">
                                     <div class="card-body">
                                         <div class="card-title">Unreleased P.O.</div>
