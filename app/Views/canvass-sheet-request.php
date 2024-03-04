@@ -624,9 +624,10 @@
 					}).then((result) => {
 					if (result.isConfirmed) {
 						var code = $('#code').val();
+						var message = prompt("Please leave a message");
 						$.ajax({
 							url:"<?=site_url('cancel-request')?>",method:"POST",
-							data:{code:code},success:function(response)
+							data:{code:code,message:message},success:function(response)
 							{
 								if(response==="success")
 								{

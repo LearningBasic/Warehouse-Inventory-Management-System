@@ -867,7 +867,7 @@ class Home extends BaseController
     public function Assign()
     {
         $builder = $this->db->table('tblassignment a');
-        $builder->select('a.Status,b.prfID,b.OrderNo,a.Date,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID,d.Status as Remarks,e.Fullname as Staff');
+        $builder->select('a.Status,b.prfID,b.OrderNo,a.Date,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID,d.Status as Remarks,e.Fullname as Staff,d.Comment');
         $builder->join('tblprf b','b.prfID=a.prfID','LEFT');
         $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
         $builder->join('tblcanvass_form d','d.OrderNo=b.OrderNo','LEFT');
@@ -1955,18 +1955,38 @@ class Home extends BaseController
     {
         $canvasFormModel = new \App\Models\canvasFormModel();
         $reviewCanvassModel = new \App\Models\reviewCanvassModel();
+        $canvassModel = new \App\Models\canvassModel();
         //data
         $user = session()->get('loggedUser');
         $code = $this->request->getPost('code');
+        $msg = $this->request->getPost('message');
         $status = 2;
-        //approver
-        $review = $reviewCanvassModel->WHERE('accountID',$user)->WHERE('Reference',$code)->first();
-        $values = ['Status'=>$status];
-        $reviewCanvassModel->update($review['crID'],$values);
-        //canvass form
-        $canvass = $canvasFormModel->WHERE('Reference',$code)->first();
-        $canvasFormModel->update($canvass['formID'],$values);
-        echo "success";
+        if(empty($msg))
+        {
+            echo "Invalid! Please try again";
+        }
+        else
+        {
+            //approver
+            $review = $reviewCanvassModel->WHERE('accountID',$user)->WHERE('Reference',$code)->first();
+            $values = ['Status'=>$status];
+            $reviewCanvassModel->update($review['crID'],$values);
+            //canvass form
+            $value = ['Status'=>$status,'Comment'=>$msg];
+            $canvass = $canvasFormModel->WHERE('Reference',$code)->first();
+            $canvasFormModel->update($canvass['formID'],$value);
+            //remove the Reference and Remarks
+            $newValues = ['Reference'=>'','Remarks'=>''];
+            $builder = $this->db->table('tblcanvass_sheet');
+            $builder->select('canvassID');
+            $builder->WHERE('OrderNo',$canvass['OrderNo']);
+            $data = $builder->get();
+            foreach($data->getResult() as $row)
+            {
+                $canvassModel->update($row->canvassID,$newValues);
+            }
+            echo "success";
+        }
     }
 
     public function approve()

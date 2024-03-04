@@ -461,6 +461,7 @@
 								<th>Status</th>
 								<th>Action Taken</th>
 								<th>Action</th>
+								<th>Comment</th>
 							</thead>
 							<tbody>
 								<?php foreach($list as $row): ?>
@@ -476,6 +477,8 @@
 											<?php if($row->Status==0||$row->Status==1){ ?>
 												<?php if($row->Remarks==4){ ?>
 													<span class="badge bg-success text-white">APPROVED</span>
+												<?php }else if($row->Remarks==2){ ?>
+													<span class="badge bg-danger text-white">DECLINED</span>
 												<?php }else{ ?>
 													<span class="badge bg-warning text-white">PROCESSING</span>
 												<?php } ?>
@@ -505,6 +508,7 @@
 												-
 											<?php } ?>
 										</td>
+										<td><?php echo $row->Comment ?></td>
 									</tr>
 								<?php endforeach; ?>
 							</tbody>
