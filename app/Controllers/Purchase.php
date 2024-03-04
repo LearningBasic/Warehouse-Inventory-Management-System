@@ -182,7 +182,7 @@ class Purchase extends BaseController
                         $values = [
                             'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
                             'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
-                            'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,
+                            'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,'Remarks'=>'OPEN',
                         ];
                         $purchaseModel->save($values);
                         $file->move('Attachment/',$originalName);
@@ -192,7 +192,7 @@ class Purchase extends BaseController
                         $values = [
                             'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$tomorrow,'Department'=>$dept,
                             'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
-                            'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,
+                            'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,'Remarks'=>'OPEN',
                         ];
                         $purchaseModel->save($values);
                         $file->move('Attachment/',$originalName);
@@ -266,7 +266,7 @@ class Purchase extends BaseController
                         $values = [
                             'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
                             'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
-                            'PurchaseType'=>$purchase_type,'Attachment'=>'N/A',
+                            'PurchaseType'=>$purchase_type,'Attachment'=>'N/A','Remarks'=>'OPEN',
                         ];
                         $purchaseModel->save($values);
                     }
@@ -275,7 +275,7 @@ class Purchase extends BaseController
                         $values = [
                             'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
                             'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
-                            'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,
+                            'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,'Remarks'=>'OPEN',
                         ];
                         $purchaseModel->save($values);
                         $file->move('Attachment/',$originalName);
@@ -288,7 +288,7 @@ class Purchase extends BaseController
                         $values = [
                             'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$tomorrow,'Department'=>$dept,
                             'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
-                            'PurchaseType'=>$purchase_type,'Attachment'=>'N/A',
+                            'PurchaseType'=>$purchase_type,'Attachment'=>'N/A','Remarks'=>'OPEN',
                         ];
                         $purchaseModel->save($values);
                     }
@@ -297,7 +297,7 @@ class Purchase extends BaseController
                         $values = [
                             'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$tomorrow,'Department'=>$dept,
                             'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
-                            'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,
+                            'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,'Remarks'=>'OPEN',
                         ];
                         $purchaseModel->save($values);
                         $file->move('Attachment/',$originalName);
