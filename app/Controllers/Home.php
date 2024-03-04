@@ -266,12 +266,15 @@ class Home extends BaseController
 
     public function newProduct($id)
     {
+        $receiveModel = new \App\Models\receiveModel();
         $reservedModel = new \App\Models\reservedModel();
         $reserve = $reservedModel->WHERE('reservedID',$id)->first();
+        //get the warehouse ID
+        $receive = $receiveModel->WHERE('purchaseNumber',$reserve['purchaseNumber'])->first();
         //warehouse
         $builder = $this->db->table('tblwarehouse');
         $builder->select('*');
-        $builder->WHERE('warehouseID',$reserve['warehouseID']);
+        $builder->WHERE('warehouseID',$receive['warehouseID']);
         $warehouse = $builder->get()->getResult();
         //supplier
         $builder = $this->db->table('tblsupplier');

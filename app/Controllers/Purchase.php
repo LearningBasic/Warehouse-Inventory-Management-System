@@ -1545,9 +1545,11 @@ class Purchase extends BaseController
 
     public function saveEntry()
     {
+        date_default_timezone_set('Asia/Manila');
         $reservedModel = new \App\Models\reservedModel();
         $systemLogsModel = new \App\Models\systemLogsModel();
         $purchaseOrderModel = new \App\Models\purchaseOrderModel();
+        $receiveModel = new \App\Models\receiveModel();
         //data
         $job_number = $this->request->getPost('job_number');
         $purchase_number = $this->request->getPost('purchase_number');
@@ -1556,14 +1558,13 @@ class Purchase extends BaseController
         $shipper = $this->request->getPost('shipper');
         $dateReceive = $this->request->getPost('date_receive');
         $remarks = $this->request->getPost('remarks');
-        $product_name = $this->request->getPost('product_name');
-        $qty = $this->request->getPost('quantity');
-        $item_unit = $this->request->getPost('item_unit');
-        $unit_price = $invoiceAmt/$qty;
-        $item_condition = $this->request->getPost('condition');
-        $description = $this->request->getPost('description');
         $receiver = $this->request->getPost('receiver');
         $assign = $this->request->getPost('assignment');
+        //array
+        $qty = $this->request->getPost('qty');
+        $item = $this->request->getPost('item');
+        $item_name = $this->request->getPost('item_name');
+        $spec = $this->request->getPost('specification');
 
         $validation = $this->validate([
             'job_number'=>'required',
@@ -1573,11 +1574,6 @@ class Purchase extends BaseController
             'shipper'=>'required',
             'date_receive'=>'required',
             'remarks'=>'required',
-            'product_name'=>'required',
-            'quantity'=>'required',
-            'item_unit'=>'required',
-            'condition'=>'required',
-            'description'=>'required',
             'assignment'=>'required',
             'receiver'=>'required'
         ]);
@@ -1591,10 +1587,20 @@ class Purchase extends BaseController
         {
             $values = ['Date'=>$dateReceive,'OrderNo'=>$job_number,'purchaseNumber'=>$purchase_number,
                         'InvoiceNo'=>$invoiceNo,'InvoiceAmount'=>$invoiceAmt,
-                        'supplierID'=>$shipper,'Remarks'=>$remarks,'productName'=>$product_name,
-                        'Qty'=>$qty,'Available'=>$qty,'ItemUnit'=>$item_unit,'UnitPrice'=>$unit_price,
-                        'Description'=>$description,'Condition'=>$item_condition,'Receiver'=>$receiver,'warehouseID'=>$assign];
-            $reservedModel->save($values);
+                        'supplierID'=>$shipper,'Remarks'=>$remarks,'Receiver'=>$receiver,'warehouseID'=>$assign];
+            $receiveModel->save($values);
+
+            //save items
+            $count = count($item_name);
+            for($i=0;$i<$count;$i++)
+            {
+                $value = ['Date'=>$dateReceive,'OrderNo'=>$job_number,'purchaseNumber'=>$purchase_number,
+                        'InvoiceNo'=>$invoiceNo,'supplierID'=>$shipper,'productName'=>$item_name[$i],
+                        'Qty'=>$qty[$i],'Available'=>$qty[$i],'ItemUnit'=>$item[$i],
+                        'Description'=>$spec[$i]];
+                $reservedModel->save($value);
+            }
+            
             if($remarks=="Full Delivery")
             {
                 $purchase = $purchaseOrderModel->WHERE('purchaseNumber',$purchase_number)->first();
@@ -1602,7 +1608,7 @@ class Purchase extends BaseController
                 $purchaseOrderModel->update($purchase['purchaseLogID'],$values);
             }
             //system logs
-            $value = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Received Order of '.$product_name];
+            $value = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Received Order of '.$invoiceNo];
             $systemLogsModel->save($value);
             session()->setFlashdata('success','Great! Successfully submitted');
             return redirect()->to('/receive-order')->withInput();

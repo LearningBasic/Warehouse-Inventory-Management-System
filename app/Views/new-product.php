@@ -465,7 +465,7 @@
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
 					<div class="card-header"><span class="icon-copy dw dw-add"></span>&nbsp;New Product
-                        <a href="<?=site_url('storage')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
+                        <a href="<?=site_url('reserved')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                     </div>
 					<div class="card-body">
                         <?php if(!empty(session()->getFlashdata('fail'))) : ?>
@@ -574,11 +574,11 @@
                                     </div>
                                     <div class="col-lg-2">
                                         <label>Unit Cost</label>
-                                        <input type="text" class="form-control" name="unitPrice" value="<?=$reserve['UnitPrice']?>" required/>
+                                        <input type="text" class="form-control" name="unitPrice" required/>
                                     </div>
                                     <div class="col-lg-2">
                                         <label>Quantity</label>
-                                        <input type="number" class="form-control" min="1" name="qty" value="<?=$reserve['Qty']?>" required/>
+                                        <input type="number" class="form-control" min="1" name="qty" value="<?=$reserve['Available']?>" required/>
                                     </div>
 									<div class="col-lg-2">
                                         <label>Re-Order</label>

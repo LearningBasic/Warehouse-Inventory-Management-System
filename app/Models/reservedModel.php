@@ -13,7 +13,7 @@ class reservedModel extends Model
     protected $returnType = 'array';
     protected $userSoftDelete = false;
     protected $protectFields = true;
-    protected $allowedFields = ['Date','OrderNo','purchaseNumber','InvoiceNo','supplierID','productName','Qty','Available','ItemUnit','UnitPrice','Description'];
+    protected $allowedFields = ['Date','OrderNo','purchaseNumber','InvoiceNo','supplierID','productName','Qty','Available','ItemUnit','Description'];
     protected $validationRules = [];
     protected $validationMessages = [];
     protected $skipValidation = false;

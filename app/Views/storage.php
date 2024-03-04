@@ -474,8 +474,6 @@
 								<th>Product Name</th>
 								<th>Stocks</th>
 								<th>Available</th>
-								<th>Unit Price</th>
-								<th>Total Price</th>
 								<th><span class="dw dw-more"></span></th>
 							</thead>
 							<tbody>
@@ -488,8 +486,6 @@
 										<td><?php echo $row->productName ?></td>
 										<td><?php echo $row->Qty ?></td>
 										<td><?php echo $row->Available ?></td>
-										<td style="text-align:right;"><?php echo number_format($row->UnitPrice,2) ?></td>
-										<td style="text-align:right;"><?php echo number_format($row->UnitPrice*$row->Qty,2) ?></td>
 										<td>
 											<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Staff"){ ?>
 											<?php if($row->Available==0){ ?>
@@ -589,7 +585,7 @@
 					{
 						if(response==="success")
 						{
-							window.location.href="<?=site_url('storage')?>";
+							window.location.href="<?=site_url('reserved')?>";
 						}
 						else
 						{
