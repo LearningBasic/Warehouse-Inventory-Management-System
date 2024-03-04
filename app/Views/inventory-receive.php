@@ -507,31 +507,25 @@
                                 </div>
                             </div>
                             <div class="col-12 form-group">
-                                <h6>Product Details</h6>
+                                <h6>Product Details
+									<a href="javascript:void(0);" class="btn-link btn-sm" onclick="addRow()" style="float:right;">
+										<span class="icon-copy dw dw-add"></span>&nbsp;Add
+									</a>
+								</h6>
                                 <hr/>
-                                <div class="row g-3">
-                                    <div class="col-lg-4">
-                                        <label>Product Name</label>
-                                        <input type="text" class="form-control" name="product_name" required/>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <label>Quantity</label>
-                                        <input type="number" min="1" class="form-control" name="quantity" required/>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <label>Item Unit</label>
-                                        <input type="text" class="form-control" name="item_unit" required/>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label>Condition</label>
-                                        <input type="text" class="form-control" name="condition" required/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 form-group">
-                                <label>Description</label>
-                                <textarea name="description" class="form-control" required></textarea>
-                            </div>
+								<table class="table stripe table-bordered hover nowrap">
+                                    <thead>
+                                        <th>Qty</th>
+                                        <th>Unit of Measure</th>
+                                        <th>Product Name</th>
+                                        <th>Specification</th>
+                                        <th><span class="dw dw-more"></span></th>
+                                    </thead>
+                                    <tbody id="Table">
+
+                                    </tbody>
+                                </table>
+							</div>
                             <div class="col-12 form-group">
                                 <div class="row g-3">
                                     <div class="col-lg-6">
@@ -573,8 +567,25 @@
 		<script>
 			$(document).ready(function()
 			{
-				loadEmployee()
+				loadEmployee();
+				$("#Table").on('click','.btnDelete',function(){
+                    $(this).closest('tr').remove();
+                });
 			});
+			function addRow() {
+				var table = document.getElementById("Table");
+				var row = table.insertRow(0);
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				var cell3 = row.insertCell(2);
+				var cell4 = row.insertCell(3);
+				var cell5 = row.insertCell(4);
+				cell1.innerHTML = "<input type='number' class='form-control' id='qty' name='qty[]'/>";
+				cell2.innerHTML = "<input type='text' class='form-control' id='item' name='item[]'/>";
+				cell3.innerHTML = "<input type='text' class='form-control' id='item_name' name='item_name[]'/>";
+				cell4.innerHTML = "<input type='text' class='form-control' id='specification' name='specification[]'/>";
+				cell5.innerHTML = "<button type='button' class='btn btn-danger btnDelete'><span class='dw dw-trash'></span></button>";
+			}
 			$('#job_number').change(function()
 			{
 				var val = $(this).val();

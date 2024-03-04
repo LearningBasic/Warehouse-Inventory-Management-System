@@ -476,8 +476,6 @@
 								<th>Available</th>
 								<th>Unit Price</th>
 								<th>Total Price</th>
-								<th>Remarks</th>
-								<th>Condition(s)</th>
 								<th><span class="dw dw-more"></span></th>
 							</thead>
 							<tbody>
@@ -491,9 +489,7 @@
 										<td><?php echo $row->Qty ?></td>
 										<td><?php echo $row->Available ?></td>
 										<td style="text-align:right;"><?php echo number_format($row->UnitPrice,2) ?></td>
-										<td style="text-align:right;"><?php echo number_format($row->InvoiceAmount,2) ?></td>
-										<td><?php echo $row->Remarks ?></td>
-										<td><?php echo $row->Condition ?></td>
+										<td style="text-align:right;"><?php echo number_format($row->UnitPrice*$row->Qty,2) ?></td>
 										<td>
 											<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Staff"){ ?>
 											<?php if($row->Available==0){ ?>
