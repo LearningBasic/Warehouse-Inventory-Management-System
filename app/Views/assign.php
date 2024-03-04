@@ -490,6 +490,7 @@
 										<tbody>
 											<?php foreach($list as $row): ?>
 												<tr>
+													<?php if($row->Remarks=="OPEN"){ ?>
 													<td><?php echo $row->Date ?></td>
 													<td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
 													<td><?php echo $row->Staff ?></td>
@@ -515,10 +516,22 @@
 															<a href="create/<?php echo $row->OrderNo ?>" class="btn btn-primary btn-sm"><span class="dw dw-add"></span></a>
 															<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-warning btn-sm" target="_blank"><span class="dw dw-edit-1"></span></a>
 															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span></button>
+															<button type="button" class="btn btn-outline-danger btn-sm archive" value="<?php echo $row->OrderNo ?>"><span class="dw dw-trash"></span></button>
 														<?php }else { ?>
 															-
 														<?php } ?>
 													</td>
+													<?php }else{ ?>
+													<td><?php echo $row->Date ?></td>
+													<td><?php echo $row->OrderNo ?></td>
+													<td><?php echo $row->Staff ?></td>
+													<td><?php echo $row->Fullname ?></td>
+													<td><?php echo $row->Department ?></td>
+													<td><?php echo $row->Reason ?></td>
+													<td><?php echo $row->DateNeeded ?></td>
+													<td>-</td>
+													<td>-</td>
+													<?php } ?>
 												</tr>
 											<?php endforeach; ?>
 										</tbody>
@@ -666,26 +679,52 @@
 					if (result.isConfirmed) {
 						var val = $(this).val();
 						var message = prompt("Enter your comment to cancel");
-						if(message==="")
-						{
-							alert("Invalid! Please try again");
-						}
-						else{
-							$.ajax({
-								url:"<?=site_url('cancel-purchase')?>",method:"POST",
-								data:{value:val,message:message},success:function(response)
+						$.ajax({
+							url:"<?=site_url('cancel-purchase')?>",method:"POST",
+							data:{value:val,message:message},success:function(response)
+							{
+								if(response==="success")
 								{
-									if(response==="success")
-									{
-										location.reload();
-									}
-									else
-									{
-										alert(response);
-									}
+									location.reload();
 								}
-							});
-						}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
+					}
+				});
+			});
+
+			$(document).on('click','.archive',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to tag as close this selected PRF?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						$.ajax({
+							url:"<?=site_url('close-purchase')?>",method:"POST",
+							data:{value:val},success:function(response)
+							{
+								if(response==="success")
+								{
+									location.reload();
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
 					}
 				});
 			});

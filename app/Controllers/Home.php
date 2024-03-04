@@ -869,7 +869,7 @@ class Home extends BaseController
         $canvasFormModel = new \App\Models\canvasFormModel();
         $user = session()->get('loggedUser');
         $builder = $this->db->table('tblassignment a');
-        $builder->select('a.Status,b.prfID,b.OrderNo,a.Date,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID,e.Fullname as Staff');
+        $builder->select('a.Status,b.prfID,b.OrderNo,b.Remarks,a.Date,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID,e.Fullname as Staff');
         $builder->join('tblprf b','b.prfID=a.prfID','LEFT');
         $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
         $builder->join('tblaccount e','e.accountID=a.accountID','LEFT');

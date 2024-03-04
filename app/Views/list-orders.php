@@ -515,6 +515,8 @@
 															<span class="badge bg-success text-white">APPROVED</span>
 														<?php }else if($row->Status==4){ ?>
 															<span class="badge bg-primary text-white">CHECKING</span>
+														<?php }else{ ?>
+															<span class="badge bg-secondary text-white">CLOSE</span>
 														<?php } ?>
 													</td>
 													<td>

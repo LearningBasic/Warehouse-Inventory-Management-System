@@ -1015,6 +1015,16 @@ class Purchase extends BaseController
         echo "success";
     }
 
+    public function archivePurchase()
+    {
+        $purchaseModel = new \App\Models\purchaseModel();
+        $val = $this->request->getPost('value');
+        $purchase = $purchaseModel->WHERE('OrderNo',$val)->first();
+        $values = ['Status'=>5,'Remarks'=>'CLOSE'];
+        $purchaseModel->update($purchase['prfID'],$values);
+        echo "success";
+    }
+
     public function CancelPurchase()
     {
         $systemLogsModel = new \App\Models\systemLogsModel();
@@ -1025,43 +1035,50 @@ class Purchase extends BaseController
         $val = $this->request->getPost('value');
         $msg = $this->request->getPost('message');
         $user = session()->get('loggedUser');
-        //update
-        $purchase = $purchaseModel->WHERE('OrderNo',$val)->first();
-        $value = ['Status'=>2];
-        $purchaseModel->update($purchase['prfID'],$value);
-        //update the assigned PRF
-        $assign = $assignmentModel->WHERE('prfID',$purchase['prfID'])->first();
-        $values = ['Status'=>2];
-        $assignmentModel->update($assign['assignID'],$values);
-        //send an email to the requestor
-        $account = $accountModel->WHERE('accountID',$purchase['accountID'])->first();
-        $email = \Config\Services::email();
-        $email->setTo($account['Email'],$account['Fullname']);
-        $email->setFrom("fastcat.system@gmail.com","FastCat");
-        $imgURL = "assets/img/fastcat.png";
-        $email->attach($imgURL);
-        $cid = $email->setAttachmentCID($imgURL);
-        $template = "<center>
-        <img src='cid:". $cid ."' width='100'/>
-        <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
-        <tr><td><center><h1>For Issuance</h1></center></td></tr>
-        <tr><td><center>Hi, ".$account['Fullname']."</center></td></tr>
-        <tr><td><center>This is from FastCat System, sending you a message that your request PRF No : ".$val." has been rejected.</center></td></tr>
-        <tr><td><p><center>Please see the comment below :</center></p></td><tr>
-        <tr><td><p><center>Reason : ".$msg."</center></p></td><tr>
-        <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
-        <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
-        <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
-        $subject = "Declined PRF";
-        $email->setSubject($subject);
-        $email->setMessage($template);
-        $email->send();
-        //system logs
-        $values = [
-            'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Cancelled '.$val
-        ];
-        $systemLogsModel->save($values);
-        echo "success";
+        if(empty($msg))
+        {
+            echo "Invalid! Please try again";
+        }
+        else
+        {
+            //update
+            $purchase = $purchaseModel->WHERE('OrderNo',$val)->first();
+            $value = ['Status'=>2];
+            $purchaseModel->update($purchase['prfID'],$value);
+            //update the assigned PRF
+            $assign = $assignmentModel->WHERE('prfID',$purchase['prfID'])->first();
+            $values = ['Status'=>2];
+            $assignmentModel->update($assign['assignID'],$values);
+            //send an email to the requestor
+            $account = $accountModel->WHERE('accountID',$purchase['accountID'])->first();
+            $email = \Config\Services::email();
+            $email->setTo($account['Email'],$account['Fullname']);
+            $email->setFrom("fastcat.system@gmail.com","FastCat");
+            $imgURL = "assets/img/fastcat.png";
+            $email->attach($imgURL);
+            $cid = $email->setAttachmentCID($imgURL);
+            $template = "<center>
+            <img src='cid:". $cid ."' width='100'/>
+            <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+            <tr><td><center><h1>For Issuance</h1></center></td></tr>
+            <tr><td><center>Hi, ".$account['Fullname']."</center></td></tr>
+            <tr><td><center>This is from FastCat System, sending you a message that your request PRF No : ".$val." has been rejected.</center></td></tr>
+            <tr><td><p><center>Please see the comment below :</center></p></td><tr>
+            <tr><td><p><center>Reason : ".$msg."</center></p></td><tr>
+            <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+            <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+            <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+            $subject = "Declined PRF";
+            $email->setSubject($subject);
+            $email->setMessage($template);
+            $email->send();
+            //system logs
+            $values = [
+                'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Cancelled '.$val
+            ];
+            $systemLogsModel->save($values);
+            echo "success";
+        }
     }
 
     public function cancelTransfer()
