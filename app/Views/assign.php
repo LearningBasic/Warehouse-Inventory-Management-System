@@ -442,77 +442,104 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
                 <div class="card-box">
-                    <div class="card-header">Assigned PRF</div>
+                    <div class="card-header">Assignment</div>
                     <div class="card-body">
 						<?php if(!empty(session()->getFlashdata('success'))) : ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <?= session()->getFlashdata('success'); ?>
                             </div>
                         <?php endif; ?>
-						<table class="data-table table stripe hover nowrap">
-							<thead>
-								<th>Date Received</th>
-								<th>PRF No</th>
-								<th>Assigned To</th>
-								<th>Requestor</th>
-								<th>Department</th>
-								<th>Reason</th>
-								<th>Date Needed</th>
-								<th>Status</th>
-								<th>Action Taken</th>
-								<th>Action</th>
-								<th>Comment</th>
-							</thead>
-							<tbody>
-								<?php foreach($list as $row): ?>
-									<tr>
-										<td><?php echo $row->Date ?></td>
-										<td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
-										<td><?php echo $row->Staff ?></td>
-										<td><?php echo $row->Fullname ?></td>
-										<td><?php echo $row->Department ?></td>
-										<td><?php echo $row->Reason ?></td>
-										<td><?php echo $row->DateNeeded ?></td>
-										<td>
-											<?php if($row->Status==0||$row->Status==1){ ?>
-												<?php if($row->Remarks==4){ ?>
-													<span class="badge bg-success text-white">APPROVED</span>
-												<?php }else if($row->Remarks==2){ ?>
-													<span class="badge bg-danger text-white">DECLINED</span>
-												<?php }else{ ?>
-													<span class="badge bg-warning text-white">PROCESSING</span>
-												<?php } ?>
-											<?php }else { ?>
-												-
-											<?php } ?>
-										</td>
-										<td>
-											<?php if($row->Status==0){ ?>
-												<span class="badge bg-warning text-white">WAITING</span>
-											<?php }else if($row->Status==1){ ?>
-												<span class="badge bg-success text-white">ACCEPTED</span>
-											<?php }else{ ?>
-												<span class="badge bg-danger text-white">DECLINED</span>
-											<?php } ?>
-										</td>
-										<td>
-											<?php if($row->Status==0){ ?>
-												<button type="button" class="btn btn-primary btn-sm accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span></button>
-												<button type="button" class="btn btn-danger btn-sm revision" value="<?php echo $row->OrderNo ?>"><span class="dw dw-repeat1"></span></button>
-												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span></button>
-											<?php }else if($row->Status==1){ ?>
-												<a href="create/<?php echo $row->OrderNo ?>" class="btn btn-primary btn-sm"><span class="dw dw-add"></span></a>
-												<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-warning btn-sm"><span class="dw dw-edit-1"></span></a>
-												<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span></button>
-											<?php }else { ?>
-												-
-											<?php } ?>
-										</td>
-										<td><?php echo $row->Comment ?></td>
-									</tr>
-								<?php endforeach; ?>
-							</tbody>
-						</table>
+						<div class="tabs">
+							<ul class="nav nav-pills justify-content-left" role="tablist">
+								<li class="nav-item">
+									<a
+										class="nav-link active text-blue"
+										data-toggle="tab"
+										href="#home6"
+										role="tab"
+										aria-selected="true"
+										>PRF</a
+									>
+								</li>
+								<li class="nav-item">
+									<a
+										class="nav-link text-blue"
+										data-toggle="tab"
+										href="#profile6"
+										role="tab"
+										aria-selected="false"
+										>Quotation</a
+									>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane fade show active" id="home6" role="tabpanel">
+									<br/>
+									<table class="data-table table stripe hover nowrap">
+										<thead>
+											<th>Date Received</th>
+											<th>PRF No</th>
+											<th>Assigned To</th>
+											<th>Requestor</th>
+											<th>Department</th>
+											<th>Reason</th>
+											<th>Date Needed</th>
+											<th>Action Taken</th>
+											<th>Action</th>
+										</thead>
+										<tbody>
+											<?php foreach($list as $row): ?>
+												<tr>
+													<td><?php echo $row->Date ?></td>
+													<td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
+													<td><?php echo $row->Staff ?></td>
+													<td><?php echo $row->Fullname ?></td>
+													<td><?php echo $row->Department ?></td>
+													<td><?php echo $row->Reason ?></td>
+													<td><?php echo $row->DateNeeded ?></td>
+													<td>
+														<?php if($row->Status==0){ ?>
+															<span class="badge bg-warning text-white">WAITING</span>
+														<?php }else if($row->Status==1){ ?>
+															<span class="badge bg-success text-white">ACCEPTED</span>
+														<?php }else{ ?>
+															<span class="badge bg-danger text-white">DECLINED</span>
+														<?php } ?>
+													</td>
+													<td>
+														<?php if($row->Status==0){ ?>
+															<button type="button" class="btn btn-primary btn-sm accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span></button>
+															<button type="button" class="btn btn-danger btn-sm revision" value="<?php echo $row->OrderNo ?>"><span class="dw dw-repeat1"></span></button>
+															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span></button>
+														<?php }else if($row->Status==1){ ?>
+															<a href="create/<?php echo $row->OrderNo ?>" class="btn btn-primary btn-sm"><span class="dw dw-add"></span></a>
+															<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-warning btn-sm" target="_blank"><span class="dw dw-edit-1"></span></a>
+															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span></button>
+														<?php }else { ?>
+															-
+														<?php } ?>
+													</td>
+												</tr>
+											<?php endforeach; ?>
+										</tbody>
+									</table>
+								</div>
+								<div class="tab-pane fade" id="profile6" role="tabpanel">
+									<br/>
+									<table class="data-table table stripe hover nowrap">
+										<thead>
+											<th>Date Prepared</th>
+											<th>Reference</th>
+											<th>PRF No</th>
+											<th>Department</th>
+											<th>Date Needed</th>
+											<th>Status</th>
+											<th>Comment</th>
+										</thead>
+									</table>
+								</div>
+							</div>
+						</div>
                     </div>
                 </div>
 			</div>
