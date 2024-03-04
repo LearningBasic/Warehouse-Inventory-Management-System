@@ -536,6 +536,35 @@
 											<th>Status</th>
 											<th>Comment</th>
 										</thead>
+										<tbody>
+											<?php foreach($canvass as $row):?>
+												<tr>
+													<td><?php echo $row['DatePrepared'] ?></td>
+													<td>
+													<?php if($row['Status']==4){?>
+														<a class="btn-link" href="export/<?php echo $row['Reference'] ?>" target="_blank"><?php echo $row['Reference'] ?></a>
+													<?php }else{ ?>
+														<?php echo $row['Reference'] ?>
+													<?php } ?>
+													</td>
+													<td><?php echo $row['OrderNo'] ?></td>
+													<td><?php echo $row['Department'] ?></td>
+													<td><?php echo $row['DateNeeded'] ?></td>
+													<td>
+														<?php if($row['Status']==0){ ?>
+															<span class="badge bg-warning text-white">PENDING</span>
+														<?php }else if($row['Status']==2){?>
+															<span class="badge bg-danger text-white">DECLINED</span>
+														<?php }else if($row['Status']==4){?>
+															<span class="badge bg-success text-white">APPROVED</span>
+														<?php }else{ ?>
+															<span class="badge bg-info text-white">REVIEWED</span>
+														<?php } ?>
+													</td>
+													<td><?php echo $row['Comment'] ?></td>
+												</tr>
+											<?php endforeach; ?>
+										</tbody>
 									</table>
 								</div>
 							</div>
