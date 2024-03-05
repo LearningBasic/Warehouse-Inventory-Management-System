@@ -180,3 +180,63 @@ INFO - 2024-03-05 08:59:03 --> Session: Class initialized using 'CodeIgniter\Ses
 INFO - 2024-03-05 08:59:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-03-05 09:00:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-03-05 09:00:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-05 09:09:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-05 09:09:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-05 09:10:00 --> mysqli_sql_exception: Column 'Status' in where clause is ambiguous in C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT `a`.`Dat...', 0)
+#1 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.`Dat...')
+#2 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.`Dat...')
+#3 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`Dat...', Array, false)
+#4 C:\xampp\htdocs\FastCat-WMS\app\Controllers\Purchase.php(816): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(934): App\Controllers\Purchase->viewPurchase()
+#6 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Purchase))
+#7 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\FastCat-WMS\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\FastCat-WMS\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2024-03-05 09:10:00 --> Column 'Status' in where clause is ambiguous
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`DateApproved`, `b`.`Fullname`
+FROM `tblreview` `a`
+LEFT JOIN `tblaccount` `b` ON `b`.`accountID`=`a`.`accountID`
+WHERE `a`.`OrderNo` = :a.OrderNo:
+AND `Status` <> :Status:', [...], false)
+ 2 APPPATH\Controllers\Purchase.php(816): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Purchase->viewPurchase()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Purchase))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+ERROR - 2024-03-05 09:10:04 --> mysqli_sql_exception: Column 'Status' in where clause is ambiguous in C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\FastCat-WMS\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT `a`.`Dat...', 0)
+#1 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.`Dat...')
+#2 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.`Dat...')
+#3 C:\xampp\htdocs\FastCat-WMS\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`Dat...', Array, false)
+#4 C:\xampp\htdocs\FastCat-WMS\app\Controllers\Purchase.php(816): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(934): App\Controllers\Purchase->viewPurchase()
+#6 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Purchase))
+#7 C:\xampp\htdocs\FastCat-WMS\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\FastCat-WMS\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\FastCat-WMS\system\Commands\Server\rewrite.php(47): require_once('C:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2024-03-05 09:10:04 --> Column 'Status' in where clause is ambiguous
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`DateApproved`, `b`.`Fullname`
+FROM `tblreview` `a`
+LEFT JOIN `tblaccount` `b` ON `b`.`accountID`=`a`.`accountID`
+WHERE `a`.`OrderNo` = :a.OrderNo:
+AND `Status` <> :Status:', [...], false)
+ 2 APPPATH\Controllers\Purchase.php(816): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Purchase->viewPurchase()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Purchase))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('FCPATH\\index.php')
+INFO - 2024-03-05 09:10:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-05 09:10:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-05 09:10:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-05 09:10:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-05 09:18:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-05 09:18:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
