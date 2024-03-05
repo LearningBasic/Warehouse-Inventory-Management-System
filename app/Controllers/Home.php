@@ -206,8 +206,13 @@ class Home extends BaseController
         $builder = $this->db->table('tblinventory');
         $builder->select('*');
         $product = $builder->get()->getResult();
+        //get the receive PO
+        $builder = $this->db->table('tblreceive a');
+        $builder->select('a.*,b.warehouseName');
+        $builder->join('tblwarehouse b','b.warehouseID=a.warehouseID','LEFT');
+        $receive = $builder->get()->getResult();
 
-        $data = ['reserve'=>$reserve,'product'=>$product];
+        $data = ['reserve'=>$reserve,'product'=>$product,'receive'=>$receive];
         return view('storage',$data);
     }
 

@@ -540,9 +540,26 @@
 											<th>Receiver</th>
 											<th>Location</th>
 											<th>Remarks</th>
-											<th><span class="dw dw-more"></span></th>
+											<th>Action</th>
 										</thead>
-										<tbody></tbody>
+										<tbody>
+											<?php foreach($receive as $row): ?>
+												<tr>
+													<td><?php echo $row->Date ?></td>
+													<td><?php echo $row->purchaseNumber ?></td>
+													<td><?php echo $row->InvoiceNo ?></td>
+													<td style="text-align:right;"><?php echo number_format($row->InvoiceAmount,2) ?></td>
+													<td><?php echo $row->Receiver ?></td>
+													<td><?php echo $row->warehouseName ?></td>
+													<td><?php echo $row->Remarks ?></td>
+													<td>
+														<a class="dropdown-item" href="<?=site_url('download-file/')?><?php echo $row->purchaseNumber ?>">
+															<span class="dw dw-download"></span>&nbsp;Download
+														</a>
+													</td>
+												</tr>
+											<?php endforeach; ?>
+										</tbody>
 									</table>
 								</div>
 							</div>

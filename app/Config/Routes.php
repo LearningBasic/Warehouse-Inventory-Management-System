@@ -137,6 +137,7 @@ $routes->post('decline','Home::decline');
 $routes->get('search-vendor','Home::searchVendor');
 $routes->get('vendor-information','Home::vendorInformation');
 $routes->get('download/(:any)','Report::Download/$1');
+$routes->get('download-file/(:any)','Report::DownloadFile/$1');
 $routes->get('vendor-ledger','Report::vendorLedger');
 $routes->get('fetch-purchase_number','Report::fetchPO');
 $routes->get('generate-return-summary','Report::generateReturnSummary');
