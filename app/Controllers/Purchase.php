@@ -177,6 +177,42 @@ class Purchase extends BaseController
             $purchaseModel->update($purchaseID,$values);
             //upload the attachment
             $file->move('Attachment/',$originalName);
+            //send to approver
+            $value = [
+                'accountID'=>$approver_user,'OrderNo'=>$purchaseNumber,'DateReceived'=>date('Y-m-d'),'Status'=>0,
+                'DateApproved'=>"0000-00-00",'Comment'=>''
+            ];
+            $reviewModel->save($value);
+            //send email notification
+            $builder = $this->db->table('tblaccount');
+            $builder->select('Fullname,Email');
+            $builder->WHERE('accountID',$approver_user);
+            $data = $builder->get();
+            if($row = $data->getRow())
+            {
+                $email = \Config\Services::email();
+                $email->setTo($row->Email,$row->Fullname);
+                $email->setFrom("fastcat.system@gmail.com","FastCat");
+                $imgURL = "assets/img/fastcat.png";
+                $email->attach($imgURL);
+                $cid = $email->setAttachmentCID($imgURL);
+                $template = "<center>
+                <img src='cid:". $cid ."' width='100'/>
+                <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+                <tr><td><center><h1>Purchase Requistion Form</h1></center></td></tr>
+                <tr><td><center>Hi, ".$row->Fullname."</center></td></tr>
+                <tr><td><center>This is from FastCat System, sending you a reminder that</center></td></tr>
+                <tr><td><p><center><b>".$purchaseNumber."</b> is requesting for your approval</center></p></td><tr>
+                <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+                <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+                <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+                $subject = "Purchase Requisition Form - For Approval";
+                $email->setSubject($subject);
+                $email->setMessage($template);
+                $email->send();
+            }
+            session()->setFlashdata('success','Great! Successfully submitted for review');
+            return redirect()->to('/list-orders')->withInput();
         }
     }
 
