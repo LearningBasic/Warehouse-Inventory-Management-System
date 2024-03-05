@@ -554,7 +554,7 @@
 												<tr>
 													<td><?php echo $row['DatePrepared'] ?></td>
 													<td>
-													<?php if($row['Status']==4){?>
+													<?php if($row['Status']==4||$row['Status']==2){?>
 														<a class="btn-link" href="export/<?php echo $row['Reference'] ?>" target="_blank"><?php echo $row['Reference'] ?></a>
 													<?php }else{ ?>
 														<?php echo $row['Reference'] ?>
