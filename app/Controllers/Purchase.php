@@ -121,6 +121,65 @@ class Purchase extends BaseController
         }
     }
 
+    public function reSubmit()
+    {
+        date_default_timezone_set('Asia/Manila');
+        $OrderItemModel = new \App\Models\OrderItemModel();
+        $purchaseModel = new \App\Models\purchaseModel();
+        $reviewModel = new \App\Models\reviewModel();
+        //data
+        $purchaseID = $this->request->getPost('purchaseID');
+        $purchaseNumber = $this->request->getPost('purchaseNumber');
+        $datePrepared = $this->request->getPost('datePrepared');
+        $dept = $this->request->getPost('department');
+        $dateNeeded = $this->request->getPost('dateNeeded');
+        $reason = $this->request->getPost('reason');
+        $purchase_type = $this->request->getPost('purchase_type');
+        $file = $this->request->getFile('file');
+        $originalName = $file->getClientName();
+        $approver_user = $this->request->getPost('approver');
+        //array
+        $itemID = $this->request->getPost('itemID');
+        $qty = $this->request->getPost('qty');
+        $item = $this->request->getPost('item');
+        $item_name = $this->request->getPost('item_name');
+        $spec = $this->request->getPost('specification');
+
+        $validation = $this->validate([
+            'datePrepared'=>'required','department'=>'required','dateNeeded'=>'required',
+            'reason'=>'required','item_name'=>'required','approver'=>'required',
+            'purchase_type'=>'required','images'=>'uploaded[file]'
+        ]);
+
+        if(!$validation)
+        {
+            session()->setFlashdata('fail','Invalid! Please fill in the form');
+            return redirect()->to('/edit-purchase/'.$purchaseNumber)->withInput();
+        }
+        else
+        {
+            //update all the item requested
+            $count = count($item_name);
+            for($i=0;$i<$count;$i++)
+            {
+                $values = [
+                    'Qty'=>$qty[$i],'ItemUnit'=>$item[$i],'Item_Name'=>$item_name[$i],
+                    'Specification'=>$spec[$i],
+                ];
+                $OrderItemModel->update($itemID[$i],$values);
+            }
+            //update the purchase Form
+            $values = [
+                'DatePrepared'=>$datePrepared,'Department'=>$dept,
+                'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
+                'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,
+            ];
+            $purchaseModel->update($purchaseID,$values);
+            //upload the attachment
+            $file->move('Attachment/',$originalName);
+        }
+    }
+
     public function saveOrder()
     {
         date_default_timezone_set('Asia/Manila');

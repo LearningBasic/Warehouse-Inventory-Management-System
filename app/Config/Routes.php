@@ -102,6 +102,7 @@ $routes->post('accept-return-order','ProductController::acceptReturnOrder');
 $routes->get('search-stocks','Report::searchStockReport');
 $routes->get('search-inventory','Report::searchInventory');
 $routes->post('save-order','Purchase::saveOrder');
+$routes->post('re-submit','Purchase::reSubmit');
 $routes->get('get-editor','Purchase::getEditor');
 $routes->post('cancel-order','Purchase::cancelOrder');
 $routes->get('view-order','Purchase::viewOrder');

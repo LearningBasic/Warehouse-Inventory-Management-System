@@ -685,7 +685,14 @@ class Home extends BaseController
 
     public function editPurchase($id)
     {
-        return view('edit-purchase');
+        $purchaseModel = new \App\Models\purchaseModel();
+        $purchase = $purchaseModel->WHERE('OrderNo',$id)->first();
+
+        //items
+        $OrderItemModel = new \App\Models\OrderItemModel();
+        $item = $OrderItemModel->WHERE('OrderNo',$id)->findAll();
+        $data = ['purchase'=>$purchase,'item'=>$item];
+        return view('edit-purchase',$data);
     }
 
     public function addReport()
