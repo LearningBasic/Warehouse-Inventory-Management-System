@@ -683,6 +683,11 @@ class Home extends BaseController
         return view('orders');
     }
 
+    public function editPurchase($id)
+    {
+        return view('edit-purchase');
+    }
+
     public function addReport()
     {
         $user = session()->get('loggedUser');

@@ -171,6 +171,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('/return-order','Home::returnOrder');
     $routes->get('/request','Home::userRequest');
     $routes->get('/orders','Home::purchaseRequest');
+    $routes->get('/edit-purchase/(:any)','Home::editPurchase/$1');
     $routes->get('/list-orders','Home::listOrders');
     $routes->get('/export/(:any)','Home::export/$1');
     $routes->get('/create/(:any)','Home::createCanvas/$1');

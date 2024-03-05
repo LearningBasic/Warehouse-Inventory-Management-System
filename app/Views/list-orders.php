@@ -500,7 +500,13 @@
 												<tr>
 													<td><?php echo $row->DatePrepared ?></td>
 													<td><?php echo $row->PurchaseType ?></td>
-													<td><?php echo $row->OrderNo ?></td>
+													<td>
+														<?php if($row->Status==2){ ?>
+														<a href="edit-purchase/<?php echo $row->OrderNo ?>" class="btn-link"><?php echo $row->OrderNo ?></a>
+														<?php }else{?>
+														<?php echo $row->OrderNo ?>
+														<?php } ?>
+													</td>
 													<td><?php echo $row->Reason ?></td>
 													<td><?php echo $row->Department ?></td>
 													<td><?php echo $row->DateNeeded ?></td>
