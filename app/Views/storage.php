@@ -460,53 +460,93 @@
 				<div class="card-box">
 					<div class="card-header"><span class="icon-copy dw dw-server"></span>&nbsp;Reserved</div>
 					<div class="card-body">
-                        <?php if(!empty(session()->getFlashdata('success'))) : ?>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <?= session()->getFlashdata('success'); ?>
-                            </div>
-                        <?php endif; ?>
-						<table class="table data-table table-striped">
-							<thead>
-								<th>Date Received</th>
-								<th>P.O. No</th>
-								<th>Invoice No</th>
-								<th>Item Unit</th>
-								<th>Product Name</th>
-								<th>Stocks</th>
-								<th>Available</th>
-								<th><span class="dw dw-more"></span></th>
-							</thead>
-							<tbody>
-								<?php foreach($reserve as $row): ?>
-									<tr>
-										<td><?php echo $row->Date ?></td>
-										<td><?php echo $row->purchaseNumber ?></td>
-										<td><?php echo $row->InvoiceNo ?></td>
-										<td><?php echo $row->ItemUnit ?></td>
-										<td><?php echo $row->productName ?></td>
-										<td><?php echo $row->Qty ?></td>
-										<td><?php echo $row->Available ?></td>
-										<td>
-											<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Staff"){ ?>
-											<?php if($row->Available==0){ ?>
-												-
-											<?php }else { ?>
-											<div class="dropdown">
-												<button type="button" class="btn btn-primary btn-sm line-height-1 no-arrow dropdown-toggle" role="button" data-toggle="dropdown">
-													Action
-												</button>
-												<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-													<button type="button" class="dropdown-item add-stock" value="<?php echo $row->reservedID ?>"><i class="icon-copy dw dw-right-arrow-1"></i> Add as Stock</button>
-													<a class="dropdown-item" href="/new-product/<?php echo $row->reservedID ?>"><i class="icon-copy dw dw-right-arrow-1"></i> Add as New Product</a>
-												</div>
-											</div>
-											<?php } ?>
-											<?php } ?>
-										</td>
-									</tr>
-								<?php endforeach; ?>
-							</tbody>
-						</table>
+						<div class="tabs">
+							<ul class="nav nav-pills justify-content-left" role="tablist">
+								<li class="nav-item">
+									<a
+										class="nav-link active text-blue"
+										data-toggle="tab"
+										href="#home6"
+										role="tab"
+										aria-selected="true"
+										>Reserved Items</a
+									>
+								</li>
+								<li class="nav-item">
+									<a
+										class="nav-link text-blue"
+										data-toggle="tab"
+										href="#profile6"
+										role="tab"
+										aria-selected="false"
+										>Receive Report</a
+									>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane fade show active" id="home6" role="tabpanel">
+									<br/>
+									<table class="table data-table table-striped">
+										<thead>
+											<th>Date Received</th>
+											<th>P.O. No</th>
+											<th>Invoice No</th>
+											<th>Item Unit</th>
+											<th>Product Name</th>
+											<th>Stocks</th>
+											<th>Available</th>
+											<th><span class="dw dw-more"></span></th>
+										</thead>
+										<tbody>
+											<?php foreach($reserve as $row): ?>
+												<tr>
+													<td><?php echo $row->Date ?></td>
+													<td><?php echo $row->purchaseNumber ?></td>
+													<td><?php echo $row->InvoiceNo ?></td>
+													<td><?php echo $row->ItemUnit ?></td>
+													<td><?php echo $row->productName ?></td>
+													<td><?php echo $row->Qty ?></td>
+													<td><?php echo $row->Available ?></td>
+													<td>
+														<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Staff"){ ?>
+														<?php if($row->Available==0){ ?>
+															-
+														<?php }else { ?>
+														<div class="dropdown">
+															<button type="button" class="btn btn-primary btn-sm line-height-1 dropdown-toggle" role="button" data-toggle="dropdown">
+																Action
+															</button>
+															<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+																<button type="button" class="dropdown-item add-stock" value="<?php echo $row->reservedID ?>"><i class="icon-copy dw dw-right-arrow-1"></i> Add as Stock</button>
+																<a class="dropdown-item" href="/new-product/<?php echo $row->reservedID ?>"><i class="icon-copy dw dw-right-arrow-1"></i> Add as New Product</a>
+															</div>
+														</div>
+														<?php } ?>
+														<?php } ?>
+													</td>
+												</tr>
+											<?php endforeach; ?>
+										</tbody>
+									</table>
+								</div>
+								<div class="tab-pane fade" id="profile6" role="tabpanel">
+									<br/>
+									<table class="table data-table table-striped">
+										<thead>
+											<th>Date Received</th>
+											<th>P.O. No</th>
+											<th>Invoice No</th>
+											<th>Invoice Amount</th>
+											<th>Receiver</th>
+											<th>Location</th>
+											<th>Remarks</th>
+											<th><span class="dw dw-more"></span></th>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
