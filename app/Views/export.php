@@ -499,12 +499,14 @@
                             <div class="col-12 form-group">
                                 <div class="row g-3">
 									<?php foreach($assign as $row): ?>
+										<?php if( $row->PurchaseType=="Regular Purchase"){ ?>
                                         <div class="col-lg-3">
 											<label>Prepared By</label>
 											<center><img src="/Signatures/<?php echo $row->Signatures ?>" width="150"/></center>
                                             <p><center><b><u><?php echo $row->Fullname ?></u></b></center></p>
                                             <p><center>Negotiator</center></p>
                                         </div>
+										<?php } ?>
                                     <?php endforeach; ?>
                                     <?php foreach($account as $row): ?>
                                         <div class="col-lg-3">

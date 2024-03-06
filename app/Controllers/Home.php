@@ -1326,7 +1326,7 @@ class Home extends BaseController
     {
         //assignment
         $builder = $this->db->table('tblcanvass_form a');
-        $builder->select('d.Fullname,d.Signatures');
+        $builder->select('d.Fullname,d.Signatures,b.PurchaseType');
         $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
         $builder->join('tblassignment c','c.prfID=b.prfID','LEFT');
         $builder->join('tblaccount d','d.accountID=c.accountID','LEFT');
