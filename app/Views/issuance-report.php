@@ -453,6 +453,23 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
+				<div class="row g-3">
+					<div class="col-12 form-group">
+						<div class="card-box">
+							<div class="card-body">
+								<div class="card-title"><i class="icon-copy dw dw-analytics-5"></i>&nbsp;Generate Report</div>
+								<form method="GET" class="row g-3" id="frmReport">
+									<div class="col-lg-3 form-group">
+										<input type="date" class="form-control" name="fromdate">
+									</div>
+									<div class="col-lg-3 form-group">
+										<input type="date" class="form-control" name="todate">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<!-- js -->
