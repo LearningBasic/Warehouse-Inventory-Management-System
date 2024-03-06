@@ -463,7 +463,7 @@
 										<?php if($row->Status==0){ ?>
                                             <a class="btn btn-link" href="<?=site_url('view/')?><?php echo $row->Reference ?>"><?php echo $row->Reference ?></a>
 										<?php }else { ?>
-											<?php echo $row->Reference ?>
+											<a class="btn-link" href="export/<?php echo $row->Reference ?>" target="_blank"><?php echo $row->Reference ?></a>
 										<?php } ?>
                                         </td>
 										<td><?php echo $row->OrderNo ?></td>

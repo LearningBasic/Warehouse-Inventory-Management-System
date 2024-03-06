@@ -529,9 +529,11 @@
 														<?php if($row->Status==0){ ?>
 															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span>&nbsp;View</button>
 															<button type="button" class="btn btn-outline-danger btn-sm cancel" value="<?php echo $row->prfID ?>"><span class="dw dw-trash"></span>&nbsp;Cancel</button>
+															<?php if($row->PurchaseType=="Local Purchase"){ ?>
+															<a class="btn btn-outline-primary btn-sm" href="create/<?php echo $row->OrderNo ?>"><span class="dw dw-add"></span>&nbsp;Create</a>
+															<?php } ?>
 														<?php }else if($row->Status==3){ ?>
 															<?php if($row->PurchaseType=="Local Purchase"){ ?>
-																<a class="btn btn-outline-primary btn-sm" href="create/<?php echo $row->OrderNo ?>"><span class="dw dw-add"></span>&nbsp;Create</a>
 																<a class="btn btn-outline-primary btn-sm" href="generate/<?php echo $row->OrderNo ?>"><span class="dw dw-export"></span>&nbsp;Export</a>
 															<?php }else{?>
 																<a class="btn btn-outline-primary btn-sm" href="generate/<?php echo $row->OrderNo ?>"><span class="dw dw-export"></span>&nbsp;Export</a>
