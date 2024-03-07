@@ -1279,7 +1279,8 @@ class Home extends BaseController
         $builder = $this->db->table('tblprf a');
         $builder->select('a.*,b.Comment');
         $builder->join('tblreview b','b.OrderNo=a.OrderNo','LEFT');
-        $builder->WHERE('a.Department',$dept);
+        $builder->join('tblaccount c','c.accountID=a.accountID','LEFT');
+        $builder->WHERE('c.Department',$dept);
         $builder->groupBy('a.OrderNo');
         $orders = $builder->get()->getResult();
         //canvass 
