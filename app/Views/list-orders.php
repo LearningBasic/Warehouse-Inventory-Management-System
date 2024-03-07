@@ -599,6 +599,7 @@
 											<th>Reference</th>
 											<th>Purchase No</th>
 											<th>Status</th>
+											<th>Action </th>
 										</thead>
 										<tbody>
 											<?php foreach($po as $row): ?>
@@ -614,6 +615,13 @@
 														<span class="badge bg-success text-white">APPROVED</span>
 													<?php }else if($row->Status==2){?>
 														<span class="badge bg-danger text-white">CANCELLED</span>
+													<?php }?>
+												</td>
+												<td>
+													<?php if($row->Status==1){?>
+													<a class="dropdown-item" href="<?=site_url('download/')?><?php echo $row->Reference ?>">
+														<span class="dw dw-download"></span>&nbsp;Download
+													</a>
 													<?php }?>
 												</td>
 											</tr>	

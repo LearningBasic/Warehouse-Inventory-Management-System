@@ -488,7 +488,9 @@
 											<span class="badge bg-danger text-white">DECLINED</span>
 										<?php }else if($row->Status==0) { ?>
 											<span class="badge bg-info text-white">CREATED</span>
-										<?php }?>
+										<?php }else {?>
+											-
+										<?php } ?> 
 									</td>
                                     <td>
 										<?php if(empty($row->Status)){ ?>
@@ -506,6 +508,9 @@
 													<button type="button" class="dropdown-item comment" value="<?php echo $row->Reference ?>">
 														<span class="dw dw-add"></span>&nbsp;Add
 													</button>
+													<a class="dropdown-item" href="<?=site_url('modify/')?><?php echo $row->Reference ?>">
+														<span class="dw dw-pencil"></span>&nbsp;Modify
+													</a>
 													<a class="dropdown-item" href="<?=site_url('download/')?><?php echo $row->Reference ?>">
 														<span class="dw dw-download"></span>&nbsp;Download
 													</a>
