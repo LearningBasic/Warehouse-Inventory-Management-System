@@ -205,7 +205,7 @@ class Purchase extends BaseController
         $validation = $this->validate([
             'datePrepared'=>'required','department'=>'required','dateNeeded'=>'required',
             'reason'=>'required','item_name'=>'required','approver'=>'required',
-            'purchase_type'=>'required','images'=>'uploaded[file]'
+            'purchase_type'=>'required',
         ]);
 
         if(!$validation)
@@ -233,7 +233,14 @@ class Purchase extends BaseController
             ];
             $purchaseModel->update($purchaseID,$values);
             //upload the attachment
-            $file->move('Attachment/',$originalName);
+            if(empty($originalName))
+            {
+                //do nothing
+            }
+            else
+            {
+                $file->move('Attachment/',$originalName);
+            }
             //send to approver
             $value = [
                 'accountID'=>$approver_user,'OrderNo'=>$purchaseNumber,'DateReceived'=>date('Y-m-d'),'Status'=>0,

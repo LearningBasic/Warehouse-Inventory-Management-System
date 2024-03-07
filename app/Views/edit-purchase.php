@@ -477,8 +477,8 @@
                                 <textarea class="form-control" name="reason" required><?php echo $purchase['Reason'] ?></textarea>
                             </div>
                             <div class="col-12 form-group">
-                                <label>Attachment</label>
-                                <input type="file" class="form-control" name="file" required/>
+                                <label>Attachment(Optional)</label>
+                                <input type="file" class="form-control" name="file"/>
                             </div>
                             <div class="col-12 form-group">
                                 <table class="table table-bordered table-striped">

@@ -1274,11 +1274,12 @@ class Home extends BaseController
 
     public function listOrders()
     {
+        $dept = session()->get('department');
         $user = session()->get('loggedUser');
         $builder = $this->db->table('tblprf a');
         $builder->select('a.*,b.Comment');
         $builder->join('tblreview b','b.OrderNo=a.OrderNo','LEFT');
-        $builder->WHERE('a.accountID',$user);
+        $builder->WHERE('a.Department',$dept);
         $builder->groupBy('a.OrderNo');
         $orders = $builder->get()->getResult();
         //canvass 
