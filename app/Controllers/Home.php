@@ -1481,7 +1481,6 @@ class Home extends BaseController
         $builder->select('a.*,b.Item_Name,b.ItemUnit,b.Qty,b.Specification');
         $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
         $builder->WHERE('a.Remarks','Selected')->WHERE('a.Reference',$id);
-        $builder->groupBy('a.Reference');
         $record = $builder->get()->getResult();
 
         $data  = ['record'=>$record,'Reference'=>$id];

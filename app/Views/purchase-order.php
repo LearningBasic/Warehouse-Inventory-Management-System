@@ -454,6 +454,11 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
+				<?php if(!empty(session()->getFlashdata('success'))) : ?>
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<?= session()->getFlashdata('success'); ?>
+					</div>
+				<?php endif; ?>
                 <div class="card-box">
                     <div class="card-header">Generate Purchase Order (P.O.)</div>
                     <div class="card-body">

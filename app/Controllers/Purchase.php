@@ -11,6 +11,43 @@ class Purchase extends BaseController
         $this->db = db_connect();
     }
 
+    public function saveChanges()
+    {
+        $OrderItemModel = new \App\Models\OrderItemModel();
+        $systemLogsModel = new \App\Models\systemLogsModel();
+        $canvassModel = new \App\Models\canvassModel();
+        //data
+        $reference = $this->request->getPost('reference');
+        $itemID = $this->request->getPost('itemID');
+        $qty = $this->request->getPost('qty');
+        $item = $this->request->getPost('item');
+        $item_name = $this->request->getPost('item_name');
+        $spec = $this->request->getPost('specification');
+        $price = $this->request->getPost('price');
+
+        $count = count($itemID);
+        //update the specification,Item Unit,Qty and Item Name
+        for($i=0;$i<$count;$i++)
+        {
+            $values = [
+                'Qty'=>$qty[$i],'ItemUnit'=>$item[$i],'Item_Name'=>$item_name[$i],
+                'Specification'=>$spec[$i],
+            ];
+            $OrderItemModel->update($itemID[$i],$values);
+        }
+        //update the price
+        for($i=0;$i<$count;$i++)
+        {
+            $canvass = $canvassModel->WHERE('orderID',$itemID[$i])->first();
+            $values = ['Price'=>$price[$i],];
+            $canvassModel->update($canvass['canvassID'],$values);
+        }
+        $value = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Update the Records of Quotation/Canvass Sheet No '.$reference];
+        $systemLogsModel->save($value);
+        session()->setFlashdata('success','Great! Successfully update the ordered item(s)');
+        return redirect()->to('/purchase-order')->withInput();
+    }
+
     public function countItem()
     {
         $user = session()->get('loggedUser');
