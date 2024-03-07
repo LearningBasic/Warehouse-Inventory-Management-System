@@ -13,9 +13,12 @@ class Purchase extends BaseController
 
     public function saveChanges()
     {
+        date_default_timezone_set('Asia/Manila');
         $OrderItemModel = new \App\Models\OrderItemModel();
         $systemLogsModel = new \App\Models\systemLogsModel();
         $canvassModel = new \App\Models\canvassModel();
+        $purchaseOrderModel = new \App\Models\purchaseOrderModel();
+        $purchaseReviewModel = new \App\Models\purchaseReviewModel();
         //data
         $reference = $this->request->getPost('reference');
         $itemID = $this->request->getPost('itemID');
@@ -24,6 +27,8 @@ class Purchase extends BaseController
         $item_name = $this->request->getPost('item_name');
         $spec = $this->request->getPost('specification');
         $price = $this->request->getPost('price');
+        $date = date('Y-m-d');
+        $status = 0;
 
         $count = count($itemID);
         //update the specification,Item Unit,Qty and Item Name
@@ -41,6 +46,21 @@ class Purchase extends BaseController
             $canvass = $canvassModel->WHERE('orderID',$itemID[$i])->first();
             $values = ['Price'=>$price[$i],];
             $canvassModel->update($canvass['canvassID'],$values);
+        }
+
+        //update the status of PO
+        $builder = $this->db->table('tblpurchase_logs');
+        $builder->select('purchaseLogID,purchaseNumber');
+        $builder->WHERE('Reference',$reference);
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            $list = ['Status'=>$status,'Date'=>$date];
+            $purchaseOrderModel->update($row->purchaseLogID,$list);
+            //get the prID
+            $record = ['DateReceived'=>$date,'Status'=>$status];
+            $review = $purchaseReviewModel->WHERE('purchaseNumber',$row->purchaseNumber)->first();
+            $purchaseReviewModel->update($review['prID'],$record);
         }
         $value = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Update the Records of Quotation/Canvass Sheet No '.$reference];
         $systemLogsModel->save($value);
