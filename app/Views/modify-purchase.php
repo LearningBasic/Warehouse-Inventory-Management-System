@@ -4,25 +4,25 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>Purchase Order</title>
+		<title>Edit Purchase Order</title>
 
 		<!-- Site favicon -->
 		<link
 			rel="apple-touch-icon"
 			sizes="180x180"
-			href="assets/img/fastcat.png"
+			href="../assets/img/fastcat.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="32x32"
-			href="assets/img/fastcat.png"
+			href="../assets/img/fastcat.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="16x16"
-			href="assets/img/fastcat.png"
+			href="../assets/img/fastcat.png"
 		/>
 
 		<!-- Mobile Specific Metas -->
@@ -37,23 +37,23 @@
 			rel="stylesheet"
 		/>
 		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="assets/vendors/styles/core.css" />
+		<link rel="stylesheet" type="text/css" href="../assets/vendors/styles/core.css" />
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="assets/vendors/styles/icon-font.min.css"
+			href="../assets/vendors/styles/icon-font.min.css"
 		/>
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+			href="../assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
 		/>
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="assets/src/plugins/datatables/css/responsive.bootstrap4.min.css"
+			href="../assets/src/plugins/datatables/css/responsive.bootstrap4.min.css"
 		/>
-		<link rel="stylesheet" type="text/css" href="assets/vendors/styles/style.css" />
+		<link rel="stylesheet" type="text/css" href="../assets/vendors/styles/style.css" />
         <style>
         /* Track */
             ::-webkit-scrollbar-track {
@@ -74,24 +74,6 @@
                 width: 0px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
-
-			  .loading-spinner{
-				width:30px;
-				height:30px;
-				border:2px solid indigo;
-				border-radius:50%;
-				border-top-color:#0001;
-				display:inline-block;
-				animation:loadingspinner .7s linear infinite;
-				}
-				@keyframes loadingspinner{
-				0%{
-					transform:rotate(0deg)
-				}
-				100%{
-					transform:rotate(360deg)
-				}
-				}
             
         </style>
 	</head>
@@ -99,7 +81,7 @@
 		<div class="pre-loader">
 			<div class="pre-loader-box">
 				<div class="loader-logo">
-					<img src="assets/img/fastcat.png" alt="Fastcat" width="100"/>
+					<img src="../assets/img/fastcat.png" alt="Fastcat" width="100"/>
 				</div>
 				<div class="loader-progress" id="progress_div">
 					<div class="bar" id="bar1"></div>
@@ -326,9 +308,9 @@
 		<div class="left-side-bar">
 			<div class="brand-logo">
 				<a href="<?=site_url('/dashboard')?>">
-					<img src="assets/img/fastcat.png" alt="" class="dark-logo" width="100"/>
+					<img src="../assets/img/fastcat.png" alt="" class="dark-logo" width="100"/>
 					<img
-						src="assets/img/fastcat.png"
+						src="../assets/img/fastcat.png"
 						alt="" width="100"
 						class="light-logo"
 					/>
@@ -361,21 +343,15 @@
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
                             <i class="micon dw dw-shopping-cart"></i><span class="mtext">Purchasing</span>
-							<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
-							&nbsp;<span class="badge badge-pill bg-primary text-white" id="notification">0</span>
-							<?php } ?>
 							</a>
 							<ul class="submenu">
                                 <li><a href="<?=site_url('orders')?>">Order Materials</a></li>
 								<li><a href="<?=site_url('list-orders')?>">List Order</a></li>
-								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
-								<li><a href="<?=site_url('approve-orders')?>">For Approval&nbsp;<span class="badge badge-pill bg-primary text-white" id="notifications">0</span></a></li>
-								<li><a href="<?=site_url('canvass-sheet-request')?>">Canvass Sheet&nbsp;<span class="badge badge-pill bg-primary text-white" id="notif">0</span></a></li>
-								<?php } ?>
 								<?php if(session()->get('role')=="Staff"||session()->get('role')=="Administrator"){?>
-								<li><a href="<?=site_url('assign')?>">Assigned PRF</a></li>
+                                <li><a href="<?=site_url('assign')?>">Assigned PRF</a></li>
 								<li><a href="<?=site_url('local-purchase')?>">Local Purchase</a></li>
-								<li><a href="<?=site_url('purchase-order')?>" class="active">Purchase Order</a></li>
+								<li><a href="<?=site_url('purchase-order')?>">Purchase Order</a></li>
+                                <li><a href="javascript:void(0);" class="active">Edit P.O.</a></li>
 								<?php } ?>
 							</ul>
 						</li>
@@ -454,186 +430,63 @@
 
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
+				<?php if(!empty(session()->getFlashdata('fail'))) : ?>
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<?= session()->getFlashdata('fail'); ?>
+					</div>
+				<?php endif; ?>
                 <div class="card-box">
-                    <div class="card-header">Generate Purchase Order (P.O.)</div>
+                    <div class="card-header">Edit Purchase Order
+                    <a href="<?=site_url('purchase-order')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
+                    </div>
                     <div class="card-body">
-                        <table class="data-table table stripe hover nowrap">
-                            <thead>
-								<th>Date Needed</th>
-                                <th>Reference No</th>
-								<th>Department</th>
-                                <th>PRF No</th>
-                                <th>Vendor(s)</th>
-                                <th>Terms</th>
-                                <th>Warranty</th>
-								<th>Department</th>
-								<th>Status</th>
-                                <th>Action</th>
-                            </thead>
-							<tbody>
-							<?php foreach($canvass as $row): ?>
-                                <tr>
-									<td><?php echo $row->DateNeeded ?></td>
-                                    <td><a class="btn btn-link" href="export/<?php echo $row->Reference ?>" target="_blank"><?php echo $row->Reference ?></a></td>
-									<td><?php echo $row->Department ?></td>
-                                    <td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
-                                    <td><?php echo $row->Supplier ?></td>
-                                    <td><?php echo $row->Terms ?></td>
-                                    <td><?php echo $row->Warranty ?></td>
-									<td><?php echo $row->Department ?></td>
-									<td>
-										<?php if($row->Status==1){ ?>
-											<span class="badge bg-success text-white">APPROVED</span>
-										<?php }else if($row->Status==2){ ?>
-											<span class="badge bg-danger text-white">DECLINED</span>
-										<?php }else if($row->Status==0) { ?>
-											<span class="badge bg-info text-white">CREATED</span>
-										<?php }else {?>
-											-
-										<?php } ?> 
-									</td>
-                                    <td>
-										<?php if(empty($row->Status)){ ?>
-											<button type="button" class="btn btn-outline-primary btn-sm generate" value="<?php echo $row->Reference ?>">
-											<span class="dw dw-add"></span>&nbsp;Create
-											</button>
-										<?php }else{ ?>
-											<?php if($row->Status==0){}else if($row->Status==1){ ?>
-											<div class="dropdown">
-												<a class="btn btn-primary btn-sm dropdown-toggle"
-													href="#" role="button" data-toggle="dropdown">
-													SELECT
-												</a>
-												<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
-													<button type="button" class="dropdown-item comment" value="<?php echo $row->Reference ?>">
-														<span class="dw dw-add"></span>&nbsp;Add
-													</button>
-													<?php if($row->Status==0||$row->Status==1){ ?>
-													<a class="dropdown-item" href="<?=site_url('modify/')?><?php echo $row->Reference ?>">
-														<span class="dw dw-pencil"></span>&nbsp;Modify
-													</a>
-													<?php } ?>
-													<a class="dropdown-item" href="<?=site_url('download/')?><?php echo $row->Reference ?>">
-														<span class="dw dw-download"></span>&nbsp;Download
-													</a>
-												</div>
-											</div>
-											<?php }else{ ?>
-												-
-											<?php }?>
-										<?php } ?>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-							</tbody>
-                        </table>
+                        <form method="POST" class="row g-3" action="<?=base_url('save-changes')?>">
+                            <div class="col-12 form-group">
+                                <h3><b>Reference #</b> : <?=$Reference?></h3>
+                            </div>
+							<input type="hidden" name="reference" value="<?=$Reference?>"/>
+                            <div class="col-12 form-group table-responsive">
+                                <table class="table stripe table-bordered hover nowrap">
+                                    <thead>
+                                        <th class="bg-primary text-white">#</th>
+                                        <th class="bg-primary text-white">Qty</th>
+                                        <th class="bg-primary text-white">Unit of Measure</th>
+                                        <th class="bg-primary text-white">Product Name</th>
+                                        <th class="bg-primary text-white">Unit Price</th>
+                                        <th class="bg-primary text-white">Specification</th>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach($record as $row): ?>
+                                        <tr>
+                                            <td><input type="checkbox" style="height:18px;width:18px;" value="<?php echo $row->orderID ?>" name="itemID[]" id="itemID" checked/></td>
+                                            <td><input type='number' class='form-control' value="<?php echo $row->Qty ?>" name='qty[]'/></td>
+                                            <td><input type='text' class='form-control' value="<?php echo $row->ItemUnit ?>" name='item[]'/></td>
+                                            <td><input type='text' class='form-control' value="<?php echo $row->Item_Name ?>" name='item_name[]'/></td>
+                                            <td><input type='text' class='form-control' value="<?php echo $row->Price ?>" name='price[]'/></td>
+                                            <td><input type='text' class='form-control' value="<?php echo $row->Specification ?>" name='specification[]'/></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-12 form-group">
+                                <button type="submit" class="btn btn-primary" onclick="return confirm('Do you want to save the changes applied?')" id="btnSave">Save Changes</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
 			</div>
-		</div>
-		<div class="modal" id="modal-loading" data-backdrop="static">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-				<div class="modal-body text-center">
-					<div class="loading-spinner mb-2"></div>
-					<div>Loading</div>
-				</div>
-				</div>
-			</div>
-		</div>
+		</div
 		<!-- js -->
-		<script src="assets/vendors/scripts/core.js"></script>
-		<script src="assets/vendors/scripts/script.min.js"></script>
-		<script src="assets/vendors/scripts/process.js"></script>
-		<script src="assets/vendors/scripts/layout-settings.js"></script>
-		<script src="assets/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-		<script src="assets/vendors/scripts/datatable-setting.js"></script>
+		<script src="../assets/vendors/scripts/core.js"></script>
+		<script src="../assets/vendors/scripts/script.min.js"></script>
+		<script src="../assets/vendors/scripts/process.js"></script>
+		<script src="../assets/vendors/scripts/layout-settings.js"></script>
+		<script src="../assets/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+		<script src="../assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+		<script src="../assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+		<script src="../assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+		<script src="../assets/vendors/scripts/datatable-setting.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-			$(document).ready(function()
-			{
-				notify();
-			});
-			function notify()
-			{
-				$.ajax({
-					url:"<?=site_url('notification')?>",method:"GET",
-					success:function(response)
-					{
-						$('#notifications').html(response);
-					}
-				});
-				$.ajax({
-					url:"<?=site_url('canvas-notification')?>",method:"GET",
-					success:function(response)
-					{
-						$('#notif').html(response);
-					}
-				});
-				$.ajax({
-					url:"<?=site_url('total-notification')?>",method:"GET",
-					success:function(response)
-					{
-						$('#notification').html(response);
-					}
-				});
-			}
-			$(document).on('click','.comment',function()
-			{
-				var message = prompt("Please enter delivery instruction");
-				var val = $(this).val();
-				$.ajax({
-					url:"<?=site_url('add-comment')?>",method:"POST",
-					data:{value:val,message:message},
-					success:function(response)
-					{
-						if(response==="success")
-						{
-							alert("Great! Successfully added");
-						}
-						else
-						{
-							alert(response);
-						}
-					}
-				});
-			});
-			$(document).on('click','.generate',function(e)
-            {
-                e.preventDefault();
-                Swal.fire({
-					title: "Are you sure?",
-					text: "Do you want to create purchase order form with this selected Vendor?",
-					icon: "question",
-					showCancelButton: true,
-					confirmButtonColor: "#3085d6",
-					cancelButtonColor: "#d33",
-					confirmButtonText: "Yes!"
-					}).then((result) => {
-					if (result.isConfirmed) {
-						var val = $(this).val();
-						$('#modal-loading').modal('show');
-						$.ajax({
-							url:"<?=site_url('create-purchase-order')?>",method:"POST",
-							data:{value:val},success:function(response)
-							{
-								if(response==="success")
-								{
-									location.reload();
-								}
-								else
-								{
-									alert(response);
-								}
-								$('#modal-loading').modal('hide');
-							}
-						});
-					}
-				});
-            });
-		</script>
 	</body>
 </html>
