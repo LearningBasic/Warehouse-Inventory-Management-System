@@ -507,7 +507,7 @@
 												</a>
 												<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 													<button type="button" class="dropdown-item comment" value="<?php echo $row->Reference ?>">
-														<span class="dw dw-add"></span>&nbsp;Add
+														<span class="dw dw-add"></span>&nbsp;Add Message
 													</button>
 													<?php if($row->Status==0||$row->Status==1){ ?>
 													<a class="dropdown-item" href="<?=site_url('modify/')?><?php echo $row->Reference ?>">
