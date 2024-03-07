@@ -464,46 +464,42 @@
                     <div class="card-body">
                         <table class="data-table table stripe hover nowrap">
                             <thead>
+								<th>Date Prepared</th>
 								<th>Date Needed</th>
                                 <th>Reference No</th>
 								<th>Department</th>
                                 <th>PRF No</th>
-                                <th>Vendor(s)</th>
-                                <th>Terms</th>
-                                <th>Warranty</th>
-								<th>Department</th>
 								<th>Status</th>
                                 <th>Action</th>
                             </thead>
 							<tbody>
 							<?php foreach($canvass as $row): ?>
                                 <tr>
+									<td><?php echo $row->DatePrepared?></td>
 									<td><?php echo $row->DateNeeded ?></td>
                                     <td><a class="btn btn-link" href="export/<?php echo $row->Reference ?>" target="_blank"><?php echo $row->Reference ?></a></td>
 									<td><?php echo $row->Department ?></td>
                                     <td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
-                                    <td><?php echo $row->Supplier ?></td>
-                                    <td><?php echo $row->Terms ?></td>
-                                    <td><?php echo $row->Warranty ?></td>
-									<td><?php echo $row->Department ?></td>
 									<td>
-										<?php if($row->Status==1){ ?>
-											<span class="badge bg-success text-white">APPROVED</span>
-										<?php }else if($row->Status==2){ ?>
-											<span class="badge bg-danger text-white">DECLINED</span>
-										<?php }else if($row->Status==0) { ?>
-											<span class="badge bg-info text-white">CREATED</span>
-										<?php }else {?>
-											-
-										<?php } ?> 
+										<?php if($row->Status==""){ ?>
+											<span class="badge bg-warning text-white">WAITING</span>
+										<?php }else{ ?>
+											<?php if($row->Status==1){ ?>
+												<span class="badge bg-success text-white">APPROVED</span>
+											<?php }else if($row->Status==2){ ?>
+												<span class="badge bg-danger text-white">DECLINED</span>
+											<?php }else if($row->Status==0) { ?>
+												<span class="badge bg-info text-white">CREATED</span>
+											<?php }?>
+										<?php }?>
 									</td>
                                     <td>
-										<?php if(empty($row->Status)){ ?>
+										<?php if($row->Status==""){ ?>
 											<button type="button" class="btn btn-outline-primary btn-sm generate" value="<?php echo $row->Reference ?>">
 											<span class="dw dw-add"></span>&nbsp;Create
 											</button>
 										<?php }else{ ?>
-											<?php if($row->Status==0){}else if($row->Status==1){ ?>
+											<?php if($row->Status==1){ ?>
 											<div class="dropdown">
 												<a class="btn btn-primary btn-sm dropdown-toggle"
 													href="#" role="button" data-toggle="dropdown">
