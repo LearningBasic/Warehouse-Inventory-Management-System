@@ -477,7 +477,7 @@ class Report extends BaseController
         $dompdf = new Dompdf();
         $purchase_number="";$jobOrder="";
         $builder = $this->db->table('tblpurchase_logs a');
-        $builder->select('a.purchaseLogID,a.purchaseNumber,a.Date,b.OrderNo,b.Supplier,b.Price,b.Terms,b.Address,e.Fullname,b.Vatable,c.PurchaseType');
+        $builder->select('a.purchaseLogID,a.purchaseNumber,a.Date,b.OrderNo,b.Supplier,b.Price,b.Terms,b.Address,e.Fullname,b.Vatable,c.PurchaseType,b.Currency');
         $builder->join('tblcanvass_sheet b','b.purchaseLogID=a.purchaseLogID','LEFT');
         $builder->join('tblprf c','c.OrderNo=b.OrderNo','LEFT');
         $builder->join('tblpurchase_review d','d.purchaseNumber=a.purchaseNumber','LEFT');
@@ -499,6 +499,7 @@ class Report extends BaseController
         {        
             $purchase_number = $row->purchaseNumber;
             $jobOrder = $row->OrderNo;
+            $currency = $row->Currency;
             $template .= "
             <head>
                 <style>
@@ -664,7 +665,7 @@ class Report extends BaseController
                         <th>TOTAL AMOUNT</th>
                         </thead><tbody>";
             $builder = $this->db->table('tblcanvass_sheet a');
-            $builder->select('a.Price,b.Qty,b.Item_Name,b.ItemUnit');
+            $builder->select('a.Price,b.Qty,b.Item_Name,b.ItemUnit,a.Currency');
             $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
             $builder->WHERE('a.purchaseLogID',$row->purchaseLogID);
             $datas = $builder->get();
@@ -674,8 +675,8 @@ class Report extends BaseController
                     <td>".$rows->Qty."</td>
                     <td>".$rows->ItemUnit."</td>
                     <td>".$rows->Item_Name."</td>
-                    <td style='text-align:right;'>PhP ".number_format($rows->Price,2)."</td>
-                    <td style='text-align:right;'>PhP ".number_format($rows->Qty*$rows->Price,2)."</td>
+                    <td style='text-align:right;'>".$rows->Currency." ".number_format($rows->Price,2)."</td>
+                    <td style='text-align:right;'>".$rows->Currency." ".number_format($rows->Qty*$rows->Price,2)."</td>
                 </tr>";
             } 
             $template.="<tr><td colspan='5'>&nbsp;</td></tr>";
@@ -692,17 +693,17 @@ class Report extends BaseController
                 $template.="<tr>
                     <td colspan='3'></td>
                     <td>Sub-Total Amount</td>
-                    <td style='text-align:right;'>PhP ".number_format($rowx->total,2)."</td>
+                    <td style='text-align:right;'>".$currency." ".number_format($rowx->total,2)."</td>
                 </tr>";
             }   
             $template.="<tr><td colspan='5'>&nbsp;</td></tr>";
             if($row->Vatable=="Yes")
             {
-                $template.="<tr><td colspan='3'></td><td>VATable</td><td style='text-align:right;'>PhP ".number_format($totalAmount/1.12,2)."</td></tr>";
-                $template.="<tr><td colspan='3'></td><td>VAT - 12%</td><td style='text-align:right;'>PhP ".number_format(($totalAmount/1.12)*0.12,2)."</td></tr>";
+                $template.="<tr><td colspan='3'></td><td>VATable</td><td style='text-align:right;'>".$currency." ".number_format($totalAmount/1.12,2)."</td></tr>";
+                $template.="<tr><td colspan='3'></td><td>VAT - 12%</td><td style='text-align:right;'>".$currency." ".number_format(($totalAmount/1.12)*0.12,2)."</td></tr>";
                 $template.="<tr><td colspan='3'></td><td>VAT Exempt</td><td style='text-align:right;'>0.00</td></tr>";
                 $template.="<tr><td colspan='3'></td><td>VAT Zero Rated</td><td style='text-align:right;'>0.00</td></tr>";
-                $template.="<tr><td colspan='3'></td><td>VAT Total</td><td style='text-align:right;'>PhP ".number_format($totalAmount,2)."</td></tr>";
+                $template.="<tr><td colspan='3'></td><td>VAT Total</td><td style='text-align:right;'>".$currency." ".number_format($totalAmount,2)."</td></tr>";
             }
             else
             {
