@@ -484,7 +484,7 @@
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="home6" role="tabpanel">
 									<br/>
-									<table class="multiple-select-row data-table-export table stripe hover nowrap">
+									<table class="data-table-export table stripe hover nowrap">
 										<thead>
 											<th>Date Prepared</th>
 											<th>Purchase Type</th>
