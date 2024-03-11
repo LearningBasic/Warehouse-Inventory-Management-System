@@ -475,6 +475,21 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-12 form-group tableFixHead" style="height:500px;overflow-y:auto;font-size:13px;">
+						<table class="table-bordered table-striped">
+							<thead>
+								<th>Date Prepared</th>
+								<th>Product ID</th>
+								<th>Item Unit</th>
+								<th>Product Name</th>
+								<th>Qty</th>
+								<th>Date Effectivity</th>
+								<th>To</th>
+								<th>Status</th>
+								<th>Via</th>
+							</thead>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
