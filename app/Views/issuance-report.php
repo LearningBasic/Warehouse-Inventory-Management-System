@@ -465,6 +465,12 @@
 									<div class="col-lg-3 form-group">
 										<input type="date" class="form-control" name="todate">
 									</div>
+									<div class="col-lg-2 form-group">
+										<button type="submit" class="btn btn-primary form-control text-white" id="btnSearch"><span class="dw dw-search"></span>&nbsp;Search</button>
+									</div>
+									<div class="col-lg-2 form-group">
+										<a href="" class="btn btn-outline-primary form-control" id="btnDownload"><span class="dw dw-download"></span>&nbsp;Export</a>
+									</div>
 								</form>
 							</div>
 						</div>
