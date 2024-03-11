@@ -647,6 +647,7 @@
 										<th class="bg-primary text-white">#</th>
 										<th class="bg-primary text-white">Item Name</th>
 										<th class="bg-primary text-white">Specification</th>
+										<th class="bg-primary text-white">Currency</th>
 										<th class="bg-primary text-white">Unit Price</th>
 									</thead>
 									<tbody id="tbl_entries">
