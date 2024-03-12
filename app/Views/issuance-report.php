@@ -469,14 +469,14 @@
 										<button type="submit" class="btn btn-primary form-control text-white" id="btnSearch"><span class="dw dw-search"></span>&nbsp;Search</button>
 									</div>
 									<div class="col-lg-2 form-group">
-										<a href="" class="btn btn-outline-primary form-control" id="btnDownload"><span class="dw dw-download"></span>&nbsp;Export</a>
+										<a href="javascript:void(0);" onclick="exportf(this)" class="btn btn-outline-primary form-control" id="btnDownload"><span class="dw dw-download"></span>&nbsp;Export</a>
 									</div>
 								</form>
 							</div>
 						</div>
 					</div>
 					<div class="col-12 form-group tableFixHead" style="height:500px;overflow-y:auto;font-size:13px;">
-						<table class="table-bordered table-striped">
+						<table class="table-bordered table-striped" id="table">
 							<thead>
 								<th>Item Code</th>
 								<th>Product Name</th>
@@ -485,7 +485,7 @@
 								<th>Unit Cost</th>
 								<th>Total Amount</th>
 								<th>Vessel/Port</th>
-								<th>PRF No</th>
+								<th>Status</th>
 								<th>Via</th>
 								<th>Issued By</th>
 							</thead>
@@ -556,6 +556,14 @@
 					}
 				});
 			});
+			function exportf(elem) {
+			var table = document.getElementById("table");
+			var html = table.outerHTML;
+			var url = 'data:application/vnd.ms-excel,' + escape(html); // Set your html table into url 
+			elem.setAttribute("href", url);
+			elem.setAttribute("download","issuance-report.xls"); // Choose the file name
+			return false;
+			}
 		</script>
 	</body>
 </html>

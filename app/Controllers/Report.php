@@ -16,6 +16,43 @@ class Report extends BaseController
         $fromdate = $this->request->getGet('fromdate');
         $todate = $this->request->getGet('todate');
         //get the data
+        $builder = $this->db->table('tbltransferitem a');
+        $builder->select('a.*,b.warehouseName,c.Fullname');
+        $builder->join('tblwarehouse b','b.warehouseID=a.warehouseID','LEFT');
+        $builder->join('tblaccount c','c.accountID=a.accountID','LEFT');
+        $builder->WHERE('a.DatePrepared >=',$fromdate)->WHERE('a.DatePrepared <=',$todate);
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <tr>
+                <td><?php echo $row->productID ?></td>
+                <td><?php echo $row->productName ?></td>
+                <td><?php echo $row->Qty ?></td>
+                <td><?php echo $row->ItemUnit ?></td>
+                <td style="text-align:right;"><?php echo number_format($row->unitPrice,2) ?></td>
+                <td style="text-align:right;"><?php echo number_format($row->Qty*$row->unitPrice,2) ?></td>
+                <td><?php echo $row->warehouseName ?></td>
+                <td>
+                    <?php if($row->Status==0){ ?>
+                        <span class="badge bg-warning text-white">For Delivery</span>
+                    <?php }else if($row->Status==1){?>
+                        <span class="badge bg-success text-white">Delivered</span>
+                    <?php }else{?>
+                        <span class="badge bg-danger text-white">Cancelled</span>
+                    <?php } ?>
+                </td>
+                <td>
+                    <?php if($row->cargo_type=="Company Service"){ ?>
+                        <?php echo $row->Driver ?>/<?php echo $row->Plate_number ?>
+                    <?php }else{?>
+                        <?php echo $row->TrackingNumber ?>
+                    <?php } ?>
+                </td>
+                <td><?php echo $row->Fullname ?></td>
+            </tr>
+            <?php
+        }
     }
 
     public function generateReturnSummary()
