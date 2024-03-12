@@ -832,8 +832,13 @@ class Home extends BaseController
         $builder->select('*');
         $builder->WHERE('systemRole','Administrator');
         $admin = $builder->get()->getResult();
+        //staff
+        $builder = $this->db->table('tblaccount');
+        $builder->select('*');
+        $builder->WHERE('systemRole','Staff')->WHERE('Status',1);
+        $staff = $builder->get()->getResult();
 
-        $data = ['account'=>$account,'logs'=>$logs,'admin'=>$admin];
+        $data = ['account'=>$account,'logs'=>$logs,'admin'=>$admin,'staff'=>$staff];
         return view('system-config',$data);
     }
 

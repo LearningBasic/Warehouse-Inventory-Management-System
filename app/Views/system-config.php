@@ -443,6 +443,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-blue" data-toggle="tab" href="#profile6" role="tab" aria-selected="false">User Management</a>
                         </li>
+						<li class="nav-item">
+                            <a class="nav-link text-blue" data-toggle="tab" href="#task6" role="tab" aria-selected="false">Task Category</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-blue" data-toggle="tab" href="#contact6" role="tab" aria-selected="false">System Logs/Activities</a>
                         </li>
@@ -536,10 +539,28 @@
 								</div>
                             </div>
                         </div>
+						<div class="tab-pane fade" id="task6" role="tabpanel">
+							<div class="pd-20">
+								<div class="card-box">
+									<div class="card-header"><i class="icon-copy dw dw-library"></i>&nbsp;Task - Item Group
+									<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#taskModal" style="float:right;"><i class="icon-copy dw dw-add"></i>&nbsp;Add</a>
+									</div>
+									<div class="card-body">
+										<table class="data-table table stripe hover nowrap">
+											<thead>
+												<th>Fullname</th>
+												<th>Item Group</th>
+												<th>Action</th>
+											</thead>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
                         <div class="tab-pane fade" id="contact6" role="tabpanel">
                             <div class="pd-20">
 								<div class="card-box">
-									<div class="card-header">System Logs</div>
+									<div class="card-header"><i class="icon-copy dw dw-list"></i>&nbsp;System Logs</div>
 									<div class="card-body">
 										<table class="data-table table stripe hover nowrap">
 											<thead>
@@ -701,6 +722,38 @@
 							<div class="col-12 form-group">
 								<input type="submit" class="btn btn-primary" id="btnAddAccount" value="Register"/>
 							</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            New Task
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" class="row g-3" id="frmTask">
+                            <div class="col-12 form-group">
+                                <label>Materials Staff</label>
+                                <select class="form-control custom-select2" style="width:100%;" name="staff">
+									<option value="">Choose</option>
+									<?php foreach($staff as $row): ?>
+										<option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?></option>
+									<?php endforeach; ?>
+								</select>
+                            </div>
+                            <div class="col-12 form-group">
+                                
+                            </div>
+                            <div class="col-12 form-group">
+                                <input type="submit" class="btn btn-primary" value="Add Entry" id="btnAddTask"/>
+                            </div>
                         </form>
                     </div>
                 </div>
