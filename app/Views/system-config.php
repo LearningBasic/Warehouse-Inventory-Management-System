@@ -749,7 +749,13 @@
 								</select>
                             </div>
                             <div class="col-12 form-group">
-                                
+								<table class="table table-bordered table-striped">	
+									<thead>
+										<th class="bg-primary text-white">#</th>
+										<th class="bg-primary text-white">Item Description</th>
+									</thead>
+									<tbody id="tblresult"></tbody>
+								</table>
                             </div>
                             <div class="col-12 form-group">
                                 <input type="submit" class="btn btn-primary" value="Add Entry" id="btnAddTask"/>
