@@ -289,6 +289,7 @@ class Purchase extends BaseController
         //datas
         $user = session()->get('loggedUser');
         $datePrepared = $this->request->getPost('datePrepared');
+        $itemGroup = $this->request->getPost('item_group');
         $tomorrow = date("Y-m-d", time() + 86400);
         $dept = $this->request->getPost('department');
         $dateNeeded = $this->request->getPost('dateNeeded');
@@ -328,9 +329,9 @@ class Purchase extends BaseController
             //check purchase type
             if($purchase_type=="Local Purchase")
             {
-                if(empty($originalName))
+                if(empty($originalName)||empty($itemGroup))
                 {
-                    session()->setFlashdata('fail','Error! Please attach the required documents');
+                    session()->setFlashdata('fail','Error! Please select item group/attach the required documents');
                     return redirect()->to('/orders')->withInput();
                 }
                 else
@@ -339,7 +340,7 @@ class Purchase extends BaseController
                     if(date("h:i:s a")<="02:00:00 pm")
                     {
                         $values = [
-                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
+                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'ItemGroup'=>$itemGroup,'Department'=>$dept,
                             'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
                             'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,'Remarks'=>'OPEN',
                         ];
@@ -349,7 +350,7 @@ class Purchase extends BaseController
                     else
                     {
                         $values = [
-                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$tomorrow,'Department'=>$dept,
+                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$tomorrow,'ItemGroup'=>$itemGroup,'Department'=>$dept,
                             'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
                             'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,'Remarks'=>'OPEN',
                         ];
@@ -423,7 +424,7 @@ class Purchase extends BaseController
                     if(empty($originalName))
                     {
                         $values = [
-                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
+                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'ItemGroup'=>$itemGroup,'Department'=>$dept,
                             'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
                             'PurchaseType'=>$purchase_type,'Attachment'=>'N/A','Remarks'=>'OPEN',
                         ];
@@ -432,7 +433,7 @@ class Purchase extends BaseController
                     else
                     {
                         $values = [
-                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'Department'=>$dept,
+                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$datePrepared,'ItemGroup'=>$itemGroup,'Department'=>$dept,
                             'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
                             'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,'Remarks'=>'OPEN',
                         ];
@@ -445,7 +446,7 @@ class Purchase extends BaseController
                     if(empty($originalName))
                     {
                         $values = [
-                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$tomorrow,'Department'=>$dept,
+                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$tomorrow,'ItemGroup'=>$itemGroup,'Department'=>$dept,
                             'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
                             'PurchaseType'=>$purchase_type,'Attachment'=>'N/A','Remarks'=>'OPEN',
                         ];
@@ -454,7 +455,7 @@ class Purchase extends BaseController
                     else
                     {
                         $values = [
-                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$tomorrow,'Department'=>$dept,
+                            'OrderNo'=>$code,'accountID'=>$user, 'DatePrepared'=>$tomorrow,'ItemGroup'=>$itemGroup,'Department'=>$dept,
                             'DateNeeded'=>$dateNeeded,'Reason'=>$reason,'Status'=>0,'DateCreated'=>date('Y-m-d'),
                             'PurchaseType'=>$purchase_type,'Attachment'=>$originalName,'Remarks'=>'OPEN',
                         ];

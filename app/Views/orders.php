@@ -468,7 +468,7 @@
                         <form method="POST" class="row g-3" id="frmPurchase" enctype="multipart/form-data" action="<?=base_url('save-order')?>">
                             <div class="col-12 form-group">
                                 <div class="row g-3">
-									<div class="col-lg-3">
+									<div class="col-lg-2">
                                         <label>Type of Purchase</label>
                                         <select class="form-control" name="purchase_type" id="purchase_type" required>
 											<option value="">Choose</option>
@@ -476,7 +476,27 @@
 											<option>Local Purchase</option>
 										</select>
                                     </div>
-                                    <div class="col-lg-3">
+									<div class="col-lg-3">
+                                        <label>Item Group</label>
+                                        <select class="form-control" name="item_group" id="item_group" disabled>
+											<option value="">Choose</option>
+											<option>Office Supplies</option>
+											<option>IT Products</option>
+											<option>Kitchen Wares</option>
+											<option>Furnitures</option>
+											<option>Appliances</option>
+											<option>Fresh Water</option>
+											<option>Cleaning Materials</option>
+											<option>Hardware/Electrical</option>
+											<option>Printing Materials</option>
+											<option>Ramp Materials</option>
+											<option>Calibration</option>
+											<option>Transpo Rental</option>
+											<option>Technical Consumables</option>
+											<option>Spare Parts</option>
+										</select>
+                                    </div>
+                                    <div class="col-lg-2">
                                         <label>Date Prepared</label>
                                         <input type="date" class="form-control" value="<?php echo date('Y-m-d') ?>" name="datePrepared" required/>
                                     </div>
@@ -484,7 +504,7 @@
                                         <label>Vessel/Port/Department</label>
                                         <input type="text" class="form-control"  name="department" required/>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-2">
                                         <label>Date Needed</label>
                                         <input type="date" class="form-control" name="dateNeeded" id="dateNeeded" required/>
                                     </div>
@@ -514,7 +534,7 @@
                             </div>
 							<div class="col-12 form-group">
 								<label>Department Head/Masters</label>
-								<select class="form-control custom-select2" name="approver" id="approver">
+								<select class="form-control custom-select2" name="approver" id="approver" style="width:100%;">
 									<option value="">Choose</option>
 								</select>
 							</div>
@@ -543,6 +563,19 @@
 				$("#Table").on('click','.btnDelete',function(){
                     $(this).closest('tr').remove();
                 });
+				$('#purchase_type').change(function()
+				{
+					var val = $(this).val();
+					if(val==="Local Purchase")
+					{
+						$('#item_group').attr("disabled",false);
+					}
+					else
+					{
+						$('#item_group').attr("disabled",true);
+						$("#item_group").prop('selectedIndex', 0);
+					}
+				});
 			});
 			function convert(str) {
 				var date = new Date(str),
