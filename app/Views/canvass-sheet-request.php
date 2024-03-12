@@ -516,17 +516,6 @@
 								<div id="result"></div>
 								<br/>
 							</div>
-							<?php if(session()->get('role')!="Administrator"){ ?>
-							<div class="col-12 form-group">
-								<label>Negotiator</label>
-								<select class="form-control custom-select2" name="receiver" id="receiver" style="width:100%;">
-									<option value="0">Choose</option>
-									<?php foreach($account as $row): ?>
-										<option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?></option>
-									<?php endforeach; ?>
-								</select>
-							</div>
-							<?php } ?>
 							<div class="col-12 form-group">
 								<button type="submit" class="btn btn-primary approve"><span class="dw dw-check"></span>&nbsp;Approve</button>
 								<button type="button" class="btn btn-danger cancel"><span class="dw dw-trash"></span>&nbsp;Cancel</button>
@@ -589,11 +578,10 @@
 					}).then((result) => {
 					if (result.isConfirmed) {
 						var code = $('#code').val();
-						var user = $('#receiver').val();
 						$('#modal-loading').modal('show');
 						$.ajax({
 							url:"<?=site_url('accept-request')?>",method:"POST",
-							data:{code:code,user:user},success:function(response)
+							data:{code:code},success:function(response)
 							{
 								if(response==="success")
 								{
