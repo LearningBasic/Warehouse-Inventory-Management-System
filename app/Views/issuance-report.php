@@ -485,7 +485,7 @@
 								<th>Unit Cost</th>
 								<th>Total Amount</th>
 								<th>Vessel/Port</th>
-								<th>Status</th>
+								<th>PRF No</th>
 								<th>Via</th>
 								<th>Issued By</th>
 							</thead>
@@ -540,6 +540,21 @@
 				e.preventDefault();
 				var data = $('#frmReport').serialize();
 				$('#tblresult').html("<tr><td colspan='10'><center>Loading...</center></td></tr>");
+				$.ajax({
+					url:"<?=site_url('issued-items')?>",method:"GET",
+					data:data,
+					success:function(response)
+					{
+						if(response==="")
+						{
+							$('#tblresult').html("<tr><td colspan='10'><center>No Record(s)</center></td></tr>");
+						}
+						else
+						{
+							$('#tblresult').html(response);
+						}
+					}
+				});
 			});
 		</script>
 	</body>

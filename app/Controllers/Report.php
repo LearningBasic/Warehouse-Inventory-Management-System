@@ -11,6 +11,13 @@ class Report extends BaseController
         $this->db = db_connect();
     }
 
+    public function issuedItems()
+    {
+        $fromdate = $this->request->getGet('fromdate');
+        $todate = $this->request->getGet('todate');
+        //get the data
+    }
+
     public function generateReturnSummary()
     {
         $vendor = $this->request->getGet('vendor');
