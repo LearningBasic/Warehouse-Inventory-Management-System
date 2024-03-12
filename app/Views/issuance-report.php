@@ -489,6 +489,7 @@
 								<th>Via</th>
 								<th>Issued By</th>
 							</thead>
+							<tbody id="tblresult"></tbody>
 						</table>
 					</div>
 				</div>
@@ -533,6 +534,13 @@
 					}
 				});
 			}
+
+			$('#btnSearch').on('click',function(e)
+			{
+				e.preventDefault();
+				var data = $('#frmReport').serialize();
+				$('#tblresult').html("<tr><td colspan='10'><center>Loading...</center></td></tr>");
+			});
 		</script>
 	</body>
 </html>

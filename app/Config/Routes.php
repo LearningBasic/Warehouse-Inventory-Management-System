@@ -145,6 +145,7 @@ $routes->get('fetch-purchase_number','Report::fetchPO');
 $routes->get('generate-return-summary','Report::generateReturnSummary');
 $routes->get('load-entries','Purchase::loadEntries');
 $routes->post('save-entries','Purchase::saveEntries');
+$routes->get('issued-items','Report::issuedItems');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
