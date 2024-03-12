@@ -74,6 +74,15 @@
                 width: 0px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
+			.tableFixHead thead th { position: sticky; top: 0; z-index: 1;color:#fff;background-color:#0275d8;}
+
+			/* Just common table stuff. Really. */
+			table  { border-collapse: collapse; width: 100%; }
+			th, td { padding: 8px 16px;color:#000; }
+			tbody{color:#000;}
+			tr:nth-child(even) {
+			background-color: #f2f2f2;
+			}
             
         </style>
 	</head>
@@ -748,11 +757,11 @@
 									<?php endforeach; ?>
 								</select>
                             </div>
-                            <div class="col-12 form-group">
-								<table class="table table-bordered table-striped">	
+                            <div class="col-12 form-group tableFixHead" style="height:300px;overflow-y:auto;">
+								<table class="table-bordered table-striped">	
 									<thead>
-										<th class="bg-primary text-white">#</th>
-										<th class="bg-primary text-white">Item Description</th>
+										<th>#</th>
+										<th>Item Description</th>
 									</thead>
 									<tbody id="tblresult"></tbody>
 								</table>
@@ -777,7 +786,8 @@
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-            $(document).ready(function(){listIndustry();listCategory();listWarehouse();assignment();notify();});
+            $(document).ready(function(){listIndustry();listCategory();listWarehouse();assignment();notify();library();});
+			function library(){$.ajax({url:"<?=site_url('library')?>",method:"GET",success:function(response){$('#tblresult').html(response);}});}
             function listCategory(){$.ajax({url:"<?=site_url('list-category')?>",method:"GET",success:function(response){$('#listcategory').html(response);}});}
             function listIndustry(){$.ajax({url:"<?=site_url('list-industry')?>",method:"GET",success:function(response){$('#listindustry').html(response);}});}
             function listWarehouse(){$.ajax({url:"<?=site_url('list-warehouse')?>",method:"GET",success:function(response){$('#listwarehouse').html(response);}});}
