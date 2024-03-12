@@ -484,7 +484,7 @@
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="home6" role="tabpanel">
 									<br/>
-									<table class="data-table-export table stripe hover nowrap">
+									<table class="data-table table stripe hover nowrap">
 										<thead>
 											<th>Date Prepared</th>
 											<th>Purchase Type</th>
@@ -661,13 +661,6 @@
 		<script src="assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/dataTables.buttons.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/buttons.print.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/buttons.html5.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/buttons.flash.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/pdfmake.min.js"></script>
-		<script src="assets/src/plugins/datatables/js/vfs_fonts.js"></script>
 		<script src="assets/vendors/scripts/datatable-setting.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script>
