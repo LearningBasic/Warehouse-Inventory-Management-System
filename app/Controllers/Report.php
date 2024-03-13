@@ -11,6 +11,15 @@ class Report extends BaseController
         $this->db = db_connect();
     }
 
+    public function removeTask()
+    {
+        $val = $this->request->getPost('value'); 
+        $builder = $this->db->table('tbltask');   
+        $builder->WHERE('taskID',$val);
+        $builder->delete();
+        echo "success";
+    }
+
     public function saveTask()
     {
         $taskModel = new \App\Models\taskModel();
