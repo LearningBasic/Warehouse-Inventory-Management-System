@@ -889,6 +889,38 @@
 					}
 				});
 			});
+			$(document).on('click','.removeTask',function(e)
+			{
+				e.preventDefault();
+				Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to remove this selected item group?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						$.ajax({
+							url:"<?=site_url('remove-task')?>",method:"POST",
+							data:{value:val},success:function(response)
+							{
+								if(response==="success")
+								{
+									location.reload();
+								}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
+					}
+				});
+			});
+
 			$(document).on('click','.removeIndustry',function(e)
 			{
 				e.preventDefault();
