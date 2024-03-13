@@ -11,6 +11,11 @@ class Report extends BaseController
         $this->db = db_connect();
     }
 
+    public function saveTask()
+    {
+        
+    }
+
     public function Library()
     {
         $sql = ('Select a.* from tbl_local_purchase_category a WHERE NOT EXISTS(Select b.ItemGroup from tbltask b WHERE a.Description=b.ItemGroup)');
@@ -19,7 +24,7 @@ class Report extends BaseController
         {
             ?>
             <tr>
-                <td><input type="checkbox" class="checkbox" value="<?php echo $row->localID ?>" name="itemID[]" id="itemID" style="width:20px;height:20px;" checked/></td>
+                <td><input type="checkbox" class="checkbox" value="<?php echo $row->Description ?>" name="itemID[]" id="itemID" style="width:20px;height:20px;" checked/></td>
                 <td><?php echo $row->Description ?></td>
             </tr>
             <?php

@@ -1027,6 +1027,27 @@
 					}
 				});
 			});
+
+			$('#btnAddTask').on('click',function(e)
+			{
+				e.preventDefault();
+				var data = $('#frmTask').serialize();
+				$(this).attr("value","Saving...");
+				$.ajax({
+					url:"<?=site_url('save-task')?>",method:"POST",
+					data:data,success:function(response)
+					{
+						if(response==="success")
+						{
+							location.reload();
+						}
+						else
+						{
+							alert(response);
+						}
+					}
+				});
+			});
 			
         </script>
 	</body>
