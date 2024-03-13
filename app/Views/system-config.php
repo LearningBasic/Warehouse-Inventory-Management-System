@@ -509,15 +509,15 @@
 										<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#accountModal" style="float:right;"><i class="icon-copy dw dw-add-user"></i>&nbsp;Add</a>
 									</div>
 									<div class="card-body">
-										<table class="data-table table stripe hover nowrap">
+										<table class="data-table table hover nowrap">
 											<thead>
-												<th>Date Created</th>
-												<th>Fullname</th>
-												<th>Email</th>
-												<th>Department</th>
-												<th>Status</th>
-												<th>User Role</th>
-												<th>&nbsp;</th>
+												<th class="bg-primary text-white">Date Created</th>
+												<th class="bg-primary text-white">Fullname</th>
+												<th class="bg-primary text-white">Email</th>
+												<th class="bg-primary text-white">Department</th>
+												<th class="bg-primary text-white">Status</th>
+												<th class="bg-primary text-white">User Role</th>
+												<th class="bg-primary text-white">&nbsp;</th>
 											</thead>
 											<tbody>
 												<?php foreach($account as $row): ?>
@@ -555,12 +555,23 @@
 									<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#taskModal" style="float:right;"><i class="icon-copy dw dw-add"></i>&nbsp;Add</a>
 									</div>
 									<div class="card-body">
-										<table class="data-table table stripe hover nowrap">
+										<table class="data-table table hover nowrap">
 											<thead>
-												<th>Fullname</th>
-												<th>Item Group</th>
-												<th>Action</th>
+												<th class="bg-primary text-white">Fullname</th>
+												<th class="bg-primary text-white">Item Group</th>
+												<th class="bg-primary text-white">Action</th>
 											</thead>
+											<tbody>
+												<?php foreach($task as $row): ?>
+													<tr>
+														<td><?php echo $row->Fullname ?></td>
+														<td><?php echo $row->ItemGroup ?></td>
+														<td>
+															<button type="button" class="btn btn-danger btn-sm removeTask" value="<?php echo $row->taskID ?>"><span class="dw dw-trash"></span>&nbsp;Remove</button>
+														</td>
+													</tr>
+												<?php endforeach; ?>
+											</tbody>
 										</table>
 									</div>
 								</div>
@@ -571,11 +582,11 @@
 								<div class="card-box">
 									<div class="card-header"><i class="icon-copy dw dw-list"></i>&nbsp;System Logs</div>
 									<div class="card-body">
-										<table class="data-table table stripe hover nowrap">
+										<table class="data-table table hover nowrap">
 											<thead>
-												<th>Date</th>
-												<th>Fullname</th>
-												<th>Activities</th>
+												<th class="bg-primary text-white">Date</th>
+												<th class="bg-primary text-white">Fullname</th>
+												<th class="bg-primary text-white">Activities</th>
 											</thead>
 											<tbody>
 												<?php foreach($logs as $row): ?>

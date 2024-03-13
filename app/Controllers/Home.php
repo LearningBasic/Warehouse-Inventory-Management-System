@@ -837,8 +837,13 @@ class Home extends BaseController
         $builder->select('*');
         $builder->WHERE('systemRole','Staff')->WHERE('Status',1);
         $staff = $builder->get()->getResult();
+        //item group
+        $builder = $this->db->table('tbltask a');
+        $builder->select('a.ItemGroup,b.Fullname,a.taskID');
+        $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+        $task = $builder->get()->getResult();
 
-        $data = ['account'=>$account,'logs'=>$logs,'admin'=>$admin,'staff'=>$staff];
+        $data = ['account'=>$account,'logs'=>$logs,'admin'=>$admin,'staff'=>$staff,'task'=>$task];
         return view('system-config',$data);
     }
 
