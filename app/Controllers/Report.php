@@ -13,7 +13,17 @@ class Report extends BaseController
 
     public function saveTask()
     {
-        
+        $taskModel = new \App\Models\taskModel();
+        $staff = $this->request->getPost('staff');
+        $rowCounts = count($this->request->getPost('itemID'));
+        $item = $this->request->getPost('desc');
+        for($i=0;$i<$rowCounts;$i++)
+        {
+            //values
+            $values = ['ItemGroup'=>$item[$i],'accountID'=>$staff];
+            $taskModel->save($values);
+        }
+        echo "success";
     }
 
     public function Library()
@@ -24,8 +34,8 @@ class Report extends BaseController
         {
             ?>
             <tr>
-                <td><input type="checkbox" class="checkbox" value="<?php echo $row->Description ?>" name="itemID[]" id="itemID" style="width:20px;height:20px;" checked/></td>
-                <td><?php echo $row->Description ?></td>
+                <td><input type="checkbox" class="checkbox" value="<?php echo $row->localID ?>" name="itemID[]" id="itemID" style="width:20px;height:20px;" checked/></td>
+                <td><input type="text" class="form-control" name="desc[]" value="<?php echo $row->Description ?>"></td>
             </tr>
             <?php
         }
