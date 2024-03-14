@@ -19,6 +19,7 @@ class Purchase extends BaseController
         $canvassModel = new \App\Models\canvassModel();
         $purchaseOrderModel = new \App\Models\purchaseOrderModel();
         $purchaseReviewModel = new \App\Models\purchaseReviewModel();
+        $canvassFormModel = new \App\Models\canvasFormModel();
         //data
         $reference = $this->request->getPost('reference');
         $itemID = $this->request->getPost('itemID');
@@ -28,6 +29,8 @@ class Purchase extends BaseController
         $spec = $this->request->getPost('specification');
         $price = $this->request->getPost('price');
         $date = date('Y-m-d');
+        $file = $this->request->getFile('file');
+        $originalName = $file->getClientName();
         $status = 0;
 
         $count = count($itemID);
@@ -46,6 +49,19 @@ class Purchase extends BaseController
             $canvass = $canvassModel->WHERE('orderID',$itemID[$i])->first();
             $values = ['Price'=>$price[$i],];
             $canvassModel->update($canvass['canvassID'],$values);
+        }
+        //update the attachment
+        if(empty($originalName))
+        {
+            //do nothing
+        }
+        else
+        {
+            //get the ID
+            $form = $canvassFormModel->WHERE('Reference',$reference)->first();
+            $values = ['Attachment'=>$originalName];
+            $file->move('Attachment/',$originalName);
+            $canvassFormModel->update($form['formID'],$values);
         }
 
         //update the status of PO

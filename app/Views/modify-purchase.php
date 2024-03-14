@@ -440,7 +440,7 @@
                     <a href="<?=site_url('purchase-order')?>" style="float:right;"><i class="icon-copy dw dw-left-arrow1"></i>&nbsp;Back</a>
                     </div>
                     <div class="card-body">
-                        <form method="POST" class="row g-3" action="<?=base_url('save-changes')?>">
+                        <form method="POST" class="row g-3" enctype="multipart/form-data" action="<?=base_url('save-changes')?>">
                             <div class="col-12 form-group">
                                 <h3><b>Reference #</b> : <?=$Reference?></h3>
                             </div>
@@ -469,6 +469,10 @@
                                     </tbody>
                                 </table>
                             </div>
+							<div class="col-12 form-group">
+								<label>Attachment</label>
+								<input type="file" class="form-control" name="file" accept="application/pdf"/>
+							</div>
                             <div class="col-12 form-group">
                                 <button type="submit" class="btn btn-primary" onclick="return confirm('Do you want to save the changes applied?')" id="btnSave">Save Changes</button>
                             </div>
