@@ -1440,13 +1440,6 @@ class Purchase extends BaseController
                 <td><input type="checkbox" style="height:18px;width:18px;" value="<?php echo $row->orderID ?>" name="itemID[]" id="itemID" checked/></td>
                 <td><?php echo $row->Item_Name ?></td>
                 <td><?php echo $row->Specification ?></td>
-                <td>
-                    <select class="form-control" name="currency[]">
-                    <option value="">Choose</option>
-                    <option>PHP</option>
-                    <option>USD</option>
-                    </select>
-                </td>
                 <td><input type="text" class="form-control" name="unitPrice[]"/></td>
             </tr>
             <?php
@@ -1489,7 +1482,7 @@ class Purchase extends BaseController
             for($i=0;$i<$count;$i++)
             {
                 $values = 
-                ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$unitPrice[$i],'Currency'=>$currency[$i],
+                ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$unitPrice[$i],'Currency'=>$currency,
                 'ContactPerson'=>$contactPerson,'ContactNumber'=>$phone,'Address'=>$address,
                 'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>'','Remarks'=>'',
                 'Vatable'=>$vatable,'purchaseLogID'=>0];

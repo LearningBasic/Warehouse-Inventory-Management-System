@@ -603,9 +603,21 @@
                         <form method="POST" class="row g-3" id="frmEntries">
 							<input type="hidden" name="orderNo" value="<?=$id ?>"/>
 							<div class="col-12">
-								<label>Vatable ?</label>
-								<input type="radio" name="vatable" style="width:15px;height:15px;" value="Yes"/>&nbsp;<label>Yes</label>
-								<input type="radio" name="vatable" style="width:15px;height:15px;" value="No" checked/>&nbsp;<label>No</label>
+								<div class="row g-3">
+									<div class="col-lg-6">
+										<label>Vatable ?</label>
+										<input type="radio" name="vatable" style="width:15px;height:15px;" value="Yes"/>&nbsp;<label>Yes</label>
+										<input type="radio" name="vatable" style="width:15px;height:15px;" value="No" checked/>&nbsp;<label>No</label>
+									</div>
+									<div class="col-lg-6">
+										<label>Currency</label>
+										<select class="form-control" name="currency">
+											<option value="">Choose</option>
+											<option>PHP</option>
+											<option>USD</option>
+										</select>
+									</div>
+								</div>
 							</div>
 							<div class="col-12 form-group">
 								<label>Vendors/Supplier's Name</label>
@@ -647,7 +659,6 @@
 										<th class="bg-primary text-white">#</th>
 										<th class="bg-primary text-white">Item Name</th>
 										<th class="bg-primary text-white">Specification</th>
-										<th class="bg-primary text-white">Currency</th>
 										<th class="bg-primary text-white">Unit Price</th>
 									</thead>
 									<tbody id="tbl_entries">
