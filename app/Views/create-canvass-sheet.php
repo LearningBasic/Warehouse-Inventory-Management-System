@@ -604,17 +604,22 @@
 							<input type="hidden" name="orderNo" value="<?=$id ?>"/>
 							<div class="col-12">
 								<div class="row g-3">
-									<div class="col-lg-6">
-										<label>Vatable ?</label>
+									<div class="col-lg-9">
+										<p>Vatable ?</p>
 										<input type="radio" name="vatable" style="width:15px;height:15px;" value="Yes"/>&nbsp;<label>Yes</label>
 										<input type="radio" name="vatable" style="width:15px;height:15px;" value="No" checked/>&nbsp;<label>No</label>
 									</div>
-									<div class="col-lg-6">
+									<div class="col-lg-3">
 										<label>Currency</label>
 										<select class="form-control" name="currency">
 											<option value="">Choose</option>
 											<option>PHP</option>
 											<option>USD</option>
+											<option>EUR</option>
+											<option>YEN</option>
+											<option>AUD</option>
+											<option>GBP</option>
+											<option>SGD</option>
 										</select>
 									</div>
 								</div>
