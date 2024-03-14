@@ -903,6 +903,7 @@ class Home extends BaseController
         $builder->join('tblprf b','b.prfID=a.prfID','LEFT');
         $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
         $builder->join('tblaccount e','e.accountID=a.accountID','LEFT');
+        $builder->WHERE('a.accountID',$user);
         $builder->groupby('a.assignID');
         $list = $builder->get()->getResult();
         //quotation
