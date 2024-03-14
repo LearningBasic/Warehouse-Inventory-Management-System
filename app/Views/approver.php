@@ -826,26 +826,20 @@
 					if (result.isConfirmed) {
 						var val = $('#reviewID').val();
 						var message = prompt("Enter your comment to cancel");
-						if(message==="")
-						{
-							alert("Invalid! Please try again");
-						}
-						else{
-							$.ajax({
-								url:"<?=site_url('cancel')?>",method:"POST",
-								data:{value:val,message:message},success:function(response)
+						$.ajax({
+							url:"<?=site_url('cancel')?>",method:"POST",
+							data:{value:val,message:message},success:function(response)
+							{
+								if(response==="success")
 								{
-									if(response==="success")
-									{
-										location.reload();
-									}
-									else
-									{
-										alert(response);
-									}
+									location.reload();
 								}
-							});
-						}
+								else
+								{
+									alert(response);
+								}
+							}
+						});
 					}
 				});
 			});
@@ -954,29 +948,22 @@
 					if (result.isConfirmed) {
 						var val = $(this).val();
 						var message = prompt("Please leave a comment");
-						if(message==="")
-						{
-							alert("Invalid! Please try again");
-						}
-						else
-						{
-							$('#modal-loading').modal('show');
-							$.ajax({
-								url:"<?=site_url('decline')?>",method:"POST",
-								data:{value:val,message:message},success:function(response)
+						$('#modal-loading').modal('show');
+						$.ajax({
+							url:"<?=site_url('decline')?>",method:"POST",
+							data:{value:val,message:message},success:function(response)
+							{
+								if(response==="success")
 								{
-									if(response==="success")
-									{
-										location.reload();
-									}
-									else
-									{
-										alert(response);
-									}
-									$('#modal-loading').modal('hide');
+									location.reload();
 								}
-							});
-						}
+								else
+								{
+									alert(response);
+								}
+								$('#modal-loading').modal('hide');
+							}
+						});
 					}
 				});
 			});

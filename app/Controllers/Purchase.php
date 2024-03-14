@@ -1151,28 +1151,35 @@ class Purchase extends BaseController
         $msg = $this->request->getPost('message');
         $user = session()->get('loggedUser');
         //cancel
-        $values = [
-            'Status'=>2,'Comment'=>$msg
-        ];
-        $reviewModel->update($val,$values);
-        //update
-        $builder = $this->db->table('tblreview a');
-        $builder->select('a.OrderNo');
-        $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
-        $builder->WHERE('a.reviewID',$val);
-        $data = $builder->get();
-        if($row = $data->getRow())
+        if(empty($msg))
         {
-            $purchase = $purchaseModel->WHERE('OrderNo',$row->OrderNo)->first();
-            $value = ['Status'=>2];
-            $purchaseModel->update($purchase['prfID'],$value);
-            //system logs
-            $values = [
-                'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Cancelled '.$row->OrderNo
-            ];
-            $systemLogsModel->save($values);
+            echo "Invalid! Please leave a message";
         }
-        echo "success";
+        else
+        {
+            $values = [
+                'Status'=>2,'Comment'=>$msg
+            ];
+            $reviewModel->update($val,$values);
+            //update
+            $builder = $this->db->table('tblreview a');
+            $builder->select('a.OrderNo');
+            $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
+            $builder->WHERE('a.reviewID',$val);
+            $data = $builder->get();
+            if($row = $data->getRow())
+            {
+                $purchase = $purchaseModel->WHERE('OrderNo',$row->OrderNo)->first();
+                $value = ['Status'=>2];
+                $purchaseModel->update($purchase['prfID'],$value);
+                //system logs
+                $values = [
+                    'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Cancelled '.$row->OrderNo
+                ];
+                $systemLogsModel->save($values);
+            }
+            echo "success";
+        }
     }
 
     public function archivePurchase()
