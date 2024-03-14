@@ -471,6 +471,7 @@
                                 <th>PRF No</th>
 								<th>Status</th>
                                 <th>Action</th>
+								<th>Comment</th>
                             </thead>
 							<tbody>
 							<?php foreach($canvass as $row): ?>
@@ -509,21 +510,28 @@
 													<button type="button" class="dropdown-item comment" value="<?php echo $row->Reference ?>">
 														<span class="dw dw-add"></span>&nbsp;Add Message
 													</button>
-													<?php if($row->Status==0||$row->Status==1){ ?>
 													<a class="dropdown-item" href="<?=site_url('modify/')?><?php echo $row->Reference ?>">
 														<span class="dw dw-pencil"></span>&nbsp;Modify
 													</a>
-													<?php } ?>
 													<a class="dropdown-item" href="<?=site_url('download/')?><?php echo $row->Reference ?>">
 														<span class="dw dw-download"></span>&nbsp;Download
 													</a>
 												</div>
 											</div>
+											<?php }else if($row->Status==2){?>
+												<a class="dropdown-item" href="<?=site_url('modify/')?><?php echo $row->Reference ?>">
+													<span class="dw dw-pencil"></span>&nbsp;Modify
+												</a>
 											<?php }else{ ?>
 												-
 											<?php }?>
 										<?php } ?>
                                     </td>
+									<td>
+										<?php if($row->Status==2){?>
+											<?php echo $row->Comment ?>
+										<?php } ?>
+									</td>
                                 </tr>
                             <?php endforeach; ?>
 							</tbody>

@@ -1470,7 +1470,7 @@ class Home extends BaseController
     public function purchaseOrder()
     {
         $builder = $this->db->table('tblcanvass_form a');
-        $builder->select('a.DateNeeded,a.DatePrepared,a.Department,a.OrderNo,a.Reference,b.Status');
+        $builder->select('a.DateNeeded,a.DatePrepared,a.Department,a.OrderNo,a.Reference,b.Status,b.Comment');
         $builder->join('tblpurchase_logs b','b.Reference=a.Reference','LEFT');
         $builder->WHERE('a.Status',4);
         $builder->groupBy('a.Reference');
@@ -1530,7 +1530,7 @@ class Home extends BaseController
                     $code = "PO-".str_pad($li->total, 9, '0', STR_PAD_LEFT);
                 }
                 //save
-                $values = ['purchaseNumber'=>$code,'Reference'=>$val, 'Status'=>$status,'Date'=>$date,'accountID'=>$user,'Remarks'=>'OPEN'];
+                $values = ['purchaseNumber'=>$code,'Reference'=>$val, 'Status'=>$status,'Date'=>$date,'accountID'=>$user,'Remarks'=>'OPEN','Comment'=>''];
                 $purchaseOrderModel->save($values);
                 //get the PO Number
                 $purchase = $purchaseOrderModel->WHERE('purchaseNumber',$code)->first();
@@ -2089,7 +2089,7 @@ class Home extends BaseController
             //update the PO status
             $purchase = $purchaseReviewModel->WHERE('prID',$val)->first();
             $purchase_order = $purchaseOrderModel->WHERE('purchaseNumber',$purchase['purchaseNumber'])->first();
-            $values = ['Status'=>2];
+            $values = ['Status'=>2,'Comment'=>$msg];
             $purchaseOrderModel->update($purchase_order['purchaseLogID'],$values);
             //send email
             $builder = $this->db->table('tblcanvass_form a');
