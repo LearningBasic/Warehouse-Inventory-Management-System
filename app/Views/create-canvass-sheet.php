@@ -612,7 +612,6 @@
 									<div class="col-lg-3">
 										<label>Currency</label>
 										<select class="form-control" name="currency">
-											<option value="">Choose</option>
 											<option>PHP</option>
 											<option>USD</option>
 											<option>EUR</option>
