@@ -559,7 +559,7 @@
         <script>
 			$(document).ready(function()
 			{
-				editors();notify();today();
+				editors();notify();add_business_days();
 				$("#Table").on('click','.btnDelete',function(){
                     $(this).closest('tr').remove();
                 });
@@ -577,20 +577,28 @@
 				// 	}
 				// });
 			});
+			function add_business_days()
+			{
+				var date = new Date();
+				var startDate = new Date(); 
+				startDate = new Date(startDate);
+				var endDate = "", noOfDaysToAdd = 15, count = 0;
+				while(count < noOfDaysToAdd){
+					endDate = new Date(startDate.setDate(startDate.getDate() + 1));
+					if(endDate.getDay() != 0 && endDate.getDay() != 6){
+					//Date.getDay() gives weekday starting from 0(Sunday) to 6(Saturday)
+					count++;
+					}
+				}
+				$('#dateNeeded').val(convert(endDate));
+            	$('#dateNeeded').attr('min',convert(endDate));
+			}
 			function convert(str) {
 				var date = new Date(str),
 				mnth = ("0" + (date.getMonth() + 1)).slice(-2),
 				day = ("0" + date.getDate()).slice(-2);
 				return [date.getFullYear(), mnth, day].join("-");
 			}
-
-			function today()
-        	{
-            	var date = new Date(); // Now
-            	date.setDate(date.getDate() + 15);
-            	$('#dateNeeded').val(convert(date));
-            	$('#dateNeeded').attr('min',convert(date));
-        	}
         
 			function notify()
 			{
