@@ -345,9 +345,9 @@ class Purchase extends BaseController
             //check purchase type
             if($purchase_type=="Local Purchase")
             {
-                if(empty($originalName)||empty($itemGroup))
+                if(empty($originalName))
                 {
-                    session()->setFlashdata('fail','Error! Please select item group/attach the required documents');
+                    session()->setFlashdata('fail','Error! Please attach the required documents');
                     return redirect()->to('/orders')->withInput();
                 }
                 else

@@ -478,7 +478,7 @@
                                     </div>
 									<div class="col-lg-3">
                                         <label>Item Group</label>
-                                        <select class="form-control" name="item_group" id="item_group" disabled>
+                                        <select class="form-control" name="item_group" id="item_group" required>
 											<option value="">Choose</option>
 											<option>Office Supplies</option>
 											<option>IT Products</option>
@@ -563,19 +563,19 @@
 				$("#Table").on('click','.btnDelete',function(){
                     $(this).closest('tr').remove();
                 });
-				$('#purchase_type').change(function()
-				{
-					var val = $(this).val();
-					if(val==="Local Purchase")
-					{
-						$('#item_group').attr("disabled",false);
-					}
-					else
-					{
-						$('#item_group').attr("disabled",true);
-						$("#item_group").prop('selectedIndex', 0);
-					}
-				});
+				// $('#purchase_type').change(function()
+				// {
+				// 	var val = $(this).val();
+				// 	if(val==="Local Purchase")
+				// 	{
+				// 		$('#item_group').attr("disabled",false);
+				// 	}
+				// 	else
+				// 	{
+				// 		$('#item_group').attr("disabled",true);
+				// 		$("#item_group").prop('selectedIndex', 0);
+				// 	}
+				// });
 			});
 			function convert(str) {
 				var date = new Date(str),
