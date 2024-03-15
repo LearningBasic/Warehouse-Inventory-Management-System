@@ -692,7 +692,6 @@
 				title: '',
 				curveType: 'function',
 				legend: { position: 'bottom' },
-				pieHole: 0.4
 				};
 				/* Instantiate and draw the chart.*/
 				var chart = new google.visualization.PieChart(document.getElementById('chartAssignment'));

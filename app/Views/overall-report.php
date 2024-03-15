@@ -492,7 +492,7 @@
                     </div>
                     <div class="col-12 form-group">
                         <div class="row g-3">
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 form-group">
                                 <div class="card-box">
                                     <div class="card-body">
                                         <div class="card-title">Top 20 Vendor</div>
@@ -515,7 +515,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-8">
+                            <div class="col-lg-8 form-group">
                                 <div class="card-box">
                                     <div class="card-body">
                                         <div class="card-title">Daily Cost for Purchase Order</div>
