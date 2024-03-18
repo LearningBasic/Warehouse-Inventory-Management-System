@@ -551,7 +551,7 @@
 								</div>
 								<div class="tab-pane fade" id="forRelease" role="tabpanel">
 								<br/>
-									<table class="data-table table stripe hover nowrap">
+									<table class="data-table table stripe hover">
 										<thead>
 											<th>Date Received</th>
 											<th>Order No</th>
