@@ -448,8 +448,8 @@
 					</div>
 				<?php endif; ?>
                 <div class="card-box">
-                    <div class="card-header"><?php if(session()->get('role')=="Staff"){ ?>Create Quotation<?php }else {?>Create Canvass Sheet<?php }?>
-					<?php if(session()->get('role')=="Staff"){ ?>
+                    <div class="card-header"><?php if(session()->get('role')=="Staff"||session()->get('role')=="Administrator"){ ?>Create Quotation<?php }else {?>Create Canvass Sheet<?php }?>
+					<?php if(session()->get('role')=="Staff"||session()->get('role')=="Administrator"){ ?>
 						<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addRegularModal" style="float:right;"><i class="icon-copy dw dw-add"></i>&nbsp;Add</a>
 					<?php }else {?>	
 						<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addModal" style="float:right;"><i class="icon-copy dw dw-add"></i>&nbsp;Add</a>
