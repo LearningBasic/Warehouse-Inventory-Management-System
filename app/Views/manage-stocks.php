@@ -555,6 +555,7 @@
 										<thead>
 											<th>Date Received</th>
 											<th>Order No</th>
+											<th>Department/Vessel/Port</th>
 											<th>Product Name</th>
 											<th>Item Unit</th>
 											<th>Qty</th>
@@ -567,6 +568,7 @@
 												<tr>
 													<td><?php echo $row->DateReceived ?></td>
 													<td><?php echo $row->OrderNo ?></td>
+													<td><?php echo $row->Department ?></td>
 													<td><?php echo $row->Item_Name ?></td>
 													<td><?php echo $row->ItemUnit ?></td>
 													<td><?php echo $row->Qty ?></td>

@@ -180,9 +180,10 @@ class Home extends BaseController
     {
         $user = session()->get('loggedUser');
         //for release
-        $builder = $this->db->table('tblissuance');
-        $builder->select('*');
-        $builder->WHERE('accountID',$user);
+        $builder = $this->db->table('tblissuance a');
+        $builder->select('a.*,b.Department');
+        $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
+        $builder->WHERE('a.accountID',$user);
         $release = $builder->get()->getResult();
         //transfer item
         $builder = $this->db->table('tbltransferitem');
