@@ -893,7 +893,7 @@ class Purchase extends BaseController
                                     $builder = $this->db->table('tblreview a');
                                     $builder->select('a.DateApproved,b.Fullname');
                                     $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
-                                    $builder->WHERE('a.OrderNo',$row->OrderNo)->WHERE('a.Status<>',2);
+                                    $builder->WHERE('a.OrderNo',$row->OrderNo);
                                     $datas = $builder->get();
                                     foreach($datas->getResult() as $rows)
                                     {
