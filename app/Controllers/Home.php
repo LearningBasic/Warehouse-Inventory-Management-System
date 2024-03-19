@@ -1291,7 +1291,7 @@ class Home extends BaseController
         $builder->select('a.*,b.Comment');
         $builder->join('tblreview b','b.OrderNo=a.OrderNo','LEFT');
         $builder->WHERE('a.accountID',$user);
-        $builder->groupBy('a.OrderNo');
+        $builder->groupBy('a.OrderNo')->orderBy('b.Comment','DESC');
         $orders = $builder->get()->getResult();
         //canvass 
         $builder = $this->db->table('tblcanvass_form');
