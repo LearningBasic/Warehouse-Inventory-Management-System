@@ -1289,9 +1289,9 @@ class Home extends BaseController
         $user = session()->get('loggedUser');
         $builder = $this->db->table('tblprf a');
         $builder->select('a.*,b.Comment');
-        $builder->join('tblreview b','b.OrderNo=a.OrderNo','LEFT');
+        $builder->join('(Select Comment,OrderNo from tblreview group by reviewID order by reviewID DESC) b','b.OrderNo=a.OrderNo','LEFT');
         $builder->WHERE('a.accountID',$user);
-        $builder->groupBy('a.OrderNo')->orderBy('b.Comment','DESC');
+        $builder->groupBy('a.OrderNo');
         $orders = $builder->get()->getResult();
         //canvass 
         $builder = $this->db->table('tblcanvass_form');
