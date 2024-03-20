@@ -906,9 +906,17 @@ class Home extends BaseController
         $builder->join('tblaccount e','e.accountID=a.accountID','LEFT');
         $builder->groupby('a.assignID');
         $list = $builder->get()->getResult();
+        //pending
+        $builder = $this->db->table('tblassignment a');
+        $builder->select('a.Status,b.prfID,b.OrderNo,b.Remarks,a.Date,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID');
+        $builder->join('tblprf b','b.prfID=a.prfID','LEFT');
+        $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
+        $builder->WHERE('a.accountID',$user)->WHERE('a.Status',0);
+        $builder->groupby('a.assignID');
+        $pending = $builder->get()->getResult();
         //quotation
         $canvass = $canvasFormModel->WHERE('createdBy',$user)->findAll();
-        $data = ['list'=>$list,'canvass'=>$canvass];
+        $data = ['list'=>$list,'pending'=>$pending,'canvass'=>$canvass];
         return view('assign',$data);
     }
 

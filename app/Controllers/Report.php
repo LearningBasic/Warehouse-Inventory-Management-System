@@ -127,22 +127,22 @@ class Report extends BaseController
         $OrderItemModel = new \App\Models\OrderItemModel();
         $purchaseOrderModel = new \App\Models\purchaseOrderModel();
 
-        $builder = $this->db->table('tblreserved');
-        $builder->select('OrderNo,purchaseNumber,productName,SUM(Qty)total');
-        $builder->WHERE('Remarks','Partial Delivery');
-        $builder->groupBy('purchaseNumber');
-        $data = $builder->get();
-        foreach($data->getResult() as $row)
-        {
-            $order = $OrderItemModel->WHERE('OrderNo',$row->OrderNo)->WHERE('Item_Name',$row->productName)->first();
-            if($row->total==$order['Qty'])
-            {
-                //update the remarks
-                $values = ['Remarks','CLOSE'];
-                $purchase = $purchaseOrderModel->WHERE('purchaseNumber',$row->purchaseNumber)->first();
-                $purchaseOrderModel->update($purchase['purchaseLogID'],$values);
-            }
-        }
+        // $builder = $this->db->table('tblreceive');
+        // $builder->select('OrderNo,purchaseNumber,productName,SUM(Qty)total');
+        // $builder->WHERE('Remarks','Partial Delivery');
+        // $builder->groupBy('purchaseNumber');
+        // $data = $builder->get();
+        // foreach($data->getResult() as $row)
+        // {
+        //     $order = $OrderItemModel->WHERE('OrderNo',$row->OrderNo)->WHERE('Item_Name',$row->productName)->first();
+        //     if($row->total==$order['Qty'])
+        //     {
+        //         //update the remarks
+        //         $values = ['Remarks','CLOSE'];
+        //         $purchase = $purchaseOrderModel->WHERE('purchaseNumber',$row->purchaseNumber)->first();
+        //         $purchaseOrderModel->update($purchase['purchaseLogID'],$values);
+        //     }
+        // }
     }
 
     public function fetchPO()

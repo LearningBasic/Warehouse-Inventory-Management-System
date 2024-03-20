@@ -465,6 +465,26 @@
 									<a
 										class="nav-link text-blue"
 										data-toggle="tab"
+										href="#pending6"
+										role="tab"
+										aria-selected="true"
+										>Pending</a
+									>
+								</li>
+								<li class="nav-item">
+									<a
+										class="nav-link text-blue"
+										data-toggle="tab"
+										href="#archive6"
+										role="tab"
+										aria-selected="true"
+										>Archive</a
+									>
+								</li>
+								<li class="nav-item">
+									<a
+										class="nav-link text-blue"
+										data-toggle="tab"
 										href="#profile6"
 										role="tab"
 										aria-selected="false"
@@ -485,7 +505,6 @@
 											<th>Reason</th>
 											<th>Date Needed</th>
 											<th>Action Taken</th>
-											<th>Action</th>
 										</thead>
 										<tbody>
 											<?php foreach($list as $row): ?>
@@ -507,6 +526,44 @@
 															<span class="badge bg-danger text-white">DECLINED</span>
 														<?php } ?>
 													</td>
+													<?php }else{ ?>
+													<td><?php echo $row->Date ?></td>
+													<td><?php echo $row->OrderNo ?></td>
+													<td><?php echo $row->Staff ?></td>
+													<td><?php echo $row->Fullname ?></td>
+													<td><?php echo $row->Department ?></td>
+													<td><?php echo $row->Reason ?></td>
+													<td><?php echo $row->DateNeeded ?></td>
+													<td>-</td>
+													<?php } ?>
+												</tr>
+											<?php endforeach; ?>
+										</tbody>
+									</table>
+								</div>
+								<div class="tab-pane fade" id="pending6" role="tabpanel">
+									<br/>
+									<table class="data-table table stripe hover nowrap">
+										<thead>
+											<th>Date Received</th>
+											<th>PRF No</th>
+											<th>Requestor</th>
+											<th>Department</th>
+											<th>Reason</th>
+											<th>Date Needed</th>
+											<th>Action Taken</th>
+											<th>Action</th>
+										</thead>
+										<tbody>
+											<?php foreach($pending as $row): ?>
+												<tr>
+													<td><?php echo $row->Date ?></td>
+													<td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
+													<td><?php echo $row->Fullname ?></td>
+													<td><?php echo $row->Department ?></td>
+													<td><?php echo $row->Reason ?></td>
+													<td><?php echo $row->DateNeeded ?></td>
+													<td><span class="badge bg-warning text-white">WAITING</span></td>
 													<td>
 														<?php if($row->Status==0){ ?>
 															<button type="button" class="btn btn-primary btn-sm accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span></button>
@@ -521,20 +578,24 @@
 															-
 														<?php } ?>
 													</td>
-													<?php }else{ ?>
-													<td><?php echo $row->Date ?></td>
-													<td><?php echo $row->OrderNo ?></td>
-													<td><?php echo $row->Staff ?></td>
-													<td><?php echo $row->Fullname ?></td>
-													<td><?php echo $row->Department ?></td>
-													<td><?php echo $row->Reason ?></td>
-													<td><?php echo $row->DateNeeded ?></td>
-													<td>-</td>
-													<td>-</td>
-													<?php } ?>
 												</tr>
 											<?php endforeach; ?>
 										</tbody>
+									</table>
+								</div>
+								<div class="tab-pane fade" id="archive6" role="tabpanel">
+									<br/>
+									<table class="data-table table stripe hover nowrap">
+										<thead>
+											<th>Date Received</th>
+											<th>PRF No</th>
+											<th>Requestor</th>
+											<th>Department</th>
+											<th>Reason</th>
+											<th>Date Needed</th>
+											<th>Action Taken</th>
+											<th>Action</th>
+										</thead>
 									</table>
 								</div>
 								<div class="tab-pane fade" id="profile6" role="tabpanel">
