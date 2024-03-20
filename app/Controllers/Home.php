@@ -914,9 +914,23 @@ class Home extends BaseController
         $builder->WHERE('a.accountID',$user)->WHERE('a.Status',0);
         $builder->groupby('a.assignID');
         $pending = $builder->get()->getResult();
+        //ongoing
+        $builder = $this->db->table('tblassignment a');
+        $builder->select('a.Status,b.prfID,b.OrderNo,b.Remarks,a.Date,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID');
+        $builder->join('tblprf b','b.prfID=a.prfID','LEFT');
+        $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
+        $builder->WHERE('a.accountID',$user)->WHERE('a.Status<>',0);
+        $builder->groupby('a.assignID');
+        $ongoing = $builder->get()->getResult();
+        //archive
+        $builder = $this->db->table('tblprf a');
+        $builder->select('a.*,b.Fullname');
+        $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+        $builder->WHERE('a.Status',5);
+        $archive = $builder->get()->getResult();
         //quotation
         $canvass = $canvasFormModel->WHERE('createdBy',$user)->findAll();
-        $data = ['list'=>$list,'pending'=>$pending,'canvass'=>$canvass];
+        $data = ['list'=>$list,'pending'=>$pending,'ongoing'=>$ongoing,'archive'=>$archive,'canvass'=>$canvass];
         return view('assign',$data);
     }
 
