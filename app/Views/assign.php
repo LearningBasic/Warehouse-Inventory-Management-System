@@ -559,7 +559,6 @@
 											<th>PRF No</th>
 											<th>Requestor</th>
 											<th>Department</th>
-											<th>Reason</th>
 											<th>Date Needed</th>
 											<th>Action Taken</th>
 											<th>Action</th>
@@ -571,22 +570,20 @@
 													<td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
 													<td><?php echo $row->Fullname ?></td>
 													<td><?php echo $row->Department ?></td>
-													<td><?php echo $row->Reason ?></td>
 													<td><?php echo $row->DateNeeded ?></td>
 													<td><span class="badge bg-warning text-white">WAITING</span></td>
 													<td>
-														<?php if($row->Status==0){ ?>
-															<button type="button" class="btn btn-primary btn-sm accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span></button>
-															<button type="button" class="btn btn-danger btn-sm revision" value="<?php echo $row->OrderNo ?>"><span class="dw dw-repeat1"></span></button>
-															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span></button>
-														<?php }else if($row->Status==1){ ?>
-															<a href="create/<?php echo $row->OrderNo ?>" class="btn btn-primary btn-sm"><span class="dw dw-add"></span></a>
-															<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-warning btn-sm" target="_blank"><span class="dw dw-edit-1"></span></a>
-															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span></button>
-															<button type="button" class="btn btn-outline-danger btn-sm archive" value="<?php echo $row->OrderNo ?>"><span class="dw dw-trash"></span></button>
-														<?php }else { ?>
-															-
-														<?php } ?>
+														<div class="dropdown">
+															<a class="btn btn-primary btn-sm dropdown-toggle"
+																href="#" role="button" data-toggle="dropdown">
+																SELECT
+															</a>
+															<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+																<button type="button" class="dropdown-item accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span>&nbsp;Accept</button>
+																<button type="button" class="dropdown-item revision" value="<?php echo $row->OrderNo ?>"><span class="dw dw-repeat1"></span>&nbsp;Reject</button>
+																<button type="button" class="dropdown-item view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span>&nbsp;List of Items</button>
+															</div>
+														</div>
 													</td>
 												</tr>
 											<?php endforeach; ?>
@@ -601,7 +598,6 @@
 											<th>PRF No</th>
 											<th>Requestor</th>
 											<th>Department</th>
-											<th>Reason</th>
 											<th>Date Needed</th>
 											<th>Action</th>
 										</thead>
@@ -612,14 +608,21 @@
 													<td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
 													<td><?php echo $row->Fullname ?></td>
 													<td><?php echo $row->Department ?></td>
-													<td><?php echo $row->Reason ?></td>
 													<td><?php echo $row->DateNeeded ?></td>
 													<td>
 														<?php if($row->Status==1){ ?>
-															<a href="create/<?php echo $row->OrderNo ?>" class="btn btn-primary btn-sm"><span class="dw dw-add"></span></a>
-															<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-warning btn-sm" target="_blank"><span class="dw dw-edit-1"></span></a>
-															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span></button>
-															<button type="button" class="btn btn-outline-danger btn-sm archive" value="<?php echo $row->OrderNo ?>"><span class="dw dw-trash"></span></button>
+															<div class="dropdown">
+																<a class="btn btn-primary btn-sm dropdown-toggle"
+																	href="#" role="button" data-toggle="dropdown">
+																	SELECT
+																</a>
+																<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+																	<a href="create/<?php echo $row->OrderNo ?>" class="dropdown-item"><span class="dw dw-add"></span>&nbsp;Create</a>
+																	<a href="edit-order/<?php echo $row->OrderNo ?>" class="dropdown-item" target="_blank"><span class="dw dw-edit-1"></span>&nbsp;Edit Items</a>
+																	<button type="button" class="dropdown-item view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span>&nbsp;List of Item</button>
+																	<button type="button" class="dropdown-item archive" value="<?php echo $row->OrderNo ?>"><span class="dw dw-trash"></span>&nbsp;Close</button>
+																</div>
+															</div>
 														<?php }else { ?>
 															-
 														<?php } ?>
@@ -647,8 +650,8 @@
 													<td><?php echo $row->OrderNo ?></td>
 													<td><?php echo $row->Fullname ?></td>
 													<td><?php echo $row->Department ?></td>
-													<td><?php echo substr($row->Reason,0,30) ?>...
-													<td><?php echo $row->DateNeeded ?></td></td>
+													<td><?php echo substr($row->Reason,0,30) ?>...</td>
+													<td><?php echo $row->DateNeeded ?></td>
 												</tr>
 											<?php endforeach; ?>
 										</tbody>
