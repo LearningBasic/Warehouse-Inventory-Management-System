@@ -772,11 +772,7 @@ class Purchase extends BaseController
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <b>Reason</b>
-            <textarea class="form-control" style="height:120px;"><?php echo $rowx->Reason ?></textarea>
-        </div>
-            <?php
+        <?php
         }
         $builder = $this->db->table('tblcanvass_sheet a');
         $builder->select('a.*,b.Qty,b.ItemUnit,b.Item_Name,b.Specification');
@@ -837,7 +833,7 @@ class Purchase extends BaseController
             <div class="form-group">
             <?php if($rowx->Status==0){ ?>
                 <button type="button" class="btn btn-primary btn-sm approve" value="<?php echo $rowx->prID ?>"><span class="dw dw-check"></span>&nbsp;Approve</button>
-                <button type="button" class="btn btn-danger btn-sm decline" value="<?php echo $row->prID ?>"><span class="dw dw-trash"></span>&nbsp;Decline</button>
+                <button type="button" class="btn btn-danger btn-sm decline" value="<?php echo $rowx->prID ?>"><span class="dw dw-trash"></span>&nbsp;Decline</button>
             <?php } ?>
             </div>
             <?php
