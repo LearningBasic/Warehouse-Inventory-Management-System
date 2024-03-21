@@ -598,7 +598,7 @@
 														<td><?php echo $row->OrderNo ?></td>
 														<td><?php echo $row->Reference ?></td>
 														<td><?php echo $row->DateApproved ?></td>
-														<td><button type="button" class="btn btn-primary btn-sm viewQuotation" value="<?php echo $row->Reference ?>">Details</button></td>
+														<td><button type="button" class="btn btn-primary btn-sm viewQuotation" value="<?php echo $row->purchaseNumber ?>">Details</button></td>
 														<td>
 															<?php if($row->Status==0){ ?>
 																<span class="badge bg-warning text-white">PENDING</span>
