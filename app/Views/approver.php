@@ -595,8 +595,8 @@
 													<tr>
 														<td><?php echo $row->DateReceived ?></td>
 														<td><?php echo $row->purchaseNumber ?></td>
-														<td><?php echo $row->OrderNo ?></td>
-														<td><?php echo $row->Reference ?></td>
+														<td><a href="<?=site_url('generate/')?><?php echo $row->OrderNo ?>" target="_BLANK"><?php echo $row->OrderNo ?></a></td>
+														<td><a href="<?=site_url('export/')?><?php echo $row->Reference ?>" target="_BLANK"><?php echo $row->Reference ?></a></td>
 														<td><?php echo $row->DateApproved ?></td>
 														<td><button type="button" class="btn btn-primary btn-sm viewQuotation" value="<?php echo $row->purchaseNumber ?>">Details</button></td>
 														<td>

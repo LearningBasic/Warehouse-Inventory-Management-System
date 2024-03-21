@@ -741,9 +741,11 @@ class Purchase extends BaseController
         $file="";$orderNo="";
         //fetch
         $builder = $this->db->table('tblcanvass_form a');
-        $builder->select('a.Reference,b.Department,b.OrderNo,b.DateNeeded,b.PurchaseType,b.Reason,b.Attachment');
+        $builder->select('a.Reference,b.Department,b.OrderNo,b.DateNeeded,b.PurchaseType,b.Reason,b.Attachment,d.Status,d.prID');
         $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
-        $builder->WHERE('a.Reference',$reference);
+        $builder->join('tblpurchase_logs c','a.Reference=c.Reference','LEFT');
+        $builder->join('tblpurchase_review d','d.purchaseNumber=c.purchaseNumber','LEFT');
+        $builder->WHERE('c.purchaseNumber',$reference);
         $datax = $builder->get();
         if($rowx = $datax->getRow())
         {
@@ -778,8 +780,9 @@ class Purchase extends BaseController
         }
         $builder = $this->db->table('tblcanvass_sheet a');
         $builder->select('a.*,b.Qty,b.ItemUnit,b.Item_Name,b.Specification');
-        $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
-        $builder->WHERE('a.Reference',$reference)->WHERE('a.Remarks','Selected');
+        $builder->join('tbl_order_item b','b.orderID=a.orderID','INNER');
+        $builder->join('tblpurchase_logs c','c.purchaseLogID=a.purchaseLogID','INNER');
+        $builder->WHERE('c.purchaseNumber',$reference);
         $data = $builder->get();
         ?>
         <div class="form-group table-responsive">
@@ -814,18 +817,14 @@ class Purchase extends BaseController
             </table>
         </div>
         <?php
-        $builder = $this->db->table('tblcanvass_form');
-        $builder->select('Attachment');
-        $builder->WHERE('Reference',$reference);
+        $builder = $this->db->table('tblcanvass_form a');
+        $builder->select('a.Attachment,a.Reference');
+        $builder->join('tblpurchase_logs b','b.Reference=a.Reference','LEFT');
+        $builder->WHERE('b.purchaseNumber',$reference);
         $data = $builder->get();
         if($row = $data->getRow())
         {
             ?>
-            <div class="form-group">
-                <p>PRF and Quotations</p>
-                <a href="<?=site_url('generate/')?><?php echo $orderNo ?>" class="btn btn-outline-primary btn-sm" target="_blank">View PRF</a>
-                <a href="<?=site_url('export/')?><?php echo $reference ?>" class="btn btn-outline-primary btn-sm" target="_blank">View Quotation</a>
-            </div>
             <div class="form-group">
                 <p>Attachments</p>
                 <?php if(empty($file)){ ?>
@@ -834,6 +833,12 @@ class Purchase extends BaseController
                     <a href="Attachment/<?php echo $file ?>" class="btn btn-outline-primary btn-sm" target="_blank"><span class="dw dw-paperclip"></span>PRF Files</a>
                 <?php } ?>
                 <a href="Canvass/<?php echo $row->Attachment ?>" class="btn btn-outline-primary btn-sm" target="_blank"><span class="dw dw-paperclip"></span>Quotation Files</a>
+            </div>
+            <div class="form-group">
+            <?php if($rowx->Status==0){ ?>
+                <button type="button" class="btn btn-primary btn-sm approve" value="<?php echo $rowx->prID ?>"><span class="dw dw-check"></span>&nbsp;Approve</button>
+                <button type="button" class="btn btn-danger btn-sm decline" value="<?php echo $row->prID ?>"><span class="dw dw-trash"></span>&nbsp;Decline</button>
+            <?php } ?>
             </div>
             <?php
         }
