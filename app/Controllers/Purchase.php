@@ -947,7 +947,7 @@ class Purchase extends BaseController
                         <option value="">Choose</option>
                     </select>
                 </div>
-                <?php } ?>
+                <?php }?>
                 <div class="col-12 form-group">
                     <?php if($row->Status==0){ ?>
                     <input type="button" class="btn btn-primary accept" value="Accept"/>
@@ -970,121 +970,130 @@ class Purchase extends BaseController
         $deptHead = $this->request->getPost('departmentHead');
         $location = $this->request->getPost('location');
         $user = session()->get('loggedUser');
-        $values = [
-            'Status'=>1,'DateApproved'=>date('Y-m-d')
-        ];
-        $reviewModel->update($val,$values);
+        
         if(str_contains($location, 'FCM'))
         {
-            //update
-            $builder = $this->db->table('tblreview a');
-            $builder->select('a.OrderNo,b.Status');
-            $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
-            $builder->WHERE('a.reviewID',$val);
-            $data = $builder->get();
-            if($row = $data->getRow())
+            if(empty($deptHead) && str_contains(session()->get('location'), 'FCM'))
             {
-                if($row->Status==0)
+                echo "Invalid! Please select Department Head for next approval";
+            }
+            else
+            {
+                //update
+                $builder = $this->db->table('tblreview a');
+                $builder->select('a.OrderNo,b.Status');
+                $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
+                $builder->WHERE('a.reviewID',$val);
+                $data = $builder->get();
+                if($row = $data->getRow())
                 {
-                    $purchase = $purchaseModel->WHERE('OrderNo',$row->OrderNo)->first();
-                    $value = ['Status'=>4];
-                    $purchaseModel->update($purchase['prfID'],$value);
-                    //save logs
-                    $values = [
-                        'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Accepted '.$row->OrderNo
-                    ];
-                    $systemLogsModel->save($values);
-                    //send email to procurement dept head
-                    $builder = $this->db->table('tblaccount');
-                    $builder->select('*');
-                    $builder->WHERE('accountID',$deptHead);
-                    $datas = $builder->get();
-                    if($rows = $datas->getRow())
+                    if($row->Status==0)
                     {
-                        $records = [
-                            'accountID'=>$rows->accountID,'OrderNo'=>$row->OrderNo,
-                            'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>'0000-00-00','Comment'=>''
+                        $purchase = $purchaseModel->WHERE('OrderNo',$row->OrderNo)->first();
+                        $value = ['Status'=>4];
+                        $purchaseModel->update($purchase['prfID'],$value);
+                        //save logs
+                        $values = [
+                            'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Accepted '.$row->OrderNo
                         ];
-                        $reviewModel->save($records);
-                        //email
-                        $email = \Config\Services::email();
-                        $email->setTo($rows->Email,$rows->Fullname);
-                        $email->setFrom("fastcat.system@gmail.com","FastCat");
-                        $imgURL = "assets/img/fastcat.png";
-                        $email->attach($imgURL);
-                        $cid = $email->setAttachmentCID($imgURL);
-                        $template = "<center>
-                        <img src='cid:". $cid ."' width='100'/>
-                        <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
-                        <tr><td><center><h1>Purchase Requistion Form</h1></center></td></tr>
-                        <tr><td><center>Hi, ".$rows->Fullname."</center></td></tr>
-                        <tr><td><center>This is from FastCat System, sending you a reminder that</center></td></tr>
-                        <tr><td><p><center><b>".$row->OrderNo."</b> is requesting for your approval</center></p></td><tr>
-                        <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
-                        <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
-                        <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
-                        $subject = "Purchase Requisition Form - For Approval";
-                        $email->setSubject($subject);
-                        $email->setMessage($template);
-                        $email->send();
+                        $systemLogsModel->save($values);
+                        //send email to procurement dept head
+                        $builder = $this->db->table('tblaccount');
+                        $builder->select('*');
+                        $builder->WHERE('accountID',$deptHead);
+                        $datas = $builder->get();
+                        if($rows = $datas->getRow())
+                        {
+                            $records = [
+                                'accountID'=>$rows->accountID,'OrderNo'=>$row->OrderNo,
+                                'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>'0000-00-00','Comment'=>''
+                            ];
+                            $reviewModel->save($records);
+                            //email
+                            $email = \Config\Services::email();
+                            $email->setTo($rows->Email,$rows->Fullname);
+                            $email->setFrom("fastcat.system@gmail.com","FastCat");
+                            $imgURL = "assets/img/fastcat.png";
+                            $email->attach($imgURL);
+                            $cid = $email->setAttachmentCID($imgURL);
+                            $template = "<center>
+                            <img src='cid:". $cid ."' width='100'/>
+                            <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+                            <tr><td><center><h1>Purchase Requistion Form</h1></center></td></tr>
+                            <tr><td><center>Hi, ".$rows->Fullname."</center></td></tr>
+                            <tr><td><center>This is from FastCat System, sending you a reminder that</center></td></tr>
+                            <tr><td><p><center><b>".$row->OrderNo."</b> is requesting for your approval</center></p></td><tr>
+                            <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+                            <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+                            <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+                            $subject = "Purchase Requisition Form - For Approval";
+                            $email->setSubject($subject);
+                            $email->setMessage($template);
+                            $email->send();
+                        }
+                    }
+                    else if($row->Status==4)
+                    {
+                        $purchase = $purchaseModel->WHERE('OrderNo',$row->OrderNo)->first();
+                        $value = ['Status'=>1];
+                        $purchaseModel->update($purchase['prfID'],$value);
+                        //save logs
+                        $values = [
+                            'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Accepted '.$row->OrderNo
+                        ];
+                        $systemLogsModel->save($values);
+                        //send email to procurement dept head
+                        $builder = $this->db->table('tblaccount');
+                        $builder->select('*');
+                        $builder->WHERE('Department','Procurement')->WHERE('systemRole','Administrator');
+                        $datas = $builder->get();
+                        if($rows = $datas->getRow())
+                        {
+                            $records = [
+                                'accountID'=>$rows->accountID,'OrderNo'=>$row->OrderNo,
+                                'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>'0000-00-00','Comment'=>''
+                            ];
+                            $reviewModel->save($records);
+                            //email
+                            $email = \Config\Services::email();
+                            $email->setTo($rows->Email,$rows->Fullname);
+                            $email->setFrom("fastcat.system@gmail.com","FastCat");
+                            $imgURL = "assets/img/fastcat.png";
+                            $email->attach($imgURL);
+                            $cid = $email->setAttachmentCID($imgURL);
+                            $template = "<center>
+                            <img src='cid:". $cid ."' width='100'/>
+                            <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
+                            <tr><td><center><h1>Purchase Requistion Form</h1></center></td></tr>
+                            <tr><td><center>Hi, ".$rows->Fullname."</center></td></tr>
+                            <tr><td><center>This is from FastCat System, sending you a reminder that</center></td></tr>
+                            <tr><td><p><center><b>".$row->OrderNo."</b> is requesting for your approval</center></p></td><tr>
+                            <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
+                            <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
+                            <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
+                            $subject = "Purchase Requisition Form - For Approval";
+                            $email->setSubject($subject);
+                            $email->setMessage($template);
+                            $email->send();
+                        }
+                    }
+                    else
+                    {
+                        $purchase = $purchaseModel->WHERE('OrderNo',$row->OrderNo)->first();
+                        $value = ['Status'=>3,'PurchaseType'=>$typePurchase];
+                        $purchaseModel->update($purchase['prfID'],$value);
+                        //save logs
+                        $values = [
+                            'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Accepted '.$row->OrderNo
+                        ];
+                        $systemLogsModel->save($values);
                     }
                 }
-                else if($row->Status==4)
-                {
-                    $purchase = $purchaseModel->WHERE('OrderNo',$row->OrderNo)->first();
-                    $value = ['Status'=>1];
-                    $purchaseModel->update($purchase['prfID'],$value);
-                    //save logs
-                    $values = [
-                        'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Accepted '.$row->OrderNo
-                    ];
-                    $systemLogsModel->save($values);
-                    //send email to procurement dept head
-                    $builder = $this->db->table('tblaccount');
-                    $builder->select('*');
-                    $builder->WHERE('Department','Procurement')->WHERE('systemRole','Administrator');
-                    $datas = $builder->get();
-                    if($rows = $datas->getRow())
-                    {
-                        $records = [
-                            'accountID'=>$rows->accountID,'OrderNo'=>$row->OrderNo,
-                            'DateReceived'=>date('Y-m-d'),'Status'=>0,'DateApproved'=>'0000-00-00','Comment'=>''
-                        ];
-                        $reviewModel->save($records);
-                        //email
-                        $email = \Config\Services::email();
-                        $email->setTo($rows->Email,$rows->Fullname);
-                        $email->setFrom("fastcat.system@gmail.com","FastCat");
-                        $imgURL = "assets/img/fastcat.png";
-                        $email->attach($imgURL);
-                        $cid = $email->setAttachmentCID($imgURL);
-                        $template = "<center>
-                        <img src='cid:". $cid ."' width='100'/>
-                        <table style='padding:10px;background-color:#ffffff;' border='0'><tbody>
-                        <tr><td><center><h1>Purchase Requistion Form</h1></center></td></tr>
-                        <tr><td><center>Hi, ".$rows->Fullname."</center></td></tr>
-                        <tr><td><center>This is from FastCat System, sending you a reminder that</center></td></tr>
-                        <tr><td><p><center><b>".$row->OrderNo."</b> is requesting for your approval</center></p></td><tr>
-                        <tr><td><center>Please login to your account @ https:fastcat-ims.com.</center></td></tr>
-                        <tr><td><center>This is a system message please don't reply. Thank you</center></td></tr>
-                        <tr><td><center>FastCat IT Support</center></td></tr></tbody></table></center>";
-                        $subject = "Purchase Requisition Form - For Approval";
-                        $email->setSubject($subject);
-                        $email->setMessage($template);
-                        $email->send();
-                    }
-                }
-                else
-                {
-                    $purchase = $purchaseModel->WHERE('OrderNo',$row->OrderNo)->first();
-                    $value = ['Status'=>3,'PurchaseType'=>$typePurchase];
-                    $purchaseModel->update($purchase['prfID'],$value);
-                    //save logs
-                    $values = [
-                        'accountID'=>$user,'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Accepted '.$row->OrderNo
-                    ];
-                    $systemLogsModel->save($values);
-                }
+                $values = [
+                    'Status'=>1,'DateApproved'=>date('Y-m-d')
+                ];
+                $reviewModel->update($val,$values);
+                echo "success";
             }
         }
         else
@@ -1154,8 +1163,12 @@ class Purchase extends BaseController
                     $systemLogsModel->save($values);
                 }
             }
-        }
-        echo "success";
+            $values = [
+                'Status'=>1,'DateApproved'=>date('Y-m-d')
+            ];
+            $reviewModel->update($val,$values);
+            echo "success";
+        }  
     }
 
     public function Cancel()
