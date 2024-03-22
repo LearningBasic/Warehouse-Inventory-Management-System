@@ -536,7 +536,7 @@
 																</a>
 																<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 																	<a class="dropdown-item" href="<?=site_url('edit-account/')?><?php echo $row->accountID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
-																	<button type="button" class="dropdown-item deadstock" value="<?php echo $row->accountID ?>"><i class="icon-copy dw dw-reload"></i>Reset</button>
+																	<button type="button" class="dropdown-item reset" value="<?php echo $row->accountID ?>"><i class="icon-copy dw dw-reload"></i>Reset</button>
 																</div>
 															</div>
 														</td>

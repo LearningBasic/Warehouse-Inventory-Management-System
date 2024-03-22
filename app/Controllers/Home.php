@@ -2261,4 +2261,9 @@ class Home extends BaseController
     {
         return view('issuance-report');
     }
+
+    public function resetAccount()
+    {
+        $val = $this->request->getPost('value');
+    }
 }
