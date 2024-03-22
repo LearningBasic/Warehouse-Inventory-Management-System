@@ -2264,6 +2264,11 @@ class Home extends BaseController
 
     public function resetAccount()
     {
+        $accountModel = new \App\Models\accountModel();
         $val = $this->request->getPost('value');
+        $defaultPassword = Hash::make("Fastcat_01");
+        $values = ['password'=>$defaultPassword];
+        $accountModel->update($val,$values);
+        echo "success";
     }
 }
