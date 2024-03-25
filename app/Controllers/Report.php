@@ -748,7 +748,7 @@ class Report extends BaseController
                         <th>TOTAL AMOUNT</th>
                         </thead><tbody>";
             $builder = $this->db->table('tblcanvass_sheet a');
-            $builder->select('a.Price,b.Qty,b.Item_Name,b.ItemUnit,a.Currency');
+            $builder->select('a.Price,b.Qty,b.Item_Name,b.ItemUnit,a.Currency,b.Specification');
             $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
             $builder->WHERE('a.purchaseLogID',$row->purchaseLogID);
             $datas = $builder->get();
@@ -757,7 +757,7 @@ class Report extends BaseController
                 $template.="<tr>
                     <td>".$rows->Qty."</td>
                     <td>".$rows->ItemUnit."</td>
-                    <td>".$rows->Item_Name."</td>
+                    <td>".$rows->Item_Name."-".$rows->Specification."</td>
                     <td style='text-align:right;'>".$rows->Currency." ".number_format($rows->Price,2)."</td>
                     <td style='text-align:right;'>".$rows->Currency." ".number_format($rows->Qty*$rows->Price,2)."</td>
                 </tr>";
