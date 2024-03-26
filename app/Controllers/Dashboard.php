@@ -51,6 +51,7 @@ class Dashboard extends BaseController
     {
         $accountModel = new \App\Models\accountModel();
         $systemLogsModel = new \App\Models\systemLogsModel();
+        $warehouseModel = new \App\Models\warehouseModel();
         $password = "Fastcat_01";
         
         $user_info = $accountModel->where('username', $username)->WHERE('Status',1)->first();
@@ -69,11 +70,14 @@ class Dashboard extends BaseController
             }
             else
             {
+                $warehouse = $warehouseModel->WHERE('warehouseID',$user_info['warehouseID'])->first();
                 session()->set('loggedUser', $user_info['accountID']);
                 session()->set('fullname', $user_info['Fullname']);
                 session()->set('role',$user_info['systemRole']);
                 session()->set('assignment',$user_info['warehouseID']);
                 session()->set('department',$user_info['Department']);
+                session()->set('location',$warehouse['warehouseName']);
+                    
                 //save the logs
                 $values = ['accountID'=>$user_info['accountID'],'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Logged-In'];
                 $systemLogsModel->save($values);
