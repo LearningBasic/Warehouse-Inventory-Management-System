@@ -1748,6 +1748,7 @@ class Purchase extends BaseController
         $systemLogsModel = new \App\Models\systemLogsModel();
         $purchaseOrderModel = new \App\Models\purchaseOrderModel();
         $receiveModel = new \App\Models\receiveModel();
+        $purchaseModel = new \App\Models\purchaseModel();
         //data
         $job_number = $this->request->getPost('job_number');
         $purchase_number = $this->request->getPost('purchase_number');
@@ -1804,6 +1805,10 @@ class Purchase extends BaseController
                 $purchase = $purchaseOrderModel->WHERE('purchaseNumber',$purchase_number)->first();
                 $values = ['Remarks'=>'CLOSE'];
                 $purchaseOrderModel->update($purchase['purchaseLogID'],$values);
+                //PRF
+                $prf = $purchaseModel->WHERE('OrderNo',$job_number)->first();
+                $new_values = ['Status'=>5,'Remarks'=>'CLOSE'];
+                $purchaseModel->update($prf['prfID'],$new_values);
             }
             //system logs
             $value = ['accountID'=>session()->get('loggedUser'),'Date'=>date('Y-m-d H:i:s a'),'Activity'=>'Received Order of '.$invoiceNo];
