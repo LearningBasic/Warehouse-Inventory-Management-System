@@ -2271,4 +2271,14 @@ class Home extends BaseController
         $accountModel->update($val,$values);
         echo "success";
     }
+
+    public function changeAssignment()
+    {
+        $accountModel = new \App\Models\accountModel();
+        $id = $this->request->getPost('accountID');
+        $assign = $this->request->getPost('assignment');
+        $values = ['warehouseID'=>$assign];
+        $accountModel->update($id,$values);
+        echo "success";
+    }
 }

@@ -620,7 +620,7 @@
                         <form method="post" class="row g-3" id="frmTransfer">
 							<input type="hidden" name="accountID" id="accountID"/>
                             <div class="col-12 form-group">
-                                <label>New Assignment</label>
+                                <label>Assignment</label>
                                 <select class="form-control" name="assignment" id="assignments">
 									<option value="">Choose</option>
 								</select>
@@ -1117,6 +1117,27 @@
 						if(response==="success")
 						{
 							location.reload();
+						}
+						else
+						{
+							alert(response);
+						}
+					}
+				});
+			});
+
+			$('#btnUpdate').on('click',function(e)
+			{
+				e.preventDefault();
+				var data = $('#frmTransfer').serialize();
+				$.ajax({
+					url:"<?=site_url('change-assignment')?>",method:"POST",
+					data:data,
+					success:function(response)
+					{
+						if(response=="success")
+						{
+							alert("Great! Successfully re-assigned");
 						}
 						else
 						{

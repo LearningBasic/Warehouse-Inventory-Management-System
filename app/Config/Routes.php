@@ -76,6 +76,7 @@ $routes->post('accept-item','Purchase::acceptItem');
 $routes->post('cancel-item','Purchase::cancelItem');
 $routes->get('count-item','Purchase::countItem');
 $routes->post('save-changes','Purchase::saveChanges');
+$routes->post('change-assignment','Home::changeAssignment');
 //fetch the product details
 $routes->get('product-information','ProductController::productInfo');
 $routes->post('save-report','ProductController::saveReport');
