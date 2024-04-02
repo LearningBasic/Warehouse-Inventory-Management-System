@@ -537,6 +537,7 @@
 																<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 																	<a class="dropdown-item" href="<?=site_url('edit-account/')?><?php echo $row->accountID ?>"><i class="icon-copy dw dw-edit"></i>Edit</a>
 																	<button type="button" class="dropdown-item reset" value="<?php echo $row->accountID ?>"><i class="icon-copy dw dw-reload"></i>Reset</button>
+																	<button type="button" class="dropdown-item transfer" value="<?php echo $row->accountID ?>"><i class="icon-copy dw dw-move"></i>Transfer</button>
 																</div>
 															</div>
 														</td>
@@ -606,6 +607,32 @@
                 </div>
 			</div>
 		</div>
+		<div class="modal fade" id="transferModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            New Assignment
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" class="row g-3" id="frmTransfer">
+							<input type="hidden" name="accountID" id="accountID"/>
+                            <div class="col-12 form-group">
+                                <label>New Assignment</label>
+                                <select class="form-control" name="assignment" id="assignments">
+									<option value="">Choose</option>
+								</select>
+                            </div>
+                            <div class="col-12 form-group">
+                                <input type="submit" class="btn btn-primary" value="Update Changes" id="btnUpdate"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="modal fade" id="industryModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -802,7 +829,14 @@
             function listCategory(){$.ajax({url:"<?=site_url('list-category')?>",method:"GET",success:function(response){$('#listcategory').html(response);}});}
             function listIndustry(){$.ajax({url:"<?=site_url('list-industry')?>",method:"GET",success:function(response){$('#listindustry').html(response);}});}
             function listWarehouse(){$.ajax({url:"<?=site_url('list-warehouse')?>",method:"GET",success:function(response){$('#listwarehouse').html(response);}});}
-			function assignment(){$.ajax({url:"<?=site_url('assignment')?>",method:"GET",success:function(response){$('#assignment').append(response);}});}
+			function assignment(){$.ajax({url:"<?=site_url('assignment')?>",method:"GET",success:function(response){$('#assignment').append(response);$('#assignments').append(response);}});}
+			$(document).on('click','.transfer',function()
+			{
+				var val = $(this).val();
+				$('#transferModal').modal('show');
+				$('#accountID').attr("value",val);
+			});
+
 			$('#btnAdd').on('click',function(e)
             {
                 e.preventDefault();
