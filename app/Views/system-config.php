@@ -1143,6 +1143,7 @@
 						{
 							alert(response);
 						}
+						$('#transferModal').modal('hide');
 					}
 				});
 			});
