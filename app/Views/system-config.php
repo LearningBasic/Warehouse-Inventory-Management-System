@@ -553,7 +553,7 @@
 							<div class="pd-20">
 								<div class="card-box">
 									<div class="card-header"><i class="icon-copy dw dw-library"></i>&nbsp;Task - Item Group
-									<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#taskModal" style="float:right;"><i class="icon-copy dw dw-add"></i>&nbsp;Add</a>
+									<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#taskModal" style="float:right;"><i class="icon-copy dw dw-add"></i>&nbsp;Add Task</a>
 									</div>
 									<div class="card-body">
 										<table class="data-table table hover nowrap">

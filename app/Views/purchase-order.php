@@ -516,7 +516,13 @@
 														<span class="dw dw-pencil"></span>&nbsp;Modify
 													</a>
 													<a class="dropdown-item" href="<?=site_url('download/')?><?php echo $row->Reference ?>">
-														<span class="dw dw-download"></span>&nbsp;Download
+														<span class="dw dw-download"></span>&nbsp;Download PO
+													</a>
+													<a class="dropdown-item" href="Attachment/<?php echo $row->file ?>" target="_blank">
+														<span class="dw dw-download"></span>&nbsp;PRF Attachment
+													</a>
+													<a class="dropdown-item" href="Canvass/<?php echo $row->Attachment ?>" target="_blank">
+														<span class="dw dw-download"></span>&nbsp;Quotation
 													</a>
 												</div>
 											</div>
