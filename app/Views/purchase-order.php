@@ -469,6 +469,7 @@
                                 <th>Reference No</th>
 								<th>Department</th>
                                 <th>PRF No</th>
+								<th>Type</th>
 								<th>Status</th>
                                 <th>Action</th>
 								<th>Comment</th>
@@ -481,6 +482,7 @@
                                     <td><a class="btn btn-link" href="export/<?php echo $row->Reference ?>" target="_blank"><?php echo $row->Reference ?></a></td>
 									<td><?php echo $row->Department ?></td>
                                     <td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
+									<td><?php echo $row->PurchaseType ?></td>
 									<td>
 										<?php if($row->Status==""){ ?>
 											<span class="badge bg-warning text-white">WAITING</span>

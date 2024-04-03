@@ -922,6 +922,14 @@ class Home extends BaseController
         $builder->WHERE('a.accountID',$user)->WHERE('a.Status<>',0);
         $builder->groupby('a.assignID');
         $ongoing = $builder->get()->getResult();
+        //rejected
+        $builder = $this->db->table('tblassignment a');
+        $builder->select('a.Status,b.prfID,b.OrderNo,b.Remarks,a.Date,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID');
+        $builder->join('tblprf b','b.prfID=a.prfID','LEFT');
+        $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
+        $builder->WHERE('a.accountID',$user)->WHERE('a.Status',2);
+        $builder->groupby('a.assignID');
+        $rejected = $builder->get()->getResult();
         //archive
         $builder = $this->db->table('tblprf a');
         $builder->select('a.*,b.Fullname');
@@ -930,7 +938,7 @@ class Home extends BaseController
         $archive = $builder->get()->getResult();
         //quotation
         $canvass = $canvasFormModel->WHERE('createdBy',$user)->findAll();
-        $data = ['list'=>$list,'pending'=>$pending,'ongoing'=>$ongoing,'archive'=>$archive,'canvass'=>$canvass];
+        $data = ['list'=>$list,'pending'=>$pending,'ongoing'=>$ongoing,'rejected'=>$rejected,'archive'=>$archive,'canvass'=>$canvass];
         return view('assign',$data);
     }
 
@@ -1492,8 +1500,9 @@ class Home extends BaseController
     public function purchaseOrder()
     {
         $builder = $this->db->table('tblcanvass_form a');
-        $builder->select('a.DateNeeded,a.DatePrepared,a.Department,a.OrderNo,a.Reference,b.Status,b.Comment');
+        $builder->select('a.DateNeeded,a.DatePrepared,a.Department,a.OrderNo,a.Reference,b.Status,b.Comment,c.PurchaseType');
         $builder->join('tblpurchase_logs b','b.Reference=a.Reference','LEFT');
+        $builder->join('tblprf c','c.OrderNo=a.OrderNo','LEFT');
         $builder->WHERE('a.Status',4);
         $builder->groupBy('a.Reference');
         $canvass = $builder->get()->getResult();

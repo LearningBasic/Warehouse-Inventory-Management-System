@@ -529,7 +529,7 @@
                                 <textarea class="form-control" name="reason" required></textarea>
                             </div>
 							<div class="col-12 form-group">
-                                <label>Attachment</label>
+                                <label>Attachment(Incident Report/WRF/Work Directives/etc)</label>
                                 <input type="file" class="form-control" name="file"/>
                             </div>
 							<div class="col-12 form-group">
