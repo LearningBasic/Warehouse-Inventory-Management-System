@@ -652,6 +652,31 @@
 										</tbody>
 									</table>
 								</div>
+								<div class="tab-pane fade" id="completed6" role="tabpanel">
+									<br/>
+									<table class="data-table table stripe hover nowrap">
+										<thead>
+											<th>Date Received</th>
+											<th>PRF No</th>
+											<th>Requestor</th>
+											<th>Department</th>
+											<th>Date Needed</th>
+											<th>Action Taken</th>
+										</thead>
+										<tbody>
+											<?php foreach($complete as $row): ?>
+												<tr>
+													<td><?php echo $row->Date ?></td>
+													<td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
+													<td><?php echo $row->Fullname ?></td>
+													<td><?php echo $row->Department ?></td>
+													<td><?php echo $row->DateNeeded ?></td>
+													<td><span class="badge bg-success text-white">Completed</span></td>
+												</tr>
+											<?php endforeach; ?>
+										</tbody>
+									</table>
+								</div>
 								<div class="tab-pane fade" id="rejected6" role="tabpanel">
 									<br/>
 									<table class="data-table table stripe hover nowrap">
