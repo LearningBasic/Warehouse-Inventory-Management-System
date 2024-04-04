@@ -462,88 +462,133 @@
                 <div class="card-box">
                     <div class="card-header">Generate Purchase Order (P.O.)</div>
                     <div class="card-body">
-                        <table class="data-table table stripe hover nowrap">
-                            <thead>
-								<th>Date Prepared</th>
-								<th>Date Needed</th>
-                                <th>Reference No</th>
-								<th>Department</th>
-                                <th>PRF No</th>
-								<th>Type</th>
-								<th>Status</th>
-                                <th>Action</th>
-								<th>Comment</th>
-                            </thead>
-							<tbody>
-							<?php foreach($canvass as $row): ?>
-                                <tr>
-									<td><?php echo $row->DatePrepared?></td>
-									<td><?php echo $row->DateNeeded ?></td>
-                                    <td><a class="btn btn-link" href="export/<?php echo $row->Reference ?>" target="_blank"><?php echo $row->Reference ?></a></td>
-									<td><?php echo $row->Department ?></td>
-                                    <td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
-									<td><?php echo $row->PurchaseType ?></td>
-									<td>
-										<?php if($row->Status==""){ ?>
-											<span class="badge bg-warning text-white">WAITING</span>
-										<?php }else{ ?>
-											<?php if($row->Status==1){ ?>
-												<span class="badge bg-success text-white">APPROVED</span>
-											<?php }else if($row->Status==2){ ?>
-												<span class="badge bg-danger text-white">DECLINED</span>
-											<?php }else if($row->Status==0) { ?>
-												<span class="badge bg-info text-white">CREATED</span>
-											<?php }?>
-										<?php }?>
-									</td>
-                                    <td>
-										<?php if($row->Status==""){ ?>
-											<button type="button" class="btn btn-outline-primary btn-sm generate" value="<?php echo $row->Reference ?>">
-											<span class="dw dw-add"></span>&nbsp;Create
-											</button>
-										<?php }else{ ?>
-											<?php if($row->Status==1){ ?>
-											<div class="dropdown">
-												<a class="btn btn-primary btn-sm dropdown-toggle"
-													href="#" role="button" data-toggle="dropdown">
-													SELECT
-												</a>
-												<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
-													<button type="button" class="dropdown-item comment" value="<?php echo $row->Reference ?>">
-														<span class="dw dw-add"></span>&nbsp;Add Message
-													</button>
-													<a class="dropdown-item" href="<?=site_url('modify/')?><?php echo $row->Reference ?>">
-														<span class="dw dw-pencil"></span>&nbsp;Modify
-													</a>
-													<a class="dropdown-item" href="<?=site_url('download/')?><?php echo $row->Reference ?>">
-														<span class="dw dw-download"></span>&nbsp;Download PO
-													</a>
-													<a class="dropdown-item" href="Attachment/<?php echo $row->file ?>" target="_blank">
-														<span class="dw dw-download"></span>&nbsp;PRF Attachment
-													</a>
-													<a class="dropdown-item" href="Canvass/<?php echo $row->Attachment ?>" target="_blank">
-														<span class="dw dw-download"></span>&nbsp;Quotation
-													</a>
-												</div>
-											</div>
-											<?php }else if($row->Status==2){?>
-												<a class="dropdown-item" href="<?=site_url('modify/')?><?php echo $row->Reference ?>">
-													<span class="dw dw-pencil"></span>&nbsp;Modify
-												</a>
-											<?php }else{ ?>
-												-
-											<?php }?>
-										<?php } ?>
-                                    </td>
-									<td>
-										<?php if($row->Status==2){?>
-											<?php echo $row->Comment ?>
-										<?php } ?>
-									</td>
-                                </tr>
-                            <?php endforeach; ?>
-							</tbody>
-                        </table>
+						<div class="tabs">
+							<ul class="nav nav-pills justify-content-left" role="tablist">
+								<li class="nav-item">
+									<a
+										class="nav-link active text-blue"
+										data-toggle="tab"
+										href="#home6"
+										role="tab"
+										aria-selected="true"
+										>Generate</a
+									>
+								</li>
+								<li class="nav-item">
+									<a
+										class="nav-link text-blue"
+										data-toggle="tab"
+										href="#pending6"
+										role="tab"
+										aria-selected="true"
+										>List</a
+									>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane fade show active" id="home6" role="tabpanel">
+									<br/>
+									<table class="data-table table stripe hover nowrap">
+										<thead>
+											<th>Date Prepared</th>
+											<th>Date Needed</th>
+											<th>Reference No</th>
+											<th>Department</th>
+											<th>PRF No</th>
+											<th>Type</th>
+											<th>Status</th>
+											<th>Action</th>
+											<th>Comment</th>
+										</thead>
+										<tbody>
+										<?php foreach($canvass as $row): ?>
+											<tr>
+												<td><?php echo $row->DatePrepared?></td>
+												<td><?php echo $row->DateNeeded ?></td>
+												<td><a class="btn btn-link" href="export/<?php echo $row->Reference ?>" target="_blank"><?php echo $row->Reference ?></a></td>
+												<td><?php echo $row->Department ?></td>
+												<td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
+												<td><?php echo $row->PurchaseType ?></td>
+												<td>
+													<?php if($row->Status==""){ ?>
+														<span class="badge bg-warning text-white">WAITING</span>
+													<?php }else{ ?>
+														<?php if($row->Status==1){ ?>
+															<span class="badge bg-success text-white">APPROVED</span>
+														<?php }else if($row->Status==2){ ?>
+															<span class="badge bg-danger text-white">DECLINED</span>
+														<?php }else if($row->Status==0) { ?>
+															<span class="badge bg-info text-white">CREATED</span>
+														<?php }?>
+													<?php }?>
+												</td>
+												<td>
+													<?php if($row->Status==""){ ?>
+														<button type="button" class="btn btn-outline-primary btn-sm generate" value="<?php echo $row->Reference ?>">
+														<span class="dw dw-add"></span>&nbsp;Create
+														</button>
+													<?php }else{ ?>
+														<?php if($row->Status==1){ ?>
+														<div class="dropdown">
+															<a class="btn btn-primary btn-sm dropdown-toggle"
+																href="#" role="button" data-toggle="dropdown">
+																SELECT
+															</a>
+															<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+																<button type="button" class="dropdown-item comment" value="<?php echo $row->Reference ?>">
+																	<span class="dw dw-add"></span>&nbsp;Add Message
+																</button>
+																<a class="dropdown-item" href="<?=site_url('modify/')?><?php echo $row->Reference ?>">
+																	<span class="dw dw-pencil"></span>&nbsp;Modify
+																</a>
+																<a class="dropdown-item" href="<?=site_url('download/')?><?php echo $row->Reference ?>">
+																	<span class="dw dw-download"></span>&nbsp;Download PO
+																</a>
+																<a class="dropdown-item" href="Attachment/<?php echo $row->file ?>" target="_blank">
+																	<span class="dw dw-download"></span>&nbsp;PRF Attachment
+																</a>
+																<a class="dropdown-item" href="Canvass/<?php echo $row->Attachment ?>" target="_blank">
+																	<span class="dw dw-download"></span>&nbsp;Quotation
+																</a>
+															</div>
+														</div>
+														<?php }else if($row->Status==2){?>
+															<a class="dropdown-item" href="<?=site_url('modify/')?><?php echo $row->Reference ?>">
+																<span class="dw dw-pencil"></span>&nbsp;Modify
+															</a>
+														<?php }else{ ?>
+															-
+														<?php }?>
+													<?php } ?>
+												</td>
+												<td>
+													<?php if($row->Status==2){?>
+														<?php echo $row->Comment ?>
+													<?php } ?>
+												</td>
+											</tr>
+										<?php endforeach; ?>
+										</tbody>
+									</table>
+								</div>
+								<div class="tab-pane fade" id="pending6" role="tabpanel">
+									<br/>
+									<table class="data-table table stripe hover nowrap">
+										<thead>
+											<th>Date</th>
+											<th>P.O. No</th>
+											<th>PRF No</th>
+											<th>Reference</th>
+											<th>Status</th>
+											<th>Remarks</th>
+											<th>Action</th>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
                     </div>
                 </div>
 			</div>
