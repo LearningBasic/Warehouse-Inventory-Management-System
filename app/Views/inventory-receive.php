@@ -515,11 +515,12 @@
                                 <hr/>
 								<table class="table stripe table-bordered hover nowrap">
                                     <thead>
-                                        <th>Qty</th>
-                                        <th>Unit of Measure</th>
-                                        <th>Product Name</th>
-                                        <th>Specification</th>
-                                        <th><span class="dw dw-more"></span></th>
+										<th class="bg-primary text-white">#</th>
+                                        <th class="bg-primary text-white">Qty</th>
+                                        <th class="bg-primary text-white">Unit of Measure</th>
+                                        <th class="bg-primary text-white">Product Name</th>
+                                        <th class="bg-primary text-white">Specification</th>
+                                        <!-- <th><span class="dw dw-more"></span></th> -->
                                     </thead>
                                     <tbody id="Table">
 
@@ -572,20 +573,20 @@
                     $(this).closest('tr').remove();
                 });
 			});
-			function addRow() {
-				var table = document.getElementById("Table");
-				var row = table.insertRow(0);
-				var cell1 = row.insertCell(0);
-				var cell2 = row.insertCell(1);
-				var cell3 = row.insertCell(2);
-				var cell4 = row.insertCell(3);
-				var cell5 = row.insertCell(4);
-				cell1.innerHTML = "<input type='number' class='form-control' id='qty' name='qty[]'/>";
-				cell2.innerHTML = "<input type='text' class='form-control' id='item' name='item[]'/>";
-				cell3.innerHTML = "<input type='text' class='form-control' id='item_name' name='item_name[]'/>";
-				cell4.innerHTML = "<input type='text' class='form-control' id='specification' name='specification[]'/>";
-				cell5.innerHTML = "<button type='button' class='btn btn-danger btnDelete'><span class='dw dw-trash'></span></button>";
-			}
+			// function addRow() {
+			// 	var table = document.getElementById("Table");
+			// 	var row = table.insertRow(0);
+			// 	var cell1 = row.insertCell(0);
+			// 	var cell2 = row.insertCell(1);
+			// 	var cell3 = row.insertCell(2);
+			// 	var cell4 = row.insertCell(3);
+			// 	var cell5 = row.insertCell(4);
+			// 	cell1.innerHTML = "<input type='number' class='form-control' id='qty' name='qty[]'/>";
+			// 	cell2.innerHTML = "<input type='text' class='form-control' id='item' name='item[]'/>";
+			// 	cell3.innerHTML = "<input type='text' class='form-control' id='item_name' name='item_name[]'/>";
+			// 	cell4.innerHTML = "<input type='text' class='form-control' id='specification' name='specification[]'/>";
+			// 	cell5.innerHTML = "<button type='button' class='btn btn-danger btnDelete'><span class='dw dw-trash'></span></button>";
+			// }
 			$('#job_number').change(function()
 			{
 				var val = $(this).val();
@@ -596,6 +597,19 @@
 					success:function(response)
 					{
 						$('#purchase_number').append(response);
+					}
+				});
+			});
+
+			$('#purchase_number').change(function()
+			{
+				var val = $(this).val();
+				$.ajax({
+					url:"<?=site_url('fetch-items')?>",method:"GET",
+					data:{value:val},
+					success:function(response)
+					{
+						$('#Table').html(response);
 					}
 				});
 			});

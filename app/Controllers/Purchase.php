@@ -1769,6 +1769,7 @@ class Purchase extends BaseController
 
     public function saveEntry()
     {
+        $OrderItemModel = new \App\Models\OrderItemModel();
         date_default_timezone_set('Asia/Manila');
         $reservedModel = new \App\Models\reservedModel();
         $systemLogsModel = new \App\Models\systemLogsModel();
@@ -1786,10 +1787,8 @@ class Purchase extends BaseController
         $receiver = $this->request->getPost('receiver');
         $assign = $this->request->getPost('assignment');
         //array
+        $itemID = $this->request->getPost('itemID');
         $qty = $this->request->getPost('qty');
-        $item = $this->request->getPost('item');
-        $item_name = $this->request->getPost('item_name');
-        $spec = $this->request->getPost('specification');
 
         $validation = $this->validate([
             'job_number'=>'required',
@@ -1816,13 +1815,14 @@ class Purchase extends BaseController
             $receiveModel->save($values);
 
             //save items
-            $count = count($item_name);
+            $count = count($itemID);
             for($i=0;$i<$count;$i++)
             {
+                $items = $OrderItemModel->WHERE('orderID',$itemID[$i])->first();
                 $value = ['Date'=>$dateReceive,'OrderNo'=>$job_number,'purchaseNumber'=>$purchase_number,
-                        'InvoiceNo'=>$invoiceNo,'supplierID'=>$shipper,'productName'=>$item_name[$i],
-                        'Qty'=>$qty[$i],'Available'=>$qty[$i],'ItemUnit'=>$item[$i],
-                        'Description'=>$spec[$i]];
+                        'InvoiceNo'=>$invoiceNo,'supplierID'=>$shipper,'productName'=>$items['Item_Name'],
+                        'Qty'=>$qty[$i],'Available'=>$qty[$i],'ItemUnit'=>$items['ItemUnit'],
+                        'Description'=>$items['Specification']];
                 $reservedModel->save($value);
             }
             
@@ -1906,6 +1906,28 @@ class Purchase extends BaseController
         {
             session()->setFlashdata('success','Great! Successfully update the ordered item(s)');
             return redirect()->to('/approve-orders')->withInput();
+        }
+    }
+
+    public function fetchItems()
+    {
+        $val = $this->request->getGet('value');
+        $sql = "Select c.* from tblpurchase_logs a 
+        LEFT JOIN tblcanvass_sheet b ON b.purchaseLogID=a.purchaseLogID 
+        LEFT JOIN tbl_order_item c ON c.orderID=b.orderID WHERE a.purchaseNumber=:val: 
+        AND NOT EXISTS(Select d.productName from tblreserved d WHERE c.Item_Name=d.productName AND c.OrderNo=d.OrderNo)";
+        $query = $this->db->query($sql,['val'=>$val]);
+        foreach ($query->getResult() as $row)
+        {
+            ?>
+            <tr>
+                <td><input type="checkbox" class="checkbox" value="<?php echo $row->orderID ?>" name="itemID[]" id="itemID" style="width:20px;height:20px;" checked/></td>
+                <td><input type='number' class='form-control' id='qty' name='qty[]'/></td>
+                <td><input type='text' class='form-control' id='item' name='item[]' value="<?php echo $row->ItemUnit ?>"/></td>
+                <td><input type='text' class='form-control' id='item_name' name='item_name[]' value="<?php echo $row->Item_Name ?>"/></td>
+                <td><input type='text' class='form-control' id='specification' name='specification[]' value="<?php echo $row->Specification ?>"/></td>
+            </tr>
+            <?php
         }
     }
 }
