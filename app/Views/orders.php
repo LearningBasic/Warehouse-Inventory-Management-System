@@ -478,22 +478,11 @@
                                     </div>
 									<div class="col-lg-3">
                                         <label>Item Group</label>
-                                        <select class="form-control" name="item_group" id="item_group" required>
+                                        <select class="form-control custom-select2" name="item_group" id="item_group" style="width:100%;" required>
 											<option value="">Choose</option>
-											<option>Office Supplies</option>
-											<option>IT Products</option>
-											<option>Kitchen Wares</option>
-											<option>Furnitures</option>
-											<option>Appliances</option>
-											<option>Fresh Water</option>
-											<option>Cleaning Materials</option>
-											<option>Hardware/Electrical</option>
-											<option>Printing Materials</option>
-											<option>Ramp Materials</option>
-											<option>Calibration</option>
-											<option>Transpo Rental</option>
-											<option>Technical Consumables</option>
-											<option>Spare Parts</option>
+											<?php foreach($item as $row): ?>
+												<option><?php echo $row['Description'] ?></option>
+											<?php endforeach; ?>
 										</select>
                                     </div>
                                     <div class="col-lg-2">
@@ -563,19 +552,6 @@
 				$("#Table").on('click','.btnDelete',function(){
                     $(this).closest('tr').remove();
                 });
-				// $('#purchase_type').change(function()
-				// {
-				// 	var val = $(this).val();
-				// 	if(val==="Local Purchase")
-				// 	{
-				// 		$('#item_group').attr("disabled",false);
-				// 	}
-				// 	else
-				// 	{
-				// 		$('#item_group').attr("disabled",true);
-				// 		$("#item_group").prop('selectedIndex', 0);
-				// 	}
-				// });
 			});
 			function add_business_days()
 			{

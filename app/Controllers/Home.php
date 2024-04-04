@@ -681,7 +681,10 @@ class Home extends BaseController
 
     public function purchaseRequest()
     {
-        return view('orders');
+        $itemGroupModel = new \App\Models\itemGroupModel();
+        $item = $itemGroupModel->findAll();
+        $data = ['item'=>$item];
+        return view('orders',$data);
     }
 
     public function editPurchase($id)
