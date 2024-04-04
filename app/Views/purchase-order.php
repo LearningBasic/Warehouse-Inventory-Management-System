@@ -584,6 +584,35 @@
 											<th>Action</th>
 										</thead>
 										<tbody>
+										<?php foreach($purchase as $row): ?>
+											<tr>
+												<td><?php echo $row->Date ?></td>
+												<td><?php echo $row->purchaseNumber ?></td>
+												<td><?php echo $row->OrderNo ?></td>
+												<td><?php echo $row->Reference ?></td>
+												<td>
+													<?php if($row->Status==0){ ?>
+														<span class="badge bg-warning text-white">PENDING</span>
+													<?php }else if($row->Status==1){?>
+														<span class="badge bg-success text-white">APPROVED</span>
+													<?php }else{ ?>
+														<span class="badge bg-danger text-white">CANCELLED</span>
+													<?php } ?>
+												</td>
+												<td>
+													<?php if($row->Remarks=="OPEN"){ ?>
+														<span class="badge bg-warning text-white"><?php echo $row->Remarks ?></span>
+													<?php }else {?>
+														<span class="badge bg-secondary text-white"><?php echo $row->Remarks ?></span>
+													<?php } ?>
+												</td>
+												<td>
+													<a class="dropdown-item" href="<?=site_url('file-download/')?><?php echo $row->purchaseNumber ?>">
+														<span class="dw dw-download"></span>&nbsp;Download
+													</a>	
+												</td>
+											</tr>
+										<?php endforeach; ?>
 										</tbody>
 									</table>
 								</div>

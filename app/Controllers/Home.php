@@ -1343,7 +1343,7 @@ class Home extends BaseController
         //po
         $builder = $this->db->table('tblcanvass_form a');
         $builder->select('a.Reference,b.purchaseNumber,b.Date,b.Status,a.OrderNo');
-        $builder->join('tblpurchase_logs b','b.Reference=a.Reference','LEFT');
+        $builder->join('tblpurchase_logs b','b.Reference=a.Reference','INNER');
         $builder->WHERE('a.accountID',$user);
         $po = $builder->get()->getResult();
 
@@ -1519,8 +1519,13 @@ class Home extends BaseController
         $builder->WHERE('a.Status',4);
         $builder->groupBy('a.Reference');
         $canvass = $builder->get()->getResult();
+        //load all the generated PO
+        $builder = $this->db->table('tblpurchase_logs a');
+        $builder->select('a.*,b.OrderNo');
+        $builder->join('tblcanvass_form b','b.Reference=a.Reference','LEFT');
+        $purchase = $builder->get()->getResult();
 
-        $data = ['canvass'=>$canvass];
+        $data = ['canvass'=>$canvass,'purchase'=>$purchase];
         return view('purchase-order',$data);
     }
 
