@@ -554,6 +554,7 @@
 								<div class="card-box">
 									<div class="card-header"><i class="icon-copy dw dw-library"></i>&nbsp;Task - Item Group
 									<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#taskModal" style="float:right;"><i class="icon-copy dw dw-add"></i>&nbsp;Add Task</a>
+									<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#itemGroupModal" style="float:right;margin-left:10px;"><i class="icon-copy dw dw-add"></i>&nbsp;Add Group</a>
 									</div>
 									<div class="card-body">
 										<table class="data-table table hover nowrap">
@@ -627,6 +628,29 @@
                             </div>
                             <div class="col-12 form-group">
                                 <input type="submit" class="btn btn-primary" value="Update Changes" id="btnUpdate"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="modal fade" id="itemGroupModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            New Item Group
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" class="row g-3" id="frmItemGroup">
+                            <div class="col-12 form-group">
+                                <label>Item Group</label>
+                                <input type="text" class="form-control" name="itemGroupName" required/>
+                            </div>
+                            <div class="col-12 form-group">
+                                <input type="submit" class="btn btn-primary" value="Add Entry" id="btnNewEntry"/>
                             </div>
                         </form>
                     </div>
