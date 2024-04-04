@@ -442,8 +442,12 @@
                     <div class="card-body">
                         <form method="POST" class="row g-3" enctype="multipart/form-data" action="<?=base_url('save-changes')?>">
                             <div class="col-12 form-group">
-                                <h3><b>Reference #</b> : <?=$Reference?></h3>
-                            </div>
+                                <h3><b>Reference #</b> : <?=$Reference?>
+								<?php foreach($attach as $row): ?>
+								<a href="/Canvass/<?php echo $row->Attachment ?>" target="_blank" class="btn btn-primary btn-sm" style="float:right;"><span class="dw dw-download"></span>&nbsp;Download Files</a>
+								<?php endforeach;?>
+								</h3>
+							</div>
 							<input type="hidden" name="reference" value="<?=$Reference?>"/>
                             <div class="col-12 form-group table-responsive">
                                 <table class="table stripe table-bordered hover nowrap">

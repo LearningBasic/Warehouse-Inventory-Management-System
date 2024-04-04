@@ -861,6 +861,27 @@
 				$('#accountID').attr("value",val);
 			});
 
+			$('#btnNewEntry').on('click',function(e)
+			{
+				e.preventDefault();
+				var data = $('#frmItemGroup').serialize();
+				$.ajax({
+					url:"<?=site_url('save-group')?>",method:"POST",
+					data:data,
+					success:function(response)
+					{
+						if(response==="success")
+						{
+							location.reload();
+						}
+						else
+						{
+							alert(response);
+						}
+					}
+				});
+			});
+
 			$('#btnAdd').on('click',function(e)
             {
                 e.preventDefault();

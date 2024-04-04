@@ -1531,8 +1531,13 @@ class Home extends BaseController
         $builder->join('tbl_order_item b','b.orderID=a.orderID','LEFT');
         $builder->WHERE('a.Remarks','Selected')->WHERE('a.Reference',$id);
         $record = $builder->get()->getResult();
+        //get the file
+        $builder = $this->db->table('tblcanvass_form');
+        $builder->select('Attachment');
+        $builder->WHERE('Reference',$id);
+        $attach = $builder->get()->getResult();
 
-        $data  = ['record'=>$record,'Reference'=>$id];
+        $data  = ['record'=>$record,'Reference'=>$id,'attach'=>$attach];
         return view('modify-purchase',$data);
     }
 
@@ -2302,5 +2307,33 @@ class Home extends BaseController
         $values = ['warehouseID'=>$assign];
         $accountModel->update($id,$values);
         echo "success";
+    }
+
+    public function saveGroup()
+    {
+        $itemGroupModel = new \App\Models\itemGroupModel();
+        //data
+        $item = $this->request->getPost('itemGroupName');
+        $validation = $this->validate([
+            'itemGroupName'=>'is_unique[tbl_local_purchase_category.Description]'
+        ]);
+
+        if(!$validation)
+        {
+            echo "Invalid! Item Group is already exists";
+        }
+        else
+        {
+            if(empty($item))
+            {
+                echo "Invalid! Please enter the new item group";
+            }
+            else
+            {
+                $values = ['Description'=>$item];
+                $itemGroupModel->save($values);
+                echo "success";
+            }
+        }
     }
 }
