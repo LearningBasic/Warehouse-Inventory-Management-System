@@ -481,7 +481,7 @@
 										href="#pending6"
 										role="tab"
 										aria-selected="true"
-										>List</a
+										>List of Purchase Order</a
 									>
 								</li>
 							</ul>
