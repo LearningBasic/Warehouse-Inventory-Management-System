@@ -23,13 +23,16 @@ class Report extends BaseController
     public function saveTask()
     {
         $taskModel = new \App\Models\taskModel();
+        $itemGroupModel = new \App\Models\itemGroupModel();
         $staff = $this->request->getPost('staff');
+        $id = $this->request->getPost('itemID');
         $rowCounts = count($this->request->getPost('itemID'));
         $item = $this->request->getPost('desc');
         for($i=0;$i<$rowCounts;$i++)
         {
+            $items = $itemGroupModel->WHERE('localID',$id[$i])->first();
             //values
-            $values = ['ItemGroup'=>$item[$i],'accountID'=>$staff];
+            $values = ['ItemGroup'=>$items['Description'],'accountID'=>$staff];
             $taskModel->save($values);
         }
         echo "success";
