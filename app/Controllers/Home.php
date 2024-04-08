@@ -922,12 +922,6 @@ class Home extends BaseController
         LEFT JOIN tblprf b ON b.prfID=a.prfID LEFT JOIN tblaccount c ON c.accountID=b.accountID WHERE a.accountID=:user: AND a.Status=1 
         AND NOT EXISTS(Select d.OrderNo from tblcanvass_form d WHERE d.OrderNo=b.OrderNo)";
         $query = $this->db->query($sql,['user'=>$user]);
-        // $builder = $this->db->table('tblassignment a');
-        // $builder->select('a.Status,b.prfID,b.OrderNo,b.Remarks,a.Date,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID');
-        // $builder->join('tblprf b','b.prfID=a.prfID','LEFT');
-        // $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
-        // $builder->WHERE('a.accountID',$user)->WHERE('a.Status<>',0)->WHERE('b.OrderNo!=','(Select)');
-        // $builder->groupby('a.assignID');
         $ongoing = $query->getResult();
         //completed
         $sql = "Select a.Status,b.prfID,b.OrderNo,b.Remarks,a.Date,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID from tblassignment a
