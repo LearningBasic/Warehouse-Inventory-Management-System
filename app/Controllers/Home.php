@@ -951,7 +951,13 @@ class Home extends BaseController
         $archive = $builder->get()->getResult();
         //quotation
         $canvass = $canvasFormModel->WHERE('createdBy',$user)->findAll();
-        $data = ['list'=>$list,'pending'=>$pending,'ongoing'=>$ongoing,'complete'=>$complete,'rejected'=>$rejected,'archive'=>$archive,'canvass'=>$canvass];
+        //account
+        $builder = $this->db->table('tblaccount');
+        $builder->select('*');
+        $builder->WHERE('systemRole','Staff')->WHERE('Status',1);
+        $account = $builder->get()->getResult();
+
+        $data = ['account'=>$account,'list'=>$list,'pending'=>$pending,'ongoing'=>$ongoing,'complete'=>$complete,'rejected'=>$rejected,'archive'=>$archive,'canvass'=>$canvass];
         return view('assign',$data);
     }
 
@@ -1524,6 +1530,7 @@ class Home extends BaseController
         $builder->select('a.*,b.OrderNo,c.Supplier');
         $builder->join('tblcanvass_form b','b.Reference=a.Reference','LEFT');
         $builder->join('tblcanvass_sheet c','c.purchaseLogID=a.purchaseLogID','LEFT');
+        $builder->groupBy('a.purchaseNumber');
         $purchase = $builder->get()->getResult();
 
         $data = ['canvass'=>$canvass,'purchase'=>$purchase];

@@ -601,6 +601,7 @@
 															<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 																<button type="button" class="dropdown-item accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span>&nbsp;Accept</button>
 																<button type="button" class="dropdown-item revision" value="<?php echo $row->OrderNo ?>"><span class="dw dw-repeat1"></span>&nbsp;Reject</button>
+																<button type="button" class="dropdown-item transfer" value="<?php echo $row->assignID ?>"><span class="bi bi-forward"></span>&nbsp;Transfer</button>
 																<button type="button" class="dropdown-item view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span>&nbsp;List of Items</button>
 															</div>
 														</div>
@@ -788,6 +789,35 @@
                     </div>
                     <div class="modal-body">
                         <div id="result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="modal fade" id="assignModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            Transfer PRF
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" class="row g-3" id="frmTransfer">
+                            <input type="hidden" id="assignID" name="assignID"/>
+                            <div class="col-12 form-group">
+                                <label>Assign To</label>
+                                <select class="form-control custom-select2" name="receiver" id="receiver" style="width:100%;" required>
+									<option value="">Choose</option>
+									<?php foreach($account as $row): ?>
+										<option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?></option>
+									<?php endforeach; ?>
+								</select>
+                            </div>
+                            <div class="col-12 form-group">
+                                <input type="submit" class="btn btn-primary" id="btnTransfer" value="Transfer Entry"/>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
