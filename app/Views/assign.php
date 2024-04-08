@@ -843,8 +843,23 @@
 			$('#btnTransfer').on('click',function(e)
 			{
 				e.preventDefault();
+				$(this).attr("value","Submitting...");
 				var data = $('#frmTransfer').serialize();
-				alert(data);
+				$.ajax({
+					url:"<?=site_url('forward')?>",method:"POST",
+					data:data,success:function(response)
+					{
+						if(response==="success")
+						{
+							location.reload();
+						}
+						else
+						{
+							alert(response);
+						}
+						$('#btnTransfer').attr("value","Submit");
+					}
+				});
 			});
             $(document).on('click','.accept',function(e)
             {

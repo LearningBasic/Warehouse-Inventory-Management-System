@@ -78,6 +78,7 @@ $routes->get('count-item','Purchase::countItem');
 $routes->post('save-changes','Purchase::saveChanges');
 $routes->post('change-assignment','Home::changeAssignment');
 $routes->post('save-group','Home::saveGroup');
+$routes->post('forward','Purchase::forwardPRF');
 //fetch the product details
 $routes->get('product-information','ProductController::productInfo');
 $routes->post('save-report','ProductController::saveReport');
