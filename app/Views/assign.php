@@ -601,7 +601,7 @@
 															<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
 																<button type="button" class="dropdown-item accept" value="<?php echo $row->assignID ?>"><span class="dw dw-check"></span>&nbsp;Accept</button>
 																<button type="button" class="dropdown-item revision" value="<?php echo $row->OrderNo ?>"><span class="dw dw-repeat1"></span>&nbsp;Reject</button>
-																<button type="button" class="dropdown-item transfer" value="<?php echo $row->assignID ?>"><span class="bi bi-forward"></span>&nbsp;Transfer</button>
+																<button type="button" class="dropdown-item transfer" value="<?php echo $row->assignID ?>"><span class="bi bi-forward"></span>&nbsp;Forward</button>
 																<button type="button" class="dropdown-item view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-list"></span>&nbsp;List of Items</button>
 															</div>
 														</div>
@@ -815,7 +815,7 @@
 								</select>
                             </div>
                             <div class="col-12 form-group">
-                                <input type="submit" class="btn btn-primary" id="btnTransfer" value="Transfer Entry"/>
+                                <input type="submit" class="btn btn-primary" id="btnTransfer" value="Submit"/>
                             </div>
                         </form>
                     </div>
@@ -835,6 +835,17 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
 			$(document).ready(function(){notify();});
+			$(document).on('click','.transfer',function(){
+				var val = $(this).val();
+				$('#assignModal').modal('show');
+				$('#assignID').attr("value",val);
+			});
+			$('#btnTransfer').on('click',function(e)
+			{
+				e.preventDefault();
+				var data = $('#frmTransfer').serialize();
+				alert(data);
+			});
             $(document).on('click','.accept',function(e)
             {
                 e.preventDefault();

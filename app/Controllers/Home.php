@@ -955,6 +955,7 @@ class Home extends BaseController
         $builder = $this->db->table('tblaccount');
         $builder->select('*');
         $builder->WHERE('systemRole','Staff')->WHERE('Status',1);
+        $builder->WHERE('accountID<>',$user);
         $account = $builder->get()->getResult();
 
         $data = ['account'=>$account,'list'=>$list,'pending'=>$pending,'ongoing'=>$ongoing,'complete'=>$complete,'rejected'=>$rejected,'archive'=>$archive,'canvass'=>$canvass];

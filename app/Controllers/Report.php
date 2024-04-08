@@ -868,7 +868,7 @@ class Report extends BaseController
         $dompdf = new Dompdf();
         $purchase_number="";
         $builder = $this->db->table('tblpurchase_logs a');
-        $builder->select('a.purchaseLogID,a.purchaseNumber,a.Date,b.OrderNo,b.Supplier,b.Price,b.Terms,
+        $builder->select('a.purchaseLogID,a.purchaseNumber,a.Date,a.Reference,b.OrderNo,b.Supplier,b.Price,b.Terms,
         b.Address,e.Fullname,b.Vatable,c.PurchaseType,b.Currency');
         $builder->join('tblcanvass_sheet b','b.purchaseLogID=a.purchaseLogID','INNER');
         $builder->join('tblprf c','c.OrderNo=b.OrderNo','LEFT');
@@ -1107,7 +1107,7 @@ class Report extends BaseController
             $template.="</tbody></table></td></tr>"; 
             $builder = $this->db->table('tblcomment');
             $builder->select('Message');
-            $builder->WHERE('Reference',$id);
+            $builder->WHERE('Reference',$row->Reference);
             $dataY = $builder->get();
             if($rowY = $dataY->getRow())
             {
