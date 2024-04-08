@@ -576,6 +576,7 @@
 									<table class="data-table table stripe hover nowrap">
 										<thead>
 											<th>Date</th>
+											<th>Vendor</th>
 											<th>P.O. No</th>
 											<th>PRF No</th>
 											<th>Reference</th>
@@ -587,6 +588,7 @@
 										<?php foreach($purchase as $row): ?>
 											<tr>
 												<td><?php echo $row->Date ?></td>
+												<td><?php echo $row->Supplier ?></td>
 												<td><?php echo $row->purchaseNumber ?></td>
 												<td><?php echo $row->OrderNo ?></td>
 												<td><?php echo $row->Reference ?></td>

@@ -1521,8 +1521,9 @@ class Home extends BaseController
         $canvass = $builder->get()->getResult();
         //load all the generated PO
         $builder = $this->db->table('tblpurchase_logs a');
-        $builder->select('a.*,b.OrderNo');
+        $builder->select('a.*,b.OrderNo,c.Supplier');
         $builder->join('tblcanvass_form b','b.Reference=a.Reference','LEFT');
+        $builder->join('tblcanvass_sheet c','c.purchaseLogID=a.purchaseLogID','LEFT');
         $purchase = $builder->get()->getResult();
 
         $data = ['canvass'=>$canvass,'purchase'=>$purchase];
