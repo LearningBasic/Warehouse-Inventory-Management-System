@@ -739,6 +739,7 @@
 											<th>Date Needed</th>
 											<th>Status</th>
 											<th>Comment</th>
+											<th>Action</th>
 										</thead>
 										<tbody>
 											<?php foreach($canvass as $row):?>
@@ -766,6 +767,11 @@
 														<?php } ?>
 													</td>
 													<td><?php echo $row['Comment'] ?></td>
+													<td>
+														<?php if($row['Status']==2){?>
+														<a href="create/<?php echo $row['OrderNo'] ?>" class="dropdown-item"><span class="dw dw-add"></span>&nbsp;Create</a>
+														<?php } ?>
+													</td>
 												</tr>
 											<?php endforeach; ?>
 										</tbody>
