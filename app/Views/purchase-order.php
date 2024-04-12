@@ -610,7 +610,7 @@
 												</td>
 												<td>
 													<a class="dropdown-item" href="<?=site_url('file-download/')?><?php echo $row->purchaseNumber ?>">
-														<span class="dw dw-download"></span>&nbsp;Download
+														<span class="dw dw-download"></span>&nbsp;Export
 													</a>	
 												</td>
 											</tr>
