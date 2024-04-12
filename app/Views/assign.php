@@ -525,7 +525,7 @@
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="home6" role="tabpanel">
 									<br/>
-									<table class="data-table table stripe hover">
+									<table class="data-table table stripe hover nowrap">
 										<thead>
 											<th>Date Received</th>
 											<th>PRF No</th>
@@ -613,7 +613,7 @@
 								</div>
 								<div class="tab-pane fade" id="process6" role="tabpanel">
 									<br/>
-									<table class="data-table table stripe hover">
+									<table class="data-table table stripe hover nowrap">
 										<thead>
 											<th>Date Received</th>
 											<th>PRF No</th>
@@ -655,7 +655,7 @@
 								</div>
 								<div class="tab-pane fade" id="completed6" role="tabpanel">
 									<br/>
-									<table class="data-table table stripe hover">
+									<table class="data-table table stripe hover nowrap">
 										<thead>
 											<th>Date Received</th>
 											<th>PRF No</th>
@@ -680,7 +680,7 @@
 								</div>
 								<div class="tab-pane fade" id="rejected6" role="tabpanel">
 									<br/>
-									<table class="data-table table stripe hover">
+									<table class="data-table table stripe hover nowrap">
 										<thead>
 											<th>Date Received</th>
 											<th>PRF No</th>
@@ -705,7 +705,7 @@
 								</div>
 								<div class="tab-pane fade" id="archive6" role="tabpanel">
 									<br/>
-									<table class="data-table table stripe hover">
+									<table class="data-table table stripe hover nowrap">
 										<thead>
 											<th>Date Prepared</th>
 											<th>PRF No</th>
