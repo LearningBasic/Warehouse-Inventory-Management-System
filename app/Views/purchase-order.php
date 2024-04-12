@@ -573,7 +573,7 @@
 								</div>
 								<div class="tab-pane fade" id="pending6" role="tabpanel">
 									<br/>
-									<table class="data-table table stripe hover nowrap">
+									<table class="data-table table stripe hover">
 										<thead>
 											<th>Date</th>
 											<th>Vendor</th>
