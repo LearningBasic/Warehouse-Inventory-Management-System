@@ -1522,12 +1522,23 @@ class Purchase extends BaseController
         }
         else
         {
-            if($vatable=="Yes")
+            if($vatable=="VAT INC")
             {
                 for($i=0;$i<$count;$i++)
                 {
                     $values = 
                     ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$unitPrice[$i]/1.12,
+                    'Currency'=>$currency,'ContactPerson'=>$contactPerson,'ContactNumber'=>$phone,'Address'=>$address,
+                    'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>'','Remarks'=>'','Vatable'=>$vatable,'purchaseLogID'=>0];
+                    $canvassModel->save($values);
+                }
+            }
+            else if($vatable=="VAT EX")
+            {
+                for($i=0;$i<$count;$i++)
+                {
+                    $values = 
+                    ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$unitPrice[$i]*1.12,
                     'Currency'=>$currency,'ContactPerson'=>$contactPerson,'ContactNumber'=>$phone,'Address'=>$address,
                     'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>'','Remarks'=>'','Vatable'=>$vatable,'purchaseLogID'=>0];
                     $canvassModel->save($values);
