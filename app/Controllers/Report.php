@@ -783,7 +783,7 @@ class Report extends BaseController
                 </tr>";
             }   
             $template.="<tr><td colspan='5'>&nbsp;</td></tr>";
-            if($row->Vatable=="Yes")
+            if($row->Vatable=="VAT INC"||$row->Vatable=="VAT EX")
             {
                 $template.="<tr><td colspan='3'></td><td>VATable</td><td style='text-align:right;'>".$currency." ".number_format($totalAmount/1.12,2)."</td></tr>";
                 $template.="<tr><td colspan='3'></td><td>VAT - 12%</td><td style='text-align:right;'>".$currency." ".number_format(($totalAmount/1.12)*0.12,2)."</td></tr>";
@@ -1088,7 +1088,7 @@ class Report extends BaseController
                 </tr>";
             }   
             $template.="<tr><td colspan='5'>&nbsp;</td></tr>";
-            if($row->Vatable=="Yes")
+            if($row->Vatable=="VAT INC" || $row->Vatable=="VAT EX")
             {
                 $template.="<tr><td colspan='3'></td><td>VATable</td><td style='text-align:right;'>".$currency." ".number_format($totalAmount/1.12,2)."</td></tr>";
                 $template.="<tr><td colspan='3'></td><td>VAT - 12%</td><td style='text-align:right;'>".$currency." ".number_format(($totalAmount/1.12)*0.12,2)."</td></tr>";
