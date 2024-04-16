@@ -468,7 +468,7 @@
                                 <div class="card-box">
                                     <div class="card-body">
                                         <div class="card-title">Total PRF</div>
-                                        <h3><?=$total?></h3>
+                                        <h3><?=number_format($total,2)?></h3>
                                     </div>
                                 </div>
                             </div>
