@@ -531,9 +531,13 @@
                         <form method="POST" class="row g-3" id="frmAdd">
 							<input type="hidden" name="orderNo" value="<?=$id ?>"/>
 							<div class="col-12">
-								<label>Vatable ?</label>
-								<input type="radio" name="vatable" style="width:15px;height:15px;" value="Yes"/>&nbsp;<label>Yes</label>
-								<input type="radio" name="vatable" style="width:15px;height:15px;" value="No" checked/>&nbsp;<label>No</label>
+								<label>VAT (Value Added Tax)</label>
+								<select class="form-control" name="vatable">
+									<option value="">Choose</option>
+									<option>VAT INC</option>
+									<option>VAT EX</option>
+									<option>Non-Vatable</option>
+								</select>
 							</div>
 							<div class="col-12 form-group">
 								<label>Item/Equipment</label>
