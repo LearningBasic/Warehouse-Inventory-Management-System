@@ -1453,7 +1453,7 @@ class Home extends BaseController
         $account = $builder->get()->getResult();
         //purchase order
         $builder = $this->db->table('tblpurchase_review a');
-        $builder->select('a.prID,a.DateReceived,b.Reference,a.Status,a.purchaseNumber,a.DateApproved,c.OrderNo');
+        $builder->select('a.prID,a.DateReceived,c.Department,a.Status,a.purchaseNumber,a.DateApproved,c.OrderNo');
         $builder->join('tblpurchase_logs b','b.purchaseNumber=a.purchaseNumber','LEFT');
         $builder->join('tblcanvass_form c','c.Reference=b.Reference','LEFT');
         $builder->WHERE('a.accountID',$user);

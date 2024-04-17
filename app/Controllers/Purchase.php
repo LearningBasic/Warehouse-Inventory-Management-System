@@ -741,7 +741,7 @@ class Purchase extends BaseController
         $file="";$orderNo="";
         //fetch
         $builder = $this->db->table('tblcanvass_form a');
-        $builder->select('a.Reference,b.Department,b.OrderNo,b.DateNeeded,b.PurchaseType,b.Reason,b.Attachment,d.Status,d.prID');
+        $builder->select('a.Reference,a.Attachment as quotation,b.Department,b.OrderNo,b.DateNeeded,b.PurchaseType,b.Reason,b.Attachment,d.Status,d.prID');
         $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
         $builder->join('tblpurchase_logs c','a.Reference=c.Reference','LEFT');
         $builder->join('tblpurchase_review d','d.purchaseNumber=c.purchaseNumber','LEFT');
@@ -749,29 +749,21 @@ class Purchase extends BaseController
         $datax = $builder->get();
         if($rowx = $datax->getRow())
         {
-            $orderNo = $rowx->OrderNo;
             $file = $rowx->Attachment;
+            $quotation = $rowx->quotation;
             ?>
-        <div class="form-group">
-            <div class="row g-3">
-                <div class="col-lg-3">
-                    <b>PRF No.</b>
-                    <input type="text" class="form-control" value="<?php echo $rowx->OrderNo ?>"/>
-                </div>
-                <div class="col-lg-3">
-                    <b>Department</b>
-                    <input type="text" class="form-control" value="<?php echo $rowx->Department ?>"/>
-                </div>
-                <div class="col-lg-3">
-                    <b>Type of Purchase</b>
-                    <input type="text" class="form-control" value="<?php echo $rowx->PurchaseType ?>"/>
-                </div>
-                <div class="col-lg-3">
-                    <b>Date Needed</b>
-                    <input type="text" class="form-control" value="<?php echo $rowx->DateNeeded ?>"/>
-                </div>
-            </div>
-        </div>
+        <div class="tab">
+            <ul class="nav nav-pills" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active text-blue" data-toggle="tab" href="#items" role="tab" aria-selected="true">Ordered Items</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-blue" data-toggle="tab" href="#prf" role="tab" aria-selected="true">PRF Attachment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-blue" data-toggle="tab" href="#quotation" role="tab" aria-selected="true">Quotation</a>
+                </li>
+            </ul>
         <?php
         }
         $builder = $this->db->table('tblcanvass_sheet a');
@@ -781,63 +773,60 @@ class Purchase extends BaseController
         $builder->WHERE('c.purchaseNumber',$reference);
         $data = $builder->get();
         ?>
-        <div class="form-group table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <th class="bg-primary text-white">Item(s)</th>
-                    <th class="bg-primary text-white">Qty</th>
-                    <th class="bg-primary text-white">Unit Price</th>
-                    <th class="bg-primary text-white">Total Price</th>
-                    <th class="bg-primary text-white">Specification</th>
-                    <th class="bg-primary text-white">Vendor(s)</th>
-                    <th class="bg-primary text-white">Terms</th>
-                </thead>
-                <tbody>
-        <?php
-        foreach($data->getResult() as $row)
-        {
-            ?>
-            <tr>
-                <td><?php echo $row->Item_Name ?></td>
-                <td><?php echo $row->Qty ?></td>
-                <td style="text-align:right;"><?php echo number_format($row->Price,2) ?></td>
-                <td style="text-align:right;"><?php echo number_format($row->Qty*$row->Price,2) ?></td>
-                <td><?php echo $row->Specification ?></td>
-                <td><?php echo $row->Supplier ?></td>
-                <td><?php echo $row->Terms ?></td>
-            </tr>
-            <?php
-        }
-        ?>
-                </tbody>
-            </table>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="items" role="tabpanel">
+                    <br/>
+                    <div class="form-group table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <th class="bg-primary text-white">Item(s)</th>
+                                <th class="bg-primary text-white">Qty</th>
+                                <th class="bg-primary text-white">Unit Price</th>
+                                <th class="bg-primary text-white">Total Price</th>
+                                <th class="bg-primary text-white">Specification</th>
+                                <th class="bg-primary text-white">Vendor(s)</th>
+                                <th class="bg-primary text-white">Terms</th>
+                            </thead>
+                            <tbody>
+                    <?php
+                    foreach($data->getResult() as $row)
+                    {
+                        ?>
+                        <tr>
+                            <td><?php echo $row->Item_Name ?></td>
+                            <td><?php echo $row->Qty ?></td>
+                            <td style="text-align:right;"><?php echo number_format($row->Price,2) ?></td>
+                            <td style="text-align:right;"><?php echo number_format($row->Qty*$row->Price,2) ?></td>
+                            <td><?php echo $row->Specification ?></td>
+                            <td><?php echo $row->Supplier ?></td>
+                            <td><?php echo $row->Terms ?></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade show" id="prf" role="tabpanel">
+                    <br/>
+                    <object data="Attachment/<?php echo $file ?>" type="application/pdf" style="width:100%;height:500px;">
+                        <div>No PDF viewer available</div>
+                    </object>
+                </div>
+                <div class="tab-pane fade show" id="quotation" role="tabpanel">
+                    <br/>
+                    <object data="Canvass/<?php echo $quotation ?>" type="application/pdf" style="width:100%;height:500px;">
+                        <div>No PDF viewer available</div>
+                    </object>
+                </div>
+            </div>
         </div>
+        <?php if($rowx->Status==0){ ?>
+            <button type="button" class="btn btn-primary btn-sm approve" value="<?php echo $rowx->prID ?>"><span class="dw dw-check"></span>&nbsp;Approve</button>
+            <button type="button" class="btn btn-danger btn-sm decline" value="<?php echo $rowx->prID ?>"><span class="dw dw-trash"></span>&nbsp;Decline</button>
+        <?php } ?>
         <?php
-        $builder = $this->db->table('tblcanvass_form a');
-        $builder->select('a.Attachment,a.Reference');
-        $builder->join('tblpurchase_logs b','b.Reference=a.Reference','LEFT');
-        $builder->WHERE('b.purchaseNumber',$reference);
-        $data = $builder->get();
-        if($row = $data->getRow())
-        {
-            ?>
-            <div class="form-group">
-                <p>Attachments</p>
-                <?php if(empty($file)){ ?>
-                    <a href="javascript:void(0);" class="btn btn-outline-primary btn-sm"><span class="dw dw-paperclip"></span>No Attachment</a>
-                <?php } else {?>
-                    <a href="Attachment/<?php echo $file ?>" class="btn btn-outline-primary btn-sm" target="_blank"><span class="dw dw-paperclip"></span>PRF Files</a>
-                <?php } ?>
-                <a href="Canvass/<?php echo $row->Attachment ?>" class="btn btn-outline-primary btn-sm" target="_blank"><span class="dw dw-paperclip"></span>Quotation Files</a>
-            </div>
-            <div class="form-group">
-            <?php if($rowx->Status==0){ ?>
-                <button type="button" class="btn btn-primary btn-sm approve" value="<?php echo $rowx->prID ?>"><span class="dw dw-check"></span>&nbsp;Approve</button>
-                <button type="button" class="btn btn-danger btn-sm decline" value="<?php echo $rowx->prID ?>"><span class="dw dw-trash"></span>&nbsp;Decline</button>
-            <?php } ?>
-            </div>
-            <?php
-        }
     }
 
     public function viewPurchase()
