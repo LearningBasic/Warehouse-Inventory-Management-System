@@ -618,7 +618,7 @@
 				var cell3 = row.insertCell(2);
 				var cell4 = row.insertCell(3);
 				var cell5 = row.insertCell(4);
-				cell1.innerHTML = "<input type='number' class='form-control' id='qty' name='qty[]'/>";
+				cell1.innerHTML = "<input type='text' class='form-control' id='qty' name='qty[]'/>";
 				cell2.innerHTML = "<input type='text' class='form-control' id='item' name='item[]'/>";
 				cell3.innerHTML = "<input type='text' class='form-control' id='item_name' name='item_name[]'/>";
 				cell4.innerHTML = "<input type='text' class='form-control' id='specification' name='specification[]'/>";
