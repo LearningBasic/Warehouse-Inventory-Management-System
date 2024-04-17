@@ -519,7 +519,7 @@
                             </div>
 							<div class="col-12 form-group">
                                 <label>Attachment(Incident Report/WRF/Work Directives/etc)</label>
-                                <input type="file" class="form-control" name="file"/>
+                                <input type="file" class="form-control" name="file" required/>
                             </div>
 							<div class="col-12 form-group">
 								<label>Department Head/Masters</label>
