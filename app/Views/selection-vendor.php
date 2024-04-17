@@ -466,7 +466,7 @@
 											<a class="btn-link" href="export/<?php echo $row->Reference ?>" target="_blank"><?php echo $row->Reference ?></a>
 										<?php } ?>
                                         </td>
-										<td><?php echo $row->OrderNo ?></td>
+										<a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a>
 										<td><?php echo $row->Fullname ?></td>
 										<td><?php echo $row->Dept ?></td>
 										<td><?php echo $row->Department ?></td>

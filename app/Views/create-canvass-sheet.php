@@ -500,8 +500,8 @@
                                 </table>
                             </div>
 							<div class="col-12 form-group">
-								<label>Attachment</label>
-                                <input type="file" class="form-control" name="file" required/>
+								<label>Attachment</label> 
+                                <input type="file" class="form-control" name="file" accept="application/pdf" required/>
 							</div>
 							<div class="col-12 form-group">
 								<label>Department/Division Head</label>
