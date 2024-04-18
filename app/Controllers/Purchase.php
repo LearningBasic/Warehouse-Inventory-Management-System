@@ -1494,7 +1494,6 @@ class Purchase extends BaseController
         $supplierModel = new \App\Models\supplierModel();
         //datas
         $orderNo = $this->request->getPost('orderNo');
-        $unitPrice = $this->request->getPost('unitPrice');
         $supplier = $this->request->getPost('supplier');
         $contactPerson = $this->request->getPost('contactPerson');
         $address = $this->request->getPost('address');
@@ -1504,7 +1503,8 @@ class Purchase extends BaseController
         $vatable = $this->request->getPost('vatable');
         $orderID = $this->request->getPost('itemID');
         $currency = $this->request->getPost('currency');
-        $count = count($orderID);
+        $unitPrice = $this->request->getPost('unitPrice');
+        $count = count(array_filter($orderID));
 
         $validation = $this->validate([
             'unitPrice'=>'required',
@@ -1526,7 +1526,7 @@ class Purchase extends BaseController
                 for($i=0;$i<$count;$i++)
                 {
                     $values = 
-                    ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$unitPrice[$i]/1.12,
+                    ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$unitPrice[$i],
                     'Currency'=>$currency,'ContactPerson'=>$contactPerson,'ContactNumber'=>$phone,'Address'=>$address,
                     'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>'','Remarks'=>'','Vatable'=>$vatable,'purchaseLogID'=>0];
                     $canvassModel->save($values);
