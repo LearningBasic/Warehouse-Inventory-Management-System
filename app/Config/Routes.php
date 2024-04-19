@@ -144,6 +144,7 @@ $routes->get('vendor-information','Home::vendorInformation');
 $routes->get('download/(:any)','Report::Download/$1');
 $routes->get('download-file/(:any)','Report::DownloadFile/$1');
 $routes->get('file-download/(:any)','Report::fileDownload/$1');
+$routes->get('open-file/(:any)','Report::openFile/$1');
 $routes->get('vendor-ledger','Report::vendorLedger');
 $routes->get('fetch-purchase_number','Report::fetchPO');
 $routes->get('generate-return-summary','Report::generateReturnSummary');

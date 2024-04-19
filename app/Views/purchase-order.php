@@ -610,8 +610,11 @@
 												</td>
 												<td>
 													<a class="dropdown-item" href="<?=site_url('file-download/')?><?php echo $row->purchaseNumber ?>">
-														<span class="dw dw-download"></span>&nbsp;Export
-													</a>	
+														<span class="dw dw-download"></span>
+													</a>
+													<a class="dropdown-item" href="<?=site_url('open-file/')?><?php echo $row->purchaseNumber ?>" target="_blank">
+														<i class="icon-copy dw dw-view"></i>
+													</a>
 												</td>
 											</tr>
 										<?php endforeach; ?>

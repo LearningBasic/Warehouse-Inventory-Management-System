@@ -513,9 +513,12 @@
                                 <input type="file" class="form-control" name="file" accept="application/pdf" required/>
 							</div>
 							<div class="col-12 form-group">
-								<label>Department/Division Head</label>
+								<label>Material Department Head</label>
 								<select class="form-control custom-select2" name="approver" id="approver" required>
 									<option value="">Choose</option>
+									<?php foreach($approver as $row): ?>
+										<option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?></option>
+									<?php endforeach; ?>
 								</select>
 							</div>
 							<div class="col-12 form-group">
@@ -711,7 +714,7 @@
 		<script>
 			$(document).ready(function()
 			{
-				loadSuppliers();editors();entries();
+				loadSuppliers();entries();
 			});
 			function entries()
 			{
@@ -722,16 +725,6 @@
 					success:function(response)
 					{
 						$('#tbl_entries').html(response);
-					}
-				});
-			}
-			function editors()
-			{
-				$.ajax({
-					url:"<?=site_url('get-editor')?>",method:"GET",
-					success:function(response)
-					{
-						$('#approver').append(response);
 					}
 				});
 			}

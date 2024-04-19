@@ -1426,8 +1426,13 @@ class Home extends BaseController
         $builder->select('*');
         $builder->WHERE('OrderNo',$id);
         $item = $builder->get()->getResult();
+        //approver
+        $builder = $this->db->table('tblaccount');
+        $builder->select('*');
+        $builder->WHERE('Status',1)->WHERE('systemRole','Administrator')->WHERE('Department','Procurement');
+        $approver = $builder->get()->getResult();
 
-        $data = ['prf'=>$prf,'item'=>$item,'id'=>$id];
+        $data = ['prf'=>$prf,'item'=>$item,'id'=>$id,'approver'=>$approver];
         return view('create-canvass-sheet',$data);
     }
 

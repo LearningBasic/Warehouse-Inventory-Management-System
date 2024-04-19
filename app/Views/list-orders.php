@@ -484,7 +484,7 @@
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="home6" role="tabpanel">
 									<br/>
-									<table class="data-table table stripe hover nowrap">
+									<table class="data-table table stripe hover">
 										<thead>
 											<th>Date Prepared</th>
 											<th>Purchase Type</th>
@@ -507,7 +507,7 @@
 														<?php echo $row->OrderNo ?>
 														<?php } ?>
 													</td>
-													<td><?php echo $row->Reason ?></td>
+													<td><?php echo substr($row->Reason,0,20) ?>...</td>
 													<td><?php echo $row->Department ?></td>
 													<td><?php echo $row->DateNeeded ?></td>
 													<td>
@@ -527,17 +527,17 @@
 													</td>
 													<td>
 														<?php if($row->Status==0){ ?>
-															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span>&nbsp;View</button>
-															<button type="button" class="btn btn-outline-danger btn-sm cancel" value="<?php echo $row->prfID ?>"><span class="dw dw-trash"></span>&nbsp;Cancel</button>
+															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span></button>
+															<button type="button" class="btn btn-outline-danger btn-sm cancel" value="<?php echo $row->prfID ?>"><span class="dw dw-trash"></span></button>
 															<?php if($row->PurchaseType=="Local Purchase"){ ?>
-															<a class="btn btn-outline-primary btn-sm" href="create/<?php echo $row->OrderNo ?>"><span class="dw dw-add"></span>&nbsp;Create</a>
+															<a class="btn btn-outline-primary btn-sm" href="create/<?php echo $row->OrderNo ?>"><span class="dw dw-add"></span></a>
 															<?php } ?>
 														<?php }else if($row->Status==3){ ?>
-															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span>&nbsp;View</button>
+															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span></button>
 															<?php if($row->PurchaseType=="Local Purchase"){ ?>
-																<a class="btn btn-outline-primary btn-sm" href="generate/<?php echo $row->OrderNo ?>"><span class="dw dw-export"></span>&nbsp;Export</a>
+																<a class="btn btn-outline-primary btn-sm" href="generate/<?php echo $row->OrderNo ?>"><span class="dw dw-export"></span></a>
 															<?php }else{?>
-																<a class="btn btn-outline-primary btn-sm" href="generate/<?php echo $row->OrderNo ?>"><span class="dw dw-export"></span>&nbsp;Export</a>
+																<a class="btn btn-outline-primary btn-sm" href="generate/<?php echo $row->OrderNo ?>"><span class="dw dw-export"></span></a>
 															<?php } ?>
 														<?php }else{?>
 															<?php echo $row->Comment ?>
