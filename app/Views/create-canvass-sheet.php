@@ -756,6 +756,7 @@
 					data:data,
 					success:function(response)
 					{
+						//console.log(response);
 						if(response==="success")
 						{
 							loadSuppliers();entries();

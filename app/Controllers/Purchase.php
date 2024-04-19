@@ -1523,15 +1523,13 @@ class Purchase extends BaseController
         {
             if($vatable=="VAT INC")
             {
-                for($i=0;$i<$count;$i++)
+                foreach($unitPrice as $key => $value)  
+                    if(empty($value))
+                        unset($unitPrice[$key]);
+                foreach($unitPrice as $key => $value) 
                 {
-                    foreach($unitPrice as $key => $value)  
-                        if(empty($value))
-                            unset($unitPrice[$key]);
-                    foreach($unitPrice as $key => $value) 
-                    $newPrice = $unitPrice[$key];
                     $values = 
-                    ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$newPrice,
+                    ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$key],'Supplier'=>$supplier,'Price'=>$unitPrice[$key],
                     'Currency'=>$currency,'ContactPerson'=>$contactPerson,'ContactNumber'=>$phone,'Address'=>$address,
                     'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>'','Remarks'=>'','Vatable'=>$vatable,'purchaseLogID'=>0];
                     $canvassModel->save($values);
@@ -1539,34 +1537,30 @@ class Purchase extends BaseController
             }
             else if($vatable=="VAT EX")
             {
-                for($i=0;$i<$count;$i++)
+                foreach($unitPrice as $key => $value)  
+                    if(empty($value))
+                        unset($unitPrice[$key]);
+                foreach($unitPrice as $key => $value) 
                 {
-                    foreach($unitPrice as $key => $value)  
-                        if(empty($value))
-                            unset($unitPrice[$key]);
-                    foreach($unitPrice as $key => $value) 
-                    $newPrice = $unitPrice[$key];
-                    $values = 
-                    ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$newPrice*1.12,
-                    'Currency'=>$currency,'ContactPerson'=>$contactPerson,'ContactNumber'=>$phone,'Address'=>$address,
-                    'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>'','Remarks'=>'','Vatable'=>$vatable,'purchaseLogID'=>0];
-                    $canvassModel->save($values);
+                $values = 
+                ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$key],'Supplier'=>$supplier,'Price'=>$unitPrice[$key]*1.12,
+                'Currency'=>$currency,'ContactPerson'=>$contactPerson,'ContactNumber'=>$phone,'Address'=>$address,
+                'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>'','Remarks'=>'','Vatable'=>$vatable,'purchaseLogID'=>0];
+                $canvassModel->save($values);
                 }
             }
             else
             {
-                for($i=0;$i<$count;$i++)
+                foreach($unitPrice as $key => $value)  
+                    if(empty($value))
+                        unset($unitPrice[$key]);
+                foreach($unitPrice as $key => $value) 
                 {
-                    foreach($unitPrice as $key => $value)  
-                        if(empty($value))
-                            unset($unitPrice[$key]);
-                    foreach($unitPrice as $key => $value) 
-                    $newPrice = $unitPrice[$key];
-                    $values = 
-                    ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$newPrice,
-                    'Currency'=>$currency,'ContactPerson'=>$contactPerson,'ContactNumber'=>$phone,'Address'=>$address,
-                    'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>'','Remarks'=>'','Vatable'=>$vatable,'purchaseLogID'=>0];
-                    $canvassModel->save($values);
+                $values = 
+                ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$key],'Supplier'=>$supplier,'Price'=>$unitPrice[$key],
+                'Currency'=>$currency,'ContactPerson'=>$contactPerson,'ContactNumber'=>$phone,'Address'=>$address,
+                'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>'','Remarks'=>'','Vatable'=>$vatable,'purchaseLogID'=>0];
+                $canvassModel->save($values);
                 }
             }
             //validate if supplier already exist
