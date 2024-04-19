@@ -623,7 +623,8 @@
 											<th>Action</th>
 										</thead>
 										<tbody>
-										<?php foreach($ongoing as $row): ?>
+											<?php foreach($ongoing as $row): ?>
+												<?php if($row->total==$row->totalOrder){}else{ ?>
 												<tr>
 													<td><?php echo $row->Date ?></td>
 													<td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
@@ -649,6 +650,7 @@
 														<?php } ?>
 													</td>
 												</tr>
+												<?php } ?>
 											<?php endforeach; ?>
 										</tbody>
 									</table>

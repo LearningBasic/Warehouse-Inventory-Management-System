@@ -918,9 +918,12 @@ class Home extends BaseController
         $builder->groupby('a.assignID');
         $pending = $builder->get()->getResult();
         //ongoing
-        $sql = "Select a.Status,b.prfID,b.OrderNo,b.Remarks,a.Date,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID from tblassignment a
-        LEFT JOIN tblprf b ON b.prfID=a.prfID LEFT JOIN tblaccount c ON c.accountID=b.accountID WHERE a.accountID=:user: AND a.Status=1 
-        AND NOT EXISTS(Select d.OrderNo from tblcanvass_form d WHERE d.OrderNo=b.OrderNo)";
+        $sql = "Select a.Status,b.prfID,b.OrderNo,b.Remarks,a.Date,b.DateNeeded,b.Reason,b.Department,c.Fullname,a.assignID,e.total,f.totalOrder from tblassignment a
+        LEFT JOIN tblprf b ON b.prfID=a.prfID 
+        LEFT JOIN tblaccount c ON c.accountID=b.accountID 
+        LEFT JOIN (Select COUNT(orderID)total,OrderNo from tblcanvass_sheet GROUP BY OrderNo) e ON e.OrderNo=b.OrderNo
+        LEFT JOIN (Select COUNT(orderID)totalOrder,OrderNo from tbl_order_item GROUP BY OrderNo) f ON f.OrderNo=b.OrderNo
+        WHERE a.accountID=:user: AND a.Status=1";
         $query = $this->db->query($sql,['user'=>$user]);
         $ongoing = $query->getResult();
         //completed
