@@ -74,6 +74,15 @@
                 width: 4px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
+			.tableFixHead thead th { position: sticky; top: 0; z-index: 1;color:#fff;background-color:#0275d8;}
+
+			/* Just common table stuff. Really. */
+			table  { border-collapse: collapse; width: 100%; }
+			th, td { padding: 8px 16px;color:#000; }
+			tbody{color:#000;}
+			tr:nth-child(even) {
+			background-color: #f2f2f2;
+			}
             
         </style>
 	</head>
@@ -666,17 +675,19 @@
 							</div>
 							<div class="col-12 form-group">
 								<label>Ordered Items/Materials</label>
-								<table class="table table-bordered table-striped">
-									<thead>
-										<th class="bg-primary text-white">#</th>
-										<th class="bg-primary text-white">Item Name</th>
-										<th class="bg-primary text-white">Specification</th>
-										<th class="bg-primary text-white">Unit Price</th>
-									</thead>
-									<tbody id="tbl_entries">
-									
-									</tbody>
-								</table>
+								<div class="tableFixHead" style="height:300px;overflow-y:auto;">
+									<table class="table-bordered">
+										<thead>
+											<th>#</th>
+											<th>Item Name</th>
+											<th>Specification</th>
+											<th>Unit Price</th>
+										</thead>
+										<tbody id="tbl_entries">
+										
+										</tbody>
+									</table>
+								</div>
 							</div>
 							<div class="col-12 form-group">
 								<input type="submit" class="btn btn-primary text-white" value="Save Entry" id="btnSaveEntry"/>
