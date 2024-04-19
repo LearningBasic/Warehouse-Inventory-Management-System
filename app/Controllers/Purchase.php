@@ -1525,22 +1525,29 @@ class Purchase extends BaseController
             {
                 for($i=0;$i<$count;$i++)
                 {
-                    if(!empty($unitPrice[$i]))
-                    {
-                        $values = 
-                        ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$unitPrice[$i],
-                        'Currency'=>$currency,'ContactPerson'=>$contactPerson,'ContactNumber'=>$phone,'Address'=>$address,
-                        'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>'','Remarks'=>'','Vatable'=>$vatable,'purchaseLogID'=>0];
-                        $canvassModel->save($values);
-                    }
+                    foreach($unitPrice as $key => $value)  
+                        if(empty($value))
+                            unset($unitPrice[$key]);
+                    foreach($unitPrice as $key => $value) 
+                    $newPrice = $unitPrice[$key];
+                    $values = 
+                    ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$newPrice,
+                    'Currency'=>$currency,'ContactPerson'=>$contactPerson,'ContactNumber'=>$phone,'Address'=>$address,
+                    'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>'','Remarks'=>'','Vatable'=>$vatable,'purchaseLogID'=>0];
+                    $canvassModel->save($values);
                 }
             }
             else if($vatable=="VAT EX")
             {
                 for($i=0;$i<$count;$i++)
                 {
+                    foreach($unitPrice as $key => $value)  
+                        if(empty($value))
+                            unset($unitPrice[$key]);
+                    foreach($unitPrice as $key => $value) 
+                    $newPrice = $unitPrice[$key];
                     $values = 
-                    ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$unitPrice[$i]*1.12,
+                    ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$newPrice*1.12,
                     'Currency'=>$currency,'ContactPerson'=>$contactPerson,'ContactNumber'=>$phone,'Address'=>$address,
                     'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>'','Remarks'=>'','Vatable'=>$vatable,'purchaseLogID'=>0];
                     $canvassModel->save($values);
@@ -1550,8 +1557,13 @@ class Purchase extends BaseController
             {
                 for($i=0;$i<$count;$i++)
                 {
+                    foreach($unitPrice as $key => $value)  
+                        if(empty($value))
+                            unset($unitPrice[$key]);
+                    foreach($unitPrice as $key => $value) 
+                    $newPrice = $unitPrice[$key];
                     $values = 
-                    ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$unitPrice[$i],
+                    ['OrderNo'=>$orderNo, 'orderID'=>$orderID[$i],'Supplier'=>$supplier,'Price'=>$newPrice,
                     'Currency'=>$currency,'ContactPerson'=>$contactPerson,'ContactNumber'=>$phone,'Address'=>$address,
                     'Terms'=>$terms,'Warranty'=>$warranty,'Reference'=>'','Remarks'=>'','Vatable'=>$vatable,'purchaseLogID'=>0];
                     $canvassModel->save($values);
