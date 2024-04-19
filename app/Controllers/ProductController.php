@@ -800,58 +800,74 @@ class ProductController extends BaseController
         $builder->orderby('a.orderID');
         $data = $builder->get();
         ?>
-        <table class="table table-bordered hover nowrap">
-            <thead>
-                <th class="bg-primary text-white">Product Name</th>
-                <th class="bg-primary text-white">Vendor</th>
-                <th class="bg-primary text-white">Price</th>
-                <th class="bg-primary text-white">Terms</th>
-                <th class="bg-primary text-white">Warranty</th>
-                <th class="bg-primary text-white">Remarks</th>
-            </thead>
-        <?php
-        foreach($data->getResult() as $row)
-        {
-            ?>
-            <tr>
-                <td><?php echo $row->Item_Name ?></td>
-                <td><?php echo $row->Supplier ?></td>
-                <td><?php echo number_format($row->Price,2) ?></td>
-                <td><?php echo $row->Terms ?></td>
-                <td><?php echo $row->Warranty ?></td>
-                <td>
-                    <?php if(!empty($row->Remarks)){ ?>
-                    <span class="badge bg-success text-white"><?php echo $row->Remarks ?></span>
+        <div class="tab">
+            <ul class="nav nav-pills" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active text-blue" data-toggle="tab" href="#items" role="tab" aria-selected="true">Vendors and Price List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-blue" data-toggle="tab" href="#prf" role="tab" aria-selected="true">PRF Attachment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-blue" data-toggle="tab" href="#quotation" role="tab" aria-selected="true">Quotation</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="items" role="tabpanel">
+                    <br/>
+                    <table class="table table-bordered hover nowrap">
+                        <thead>
+                            <th class="bg-primary text-white">Product Name</th>
+                            <th class="bg-primary text-white">Vendor</th>
+                            <th class="bg-primary text-white">Price</th>
+                            <th class="bg-primary text-white">Terms</th>
+                            <th class="bg-primary text-white">Warranty</th>
+                            <th class="bg-primary text-white">Remarks</th>
+                        </thead>
+                    <?php
+                    foreach($data->getResult() as $row)
+                    {
+                        ?>
+                        <tr>
+                            <td><?php echo $row->Item_Name ?></td>
+                            <td><?php echo $row->Supplier ?></td>
+                            <td><?php echo number_format($row->Price,2) ?></td>
+                            <td><?php echo $row->Terms ?></td>
+                            <td><?php echo $row->Warranty ?></td>
+                            <td>
+                                <?php if(!empty($row->Remarks)){ ?>
+                                <span class="badge bg-success text-white"><?php echo $row->Remarks ?></span>
+                                <?php } ?>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                    </table>
+                </div>
+                <div class="tab-pane fade show" id="prf" role="tabpanel">
+                    <br/>
+                    <?php
+                    $builder = $this->db->table('tblprf');
+                    $builder->select('Attachment');
+                    $builder->WHERE('OrderNo',$row->OrderNo);
+                    $data = $builder->get();
+                    if($rows = $data->getRow())
+                    {
+                     ?>
+                    <object data="Attachment/<?php echo $rows->Attachment ?>" type="application/pdf" style="width:100%;height:500px;">
+                        <div>No PDF viewer available</div>
+                    </object>
                     <?php } ?>
-                </td>
-            </tr>
-            <?php
-        }
-        ?>
-        </table>
-        <br/>
-        <?php
-        $builder = $this->db->table('tblprf');
-        $builder->select('Attachment');
-        $builder->WHERE('OrderNo',$row->OrderNo);
-        $data = $builder->get();
-        if($rows = $data->getRow())
-        {
-            if(empty($rows->Attachment)||$rows->Attachment=="N/A")
-            {
-                ?>
-                <p><center>No PRF Attachment</center></p>
-                <?php
-            }
-            else
-            {
-            ?>
-            <a href="Attachment/<?php echo $rows->Attachment ?>" class="btn btn-link" target="_blank"><span class="dw dw-paperclip"></span> <?php echo $rows->Attachment ?></a>
-            <?php
-            }
-        }
-         ?>
-        <a href="Canvass/<?php echo $row->Attachment ?>" class="btn btn-link form-control" target="_blank"><span class="dw dw-paperclip"></span> <?php echo $row->Attachment ?></a>
+                </div>
+                <div class="tab-pane fade show" id="quotation" role="tabpanel">
+                    <br/>
+                    <object data="Canvass/<?php echo $row->Attachment ?>" type="application/pdf" style="width:100%;height:500px;">
+                        <div>No PDF viewer available</div>
+                    </object>
+                </div>
+            </div>
+        </div>
         <?php
     }
 

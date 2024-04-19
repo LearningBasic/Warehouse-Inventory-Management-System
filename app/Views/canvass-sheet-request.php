@@ -498,7 +498,7 @@
 			</div>
 		</div>
 		<div class="modal fade" id="viewModal" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color:#EC5800;">
                         <h4 class="modal-title text-white" id="myLargeModalLabel">
@@ -509,9 +509,6 @@
                     <div class="modal-body">
 						<form method="post" class="row g-3">
 							<input type="hidden" name="code" id="code"/>
-							<div class="col-12">
-								<p>Reference No : <label id="reference"></label></p>
-							</div>
 							<div class="col-12">
 								<div id="result"></div>
 								<br/>
