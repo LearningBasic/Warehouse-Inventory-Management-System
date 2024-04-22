@@ -74,6 +74,15 @@
                 width: 4px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
+			  .tableFixHead thead th { position: sticky; top: 0; z-index: 1;color:#fff;background-color:#0275d8;}
+
+			/* Just common table stuff. Really. */
+			table  { border-collapse: collapse; width: 100%; }
+			th, td { padding: 8px 16px;color:#000; }
+			tbody{color:#000;}
+			tr:nth-child(even) {
+			background-color: #f2f2f2;
+			}
 			  .loading-spinner{
 				width:30px;
 				height:30px;
@@ -457,42 +466,50 @@
 				<div class="card-box">
 					<div class="card-header">Canvass Sheet</div>
 					<div class="card-body">
-                        <table class="data-table table stripe hover nowrap">
-                            <thead>
-                                <th>Date Received</th>
-                                <th>Reference No</th>
-                                <th>PRF No</th>
-								<th>Requestor</th>
-                                <th>Department</th>
-                                <th>Date Needed</th>
-                                <th>Status</th>
-                            </thead>
-							<tbody>
-								<?php foreach($list as $row): ?>
-									<tr>
-										<td><?php echo $row->DateReceived ?></td>
-										<?php if($row->Status==0){ ?>
-										<td><button type="button" class="btn btn-link view" value="<?php echo $row->Reference ?>"><?php echo $row->Reference ?></button></td>
-										<?php }else { ?>
-										<td><button type="button" class="btn btn-link" value="<?php echo $row->Reference ?>"><?php echo $row->Reference ?></button></td>
-										<?php } ?>
-										<td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
-										<td><?php echo $row->Fullname ?></td>
-										<td><?php echo $row->Department ?></td>
-										<td><?php echo $row->DateNeeded ?></td>
-										<td>
-											<?php if($row->Status==0){ ?>
-												<span class="badge bg-warning text-white">PENDING</span>
-											<?php }else if($row->Status==1){?>
-												<span class="badge bg-success text-white">APPROVED</span>
-											<?php }else if($row->Status==2){ ?>
-												<span class="badge bg-danger text-white">REJECTED</span>
-											<?php } ?>
-										</td>
-									</tr>
-								<?php endforeach; ?>
-							</tbody>
-                        </table>
+                        <div class="row g-3">
+							<div class="col-12 form-group">
+								<label>Search</label>
+								<input type="search" class="form-control" id="search"/>
+							</div>
+							<div class="col-12 form-group tableFixHead" style="height:400px;overflow-y:auto;">
+								<table class="table stripe hover nowrap">
+									<thead>
+										<th>Date Received</th>
+										<th>Reference No</th>
+										<th>PRF No</th>
+										<th>Requestor</th>
+										<th>Department</th>
+										<th>Date Needed</th>
+										<th>Status</th>
+									</thead>
+									<tbody id="tbl_list">
+										<?php foreach($list as $row): ?>
+											<tr>
+												<td><?php echo $row->DateReceived ?></td>
+												<?php if($row->Status==0){ ?>
+												<td><button type="button" class="btn btn-link view" value="<?php echo $row->Reference ?>"><?php echo $row->Reference ?></button></td>
+												<?php }else { ?>
+												<td><button type="button" class="btn btn-link" value="<?php echo $row->Reference ?>"><?php echo $row->Reference ?></button></td>
+												<?php } ?>
+												<td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
+												<td><?php echo $row->Fullname ?></td>
+												<td><?php echo $row->Department ?></td>
+												<td><?php echo $row->DateNeeded ?></td>
+												<td>
+													<?php if($row->Status==0){ ?>
+														<span class="badge bg-warning text-white">PENDING</span>
+													<?php }else if($row->Status==1){?>
+														<span class="badge bg-success text-white">APPROVED</span>
+													<?php }else if($row->Status==2){ ?>
+														<span class="badge bg-danger text-white">REJECTED</span>
+													<?php } ?>
+												</td>
+											</tr>
+										<?php endforeach; ?>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -545,6 +562,26 @@
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script>
 			$(document).ready(function(){notify();});
+			$('#search').keyup(function()
+			{
+				var val = $(this).val();
+				$('#tbl_list').html("<tr><td colspan='7'><center>Searching....</center></td></tr>");
+				$.ajax({
+					url:"<?=site_url('search-request')?>",method:"GET",
+					data:{values:val},
+					success:function(response)
+					{
+						if(response==="")
+						{
+							$('#tbl_list').html("<tr><td colspan='7'><center>No Record(s) found</center></td></tr>");
+						}
+						else
+						{
+							$('#tbl_list').html(response);
+						}
+					}
+				});
+			});
 			$(document).on('click','.view',function()
 			{
 				var val = $(this).val();

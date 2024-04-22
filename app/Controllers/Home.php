@@ -1479,7 +1479,7 @@ class Home extends BaseController
         $builder->join('tblcanvass_form b','b.Reference=a.Reference','LEFT');
         $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
         $builder->WHERE('a.accountID',$user);
-        $builder->groupBy('a.crID')->orderby('a.crID','DESC');
+        $builder->groupBy('a.crID')->orderby('a.Status','ASC');
         $list = $builder->get()->getResult();
 
         $data = ['list'=>$list];

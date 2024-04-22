@@ -1988,4 +1988,45 @@ class Purchase extends BaseController
         }
         echo "success";
     }
+
+    public function searchRequest()
+    {
+        $val = $this->request->getGet('values');
+        $keyword = "%".$val."%";
+
+        $user = session()->get('loggedUser');
+        $builder = $this->db->table('tblcanvass_review a');
+        $builder->select('a.DateReceived,a.Reference,b.DateNeeded,b.Department,a.Status,c.Fullname,b.OrderNo,a.accountID');
+        $builder->join('tblcanvass_form b','b.Reference=a.Reference','LEFT');
+        $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
+        $builder->WHERE('a.accountID',$user)->LIKE('b.OrderNo',$keyword);
+        $builder->groupBy('a.crID')->orderby('a.Status','ASC');
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <tr>
+                <td><?php echo $row->DateReceived ?></td>
+                <?php if($row->Status==0){ ?>
+                <td><button type="button" class="btn btn-link view" value="<?php echo $row->Reference ?>"><?php echo $row->Reference ?></button></td>
+                <?php }else { ?>
+                <td><button type="button" class="btn btn-link" value="<?php echo $row->Reference ?>"><?php echo $row->Reference ?></button></td>
+                <?php } ?>
+                <td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
+                <td><?php echo $row->Fullname ?></td>
+                <td><?php echo $row->Department ?></td>
+                <td><?php echo $row->DateNeeded ?></td>
+                <td>
+                    <?php if($row->Status==0){ ?>
+                        <span class="badge bg-warning text-white">PENDING</span>
+                    <?php }else if($row->Status==1){?>
+                        <span class="badge bg-success text-white">APPROVED</span>
+                    <?php }else if($row->Status==2){ ?>
+                        <span class="badge bg-danger text-white">REJECTED</span>
+                    <?php } ?>
+                </td>
+            </tr>
+            <?php
+        }
+    }
 }

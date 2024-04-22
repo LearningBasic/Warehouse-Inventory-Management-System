@@ -520,7 +520,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 form-group tableFixHead" style="height:400px;overflow-y:auto;">
-                                    <table  class="table stripe table-bordered hover nowrap" id="table">
+                                    <table class="table stripe table-bordered hover nowrap" id="table">
                                         <thead>
                                             <th>Product ID</th>
                                             <th>Product Name</th>
