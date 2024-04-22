@@ -1444,7 +1444,7 @@ class Home extends BaseController
         $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
         $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
         $builder->WHERE('a.accountID',$user);
-        $builder->groupBy('a.reviewID');
+        $builder->groupBy('a.reviewID')->orderBy('a.Status','ASC');
         $review = $builder->get()->getResult();
         //assignment
         $builder = $this->db->table('tblprf a');

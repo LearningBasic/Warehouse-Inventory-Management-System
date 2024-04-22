@@ -467,8 +467,12 @@
 					<div class="card-header">Canvass Sheet</div>
 					<div class="card-body">
                         <div class="row g-3">
+							<div class="col-12">
+								<label><b><i class="icon-copy dw dw-search"></i>&nbsp;Search By</b></label><br/>
+								<input type="radio" class="btn" style="height:25px;width:25px;" name="filter" value="Reference" checked/>&nbsp;<label>Reference</label>
+								<input type="radio" class="btn" style="height:25px;width:25px;" name="filter" value="OrderNo"/>&nbsp;<label>PRF Number</label>
+							</div>
 							<div class="col-12 form-group">
-								<label>Search</label>
 								<input type="search" class="form-control" id="search"/>
 							</div>
 							<div class="col-12 form-group tableFixHead" style="height:400px;overflow-y:auto;">
@@ -565,10 +569,11 @@
 			$('#search').keyup(function()
 			{
 				var val = $(this).val();
+				var filter =  document.querySelector('input[name="filter"]:checked').value;  
 				$('#tbl_list').html("<tr><td colspan='7'><center>Searching....</center></td></tr>");
 				$.ajax({
 					url:"<?=site_url('search-request')?>",method:"GET",
-					data:{values:val},
+					data:{filter:filter,values:val},
 					success:function(response)
 					{
 						if(response==="")

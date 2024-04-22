@@ -501,7 +501,7 @@
 								<div class="tab-pane fade show active" id="others6" role="tabpanel">
 									<br/>
 									<div class="table-responsive">
-										<table class="data-table table stripe hover nowrap">
+										<table class="table stripe hover nowrap">
 											<thead>
 												<th>Date Received</th>
 												<th>PRF No</th>
