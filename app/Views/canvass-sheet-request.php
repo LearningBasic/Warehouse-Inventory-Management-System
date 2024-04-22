@@ -464,7 +464,7 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header">Canvass Sheet</div>
+					<div class="card-header"><span class="dw dw-list"></span>&nbsp;Canvass Sheet/Quotation Request</div>
 					<div class="card-body">
                         <div class="row g-3">
 							<div class="col-12">

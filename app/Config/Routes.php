@@ -156,6 +156,8 @@ $routes->post('save-task','Report::saveTask');
 $routes->post('remove-task','Report::removeTask');
 $routes->get('fetch-items','Purchase::fetchItems');
 $routes->get('search-request','Purchase::searchRequest');
+$routes->get('search-order','Purchase::searchOrder');
+$routes->get('search-purchase','Purchase::searchPurchase');
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {

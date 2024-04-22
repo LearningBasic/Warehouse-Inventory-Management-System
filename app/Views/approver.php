@@ -462,7 +462,7 @@
 		<div class="main-container">
 			<div class="xs-pd-20-10 pd-ltr-20">
 				<div class="card-box">
-					<div class="card-header">PRF/Purchase Order (For Approval)</div>
+					<div class="card-header"><span class="dw dw-list"></span>&nbsp;PRF/Purchase Order (For Approval)</div>
 					<div class="card-body">
 						<?php if(!empty(session()->getFlashdata('success'))) : ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -506,12 +506,13 @@
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="others6" role="tabpanel">
+									<br/>
 									<div class="row g-3">
 										<div class="col-12 form-group">
-
+											<input type="search" class="form-control" id="search" placeholder="Search here..."/>
 										</div>
 										<div class="col-12 form-group">
-											<div class="table-responsive tableFixHead" style="height:400px;overflow-y:auto;">
+											<div class="table-responsive tableFixHead" style="height:500px;overflow-y:auto;">
 												<table class="table stripe hover nowrap">
 													<thead>
 														<th>Date Received</th>
@@ -523,7 +524,7 @@
 														<th>Status</th>
 														<th>Action</th>
 													</thead>
-													<tbody>
+													<tbody id="tblreview">
 														<?php foreach($review as $row): ?>
 															<tr>
 																<td><?php echo $row->DateReceived ?></td>
@@ -591,56 +592,63 @@
 								</div>
 								<div class="tab-pane fade" id="purchase" role="tabpanel">
 									<br/>
-									<div class="table-responsive">
-										<table class="table stripe hover nowrap">
-											<thead>
-												<th>Date Received</th>
-												<th>P.O. No</th>
-												<th>PRF No</th>
-												<th>Department</th>
-												<th>Date Approved</th>
-												<th>Order(s)</th>
-												<th>Status</th>
-												<th>Action</th>
-											</thead>
-											<tbody>
-												<?php foreach($purchase as $row): ?>
-													<tr>
-														<td><?php echo $row->DateReceived ?></td>
-														<td><?php echo $row->purchaseNumber ?></td>
-														<td><?php echo $row->OrderNo ?></td>
-														<td><?php echo $row->Department ?></td>
-														<td><?php echo $row->DateApproved ?></td>
-														<td><button type="button" class="btn btn-primary btn-sm viewQuotation" value="<?php echo $row->purchaseNumber ?>">Details</button></td>
-														<td>
-															<?php if($row->Status==0){ ?>
-																<span class="badge bg-warning text-white">PENDING</span>
-															<?php }else if($row->Status==1){?>
-																<span class="badge bg-success text-white">APPROVED</span>
-															<?php }else{?>
-																<span class="badge bg-danger text-white">CANCELLED</span>
-															<?php } ?>
-														</td>
-														<td>
-															<?php if($row->Status==0){ ?>
-																<div class="dropdown">
-																	<a class="btn btn-primary btn-sm dropdown-toggle"
-																		href="#" role="button" data-toggle="dropdown">
-																		SELECT
-																	</a>
-																	<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
-																		<button type="button" class="dropdown-item approve" value="<?php echo $row->prID ?>"><span class="dw dw-check"></span>&nbsp;Approve</button>
-																		<button type="button" class="dropdown-item decline" value="<?php echo $row->prID ?>"><span class="dw dw-trash"></span>&nbsp;Decline</button>
-																	</div>
-																</div>														
-															<?php }else{?>
-																-
-															<?php } ?>
-														</td>
-													</tr>
-												<?php endforeach; ?>
-											</tbody>
-										</table>
+									<div class="row g-3">
+										<div class="col-12 form-group">
+											<input type="search" class="form-control" id="searchPO" placeholder="Search here..."/>
+										</div>
+										<div class="col-12 form-group">
+											<div class="table-responsive tableFixHead" style="height:500px;overflow-y:auto;"">
+												<table class="table stripe hover nowrap">
+													<thead>
+														<th>Date Received</th>
+														<th>P.O. No</th>
+														<th>PRF No</th>
+														<th>Department</th>
+														<th>Date Approved</th>
+														<th>Order(s)</th>
+														<th>Status</th>
+														<th>Action</th>
+													</thead>
+													<tbody id="tblpurchase">
+														<?php foreach($purchase as $row): ?>
+															<tr>
+																<td><?php echo $row->DateReceived ?></td>
+																<td><?php echo $row->purchaseNumber ?></td>
+																<td><?php echo $row->OrderNo ?></td>
+																<td><?php echo $row->Department ?></td>
+																<td><?php echo $row->DateApproved ?></td>
+																<td><button type="button" class="btn btn-primary btn-sm viewQuotation" value="<?php echo $row->purchaseNumber ?>">Details</button></td>
+																<td>
+																	<?php if($row->Status==0){ ?>
+																		<span class="badge bg-warning text-white">PENDING</span>
+																	<?php }else if($row->Status==1){?>
+																		<span class="badge bg-success text-white">APPROVED</span>
+																	<?php }else{?>
+																		<span class="badge bg-danger text-white">CANCELLED</span>
+																	<?php } ?>
+																</td>
+																<td>
+																	<?php if($row->Status==0){ ?>
+																		<div class="dropdown">
+																			<a class="btn btn-primary btn-sm dropdown-toggle"
+																				href="#" role="button" data-toggle="dropdown">
+																				SELECT
+																			</a>
+																			<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+																				<button type="button" class="dropdown-item approve" value="<?php echo $row->prID ?>"><span class="dw dw-check"></span>&nbsp;Approve</button>
+																				<button type="button" class="dropdown-item decline" value="<?php echo $row->prID ?>"><span class="dw dw-trash"></span>&nbsp;Decline</button>
+																			</div>
+																		</div>														
+																	<?php }else{?>
+																		-
+																	<?php } ?>
+																</td>
+															</tr>
+														<?php endforeach; ?>
+													</tbody>
+												</table>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -733,6 +741,46 @@
 			$(document).ready(function()
 			{
 				notify();
+			});
+			$('#search').keyup(function()
+			{
+				var val = $(this).val(); 
+				$('#tblreview').html("<tr><td colspan='8'><center>Searching....</center></td></tr>");
+				$.ajax({
+					url:"<?=site_url('search-order')?>",method:"GET",
+					data:{values:val},
+					success:function(response)
+					{
+						if(response==="")
+						{
+							$('#tblreview').html("<tr><td colspan='8'><center>No Record(s) found</center></td></tr>");
+						}
+						else
+						{
+							$('#tblreview').html(response);
+						}
+					}
+				});
+			});
+			$('#searchPO').keyup(function()
+			{
+				var val = $(this).val(); 
+				$('#tblpurchase').html("<tr><td colspan='8'><center>Searching....</center></td></tr>");
+				$.ajax({
+					url:"<?=site_url('search-purchase')?>",method:"GET",
+					data:{values:val},
+					success:function(response)
+					{
+						if(response==="")
+						{
+							$('#tblpurchase').html("<tr><td colspan='8'><center>No Record(s) found</center></td></tr>");
+						}
+						else
+						{
+							$('#tblpurchase').html(response);
+						}
+					}
+				});
 			});
 			function approver()
 			{

@@ -519,7 +519,7 @@
                             </div>
 							<div class="col-12 form-group">
                                 <label>Attachment(Incident Report/WRF/Work Directives/etc)</label>
-                                <input type="file" class="form-control" name="file" required/>
+                                <input type="file" class="form-control" name="file" accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" required/>
                             </div>
 							<div class="col-12 form-group">
 								<label>Department Head/Masters</label>

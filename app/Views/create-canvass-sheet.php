@@ -510,7 +510,7 @@
                             </div>
 							<div class="col-12 form-group">
 								<label>Attachment</label> 
-                                <input type="file" class="form-control" name="file" accept="application/pdf" required/>
+                                <input type="file" class="form-control" name="file" accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" required/>
 							</div>
 							<div class="col-12 form-group">
 								<label>Material Department Head</label>

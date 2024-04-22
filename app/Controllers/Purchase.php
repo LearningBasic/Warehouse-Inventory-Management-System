@@ -2068,4 +2068,97 @@ class Purchase extends BaseController
             }
         }
     }
+
+    public function searchOrder()
+    {
+        $val = $this->request->getGet('values');
+        $keyword = "%".$val."%";
+        $user = session()->get('loggedUser');
+        $builder = $this->db->table('tblreview a');
+        $builder->select('a.reviewID,a.OrderNo,a.DateReceived,a.DateApproved,a.Status,b.Department,b.DateNeeded,b.PurchaseType,c.Fullname');
+        $builder->join('tblprf b','b.OrderNo=a.OrderNo','LEFT');
+        $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
+        $builder->WHERE('a.accountID',$user)->like('a.OrderNo',$keyword);
+        $builder->groupBy('a.reviewID')->orderBy('a.Status','ASC');
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <tr>
+                <td><?php echo $row->DateReceived ?></td>
+                <td><button type="button" class="btn btn-link view" value="<?php echo $row->reviewID ?>"><?php echo $row->OrderNo ?></button></td>
+                <td><?php echo $row->Fullname ?></td>
+                <td><?php echo $row->Department ?></td>
+                <td><?php echo $row->DateNeeded ?></td>
+                <td><?php echo $row->DateApproved ?></td>
+                <td>
+                    <?php if($row->Status==0){ ?>
+                        <span class="badge bg-warning text-white">PENDING</span>
+                    <?php }else if($row->Status==1){?>
+                        <span class="badge bg-success text-white">APPROVED</span>
+                    <?php }else if($row->Status==2){?>
+                        <span class="badge bg-danger text-white">CANCELLED</span>
+                    <?php } ?>
+                </td>
+                <td>
+                    <?php if($row->Status==0){ ?>
+                    <a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-warning btn-sm"><span class="dw dw-edit-1"></span></a>
+                    <?php } ?>
+                </td>
+            </tr>
+            <?php
+        }
+    }
+
+    public function searchPurchase()
+    {
+        $val = $this->request->getGet('values');
+        $keyword = "%".$val."%";
+        $user = session()->get('loggedUser');
+        $builder = $this->db->table('tblpurchase_review a');
+        $builder->select('a.prID,a.DateReceived,c.Department,a.Status,a.purchaseNumber,a.DateApproved,c.OrderNo');
+        $builder->join('tblpurchase_logs b','b.purchaseNumber=a.purchaseNumber','LEFT');
+        $builder->join('tblcanvass_form c','c.Reference=b.Reference','LEFT');
+        $builder->WHERE('a.accountID',$user)->like('a.purchaseNumber',$keyword);
+        $builder->groupBy('a.prID')->orderBy('a.Status','ASC');
+        $data = $builder->get();
+        foreach($data->getResult() as $row)
+        {
+            ?>
+            <tr>
+                <td><?php echo $row->DateReceived ?></td>
+                <td><?php echo $row->purchaseNumber ?></td>
+                <td><?php echo $row->OrderNo ?></td>
+                <td><?php echo $row->Department ?></td>
+                <td><?php echo $row->DateApproved ?></td>
+                <td><button type="button" class="btn btn-primary btn-sm viewQuotation" value="<?php echo $row->purchaseNumber ?>">Details</button></td>
+                <td>
+                    <?php if($row->Status==0){ ?>
+                        <span class="badge bg-warning text-white">PENDING</span>
+                    <?php }else if($row->Status==1){?>
+                        <span class="badge bg-success text-white">APPROVED</span>
+                    <?php }else{?>
+                        <span class="badge bg-danger text-white">CANCELLED</span>
+                    <?php } ?>
+                </td>
+                <td>
+                    <?php if($row->Status==0){ ?>
+                        <div class="dropdown">
+                            <a class="btn btn-primary btn-sm dropdown-toggle"
+                                href="#" role="button" data-toggle="dropdown">
+                                SELECT
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+                                <button type="button" class="dropdown-item approve" value="<?php echo $row->prID ?>"><span class="dw dw-check"></span>&nbsp;Approve</button>
+                                <button type="button" class="dropdown-item decline" value="<?php echo $row->prID ?>"><span class="dw dw-trash"></span>&nbsp;Decline</button>
+                            </div>
+                        </div>														
+                    <?php }else{?>
+                        -
+                    <?php } ?>
+                </td>
+            </tr>
+            <?php
+        }
+    }
 }
