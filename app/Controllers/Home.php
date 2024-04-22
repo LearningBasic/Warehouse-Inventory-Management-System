@@ -1465,7 +1465,7 @@ class Home extends BaseController
         $builder->join('tblpurchase_logs b','b.purchaseNumber=a.purchaseNumber','LEFT');
         $builder->join('tblcanvass_form c','c.Reference=b.Reference','LEFT');
         $builder->WHERE('a.accountID',$user);
-        $builder->groupBy('a.prID');
+        $builder->groupBy('a.prID')->orderBy('a.Status','ASC');
         $purchase = $builder->get()->getResult();
         $data = ['review'=>$review,'assign'=>$assign,'account'=>$account,'purchase'=>$purchase];
         return view('approver',$data);

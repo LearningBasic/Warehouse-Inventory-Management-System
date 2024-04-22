@@ -74,6 +74,13 @@
                 width: 4px;               /* width of vertical scrollbar */
                 border: 1px solid #d5d5d5;
               }
+			.tableFixHead thead th { position: sticky; top: 0; z-index: 1;color:#fff;background-color:#0275d8;}
+			table  { border-collapse: collapse; width: 100%; }
+			th, td { padding: 8px 16px;color:#000; }
+			tbody{color:#000;}
+			tr:nth-child(even) {
+			background-color: #f2f2f2;
+			}
 			  .loading-spinner{
 				width:30px;
 				height:30px;
@@ -499,46 +506,52 @@
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="others6" role="tabpanel">
-									<br/>
-									<div class="table-responsive">
-										<table class="table stripe hover nowrap">
-											<thead>
-												<th>Date Received</th>
-												<th>PRF No</th>
-												<th>Requestor</th>
-												<th>Department</th>
-												<th>Date Needed</th>
-												<th>Date Approved</th>
-												<th>Status</th>
-												<th>Action</th>
-											</thead>
-											<tbody>
-												<?php foreach($review as $row): ?>
-													<tr>
-														<td><?php echo $row->DateReceived ?></td>
-														<td><button type="button" class="btn btn-link view" value="<?php echo $row->reviewID ?>"><?php echo $row->OrderNo ?></button></td>
-														<td><?php echo $row->Fullname ?></td>
-														<td><?php echo $row->Department ?></td>
-														<td><?php echo $row->DateNeeded ?></td>
-														<td><?php echo $row->DateApproved ?></td>
-														<td>
-															<?php if($row->Status==0){ ?>
-																<span class="badge bg-warning text-white">PENDING</span>
-															<?php }else if($row->Status==1){?>
-																<span class="badge bg-success text-white">APPROVED</span>
-															<?php }else if($row->Status==2){?>
-																<span class="badge bg-danger text-white">CANCELLED</span>
-															<?php } ?>
-														</td>
-														<td>
-															<?php if($row->Status==0){ ?>
-															<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-warning btn-sm"><span class="dw dw-edit-1"></span></a>
-															<?php } ?>
-														</td>
-													</tr>
-												<?php endforeach; ?>
-											</tbody>
-										</table>
+									<div class="row g-3">
+										<div class="col-12 form-group">
+
+										</div>
+										<div class="col-12 form-group">
+											<div class="table-responsive tableFixHead" style="height:400px;overflow-y:auto;">
+												<table class="table stripe hover nowrap">
+													<thead>
+														<th>Date Received</th>
+														<th>PRF No</th>
+														<th>Requestor</th>
+														<th>Department</th>
+														<th>Date Needed</th>
+														<th>Date Approved</th>
+														<th>Status</th>
+														<th>Action</th>
+													</thead>
+													<tbody>
+														<?php foreach($review as $row): ?>
+															<tr>
+																<td><?php echo $row->DateReceived ?></td>
+																<td><button type="button" class="btn btn-link view" value="<?php echo $row->reviewID ?>"><?php echo $row->OrderNo ?></button></td>
+																<td><?php echo $row->Fullname ?></td>
+																<td><?php echo $row->Department ?></td>
+																<td><?php echo $row->DateNeeded ?></td>
+																<td><?php echo $row->DateApproved ?></td>
+																<td>
+																	<?php if($row->Status==0){ ?>
+																		<span class="badge bg-warning text-white">PENDING</span>
+																	<?php }else if($row->Status==1){?>
+																		<span class="badge bg-success text-white">APPROVED</span>
+																	<?php }else if($row->Status==2){?>
+																		<span class="badge bg-danger text-white">CANCELLED</span>
+																	<?php } ?>
+																</td>
+																<td>
+																	<?php if($row->Status==0){ ?>
+																	<a href="edit-order/<?php echo $row->OrderNo ?>" class="btn btn-warning btn-sm"><span class="dw dw-edit-1"></span></a>
+																	<?php } ?>
+																</td>
+															</tr>
+														<?php endforeach; ?>
+													</tbody>
+												</table>
+											</div>
+										</div>
 									</div>
 								</div>
 								<div class="tab-pane fade" id="addstock" role="tabpanel">
@@ -579,7 +592,7 @@
 								<div class="tab-pane fade" id="purchase" role="tabpanel">
 									<br/>
 									<div class="table-responsive">
-										<table class="data-table table stripe hover nowrap">
+										<table class="table stripe hover nowrap">
 											<thead>
 												<th>Date Received</th>
 												<th>P.O. No</th>
