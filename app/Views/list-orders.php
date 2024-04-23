@@ -527,18 +527,33 @@
 													</td>
 													<td>
 														<?php if($row->Status==0){ ?>
-															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span></button>
-															<button type="button" class="btn btn-outline-danger btn-sm cancel" value="<?php echo $row->prfID ?>"><span class="dw dw-trash"></span></button>
-															<?php if($row->PurchaseType=="Local Purchase"){ ?>
-															<a class="btn btn-outline-primary btn-sm" href="create/<?php echo $row->OrderNo ?>"><span class="dw dw-add"></span></a>
-															<?php } ?>
+															<div class="dropdown">
+																<a class="btn btn-primary btn-sm dropdown-toggle"
+																	href="#" role="button" data-toggle="dropdown">
+																	SELECT
+																</a>
+																<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+																	<button type="button" class="dropdown-item view" value="<?php echo $row->OrderNo ?>"><i class="dw dw-book"></i>&nbsp;View</button>
+																	<button type="button" class="dropdown-item cancel" value="<?php echo $row->prfID ?>"><i class="dw dw-trash"></i>&nbsp;Cancel</button>	
+																	<?php if($row->PurchaseType=="Local Purchase"){ ?>
+																	<a class="dropdown-item" alt="Create Canvass Sheet" href="create/<?php echo $row->OrderNo ?>"><i class="dw dw-add"></i>&nbsp;Create</a>
+																	<?php } ?>
+																</div>
+															</div>
 														<?php }else if($row->Status==3){ ?>
-															<button type="button" class="btn btn-outline-primary btn-sm view" value="<?php echo $row->OrderNo ?>"><span class="dw dw-book"></span></button>
-															<?php if($row->PurchaseType=="Local Purchase"){ ?>
-																<a class="btn btn-outline-primary btn-sm" href="generate/<?php echo $row->OrderNo ?>"><span class="dw dw-export"></span></a>
-															<?php }else{?>
-																<a class="btn btn-outline-primary btn-sm" href="generate/<?php echo $row->OrderNo ?>"><span class="dw dw-export"></span></a>
-															<?php } ?>
+															<div class="dropdown">
+																<a class="btn btn-primary btn-sm dropdown-toggle"
+																	href="#" role="button" data-toggle="dropdown">
+																	SELECT
+																</a>
+																<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+																	<button type="button" class="dropdown-item view" value="<?php echo $row->OrderNo ?>"><i class="dw dw-book"></i>&nbsp;View</button>
+																	<a class="dropdown-item" alt="Export" href="generate/<?php echo $row->OrderNo ?>"><i class="dw dw-export"></i>&nbsp;Export</a>
+																	<?php if($row->PurchaseType=="Local Purchase"){ ?>
+																	<a class="dropdown-item" alt="Create Canvass Sheet" href="create/<?php echo $row->OrderNo ?>"><i class="dw dw-add"></i>&nbsp;Create</a>
+																	<?php } ?>
+																</div>
+															</div>
 														<?php }else{?>
 															<?php echo $row->Comment ?>
 														<?php } ?>
