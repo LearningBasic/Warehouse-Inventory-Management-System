@@ -1785,12 +1785,14 @@ class Home extends BaseController
         $prf = $this->request->getPost('prfID');
         $receiver = $this->request->getPost('receiver');
 
-        $validation = $this->validate([
-            'prfID'=>'is_unique[tblassignment.prfID]'
-        ]);
-        if(!$validation)
+        $builder = $this->db->table('tblassignment a');
+        $builder->select('b.Fullname');
+        $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+        $builder->WHERE('a.prfID',$prf)->WHERE('a.accountID',$receiver)->WHERE('a.Date',date('Y-m-d'));
+        $data = $builder->get();
+        if($row = $data->getRow())
         {
-            echo "Invalid! Already assigned";
+            echo "Invalid! PRF already assigned to ".$row->Fullname;
         }
         else
         {
