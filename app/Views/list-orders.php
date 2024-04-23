@@ -635,7 +635,7 @@
 												</td>
 												<td>
 													<?php if($row->Status==1){?>
-													<a class="dropdown-item" href="<?=site_url('file-download/')?><?php echo $row->purchaseNumber ?>">
+													<a class="btn btn-primary btn-sm" href="<?=site_url('file-download/')?><?php echo $row->purchaseNumber ?>">
 														<span class="dw dw-download"></span>&nbsp;Download
 													</a>
 													<?php }?>

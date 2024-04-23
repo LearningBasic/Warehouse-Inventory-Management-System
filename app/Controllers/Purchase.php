@@ -841,109 +841,133 @@ class Purchase extends BaseController
         $data = $builder->get();
         if($row = $data->getRow())
         {
+            $file = $row->Attachment;
+            $orderNo = $row->OrderNo;
             ?>
-            <form method="post" class="row g-3" id="frmReview">
-                <input type="hidden" name="reviewID" id="reviewID" value="<?php echo $row->reviewID ?>"/>
-                <input type="hidden" name="location" id="location" value="<?php echo $row->warehouseName ?>"/>
-                <div class="col-12 form-group">
-                    <div class="row g-3">
-                        <div class="col-lg-8 form-group">
-                            <div class="row g-3">
-                                <div class="col-lg-4">
-                                    <label>Type of Purchase</label>
-                                    <select class="form-control" name="purchase_type" id="purchase_type">
-                                        <option value="">Choose</option>
-                                        <option <?php if($row->PurchaseType=="Local Purchase") echo 'selected="selected"'; ?>>Local Purchase</option>
-                                        <option <?php if($row->PurchaseType=="Regular Purchase") echo 'selected="selected"'; ?>>Regular Purchase</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label>PRF Number</label>
-                                    <input type="text" class="form-control" name="orderno" value="<?php echo $row->OrderNo ?>"/>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label>Date Needed</label>
-                                    <input type="date" class="form-control" name="dateneeded" value="<?php echo $row->DateNeeded ?>"/>
+            <div class="tab">
+                <ul class="nav nav-pills" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active text-blue" data-toggle="tab" href="#items" role="tab" aria-selected="true">Order Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-blue" data-toggle="tab" href="#prf" role="tab" aria-selected="true">Attachment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-blue" data-toggle="tab" href="#quotation" role="tab" aria-selected="true">Approval</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="items" role="tabpanel">
+                        <br/>
+                        <form method="post" class="row g-3" id="frmReview">
+                            <input type="hidden" name="reviewID" id="reviewID" value="<?php echo $row->reviewID ?>"/>
+                            <input type="hidden" name="location" id="location" value="<?php echo $row->warehouseName ?>"/>
+                            <div class="col-12 form-group">
+                                <div class="row g-3">
+                                    <div class="col-12 form-group">
+                                        <div class="row g-3">
+                                            <div class="col-lg-4">
+                                                <label>Type of Purchase</label>
+                                                <select class="form-control" name="purchase_type" id="purchase_type">
+                                                    <option value="">Choose</option>
+                                                    <option <?php if($row->PurchaseType=="Local Purchase") echo 'selected="selected"'; ?>>Local Purchase</option>
+                                                    <option <?php if($row->PurchaseType=="Regular Purchase") echo 'selected="selected"'; ?>>Regular Purchase</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <label>PRF Number</label>
+                                                <input type="text" class="form-control" name="orderno" value="<?php echo $row->OrderNo ?>"/>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <label>Date Needed</label>
+                                                <input type="date" class="form-control" name="dateneeded" value="<?php echo $row->DateNeeded ?>"/>
+                                            </div>
+                                        </div>
+                                        <label>Reason</label>
+                                        <textarea name="reason" id="reason" class="form-control" style="height:120px;"><?php echo $row->Reason ?></textarea>
+                                    </div>
                                 </div>
                             </div>
-                            <label>Reason</label>
-                            <textarea name="reason" id="reason" class="form-control" style="height:120px;"><?php echo $row->Reason ?></textarea>
-                            <br/>
-                            <label>Attachment</label>
-                            <div><a href="Attachment/<?php echo $row->Attachment ?>" target="_BLANK"><span class="dw dw-paperclip"></span>&nbsp;Attachment</a></div>
-                        </div>
-                        <div class="col-lg-4 form-group table-responsive">
-                            <table class="table table-striped table-bordered hover nowrap">
-                                <thead>
-                                    <th class="bg-primary text-white">Department Head</th>
-                                    <th class="bg-primary text-white">Date</th>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $builder = $this->db->table('tblreview a');
-                                    $builder->select('a.DateApproved,b.Fullname');
-                                    $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
-                                    $builder->WHERE('a.OrderNo',$row->OrderNo);
-                                    $datas = $builder->get();
-                                    foreach($datas->getResult() as $rows)
-                                    {
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $rows->Fullname ?></td>
-                                            <td><?php echo $rows->DateApproved ?></td>
-                                        </tr>
+                            <div class="col-12 form-group table-responsive">
+                                <table class="table table-striped table-bordered hover nowrap">
+                                    <thead>
+                                        <th class="bg-primary text-white">Item(s)</th>
+                                        <th class="bg-primary text-white">Unit(s)</th>
+                                        <th class="bg-primary text-white">Qty</th>
+                                        <th class="bg-primary text-white">Specification(s)</th>
+                                    </thead>
+                                    <tbody>
                                         <?php
-                                    }
+                                        $builder = $this->db->table('tbl_order_item');
+                                        $builder->select('*');
+                                        $builder->WHERE('OrderNo',$row->OrderNo);
+                                        $datas = $builder->get();
+                                        foreach($datas->getResult() as $rows)
+                                        {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $rows->Item_Name ?></td>
+                                                <td><?php echo $rows->ItemUnit ?></td>
+                                                <td><?php echo $rows->Qty ?></td>
+                                                <td><?php echo $rows->Specification ?></td>
+                                            </tr>
+                                            <?php
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>`
+                            <?php if(str_contains(session()->get('location'), 'FCM')){ ?>
+                            <div class="col-12 form-group">
+                                <label>Department Head</label>
+                                <select class="form-control" name="departmentHead" id="departmentHead">
+                                    <option value="">Choose</option>
+                                </select>
+                            </div>
+                            <?php }?>
+                            <div class="col-12 form-group">
+                                <?php if($row->Status==0){ ?>
+                                <input type="button" class="btn btn-primary accept" value="Accept"/>
+                                <button type="button" class="btn btn-outline-danger cancel">Cancel</button>
+                                <?php } ?>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade show" id="prf" role="tabpanel">
+                        <br/>
+                        <object data="Attachment/<?php echo $file ?>" type="application/pdf" style="width:100%;height:500px;">
+                            <div>No PDF viewer available</div>
+                        </object>
+                    </div>
+                    <div class="tab-pane fade show" id="quotation" role="tabpanel">
+                        <br/>
+                        <table class="table table-striped table-bordered hover nowrap">
+                            <thead>
+                                <th class="bg-primary text-white">Department Head</th>
+                                <th class="bg-primary text-white">Date</th>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $builder = $this->db->table('tblreview a');
+                                $builder->select('a.DateApproved,b.Fullname');
+                                $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
+                                $builder->WHERE('a.OrderNo',$orderNo);
+                                $datas = $builder->get();
+                                foreach($datas->getResult() as $rows)
+                                {
                                     ?>
-                                </tbody>
-                            </table>  
-                        </div>
+                                    <tr>
+                                        <td><?php echo $rows->Fullname ?></td>
+                                        <td><?php echo $rows->DateApproved ?></td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table> 
                     </div>
                 </div>
-                <div class="col-12 form-group table-responsive">
-                    <table class="table table-striped table-bordered hover nowrap">
-                        <thead>
-                            <th class="bg-primary text-white">Item(s)</th>
-                            <th class="bg-primary text-white">Unit(s)</th>
-                            <th class="bg-primary text-white">Qty</th>
-                            <th class="bg-primary text-white">Specification(s)</th>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $builder = $this->db->table('tbl_order_item');
-                            $builder->select('*');
-                            $builder->WHERE('OrderNo',$row->OrderNo);
-                            $datas = $builder->get();
-                            foreach($datas->getResult() as $rows)
-                            {
-                                ?>
-                                <tr>
-                                    <td><?php echo $rows->Item_Name ?></td>
-                                    <td><?php echo $rows->ItemUnit ?></td>
-                                    <td><?php echo $rows->Qty ?></td>
-                                    <td><?php echo $rows->Specification ?></td>
-                                </tr>
-                                <?php
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>`
-                <?php if(str_contains(session()->get('location'), 'FCM')){ ?>
-                <div class="col-12 form-group">
-                    <label>Department Head</label>
-                    <select class="form-control" name="departmentHead" id="departmentHead">
-                        <option value="">Choose</option>
-                    </select>
-                </div>
-                <?php }?>
-                <div class="col-12 form-group">
-                    <?php if($row->Status==0){ ?>
-                    <input type="button" class="btn btn-primary accept" value="Accept"/>
-                    <button type="button" class="btn btn-outline-danger cancel">Cancel</button>
-                    <?php } ?>
-                </div>
-            </form>
+            </div>
             <?php
         }
     }
