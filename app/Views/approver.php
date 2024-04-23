@@ -662,7 +662,7 @@
                 <div class="modal-content">
                     <div class="modal-header" style="background-color:#EC5800;">
                         <h4 class="modal-title text-white" id="myLargeModalLabel">
-                            Purchase Details
+                            Purchase Requisition Details (PRF)
                         </h4>
                         <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>

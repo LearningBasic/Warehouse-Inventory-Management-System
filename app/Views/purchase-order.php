@@ -609,12 +609,23 @@
 													<?php } ?>
 												</td>
 												<td>
-													<a class="dropdown-item" href="<?=site_url('file-download/')?><?php echo $row->purchaseNumber ?>">
-														<span class="dw dw-download"></span>
-													</a>
-													<a class="dropdown-item" href="<?=site_url('open-file/')?><?php echo $row->purchaseNumber ?>" target="_blank">
-														<i class="icon-copy dw dw-view"></i>
-													</a>
+													<div class="dropdown">
+														<a class="btn btn-primary btn-sm dropdown-toggle"
+															href="#" role="button" data-toggle="dropdown">
+															SELECT
+														</a>
+														<div class="dropdown-menu dropdown-menu-left dropdown-menu-icon-list">
+															<a class="dropdown-item" href="<?=site_url('file-download/')?><?php echo $row->purchaseNumber ?>">
+																<i class="dw dw-download"></i>&nbsp;Download
+															</a>
+															<a class="dropdown-item" href="<?=site_url('open-file/')?><?php echo $row->purchaseNumber ?>" target="_blank">
+																<i class="icon-copy dw dw-view"></i>&nbsp;View
+															</a>
+															<button type="button" class="dropdown-item sendEmail" value="<?php echo $row->purchaseNumber ?>">
+																<i class="icon-copy dw dw-mail"></i>&nbsp;Send via Email
+															</button>
+														</div>
+													</div>
 												</td>
 											</tr>
 										<?php endforeach; ?>
@@ -714,6 +725,40 @@
 						$('#modal-loading').modal('show');
 						$.ajax({
 							url:"<?=site_url('create-purchase-order')?>",method:"POST",
+							data:{value:val},success:function(response)
+							{
+								if(response==="success")
+								{
+									location.reload();
+								}
+								else
+								{
+									alert(response);
+								}
+								$('#modal-loading').modal('hide');
+							}
+						});
+					}
+				});
+            });
+
+			$(document).on('click','.sendEmail',function(e)
+            {
+                e.preventDefault();
+                Swal.fire({
+					title: "Are you sure?",
+					text: "Do you want to send this Purchase Order Form?",
+					icon: "question",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes!"
+					}).then((result) => {
+					if (result.isConfirmed) {
+						var val = $(this).val();
+						$('#modal-loading').modal('show');
+						$.ajax({
+							url:"<?=site_url('send-email')?>",method:"POST",
 							data:{value:val},success:function(response)
 							{
 								if(response==="success")

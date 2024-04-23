@@ -847,17 +847,17 @@ class Purchase extends BaseController
             <div class="tab">
                 <ul class="nav nav-pills" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active text-blue" data-toggle="tab" href="#items" role="tab" aria-selected="true">Order Details</a>
+                        <a class="nav-link active text-blue" data-toggle="tab" href="#details" role="tab" aria-selected="true">Order Details</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-blue" data-toggle="tab" href="#prf" role="tab" aria-selected="true">Attachment</a>
+                        <a class="nav-link text-blue" data-toggle="tab" href="#attachment" role="tab" aria-selected="true">Attachment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-blue" data-toggle="tab" href="#quotation" role="tab" aria-selected="true">Approval</a>
+                        <a class="nav-link text-blue" data-toggle="tab" href="#approval" role="tab" aria-selected="true">Approval</a>
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane fade show active" id="items" role="tabpanel">
+                    <div class="tab-pane fade show active" id="details" role="tabpanel">
                         <br/>
                         <form method="post" class="row g-3" id="frmReview">
                             <input type="hidden" name="reviewID" id="reviewID" value="<?php echo $row->reviewID ?>"/>
@@ -888,8 +888,8 @@ class Purchase extends BaseController
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 form-group table-responsive">
-                                <table class="table table-striped table-bordered hover nowrap">
+                            <div class="col-12 form-group tableFixHead" style="height:300px;overflow-y:auto;">
+                                <table class="table-bordered">
                                     <thead>
                                         <th class="bg-primary text-white">Item(s)</th>
                                         <th class="bg-primary text-white">Unit(s)</th>
@@ -933,23 +933,24 @@ class Purchase extends BaseController
                             </div>
                         </form>
                     </div>
-                    <div class="tab-pane fade show" id="prf" role="tabpanel">
+                    <div class="tab-pane fade show" id="attachment" role="tabpanel">
                         <br/>
                         <object data="Attachment/<?php echo $file ?>" type="application/pdf" style="width:100%;height:500px;">
                             <div>No PDF viewer available</div>
                         </object>
                     </div>
-                    <div class="tab-pane fade show" id="quotation" role="tabpanel">
+                    <div class="tab-pane fade show" id="approval" role="tabpanel">
                         <br/>
                         <table class="table table-striped table-bordered hover nowrap">
                             <thead>
                                 <th class="bg-primary text-white">Department Head</th>
+                                <th class="bg-primary text-white">Status</th>
                                 <th class="bg-primary text-white">Date</th>
                             </thead>
                             <tbody>
                                 <?php
                                 $builder = $this->db->table('tblreview a');
-                                $builder->select('a.DateApproved,b.Fullname');
+                                $builder->select('a.DateApproved,b.Fullname,a.Status');
                                 $builder->join('tblaccount b','b.accountID=a.accountID','LEFT');
                                 $builder->WHERE('a.OrderNo',$orderNo);
                                 $datas = $builder->get();
@@ -958,6 +959,15 @@ class Purchase extends BaseController
                                     ?>
                                     <tr>
                                         <td><?php echo $rows->Fullname ?></td>
+                                        <td>
+                                            <?php if($rows->Status==0){ ?>
+                                                <span class="badge bg-warning text-white">PENDING</span>
+                                            <?php }else if($rows->Status==1){?>
+                                                <span class="badge bg-success text-white">APPROVED</span>
+                                            <?php }else{ ?>
+                                                <span class="badge bg-danger text-white">DENIED</span>
+                                            <?php } ?>
+                                        </td>
                                         <td><?php echo $rows->DateApproved ?></td>
                                     </tr>
                                     <?php
