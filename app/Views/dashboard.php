@@ -511,11 +511,11 @@
 				</div>
 				<div class="row pb-10">
 					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
-						<div class="card-box height-100-p widget-style3">
+						<div class="card-box height-100-p widget-style3 bg-primary">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="allStocks"><?=$total?></div>
-									<div class="font-14 text-secondary weight-500">
+									<div class="weight-700 font-24 text-white" id="allStocks"><i class="icon-copy dw dw-server"></i> <?=$total?></div>
+									<div class="font-14 text-white weight-500">
 										Physical Available
 									</div>
 								</div>
@@ -523,11 +523,11 @@
 						</div>
 					</div>
 					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
-						<div class="card-box height-100-p widget-style3">
+						<div class="card-box height-100-p widget-style3 bg-primary">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="totalReserved"><?=$reserve?></div>
-									<div class="font-14 text-secondary weight-500">
+									<div class="weight-700 font-24 text-white" id="totalReserved"><i class="icon-copy dw dw-server"></i> <?=$reserve?></div>
+									<div class="font-14 text-white weight-500">
 										Soft Reserved
 									</div>
 								</div>
@@ -535,11 +535,11 @@
 						</div>
 					</div>
 					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
-						<div class="card-box height-100-p widget-style3">
+						<div class="card-box height-100-p widget-style3 bg-primary">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="totalStocks"><?=$stocks?></div>
-									<div class="font-14 text-secondary weight-500">
+									<div class="weight-700 font-24 text-white" id="totalStocks"><i class="icon-copy dw dw-server"></i> <?=$stocks?></div>
+									<div class="font-14 text-white weight-500">
 										On-hand Inventory
 									</div>
 								</div>
@@ -547,11 +547,11 @@
 						</div>
 					</div>
 					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
-						<div class="card-box height-100-p widget-style3">
+						<div class="card-box height-100-p widget-style3 bg-primary">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="totalOrders"><?=$purchase?></div>
-									<div class="font-14 text-secondary weight-500">
+									<div class="weight-700 font-24 text-white" id="totalOrders"><i class="icon-copy dw dw-shopping-cart"></i> <?=$purchase?></div>
+									<div class="font-14 text-white weight-500">
 										Purchase Order
 									</div>
 								</div>
@@ -559,11 +559,11 @@
 						</div>
 					</div>
 					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
-						<div class="card-box height-100-p widget-style3">
+						<div class="card-box height-100-p widget-style3 bg-primary">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="totalReturn">0</div>
-									<div class="font-14 text-secondary weight-500">
+									<div class="weight-700 font-24 text-white" id="totalReturn"><i class="icon-copy dw dw-notepad"></i> 0</div>
+									<div class="font-14 text-white weight-500">
 										Returned Item
 									</div>
 								</div>
@@ -571,11 +571,11 @@
 						</div>
 					</div>
 					<div class="col-xl-2 col-lg-2 col-md-6 mb-20">
-						<div class="card-box height-100-p widget-style3">
+						<div class="card-box height-100-p widget-style3 bg-primary">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark" id="totalVoid"><?=$void?></div>
-									<div class="font-14 text-secondary weight-500">
+									<div class="weight-700 font-24 text-white" id="totalVoid"><i class="icon-copy dw dw-package"></i> <?=$void?></div>
+									<div class="font-14 text-white weight-500">
 										Out of Stocks
 									</div>
 								</div>
