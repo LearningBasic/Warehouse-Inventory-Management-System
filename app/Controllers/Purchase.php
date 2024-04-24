@@ -610,15 +610,33 @@ class Purchase extends BaseController
     {
         if(str_contains(session()->get('location'), 'FCM'))
         {
-            $builder = $this->db->table('tblaccount');
-            $builder->select('*');
-            $builder->WHERE('Status',1)->WHERE('systemRole','Editor')->WHERE('warehouseID',session()->get('assignment'));
-            $data = $builder->get();
-            foreach($data->getResult() as $row)
+            if(session()->get('location')=="FCM15"||session()->get('location')=="FCM19")
             {
-                ?>
-                <option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?> - <?php echo $row->Department ?></option>
-                <?php
+                $builder = $this->db->table('tblaccount');
+                $builder->select('*');
+                $builder->WHERE('Status',1)->WHERE('systemRole','Editor')
+                ->WHERE('Department!=','Technical')
+                ->WHERE('warehouseID',session()->get('assignment'));
+                $data = $builder->get();
+                foreach($data->getResult() as $row)
+                {
+                    ?>
+                    <option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?> - <?php echo $row->Department ?></option>
+                    <?php
+                }
+            }
+            else
+            {
+                $builder = $this->db->table('tblaccount');
+                $builder->select('*');
+                $builder->WHERE('Status',1)->WHERE('systemRole','Editor')->WHERE('warehouseID',session()->get('assignment'));
+                $data = $builder->get();
+                foreach($data->getResult() as $row)
+                {
+                    ?>
+                    <option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?> - <?php echo $row->Department ?></option>
+                    <?php
+                }
             }
         }
         else
