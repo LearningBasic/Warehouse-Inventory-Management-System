@@ -180,17 +180,39 @@ class Purchase extends BaseController
 
     public function listEditor()
     {
-        $role = ['Editor','Administrator'];
-        $user = session()->get('loggedUser');
-        $builder = $this->db->table('tblaccount');
-        $builder->select('*');
-        $builder->WHERE('Status',1)->WHEREIN('systemRole',$role)->WHERE('accountID<>',$user)->WHERE('Department!=','');
-        $editor = $builder->get();
-        foreach($editor->getResult() as $row)
+        if(session()->get('location')=="FCM 15"||session()->get('location')=="FCM 19")
         {
-            ?>
-            <option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?> - <?php echo $row->Department ?></option>
-            <?php
+            $role = ['Editor','Administrator'];
+            $user = session()->get('loggedUser');
+            $dept = ['','MIS','Crewing','Technical','Drydock'];
+            $builder = $this->db->table('tblaccount');
+            $builder->select('*');
+            $builder->WHERE('Status',1)->WHEREIN('systemRole',$role)->WHERE('accountID<>',$user)->WHERENOTIN('Department',$dept);
+            $builder->orderBy('Department','ASC');
+            $editor = $builder->get();
+            foreach($editor->getResult() as $row)
+            {
+                ?>
+                <option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?> - <?php echo $row->Department ?></option>
+                <?php
+            }
+        }
+        else
+        {
+            $role = ['Editor','Administrator'];
+            $user = session()->get('loggedUser');
+            $dept = ['','MIS','Crewing'];
+            $builder = $this->db->table('tblaccount');
+            $builder->select('*');
+            $builder->WHERE('Status',1)->WHEREIN('systemRole',$role)->WHERE('accountID<>',$user)->WHERENOTIN('Department',$dept);
+            $builder->orderBy('Department','ASC');
+            $editor = $builder->get();
+            foreach($editor->getResult() as $row)
+            {
+                ?>
+                <option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?> - <?php echo $row->Department ?></option>
+                <?php
+            }
         }
     }
 
@@ -610,33 +632,15 @@ class Purchase extends BaseController
     {
         if(str_contains(session()->get('location'), 'FCM'))
         {
-            if(session()->get('location')=="FCM15"||session()->get('location')=="FCM19")
+            $builder = $this->db->table('tblaccount');
+            $builder->select('*');
+            $builder->WHERE('Status',1)->WHERE('systemRole','Editor')->WHERE('warehouseID',session()->get('assignment'));
+            $data = $builder->get();
+            foreach($data->getResult() as $row)
             {
-                $builder = $this->db->table('tblaccount');
-                $builder->select('*');
-                $builder->WHERE('Status',1)->WHERE('systemRole','Editor')
-                ->WHERE('Department!=','Technical')
-                ->WHERE('warehouseID',session()->get('assignment'));
-                $data = $builder->get();
-                foreach($data->getResult() as $row)
-                {
-                    ?>
-                    <option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?> - <?php echo $row->Department ?></option>
-                    <?php
-                }
-            }
-            else
-            {
-                $builder = $this->db->table('tblaccount');
-                $builder->select('*');
-                $builder->WHERE('Status',1)->WHERE('systemRole','Editor')->WHERE('warehouseID',session()->get('assignment'));
-                $data = $builder->get();
-                foreach($data->getResult() as $row)
-                {
-                    ?>
-                    <option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?> - <?php echo $row->Department ?></option>
-                    <?php
-                }
+                ?>
+                <option value="<?php echo $row->accountID ?>"><?php echo $row->Fullname ?> - <?php echo $row->Department ?></option>
+                <?php
             }
         }
         else
