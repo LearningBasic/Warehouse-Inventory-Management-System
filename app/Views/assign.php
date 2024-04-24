@@ -622,7 +622,7 @@
 											<th>Date Needed</th>
 											<th>Action</th>
 										</thead>
-										<tbody>
+										<tbody> 
 											<?php foreach($ongoing as $row): ?>
 												<?php if($row->total==$row->totalOrder){}else{ ?>
 												<tr>
@@ -707,7 +707,7 @@
 								</div>
 								<div class="tab-pane fade" id="archive6" role="tabpanel">
 									<br/>
-									<table class="data-table table stripe hover nowrap">
+									<table class="data-table table stripe hover">
 										<thead>
 											<th>Date Prepared</th>
 											<th>PRF No</th>
