@@ -1475,9 +1475,10 @@ class Home extends BaseController
     {
         $user = session()->get('loggedUser');
         $builder = $this->db->table('tblcanvass_review a');
-        $builder->select('a.DateReceived,a.Reference,b.DateNeeded,b.Department,a.Status,c.Fullname,b.OrderNo,a.accountID');
+        $builder->select('a.DateReceived,a.Reference,b.DateNeeded,b.Department,a.Status,c.Fullname,b.OrderNo,a.accountID,d.PurchaseType');
         $builder->join('tblcanvass_form b','b.Reference=a.Reference','LEFT');
         $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
+        $builder->join('tblprf d','d.OrderNo=b.OrderNo','LEFT');
         $builder->WHERE('a.accountID',$user);
         $builder->groupBy('a.crID')->orderby('a.Status','ASC');
         $list = $builder->get()->getResult();
