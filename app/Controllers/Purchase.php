@@ -2054,9 +2054,10 @@ class Purchase extends BaseController
         if($filter=="Reference")
         {
             $builder = $this->db->table('tblcanvass_review a');
-            $builder->select('a.DateReceived,a.Reference,b.DateNeeded,b.Department,a.Status,c.Fullname,b.OrderNo,a.accountID');
+            $builder->select('a.DateReceived,a.Reference,b.DateNeeded,b.Department,a.Status,c.Fullname,b.OrderNo,a.accountID,d.PurchaseType');
             $builder->join('tblcanvass_form b','b.Reference=a.Reference','LEFT');
             $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
+            $builder->join('tblprf d','d.OrderNo=b.OrderNo','LEFT');
             $builder->WHERE('a.accountID',$user)->LIKE('a.Reference',$keyword);
             $builder->groupBy('a.crID')->orderby('a.Status','ASC');
             $data = $builder->get();
@@ -2071,6 +2072,7 @@ class Purchase extends BaseController
                     <td><button type="button" class="btn btn-link" value="<?php echo $row->Reference ?>"><?php echo $row->Reference ?></button></td>
                     <?php } ?>
                     <td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
+                    <td><?php echo $row->PurchaseType ?></td>
                     <td><?php echo $row->Fullname ?></td>
                     <td><?php echo $row->Department ?></td>
                     <td><?php echo $row->DateNeeded ?></td>
@@ -2090,9 +2092,10 @@ class Purchase extends BaseController
         else
         {
             $builder = $this->db->table('tblcanvass_review a');
-            $builder->select('a.DateReceived,a.Reference,b.DateNeeded,b.Department,a.Status,c.Fullname,b.OrderNo,a.accountID');
+            $builder->select('a.DateReceived,a.Reference,b.DateNeeded,b.Department,a.Status,c.Fullname,b.OrderNo,a.accountID,d.PurchaseType');
             $builder->join('tblcanvass_form b','b.Reference=a.Reference','LEFT');
             $builder->join('tblaccount c','c.accountID=b.accountID','LEFT');
+            $builder->join('tblprf d','d.OrderNo=b.OrderNo','LEFT');
             $builder->WHERE('a.accountID',$user)->LIKE('b.OrderNo',$keyword);
             $builder->groupBy('a.crID')->orderby('a.Status','ASC');
             $data = $builder->get();
@@ -2107,6 +2110,7 @@ class Purchase extends BaseController
                     <td><button type="button" class="btn btn-link" value="<?php echo $row->Reference ?>"><?php echo $row->Reference ?></button></td>
                     <?php } ?>
                     <td><a class="btn btn-link" href="generate/<?php echo $row->OrderNo ?>" target="_blank"><?php echo $row->OrderNo ?></a></td>
+                    <td><?php echo $row->PurchaseType ?></td>
                     <td><?php echo $row->Fullname ?></td>
                     <td><?php echo $row->Department ?></td>
                     <td><?php echo $row->DateNeeded ?></td>
@@ -2175,6 +2179,7 @@ class Purchase extends BaseController
         $builder->select('a.prID,a.DateReceived,c.Department,a.Status,a.purchaseNumber,a.DateApproved,c.OrderNo');
         $builder->join('tblpurchase_logs b','b.purchaseNumber=a.purchaseNumber','LEFT');
         $builder->join('tblcanvass_form c','c.Reference=b.Reference','LEFT');
+
         $builder->WHERE('a.accountID',$user)->like('a.purchaseNumber',$keyword);
         $builder->groupBy('a.prID')->orderBy('a.Status','ASC');
         $data = $builder->get();
