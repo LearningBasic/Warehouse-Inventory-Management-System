@@ -1427,9 +1427,10 @@ class Home extends BaseController
         $builder->WHERE('OrderNo',$id);
         $item = $builder->get()->getResult();
         //approver
+        $role = ['Administrator','Editor'];
         $builder = $this->db->table('tblaccount');
         $builder->select('*');
-        $builder->WHERE('Status',1)->WHERE('systemRole','Administrator')->WHERE('Department','Procurement');
+        $builder->WHERE('Status',1)->WHEREIN('systemRole',$role);
         $approver = $builder->get()->getResult();
 
         $data = ['prf'=>$prf,'item'=>$item,'id'=>$id,'approver'=>$approver];
