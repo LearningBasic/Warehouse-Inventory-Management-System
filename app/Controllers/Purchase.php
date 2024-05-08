@@ -1478,7 +1478,7 @@ class Purchase extends BaseController
             {
                 $values = [
                     'OrderNo'=>$orderNo, 'orderID'=>$item,'Supplier'=>$supplier,
-                    'Price'=>$unitPrice/1.12,'Currency'=>'PHP','ContactPerson'=>$contactPerson,'Address'=>$address,
+                    'Price'=>$unitPrice,'Currency'=>'PHP','ContactPerson'=>$contactPerson,'Address'=>$address,
                     'ContactNumber'=>$phone,'Terms'=>$terms,'Warranty'=>$warranty,
                     'Reference'=>'','Remarks'=>'','Vatable'=>$vatable,'purchaseLogID'=>0
                 ];
