@@ -339,22 +339,10 @@
 						</li>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
-                            <i class="micon dw dw-server"></i><span class="mtext">Inventory</span>
-							</a>
-							<ul class="submenu">
-								<li><a href="<?=site_url('stocks')?>">All Stocks</a></li>
-								<li><a href="<?=site_url('add')?>">Add Item</a></li>
-								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Planner"){ ?>
-								<li><a href="<?=site_url('manage')?>">Manage Stocks</a></li>
-                                <?php } ?>
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a href="javascript:;" class="dropdown-toggle">
                             <i class="micon dw dw-shopping-cart"></i><span class="mtext">Purchasing</span>&nbsp;<span class="badge badge-pill bg-primary text-white" id="notification">0</span>
 							</a>
 							<ul class="submenu">
-                                <li><a href="<?=site_url('orders')?>">Order Materials</a></li>
+                                <li><a href="<?=site_url('orders')?>">Purchase Request</a></li>
 								<li><a href="<?=site_url('list-orders')?>">List Order</a></li>
 								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Editor"){ ?>
 								<li><a href="<?=site_url('approve-orders')?>">For Approval&nbsp;<span class="badge badge-pill bg-primary text-white" id="notifications">0</span></a></li>
@@ -375,6 +363,18 @@
                                 <li><a href="<?=site_url('receiving-item')?>">Receiving Item</a></li>
 								<li><a href="<?=site_url('receive-order')?>">Received Order</a></li>
 								<li><a href="<?=site_url('reserved')?>">Reserved</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+                            <i class="micon dw dw-server"></i><span class="mtext">Inventory</span>
+							</a>
+							<ul class="submenu">
+								<li><a href="<?=site_url('stocks')?>">All Stocks</a></li>
+								<li><a href="<?=site_url('add')?>">Add Item</a></li>
+								<?php if(session()->get('role')=="Administrator"||session()->get('role')=="Planner"){ ?>
+								<li><a href="<?=site_url('manage')?>">Manage Stocks</a></li>
+                                <?php } ?>
 							</ul>
 						</li>
 						<li class="dropdown">
